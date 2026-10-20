@@ -26,8 +26,8 @@ button.on { border-color: var(--acc); color: var(--acc); font-weight: 500; }
 .sec { margin: 28px 0 8px; font-family: var(--ko); font-size: 13px; letter-spacing: .06em; text-transform: uppercase; color: var(--mute); }
 .ln { display: grid; grid-template-columns: 40px 1fr 48px; gap: 6px 10px; align-items: start; padding: 12px 0; border-bottom: 1px solid var(--line); }
 .ln .n { font-variant-numeric: tabular-nums; color: var(--mute); font-size: 14px; padding-top: 6px; }
-.ln .ko { font-family: var(--ko); font-size: 22px; line-height: 1.55; font-weight: 500; grid-column: 2; min-width: 0; cursor: pointer; }
-.ln .read, .ln .th { grid-column: 2; font-size: 14px; color: var(--mute); margin: 0; }
+.ln .ko { font-family: var(--ko); font-size: calc(22px * var(--ts, 1)); line-height: 1.55; font-weight: 500; grid-column: 2; min-width: 0; cursor: pointer; }
+.ln .read, .ln .th { grid-column: 2; font-size: calc(14px * var(--ts, 1)); color: var(--mute); margin: 0; }
 .ln .th { color: var(--fg); }
 .ln .play { grid-column: 3; grid-row: 1 / span 3; justify-self: end; width: 44px; height: 44px; padding: 0; border-radius: 50%; font-size: 16px; }
 .ln.playing { background: color-mix(in srgb, var(--acc) 8%, transparent); margin: 0 -8px; padding-left: 8px; padding-right: 8px; border-radius: 8px; }
@@ -38,7 +38,8 @@ body[data-hide="th"] .read, body[data-hide="th"] .th { display: none; }
 body[data-hide="ko"] .ko { filter: blur(7px); user-select: none; }
 body[data-hide="ko"] .ko.show, body[data-hide="ko"] .ln.playing .ko { filter: none; }
 .hint { font-size: 13px; color: var(--mute); margin: 10px 0 0; }
-@media (max-width: 480px) { .ln .ko { font-size: 20px } button { padding: 8px 10px } }
+body[data-noread] .read { display: none; }
+@media (max-width: 480px) { .ln .ko { font-size: calc(20px * var(--ts, 1)) } button { padding: 8px 10px } }
 @media (prefers-reduced-motion: no-preference) { .ln { transition: background .2s } }
 </style>
 <div class="wrap">
@@ -51,6 +52,9 @@ body[data-hide="ko"] .ko.show, body[data-hide="ko"] .ln.playing .ko { filter: no
   <span class="seg" id="rate"><button data-r="0.7">0.7×</button><button data-r="0.85">0.85×</button><button data-r="1" class="on">1×</button></span>
   <button id="loop">↻ วนประโยค</button>
   <span class="seg" id="hide"><button data-h="" class="on">ครบ</button><button data-h="th">ซ่อนไทย</button><button data-h="ko">ซ่อนเกาหลี</button></span>
+  <button id="read" class="on">คำอ่าน</button>
+  <span class="seg" id="size" aria-label="ขนาดตัวอักษร"><button data-s="0.85">A−</button><button data-s="1" class="on">A</button><button data-s="1.25">A+</button><button data-s="1.5">A++</button></span>
+  <span class="seg" id="theme" aria-label="ธีม"><button data-t="" class="on">อัตโนมัติ</button><button data-t="light">☀ สว่าง</button><button data-t="dark">☾ มืด</button></span>
 </div>
 <div id="list"></div>
 <p class="hint">แตะประโยคเพื่อเล่นเฉพาะประโยคนั้น · โหมด "ซ่อนเกาหลี" ให้ดูคำไทยแล้วพูดเอง แตะเพื่อเฉลย · เสียง: InJoon (edge-tts)</p>
@@ -107,6 +111,17 @@ $('#rate').onclick = ev => { const b = ev.target.closest('button'); if (!b) retu
   $('#rate').querySelectorAll('button').forEach(x => x.classList.toggle('on', x === b)); try { localStorage.setItem('rate', rate); } catch (e) {} };
 $('#hide').onclick = ev => { const b = ev.target.closest('button'); if (!b) return; document.body.dataset.hide = b.dataset.h;
   $('#hide').querySelectorAll('button').forEach(x => x.classList.toggle('on', x === b)); document.querySelectorAll('.ko.show').forEach(x => x.classList.remove('show')); };
+function setTheme(t, save) { const r = document.documentElement; if (t) r.dataset.theme = t; else r.removeAttribute('data-theme');
+  $('#theme').querySelectorAll('button').forEach(x => x.classList.toggle('on', x.dataset.t === t)); if (save) try { localStorage.setItem('theme', t); } catch (e) {} }
+$('#theme').onclick = ev => { const b = ev.target.closest('button'); if (b) setTheme(b.dataset.t, true); };
+function setRead(on, save) { if (on) document.body.removeAttribute('data-noread'); else document.body.dataset.noread = '1';
+  $('#read').classList.toggle('on', on); if (save) try { localStorage.setItem('read', on ? '1' : '0'); } catch (e) {} }
+$('#read').onclick = () => setRead(document.body.hasAttribute('data-noread'), true);
+function setSize(v, save) { document.documentElement.style.setProperty('--ts', v);
+  $('#size').querySelectorAll('button').forEach(x => x.classList.toggle('on', x.dataset.s === String(v))); if (save) try { localStorage.setItem('size', v); } catch (e) {} }
+$('#size').onclick = ev => { const b = ev.target.closest('button'); if (b) setSize(b.dataset.s, true); };
+try { if (localStorage.getItem('read') === '0') setRead(false, false); const z = localStorage.getItem('size'); if (z) setSize(z, false); } catch (e) {}
+try { const t = localStorage.getItem('theme'); if (t !== null) setTheme(t, false); } catch (e) {}
 try { const r = localStorage.getItem('rate'); if (r) { const b = $('#rate button[data-r="' + r + '"]'); if (b) b.click(); } } catch (e) {}
 document.addEventListener('keydown', ev => { if (ev.target.tagName === 'INPUT') return;
   if (ev.key === ' ') { ev.preventDefault(); if (cur) $('#pause').click(); else $('#all').click(); }

@@ -321,7 +321,7 @@ const WORDS = window.KMU_WORDS || {};   // per clip: [[startSec, endSec, word], 
 const EXAMS = [
   { id: 'mini02', title: '복습시험 ②', date: '2026-10-20', when: 'อ. 20 ต.ค. · 14~20과', note: 'เก็งข้อสอบจากรูปแบบ 복습시험 ① — 쓰기 100 · 듣기 10 · 읽기 10 · 말하기 10' },
   { id: 'review', title: '중간시험 복습문제 (ชุดทบทวนของครู)', date: '2026-10-22', when: 'ชุดที่ครูแจก 16 ต.ค.', note: 'พิมพ์เขียวของข้อสอบกลางภาค — 쓰기 14 ตอน · 읽기 25 ข้อ · 말하기 20 คำถาม (듣기 ของครูต้องใช้เสียงในห้อง จึงไม่มีในนี้)' },
-  { id: 'midterm', title: '중간시험 (สอบกลางภาค)', date: '2026-10-22', when: 'พฤ. 22 ต.ค. 말하기 · ศ. 23 ต.ค. 쓰기·듣기·읽기 · 1~21과', note: 'ข้อสอบจำลองจากเล่มเก็งข้อสอบ — 쓰기 2 ชุด · 읽기 2 ชุด · 듣기 2 ชุด · 말하기 54 คำถาม' }
+  { id: 'midterm', title: '중간시험 (สอบกลางภาค)', date: '2026-10-22', when: 'พฤ. 22 ต.ค. 말하기 · ศ. 23 ต.ค. 쓰기·듣기·읽기 · 1~21과', note: 'ข้อสอบจำลองจากเล่มเก็งข้อสอบ — 쓰기 2 ชุด · 읽기 2 ชุด · 듣기 2 ชุด · 말하기 25 คำถาม' }
 ];
 const SKILL = { writing: ['쓰기', 'เขียน'], reading: ['읽기', 'อ่าน'], listening: ['듣기', 'ฟัง'], speaking: ['말하기', 'พูด'] };
 const ORDER = ['writing', 'reading', 'listening', 'speaking'];
@@ -883,7 +883,7 @@ function Home() {
     ${EXAMS.map(ex => {
       const sets = SETS.filter(s => s.exam === ex.id); if (!sets.length) return null;
       const done = sets.filter(s => lastScore(s.id)).length, papers = [...new Set(sets.map(paperOf))], byPaper = papers.length > 1;
-      const groups = byPaper ? papers.map((p, i) => ({ label: `ชุดที่ ${i + 1}`, sets: sets.filter(s => paperOf(s) === p) })) : [{ label: 'ทุกชุด · เรียงตาม 쓰기 → 읽기 → 듣기 → 말하기', sets }];
+      const groups = byPaper ? papers.map((p, i) => { const ps = sets.filter(s => paperOf(s) === p); return { label: ps.every(s => /ข้อสอบจริง/.test(s.title)) ? 'ข้อสอบจริง (สอบแล้ว 20 ต.ค.)' : `ชุดที่ ${i + 1}`, sets: ps }; }) : [{ label: 'ทุกชุด · เรียงตาม 쓰기 → 읽기 → 듣기 → 말하기', sets }];
       return html`<article class="exam">
         <div class="exam-h"><h2 class="ko">${ex.title}</h2><span class="dday">${dday(ex.date)}</span><span class="muted">${ex.when}</span><p>${ex.note}</p></div>
         <p class="exam-sum">ทำแล้ว ${done}/${sets.length} ชุด</p>

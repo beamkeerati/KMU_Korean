@@ -20,6 +20,12 @@ Claude Code loads this file automatically when started in this folder.
   each turned into a 가/나 dialogue with 나 blank, 1×10 — ①'s three passages were 읽기 6-2, 9-2 and 13-2 nearly
   verbatim, so ② will almost certainly lift 읽기 texts of 14–19). Transcribed in content/exercises/miniexam/exam01.md, analysed
   in content/predictions/miniexam/exam02.md §1. ① 10/6 = 5–13과 · ② **10/20 = 14–20과** (the syllabus said 10/19; the teacher's whiteboard on 10/15 moved it to Tue 10/20, same day as the 방학 계획 발표; Mon 10/19 = 21·22과) · ③ 11/6 = 22–29과 · ④ 11/18 = 30–37과.
+  ② (sat 10/20, scan in source/miniexam/, transcription exercises/miniexam/exam02.md, scorecard at the top of predictions/miniexam/exam02.md) had a
+  **7-section 쓰기** (반대말 · 해요→합니다 · 높임 · 조사 · answer-with-given-grammar -네요/-(으)시/-(으)러 · Q&A ×6 · picture timeline in 합니다체), 듣기 10×1 from the
+  textbook 17–20과 listening texts, and 읽기 = the three passages of the teacher's 복습문제 verbatim. Marks due 10/21.
+- **중간시험 facts from the teacher (10/20):** "not far from 복습시험①, ② and the 복습문제 — maybe only the words change"; Fri 10/23 쓰기 1 h · 듣기 40 min ·
+  읽기 1 h; 말하기 Wed 10/22 slot 3, 09:45–10:00, 20–25 questions like the review set's 말하기 table. Mock v2 built from those formats
+  (content/specs/BRIEF_midterm_v2.md, 4 Sonnet agents 10/20).
 - 낭독시험 (read-aloud, 20 marks of 읽기): ① 9/30 9과 · ② 10/6 · ③ 10/12 15과 · ④ **10/15** (announced 10/14, the 19과
   day — the plan names no unit; ① and ③ were the unit taught on the announcement day, so 19과 is the working assumption)
   · ⑤ 10/28 23과 · ⑥ 11/6 · ⑦ 11/12 31과 · ⑧ 11/18. The 19과 texts with pronunciation are in exam02.md §7.
@@ -48,6 +54,7 @@ source/        ต้นฉบับ — never modify the contents; file names f
   everyday/    KMU everyday test unit 05 - 13.pdf · KMU everyday sheet unit 05 - 13.pdf
                KMU everyday test unit 14.pdf · test unit 15, 16, 17, 18, 19 · sheet unit 15, 16, 17, 18, 19, 20   ← daily hand-outs land HERE
   miniexam/    KMU mini exam 01 unit 05 - 13.pdf   (복습시험 ①: score sheet + 듣기/읽기/쓰기 papers in one PDF)
+               KMU mini exam 02 unit 14 - 20.pdf   (복습시험 ②, sat 2026-10-20: 쓰기 4 pp + 듣기 + 읽기, the student's pencil, no marks yet)
                ← 복습시험 scans land HERE, never in everyday/ (the user wants the two kept apart at every level)
   review/      KMU midterm review 01 unit 05 - 22.pdf   (teacher's 「1급 중간시험 복습문제」, 16 pp: 쓰기 1–14 · 읽기 1–25 · 듣기 1–12 · 말하기 1–20;
                p.17 of the scan is the 19과 sheet again — ignored)
@@ -92,7 +99,9 @@ content/       ✍️ SOURCE OF TRUTH — edit here, never in output/
   mindmaps/    unit05…22.md + all.md — mind-map OUTLINES (see scripts/build_mindmaps.py for the grammar). Per unit: 문법 (forms,
                conditions, ⚠️) · 어휘 · 표현·대화 · 연결 (← 이전 / → 이후 / 시험). all.md = 7 cross-unit threads (문장 끝맺기 · 조사 ·
                시제 · 숫자·시간 · 높임 · 부정·질문 · 묘사·장소) — the per-unit 연결 branches must agree with it.
-  mockweb/     practice-site data, one JSON per source: mini02.json (복습시험② prediction) · mini02_b.json / mini02_c.json (papers 2 and 3,
+  mockweb/     practice-site data, one JSON per source: mini02.json (복습시험② prediction) · mini02_real.json (② as sat, ids mini02r-*, Agent T
+               2026-10-20) · mid_writing / mid_reading / mid_listen_speak.json = **midterm mock v2** (2026-10-20, ids mid-writing-a/b, mid-reading-a/b,
+               mid-listening-a/b, mid-speaking; brief content/specs/BRIEF_midterm_v2.md; the old midterm-* ids are gone) · mini02_b.json / mini02_c.json (papers 2 and 3,
                2026-10-19, 2 Sonnet agents from content/specs/BRIEF_mini02_extra.md; b = most-tested items, c = the user's weak points + 19–20과) · review_p1/p2.json (teacher's
                복습문제; its 듣기 has no script so it is left out) · mid_writing / mid_reading / mid_listen_speak.json (중간시험
                prediction). Written by 6 Sonnet agents 2026-10-18 from the Markdown sources; when a source changes, fix the JSON too.
@@ -133,7 +142,7 @@ output/        🤖 GENERATED — overwritten every build, never hand-edit. Reor
   1_Guides/      KMU_Guide_By_Unit.pdf (เล่ม 1, ~105 pp) · KMU_Guide_By_Topic.pdf (เล่ม 2, ~210 pp) · KMU_Mindmaps.pdf (19 maps)
                  · KMU_Syllabus_2026_Fall_TH.pdf (one-off: make_pdf.py <abs path to content/syllabus/syllabus_th.md> --pdf-dir
                  output/1_Guides, then rename) · mindmaps/KMU_Mindmap_<name>.{html,pdf,png} (build_mindmaps.py)
-  2_Practice_Web/ ⭐ practice website (build_mockweb.py): index.html + data.js (window.KMU_SETS, 16 sets, 472 items) + clips.js
+  2_Practice_Web/ ⭐ practice website (build_mockweb.py): index.html + data.js (window.KMU_SETS, 26 sets, 601 items as of 2026-10-20 evening) + vendor.js + clips.js
                  (window.KMU_CLIPS, 252 neural clips ~6 MB) + start.sh (localhost server → microphone works in Chrome).
                  Published as https://claude.ai/artifact/14Xbi9kWyQgDryHzk7kuzm from scripts/mockweb/app.html with
                  files {data.js, clips.js}; the claude.ai frame refuses the microphone (no capability for it) → typing only there.
@@ -156,7 +165,8 @@ output/        🤖 GENERATED — overwritten every build, never hand-edit. Reor
                  artifact file; no CDN, works offline). CSS, ids, `kmuweb:` keys, cloud/AI/karaoke modules and window.__kmu are unchanged, so old
                  progress loads as before; every harness driver matches v24 (only wall-clock stamps differ). Under the harness (window.__fake)
                  rendering is flushed synchronously; real browsers keep Preact's batched rendering. Publish files = {data.js, clips.js, vendor.js}.
-  3_Exam_Prep/   KMU_Review_Midterm01.pdf (teacher's 중간시험 복습문제) · KMU_Predict_midterm01.pdf · KMU_Predict_miniexam02.pdf
+  3_Exam_Prep/   KMU_Review_Midterm01.pdf (teacher's 중간시험 복습문제) · KMU_Predict_midterm01.pdf (v2 2026-10-20, 45 pp; parts assembled by
+                 scripts/assemble_midterm.py, then build.py predict) · KMU_Predict_miniexam02.pdf · past/KMU_MiniExam_02.pdf (② as sat + AI key)
                  · past/KMU_MiniExam_NN.pdf (복습시험 as sat)
   4_Daily_Tests/ KMU_Everyday_unitNN.pdf ⭐ one small PDF per unit (what the user prints day to day) · predictions/KMU_Predict_unitNN.pdf
   5_Homework/    KMU_Workbook.pdf (워크북 5–22 + 종합문제) · KMU_Listening.pdf (본문 듣기 5–22)
@@ -211,7 +221,8 @@ is not zero-padded will not be found.
   `!extracted/lecture/` if the slide photos are needed on another machine), `.vscode/`, `__pycache__/`.
 - A reverted/amended commit keeps its blobs alive through the reflog, `ORIG_HEAD` and `FETCH_HEAD`; to really free disk run
   `git reflog expire --expire=now --expire-unreachable=now --all && git prune --expire=now` (848 MB of orphans were cleared this way).
-- Commit only when the user asks; commit messages end with the Co-Authored-By line from the session reminder.
+- Commit only when the user asks. **No Co-Authored-By / Claude attribution line in commit messages** (user's request 2026-10-20;
+  the two local commits that had it were reworded before pushing).
 
 ## 3. How the books are assembled
 - **Guide = two books** (`build_guide()`, split 2026-10-16; parts renamed ส่วนที่ and slides merged inline the same evening):
@@ -470,6 +481,10 @@ starred ones cost real marks.
 - Practice-site 읽기 sentence answers (2026-10-18): 고양 친구 for 고향 친구 (ㅎ→ㅇ, 가 dropped) · 학교 근처가 한식집에 (stray 가 inside a noun
   phrase) · 몇 시에 일어났어요? → 10시 20분이었습니다 (answered with 이다 instead of the verb asked about) · 쇼핑 하러 갔어요 where the text
   said 윤아 씨를 만나러. Content of 7/8/12/14 was right — the site had only marked them ✕ because they did not match the model string.
+- 복습시험② (2026-10-20, pencil on the paper, not yet marked): ★ **테국** for 태국 (ㅐ/ㅔ, in the very first answer) · **먹으세요** for 드세요 (special
+  honorific missed in a drill, next to 계세요 in the 보기) · **사과과** for 사과와 (와 after a vowel) · **먹습니다** for 먹습니까? (question mark ignored
+  when converting) · section 5 "answer with -네요 / -(으)시 / -(으)러" left blank (format not understood: pick the grammar that fits each question) ·
+  6-5 무엇을 드시겠습니까? → 저는 ___ unsure (→ 비빔밥을 먹겠습니다). 듣기 5 changed O→X (지훈 그림을 좋아하지 않아요).
 What the user does well: ㅂ니다/습니다 choice by 받침, -지 않- forms, 겠 forms, the ㅡ-drop past
 (바빴어요·컸어요), special honorific words (드세요·주무세요·계세요), 에서 for activity places.
 
@@ -615,3 +630,13 @@ The user scored 100/100 쓰기, 10/10 읽기, 9/10 듣기 on paper 1 before the 
 later — Fable recommended Preact + Signals (no build step, works as a single-file artifact) or React+Vite+shadcn with own hosting; the user
 chose **A = wait until after the midterm (after 2026-10-23)**, then decide. Pending ideas offered but not built: export/import of progress,
 HTTPS hosting for the iPad microphone, loading clips per set instead of one 6 MB file.
+2026-10-20 (afternoon/evening, Fable 5.1 + Sonnet agents): folder renamed KMU_Korean and put under git (§2.2). The practice site was ported to
+**Preact + Signals** (v25, one Sonnet agent from content/specs/BRIEF_preact_port.md, 245k tokens; harness drivers all matched v24). A speech
+audio player for the 자기 소개 발표 was built (scripts/build_speech_audio.py → output/6_Speaking/KMU_Speaking_Myself_Audio.html, artifact
+https://claude.ai/artifact/UB8eXhn7DoTV6pVQDVMPSC; theme / reading / text-size controls added on request). The 복습시험② scan arrived (§1, §6b):
+Fable read it, scored the prediction (format ~50 % for 쓰기, content ~85 %; 듣기/읽기 matched), and wrote content/specs/BRIEF_midterm_v2.md; four
+Sonnet agents (125–160k tokens, 3–7 min each) transcribed the real paper (exercises/miniexam/exam02.md + mockweb/mini02_real.json → past/KMU_MiniExam_02.pdf)
+and rewrote the midterm mock as **v2** (parts 02–05 + mockweb mid_*.json: every section mirrors 복습시험①/② or the review set with changed words;
+쓰기 2 papers, 읽기 25+15, 듣기 29+10 with scripts, 말하기 25 questions with 해요/합니다 answers). scripts/assemble_midterm.py now lives in the repo.
+Site v26/v27 (26 sets · 601 items · 311 clips) published; the real paper shows as its own row "ข้อสอบจริง". Marks for ② are due 10/21.
+
