@@ -9,7 +9,7 @@ start.sh (serves the folder on localhost so Chrome allows the microphone).
 Voices (free edge-tts, Microsoft neural): T teacher + F female = SunHi, M male = InJoon, S the student's model answers = Hyunsu.
 Clips are cached in extracted/mockweb_clips/<sha1>.mp3, so only new or changed lines are generated.
 """
-import asyncio, base64, glob, hashlib, json, os, re, ssl, sys
+import asyncio, base64, glob, hashlib, json, os, re, shutil, ssl, sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, 'scripts'))
@@ -135,6 +135,7 @@ def main():
     with open(os.path.join(OUT, 'clips.js'), 'w', encoding='utf-8') as f:
         f.write('window.KMU_CLIPS = ' + json.dumps(clips, ensure_ascii=False) + ';\n')
         f.write('window.KMU_WORDS = ' + json.dumps(words, ensure_ascii=False) + ';\n')
+    shutil.copyfile(os.path.join(os.path.dirname(APP), 'vendor.js'), os.path.join(OUT, 'vendor.js'))   # Preact + Signals + htm (UMD)
     with open(os.path.join(OUT, 'index.html'), 'w', encoding='utf-8') as f:
         f.write(standalone(open(APP, encoding='utf-8').read()))
     sh = os.path.join(OUT, 'start.sh')
@@ -144,7 +145,7 @@ def main():
                 'python3 -m http.server 8000 --bind 127.0.0.1\n')
     os.chmod(sh, 0o755)
     n = sum(len(s['items']) for st in sets for s in st['sections'])
-    size = sum(os.path.getsize(os.path.join(OUT, x)) for x in ('data.js', 'clips.js', 'index.html')) // 1024
+    size = sum(os.path.getsize(os.path.join(OUT, x)) for x in ('data.js', 'clips.js', 'vendor.js', 'index.html')) // 1024
     print(f'mockweb   : {len(sets)} sets · {n} items · {len(clips)}/{len(lines)} clips · {size} KB -> output/2_Practice_Web/')
 
 

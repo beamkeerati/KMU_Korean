@@ -151,11 +151,20 @@ output/        🤖 GENERATED — overwritten every build, never hand-edit. Reor
                  (edge-tts WordBoundary → [start,end,word], cache <sha1>.mp3.json; all clips were regenerated) and say(text, voice, el)
                  lights .w spans; transport bar #tp (pause keeps the clip alive via userPaused/curFin).
                  Test harness (fake Audio, virtual time): scratchpad/harness/run.py — not in the repo.
+                 v25 (2026-10-20, Sonnet port from content/specs/BRIEF_preact_port.md, 245k tokens / 14 min): the engine is **Preact 10.29 +
+                 @preact/signals 2.11 + htm 3.1**, vendored as UMD builds in scripts/mockweb/vendor.js (copied to output/, published as a third
+                 artifact file; no CDN, works offline). CSS, ids, `kmuweb:` keys, cloud/AI/karaoke modules and window.__kmu are unchanged, so old
+                 progress loads as before; every harness driver matches v24 (only wall-clock stamps differ). Under the harness (window.__fake)
+                 rendering is flushed synchronously; real browsers keep Preact's batched rendering. Publish files = {data.js, clips.js, vendor.js}.
   3_Exam_Prep/   KMU_Review_Midterm01.pdf (teacher's 중간시험 복습문제) · KMU_Predict_midterm01.pdf · KMU_Predict_miniexam02.pdf
                  · past/KMU_MiniExam_NN.pdf (복습시험 as sat)
   4_Daily_Tests/ KMU_Everyday_unitNN.pdf ⭐ one small PDF per unit (what the user prints day to day) · predictions/KMU_Predict_unitNN.pdf
   5_Homework/    KMU_Workbook.pdf (워크북 5–22 + 종합문제) · KMU_Listening.pdf (본문 듣기 5–22)
   6_Speaking/    KMU_Speaking_MyRoom.pdf · KMU_Speaking_Myself.pdf · KMU_Speaking_VacationPlan.pdf
+                 · KMU_Speaking_Myself_Audio.html (2026-10-20, `python3 scripts/build_speech_audio.py myself`: one InJoon edge-tts clip per
+                 numbered line of content/speaking/<name>.md with word timings, cached in extracted/speech_clips/; single-file player with
+                 per-line / whole-speech play, karaoke highlight, 0.7–1× speed, hide-Thai / hide-Korean drill modes; published as
+                 https://claude.ai/artifact/UB8eXhn7DoTV6pVQDVMPSC — works for vacation_plan / my_room too)
   _build/md/     the intermediate Markdown behind each PDF (grep here: `grep -c '~~' output/_build/md/*.md output/_build/md/*/*.md`)
 ```
 
@@ -194,6 +203,15 @@ lowercase (`workbook`, `everyday test`, `everyday sheet`, `syllabus`, `student's
 Zero-padding matters: without it `unit 10` sorts before `unit 5`.
 `scripts/ocr_extract.py` builds the textbook paths with `f"...unit {unit:02d}.pdf"`, so a file that
 is not zero-padded will not be found.
+
+### 2.2 git (since 2026-10-20)
+- Folder renamed `KMU Korean` → `KMU_Korean`; remote `origin` = https://github.com/beamkeerati/KMU_Korean.git (branch `main`).
+  The user's first push ("Initial commit", 14:24) carried extracted/ and .vscode/; the next commit untracked them.
+- `.gitignore`: the 349 MB lecture-photo PDF (GitHub refuses files > 100 MB), `extracted/` (regenerable; add
+  `!extracted/lecture/` if the slide photos are needed on another machine), `.vscode/`, `__pycache__/`.
+- A reverted/amended commit keeps its blobs alive through the reflog, `ORIG_HEAD` and `FETCH_HEAD`; to really free disk run
+  `git reflog expire --expire=now --expire-unreachable=now --all && git prune --expire=now` (848 MB of orphans were cleared this way).
+- Commit only when the user asks; commit messages end with the Co-Authored-By line from the session reminder.
 
 ## 3. How the books are assembled
 - **Guide = two books** (`build_guide()`, split 2026-10-16; parts renamed ส่วนที่ and slides merged inline the same evening):
