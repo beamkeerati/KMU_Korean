@@ -1,0 +1,1207 @@
+<title>KMU 모의시험</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Noto+Sans+Thai:wght@400;500;700&family=Noto+Serif+KR:wght@600;800&display=swap">
+<style>
+/* Layout: exam papers on a desk — a home board of the three exams, then per set: cover page → paper (exam or practice) → results.
+   The teacher's red pen grades. */
+:root {
+  --desk: #e9edf2; --paper: #ffffff; --ink: #1b2533; --muted: #5d6b7c; --rule: #d5dce5;
+  --navy: #0f4c81; --navy-soft: #e6eef7; --red: #d22f2f; --red-soft: #fdecec; --ok: #1f7a4d; --ok-soft: #e5f4ec; --hi: #fff4c2; --half: #b45309; --half-soft: #fdefd9; --tip: #2f6b8f;
+  --f-ko: "Noto Sans KR", "Noto Sans Thai", system-ui, sans-serif;
+  --f-th: "Noto Sans Thai", "Noto Sans KR", system-ui, sans-serif;
+  --f-disp: "Noto Serif KR", "Noto Sans KR", serif;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --desk: #10151c; --paper: #18202b; --ink: #e4e9f0; --muted: #9aa8b8; --rule: #2c3846; --navy: #7fb2e5; --navy-soft: #1d2b3b;
+  --red: #ff6b6b; --red-soft: #3a1f22; --ok: #5fd39a; --ok-soft: #173126; --hi: #3d3720; --half: #f2a541; --half-soft: #3a2c17; --tip: #8fc1e3; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --desk: #10151c; --paper: #18202b; --ink: #e4e9f0; --muted: #9aa8b8; --rule: #2c3846; --navy: #7fb2e5; --navy-soft: #1d2b3b;
+  --red: #ff6b6b; --red-soft: #3a1f22; --ok: #5fd39a; --ok-soft: #173126; --hi: #3d3720; --half: #f2a541; --half-soft: #3a2c17; --tip: #8fc1e3; color-scheme: dark }
+/* colour tones (the red pen stays red in every tone) */
+:root[data-palette="sakura"] { --desk: #f7eaee; --paper: #fffafb; --rule: #ecd3dc; --navy: #a8326e; --navy-soft: #fbe4ee; --hi: #fff1c9; }
+@media (prefers-color-scheme: dark) { :root[data-palette="sakura"]:not([data-theme="light"]) { --desk: #1a1216; --paper: #24191f; --rule: #3d2a33; --navy: #f08cb8; --navy-soft: #3a2230; --hi: #3d3720; } }
+:root[data-palette="sakura"][data-theme="dark"] { --desk: #1a1216; --paper: #24191f; --rule: #3d2a33; --navy: #f08cb8; --navy-soft: #3a2230; --hi: #3d3720; }
+:root[data-palette="mint"] { --desk: #e4efea; --paper: #fbfefd; --rule: #cde0d7; --navy: #1f6e5a; --navy-soft: #dcf0e7; --hi: #fff4c2; }
+@media (prefers-color-scheme: dark) { :root[data-palette="mint"]:not([data-theme="light"]) { --desk: #0f1714; --paper: #16211d; --rule: #284038; --navy: #6fd2b0; --navy-soft: #1a3229; --hi: #3d3720; } }
+:root[data-palette="mint"][data-theme="dark"] { --desk: #0f1714; --paper: #16211d; --rule: #284038; --navy: #6fd2b0; --navy-soft: #1a3229; --hi: #3d3720; }
+:root[data-palette="peach"] { --desk: #f6ece3; --paper: #fffcf8; --rule: #ead7c8; --navy: #b4531f; --navy-soft: #fbe7d8; --hi: #fff3c4; }
+@media (prefers-color-scheme: dark) { :root[data-palette="peach"]:not([data-theme="light"]) { --desk: #18120e; --paper: #221a14; --rule: #3f2f24; --navy: #f3a273; --navy-soft: #3a2619; --hi: #3d3720; } }
+:root[data-palette="peach"][data-theme="dark"] { --desk: #18120e; --paper: #221a14; --rule: #3f2f24; --navy: #f3a273; --navy-soft: #3a2619; --hi: #3d3720; }
+:root[data-palette="lavender"] { --desk: #ecebf6; --paper: #fdfcff; --rule: #d9d4ee; --navy: #5b45a8; --navy-soft: #ebe6fb; --hi: #fff4c2; }
+@media (prefers-color-scheme: dark) { :root[data-palette="lavender"]:not([data-theme="light"]) { --desk: #12111a; --paper: #1b1925; --rule: #322d48; --navy: #b3a3f5; --navy-soft: #2a2443; --hi: #3d3720; } }
+:root[data-palette="lavender"][data-theme="dark"] { --desk: #12111a; --paper: #1b1925; --rule: #322d48; --navy: #b3a3f5; --navy-soft: #2a2443; --hi: #3d3720; }
+:root[data-palette="graphite"] { --desk: #ebebec; --paper: #ffffff; --rule: #d6d6da; --navy: #2f3640; --navy-soft: #ececf0; --hi: #fff4c2; }
+@media (prefers-color-scheme: dark) { :root[data-palette="graphite"]:not([data-theme="light"]) { --desk: #111214; --paper: #1a1c1f; --rule: #303338; --navy: #cfd5dd; --navy-soft: #262a30; --hi: #3d3720; } }
+:root[data-palette="graphite"][data-theme="dark"] { --desk: #111214; --paper: #1a1c1f; --rule: #303338; --navy: #cfd5dd; --navy-soft: #262a30; --hi: #3d3720; }
+.swatches { display: flex; gap: 6px; }
+.sw { width: 24px; height: 24px; border-radius: 50%; border: 2px solid var(--paper); box-shadow: 0 0 0 1px var(--rule); padding: 0; }
+.sw[aria-pressed="true"] { box-shadow: 0 0 0 2px var(--ink); }
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+/* the page scrolls inside #scroller, not the document: iPad Safari grows an iframe to its content height, which would make the
+   outer claude.ai page scroll and carry the sticky strip / progress bar away. A fixed full-viewport scroller keeps them on screen. */
+html, body { height: 100%; overflow: hidden; }
+body { background: var(--desk); color: var(--ink); font-family: var(--f-th); font-size: calc((15px) * var(--ts, 1)); line-height: 1.65; margin: 0; padding: 0; }
+#scroller { position: fixed; inset: 0; overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-bottom: 56px; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--paper); }
+button, select, input, textarea { font: inherit; color: inherit; }
+button { cursor: pointer; }
+:focus-visible { outline: 3px solid var(--navy); outline-offset: 2px; }
+.ko { font-family: var(--f-ko); }
+.muted { color: var(--muted); }
+
+/* top strip: brand · settings menu · help · sync state */
+.strip { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--paper); border-bottom: 1px solid var(--rule);
+  margin-left: calc(-1 * max(16px, env(safe-area-inset-left, 0px))); margin-right: calc(-1 * max(16px, env(safe-area-inset-right, 0px)));
+  padding: 8px max(16px, env(safe-area-inset-right, 0px)) 8px max(16px, env(safe-area-inset-left, 0px)); }
+.strip-in { max-width: 900px; margin: 0 auto; display: flex; align-items: center; gap: 8px; }
+.brand { font-family: var(--f-disp); font-weight: 800; font-size: calc((17px) * var(--ts, 1)); margin-right: auto; background: none; border: 0; padding: 4px 0; text-align: left; min-width: 0; }
+.brand small { font-family: var(--f-th); font-weight: 500; font-size: calc((12px) * var(--ts, 1)); color: var(--muted); margin-left: 6px; }
+.sync { font-size: calc((12px) * var(--ts, 1)); color: var(--muted); white-space: nowrap; }
+.sync:empty { display: none; }
+.menu { position: relative; }
+.menu summary { list-style: none; cursor: pointer; border: 1px solid var(--rule); border-radius: 6px; padding: 5px 10px; font-size: calc((13px) * var(--ts, 1)); color: var(--muted); white-space: nowrap; min-height: 34px; display: flex; align-items: center; }
+.menu summary::-webkit-details-marker { display: none; }
+.menu[open] summary { border-color: var(--navy); color: var(--navy); }
+.menu .pop { position: absolute; right: 0; top: calc(100% + 6px); background: var(--paper); border: 1px solid var(--rule); border-radius: 8px; padding: 12px 14px; display: grid; gap: 10px; min-width: 240px; box-shadow: 0 8px 24px rgba(0,0,0,.18); z-index: 7; }
+.ctl { display: flex; align-items: center; justify-content: space-between; gap: 10px; font-size: calc((13px) * var(--ts, 1)); color: var(--muted); }
+.ctl select { border: 1px solid var(--rule); background: var(--paper); border-radius: 6px; padding: 4px 6px; min-height: 32px; color: var(--ink); }
+@media (max-width: 520px) { .brand small { display: none; } }
+
+.wrap { max-width: 900px; margin: 18px auto 0; padding-bottom: 80px; }
+.exam { background: var(--paper); border: 1px solid var(--rule); border-radius: 6px; padding: 18px clamp(14px, 3vw, 26px); margin-bottom: 14px; }
+.exam-h { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; border-bottom: 2px solid var(--ink); padding-bottom: 8px; }
+.exam-h h2 { font-family: var(--f-disp); font-size: calc((clamp(18px, 2.6vw, 22px)) * var(--ts, 1)); margin: 0; }
+.dday { font-family: var(--f-ko); font-weight: 700; color: var(--red); font-variant-numeric: tabular-nums; }
+.exam-h p { margin: 0; width: 100%; font-size: calc((13px) * var(--ts, 1)); color: var(--muted); }
+.exam-sum { font-size: calc((13px) * var(--ts, 1)); color: var(--muted); margin: 8px 0 0; }
+.skills { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; margin-top: 12px; }
+.card { text-align: left; border: 1px solid var(--rule); background: var(--paper); border-radius: 8px; padding: 12px 14px; display: grid; gap: 3px; min-width: 0; min-height: 44px; }
+.card:hover { border-color: var(--navy); }
+.card .sk { font-size: calc((12px) * var(--ts, 1)); color: var(--muted); letter-spacing: .04em; }
+.card .tt { font-family: var(--f-ko); font-weight: 700; line-height: 1.4; }
+.card .meta { font-size: calc((12px) * var(--ts, 1)); color: var(--muted); font-variant-numeric: tabular-nums; }
+.badge { justify-self: start; font-size: calc((12px) * var(--ts, 1)); font-weight: 700; padding: 1px 9px; border-radius: 999px; background: var(--navy-soft); color: var(--navy); font-variant-numeric: tabular-nums; margin-top: 3px; }
+.badge.good { background: var(--ok-soft); color: var(--ok); }
+.badge.live { background: var(--hi); color: var(--ink); }
+.badge.none { background: transparent; color: var(--muted); font-weight: 500; padding: 0; }
+.grp { margin-top: 14px; padding-top: 12px; border-top: 1px dashed var(--rule); }
+.exam-sum + .grp { border-top: 0; padding-top: 4px; }
+.grp-h { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; font-size: calc((14px) * var(--ts, 1)); }
+.grp-h b { font-size: calc((15px) * var(--ts, 1)); }
+.grp-bar { flex: 1; min-width: 80px; max-width: 220px; height: 6px; background: var(--rule); border-radius: 3px; overflow: hidden; }
+.grp-bar i { display: block; height: 100%; background: var(--ok); }
+.skills.four { grid-template-columns: repeat(4, minmax(0, 1fr)); margin-top: 8px; }
+@media (max-width: 640px) { .skills.four { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.card .tt small { font-family: var(--f-th); font-weight: 500; font-size: calc((13px) * var(--ts, 1)); color: var(--muted); }
+.card.c-good { border-color: var(--ok); } .card.c-done { border-color: var(--navy); } .card.c-live { border-color: var(--half); }
+.home-tip { font-size: calc((13px) * var(--ts, 1)); color: var(--muted); margin: 0 0 12px; }
+
+.paper { background: var(--paper); border: 1px solid var(--rule); border-radius: 4px; padding: 22px clamp(14px, 4vw, 40px) 30px; }
+.paper-head { display: grid; grid-template-columns: 1fr auto; gap: 8px 20px; align-items: end; border-bottom: 2px solid var(--ink); padding-bottom: 10px; }
+.paper-head h1 { font-family: var(--f-disp); font-size: calc((clamp(20px, 3vw, 26px)) * var(--ts, 1)); margin: 0; line-height: 1.3; text-wrap: balance; }
+.paper-head p { margin: 2px 0 0; color: var(--muted); font-size: calc((13px) * var(--ts, 1)); }
+.namebox { display: grid; grid-template-columns: auto auto; gap: 2px 10px; font-size: calc((13px) * var(--ts, 1)); font-family: var(--f-ko); font-variant-numeric: tabular-nums; }
+.namebox span:nth-child(odd) { color: var(--muted); }
+
+/* cover page */
+.cover-title { text-align: center; border: 2px solid var(--ink); padding: 20px 16px 16px; margin-top: 4px; }
+.cover-org { font-family: var(--f-ko); font-size: calc((13px) * var(--ts, 1)); letter-spacing: .08em; color: var(--muted); }
+.cover-title h1 { font-family: var(--f-disp); font-size: calc((clamp(22px, 3.4vw, 30px)) * var(--ts, 1)); margin: 6px 0 4px; line-height: 1.3; text-wrap: balance; }
+.cover-exam { font-family: var(--f-ko); color: var(--navy); font-weight: 700; }
+.cover-meta { display: inline-grid; grid-template-columns: auto auto auto auto; gap: 4px 18px; margin: 14px auto 0; font-family: var(--f-ko); font-variant-numeric: tabular-nums; border-top: 1px solid var(--rule); padding-top: 12px; }
+.cover-meta span { color: var(--muted); font-size: calc((13px) * var(--ts, 1)); display: block; }
+.cover-meta b { font-size: calc((16px) * var(--ts, 1)); }
+.rules { border-left: 3px solid var(--navy); background: var(--navy-soft); padding: 10px 14px; margin: 16px 0 0; border-radius: 0 6px 6px 0; }
+.rules h3 { margin: 0 0 4px; font-size: calc((14px) * var(--ts, 1)); font-family: var(--f-ko); }
+.rules ul { margin: 0; padding-left: 18px; font-size: calc((14px) * var(--ts, 1)); }
+.resume { border: 1px solid var(--red); background: var(--red-soft); border-radius: 8px; padding: 12px 14px; margin: 16px 0 0; display: grid; gap: 8px; }
+.resume b { color: var(--red); }
+.modes { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 16px 0 0; }
+.mode-btn { text-align: left; border: 2px solid var(--navy); background: var(--paper); border-radius: 10px; padding: 14px 16px; display: grid; gap: 2px; min-height: 44px; }
+.mode-btn.primary { background: var(--navy); color: var(--paper); }
+.mode-btn .t { font-size: calc((17px) * var(--ts, 1)); font-weight: 700; }
+.mode-btn .s { font-size: calc((13px) * var(--ts, 1)); opacity: .85; }
+.last { margin: 14px 0 0; display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; font-size: calc((14px) * var(--ts, 1)); }
+.hist { font-size: calc((13px) * var(--ts, 1)); color: var(--muted); margin: 10px 0 0; }
+.hist span { margin-right: 10px; white-space: nowrap; font-variant-numeric: tabular-nums; }
+@media (max-width: 560px) { .modes { grid-template-columns: 1fr; } .cover-meta { grid-template-columns: auto auto; } }
+
+/* paper in progress */
+.exambar { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; margin: 12px 0 4px; padding: 8px 12px; background: var(--navy-soft); border-radius: 6px; font-size: calc((14px) * var(--ts, 1)); }
+.mode-tag { font-weight: 700; color: var(--navy); font-family: var(--f-ko); }
+.mode-tag.m-exam { color: var(--red); }
+.exambar .sp { flex: 1; }
+.notice { margin: 14px 0 0; padding: 9px 13px; background: var(--hi); border-radius: 6px; font-size: calc((14px) * var(--ts, 1)); }
+.actions { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 16px 0 4px; }
+.btn { border: 1px solid var(--navy); background: var(--paper); color: var(--navy); padding: 7px 14px; border-radius: 6px; font-weight: 500; min-height: 40px; }
+.btn.primary { background: var(--navy); color: var(--paper); }
+.btn.red { border-color: var(--red); color: var(--red); }
+.btn.sm { min-height: 32px; padding: 3px 10px; font-size: calc((13px) * var(--ts, 1)); }
+.btn:disabled { opacity: .45; cursor: not-allowed; }
+.confirm { border: 1px solid var(--red); background: var(--red-soft); padding: 12px 14px; border-radius: 8px; margin: 14px 0 0; display: grid; gap: 8px; }
+.confirm .actions { margin: 0; }
+
+.sec { margin-top: 26px; }
+.sec-h { font-family: var(--f-ko); font-weight: 700; font-size: calc((16px) * var(--ts, 1)); margin: 0; }
+.sec-th { font-size: calc((13px) * var(--ts, 1)); color: var(--muted); margin: 0 0 8px; }
+.box { border: 1px solid var(--ink); border-radius: 4px; padding: 6px 12px; font-family: var(--f-ko); margin: 6px 0 8px; white-space: pre-line; }
+.passage { border-left: 3px solid var(--rule); padding: 4px 0 4px 12px; margin: 6px 0 10px; }
+.passage p { margin: 0 0 4px; }
+.passage .ko { display: block; }
+.passage .th, .script .th { display: block; font-size: calc((13px) * var(--ts, 1)); color: var(--muted); }
+.lst { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 4px 0 8px; }
+.play { border: 1px solid var(--navy); background: var(--paper); color: var(--navy); border-radius: 999px; padding: 4px 12px; font-size: calc((13px) * var(--ts, 1)); min-height: 32px; }
+.g-status { font-size: calc((13px) * var(--ts, 1)); color: var(--muted); font-variant-numeric: tabular-nums; }
+.g-status.hot { color: var(--red); font-weight: 700; }
+.secbar { height: 5px; background: var(--rule); border-radius: 3px; overflow: hidden; margin: 2px 0 8px; }
+.secbar i { display: block; height: 100%; background: var(--red); width: 0; transition: width .5s linear; }
+.secbar:not(.on) { display: none; }
+.sec.live { background: var(--navy-soft); outline: 2px solid var(--navy); outline-offset: 8px; border-radius: 2px; }
+.script { margin-top: 8px; padding: 8px 12px; border-left: 3px solid var(--navy); background: var(--navy-soft); border-radius: 0 6px 6px 0; }
+.script p { margin: 0 0 5px; }
+.script b { font-family: var(--f-ko); }
+.script .lp { border: 1px solid var(--navy); background: var(--paper); color: var(--navy); border-radius: 50%; width: 26px; height: 26px; padding: 0; font-size: calc((11px) * var(--ts, 1)); margin-right: 8px; vertical-align: middle; }
+.script .who { color: var(--muted); }
+.w.sung { color: var(--navy); }
+.w.now { color: var(--paper); background: var(--navy); border-radius: 4px; padding: 0 3px; }
+.script p.speaking { background: var(--hi); }
+/* exam mode hides every Thai gloss and hint until the student asks for them or submits */
+.paper.exam:not(.show-th) .passage .th, .paper.exam:not(.show-th) .qth.tr, .paper.exam:not(.show-th) .opt .th, .paper.exam:not(.show-th) .sec-th { display: none; }
+.paper.exam .hint { display: none; }
+
+.item { position: relative; padding: 9px 0 9px 44px; border-top: 1px dashed var(--rule); scroll-margin-top: 70px; }
+.item:first-of-type { border-top: 0; }
+.qn { position: absolute; left: 0; top: 9px; font-family: var(--f-ko); font-weight: 700; width: 40px; overflow-wrap: anywhere; font-size: calc((14px) * var(--ts, 1)); }
+.q { font-family: var(--f-ko); white-space: pre-line; }
+.qth { font-size: calc((13px) * var(--ts, 1)); color: var(--muted); }
+.pic { font-size: calc((13px) * var(--ts, 1)); }
+.opts { display: flex; flex-wrap: wrap; gap: 6px 8px; margin-top: 6px; }
+.opt { display: inline-flex; align-items: baseline; gap: 6px; border: 1px solid var(--rule); border-radius: 6px; padding: 6px 12px; background: var(--paper); cursor: pointer; min-height: 40px; }
+.opt input { position: absolute; opacity: 0; pointer-events: none; }
+.opt:has(input:checked) { border-color: var(--navy); background: var(--navy-soft); font-weight: 500; }
+.opt:has(input:focus-visible) { outline: 3px solid var(--navy); outline-offset: 2px; }
+.opt .th { font-size: calc((12px) * var(--ts, 1)); color: var(--muted); }
+.bl { border: 0; border-bottom: 1.5px solid var(--ink); background: transparent; padding: 4px 4px; width: 7.5em; max-width: 100%; font-family: var(--f-ko); min-height: 36px; font-size: calc((16px) * var(--ts, 1)); }
+.conj { display: grid; gap: 6px; }
+.conj-base { font-size: calc((17px) * var(--ts, 1)); }
+.conj-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 230px), 1fr)); gap: 6px 14px; }
+.conj-cell { display: flex; align-items: baseline; gap: 8px; min-width: 0; }
+.conj-lab { color: var(--muted); font-size: calc((14px) * var(--ts, 1)); white-space: nowrap; min-width: 6.5em; }
+.conj-cell .bl { flex: 1; width: auto; min-width: 5em; }
+.nw { white-space: nowrap; display: inline-flex; align-items: baseline; flex-wrap: nowrap; max-width: 100%; }
+.bl.ok { border-color: var(--ok); } .bl.ng { border-color: var(--red); color: var(--red); } .bl.half { border-color: var(--red); }
+textarea.wa { width: 100%; margin-top: 6px; border: 0; border-bottom: 1.5px solid var(--ink); background: repeating-linear-gradient(transparent 0 1.9em, var(--rule) 1.9em calc(1.9em + 1px)); line-height: 1.95em; padding: 0 4px; font-family: var(--f-ko); min-height: 2.1em; resize: vertical; font-size: calc((16px) * var(--ts, 1)); }
+.item.done { background: var(--navy-soft); box-shadow: 0 0 0 6px var(--navy-soft); border-radius: 2px; border-top-color: transparent; }
+.item.done + .item { border-top-color: transparent; }
+.item.done::before { content: ""; position: absolute; left: -6px; top: 4px; bottom: 4px; width: 4px; border-radius: 2px; background: var(--navy); }
+.item.done .qn { color: var(--navy); }
+.item.live { outline: 2px solid var(--navy); outline-offset: 6px; border-radius: 2px; background: var(--navy-soft); }
+.item.g-ok, .item.g-half, .item.g-ng, .item.g-pend { border-radius: 2px; border-top-color: transparent; }
+.item.g-ok { background: var(--ok-soft); box-shadow: 0 0 0 6px var(--ok-soft); }
+.item.g-half { background: var(--half-soft); box-shadow: 0 0 0 6px var(--half-soft); }
+.item.g-ng { background: var(--red-soft); box-shadow: 0 0 0 6px var(--red-soft); }
+.item.g-pend { background: var(--desk); box-shadow: 0 0 0 6px var(--desk); }
+.item.g-ok::before, .item.g-half::before, .item.g-ng::before, .item.g-pend::before { content: ""; position: absolute; left: -6px; top: 4px; bottom: 4px; width: 5px; border-radius: 2px; }
+.item.g-ok::before { background: var(--ok); } .item.g-half::before { background: var(--half); } .item.g-ng::before { background: var(--red); } .item.g-pend::before { background: var(--muted); }
+.item.g-ok .qn { color: var(--ok); } .item.g-half .qn { color: var(--half); } .item.g-ng .qn { color: var(--red); }
+.item + .item.g-ok, .item + .item.g-half, .item + .item.g-ng, .item + .item.g-pend { border-top-color: transparent; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: calc((13px) * var(--ts, 1)); }
+.legend span::before { content: ""; display: inline-block; width: 12px; height: 12px; border-radius: 3px; margin-right: 5px; vertical-align: -1px; }
+.legend .l-ok::before { background: var(--ok); } .legend .l-half::before { background: var(--half); } .legend .l-ng::before { background: var(--red); } .legend .l-pend::before { background: var(--muted); }
+.self button.v-o { border-color: var(--ok); color: var(--ok); } .self button.v-h { border-color: var(--half); color: var(--half); }
+.self button.v-o[aria-pressed="true"] { background: var(--ok); color: var(--paper); } .self button.v-h[aria-pressed="true"] { background: var(--half); color: var(--paper); }
+.mark { display: none; }
+.mark svg { width: 100%; height: 100%; overflow: visible; }
+.mark path, .mark circle { fill: none; stroke: var(--red); stroke-width: 3; stroke-linecap: round; }
+.mark .pend { display: grid; place-items: center; width: 30px; height: 30px; margin: 4px; border: 2px dashed var(--muted); border-radius: 50%; color: var(--muted); font-weight: 800; font-size: calc((16px) * var(--ts, 1)); }
+.fix { display: block; font-size: calc((13px) * var(--ts, 1)); margin-top: 4px; font-family: var(--f-ko); }
+.fix.corr { color: var(--red); }                                   /* a correction under a wrong or half-right answer */
+.fix.tip { color: var(--tip); }                                    /* advice under an answer that is already right */
+.fix.tip .th { color: var(--tip); }
+.fix .th { font-family: var(--f-th); }
+.self { display: inline-flex; gap: 4px; margin-left: 6px; vertical-align: middle; }
+.self button { border: 1px solid var(--red); background: var(--paper); color: var(--red); border-radius: 4px; padding: 2px 9px; font-size: calc((13px) * var(--ts, 1)); min-height: 30px; }
+.self button[aria-pressed="true"] { background: var(--red); color: var(--paper); }
+.aibtn { border: 1px solid var(--navy); background: var(--paper); color: var(--navy); border-radius: 4px; padding: 2px 9px; font: inherit; font-size: calc((13px) * var(--ts, 1)); margin-left: 6px; cursor: pointer; min-height: 30px; }
+.aibtn:disabled { opacity: .5; cursor: default; }
+.aifb { display: block; margin-top: 6px; padding: 6px 10px; border-left: 3px solid var(--navy); background: var(--paper); border-radius: 0 6px 6px 0; color: var(--ink); font-size: calc((13px) * var(--ts, 1)); font-family: var(--f-th); }
+.aifb b.ko { font-family: var(--f-ko); }
+.tag { font-size: calc((11px) * var(--ts, 1)); font-weight: 700; border-radius: 4px; padding: 0 5px; background: var(--navy-soft); color: var(--navy); margin-left: 6px; vertical-align: middle; }
+.zero { font-size: calc((12px) * var(--ts, 1)); color: var(--muted); }
+.checks { list-style: none; margin: 6px 0 0; padding: 0; font-size: calc((14px) * var(--ts, 1)); display: grid; gap: 2px; }
+.checks li::before { content: "○ "; color: var(--ok); font-weight: 700; }
+.checks li.ng::before { content: "✕ "; color: var(--red); }
+.rec { display: inline-flex; align-items: center; gap: 6px; color: var(--red); font-size: calc((13px) * var(--ts, 1)); font-weight: 500; font-variant-numeric: tabular-nums; }
+.rec::before { content: ""; width: 9px; height: 9px; border-radius: 50%; background: var(--red); animation: blink 1s infinite; }
+@keyframes blink { 50% { opacity: .2; } }
+@media (prefers-reduced-motion: reduce) { .rec::before { animation: none; } .secbar i { transition: none; } }
+audio { height: 32px; max-width: 100%; }
+
+/* results card */
+.results { margin: 16px 0 6px; border: 2px solid var(--red); border-radius: 10px; padding: 14px 18px; background: var(--red-soft); display: grid; gap: 10px; }
+.results .top { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 18px; }
+.results .stamp { font-family: var(--f-disp); font-size: calc((42px) * var(--ts, 1)); font-weight: 800; color: var(--red); line-height: 1; font-variant-numeric: tabular-nums; }
+.results .sub { font-size: calc((13px) * var(--ts, 1)); color: var(--muted); }
+.results table { width: 100%; border-collapse: collapse; font-size: calc((13px) * var(--ts, 1)); background: var(--paper); border-radius: 6px; overflow: hidden; }
+.results th, .results td { text-align: left; padding: 4px 8px; border-bottom: 1px solid var(--rule); }
+.results td:last-child, .results th:last-child { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.results tr:last-child td { border-bottom: 0; }
+.results ul { margin: 0; padding-left: 18px; font-size: calc((14px) * var(--ts, 1)); }
+.results a { color: var(--navy); font-weight: 600; text-decoration: none; }
+.ai-line { font-size: calc((14px) * var(--ts, 1)); display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.ai-line .bar { flex: 1; min-width: 80px; height: 6px; background: var(--rule); border-radius: 3px; overflow: hidden; }
+.ai-line .bar i { display: block; height: 100%; background: var(--navy); width: 0; transition: width .3s; }
+
+/* floating dock: exam clock · answered count · AI state */
+.dock { position: fixed; right: max(16px, env(safe-area-inset-right, 0px)); bottom: max(16px, env(safe-area-inset-bottom, 0px)); z-index: 6;
+  display: flex; align-items: stretch; border: 1px solid var(--rule); border-radius: 999px; background: var(--paper); box-shadow: 0 4px 16px rgba(0,0,0,.18); overflow: hidden; font-size: calc((14px) * var(--ts, 1)); max-width: calc(100vw - 32px); }
+.dock.up { bottom: auto; }
+.dock button { font: inherit; color: var(--ink); background: none; border: 0; padding: 8px 14px; cursor: pointer; display: flex; align-items: center; gap: 6px; min-height: 44px; }
+.dock button + button, .dock .da { border-left: 1px solid var(--rule); }
+.dock .dt { font-family: var(--f-ko); font-weight: 800; font-variant-numeric: tabular-nums; min-width: 72px; justify-content: center; }
+.dock .dt.warn { color: var(--red); }
+.dock .dp { font-variant-numeric: tabular-nums; }
+.dock .bar { width: 44px; height: 6px; border-radius: 3px; background: var(--rule); overflow: hidden; }
+.dock .bar i { display: block; height: 100%; width: 0; background: var(--navy); transition: width .2s; }
+.dock .dp.all .bar i { background: var(--ok); }
+.dock .da { padding: 8px 14px; display: flex; align-items: center; color: var(--navy); font-weight: 600; font-size: calc((13px) * var(--ts, 1)); }
+@media (max-width: 420px) { .dock .bar { display: none; } .dock button { padding: 8px 10px; } }
+
+/* big progress panel, sticky under the top strip */
+.prog { position: sticky; top: var(--strip-h, 52px); z-index: 4; background: var(--paper); border: 1px solid var(--rule); border-radius: 8px; padding: 8px 12px 10px; margin: 10px 0 4px; box-shadow: 0 2px 8px rgba(0,0,0,.06); }
+.prog-row { display: flex; align-items: baseline; gap: 10px; font-size: calc((15px) * var(--ts, 1)); font-variant-numeric: tabular-nums; }
+.prog-row .sp { flex: 1; }
+.prog-row #prog-p { color: var(--muted); font-size: calc((13px) * var(--ts, 1)); }
+#prog-t { font-family: var(--f-ko); font-size: calc((18px) * var(--ts, 1)); } #prog-t.warn { color: var(--red); }
+.prog-bar { height: 12px; background: var(--rule); border-radius: 6px; overflow: hidden; margin-top: 6px; }
+.prog-bar i { display: block; height: 100%; width: 0; background: var(--navy); border-radius: 6px; transition: width .3s; }
+.prog.all .prog-bar i#prog-a { background: var(--ok); }
+.prog-bar.time { height: 6px; } .prog-bar.time i { background: var(--muted); transition: width 1s linear; } .prog-bar.time i.warn { background: var(--red); }
+/* split layout (wide screens only) */
+:root[data-layout="split"] .wrap { max-width: 1400px; }
+@media (min-width: 900px) {
+  :root[data-layout="split"] #paper .sec { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: 0 28px; align-items: start; }
+  :root[data-layout="split"] #paper .sec-l { position: sticky; top: calc(var(--strip-h, 52px) + 86px); max-height: calc(100vh - var(--strip-h, 52px) - 100px); overflow: auto; padding-right: 6px; }
+  :root[data-layout="split"] #paper .sec-r { border-left: 1px solid var(--rule); padding-left: 22px; }
+  :root[data-layout="split"] #paper .sec-r .item:first-child { padding-top: 0; }
+}
+.tp { position: fixed; left: max(16px, env(safe-area-inset-left, 0px)); bottom: max(16px, env(safe-area-inset-bottom, 0px)); z-index: 6; display: flex; align-items: center; gap: 6px;
+  background: var(--paper); border: 1px solid var(--navy); border-radius: 999px; padding: 6px 12px; box-shadow: 0 4px 16px rgba(0,0,0,.18); max-width: calc(100vw - 32px); }
+.tp button { border: 0; background: var(--navy-soft); color: var(--navy); border-radius: 50%; width: 36px; height: 36px; font-size: calc((15px) * var(--ts, 1)); display: grid; place-items: center; }
+.tp input[type=range] { width: 160px; accent-color: var(--navy); }
+.tp span { font-size: calc((12px) * var(--ts, 1)); color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
+@media (max-width: 640px) { .tp { bottom: max(72px, calc(env(safe-area-inset-bottom, 0px) + 72px)); } .tp input[type=range] { width: 90px; } }
+.help h2 { font-family: var(--f-disp); font-size: calc((18px) * var(--ts, 1)); margin: 20px 0 6px; }
+.help ul { padding-left: 20px; margin: 0; }
+.help li { margin: 2px 0; }
+.help code { font-family: ui-monospace, monospace; background: var(--navy-soft); padding: 1px 5px; border-radius: 4px; font-size: calc((13px) * var(--ts, 1)); word-break: break-all; }
+@media (max-width: 520px) { .paper-head { grid-template-columns: 1fr; } .item { padding-left: 38px; } .paper { padding-left: 12px; padding-right: 12px; } }
+</style>
+
+<div id="scroller">
+<div class="strip"><div class="strip-in">
+  <button class="brand ko" id="home-btn" type="button">KMU 모의시험 <small>รวมแบบฝึกก่อนสอบ · 1~21과</small></button>
+  <span class="sync" id="sync" aria-live="polite"></span>
+  <details class="menu" id="settings">
+    <summary aria-label="ตั้งค่า">⚙ ตั้งค่า</summary>
+    <div class="pop">
+      <label class="ctl" for="rate">ความเร็วเสียง <select id="rate"><option value="0.8">ช้า</option><option value="0.9" selected>ปกติ</option><option value="1">เร็ว</option></select></label>
+      <label class="ctl" for="tsize">ขนาดตัวอักษร <select id="tsize"><option value="0.9">เล็ก</option><option value="1" selected>ปกติ</option><option value="1.15">ใหญ่</option><option value="1.3">ใหญ่มาก</option><option value="1.5">ใหญ่พิเศษ</option></select></label>
+      <label class="ctl" for="layout">รูปแบบหน้า <select id="layout"><option value="stack">แบบเดิม (บน-ล่าง)</option><option value="split">แบ่งซ้าย-ขวา</option></select></label>
+      <label class="ctl" for="theme">ธีม <select id="theme"><option value="auto">ตามเครื่อง</option><option value="light">☀️ สว่าง</option><option value="dark">🌙 มืด</option></select></label>
+      <div class="ctl">โทนสี <div class="swatches" role="group" aria-label="โทนสี"><button class="sw" type="button" data-pal="navy" style="background:#0f4c81" aria-pressed="false" aria-label="โทนน้ำเงิน" title="น้ำเงิน"></button><button class="sw" type="button" data-pal="sakura" style="background:#a8326e" aria-pressed="false" aria-label="โทนชมพูซากุระ" title="ชมพูซากุระ"></button><button class="sw" type="button" data-pal="mint" style="background:#1f6e5a" aria-pressed="false" aria-label="โทนเขียวมิ้นต์" title="เขียวมิ้นต์"></button><button class="sw" type="button" data-pal="peach" style="background:#b4531f" aria-pressed="false" aria-label="โทนส้มพีช" title="ส้มพีช"></button><button class="sw" type="button" data-pal="lavender" style="background:#5b45a8" aria-pressed="false" aria-label="โทนม่วงลาเวนเดอร์" title="ม่วงลาเวนเดอร์"></button><button class="sw" type="button" data-pal="graphite" style="background:#2f3640" aria-pressed="false" aria-label="โทนเทาดำ" title="เทาดำ"></button></div></div>
+    </div>
+  </details>
+  <button class="btn sm" type="button" id="help-btn">วิธีใช้</button>
+</div></div>
+
+<div class="wrap">
+  <section id="home"></section>
+  <section id="set" hidden></section>
+  <section id="help" class="paper help" hidden>
+    <div class="paper-head"><div><h1>วิธีใช้</h1><p>เว็บฝึกสอบ 복습시험 ② และ 중간시험 · ใช้ได้บน iPad, มือถือ และ PC</p></div></div>
+    <h2>ลำดับการทำข้อสอบ</h2>
+    <ul>
+      <li><b>หน้าแรก</b> แบ่งตามการสอบ 3 ชุด กดการ์ดชุดที่ต้องการ → เข้าสู่<b>หน้าปกข้อสอบ</b> ซึ่งบอกจำนวนข้อ คะแนน เวลา และกติกา</li>
+      <li><b>▶ เริ่มสอบจริง</b> = จำลองห้องสอบ: จับเวลาตามข้อสอบจริง (ดูที่แถบลอยมุมล่างขวา) ซ่อนคำแปลและคำใบ้ ชุดฟังจะเล่นเสียงเองตอนละ 2 รอบแล้วให้เวลาตอบ ชุดพูดครูจะถามทีละข้อ หมดเวลาแล้วระบบส่งคำตอบให้อัตโนมัติ</li>
+      <li><b>✎ ฝึกทำ</b> = ไม่จับเวลา เปิดคำแปลได้ กดฟังซ้ำได้ไม่จำกัด เปิดสคริปต์ได้ กด ▶ ถาม ทีละข้อได้</li>
+      <li>ทำเสร็จกด <b>ส่งคำตอบ</b> → เห็น<b>ผลสอบ</b> คะแนนรวม คะแนนรายตอน ข้อที่เสียคะแนน และเฉลยทุกข้อ แต่ละข้อเปลี่ยนสีทั้งข้อ: เขียว = ถูก · ส้ม = ครึ่งคะแนน · แดง = ผิด · เทา = รอตรวจ</li>
+      <li>⚙ ตั้งค่า › รูปแบบหน้า: <b>แบ่งซ้าย-ขวา</b> = คำสั่ง บทอ่าน และเสียงอยู่ซ้าย (ค้างไว้ขณะเลื่อน) ส่วนข้อและช่องตอบอยู่ขวา · ใช้ได้บนจอกว้าง (iPad แนวนอน / PC)</li>
+      <li>ออกกลางคันได้ด้วยปุ่ม <b>พักไว้ก่อน</b> คำตอบและเวลาที่เหลือจะถูกเก็บไว้ กลับมาที่หน้าปกแล้วกด <b>ทำต่อ</b> ได้</li>
+    </ul>
+    <h2>การตรวจ</h2>
+    <ul>
+      <li>ข้อเลือกตอบและเติมคำ ตรวจทันที ถ้าสะกดผิดเล็กน้อยได้ครึ่งคะแนนและบอกตัวที่ผิด</li>
+      <li>🤖 <b>AI ตรวจอัตโนมัติ</b> (เฉพาะลิงก์ claude.ai): หลังส่งคำตอบ Claude จะตรวจทุกข้อที่พิมพ์ตอบซึ่งไม่ตรงเฉลยตรง ๆ — ข้อเขียนประโยค ข้อเติมคำ และข้อพูด — โดยอ่านบทอ่าน/สคริปต์ โจทย์ และคำตอบตัวอย่าง แล้วให้ ถูก / ครึ่ง / ผิด พร้อมเหตุผลภาษาไทยและประโยคที่แก้แล้ว คะแนนรวมอัปเดตเอง ใช้โควตา Claude ของคุณ ครั้งแรกจะถามขออนุญาต</li>
+      <li>ไม่เห็นด้วยกับ AI หรือเปิดจากไฟล์ในเครื่อง (ไม่มี AI) ให้กด ถูก / ครึ่ง / ผิด ตรวจเองได้ทุกข้อที่พิมพ์ตอบ</li>
+      <li>คำตอบ คะแนน และประวัติเก็บไว้ในเบราว์เซอร์ และซิงก์ข้ามเครื่องผ่านบัญชี claude.ai (ดูสถานะ ☁️ บนแถบด้านบน) ไฟล์ index.html ในเครื่องเก็บแยก ไม่ซิงก์</li>
+    </ul>
+    <h2>듣기 และ 말하기</h2>
+    <ul>
+      <li>เสียงอัดด้วยเสียง neural: SunHi (หญิง) = ครูและผู้พูดหญิง · InJoon (ชาย) = ผู้พูดชาย · Hyunsu = คำตอบตัวอย่าง · ปรับความเร็วได้ที่ ⚙ ตั้งค่า</li>
+      <li>iPad/iPhone: แตะหน้าจอหนึ่งครั้งก่อนเริ่มสอบ เพื่อให้ Safari ยอมเล่นเสียงต่อเนื่อง</li>
+      <li>ชุดพูดบนลิงก์ claude.ai ใช้ไมค์ของเว็บไม่ได้ ให้พูดผ่านไมค์ของแป้นพิมพ์: iPad → Settings › General › Keyboard › เปิด Enable Dictation และเพิ่มแป้นภาษาเกาหลี แล้วแตะช่องคำตอบ กด 🎤 บนแป้น · Windows กด Win+H</li>
+      <li>ไมค์ของเว็บใช้ได้เมื่อเปิดจากเครื่องผ่าน <code>output/2_Practice_Web/start.sh</code> (Chrome, กด Allow) ระบบจะอัดเสียงให้ฟังย้อนหลังและถอดเสียงเป็นข้อความ</li>
+    </ul>
+  </section>
+</div>
+</div>
+
+<div class="tp" id="tp" hidden role="group" aria-label="ควบคุมเสียง">
+  <button type="button" id="tp-pp" aria-label="เล่น/หยุดชั่วคราว">⏸</button>
+  <button type="button" id="tp-back" aria-label="ย้อน 3 วินาที">↺3</button>
+  <button type="button" id="tp-stop" aria-label="หยุด">■</button>
+  <input type="range" id="tp-seek" min="0" max="1000" value="0" aria-label="ตำแหน่งเสียง">
+  <span id="tp-time">0:00 / 0:00</span>
+</div>
+<div class="dock" id="dock" hidden>
+  <button type="button" class="dt" id="dock-t" title="เวลา">⏱ —</button>
+  <button type="button" class="dp" id="dock-p" title="ไปข้อที่ยังไม่ตอบ"><span id="dock-n">0/0</span><span class="bar"><i id="dock-bar"></i></span></button>
+  <span class="da" id="dock-ai" hidden aria-live="polite"></span>
+</div>
+
+<script src="data.js"></script>
+<script src="clips.js"></script>
+<script>
+(() => {
+'use strict';
+const SETS = window.KMU_SETS || [];
+const CLIPS = window.KMU_CLIPS || {};
+const WORDS = window.KMU_WORDS || {};   // per clip: [[startSec, endSec, word], …] from edge-tts word boundaries
+const EXAMS = [
+  { id: 'mini02', title: '복습시험 ②', date: '2026-10-20', when: 'อ. 20 ต.ค. · 14~20과', note: 'เก็งข้อสอบจากรูปแบบ 복습시험 ① — 쓰기 100 · 듣기 10 · 읽기 10 · 말하기 10' },
+  { id: 'review', title: '중간시험 복습문제 (ชุดทบทวนของครู)', date: '2026-10-22', when: 'ชุดที่ครูแจก 16 ต.ค.', note: 'พิมพ์เขียวของข้อสอบกลางภาค — 쓰기 14 ตอน · 읽기 25 ข้อ · 말하기 20 คำถาม (듣기 ของครูต้องใช้เสียงในห้อง จึงไม่มีในนี้)' },
+  { id: 'midterm', title: '중간시험 (สอบกลางภาค)', date: '2026-10-22', when: 'พฤ. 22 ต.ค. 말하기 · ศ. 23 ต.ค. 쓰기·듣기·읽기 · 1~21과', note: 'ข้อสอบจำลองจากเล่มเก็งข้อสอบ — 쓰기 2 ชุด · 읽기 2 ชุด · 듣기 2 ชุด · 말하기 54 คำถาม' }
+];
+const SKILL = { writing: ['쓰기', 'เขียน'], reading: ['읽기', 'อ่าน'], listening: ['듣기', 'ฟัง'], speaking: ['말하기', 'พูด'] };
+const ORDER = ['writing', 'reading', 'listening', 'speaking'];
+const MODE_TH = { exam: 'สอบจริง', practice: 'ฝึกทำ' };
+const SPEAK_SECS = 25;   // seconds to answer one interview question in exam mode
+
+/* ------------------------------------------------------------------ helpers */
+const $ = s => document.querySelector(s);
+const el = (tag, attrs = {}, html = '') => { const e = document.createElement(tag); for (const [k, v] of Object.entries(attrs)) e.setAttribute(k, v); if (html) e.innerHTML = html; return e; };
+const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+const SYNCED = /^(ans|self|score|ai|hist|attempt):(.+)$/;
+const store = { get(k, d) { try { const v = localStorage.getItem('kmuweb:' + k); return v ? JSON.parse(v) : d; } catch (e) { return d; } },
+                put(k, v) { try { if (v === null || v === undefined) localStorage.removeItem('kmuweb:' + k); else localStorage.setItem('kmuweb:' + k, JSON.stringify(v)); } catch (e) {} },
+                set(k, v) { this.put(k, v); const m = SYNCED.exec(k); if (m) { this.put('stamp:' + m[2], Date.now()); cloud.queue(m[2]); } } };
+const fmt = s => `${String(Math.floor(s / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`;
+const fmtShort = s => `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`;
+const ptsOf = it => typeof it.pts === 'number' ? it.pts : 1;
+const dateTh = t => { const d = new Date(t); return `${d.getDate()} ${['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย.', 'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.'][d.getMonth()]} ${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`; };
+const norm = s => (s || '').replace(/[\s.,!?·~'"()「」]/g, '');
+const L = 'ㄱㄲㄴㄷㄸㄹㅁㅂㅃㅅㅆㅇㅈㅉㅊㅋㅌㅍㅎ', V = 'ㅏㅐㅑㅒㅓㅔㅕㅖㅗㅘㅙㅚㅛㅜㅝㅞㅟㅠㅡㅢㅣ', T = ['', ...'ㄱㄲㄳㄴㄵㄶㄷㄹㄺㄻㄼㄽㄾㄿㅀㅁㅂㅄㅅㅆㅇㅈㅊㅋㅌㅍㅎ'];
+const jamo = s => [...s].flatMap(ch => { const c = ch.charCodeAt(0) - 0xAC00; if (c < 0 || c > 11171) return [ch];
+  const t = T[c % 28]; return [L[Math.floor(c / 588)], V[Math.floor(c % 588 / 28)], ...(t ? [t] : [])]; });
+function dist(a, b) { a = jamo(a); b = jamo(b); const d = Array.from({ length: a.length + 1 }, (_, i) => [i, ...Array(b.length).fill(0)]);
+  for (let j = 1; j <= b.length; j++) d[0][j] = j;
+  for (let i = 1; i <= a.length; i++) for (let j = 1; j <= b.length; j++)
+    d[i][j] = Math.min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+  return d[a.length][b.length]; }
+function diffText(ans, key) { const a = [...ans], k = [...key], out = [];
+  for (let i = 0; i < Math.max(a.length, k.length); i++) if (a[i] !== k[i]) out.push(`${a[i] || '∅'}→${k[i] || '∅'}`);
+  return out.slice(0, 3).join(' '); }
+/* 0 = wrong, 0.5 = near miss (≤2 jamo, ≤1 for keys of 2 syllables or fewer), 1 = right; returns [score, closestKey] */
+function judgeText(ans, accepted) {
+  const a = norm(ans); if (!a) return [0, accepted[0]];
+  let best = null;
+  for (const k of accepted) { const nk = norm(k); if (a === nk) return [1, k]; const d = dist(a, nk); if (!best || d < best.d) best = { d, k, nk }; }
+  const limit = best.nk.length <= 2 ? 1 : 2;
+  return [best.d <= limit ? 0.5 : 0, best.k];
+}
+const FRAMED = (() => { try { return window.self !== window.top; } catch (e) { return true; } })();
+const V2F = { o: 1, h: .5, x: 0 };
+
+/* ------------------------------------------------------------------ audio */
+const TTS = 'speechSynthesis' in window;
+let vF = null, vM = null;
+function loadVoices() { if (!TTS) return; const ko = speechSynthesis.getVoices().filter(v => /^ko/i.test(v.lang));
+  const male = /InJoon|Hyunsu|BongJin|GookMin|Male/i; vM = ko.find(v => male.test(v.name)) || null; vF = ko.find(v => !male.test(v.name)) || ko[0] || null; }
+if (TTS) { loadVoices(); speechSynthesis.onvoiceschanged = loadVoices; }
+const rate = () => parseFloat($('#rate').value);
+let runId = 0, curAudio = null;
+/* one shared player: iPad Safari only lets an element play without a tap once a tap has started it,
+   so the first touch anywhere unlocks this element and every later clip reuses it */
+const player = new Audio();
+let unlocked = false;
+document.addEventListener('pointerdown', () => { if (unlocked) return; unlocked = true;
+  const any = Object.values(CLIPS)[0]; if (!any) return;   // a real clip, played muted, unlocks the element
+  player.muted = true; player.src = any;
+  player.play().then(() => { if (player.src === any) { player.pause(); player.muted = false; } }).catch(() => { player.muted = false; }); }, { capture: true });
+let userPaused = false, curFin = null;   // transport bar state: a user pause must not end the clip
+function playClip(src, words, onWord) { return new Promise(res => {
+  const a = player; let done = false, raf = 0;
+  const tick = () => { if (done) return; const t = a.currentTime;
+    if (words && onWord) { let k = -1; for (let i = 0; i < words.length; i++) if (words[i][0] <= t + 0.05) k = i; onWord(k, a.ended); }
+    tpUpdate(a); raf = requestAnimationFrame(tick); };
+  const fin = () => { if (done) return; done = true; cancelAnimationFrame(raf); if (onWord) onWord(words.length, true); a.onended = a.onerror = a.onpause = null; if (curAudio === a) curAudio = null; curFin = null; userPaused = false; tpShow(false); res(); };
+  curFin = fin; userPaused = false; if (cur && cur.mode !== 'exam') tpShow(true);
+  raf = requestAnimationFrame(tick);
+  a.onended = fin; a.onerror = fin; a.onpause = () => { if (!userPaused) fin(); else tpUpdate(a); };
+  a.muted = false; a.src = src; a.playbackRate = rate(); a.preservesPitch = true; curAudio = a;
+  a.play().catch(fin); }); }
+/* say(text, voice, el): with a karaoke element (its text split into .w spans by wrapWords) the words light up as they are spoken */
+function say(text, voice, kEl) {
+  const clip = CLIPS[`${voice}|${text}`];
+  if (clip) { if (kEl) wrapWords(kEl); const w = kEl ? WORDS[`${voice}|${text}`] : null; return playClip(clip, w, w ? karaoke(kEl, w) : null); }
+  return new Promise(res => { if (!TTS) return res();
+    const u = new SpeechSynthesisUtterance(text); u.lang = 'ko-KR'; u.rate = rate();
+    const male = voice === 'M' || voice === 'S'; const v = male ? (vM || vF) : vF; if (v) u.voice = v; u.pitch = male && !vM ? 0.7 : 1;
+    let done = false; const fin = () => { if (!done) { done = true; clearTimeout(t); res(); } };
+    const t = setTimeout(fin, 3000 + text.length * 320 / rate()); u.onend = fin; u.onerror = fin; speechSynthesis.speak(u); });
+}
+/* a per-section / per-item answer countdown — independent of the exam clock; onTick draws it where it belongs */
+let tickTimer = null;
+function countdown(sec, id, onTick) { return new Promise(res => { let left = sec; onTick(left, sec); clearInterval(tickTimer);
+  tickTimer = setInterval(() => { if (id !== runId) { clearInterval(tickTimer); tickTimer = null; return res(false); } left--; onTick(left, sec);
+    if (left <= 0) { clearInterval(tickTimer); tickTimer = null; res(true); } }, 1000); }); }
+const activeFinish = {};
+/* karaoke: wrap each space-separated word of a line in a span; map edge-tts word boundaries onto those spans by character position */
+function wrapWords(e) { if (e.dataset.words) return; e.dataset.words = '1';
+  e.innerHTML = e.textContent.split(/(\s+)/).map(t => /^\s+$/.test(t) || !t ? t : `<span class="w">${esc(t)}</span>`).join(''); }
+function karaoke(e, words) {
+  const spans = [...e.querySelectorAll('.w')];
+  const strip = t => t.replace(/[\s.,!?·~'"()「」…]/g, '');
+  let pos = 0; const span = []; spans.forEach((sp, i) => { const n = strip(sp.textContent).length; span.push([pos, pos + n]); pos += n; });
+  let cur = 0; const map = words.map(w => { const n = strip(w[2]).length, a = cur, b = cur + n; cur = b;
+    return spans.map((_, i) => i).filter(i => span[i][0] < b && span[i][1] > a); });
+  return (k, ended) => { spans.forEach(sp => sp.classList.remove('now', 'sung'));
+    if (ended || k >= words.length) { if (ended) spans.forEach(sp => sp.classList.add('sung')); return; }
+    for (let j = 0; j <= k; j++) (map[j] || []).forEach(i => spans[i].classList.add(j === k ? 'now' : 'sung')); }; }
+/* transport bar: play/pause · stop · seek, for the clip that is playing now */
+function tpShow(on) { $('#tp').hidden = !on; }
+function tpUpdate(a) { const d = a.duration || 0, t = a.currentTime || 0; const sk = $('#tp-seek'); if (!sk.matches(':active')) sk.value = d ? Math.round(1000 * t / d) : 0;
+  $('#tp-time').textContent = `${fmtShort(Math.floor(t))} / ${fmtShort(Math.floor(d))}`; $('#tp-pp').textContent = a.paused ? '▶' : '⏸'; }
+$('#tp-pp').addEventListener('click', () => { if (!curAudio) return; if (curAudio.paused) { userPaused = false; curAudio.play().catch(() => {}); } else { userPaused = true; curAudio.pause(); } tpUpdate(curAudio); });
+$('#tp-stop').addEventListener('click', () => stopRuns());
+$('#tp-seek').addEventListener('input', e => { if (curAudio && curAudio.duration) curAudio.currentTime = curAudio.duration * e.target.value / 1000; });
+$('#tp-back').addEventListener('click', () => { if (curAudio) curAudio.currentTime = Math.max(0, curAudio.currentTime - 3); });
+function clearKaraoke() { document.querySelectorAll('.w.now,.w.sung').forEach(x => x.classList.remove('now', 'sung')); }
+/* stop every audio / interview / countdown run (the exam clock is separate, see stopExamClock) */
+function stopRuns() {
+  runId++; if (TTS) speechSynthesis.cancel(); userPaused = false; if (curAudio) curAudio.pause(); if (curFin) curFin();
+  clearInterval(tickTimer); tickTimer = null;
+  Object.values(activeFinish).forEach(f => f());
+  document.querySelectorAll('.live,.speaking').forEach(e => e.classList.remove('live', 'speaking')); clearKaraoke();
+  document.querySelectorAll('.secbar').forEach(b => b.classList.remove('on'));
+  document.querySelectorAll('.g-status').forEach(s => { if (!s.dataset.keep) { s.textContent = ''; s.classList.remove('hot'); } });
+}
+
+/* ------------------------------------------------------------------ exam clock (absolute end time → survives reloads and background tabs) */
+let examTimer = null;
+function startExamClock() {
+  clearInterval(examTimer);
+  const tick = () => { if (!cur || cur.mode !== 'exam') { clearInterval(examTimer); examTimer = null; return; }
+    const left = Math.max(0, Math.round((cur.endAt - Date.now()) / 1000)); cur.left = left; setClock(left, left <= 60);
+    if (left % 10 === 0) saveLeft();
+    if (left <= 0) { clearInterval(examTimer); examTimer = null; submit('timeup'); } };
+  tick(); examTimer = setInterval(tick, 1000);
+}
+function stopExamClock() { if (examTimer) saveLeft(); clearInterval(examTimer); examTimer = null; }
+/* the remaining time is stored, not the end time — a paused or closed attempt does not lose time, and every device shows the same clock */
+function saveLeft() { if (!cur || cur.mode !== 'exam') return; const att = store.get('attempt:' + cur.st.id, null); if (att && att.left !== cur.left) { att.left = cur.left; store.set('attempt:' + cur.st.id, att); } }
+window.addEventListener('pagehide', () => saveLeft());
+document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') saveLeft(); });
+const attLeft = att => att.left ?? (att.endAt ? Math.max(0, Math.round((att.endAt - Date.now()) / 1000)) : null);
+function setClock(s, warn) { const pt = $('#prog-t'), pb = $('#prog-time'); if (pt) { pt.textContent = '⏱ เหลือ ' + fmt(Math.max(0, Math.round(s))); pt.classList.toggle('warn', !!warn); } if (pb && cur) { pb.style.width = (100 * s / (setMinutes(cur.st) * 60)) + '%'; pb.classList.toggle('warn', !!warn); }
+  const d = $('#dock-t'); d.textContent = '⏱ ' + fmt(Math.max(0, Math.round(s))); d.classList.toggle('warn', !!warn); }
+function setDock() {
+  const d = $('#dock-t'); d.classList.remove('warn');
+  if (!cur || cur.mode === 'cover') { $('#dock').hidden = true; return; }
+  $('#dock').hidden = false;
+  if (cur.mode === 'practice') d.textContent = '✎ ฝึกทำ';
+  else if (cur.mode === 'result') d.textContent = '📊 ผลสอบ';
+  dockCount();
+}
+
+/* ------------------------------------------------------------------ home */
+const lastScore = id => store.get('score:' + id, null);
+const setTotal = st => st.sections.reduce((a, s) => a + s.items.reduce((b, it) => b + ptsOf(it), 0), 0);
+const itemCount = st => st.sections.reduce((a, s) => a + s.items.length, 0);
+const setMinutes = st => st.minutes || 20;
+/* calendar days between today (viewer's clock) and the exam date — not hours, so the label changes at midnight */
+function dday(date) { const [y, m, dd] = date.split('-').map(Number), now = new Date();
+  const d = Math.round((Date.UTC(y, m - 1, dd) - Date.UTC(now.getFullYear(), now.getMonth(), now.getDate())) / 86400000);
+  return d > 0 ? `D-${d}` : d === 0 ? 'วันนี้' : 'ผ่านแล้ว'; }
+let homeDay = new Date().toDateString();   // a tab left open overnight re-draws the countdown when the date changes
+function refreshDay() { const t = new Date().toDateString(); if (t !== homeDay) { homeDay = t; if (!$('#home').hidden) renderHome(); } }
+setInterval(refreshDay, 60000);
+document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') refreshDay(); });
+function answeredIn(st, ans) { let n = 0; st.sections.forEach((sec, si) => sec.items.forEach((_, ii) => { if (isAnswered(ans[`${si}-${ii}`])) n++; })); return n; }
+const isAnswered = a => Array.isArray(a) ? a.some(x => (x || '').trim()) : !!(a && String(a).trim());
+/* home rows: an exam with several parallel papers (ids mini02-, mini02b-, mini02c-) gets one row per paper, the skills in
+   exam-day order inside it; any other exam gets one row per skill */
+const SKILL_RE = /-(writing|reading|listening|speaking)(-[\w]+)?$/;
+const paperOf = st => st.id.replace(SKILL_RE, '');
+function cardFor(st, short) {
+  const sc = lastScore(st.id), tot = setTotal(st), att = store.get('attempt:' + st.id, null);
+  const pct = sc ? sc.s / (sc.t || tot) : 0;
+  const c = el('button', { class: 'card' + (att ? ' c-live' : sc ? (pct >= .8 ? ' c-good' : ' c-done') : ''), type: 'button' });
+  let badge;
+  if (att) badge = `<span class="badge live">⏸ กำลังทำ ${answeredIn(st, store.get('ans:' + st.id, {}))}/${itemCount(st)}${att.mode === 'exam' && attLeft(att) !== null ? ' · เหลือ ' + fmt(attLeft(att)) : ''}</span>`;
+  else if (sc) badge = `<span class="badge${pct >= .8 ? ' good' : ''}">${st.skill === 'speaking' ? `ตอบ ${sc.s}/${sc.t}` : `${sc.s}/${sc.t || tot}`}${sc.mode ? ' · ' + MODE_TH[sc.mode] : ''}</span>`;
+  else badge = '<span class="badge none">ยังไม่ได้ทำ</span>';
+  c.innerHTML = short
+    ? `<span class="tt ko">${SKILL[st.skill][0]} <small>${SKILL[st.skill][1]}</small></span><span class="meta">${itemCount(st)} ข้อ · ${tot} คะแนน · ${setMinutes(st)} นาที</span>${badge}`
+    : `<span class="sk">${SKILL[st.skill][0]} · ${SKILL[st.skill][1]}</span><span class="tt">${esc(st.title)}</span><span class="meta">${itemCount(st)} ข้อ · ${tot} คะแนน · ${setMinutes(st)} นาที</span>${badge}`;
+  c.addEventListener('click', () => go(st.id));
+  return c;
+}
+function renderHome() {
+  const h = $('#home'); h.innerHTML = '';
+  h.append(el('p', { class: 'home-tip' }, 'เลือกชุดข้อสอบ → หน้าปกจะบอกเวลาและกติกา → <b>เริ่มสอบจริง</b> (จับเวลา เสียงเล่นเอง) หรือ <b>ฝึกทำ</b> (ไม่จับเวลา ดูคำแปลได้)'));
+  EXAMS.forEach(ex => {
+    const sets = SETS.filter(s => s.exam === ex.id);
+    if (!sets.length) return;
+    const box = el('article', { class: 'exam' });
+    const done = sets.filter(s => lastScore(s.id)).length;
+    box.innerHTML = `<div class="exam-h"><h2 class="ko">${esc(ex.title)}</h2><span class="dday">${dday(ex.date)}</span><span class="muted">${esc(ex.when)}</span><p>${esc(ex.note)}</p></div>
+      <p class="exam-sum">ทำแล้ว ${done}/${sets.length} ชุด</p>`;
+    const papers = [...new Set(sets.map(paperOf))];
+    const byPaper = papers.length > 1;
+    const groups = byPaper
+      ? papers.map((p, i) => ({ label: `ชุดที่ ${i + 1}`, sets: sets.filter(s => paperOf(s) === p) }))
+      : [{ label: 'ทุกชุด · เรียงตาม 쓰기 → 읽기 → 듣기 → 말하기', sets }];
+    groups.forEach(g => {
+      g.sets.sort((a, b) => ORDER.indexOf(a.skill) - ORDER.indexOf(b.skill) || a.id.localeCompare(b.id));
+      const scored = g.sets.filter(s => s.skill !== 'speaking'), dn = g.sets.filter(s => lastScore(s.id)).length;
+      const got = scored.reduce((a, s) => a + ((lastScore(s.id) || {}).s || 0), 0), all = scored.reduce((a, s) => a + setTotal(s), 0);
+      const row = el('section', { class: 'grp' });
+      row.innerHTML = `<div class="grp-h"><b>${esc(g.label)}</b><span class="muted">ทำแล้ว ${dn}/${g.sets.length}${byPaper && dn ? ` · คะแนน ${Math.round(got * 100) / 100}/${all}` : ''}</span>
+        <span class="grp-bar"><i style="width:${100 * dn / g.sets.length}%"></i></span></div>`;
+      const grid = el('div', { class: 'skills four' });
+      g.sets.forEach(st => grid.append(cardFor(st, byPaper)));
+      row.append(grid); box.append(row);
+    });
+    h.append(box);
+  });
+}
+function show(which) { ['home', 'set', 'help'].forEach(k => { $('#' + k).hidden = k !== which; }); $('#scroller').scrollTo({ top: 0 });
+  if (which !== 'set') $('#dock').hidden = true; else setDock(); if (which === 'home') renderHome(); }
+function go(id) { if (location.hash.slice(1) !== id) location.hash = id; else openSet(id); }
+function route() { const id = location.hash.slice(1); if (id && SETS.some(s => s.id === id)) openSet(id); else { leaveSet(); show('home'); } }
+function leaveSet() { stopRuns(); stopExamClock(); cur = null; }   // stopExamClock saves the remaining time
+window.addEventListener('hashchange', route);
+$('#home-btn').addEventListener('click', () => { if (location.hash) location.hash = ''; else { leaveSet(); show('home'); } });
+$('#help-btn').addEventListener('click', () => { stopRuns(); show('help'); });
+document.addEventListener('click', e => { const m = $('#settings'); if (m.open && !m.contains(e.target)) m.open = false; });
+
+/* ------------------------------------------------------------------ set: cover page */
+let cur = null;          // { st, mode: cover|exam|practice|result, ans, self, ai, played, endAt, startedAt, graded }
+const CIRCLE = '<svg viewBox="0 0 36 36"><circle cx="18" cy="18" r="14"/></svg>';
+const SLASH = '<svg viewBox="0 0 36 36"><path d="M8 30 L30 4"/></svg>';
+const HALF = '<svg viewBox="0 0 36 36"><path d="M6 27 L18 6 L30 27 Z"/></svg>';
+const RULES = {
+  writing: ['เขียนคำตอบลงในช่อง ข้อเติมคำตรวจทันที ข้อเขียนประโยค AI ตรวจให้หลังส่ง', 'โหมดสอบจริง: ซ่อนคำแปลโจทย์และคำใบ้ (เปิดดูได้จากแถบด้านบนถ้าจำเป็น)'],
+  reading: ['อ่านบทอ่านแล้วตอบ โหมดสอบจริงซ่อนคำแปลของบทอ่านและโจทย์เหมือนข้อสอบจริง', 'ข้อที่ให้เขียนประโยค AI ตรวจให้หลังส่ง'],
+  listening: ['โหมดสอบจริง: ครูอ่านเลขข้อ เสียงเล่นเองตอนละ 2 รอบ แล้วมีเวลาตอบก่อนไปตอนถัดไป กดฟังซ้ำและดูสคริปต์ไม่ได้จนกว่าจะส่ง', 'โหมดฝึก: กดฟังได้ไม่จำกัด เปิดสคริปต์ได้'],
+  speaking: ['โหมดสอบจริง: ครูถามทีละข้อ มีเวลาตอบข้อละ ' + SPEAK_SECS + ' วินาที แล้วไปข้อถัดไปเอง', 'โหมดฝึก: กด ▶ ถาม ทีละข้อ แล้วกด ตรวจ ได้ทันที', 'ข้อพูดไม่มีคะแนนอัตโนมัติ ระบบเช็กประโยค กาล และคำสำคัญ และ AI ให้ความเห็นหลังส่ง']
+};
+function openSet(id) {
+  const st = SETS.find(s => s.id === id); if (!st) { leaveSet(); return show('home'); }
+  stopRuns(); stopExamClock();
+  cur = { st, mode: 'cover', ans: store.get('ans:' + id, {}), self: store.get('self:' + id, {}), ai: store.get('ai:' + id, {}), played: [], endAt: null, startedAt: null, graded: false };
+  show('set'); renderCover();
+}
+function renderCover() {
+  const st = cur.st, v = $('#set'); v.innerHTML = ''; setDock();
+  const ex = EXAMS.find(e => e.id === st.exam), tot = setTotal(st), n = itemCount(st), min = setMinutes(st);
+  const att = store.get('attempt:' + st.id, null), last = lastScore(st.id), hist = store.get('hist:' + st.id, []);
+  const answered = answeredIn(st, cur.ans);
+  const p = el('article', { class: 'paper' });
+  p.innerHTML = `<div class="cover-title"><div class="cover-org">국민대학교 한국어교육센터 · 한국어 1급</div><h1 class="ko">${esc(st.title)}</h1>
+    <div class="cover-exam">${esc(ex ? ex.title : '')} · ${SKILL[st.skill][0]} (${SKILL[st.skill][1]})</div>
+    <div class="cover-meta"><div><span>이름</span><b>빔</b></div><div><span>문항</span><b>${n}문항</b></div><div><span>점수</span><b>${tot}점</b></div><div><span>시간</span><b>${min}분</b></div></div></div>`;
+  const rules = el('div', { class: 'rules' }, `<h3>수험 유의사항 · กติกา</h3><ul>${st.intro ? `<li>${esc(st.intro)}</li>` : ''}${RULES[st.skill].map(r => `<li>${esc(r)}</li>`).join('')}</ul>`);
+  p.append(rules);
+  if (st.skill === 'speaking' && FRAMED) p.append(el('p', { class: 'notice' }, 'ลิงก์ claude.ai ใช้ไมค์ของเว็บไม่ได้ — ตอบด้วยไมค์ของแป้นพิมพ์: แตะช่องคำตอบ สลับแป้นเป็นภาษาเกาหลี กด 🎤 บนแป้น (iPad/iPhone/Android) หรือ Win+H บน Windows · บน PC เปิดผ่าน start.sh จะใช้ไมค์ของเว็บและอัดเสียงได้'));
+  if (att) {
+    const expired = att.mode === 'exam' && attLeft(att) !== null && attLeft(att) <= 0;
+    const r = el('div', { class: 'resume' });
+    r.innerHTML = expired
+      ? `<div><b>หมดเวลาแล้ว</b> — การสอบจริงที่ค้างไว้ (ตอบแล้ว ${answered}/${n} ข้อ) </div>`
+      : `<div><b>มีการทำค้างอยู่</b> — โหมด${MODE_TH[att.mode]} ตอบแล้ว ${answered}/${n} ข้อ${att.mode === 'exam' ? ` · เหลือเวลา ${fmt(attLeft(att))} (หยุดเวลาไว้)` : ''}</div>`;
+    const a = el('div', { class: 'actions' });
+    const b1 = el('button', { class: 'btn primary', type: 'button' }, expired ? '📊 ส่งคำตอบที่มีและดูผล' : '▶ ทำต่อ');
+    b1.addEventListener('click', () => expired ? startSet('exam', att, true) : startSet(att.mode, att));
+    const b2 = el('button', { class: 'btn red', type: 'button' }, '✕ ยกเลิก เริ่มใหม่');
+    b2.addEventListener('click', () => { store.set('attempt:' + st.id, null); renderCover(); });
+    a.append(b1, b2); r.append(a); p.append(r);
+  }
+  const modes = el('div', { class: 'modes' });
+  const be = el('button', { class: 'mode-btn primary', type: 'button' }, `<span class="t">▶ เริ่มสอบจริง</span><span class="s">จับเวลา ${min} นาที · เหมือนห้องสอบ${st.skill === 'listening' ? ' · เสียงเล่นเอง 2 รอบ' : st.skill === 'speaking' ? ' · ครูถามทีละข้อ' : ' · ซ่อนคำแปล'}</span>`);
+  be.addEventListener('click', () => startSet('exam'));
+  const bp = el('button', { class: 'mode-btn', type: 'button' }, '<span class="t">✎ ฝึกทำ</span><span class="s">ไม่จับเวลา · ดูคำแปล ฟังซ้ำ และตรวจได้ตามสบาย</span>');
+  bp.addEventListener('click', () => startSet('practice'));
+  modes.append(be, bp); p.append(modes);
+  if (last && !att) {
+    const l = el('div', { class: 'last' });
+    l.innerHTML = `<span>ผลล่าสุด <b>${last.s}/${last.t || tot}</b> (${MODE_TH[last.mode] || 'ทำแล้ว'} · ${esc(dateTh(last.at))})</span>`;
+    const b = el('button', { class: 'btn sm', type: 'button' }, '📊 ดูผลและเฉลย'); b.addEventListener('click', () => { cur.mode = 'result'; cur.lastMode = last.mode; renderPaper(); finishGrading('view'); });
+    l.append(b); p.append(l);
+  }
+  if (hist.length > 1) p.append(el('p', { class: 'hist' }, 'ประวัติ: ' + hist.slice().reverse().map(h => `<span>${h.s}/${h.t} ${MODE_TH[h.mode] ? '(' + MODE_TH[h.mode] + ')' : ''} ${esc(dateTh(h.at))}</span>`).join('')));
+  const back = el('div', { class: 'actions' }); const bb = el('button', { class: 'btn', type: 'button' }, '← กลับหน้าแรก'); bb.addEventListener('click', () => { location.hash = ''; }); back.append(bb); p.append(back);
+  v.append(p);
+}
+
+/* ------------------------------------------------------------------ start / resume an attempt */
+function startSet(mode, att, expired) {
+  const st = cur.st; stopRuns(); stopExamClock();
+  if (!att) {   // a fresh attempt: wipe the previous answers and grades
+    cur.ans = {}; cur.self = {}; cur.ai = {}; cur.played = [];
+    store.set('ans:' + st.id, {}); store.set('self:' + st.id, {}); store.set('ai:' + st.id, {});
+    cur.startedAt = Date.now(); cur.left = mode === 'exam' ? setMinutes(st) * 60 : null;
+  } else { cur.played = att.played || []; cur.startedAt = att.startedAt || Date.now(); cur.left = attLeft(att); }
+  cur.endAt = mode === 'exam' ? Date.now() + (cur.left || 0) * 1000 : null;
+  cur.mode = mode; cur.graded = false;
+  store.set('attempt:' + st.id, { mode, left: cur.left, startedAt: cur.startedAt, played: cur.played });
+  renderPaper();
+  if (expired) { submit('timeup'); return; }
+  if (mode === 'exam') {
+    startExamClock();
+    if (st.skill === 'listening') runListening();
+    if (st.skill === 'speaking') runInterview();
+  }
+}
+function savePlayed() { const att = store.get('attempt:' + cur.st.id, null); if (att) { att.played = cur.played; store.set('attempt:' + cur.st.id, att); } }
+
+/* ------------------------------------------------------------------ the paper */
+function renderPaper() {
+  const st = cur.st, v = $('#set'); v.innerHTML = ''; setDock();
+  const ex = EXAMS.find(e => e.id === st.exam), tot = setTotal(st);
+  const p = el('article', { class: 'paper ' + cur.mode, id: 'paper' });
+  p.innerHTML = `<div class="paper-head"><div><h1 class="ko">${esc(st.title)}</h1><p>${esc(ex ? ex.title : '')} · ${SKILL[st.skill][0]} (${SKILL[st.skill][1]})</p></div>
+    <div class="namebox"><span>이름</span><span>빔</span><span>점수</span><span>${tot}점</span><span>시간</span><span>${setMinutes(st)}분</span></div></div>`;
+  p.append(el('div', { id: 'results-slot' }));
+  const bar = el('div', { class: 'exambar' });
+  bar.append(el('span', { class: 'mode-tag m-' + cur.mode }, cur.mode === 'exam' ? '실전 · สอบจริง' : cur.mode === 'practice' ? '연습 · ฝึกทำ' : '채점 · ผลสอบและเฉลย'));
+  const sp = el('span', { class: 'sp' }); bar.append(sp);
+  if (cur.mode === 'exam') {
+    { const th = el('button', { class: 'btn sm', type: 'button' }, 'แสดงคำแปล'); th.addEventListener('click', () => { p.classList.toggle('show-th'); th.textContent = p.classList.contains('show-th') ? 'ซ่อนคำแปล' : 'แสดงคำแปล'; }); bar.append(th); }
+    const pause = el('button', { class: 'btn sm red', type: 'button' }, '⏸ พักไว้ก่อน'); pause.addEventListener('click', pauseSet); bar.append(pause);
+  } else if (cur.mode === 'practice') {
+    if (st.skill === 'listening') { const b = el('button', { class: 'btn sm', type: 'button', 'data-run': '1' }, '▶ ฟังทั้งชุดแบบห้องสอบ'); b.addEventListener('click', () => runListening()); bar.append(b);
+      const s = el('button', { class: 'btn sm red', type: 'button', 'data-stop': '1', disabled: '' }, '■ หยุดเสียง'); s.addEventListener('click', stopRuns); bar.append(s); }
+    if (st.skill === 'speaking') { const b = el('button', { class: 'btn sm', type: 'button', 'data-run': '1' }, '▶ สัมภาษณ์ต่อเนื่อง'); b.addEventListener('click', () => runInterview()); bar.append(b);
+      const s = el('button', { class: 'btn sm red', type: 'button', 'data-stop': '1', disabled: '' }, '■ หยุด'); s.addEventListener('click', stopRuns); bar.append(s); }
+    const pause = el('button', { class: 'btn sm', type: 'button' }, '⏸ พักไว้ก่อน'); pause.addEventListener('click', pauseSet); bar.append(pause);
+  } else {
+    const b = el('button', { class: 'btn sm', type: 'button' }, '↑ ดูสรุปผล'); b.addEventListener('click', () => $('#results-slot').scrollIntoView({ behavior: 'smooth', block: 'start' })); bar.append(b);
+  }
+  p.append(bar);
+  if (cur.mode !== 'result') p.append(el('div', { class: 'prog', id: 'prog' }, `<div class="prog-row"><b id="prog-n">ตอบแล้ว 0/0</b><span id="prog-p">0%</span><span class="sp"></span><b id="prog-t">${cur.mode === 'exam' ? '⏱ ' + fmt(cur.left || 0) : '✎ ไม่จับเวลา'}</b></div>
+    <div class="prog-bar"><i id="prog-a"></i></div>${cur.mode === 'exam' ? '<div class="prog-bar time"><i id="prog-time"></i></div>' : ''}`));
+  st.sections.forEach((sec, si) => p.append(renderSection(sec, si)));
+  const end = el('div', { class: 'actions', id: 'end-actions' });
+  if (cur.mode !== 'result') {
+    const sub = el('button', { class: 'btn primary', type: 'button' }, '✔ ส่งคำตอบ · ตรวจด้วยปากกาแดง'); sub.addEventListener('click', () => submit('user')); end.append(sub);
+  } else {
+    const again = el('button', { class: 'btn primary', type: 'button' }, '↻ ทำใหม่'); again.addEventListener('click', () => { store.set('attempt:' + st.id, null); openSet(st.id); }); end.append(again);
+  }
+  const back = el('button', { class: 'btn', type: 'button' }, '← หน้าปก'); back.addEventListener('click', () => { if (cur.mode === 'exam' || cur.mode === 'practice') pauseSet(); else openSet(st.id); }); end.append(back);
+  p.append(end, el('div', { id: 'confirm-slot' }));
+  v.append(p);
+  refreshTools(); refreshDone();
+}
+function pauseSet() { stopRuns(); stopExamClock(); savePlayed(); openSet(cur.st.id); }
+function renderSection(sec, si) {
+  const box = el('section', { class: 'sec', id: 'sec' + si }), s = el('div', { class: 'sec-l' }), r = el('div', { class: 'sec-r' });
+  box.append(s, r);
+  s.append(el('h2', { class: 'sec-h' }, esc(sec.h)));
+  if (sec.th) s.append(el('p', { class: 'sec-th' }, esc(sec.th)));
+  if (sec.box) s.append(el('div', { class: 'box' }, esc(sec.box)));
+  if (sec.passage) { const ps = el('div', { class: 'passage' }); sec.passage.forEach(l => ps.append(el('p', {}, `<span class="ko">${esc(l.ko)}</span><span class="th">${esc(l.th)}</span>`))); s.append(ps); }
+  if (sec.script) {
+    const bar = el('div', { class: 'lst' });
+    const pb = el('button', { class: 'play', type: 'button', 'data-sec': si }, '▶ ฟัง <span class="n"></span>');
+    pb.addEventListener('click', async () => { stopRuns(); const id = ++runId; await playSection(si, id); box.classList.remove('live'); });
+    const sb = el('button', { class: 'play', type: 'button', 'data-script-btn': '1' }, 'ดูสคริปต์');
+    sb.addEventListener('click', () => { const sc = s.querySelector('.script'); sc.hidden = !sc.hidden; });
+    bar.append(pb, sb, el('span', { class: 'g-status', 'aria-live': 'polite' }));
+    s.append(bar, el('div', { class: 'secbar' }, '<i></i>'));
+  }
+  sec.items.forEach((it, ii) => r.append(renderItem(it, `${si}-${ii}`)));
+  if (sec.script) {
+    const sc = el('div', { class: 'script', hidden: '' });
+    sec.script.forEach((l, i) => { const pl = el('p', { 'data-i': i }, `<button class="lp" type="button" aria-label="ฟังบรรทัดนี้">▶</button>${l.who ? `<span class="who ko">${esc(l.who)}: </span>` : ''}<b class="ko kline">${esc(l.ko)}</b><span class="th">${esc(l.th)}</span>`);
+      pl.querySelector('.lp').addEventListener('click', async () => { stopRuns(); const id = ++runId; pl.classList.add('speaking'); await say(l.ko, l.s, pl.querySelector('.kline')); if (id === runId) pl.classList.remove('speaking'); });
+      sc.append(pl); });
+    s.append(sc);
+  }
+  return box;
+}
+function renderItem(it, key) {
+  const d = el('div', { class: 'item', id: 'it' + key });
+  d.append(el('span', { class: 'qn' }, esc(it.n) + '.'), el('div', { class: 'mark', 'aria-hidden': 'true' }));
+  const qb = el('div');
+  const ro = cur.mode === 'result';
+  const save = () => { store.set('ans:' + cur.st.id, cur.ans); markDone(key); };
+  if (it.type === 'blank') {
+    const prev = cur.ans[key] || [];
+    let bi = 0;
+    const mkInput = () => { const i = bi++; const inp = el('input', { class: 'bl', type: 'text', lang: 'ko', autocomplete: 'off', 'aria-label': `ข้อ ${it.n} ช่อง ${i + 1}` });
+      inp.value = prev[i] || ''; if (ro) inp.readOnly = true;
+      inp.addEventListener('input', () => { const a = cur.ans[key] || []; a[i] = inp.value; cur.ans[key] = a; save(); }); return inp; };
+    /* a conjugation row "받다 → -았/었/였어요 ___ · -(스)ㅂ니다 ___ · …" becomes a table: the base word, then label + box pairs */
+    const cm = /^([^→\n]{1,24}?)\s*→\s*(.+)$/s.exec(it.q), segs = cm ? cm[2].split(/\s*·\s*/) : [];
+    if (cm && segs.length >= 2 && segs.every(g => (g.match(/___/g) || []).length === 1)) {
+      const t = el('div', { class: 'conj' }); t.append(el('b', { class: 'conj-base ko' }, esc(cm[1].trim())));
+      const g = el('div', { class: 'conj-grid' });
+      segs.forEach(sg => { const [pre, post] = sg.split('___'); const c = el('label', { class: 'conj-cell' });
+        c.append(el('span', { class: 'conj-lab ko' }, esc(pre.trim()))); c.append(mkInput()); if (post.trim()) c.append(el('span', { class: 'ko' }, esc(post.trim()))); g.append(c); });
+      t.append(g); qb.append(t);
+    } else {
+      /* elsewhere keep the words right before each blank on the same line as the box */
+      const q = el('div', { class: 'q' });
+      const parts = it.q.split('___');
+      parts.forEach((txt, i) => {
+        if (i < parts.length - 1) {
+          const m = /([^\s·→(（]*[(（]?[^\s·→]*\s?)$/.exec(txt), tail = m ? m[1] : '';
+          q.append(document.createTextNode(txt.slice(0, txt.length - tail.length)));
+          const nw = el('span', { class: 'nw' }); if (tail) nw.append(document.createTextNode(tail)); nw.append(mkInput());
+          const after = /^[^\s]{0,6}/.exec(parts[i + 1])[0]; if (after) { nw.append(document.createTextNode(after)); parts[i + 1] = parts[i + 1].slice(after.length); }
+          q.append(nw);
+        } else q.append(document.createTextNode(txt));
+      });
+      qb.append(q);
+    }
+  } else {
+    qb.append(el('div', { class: 'q' }, esc(it.q)));
+  }
+  if (it.pic) qb.append(el('div', { class: 'pic' }, esc(it.pic)));
+  if (it.th) qb.append(el('div', { class: 'qth tr' }, esc(it.th)));
+  if (ptsOf(it) === 0) qb.append(el('div', { class: 'zero' }, 'ข้อสำรอง · ไม่นับคะแนน'));
+  if (it.type === 'mc' || it.type === 'ox') {
+    const opts = el('div', { class: 'opts', role: 'radiogroup', 'aria-label': 'ข้อ ' + it.n });
+    const list = it.type === 'ox' ? [['O', 'ถูก'], ['X', 'ผิด']] : it.opts;
+    list.forEach((o, k) => {
+      const val = it.type === 'ox' ? o[0] : String(k), id = `r${key}-${k}`;
+      const lab = el('label', { class: 'opt', for: id });
+      const inp = el('input', { type: 'radio', name: 'r' + key, id, value: val });
+      if (cur.ans[key] === val) inp.checked = true; if (ro) inp.disabled = true;
+      inp.addEventListener('change', () => { cur.ans[key] = val; save(); });
+      lab.append(inp, el('span', { class: 'ko' }, (it.type === 'ox' ? '' : '①②③④⑤'[k] + ' ') + esc(o[0])));
+      if (o[1]) lab.append(el('span', { class: 'th' }, esc(o[1])));
+      opts.append(lab);
+    });
+    qb.append(opts);
+  }
+  if (it.type === 'write' || it.type === 'speak') {
+    if (it.type === 'speak') {
+      const tools = el('div', { class: 'opts' });
+      if (cur.mode !== 'exam') {
+        const ask = el('button', { class: 'play', type: 'button' }, '▶ ถาม'); ask.addEventListener('click', async () => { stopRuns(); const id = ++runId; await say(it.q, 'T'); }); tools.append(ask);
+        if (SR && !FRAMED && !ro) { const mic = el('button', { class: 'play', type: 'button', 'data-mic': key }, '🎙 ตอบ'); mic.addEventListener('click', () => { if (activeFinish[key]) activeFinish[key](); else { stopRuns(); listen(key, it, ++runId); } }); tools.append(mic); }
+        const chk = el('button', { class: 'play', type: 'button' }, 'ตรวจ'); chk.addEventListener('click', () => checkSpeak(key, it)); tools.append(chk);
+      }
+      tools.append(el('span', { class: 'rec', hidden: '' }, 'กำลังฟัง'));
+      qb.append(tools);
+    }
+    if (it.hint) qb.append(el('div', { class: 'qth hint' }, '💡 ' + esc(it.hint)));
+    const ta = el('textarea', { class: 'wa', lang: 'ko', rows: '1', id: 'ta' + key, 'aria-label': 'คำตอบข้อ ' + it.n,
+      placeholder: it.type === 'speak' ? 'คำตอบ (ไมค์ถอดเสียงให้ หรือพิมพ์เอง)' : 'เขียนคำตอบ' });
+    ta.value = cur.ans[key] || ''; if (ro) ta.readOnly = true;
+    ta.addEventListener('input', () => { cur.ans[key] = ta.value; save(); });
+    qb.append(ta, el('div', { class: 'out' }));
+  }
+  d.append(qb);
+  return d;
+}
+/* answered-state colouring + the floating dock count */
+const answered = key => isAnswered(cur.ans[key]);
+function markDone(key) { const d = document.getElementById('it' + key); if (d) d.classList.toggle('done', answered(key)); dockCount(); }
+function refreshDone() { cur.st.sections.forEach((sec, si) => sec.items.forEach((_, ii) => { const k = `${si}-${ii}`, d = document.getElementById('it' + k); if (d) d.classList.toggle('done', answered(k)); })); dockCount(); }
+function dockCount() {
+  if (!cur) return;
+  const all = document.querySelectorAll('#set .item'), done = document.querySelectorAll('#set .item.done');
+  $('#dock-n').textContent = `ตอบแล้ว ${done.length}/${all.length}`;
+  $('#dock-bar').style.width = all.length ? (100 * done.length / all.length) + '%' : '0';
+  $('#dock-p').classList.toggle('all', all.length > 0 && done.length === all.length);
+  const pn = $('#prog-n'); if (pn) { const pc = all.length ? Math.round(100 * done.length / all.length) : 0; pn.textContent = `ตอบแล้ว ${done.length}/${all.length} ข้อ`; $('#prog-p').textContent = pc + '%'; $('#prog-a').style.width = pc + '%'; $('#prog').classList.toggle('all', pc === 100); }
+}
+$('#dock-t').addEventListener('click', () => { if (cur && cur.mode === 'result') $('#results-slot').scrollIntoView({ behavior: 'smooth', block: 'start' }); });
+$('#dock-p').addEventListener('click', () => {
+  const items = [...document.querySelectorAll('#set .item')], here = items.findIndex(d => d.getBoundingClientRect().top > 90);
+  const next = items.slice(Math.max(0, here)).find(d => !d.classList.contains('done')) || items.find(d => !d.classList.contains('done'));
+  if (!next) return;
+  next.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  const f = next.querySelector('input:not([type=radio]), textarea'); if (f && !f.readOnly) setTimeout(() => f.focus({ preventScroll: true }), 350);
+});
+/* while the on-screen keyboard is open (iPad), the bottom of the screen is hidden: lift the dock under the top strip */
+document.addEventListener('focusin', e => { if (e.target.matches('input.bl, textarea')) { const d = $('#dock'); d.style.top = ($('.strip').getBoundingClientRect().bottom + 8) + 'px'; d.classList.add('up'); } });
+document.addEventListener('focusout', () => { const d = $('#dock'); d.classList.remove('up'); d.style.top = ''; });
+/* which listening / speaking tools are visible in each mode */
+function refreshTools() {
+  if (!cur) return;
+  const exam = cur.mode === 'exam', result = cur.mode === 'result';
+  document.querySelectorAll('[data-sec]').forEach(b => { b.hidden = exam; const n = (cur.plays || {})[b.dataset.sec] || 0; b.querySelector('.n').textContent = n ? `(${n})` : ''; });
+  document.querySelectorAll('[data-script-btn]').forEach(b => { b.hidden = exam; });
+  document.querySelectorAll('.script').forEach(s => { s.hidden = !result; });
+}
+
+/* ------------------------------------------------------------------ listening */
+function secStatus(si, text, hot) { const s = document.querySelector(`#sec${si} .g-status`); if (s) { s.textContent = text; s.classList.toggle('hot', !!hot); } }
+function secBar(si, frac) { const b = document.querySelector(`#sec${si} .secbar`); if (!b) return; b.classList.toggle('on', frac !== null); if (frac !== null) b.querySelector('i').style.width = (100 * frac) + '%'; }
+async function playSection(si, id, round) {
+  const sec = cur.st.sections[si], box = $('#sec' + si);
+  box.classList.add('live');
+  cur.plays = cur.plays || {}; cur.plays[si] = (cur.plays[si] || 0) + 1; refreshTools();
+  secStatus(si, round ? `🔊 ฟังรอบ ${round}/2` : '🔊 กำลังเล่น…');
+  for (let i = 0; i < sec.script.length; i++) {
+    if (id !== runId) break;
+    const p = box.querySelector(`.script p[data-i="${i}"]`); if (p) p.classList.add('speaking');
+    await say(sec.script[i].ko, sec.script[i].s, p ? p.querySelector('.kline') : null);
+    if (p) p.classList.remove('speaking');
+    await sleep(sec.script[i].who ? 450 : 300);
+  }
+  if (!round) secStatus(si, '');
+  return id === runId;
+}
+async function runListening() {
+  stopRuns(); const id = ++runId; await sleep(60);
+  const exam = cur.mode === 'exam';
+  document.querySelectorAll('[data-run]').forEach(b => { b.disabled = true; }); document.querySelectorAll('[data-stop]').forEach(b => { b.disabled = false; });
+  const start = exam ? cur.st.sections.findIndex((_, si) => !cur.played.includes(si)) : 0;
+  if (start === -1) { document.querySelectorAll('[data-run]').forEach(b => { b.disabled = false; }); return; }
+  if (start === 0) { await say('지금부터 듣기 시험을 시작하겠습니다.', 'T'); await sleep(700); }
+  for (let si = start; si < cur.st.sections.length && id === runId; si++) {
+    const sec = cur.st.sections[si], box = $('#sec' + si);
+    box.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' });
+    box.classList.add('live');
+    if (sec.say) { secStatus(si, '🔊 ครูอ่านเลขข้อ'); await say(sec.say, 'T'); await sleep(800); }
+    for (let r = 1; r <= 2 && id === runId; r++) { await playSection(si, id, r); if (r === 1 && id === runId) { secStatus(si, 'อีกครั้ง…'); await sleep(2200); } }
+    if (id !== runId) break;
+    const writes = sec.items.some(i => i.type === 'blank' || i.type === 'write');
+    const secs = Math.min(40, (writes ? 20 : 10) + 4 * sec.items.length);
+    await countdown(secs, id, (left, total) => { secStatus(si, `✎ เวลาตอบ ${fmtShort(left)}`, left <= 5); secBar(si, left / total); });
+    if (id !== runId) break;
+    secStatus(si, ''); secBar(si, null); box.classList.remove('live');
+    if (exam) { cur.played.push(si); savePlayed(); }
+  }
+  if (id === runId) { await say('듣기 시험이 끝났습니다. 수고하셨습니다.', 'T'); if (exam) showNotice('ฟังครบทุกตอนแล้ว ตรวจทานคำตอบ แล้วกด ✔ ส่งคำตอบ ด้านล่าง'); }
+  document.querySelectorAll('[data-run]').forEach(b => { b.disabled = false; }); document.querySelectorAll('[data-stop]').forEach(b => { b.disabled = true; });
+}
+function showNotice(text) { const bar = document.querySelector('#paper .exambar'); if (!bar) return; let n = $('#run-notice'); if (!n) { n = el('p', { class: 'notice', id: 'run-notice', role: 'status' }); bar.after(n); } n.textContent = text; }
+
+/* ------------------------------------------------------------------ speaking */
+const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+let micStream = null, micDenied = FRAMED;
+async function ensureMic() { if (micStream || micDenied || !navigator.mediaDevices?.getUserMedia) return micStream;
+  try { micStream = await navigator.mediaDevices.getUserMedia({ audio: true }); } catch (e) { micDenied = true; } return micStream; }
+function listen(key, it, id) {
+  return new Promise(async res => {
+    const d = $('#it' + key), ta = $('#ta' + key), dot = d.querySelector('.rec');
+    if (!SR || micDenied) { res(false); return; }
+    const stream = await ensureMic();
+    if (micDenied) { d.querySelector('.out').innerHTML = '<p class="notice">ใช้ไมค์ไม่ได้ — พิมพ์คำตอบแทน แล้วกด ตรวจ</p>'; res(false); return; }
+    let rec; try { rec = new SR(); } catch (e) { res(false); return; }
+    rec.lang = 'ko-KR'; rec.continuous = true; rec.interimResults = true;
+    let finalText = '', recorder = null, chunks = [], ended = false, left = SPEAK_SECS;
+    if (stream && window.MediaRecorder) { try { recorder = new MediaRecorder(stream); recorder.ondataavailable = e => chunks.push(e.data); recorder.start(); } catch (e) { recorder = null; } }
+    rec.onresult = e => { let interim = ''; for (let k = e.resultIndex; k < e.results.length; k++) { if (e.results[k].isFinal) finalText += e.results[k][0].transcript + ' '; else interim += e.results[k][0].transcript; }
+      ta.value = (finalText + interim).trim(); cur.ans[key] = ta.value; store.set('ans:' + cur.st.id, cur.ans); markDone(key); };
+    const finish = () => {
+      if (ended) return; ended = true; delete activeFinish[key]; dot.hidden = true; clearInterval(tickTimer); tickTimer = null;
+      try { rec.stop(); } catch (e) {}
+      if (recorder && recorder.state !== 'inactive') { recorder.onstop = () => { d.dataset.audio = URL.createObjectURL(new Blob(chunks, { type: chunks[0]?.type || 'audio/webm' })); if (cur.mode !== 'exam') checkSpeak(key, it); }; recorder.stop(); }
+      setTimeout(() => { if (cur && cur.mode !== 'exam') checkSpeak(key, it); res(true); }, 600);
+    };
+    activeFinish[key] = finish;
+    rec.onend = () => { if (!ended && id === runId && left > 0) { try { rec.start(); } catch (e) { finish(); } } };
+    rec.onerror = e => { if (e.error === 'not-allowed' || e.error === 'service-not-allowed') { micDenied = true; finish(); } };
+    dot.hidden = false; dot.textContent = `กำลังฟัง ${fmtShort(left)}`;
+    try { rec.start(); } catch (e) { finish(); return; }
+    clearInterval(tickTimer);
+    tickTimer = setInterval(() => { if (id !== runId) { finish(); return; } left--; dot.textContent = `กำลังฟัง ${fmtShort(Math.max(0, left))}`; if (left <= 0) finish(); }, 1000);
+  });
+}
+function checkSpeak(key, it) {
+  const d = $('#it' + key), a = ($('#ta' + key).value || '').trim(), out = d.querySelector('.out');
+  out.innerHTML = '';
+  if (d.dataset.audio) { const p = el('div', { class: 'qth' }, 'เสียงของคุณ: '); p.append(el('audio', { controls: '', src: d.dataset.audio })); out.append(p); }
+  const ul = el('ul', { class: 'checks' });
+  if (!a) ul.innerHTML = '<li class="ng">ยังไม่มีคำตอบ</li>';
+  else {
+    const rows = [[a.split(/\s+/).filter(Boolean).length >= 2, 'ตอบเป็นประโยค ไม่ใช่คำเดียว']];
+    (it.checks || []).forEach(([re, label]) => { let ok = false; try { ok = new RegExp(re).test(a); } catch (e) {} rows.push([ok, label]); });
+    rows.forEach(([ok, label]) => ul.append(el('li', ok ? {} : { class: 'ng' }, esc(label))));
+  }
+  const m = el('div', { class: 'qth' }, `คำตอบตัวอย่าง: <b class="ko kline">${esc(it.model)}</b> · ${esc(it.mth || '')}${it.why ? ' · ' + esc(it.why) : ''} `);
+  const pb = el('button', { class: 'play', type: 'button' }, '▶ ฟังตัวอย่าง');
+  pb.addEventListener('click', () => { stopRuns(); say(it.model, 'S', m.querySelector('.kline')); });
+  m.append(pb); out.append(ul, m);
+  if (AI && a && !cur.ai[key] && !aiBusy) { const ab = el('button', { class: 'aibtn', type: 'button' }, '🤖 AI ตรวจ'); ab.addEventListener('click', () => aiGradeAll([key])); m.append(ab); }
+  if (cur.ai[key]) out.append(aiBox(cur.ai[key]));
+}
+async function runInterview() {
+  stopRuns(); const id = ++runId; await sleep(60);
+  const exam = cur.mode === 'exam';
+  document.querySelectorAll('[data-run]').forEach(b => { b.disabled = true; }); document.querySelectorAll('[data-stop]').forEach(b => { b.disabled = false; });
+  const items = []; cur.st.sections.forEach((s, si) => s.items.forEach((it, ii) => items.push([`${si}-${ii}`, it])));
+  const start = exam ? items.findIndex(([k]) => !cur.played.includes(k)) : 0;
+  if (start === -1) { document.querySelectorAll('[data-run]').forEach(b => { b.disabled = false; }); return; }
+  if (start === 0) { await say('안녕하세요. 지금부터 말하기 시험을 시작하겠습니다.', 'T'); await sleep(600); }
+  for (let i = start; i < items.length; i++) {
+    const [key, it] = items[i];
+    if (id !== runId) break;
+    const d = $('#it' + key); d.scrollIntoView({ behavior: 'smooth', block: 'center' }); d.classList.add('live');
+    await say(it.q, 'T');
+    if (id !== runId) break;
+    if (SR && !micDenied) await listen(key, it, id);
+    else { const dot = d.querySelector('.rec'); dot.hidden = false; const ta = $('#ta' + key); if (ta && !ta.readOnly) ta.focus({ preventScroll: true });
+      await countdown(SPEAK_SECS, id, left => { dot.textContent = `ตอบภายใน ${fmtShort(left)}`; }); dot.hidden = true; if (!exam && id === runId) checkSpeak(key, it); }
+    d.classList.remove('live');
+    if (exam && id === runId) { cur.played.push(key); savePlayed(); }
+    await sleep(600);
+  }
+  if (id === runId) { await say('수고하셨습니다.', 'T'); if (exam) showNotice('สัมภาษณ์ครบทุกข้อแล้ว ตรวจทานคำตอบ แล้วกด ✔ ส่งคำตอบ ด้านล่าง'); }
+  document.querySelectorAll('[data-run]').forEach(b => { b.disabled = false; }); document.querySelectorAll('[data-stop]').forEach(b => { b.disabled = true; });
+}
+
+/* ------------------------------------------------------------------ submit → grade → results */
+function submit(reason) {
+  if (!cur || cur.mode === 'result' || cur.mode === 'cover') return;
+  const st = cur.st, n = itemCount(st), done = answeredIn(st, cur.ans);
+  if (reason === 'user' && done < n) {
+    const slot = $('#confirm-slot'); slot.innerHTML = '';
+    const c = el('div', { class: 'confirm', role: 'alertdialog' });
+    c.innerHTML = `<div><b>ยังไม่ได้ตอบ ${n - done} ข้อ</b> — ส่งเลยหรือกลับไปทำต่อ?</div>`;
+    const a = el('div', { class: 'actions' });
+    const y = el('button', { class: 'btn red', type: 'button' }, 'ส่งเลย'); y.addEventListener('click', () => submit('force'));
+    const nb = el('button', { class: 'btn', type: 'button' }, 'กลับไปทำต่อ'); nb.addEventListener('click', () => { slot.innerHTML = ''; $('#dock-p').click(); });
+    a.append(y, nb); c.append(a); slot.append(c); c.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    return;
+  }
+  stopRuns(); stopExamClock();
+  const used = cur.mode === 'exam' ? setMinutes(st) * 60 - (cur.left || 0) : null;
+  const mode = cur.mode; cur.mode = 'result'; cur.lastMode = mode; cur.used = used; cur.reason = reason;
+  store.set('attempt:' + st.id, null);
+  renderPaper();
+  finishGrading(reason, true);
+}
+/* grade, draw the results card, start the AI pass; `record` = store this attempt in the history */
+function finishGrading(reason, record) {
+  const st = cur.st, g = grade();
+  if (record && st.skill !== 'speaking') {
+    const entry = { s: g.sum, t: g.tot, at: Date.now(), mode: cur.lastMode };
+    store.set('score:' + st.id, entry);
+    const hist = store.get('hist:' + st.id, []); hist.push(entry); store.set('hist:' + st.id, hist.slice(-8));
+  } else if (record) store.set('score:' + st.id, { s: answeredIn(st, cur.ans), t: itemCount(st), at: Date.now(), mode: cur.lastMode, spoken: true });
+  renderResults(g, reason);
+  $('#results-slot').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  aiGradeAll();
+}
+/* precedence for a typed item: the student's ○△✕ > the AI verdict > string matching */
+function grade() {
+  cur.graded = true;
+  let sum = 0, tot = 0; const lost = [], perSec = [], pending = [];
+  cur.st.sections.forEach((sec, si) => {
+    let ssum = 0, stot = 0;
+    sec.items.forEach((it, ii) => {
+      const key = `${si}-${ii}`, d = $('#it' + key), pts = ptsOf(it);
+      d.querySelectorAll('.fix').forEach(e => e.remove());
+      let frac = 0, fix = '', typed = false, pend = false, src = '';
+      const ans = cur.ans[key], has = isAnswered(ans);
+      if (it.type === 'mc') { frac = ans === String(it.ans) ? 1 : 0; if (!frac) fix = '정답: ' + '①②③④⑤'[it.ans] + ' ' + it.opts[it.ans][0]; }
+      else if (it.type === 'ox') { frac = ans === it.ans ? 1 : 0; if (!frac) fix = '정답: ' + it.ans; }
+      else if (it.type === 'blank') {
+        const a = ans || [], inputs = d.querySelectorAll('.bl'), wrong = []; let s = 0;
+        it.ans.forEach((acc, i) => { const [r, k] = judgeText(a[i] || '', acc); s += r;
+          if (inputs[i]) inputs[i].className = 'bl ' + (r === 1 ? 'ok' : r ? 'half' : 'ng');
+          if (r < 1) wrong.push(r ? `${i + 1}) ${k} (สะกด: ${diffText(norm(a[i]), norm(k))})` : `${i + 1}) ${k}`); });
+        frac = s / it.ans.length; typed = frac < 1 && has;
+        if (wrong.length) fix = '정답: ' + (it.ans.length === 1 ? wrong[0].replace(/^1\) /, '') : wrong.join(' · '));
+        if (typed) { if (cur.self[key]) { frac = V2F[cur.self[key]]; src = 'self'; } else if (cur.ai[key]) { frac = V2F[cur.ai[key].v]; src = 'ai'; if (frac === 1) inputs.forEach(x => { x.className = 'bl ok'; }); } else if (AI) pend = true; }
+      } else if (it.type === 'write') {
+        const [r, k] = judgeText(ans || '', it.model);
+        if (r === 1) frac = 1;
+        else { typed = has; fix = '정답 (ตัวอย่าง): ' + it.model.join(' / ') + (r === .5 ? ` · เกือบตรง: ${diffText(norm(ans), norm(k))}` : '');
+          if (cur.self[key]) { frac = V2F[cur.self[key]]; src = 'self'; } else if (cur.ai[key]) { frac = V2F[cur.ai[key].v]; src = 'ai'; } else if (has) { pend = true; frac = 0; } }
+      } else if (it.type === 'speak') { checkSpeak(key, it); return; }
+      const got = Math.round(frac * pts * 100) / 100; sum += got; tot += pts; ssum += got; stot += pts;
+      d.classList.remove('done', 'g-ok', 'g-half', 'g-ng', 'g-pend'); d.classList.add(pend ? 'g-pend' : frac >= 1 ? 'g-ok' : frac > 0 ? 'g-half' : 'g-ng');
+      if (pend) pending.push(key);
+      if (fix || it.why || typed) {
+        const fx = el('span', { class: 'fix ' + (frac >= 1 && !pend ? 'tip' : 'corr') }, `${frac >= 1 && !pend && it.why ? '💡 ' : ''}${esc(fix)}${it.why ? ` <span class="th">${fix ? '· ' : ''}${esc(it.why)}</span>` : ''}`);
+        if (src === 'ai') fx.append(el('span', { class: 'tag' }, '🤖 AI'));
+        if (src === 'self') fx.append(el('span', { class: 'tag' }, '✎ ตรวจเอง'));
+        if (typed) {
+          const g = el('span', { class: 'self' }, '');
+          [['o', 'ถูก'], ['h', 'ครึ่ง'], ['x', 'ผิด']].forEach(([v, lab]) => { const b = el('button', { type: 'button', class: 'v-' + v, 'aria-pressed': String(cur.self[key] === v) }, lab);
+            b.addEventListener('click', () => { cur.self[key] = cur.self[key] === v ? undefined : v; if (!cur.self[key]) delete cur.self[key]; store.set('self:' + cur.st.id, cur.self); regrade(); }); g.append(b); });
+          fx.append(document.createTextNode(' ตรวจเอง: '), g);
+          if (cur.ai[key]) fx.append(aiBox(cur.ai[key]));
+        }
+        (d.querySelector('.q') || d.querySelector('.conj')).parentNode.append(fx);
+      }
+      if (pts && got < pts && !pend) lost.push({ key, n: it.n, got, pts });
+    });
+    perSec.push({ h: sec.h, sum: Math.round(ssum * 100) / 100, tot: stot });
+  });
+  return { sum: Math.round(sum * 100) / 100, tot, lost, perSec, pending };
+}
+function regrade() { if (!cur || cur.mode !== 'result') return; const g = grade(); const entry = store.get('score:' + cur.st.id, null);
+  if (entry && cur.st.skill !== 'speaking') { entry.s = g.sum; entry.t = g.tot; store.set('score:' + cur.st.id, entry); const hist = store.get('hist:' + cur.st.id, []); if (hist.length) { hist[hist.length - 1].s = g.sum; store.set('hist:' + cur.st.id, hist); } }
+  renderResults(g, cur.reason); }
+function renderResults(g, reason) {
+  const slot = $('#results-slot'); slot.innerHTML = '';
+  const st = cur.st, box = el('section', { class: 'results', id: 'results', 'aria-live': 'polite' });
+  const spoken = st.skill === 'speaking';
+  const sub = [MODE_TH[cur.lastMode] ? 'โหมด' + MODE_TH[cur.lastMode] : '', cur.used ? 'ใช้เวลา ' + fmtShort(cur.used) : '', reason === 'timeup' ? '⏰ หมดเวลา — ส่งอัตโนมัติ' : ''].filter(Boolean).join(' · ');
+  box.innerHTML = `<div class="top"><span class="stamp">${spoken ? '말하기' : `${g.sum}/${g.tot}`}</span><div><div><b>${spoken ? 'สัมภาษณ์เสร็จแล้ว' : g.sum === g.tot ? 'ถูกทุกข้อ ✓' : `เสีย ${Math.round((g.tot - g.sum) * 100) / 100} คะแนน`}</b>${g.pending.length ? ` · รอ AI ตรวจ ${g.pending.length} ข้อ` : ''}</div><div class="sub">${esc(sub)}</div></div></div>`;
+  if (!spoken && g.perSec.length > 1) box.append(el('table', {}, '<tr><th>ตอน</th><th>คะแนน</th></tr>' + g.perSec.map(s => `<tr><td class="ko">${esc(s.h)}</td><td>${s.sum}/${s.tot}</td></tr>`).join('')));
+  if (!spoken) box.append(el('div', { class: 'legend' }, '<span class="l-ok">ถูก</span><span class="l-half">ครึ่งคะแนน</span><span class="l-ng">ผิด</span><span class="l-pend">รอตรวจ</span>'));
+  const line = el('div', { class: 'ai-line', id: 'ai-line' }); box.append(line);
+  if (spoken) box.append(el('ul', {}, '<li>ข้อพูดไม่มีคะแนนอัตโนมัติ ดูเครื่องหมาย ○ ✕ ใต้แต่ละข้อ ฟังตัวอย่าง แล้วพูดตาม · AI ให้ความเห็นทุกข้อที่มีคำตอบ</li>'));
+  else if (g.lost.length) box.append(el('ul', {}, '<li>ข้อที่เสียคะแนน: ' + g.lost.map(l => `<a href="#" data-jump="${l.key}">${esc(l.n)} (${l.got}/${l.pts})</a>`).join(' · ') + '</li>' +
+    (g.pending.length || Object.keys(cur.ai).length ? '' : '<li>ข้อที่พิมพ์ตอบและไม่ตรงเฉลย: กด ถูก / ครึ่ง / ผิด ตรวจเองได้</li>')));
+  box.querySelectorAll('[data-jump]').forEach(a => a.addEventListener('click', e => { e.preventDefault(); const d = $('#it' + a.dataset.jump); if (d) d.scrollIntoView({ behavior: 'smooth', block: 'center' }); }));
+  slot.append(box);
+  aiLineRender();
+}
+
+/* ------------------------------------------------------------------ AI teacher (claude.ai only): grades every typed answer that string matching could not accept */
+let AI = null, aiBusy = false, aiProg = null;   // aiProg = { done, total, failed: [] }
+(async () => { if (!(window.claude && window.claude.use)) return; AI = await window.claude.use('sample'); if (AI && cur && cur.mode === 'result') { regrade(); aiGradeAll(); } })().catch(() => {});
+const AI_RULES = `You grade answers on a mock exam for Kookmin University Korean Language Center, level 1 (국민한국어 1, units 1-21). The student is Thai.
+For each answer decide v:
+"o" = correct: answers what was asked, content agrees with the passage/script (or is a sensible personal answer when the question is about the student), grammar, particles and endings are right. 해요체 and 합니다체 are both fine unless the instruction asks for one. Extra correct words (repeating 한국에, adding 저는) are fine. The model answers / accepted answers are examples: a different valid answer (한테 for 에게, 뭐 for 무엇을, a synonym the passage supports) is correct. A missing final period or a small spacing slip (아홉시 for 아홉 시) costs nothing, but mention it.
+"h" = half: the content is right but there is one or two form errors: a misspelled word (ㅈ/ㅊ, ㅐ/ㅔ slips), a wrong or missing particle, a wrong verb form or tense, or the sentence avoids the verb the question asks about (몇 시에 일어났어요? answered 10시 20분이었습니다). For a fill-in item with several gaps: one gap wrong = "h".
+"x" = wrong: wrong content, answers a different question word, the wrong person or place, or ungrammatical beyond small slips; for fill-in items, a word that does not fit the gap.
+Items have type "blank" (fill the ___ gaps; "answer" is the list of what the student typed per gap and "accepted" the accepted strings per gap), "write" (a sentence; "model" = example answers) or "speak" (spoken answer transcribed; "model" = example).
+Return JSON only: {"results":[{"k":"<same k>","v":"o|h|x","fb":"<Thai, at most 2 short sentences: what is wrong and why, or why it is right>","fix":"<the student's own answer minimally corrected, in Korean; the same if nothing to fix>"}]} with one result per item.`;
+function aiKeys() { const ks = []; if (!cur) return ks;
+  cur.st.sections.forEach((sec, si) => sec.items.forEach((it, ii) => { const k = `${si}-${ii}`, a = cur.ans[k]; if (!isAnswered(a) || cur.ai[k]) return;
+    if (it.type === 'write' && judgeText(a, it.model)[0] < 1) ks.push(k);
+    else if (it.type === 'blank' && it.ans.some((acc, i) => judgeText((a || [])[i] || '', acc)[0] < 1)) ks.push(k);
+    else if (it.type === 'speak') ks.push(k); }));
+  return ks; }
+function aiBox(r) { const v = { o: 'ถูก', h: 'ครึ่งคะแนน', x: 'ผิด' }[r.v] || '';
+  return el('span', { class: 'aifb' }, `🤖 ${v} · ${esc(r.fb)}${r.fix ? ` · แก้เป็น: <b class="ko">${esc(r.fix)}</b>` : ''}`); }
+const AI_ERR = { not_granted: 'ไม่ได้อนุญาตให้ใช้ Claude — ตรวจเองด้วยปุ่ม ถูก / ครึ่ง / ผิด', rate_limited: 'ใช้ Claude ถี่หรือครบโควตา ลองใหม่ภายหลัง', cancelled: 'ยกเลิก' };
+function aiLineRender() {
+  const line = $('#ai-line'), dock = $('#dock-ai'); if (!line) return; line.innerHTML = '';
+  if (!AI) { line.textContent = FRAMED ? '' : '🤖 AI ตรวจใช้ได้เมื่อเปิดผ่านลิงก์ claude.ai · ที่นี่กด ถูก / ครึ่ง / ผิด ตรวจเองได้'; dock.hidden = true; return; }
+  if (aiBusy && aiProg) { line.innerHTML = `<span>🤖 AI กำลังตรวจ ${aiProg.done}/${aiProg.total} ข้อ…</span><span class="bar"><i style="width:${100 * aiProg.done / aiProg.total}%"></i></span>`; dock.textContent = `🤖 ${aiProg.done}/${aiProg.total}`; dock.hidden = false; return; }
+  dock.hidden = true;
+  const left = aiKeys();
+  if (aiProg && aiProg.failed.length) { line.innerHTML = `<span>🤖 ตรวจไม่สำเร็จ ${aiProg.failed.length} ข้อ${aiProg.err ? ' — ' + esc(aiProg.err) : ''}</span>`; const b = el('button', { class: 'aibtn', type: 'button' }, 'ลองอีกครั้ง'); b.addEventListener('click', () => aiGradeAll()); line.append(b); }
+  else if (left.length) { line.innerHTML = `<span>🤖 มี ${left.length} ข้อที่ AI ยังไม่ได้ตรวจ</span>`; const b = el('button', { class: 'aibtn', type: 'button' }, 'ให้ AI ตรวจ'); b.addEventListener('click', () => aiGradeAll()); line.append(b); }
+  else if (aiProg) line.textContent = `🤖 AI ตรวจครบ ${aiProg.total} ข้อแล้ว · ไม่เห็นด้วยกดแก้ที่ปุ่ม ถูก / ครึ่ง / ผิด ได้`;
+  else if (Object.keys(cur.ai).length) line.textContent = '🤖 AI ตรวจแล้ว';
+  else line.textContent = '🤖 ไม่มีข้อที่ต้องให้ AI ตรวจ';
+}
+async function aiCall(keys) {
+  const st = cur.st, jobs = [];
+  keys.forEach(k => { const [si, ii] = k.split('-').map(Number), it = st.sections[si].items[ii], a = cur.ans[k];
+    const j = { k, type: it.type, sec: si, instruction: st.sections[si].h, q: it.q, q_th: it.th || '', note: it.why || it.hint || '', answer: a };
+    if (it.type === 'blank') j.accepted = it.ans; else j.model = [].concat(it.model);
+    jobs.push(j); });
+  const secs = [...new Set(jobs.map(j => j.sec))].map(si => { const s = st.sections[si];
+    return { sec: si, box: s.box || '', text: (s.passage || s.script || []).map(l => (l.who ? l.who + ': ' : '') + l.ko).join('\n') }; });
+  const prompt = AI_RULES + '\n\nSECTIONS (passage or listening script):\n' + JSON.stringify(secs) + '\n\nITEMS:\n' + JSON.stringify(jobs);
+  const r = await AI.json(prompt, { modelTier: 'default' });
+  const got = new Set();
+  (r && r.results || []).forEach(x => { if (!keys.includes(x.k) || !['o', 'h', 'x'].includes(x.v)) return; got.add(x.k);
+    cur.ai[x.k] = { v: x.v, fb: String(x.fb || ''), fix: String(x.fix || '') }; });
+  store.set('ai:' + st.id, cur.ai);
+  return keys.filter(k => !got.has(k));
+}
+async function aiGradeAll(only) {
+  if (!AI || !cur || aiBusy) return;
+  const st = cur.st, keys = only || aiKeys();
+  if (!keys.length) { aiLineRender(); return; }
+  const chunks = []; for (let i = 0; i < keys.length; i += 12) chunks.push(keys.slice(i, i + 12));
+  aiBusy = true; aiProg = { done: 0, total: keys.length, failed: [], err: '' }; aiLineRender();
+  let idx = 0;
+  const worker = async () => { while (idx < chunks.length) { const c = chunks[idx++];
+    try { const miss = await aiCall(c); aiProg.failed.push(...miss); aiProg.done += c.length - miss.length; }
+    catch (e) { aiProg.failed.push(...c); aiProg.err = AI_ERR[e && e.code] || `ตรวจไม่ได้ (${(e && e.code) || 'error'})`; if (e && e.code === 'not_granted') { AI = null; idx = chunks.length; } }
+    if (cur && cur.st === st && cur.mode === 'result') regrade(); else aiLineRender(); } };
+  await Promise.all([worker(), worker()]);
+  aiBusy = false;
+  if (cur && cur.st === st) { if (cur.mode === 'result') regrade(); else keys.forEach(k => { const [si, ii] = k.split('-').map(Number); const it = st.sections[si].items[ii]; if (it.type === 'speak') checkSpeak(k, it); }); }
+}
+
+/* ------------------------------------------------------------------ cloud sync
+   On claude.ai the answers, grades and scores of each set also live in the viewer's private db subtree
+   (data/users/<id>/<setId>), so the same account sees them on every device. Last change wins, per set.
+   Opened from a file or localhost there is no claude runtime and nothing below runs. */
+var cloud = (() => {
+  let db = null, uid = null; const timers = {}, chains = {};
+  const KEYS = ['ans', 'self', 'ai', 'score', 'hist', 'attempt'];
+  const say = t => { $('#sync').textContent = t; };
+  const stampOf = id => store.get('stamp:' + id, 0) || (store.get('score:' + id, null) || {}).at || 0;
+  const hasLocal = id => KEYS.some(k => { const v = store.get(k + ':' + id, null); return v && (Array.isArray(v) ? v.length : typeof v === 'object' ? Object.keys(v).length : true); });
+  const ref = id => db.collection('data/users/' + uid).doc(id);
+  function push(id) {
+    const body = { at: stampOf(id) || Date.now() }; KEYS.forEach(k => { body[k] = store.get(k + ':' + id, null); });
+    chains[id] = (chains[id] || Promise.resolve()).then(() => ref(id).set(body)).then(() => say('☁️ บันทึกแล้ว'), () => say('☁️ บันทึกไม่ได้'));
+  }
+  async function pull() {
+    if (!db) return;
+    let snap; try { snap = await db.collection('data/users/' + uid).get(); } catch (e) { say('☁️ ออฟไลน์'); return; }
+    const remote = {}; snap.docs.forEach(d => { if (d.exists) remote[d.id] = d.data(); });
+    let changed = false;
+    SETS.forEach(st => {
+      const r = remote[st.id], lt = stampOf(st.id);
+      if (r && (r.at || 0) > lt) { KEYS.forEach(k => store.put(k + ':' + st.id, r[k] ?? null)); store.put('stamp:' + st.id, r.at); changed = true; }
+      else if (hasLocal(st.id) && (!r || lt > (r.at || 0))) push(st.id);
+    });
+    say('☁️ ซิงก์แล้ว');
+    if (changed) { if (!$('#home').hidden) renderHome(); else if (cur && cur.mode === 'cover') openSet(cur.st.id); }
+  }
+  (async () => {
+    if (!(window.claude && window.claude.use)) return;
+    const [d, u] = await Promise.all([window.claude.use('db'), window.claude.use('user')]);
+    uid = u ? await u.id() : null;
+    if (!d || !uid) return;              // signed out or db not served: stay local
+    db = d; say('☁️ กำลังซิงก์…'); await pull();
+    document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') pull(); });
+    setInterval(() => { if (document.visibilityState === 'visible' && (!cur || cur.mode === 'cover')) pull(); }, 20000);   // home / cover pages pick up another device's progress
+  })().catch(() => {});
+  return { queue(id) { if (!db) return; clearTimeout(timers[id]); say('☁️ …'); timers[id] = setTimeout(() => push(id), 1500); } };
+})();
+
+/* ------------------------------------------------------------------ light / dark theme */
+const hostTheme = document.documentElement.getAttribute('data-theme');   // what the claude.ai viewer set, if anything
+function setTheme(t) {
+  if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t);
+  else if (hostTheme) document.documentElement.setAttribute('data-theme', hostTheme);
+  else document.documentElement.removeAttribute('data-theme');
+  $('#theme').value = t; store.set('theme', t);
+}
+$('#theme').addEventListener('change', e => setTheme(e.target.value));
+setTheme(store.get('theme', 'auto'));
+
+/* ------------------------------------------------------------------ colour tone */
+function setPalette(n) {
+  if (n && n !== 'navy') document.documentElement.setAttribute('data-palette', n); else document.documentElement.removeAttribute('data-palette');
+  document.querySelectorAll('[data-pal]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.pal === (n || 'navy'))));
+  store.set('palette', n || 'navy');
+}
+document.querySelectorAll('[data-pal]').forEach(b => b.addEventListener('click', () => setPalette(b.dataset.pal)));
+setPalette(store.get('palette', 'navy'));
+/* layout: stack (one column) or split (instructions / passage / audio stay on the left, questions + answers scroll on the right) */
+function setLayout(v) { document.documentElement.setAttribute('data-layout', v === 'split' ? 'split' : 'stack'); $('#layout').value = v === 'split' ? 'split' : 'stack'; store.set('layout', v); }
+$('#layout').addEventListener('change', e => setLayout(e.target.value));
+setLayout(store.get('layout', 'stack'));
+/* text size: zoom the scroller instead of pinch-zooming — the page re-flows to the screen and the sticky bars stay put */
+function setSize(v) { v = String(v || '1'); document.documentElement.style.setProperty('--ts', v); $('#tsize').value = v; store.set('tsize', v); stripH(); }
+$('#tsize').addEventListener('change', e => setSize(e.target.value));
+const stripH = () => document.documentElement.style.setProperty('--strip-h', $('.strip').getBoundingClientRect().height + 'px');
+stripH(); window.addEventListener('resize', stripH);
+setSize(store.get('tsize', '1'));
+
+/* ------------------------------------------------------------------ boot */
+route();
+if (!SETS.length) $('#home').innerHTML = '<p class="notice">โหลดข้อมูลแบบฝึกไม่ได้ (data.js หาย)</p>';
+window.__kmu = { get cur() { return cur; }, openSet, startSet, submit, grade, aiGradeAll };   // test hooks
+})();
+</script>

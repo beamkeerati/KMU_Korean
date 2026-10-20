@@ -1,0 +1,31 @@
+### 📚 คำศัพท์ 20과 (ชีตคำศัพท์ของศูนย์ · 여자 친구한테 선물을 줬어요?)
+
+| 단어 | ไทย | English |
+|---|---|---|
+| 주다 | ให้ | to give |
+| 보내다 | ส่ง | to send |
+| 질문하다 | ถามคำถาม | to ask a question |
+| 드리다 | ให้ (สุภาพ) | to give (honorific) |
+| 강아지 | ลูกสุนัข หมา | puppy, dog |
+| 향수 | น้ำหอม | perfume |
+| 액세서리 | เครื่องประดับ | accessory |
+| 자주 | บ่อยๆ | often |
+| 듣다 | ฟัง ได้ยิน | to listen |
+| 용돈 | เงินค่าขนม | allowance, pocket money |
+| 문법 | ไวยากรณ์ | grammar |
+| 장갑 | ถุงมือ | gloves |
+| 눈 | ตา หิมะ | eye, snow |
+| 지하철 | รถไฟใต้ดิน | subway |
+| 복잡하다 | ซับซ้อน แออัด | complicated, crowded |
+| 날마다 | ทุกวัน | every day |
+| 선글라스 | แว่นกันแดด | sunglasses |
+| 졸업식 | พิธีสำเร็จการศึกษา | graduation ceremony |
+| 화장품 | เครื่องสำอาง | cosmetics |
+
+**∞ 듣기 ∞ (ศัพท์จากบทฟัง)**
+
+| 단어 | ไทย | English |
+|---|---|---|
+| 해운대 | แฮอุนแด (ชายหาดในปูซาน) | Haeundae (beach in Busan) |
+| 참 | จริงๆ มาก | really, very |
+| 유명하다 | มีชื่อเสียง | famous |

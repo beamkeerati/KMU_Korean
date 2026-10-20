@@ -1,0 +1,33 @@
+### 📚 คำศัพท์ 12과 (ชีตคำศัพท์ของศูนย์ · 커피숍에서 아르바이트를 해요)
+
+| 단어 | ไทย | English |
+|---|---|---|
+| 돼지고기 | เนื้อหมู | pork |
+| 축구 | ฟุตบอล | soccer |
+| 담배 | บุหรี่ | cigarette |
+| 피우다 | สูบ (บุหรี่) จุด | to smoke |
+| 내일 | พรุ่งนี้ | tomorrow |
+| 시장 | ตลาด | market |
+| 날씨 | อากาศ | weather |
+| 좋다 | ดี ชอบ | to be good, nice |
+| 김밥 | คิมบับ | kimbap |
+| 편의점 | ร้านสะดวกซื้อ | convenience store |
+| 과일 | ผลไม้ | fruit |
+| 오늘 | วันนี้ | today |
+| 그럼 | ถ้าอย่างนั้น งั้น | then, in that case |
+| 백화점 | ห้างสรรพสินค้า | department store |
+| 찾다 | หา ค้นหา ถอน (เงิน) | to look for, to find, to withdraw |
+| 산책 | การเดินเล่น | walk, stroll |
+| 일 | งาน | work, task |
+| 아르바이트 | งานพาร์ทไทม์ | part-time job |
+| 공원 | สวนสาธารณะ | park |
+| 농구장 | สนามบาสเกตบอล | basketball court |
+| 농구 | บาสเกตบอล | basketball |
+
+**∞ 듣기 ∞ (ศัพท์จากบทฟัง)**
+
+| 단어 | ไทย | English |
+|---|---|---|
+| 약속 | การนัดหมาย คำสัญญา | appointment, promise |
+
+*โน้ตที่คุณเขียนไว้ท้ายหน้า:* 좋아하다 = ชอบ (to like)

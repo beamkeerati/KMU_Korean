@@ -1,0 +1,7 @@
+{
+    "C_Cpp.intelliSenseEngine": "disabled",
+    "files.exclude": {
+        "**/browse.vc.db*": true
+    },
+    "ROS2.distro": "jazzy"
+}
