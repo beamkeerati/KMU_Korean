@@ -1,2 +1,8 @@
 # รูปถ่ายสไลด์ 349 MB — ถอดความไว้แล้วใน content/guide/07_lecture/ และรูปใน extracted/lecture/
 source/lecture/KMU lecture note unit 05 - 12.pdf
+
+# สร้างใหม่ได้จาก source/ ด้วย pdftoppm/tesseract/edge-tts (335 MB) — ใส่ !extracted/lecture/ ถ้าต้องการรูปสไลด์บนเครื่องอื่น
+extracted/
+
+.vscode/
+__pycache__/
