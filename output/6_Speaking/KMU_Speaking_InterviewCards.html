@@ -24,8 +24,8 @@ button.on { border-color: var(--acc); color: var(--acc); font-weight: 500; }
 .seg button.on { background: var(--acc); color: var(--acc-ink); }
 .opts { display: contents; } .bar.fold .opts { display: none; } #fold { margin-left: auto; }
 .bar.fold #fold::after { content: " ▾"; } .bar:not(.fold) #fold::after { content: " ▴"; }
-.chips { display: flex; gap: 6px; overflow-x: auto; padding: 10px 0 6px; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
-.chips::-webkit-scrollbar { display: none; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; padding: 10px 0 6px; }
+@media (max-width: 600px) { .chips { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: thin; -webkit-overflow-scrolling: touch; padding-bottom: 8px; } }
 .chip { flex: 0 0 auto; border-radius: 999px; padding: 6px 12px; min-height: 36px; font-size: 14px; white-space: nowrap; }
 .chip .c { color: var(--mute); font-size: 12px; margin-left: 4px; } .chip.on .c { color: inherit; opacity: .8; }
 .tools { display: flex; justify-content: space-between; align-items: center; color: var(--mute); font-size: 13px; padding: 2px 0 8px; }
@@ -139,6 +139,7 @@ function setCat(c) { cat = c; document.querySelectorAll('.chip').forEach(b => b.
   const v = visible(); $('#count').textContent = v.length + ' การ์ด · ' + v.reduce((s, i) => s + CARDS[i].lines.filter(j => D[j].role === 'q').length, 0) + ' คำถาม';
   window.scrollTo({ top: 0 }); }
 $('#chips').onclick = ev => { const b = ev.target.closest('.chip'); if (b) setCat(+b.dataset.c); };
+$('#chips').addEventListener('wheel', ev => { const c = $('#chips'); if (c.scrollWidth > c.clientWidth && ev.deltaY) { c.scrollLeft += ev.deltaY; ev.preventDefault(); } }, { passive: false });
 $('#openall').onclick = () => visible().forEach(i => card(i).classList.add('open'));
 $('#closeall').onclick = () => CARDS.forEach((K, i) => card(i).classList.remove('open'));
 /* ---- playback ---- */
