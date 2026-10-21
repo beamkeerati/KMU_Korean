@@ -11,6 +11,11 @@ Claude Code loads this file automatically when started in this folder.
   ⚠️ The handout prints the 기말 dates as 10/20 and 10/23; the teacher struck out the `10` and wrote
   `11` in red. 11/20/2026 is a Friday and 11/23/2026 a Monday, matching the printed weekdays —
   12/20/2026 is a Sunday, so the earlier note of "기말시험 2026-12-20/23" was wrong.
+- **Pass rules (GKS orientation guide p.9 「Course Completion and Failure」, p.7 「Attendance」, 2026-10-21):** average per SUBJECT (each of the
+  four skills, mean of 중간 1-1 and 기말 1-2) must be **≥ 70** to advance; **< 60 in any subject = fail**; 60–69 may re-test (attendance ≥ 80 %,
+  at most 2 subjects in that band, 30,000원 per subject); cheating = 0. Scholars must attend 100 %: > 3 consecutive / > 5 days a month unexcused
+  → NIIED warning, 3 tardiness warnings → scholarship lost; TOPIK 3 within the year. Stored in content/mockweb/scores.json `rules` and shown as
+  profile section 2 (pass table + notes; colours now = ≥ 70 green · 60–69 yellow · < 60 red; the summary targets 70, not the old made-up 90). Site v33.
 - Grading: every skill is out of 100 = 시험 50 + 복습시험 20 + coursework 30.
   말하기 발표 20 / 태도 10 · 듣기 워크북 숙제 20 / 태도 10 · 쓰기 글쓰기 10 + 매일시험 10 / 공책 숙제 10 ·
   읽기 낭독시험 20 / 개인 과제 (대화 외우기) 10. Half the marks are coursework, not the big exams.
@@ -65,7 +70,8 @@ source/        ต้นฉบับ — never modify the contents; file names f
                p.17 of the scan is the 19과 sheet again — ignored)
   vocabulary/  KMU vocabulary unit 05 - 22.pdf   (centre's own vocab book, 48 pp: 1–17 word lists per unit · 18–35 본문 듣기 sheets · 36–48 picture themes)
   lecture/     KMU lecture note unit 05 - 12.pdf   (18 pp of the user's PHOTOS of the teacher's slides + notebook; 366 MB; slides actually run 9–22과)
-  syllabus/    KMU syllabus 2026 fall unit 05 - 37.pdf
+  syllabus/    KMU syllabus 2026 fall unit 05 - 37.pdf · KMU orientation guide 2026 fall GKS.pdf (2026-10-21, 33 pp English, was
+               「KOOKMIN_KLC_Fall 2026 GKS Freshman Orientation Guide(노현서수정)」; pages → extracted/syllabus/orientation_2026fall/)
   audio/       (2026-10-21, git-ignored: 147 MB of publisher/teacher mp3s) textbook/KMU audio student's book unit 01 - 37/N-M.mp3
                (N = unit, M = track: 1 대화 · 2 읽어봅시다/듣기 text · 3 발음 drill; units 1–4 have more tracks = 자모) ·
                review/KMU audio midterm review 01 listening/*.mp3 (the teacher's audio for her 복습문제 듣기 1–12; file ids = the
@@ -202,7 +208,12 @@ output/        🤖 GENERATED — overwritten every build, never hand-edit. Reor
                  👤 โปรไฟล์ view (#profile, Sonnet agent): grading tables per term from scores.json, stacked earned/lost/pending bars, practice results per
                  skill from hist:<id> with sparklines, Thai summary. v29: the home board names its groups through `GROUPS` in app.html (regex on set id →
                  label + note: สัมภาษณ์จำลอง · ชุด A · ชุด B · ฟังหนังสือ · เขียนตามคำบอก · ทดสอบศัพท์ · ข้อสอบจริง); ids with no rule fall back to ชุดที่ N —
-                 add a rule when a new kind of set is added. **Publish files = {data.js, clips.js, clips2.js, vendor.js} + every audio/**/*.mp3**
+                 add a rule when a new kind of set is added. v30 (10/21 night): speaking sets get a real score — per speak item self ○△✕ > AI o/h/x > pending
+                 (grade() no longer skips them; score entries carry spoken:true + n = answered count, old entries without n are shown as 'ตอบ s/t' via oldSpk());
+                 SpeakOut shows ถูก/ครึ่ง/ผิด buttons + the verdict line; its ✓/✕ checks ignore spaces (a space in a check regex = \s*, sentence check = ≥3 syllables or a
+                 요/다/까 ending) because the answer is a speech-to-text transcript, and AI_RULES tells the grader the same for type speak only. v32–v34: viewing an old result regrades and writes the score back (upgrades pre-v30 speaking
+                 entries), the home group header shows คะแนน + ตอบ n ข้อ for speaking, and the cover has 🗑 ล้างผลชุดนี้ (two-step confirm; resetSet() store.set(null) on
+                 ans/self/ai/score/hist/attempt so the removal also syncs to the cloud). **Publish files = {data.js, clips.js, clips2.js, vendor.js} + every audio/**/*.mp3**
                  (`Artifact list scope files` first; 61 files ≈ 49 MB per publish, under the 64 MB limit). The scratchpad harness was lost with /tmp —
                  regression now = headless-Chrome screenshots of #profile, a set cover and the home page.
   3_Exam_Prep/   KMU_Predict_midterm01_speaking.pdf (2026-10-21, from content/predictions/midterm/speaking_exam.md via make_pdf.py --pdf-dir + rename:

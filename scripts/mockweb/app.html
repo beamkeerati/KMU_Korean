@@ -235,6 +235,8 @@ textarea.wa { width: 100%; margin-top: 6px; border: 0; border-bottom: 1.5px soli
 .checks { list-style: none; margin: 6px 0 0; padding: 0; font-size: calc((14px) * var(--ts, 1)); display: grid; gap: 2px; }
 .checks li::before { content: "○ "; color: var(--ok); font-weight: 700; }
 .checks li.ng::before { content: "✕ "; color: var(--red); }
+.reset { margin: 8px 0 0; font-size: calc((13px) * var(--ts, 1)); color: var(--muted); } .btn.danger { border-color: var(--red); color: var(--red); }
+.checks li.hint { color: var(--muted); font-size: calc((12px) * var(--ts, 1)); } .checks li.hint::before { content: "ℹ️ "; }
 .rec { display: inline-flex; align-items: center; gap: 6px; color: var(--red); font-size: calc((13px) * var(--ts, 1)); font-weight: 500; font-variant-numeric: tabular-nums; }
 .rec::before { content: ""; width: 9px; height: 9px; border-radius: 50%; background: var(--red); animation: blink 1s infinite; }
 @keyframes blink { 50% { opacity: .2; } }
@@ -399,6 +401,7 @@ const secSig = si => secs[si] || (secs[si] = signal({ t: '', hot: false, bar: nu
 const setSec = (si, p) => { const s = secSig(si); s.value = { ...s.peek(), ...p }; };
 const secStatus = (si, t, hot) => setSec(si, { t, hot: !!hot });
 const secBar = (si, frac) => setSec(si, { bar: frac });
+const oldSpk = e => !!(e && e.spoken && e.n === undefined);   // pre-v30 speaking entry: s = answered count, not a score
 const isAnswered = a => Array.isArray(a) ? a.some(x => (x || '').trim()) : !!(a && String(a).trim());
 
 const setTotal = st => st.sections.reduce((a, s) => a + s.items.reduce((b, it) => b + ptsOf(it), 0), 0);
@@ -523,6 +526,9 @@ const attLeft = att => att.left ?? (att.endAt ? Math.max(0, Math.round((att.endA
 
 /* ------------------------------------------------------------------ routing: home / set / help */
 const lastScore = id => store.get('score:' + id, null);
+const resetAsk = signal('');
+function resetSet(id) { ['ans', 'self', 'ai', 'score', 'hist', 'attempt'].forEach(k => store.set(k + ':' + id, null)); resetAsk.value = '';
+  if (curSt.peek() && curSt.peek().id === id) { C.ans = {}; selfS.value = {}; aiS.value = {}; G.value = null; C.graded = false; ansTick.value++; } }
 /* calendar days between today (viewer's clock) and the exam date — not hours, so the label changes at midnight */
 function dday(date) { const [y, m, dd] = date.split('-').map(Number), now = new Date();
   const d = Math.round((Date.UTC(y, m - 1, dd) - Date.UTC(now.getFullYear(), now.getMonth(), now.getDate())) / 86400000);
@@ -702,11 +708,13 @@ function submit(reason) {
 /* grade, show the results card, start the AI pass; `record` = store this attempt in the history */
 function finishGrading(reason, record) {
   const st = curSt.peek(), g = grade();
-  if (record && st.skill !== 'speaking') {
+  if (record) {
     const entry = { s: g.sum, t: g.tot, at: Date.now(), mode: C.lastMode };
+    if (st.skill === 'speaking') { entry.spoken = true; entry.n = answeredIn(st, C.ans); }   // n = answered count; old entries without n held the count in s
     store.set('score:' + st.id, entry);
     const hist = store.get('hist:' + st.id, []); hist.push(entry); store.set('hist:' + st.id, hist.slice(-8));
-  } else if (record) store.set('score:' + st.id, { s: answeredIn(st, C.ans), t: itemCount(st), at: Date.now(), mode: C.lastMode, spoken: true });
+  }
+  else regrade();   // viewing an old result: write today's grading back (also upgrades pre-v30 speaking entries)
   later(() => { const s = $('#results-slot'); if (s) s.scrollIntoView({ behavior: 'smooth', block: 'start' }); });
   aiGradeAll();
 }
@@ -737,7 +745,8 @@ function grade() {
         if (r === 1) frac = 1;
         else { typed = has; fix = '정답 (ตัวอย่าง): ' + it.model.join(' / ') + (r === .5 ? ` · เกือบตรง: ${diffText(norm(ans), norm(k))}` : '');
           if (self[key]) { frac = V2F[self[key]]; src = 'self'; } else if (ai[key]) { frac = V2F[ai[key].v]; src = 'ai'; } else if (has) { pend = true; frac = 0; } }
-      } else if (it.type === 'speak') { checkSpeak(key); return; }
+      } else if (it.type === 'speak') { checkSpeak(key); typed = has;
+        if (self[key]) { frac = V2F[self[key]]; src = 'self'; } else if (ai[key]) { frac = V2F[ai[key].v]; src = 'ai'; } else if (has) pend = true; }
       const got = Math.round(frac * pts * 100) / 100; sum += got; tot += pts; ssum += got; stot += pts;
       items[key] = { cls: ' ' + (pend ? 'g-pend' : frac >= 1 ? 'g-ok' : frac > 0 ? 'g-half' : 'g-ng'), frac, fix, typed, pend, src, inp };
       if (pend) pending.push(key);
@@ -750,7 +759,8 @@ function grade() {
   return res;
 }
 function regrade() { if (!curSt.peek() || mode.peek() !== 'result') return; const g = grade(), id = curSt.peek().id, entry = store.get('score:' + id, null);
-  if (entry && curSt.peek().skill !== 'speaking') { entry.s = g.sum; entry.t = g.tot; store.set('score:' + id, entry); const hist = store.get('hist:' + id, []); if (hist.length) { hist[hist.length - 1].s = g.sum; store.set('hist:' + id, hist); } } }
+  if (entry) { if (entry.spoken) entry.n = answeredIn(curSt.peek(), C.ans);   /* speaking: n = answered count (pre-v30 entries held it in s) */
+    entry.s = g.sum; entry.t = g.tot; store.set('score:' + id, entry); const hist = store.get('hist:' + id, []); if (hist.length) { Object.assign(hist[hist.length - 1], { s: g.sum, n: entry.n }); store.set('hist:' + id, hist); } else if (entry.spoken) store.set('hist:' + id, [entry]); } }
 
 /* ------------------------------------------------------------------ AI teacher (claude.ai only): grades every typed answer that string matching could not accept */
 let aiBusy = false, aiProg = null;   // aiProg = { done, total, failed: [] }; the aiVer signal tells the AI line / dock to redraw
@@ -761,6 +771,7 @@ For each answer decide v:
 "h" = half: the content is right but there is one or two form errors: a misspelled word (ㅈ/ㅊ, ㅐ/ㅔ slips), a wrong or missing particle, a wrong verb form or tense, or the sentence avoids the verb the question asks about (몇 시에 일어났어요? answered 10시 20분이었습니다). For a fill-in item with several gaps: one gap wrong = "h".
 "x" = wrong: wrong content, answers a different question word, the wrong person or place, or ungrammatical beyond small slips; for fill-in items, a word that does not fit the gap.
 Items have type "blank" (fill the ___ gaps; "answer" is the list of what the student typed per gap and "accepted" the accepted strings per gap), "write" (a sentence; "model" = example answers) or "speak" (spoken answer transcribed; "model" = example).
+Type "speak" answers are SPEECH-TO-TEXT transcripts of what the student said. Spacing and punctuation carry no information there: ignore them completely, never mention them and never lower v for them (태국사람입니다 = 태국 사람입니다 = "o"). A short answer that answers the question (빔입니다 for 이름이 무엇입니까?) is "o" — 저는 is optional. If a word is clearly a sound-alike mis-transcription of the intended word (same pronunciation, e.g. 안자요 for 앉아요, 가치 for 같이), treat it as the intended word. Still judge particles, endings, tense and content as above.
 Return JSON only: {"results":[{"k":"<same k>","v":"o|h|x","fb":"<Thai, at most 2 short sentences: what is wrong and why, or why it is right>","fix":"<the student's own answer minimally corrected, in Korean; the same if nothing to fix>"}]} with one result per item.`;
 function aiKeys() { const ks = [], st = curSt.peek(); if (!st) return ks;
   st.sections.forEach((sec, si) => sec.items.forEach((it, ii) => { const k = `${si}-${ii}`, a = C.ans[k]; if (!isAnswered(a) || aiS.peek()[k]) return;
@@ -903,7 +914,7 @@ function Card({ st, short }) {
   const meta = `${itemCount(st)} ข้อ · ${tot} คะแนน · ${setMinutes(st)} นาที`;
   let badge;
   if (att) badge = html`<span class="badge live">⏸ กำลังทำ ${answeredIn(st, store.get('ans:' + st.id, {}))}/${itemCount(st)}${att.mode === 'exam' && attLeft(att) !== null ? ' · เหลือ ' + fmt(attLeft(att)) : ''}</span>`;
-  else if (sc) badge = html`<span class=${'badge' + (pct >= .8 ? ' good' : '')}>${st.skill === 'speaking' ? `ตอบ ${sc.s}/${sc.t}` : `${sc.s}/${sc.t || tot}`}${sc.mode ? ' · ' + MODE_TH[sc.mode] : ''}</span>`;
+  else if (sc) badge = html`<span class=${'badge' + (pct >= .8 ? ' good' : '')}>${oldSpk(sc) ? `ตอบ ${sc.s}/${sc.t}` : sc.spoken ? `${sc.s}/${sc.t} · ตอบ ${sc.n}/${sc.t} ข้อ` : `${sc.s}/${sc.t || tot}`}${sc.mode ? ' · ' + MODE_TH[sc.mode] : ''}</span>`;
   else badge = html`<span class="badge none">ยังไม่ได้ทำ</span>`;
   return html`<button class=${'card' + (att ? ' c-live' : sc ? (pct >= .8 ? ' c-good' : ' c-done') : '')} type="button" onClick=${() => go(st.id)}>${short
     ? html`<span class="tt ko">${SKILL[st.skill][0]} <small>${SKILL[st.skill][1]}</small></span><span class="meta">${meta}</span>${badge}`
@@ -923,9 +934,9 @@ function Home() {
         <p class="exam-sum">ทำแล้ว ${done}/${sets.length} ชุด</p>
         ${groups.map(g => {
           g.sets.sort((a, b) => ORDER.indexOf(a.skill) - ORDER.indexOf(b.skill) || a.id.localeCompare(b.id));
-          const scored = g.sets.filter(s => s.skill !== 'speaking'), dn = g.sets.filter(s => lastScore(s.id)).length;
+          const scored = g.sets.filter(s => !oldSpk(lastScore(s.id))), dn = g.sets.filter(s => lastScore(s.id)).length;
           const got = scored.reduce((a, s) => a + ((lastScore(s.id) || {}).s || 0), 0), all = scored.reduce((a, s) => a + setTotal(s), 0);
-          return html`<section class="grp"><div class="grp-h"><b>${g.label}</b><span class="muted">ทำแล้ว ${dn}/${g.sets.length}${byPaper && dn ? ` · คะแนน ${Math.round(got * 100) / 100}/${all}` : ''}</span>
+          return html`<section class="grp"><div class="grp-h"><b>${g.label}</b><span class="muted">ทำแล้ว ${dn}/${g.sets.length}${byPaper && dn ? ` · คะแนน ${Math.round(got * 100) / 100}/${all}` : ''}${(() => { const sp = g.sets.filter(s => (lastScore(s.id) || {}).spoken); return sp.length ? ` · ตอบ ${sp.reduce((a, s) => { const e = lastScore(s.id); return a + (oldSpk(e) ? e.s : e.n || 0); }, 0)}/${sp.reduce((a, s) => a + itemCount(s), 0)} ข้อ` : ''; })()}</span>
             <span class="grp-bar"><i style=${'width:' + (100 * dn / g.sets.length) + '%'}></i></span></div>
             ${g.note ? html`<p class="grp-note">${g.note}</p>` : null}
             <div class="skills four">${g.sets.map(st => html`<${Card} st=${st} short=${byPaper} />`)}</div></section>`;
@@ -939,7 +950,7 @@ const RULES = {
   writing: ['เขียนคำตอบลงในช่อง ข้อเติมคำตรวจทันที ข้อเขียนประโยค AI ตรวจให้หลังส่ง', 'โหมดสอบจริง: ซ่อนคำแปลโจทย์และคำใบ้ (เปิดดูได้จากแถบด้านบนถ้าจำเป็น)'],
   reading: ['อ่านบทอ่านแล้วตอบ โหมดสอบจริงซ่อนคำแปลของบทอ่านและโจทย์เหมือนข้อสอบจริง', 'ข้อที่ให้เขียนประโยค AI ตรวจให้หลังส่ง'],
   listening: ['โหมดสอบจริง: ครูอ่านเลขข้อ เสียงเล่นเองตอนละ 2 รอบ แล้วมีเวลาตอบก่อนไปตอนถัดไป กดฟังซ้ำและดูสคริปต์ไม่ได้จนกว่าจะส่ง', 'โหมดฝึก: กดฟังได้ไม่จำกัด เปิดสคริปต์ได้'],
-  speaking: ['โหมดสอบจริง: ครูถามทีละข้อ มีเวลาตอบข้อละ ' + SPEAK_SECS + ' วินาที แล้วไปข้อถัดไปเอง', 'โหมดฝึก: กด ▶ ถาม ทีละข้อ แล้วกด ตรวจ ได้ทันที', 'ข้อพูดไม่มีคะแนนอัตโนมัติ ระบบเช็กประโยค กาล และคำสำคัญ และ AI ให้ความเห็นหลังส่ง']
+  speaking: ['โหมดสอบจริง: ครูถามทีละข้อ มีเวลาตอบข้อละ ' + SPEAK_SECS + ' วินาที แล้วไปข้อถัดไปเอง', 'โหมดฝึก: กด ▶ ถาม ทีละข้อ แล้วกด ตรวจ ได้ทันที', 'คะแนนข้อพูด: AI ตรวจหลังส่ง (ถูก 1 · ครึ่ง 0.5 · ผิด 0) ไม่เห็นด้วยกด ถูก / ครึ่ง / ผิด แก้เองได้ทุกข้อ', '○ ✕ ใต้ข้อคือเช็กคำสำคัญ ไม่ใช่คะแนน · เว้นวรรคที่ต่างเพราะถอดเสียงไม่หักคะแนน']
 };
 function Cover() {
   storeVer.value;
@@ -960,8 +971,9 @@ function Cover() {
     <div class="modes">
       <button class="mode-btn primary" type="button" onClick=${() => startSet('exam')}><span class="t">▶ เริ่มสอบจริง</span><span class="s">จับเวลา ${min} นาที · เหมือนห้องสอบ${st.skill === 'listening' ? ' · เสียงเล่นเอง 2 รอบ' : st.skill === 'speaking' ? ' · ครูถามทีละข้อ' : ' · ซ่อนคำแปล'}</span></button>
       <button class="mode-btn" type="button" onClick=${() => startSet('practice')}><span class="t">✎ ฝึกทำ</span><span class="s">ไม่จับเวลา · ดูคำแปล ฟังซ้ำ และตรวจได้ตามสบาย</span></button></div>
-    ${last && !att ? html`<div class="last"><span>ผลล่าสุด <b>${last.s}/${last.t || tot}</b> (${MODE_TH[last.mode] || 'ทำแล้ว'} · ${dateTh(last.at)})</span>
+    ${last && !att ? html`<div class="last"><span>ผลล่าสุด <b>${oldSpk(last) ? `ตอบ ${last.s}/${last.t} ข้อ (ยังไม่มีคะแนน)` : last.spoken ? `คะแนน ${last.s}/${last.t} · ตอบ ${last.n}/${last.t} ข้อ` : `${last.s}/${last.t || tot}`}</b> (${MODE_TH[last.mode] || 'ทำแล้ว'} · ${dateTh(last.at)})</span>
       <button class="btn sm" type="button" onClick=${() => { C.lastMode = last.mode; mode.value = 'result'; finishGrading('view'); }}>📊 ดูผลและเฉลย</button></div>` : null}
+    ${last || att || hist.length ? html`<p class="reset">${resetAsk.value === st.id ? html`<span>ล้างคำตอบ คะแนน ประวัติ และสถานะของชุดนี้ทั้งหมด (รวมที่ซิงก์ไว้) กลับเป็น "ยังไม่ได้ทำ"?</span> <button class="btn sm danger" type="button" onClick=${() => resetSet(st.id)}>🗑 ยืนยันล้าง</button> <button class="btn sm" type="button" onClick=${() => { resetAsk.value = ''; }}>ยกเลิก</button>` : html`<button class="btn sm" type="button" onClick=${() => { resetAsk.value = st.id; }}>🗑 ล้างผลชุดนี้</button>`}</p>` : null}
     ${hist.length > 1 ? html`<p class="hist">ประวัติ: ${hist.slice().reverse().map(e => html`<span>${e.s}/${e.t} ${MODE_TH[e.mode] ? '(' + MODE_TH[e.mode] + ')' : ''} ${dateTh(e.at)}</span>`)}</p>` : null}
     <div class="actions"><button class="btn" type="button" onClick=${() => { location.hash = ''; }}>← กลับหน้าแรก</button></div>
   </article>`;
@@ -1070,7 +1082,7 @@ function Item({ it, k }) {
       ${it.hint ? html`<div class="qth hint">💡 ${it.hint}</div>` : null}
       <textarea class="wa" lang="ko" rows="1" id=${'ta' + k} aria-label=${'คำตอบข้อ ' + it.n} placeholder=${it.type === 'speak' ? 'คำตอบ (ไมค์ถอดเสียงให้ หรือพิมพ์เอง)' : 'เขียนคำตอบ'} value=${a || ''} readOnly=${ro} onInput=${e => setAns(k, e.target.value)}></textarea>
       <div class="out">${it.type === 'speak' ? html`<${SpeakOut} it=${it} k=${k} />` : null}</div>` : null}
-    ${gi && (gi.fix || it.why || gi.typed) ? html`<${Fix} it=${it} k=${k} gi=${gi} />` : null}
+    ${gi && it.type !== 'speak' && (gi.fix || it.why || gi.typed) ? html`<${Fix} it=${it} k=${k} gi=${gi} />` : null}
   </div></div>`;
 }
 /* the red-pen line under a graded item: correction (red) or tip (blue-grey), who graded it, the ○△✕ self-grade buttons */
@@ -1085,9 +1097,15 @@ function SpeakOut({ it, k }) {
   if (!s) return null;
   if (s.mic === false) return html`<p class="notice">ใช้ไมค์ไม่ได้ — พิมพ์คำตอบแทน แล้วกด ตรวจ</p>`;
   const a = s.a, au = audioS.value[k], rows = [];
-  if (a) { rows.push([a.split(/\s+/).filter(Boolean).length >= 2, 'ตอบเป็นประโยค ไม่ใช่คำเดียว']); (it.checks || []).forEach(([re, label]) => { let ok = false; try { ok = new RegExp(re).test(a); } catch (e) {} rows.push([ok, label]); }); }
+  /* the answer is a speech-to-text transcript: spaces carry no information, so every check ignores them (a literal space in a pattern = \s*) */
+  if (a) { const flat = a.replace(/\s+/g, ''); rows.push([flat.length >= 3 || /(요|다|까)[.?!]?$/.test(a.trim()), 'ตอบเป็นประโยค ไม่ใช่คำเดียว']); (it.checks || []).forEach(([re, label]) => { let ok = false; try { ok = new RegExp(re.replace(/ /g, '\\s*')).test(a); } catch (e) {} rows.push([ok, label]); }); }
+  const gi = mode.value === 'result' && G.value ? G.value.items[k] : null, self = selfS.value[k];
+  const pick = v => { const nx = { ...selfS.peek() }; if (nx[k] === v) delete nx[k]; else nx[k] = v; selfS.value = nx; store.set('self:' + curSt.peek().id, nx); regrade(); };
+  const VL = { o: 'ถูก 1', h: 'ครึ่ง 0.5', x: 'ผิด 0' };
+  const verdict = self ? `${VL[self]} (ตรวจเอง)` : ai ? `${VL[ai.v]} (🤖 AI)` : AIS.value ? 'รอ AI ตรวจ' : 'ยังไม่มีคะแนน — กดเลือกเอง';
   return html`${au ? html`<div class="qth">เสียงของคุณ: <audio controls src=${au}></audio></div>` : null}
-    <ul class="checks">${a ? rows.map(([ok, label]) => html`<li class=${ok ? undefined : 'ng'}>${label}</li>`) : html`<li class="ng">ยังไม่มีคำตอบ</li>`}</ul>
+    <ul class="checks">${a ? rows.map(([ok, label]) => html`<li class=${ok ? undefined : 'ng'}>${label}</li>`) : html`<li class="ng">ยังไม่มีคำตอบ</li>`}${a ? html`<li class="hint">เช็กคำสำคัญเท่านั้น ไม่ใช่คะแนน · เว้นวรรคจากการถอดเสียงไม่นับ</li>` : null}</ul>
+    ${a ? html`<div class=${'fix ' + (gi && gi.frac >= 1 && !gi.pend ? 'tip' : 'corr')}>คะแนนข้อนี้: <b>${verdict}</b> · ตรวจเอง: <span class="self">${[['o', 'ถูก'], ['h', 'ครึ่ง'], ['x', 'ผิด']].map(([v, lab]) => html`<button type="button" class=${'v-' + v} aria-pressed=${String(self === v)} onClick=${() => pick(v)}>${lab}</button>`)}</span></div>` : null}
     <div class="qth">คำตอบตัวอย่าง: <${Kline} cls="ko kline" text=${it.model} /> · ${it.mth || ''}${it.why ? ' · ' + it.why : ''} <button class="play" type="button" onClick=${e => { stopRuns(); say(it.model, 'S', e.currentTarget.parentNode.querySelector('.kline')); }}>▶ ฟังตัวอย่าง</button>${AIS.value && a && !ai && !aiBusy ? html`<button class="aibtn" type="button" onClick=${() => aiGradeAll([k])}>🤖 AI ตรวจ</button>` : null}</div>
     ${ai ? html`<${AiBox} r=${ai} />` : null}`;
 }
@@ -1107,11 +1125,11 @@ function Results() {
   const sub = [MODE_TH[C.lastMode] ? 'โหมด' + MODE_TH[C.lastMode] : '', C.used ? 'ใช้เวลา ' + fmtShort(C.used) : '', reason === 'timeup' ? '⏰ หมดเวลา — ส่งอัตโนมัติ' : ''].filter(Boolean).join(' · ');
   const jump = (e, key) => { e.preventDefault(); const d = $('#it' + key); if (d) d.scrollIntoView({ behavior: 'smooth', block: 'center' }); };
   return html`<section class="results" id="results" aria-live="polite">
-    <div class="top"><span class="stamp">${spoken ? '말하기' : `${g.sum}/${g.tot}`}</span><div><div><b>${spoken ? 'สัมภาษณ์เสร็จแล้ว' : g.sum === g.tot ? 'ถูกทุกข้อ ✓' : `เสีย ${Math.round((g.tot - g.sum) * 100) / 100} คะแนน`}</b>${g.pending.length ? ` · รอ AI ตรวจ ${g.pending.length} ข้อ` : ''}</div><div class="sub">${sub}</div></div></div>
+    <div class="top"><span class="stamp">${g.sum}/${g.tot}</span><div><div><b>${spoken ? `สัมภาษณ์เสร็จแล้ว · ตอบ ${answeredIn(st, C.ans)}/${itemCount(st)} ข้อ · คะแนน ${g.sum}/${g.tot} · ` : ''}${g.sum === g.tot ? 'ถูกทุกข้อ ✓' : `เสีย ${Math.round((g.tot - g.sum) * 100) / 100} คะแนน`}</b>${g.pending.length ? ` · รอ AI ตรวจ ${g.pending.length} ข้อ` : ''}</div><div class="sub">${sub}</div></div></div>
     ${!spoken && g.perSec.length > 1 ? html`<table><tbody><tr><th>ตอน</th><th>คะแนน</th></tr>${g.perSec.map(s => html`<tr><td class="ko">${s.h}</td><td>${s.sum}/${s.tot}</td></tr>`)}</tbody></table>` : null}
-    ${!spoken ? html`<div class="legend"><span class="l-ok">ถูก</span><span class="l-half">ครึ่งคะแนน</span><span class="l-ng">ผิด</span><span class="l-pend">รอตรวจ</span></div>` : null}
+    ${html`<div class="legend"><span class="l-ok">ถูก</span><span class="l-half">ครึ่งคะแนน</span><span class="l-ng">ผิด</span><span class="l-pend">รอตรวจ</span></div>`}
     <div class="ai-line" id="ai-line"><${AiLine} /></div>
-    ${spoken ? html`<ul><li>ข้อพูดไม่มีคะแนนอัตโนมัติ ดูเครื่องหมาย ○ ✕ ใต้แต่ละข้อ ฟังตัวอย่าง แล้วพูดตาม · AI ให้ความเห็นทุกข้อที่มีคำตอบ</li></ul>`
+    ${spoken ? html`<ul><li>คะแนน = AI ตรวจ (ถูก 1 · ครึ่ง 0.5 · ผิด 0) · ไม่เห็นด้วยกด ถูก / ครึ่ง / ผิด ใต้ข้อนั้น · ○ ✕ เป็นแค่เช็กคำสำคัญ · เว้นวรรคจากการถอดเสียงไม่หักคะแนน</li>${g.lost.length ? html`<li>ข้อที่เสียคะแนน: ${g.lost.map((l, i) => html`${i ? ' · ' : ''}<a href="#" data-jump=${l.key} onClick=${e => jump(e, l.key)}>${l.n} (${l.got}/${l.pts})</a>`)}</li>` : null}</ul>`
       : g.lost.length ? html`<ul><li>ข้อที่เสียคะแนน: ${g.lost.map((l, i) => html`${i ? ' · ' : ''}<a href="#" data-jump=${l.key} onClick=${e => jump(e, l.key)}>${l.n} (${l.got}/${l.pts})</a>`)}</li>${g.pending.length || Object.keys(aiS.value).length ? null : html`<li>ข้อที่พิมพ์ตอบและไม่ตรงเฉลย: กด ถูก / ครึ่ง / ผิด ตรวจเองได้</li>`}</ul>` : null}
   </section>`;
 }
@@ -1122,7 +1140,13 @@ const SKORD = ['speaking', 'listening', 'writing', 'reading'];
 const GRP = { exam: '시험', review: '복습시험', course: 'คะแนนเก็บ' };
 const n1 = x => String(Math.round(x * 10) / 10);
 const sum = (a, f) => a.reduce((s, x) => s + f(x), 0);
-const tone = (got, mx) => got === null || got === undefined ? 'p-none' : got / mx >= .9 ? 'p-ok' : got / mx >= .7 ? 'p-mid' : 'p-low';
+const PASS = Object.assign({ pass: 70, retest: 60, retestMax: 2, attendance: 80, fee: '30,000원', notes: [] }, SCORES.rules || {});   // from the GKS orientation guide (scores.json)
+const tone = (got, mx) => got === null || got === undefined ? 'p-none' : got / mx >= PASS.pass / 100 ? 'p-ok' : got / mx >= PASS.retest / 100 ? 'p-mid' : 'p-low';
+/* where a skill stands against the pass mark: earned = announced points, pend = points not announced yet */
+function passStat(st) { const max = st.earned + st.pend, need = Math.max(0, PASS.pass - st.earned), need60 = Math.max(0, PASS.retest - st.earned);
+  const k = st.earned >= PASS.pass ? 'sure' : max >= PASS.pass ? 'open' : max >= PASS.retest ? 'retest' : 'fail';
+  const txt = k === 'sure' ? `✅ ถึง ${PASS.pass} แล้ว ผ่านแน่` : k === 'open' ? `🟡 ต้องได้อีก ${n1(need)} จาก ${n1(st.pend)} ที่ยังว่าง (${Math.round(need / st.pend * 100)}%)` : k === 'retest' ? `🟠 ถึง ${PASS.pass} ไม่ทันแล้ว · ยังสอบซ่อมได้ถ้าได้อีก ${n1(need60)} (≥ ${PASS.retest})` : `🔴 ถึง ${PASS.retest} ไม่ได้แล้ว`;
+  return { max, need, need60, k, txt }; }
 function skillStat(comps) {
   const ann = comps.filter(c => c.got !== null && c.got !== undefined), pen = comps.filter(c => c.got === null || c.got === undefined);
   const earned = sum(ann, c => c.got), annMax = sum(ann, c => c.max), pend = sum(pen, c => c.max);
@@ -1167,9 +1191,8 @@ function practiceStats() {
     const sc = store.get('score:' + st.id, null); let h = store.get('hist:' + st.id, []); if (!h.length && sc) h = [sc];
     if (!h.length) return;
     const g = by[st.skill]; if (!g) return; g.sets++;
-    if (st.skill === 'speaking') { g.n += 1; return; }
     const tot = setTotal(st);
-    h.forEach(e => { g.n++; g.pts.push({ p: e.s / (e.t || tot), at: e.at || 0 }); });
+    h.forEach(e => { if (oldSpk(e)) { g.n++; return; } g.n++; g.pts.push({ p: e.s / (e.t || tot), at: e.at || 0 }); });
     if (st.id.indexOf('mini02r') === 0) { const last = h[h.length - 1]; real.push({ st, last, n: h.length, tot }); }
   });
   SKORD.forEach(s => { const g = by[s]; g.pts.sort((a, b) => a.at - b.at); g.best = g.pts.length ? Math.max(...g.pts.map(x => x.p)) : null; g.latest = g.pts.length ? g.pts[g.pts.length - 1].p : null; });
@@ -1191,34 +1214,41 @@ function Profile() {
     }
     SKORD.forEach(s => { const st = skillStat(cur.skills[s]);
       const base = st.earned + sum(st.pen.filter(c => c.group !== 'exam'), c => c.max), pe = sum(st.pen.filter(c => c.group === 'exam'), c => c.max);
-      if (pe > 0) { const need = 90 - base;
-        tsum.push(need <= 0 ? `${SKILL[s][0]}: ถ้าคะแนนเก็บเต็มก็ถึง 90 แล้วตั้งแต่ยังไม่สอบ 시험` : `${SKILL[s][0]}: ถ้าคะแนนเก็บได้เต็ม ต้องได้ 시험 ${n1(need)}/${pe} (${Math.round(need / pe * 100)}%) ถึงจะได้ 90/100`); }
-      else tsum.push(`${SKILL[s][0]}: ประกาศครบแล้ว ${n1(st.earned)}/100 (ห่างจาก 90 อยู่ ${n1(Math.max(0, 90 - st.earned))})`); });
+      if (pe > 0) { const need = PASS.pass - base, needLo = PASS.pass - (st.earned + .7 * (base - st.earned));
+        tsum.push(need <= 0 ? `${SKILL[s][0]}: ถ้าคะแนนเก็บเต็มก็ถึง ${PASS.pass} แล้วตั้งแต่ยังไม่สอบ 시험` : `${SKILL[s][0]}: ถ้าคะแนนเก็บได้เต็ม ต้องได้ 시험 ${n1(need)}/${pe} (${Math.round(need / pe * 100)}%) ถึงจะผ่าน ${PASS.pass} · ถ้าคะแนนเก็บได้แค่ 70% ต้องได้ 시험 ${n1(Math.min(pe, needLo))}/${pe} (${Math.round(Math.min(pe, needLo) / pe * 100)}%)`); }
+      else tsum.push(`${SKILL[s][0]}: ประกาศครบแล้ว ${n1(st.earned)}/100 (${passStat(st).txt})`); });
   }
   const pk = SKORD.filter(s => s !== 'speaking' && pr.by[s].best !== null).sort((a, b) => pr.by[a].best - pr.by[b].best)[0];
   if (pk) tsum.push(`ทักษะที่ฝึกในเว็บแล้วได้ best ต่ำสุด: ${SKILL[pk][0]} (${pc(pr.by[pk].best)}, ทำ ${pr.by[pk].n} ครั้ง) — ควรฝึกเพิ่ม`);
   else tsum.push('ยังไม่มีผลฝึกในเว็บ — ทำชุดข้อสอบสักชุดแล้วกลับมาดู');
   return html`<section id="profile" class="paper prof">
-    <div class="paper-head"><div><h1>👤 โปรไฟล์คะแนน</h1><p>คะแนนที่ครูประกาศ (สมุดคะแนนในเว็บ) + ผลฝึกที่เก็บไว้ในเครื่องนี้ · แต่ละทักษะเต็ม 100 ต่อเทอม = 시험 50 + 복습시험 20 + คะแนนเก็บ 30</p></div></div>
-    <div class="sec"><h2 class="sec-h">1 · ตารางคะแนน</h2><p class="sec-th">เขียว ≥ 90% · เหลือง 70–90% · แดง ต่ำกว่า 70% · เทา = ยังไม่ประกาศ (ครูประกาศคะแนนเก็บตอนจบเทอม)</p>
+    <div class="paper-head"><div><h1>👤 โปรไฟล์คะแนน</h1><p>คะแนนที่ครูประกาศ (สมุดคะแนนในเว็บ) + ผลฝึกที่เก็บไว้ในเครื่องนี้ · แต่ละทักษะเต็ม 100 ต่อเทอม = 시험 50 + 복습시험 20 + คะแนนเก็บ 30 · <b>เกณฑ์ผ่านระดับ (คู่มือ GKS): เฉลี่ยแต่ละวิชา ≥ ${PASS.pass} · ${PASS.retest}–${PASS.pass - 1} สอบซ่อม · ต่ำกว่า ${PASS.retest} ตก</b></p></div></div>
+    <div class="sec"><h2 class="sec-h">1 · ตารางคะแนน</h2><p class="sec-th">สีตามเกณฑ์ผ่าน: เขียว ≥ ${PASS.pass}% (ผ่าน) · เหลือง ${PASS.retest}–${PASS.pass - 1}% (ช่วงสอบซ่อม) · แดง ต่ำกว่า ${PASS.retest}% (ตก) · เทา = ยังไม่ประกาศ (ครูประกาศคะแนนเก็บตอนจบเทอม)</p>
       ${terms.map(tm => html`<h3 class="ko ph3">${tm.title}</h3>${termTable(tm)}`)}
       ${(SCORES.daily || []).length ? html`<p class="hist">หลักฐาน 쓰기 คะแนนเก็บ · 매일시험: ${SCORES.daily.map(d => html`<span>${d.unit}과 ${n1(d.got)}</span>`)} <span>เฉลี่ย ${n1(sum(SCORES.daily, d => d.got) / SCORES.daily.length)}/10</span></p>` : null}
     </div>
-    <div class="sec"><h2 class="sec-h">2 · ช่องที่ขาด</h2>
+    <div class="sec"><h2 class="sec-h">2 · เกณฑ์ผ่านระดับ</h2><p class="sec-th">จาก ${PASS.source || 'คู่มือ GKS'} · คิดต่อวิชา ไม่ใช่รวมสี่วิชา · ค่าเฉลี่ยของเทอมกลางภาคกับปลายภาค (ตอนนี้มีแต่กลางภาค จึงคิดจากเทอมนี้ก่อน)</p>
+      ${terms.map(tm => { const rows = SKORD.map(s => [s, skillStat(tm.skills[s])]); if (!rows.some(([, st]) => st.ann.length)) return null;
+        return html`<h3 class="ko ph3">${tm.title}</h3><div class="ptw"><table class="ptab"><thead><tr><th>ทักษะ</th><th>ได้แล้ว</th><th>ยังว่าง</th><th>สูงสุดที่ยังเป็นไปได้</th><th>ขาดอีกถึง ${PASS.pass}</th><th>สถานะ</th></tr></thead><tbody>
+          ${rows.map(([s, st]) => { const ps = passStat(st); return html`<tr><th class="ko">${SKILL[s][0]} <small>${SKILL[s][1]}</small></th><td class="pc"><b>${n1(st.earned)}</b><span class="muted">/${n1(st.annMax)}</span></td><td class="pc p-none">${n1(st.pend)}</td><td class=${'pc ' + tone(ps.max, 100)}>${n1(ps.max)}</td><td class="pc">${ps.need ? n1(ps.need) : '–'}</td><td class=${'pc ' + (ps.k === 'sure' ? 'p-ok' : ps.k === 'open' ? 'p-mid' : 'p-low')}>${ps.txt}</td></tr>`; })}
+        </tbody></table></div>`; })}
+      <ul class="sumul">${(PASS.notes || []).map(t => html`<li>${t}</li>`)}</ul>
+    </div>
+    <div class="sec"><h2 class="sec-h">3 · ช่องที่ขาด</h2>
       <p class="legend"><span class="l-ok">ได้แล้ว</span><span class="l-lost">เสียไปแล้ว</span><span class="l-pend">ยังไม่ประกาศ</span></p>
       ${terms.map(tm => { const rows = SKORD.map(s => [s, skillStat(tm.skills[s])]); if (!rows.some(([, st]) => st.ann.length)) return html`<p class="muted">${tm.title}: ยังไม่มีคะแนนประกาศ — ว่างทั้งหมด</p>`;
         return html`<h3 class="ko ph3">${tm.title}</h3>${rows.map(([s, st]) => { const sent = st.ann.length ? `${SKILL[s][0]}: ได้ ${n1(st.earned)}/${n1(st.annMax)} จาก ${annTxt(st)} เสีย ${n1(st.lost)} คะแนน` : `${SKILL[s][0]}: ยังไม่มีคะแนนประกาศ`;
           const full = sent + ` · ยังว่าง ${n1(st.pend)}${st.pend ? ` (${pendTxt(st.pg)})` : ''}`;
           return html`<div class="srow"><div class="sk-l ko">${SKILL[s][0]}</div>${stackBar(st, full)}<div class="sk-n">${n1(st.earned)}</div></div><p class="sent">${full}</p>`; })}`; })}
     </div>
-    <div class="sec"><h2 class="sec-h">3 · ผลฝึกในเว็บ</h2>
+    <div class="sec"><h2 class="sec-h">4 · ผลฝึกในเว็บ</h2>
       ${anyPractice ? html`<div class="ptw"><table class="ptab"><thead><tr><th>ทักษะ</th><th>ครั้งที่ทำ</th><th>best</th><th>ล่าสุด</th><th>แนวโน้ม</th></tr></thead><tbody>
         ${SKORD.map(s => { const g = pr.by[s]; return html`<tr><th class="ko">${SKILL[s][0]} <small>${SKILL[s][1]}</small></th><td class="pc">${g.n || '–'}${s === 'speaking' && g.n ? html`<div class="pn">ไม่มีคะแนน %</div>` : null}</td><td class=${'pc ' + (g.best === null ? 'p-none' : tone(g.best, 1))}>${pc(g.best)}</td><td class=${'pc ' + (g.latest === null ? 'p-none' : tone(g.latest, 1))}>${pc(g.latest)}</td><td class="pc">${spark(g.pts.map(x => x.p))}</td></tr>`; })}
       </tbody></table></div>
-      ${pr.real.length ? html`<p class="hist">ข้อสอบจริง 복습시험 ② (ที่สอบ 20 ต.ค. ทำซ้ำในเว็บ): ${pr.real.map(r => html`<span>${SKILL[r.st.skill][0]} ${r.st.skill === 'speaking' ? 'ตอบแล้ว' : Math.round(r.last.s / (r.last.t || r.tot) * 100) + '%'} (${r.n} ครั้ง)</span>`)}</p>` : null}`
+      ${pr.real.length ? html`<p class="hist">ข้อสอบจริง 복습시험 ② (ที่สอบ 20 ต.ค. ทำซ้ำในเว็บ): ${pr.real.map(r => html`<span>${SKILL[r.st.skill][0]} ${oldSpk(r.last) ? 'ตอบแล้ว' : Math.round(r.last.s / (r.last.t || r.tot) * 100) + '%'} (${r.n} ครั้ง)</span>`)}</p>` : null}`
       : html`<p class="muted">ยังไม่มีผลที่บันทึกไว้ในเครื่องนี้ — ทำชุดข้อสอบแล้วกดส่งคำตอบ ผลจะมาแสดงที่นี่</p>`}
     </div>
-    <div class="sec"><h2 class="sec-h">4 · สรุป</h2><ul class="sumul">${tsum.map(t => html`<li>${t}</li>`)}</ul></div>
+    <div class="sec"><h2 class="sec-h">5 · สรุป</h2><ul class="sumul">${tsum.map(t => html`<li>${t}</li>`)}</ul></div>
     <div class="actions"><button class="btn" type="button" id="prof-back" onClick=${() => { location.hash = ''; }}>← กลับหน้าแรก</button></div>
   </section>`;
 }
