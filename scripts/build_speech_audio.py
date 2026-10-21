@@ -14,6 +14,49 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CACHE = os.path.join(ROOT, 'extracted', 'speech_clips')
 VOICES = {'F': 'ko-KR-SunHiNeural', 'M': 'ko-KR-InJoonNeural', 'S': 'ko-KR-HyunsuMultilingualNeural'}
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import kotag   # colour by word function — the same classes as every PDF (SPEC_colors.md)
+_TAG = re.compile(r'\{([A-Za-z]):([^}]*)\}')
+
+def _segments(tagged):
+    """'{n:저}{p:는} 한국' -> [('n','저'),('p','는'),('',' 한국')]"""
+    out, pos = [], 0
+    for m in _TAG.finditer(tagged):
+        if m.start() > pos: out.append(('', tagged[pos:m.start()]))
+        out.append((m.group(1).lower(), m.group(2))); pos = m.end()
+    if pos < len(tagged): out.append(('', tagged[pos:]))
+    return out
+
+def esc(t): return t.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;')
+
+def ko_html(ko, words):
+    """Korean line as nested spans: .w per spoken word (karaoke, from the edge-tts boundaries) and .k<cls> per word-function segment."""
+    tagged = ko if '{' in ko else kotag.tag_korean(ko)
+    segs = _segments(tagged); cls = []
+    for c, t in segs: cls += [c] * len(t)
+    plain = ''.join(t for _, t in segs)
+    widx, pos = [-1] * len(plain), 0
+    for j, w in enumerate(words):
+        i = plain.find(w[2], pos)
+        if i < 0: continue
+        for k in range(i, i + len(w[2])): widx[k] = j
+        pos = i + len(w[2])
+    out, i = '', 0
+    while i < len(plain):
+        j = i
+        while j < len(plain) and widx[j] == widx[i]: j += 1
+        inner, a = '', i
+        while a < j:
+            b = a
+            while b < j and cls[b] == cls[a]: b += 1
+            inner += f'<span class="k{cls[a]}">{esc(plain[a:b])}</span>' if cls[a] else esc(plain[a:b]); a = b
+        out += f'<span class="w">{inner}</span>' if widx[i] >= 0 else inner; i = j
+    return out
+
+def th_html(th, ko):
+    tagged = th if '{' in th else kotag.tag_thai(th, ko=ko)
+    return ''.join(f'<span class="k{c}">{esc(t)}</span>' if c else esc(t) for c, t in _segments(tagged))
+
 def parse(path):
     lines, sec, title = [], '', ''
     for ln in open(path, encoding='utf-8'):
@@ -23,7 +66,9 @@ def parse(path):
         m = re.match(r'^### (.+)$', ln)
         if m: sec = m.group(1); continue
         m = re.match(r'^\*\*(\d+)\. (.+)\*\*$', ln)
-        if m: lines.append({'n': int(m.group(1)), 'ko': m.group(2), 'sec': sec, 'read': '', 'th': ''}); continue
+        if m: lines.append({'n': int(m.group(1)), 'ko': m.group(2), 'sec': sec, 'read': '', 'th': '', 'role': 'q'}); continue
+        m = re.match(r'^\*\*→ (.+)\*\*$', ln)   # interview format: the model answer to the question above (spoken by the other voice)
+        if m and lines: lines.append({'n': '', 'ko': m.group(1), 'sec': sec, 'read': '', 'th': '', 'role': 'a'}); continue
         if lines and ln.startswith('*') and not lines[-1]['read']: lines[-1]['read'] = ln.strip('*')
         if lines and ln.startswith('🇹🇭'): lines[-1]['th'] = ln[2:].strip()
     return title, lines
@@ -68,6 +113,10 @@ button.on { border-color: var(--acc); color: var(--acc); font-weight: 500; }
 .seg button { border: 0; border-radius: 0; min-width: 48px; }
 .seg button + button { border-left: 1px solid var(--line); }
 .seg button.on { background: var(--acc); color: var(--acc-ink); }
+.opts { display: contents; }
+.bar.fold .opts { display: none; }
+#fold { margin-left: auto; }
+.bar.fold #fold::after { content: " ▾"; } .bar:not(.fold) #fold::after { content: " ▴"; }
 .sp { flex: 1 }
 .sec { margin: 28px 0 8px; font-family: var(--ko); font-size: 13px; letter-spacing: .06em; text-transform: uppercase; color: var(--mute); }
 .ln { display: grid; grid-template-columns: 40px 1fr 48px; gap: 6px 10px; align-items: start; padding: 12px 0; border-bottom: 1px solid var(--line); }
@@ -83,24 +132,41 @@ button.on { border-color: var(--acc); color: var(--acc); font-weight: 500; }
 body[data-hide="th"] .read, body[data-hide="th"] .th { display: none; }
 body[data-hide="ko"] .ko { filter: blur(7px); user-select: none; }
 body[data-hide="ko"] .ko.show, body[data-hide="ko"] .ln.playing .ko { filter: none; }
+.ln.a { padding-left: 14px; border-left: 3px solid var(--acc); border-bottom-style: dashed; }
+.ln.a .n { color: var(--acc); }
+body[data-hide="a"] .ln.a:not(.show):not(.playing) .ko, body[data-hide="a"] .ln.a:not(.show):not(.playing) .read, body[data-hide="a"] .ln.a:not(.show):not(.playing) .th { filter: blur(7px); user-select: none; }
+.sec.opt { color: var(--acc); text-transform: none; letter-spacing: 0; font-size: 14px; }
 .hint { font-size: 13px; color: var(--mute); margin: 10px 0 0; }
 body[data-noread] .read { display: none; }
 @media (max-width: 480px) { .ln .ko { font-size: calc(20px * var(--ts, 1)) } button { padding: 8px 10px } }
 @media (prefers-reduced-motion: no-preference) { .ln { transition: background .2s } }
+@@colors@@
+.kp { background: color-mix(in srgb, #c2410c 14%, transparent); }
+:root[data-theme="dark"] .kn { color: #93c5fd } :root[data-theme="dark"] .kp { color: #fdba74 } :root[data-theme="dark"] .kv { color: #86efac }
+:root[data-theme="dark"] .ke { color: #d8b4fe } :root[data-theme="dark"] .kq { color: #5eead4 } :root[data-theme="dark"] .kx { color: #fca5a5 }
+:root[data-theme="dark"] .km { color: #fcd34d } :root[data-theme="dark"] .ka { color: #d6d3d1 }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .kn { color: #93c5fd } :root:not([data-theme="light"]) .kp { color: #fdba74 }
+  :root:not([data-theme="light"]) .kv { color: #86efac } :root:not([data-theme="light"]) .ke { color: #d8b4fe } :root:not([data-theme="light"]) .kq { color: #5eead4 }
+  :root:not([data-theme="light"]) .kx { color: #fca5a5 } :root:not([data-theme="light"]) .km { color: #fcd34d } :root:not([data-theme="light"]) .ka { color: #d6d3d1 } }
+.w.now span { color: #1d2326; }
+.legend { font-size: 12px; color: var(--mute); margin: 6px 0 0; line-height: 1.8; } .legend span { margin-right: 8px; white-space: nowrap; }
 </style>
 <div class="wrap">
-<header><h1>@@title@@</h1><p>@@sub@@</p></header>
+<header><h1>@@title@@</h1><p>@@sub@@</p>
+<p class="legend">สี = หน้าที่ของคำ: <span class="kn">คำนาม</span><span class="kp">조사</span><span class="kv">กริยา/คุณศัพท์</span><span class="ke">ลงท้าย·กาล·이다</span><span class="kq">คำถาม</span><span class="kx">ปฏิเสธ</span><span class="km">ตัวเลข·ลักษณนาม</span><span class="ka">คำบอกเวลา·วิเศษณ์</span></p></header>
 <div class="bar">
   <button id="all" class="pri">▶ เล่นทั้งบท</button>
   <button id="pause">⏸ หยุดชั่วคราว</button>
   <button id="stop">■ หยุด</button>
-  <span class="sp"></span>
+  <button id="fold" aria-expanded="true" aria-controls="opts" title="ซ่อน/แสดงตัวเลือก">⚙</button>
+  <div class="opts" id="opts">
   <span class="seg" id="rate"><button data-r="0.7">0.7×</button><button data-r="0.85">0.85×</button><button data-r="1" class="on">1×</button></span>
   <button id="loop">↻ วนประโยค</button>
-  <span class="seg" id="hide"><button data-h="" class="on">ครบ</button><button data-h="th">ซ่อนไทย</button><button data-h="ko">ซ่อนเกาหลี</button></span>
+  <span class="seg" id="hide"><button data-h="" class="on">ครบ</button><button data-h="th">ซ่อนไทย</button><button data-h="ko">ซ่อนเกาหลี</button>@@hidea@@</span>
   <button id="read" class="on">คำอ่าน</button>
   <span class="seg" id="size" aria-label="ขนาดตัวอักษร"><button data-s="0.85">A−</button><button data-s="1" class="on">A</button><button data-s="1.25">A+</button><button data-s="1.5">A++</button></span>
   <span class="seg" id="theme" aria-label="ธีม"><button data-t="" class="on">อัตโนมัติ</button><button data-t="light">☀ สว่าง</button><button data-t="dark">☾ มืด</button></span>
+  </div>
 </div>
 <div id="list"></div>
 <p class="hint">แตะประโยคเพื่อเล่นเฉพาะประโยคนั้น · โหมด "ซ่อนเกาหลี" ให้ดูคำไทยแล้วพูดเอง แตะเพื่อเฉลย · เสียง: @@voice@@ (edge-tts)</p>
@@ -118,9 +184,9 @@ function wrap(ko, words) {
 function esc(s) { return s.replace(/[&<>]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;'})[c]); }
 let html = '', sec = '';
 D.forEach((L, i) => {
-  if (L.sec !== sec) { sec = L.sec; html += '<div class="sec">' + esc(sec) + '</div>'; }
-  html += '<div class="ln" id="l' + i + '"><div class="n">' + L.n + '</div><div class="ko">' + wrap(L.ko, L.words) + '</div>'
-    + '<p class="read">' + esc(L.read) + '</p><p class="th">' + esc(L.th) + '</p><button class="play" aria-label="เล่นประโยค ' + L.n + '">▶</button></div>';
+  if (L.sec !== sec) { sec = L.sec; html += '<div class="sec' + (sec.startsWith('➕') ? ' opt' : '') + '">' + esc(sec) + '</div>'; }
+  html += '<div class="ln' + (L.role === 'a' ? ' a' : '') + '" id="l' + i + '"><div class="n">' + (L.role === 'a' ? '↳' : L.n) + '</div><div class="ko">' + L.html + '</div>'
+    + '<p class="read">' + esc(L.read) + '</p><p class="th">' + L.thh + '</p><button class="play" aria-label="เล่นประโยค ' + L.n + '">▶</button></div>';
 });
 $('#list').innerHTML = html;
 function el(i) { return document.getElementById('l' + i); }
@@ -140,13 +206,15 @@ function play(i) {
   a.onplay = () => requestAnimationFrame(tick);
   a.onended = () => { if (cur !== a) return; spans.forEach(s => { s.classList.add('sung'); s.classList.remove('now'); });
     if (loop) return play(i);
-    if (playAll && i + 1 < D.length) return setTimeout(() => { if (cur === a) play(i + 1); }, 450);
+    if (playAll && i + 1 < D.length) { const gap = document.body.dataset.hide === 'a' && D[i + 1].role === 'a' ? 6000 : 450;   // hide-answer mode: 6 s to answer yourself
+      return setTimeout(() => { if (cur === a) play(i + 1); }, gap); }
     cur = null; setTimeout(() => { if (idx === i && !cur) { clear(i); idx = -1; } }, 1200); playAll = false; };
   a.play().catch(() => {});
 }
 $('#list').addEventListener('click', ev => {
   const ln = ev.target.closest('.ln'); if (!ln) return; const i = +ln.id.slice(1);
   if (document.body.dataset.hide === 'ko' && !ev.target.closest('.play')) { ln.querySelector('.ko').classList.toggle('show'); return; }
+  if (document.body.dataset.hide === 'a' && ln.classList.contains('a') && !ev.target.closest('.play') && !ln.classList.contains('show')) { ln.classList.add('show'); return; }
   playAll = false; play(i);
 });
 $('#all').onclick = () => { playAll = true; play(idx >= 0 && !cur ? idx : 0); };
@@ -156,7 +224,7 @@ $('#loop').onclick = () => { loop = !loop; $('#loop').classList.toggle('on', loo
 $('#rate').onclick = ev => { const b = ev.target.closest('button'); if (!b) return; rate = +b.dataset.r; if (cur) cur.playbackRate = rate;
   $('#rate').querySelectorAll('button').forEach(x => x.classList.toggle('on', x === b)); try { localStorage.setItem('rate', rate); } catch (e) {} };
 $('#hide').onclick = ev => { const b = ev.target.closest('button'); if (!b) return; document.body.dataset.hide = b.dataset.h;
-  $('#hide').querySelectorAll('button').forEach(x => x.classList.toggle('on', x === b)); document.querySelectorAll('.ko.show').forEach(x => x.classList.remove('show')); };
+  $('#hide').querySelectorAll('button').forEach(x => x.classList.toggle('on', x === b)); document.querySelectorAll('.ko.show, .ln.show').forEach(x => x.classList.remove('show')); };
 function setTheme(t, save) { const r = document.documentElement; if (t) r.dataset.theme = t; else r.removeAttribute('data-theme');
   $('#theme').querySelectorAll('button').forEach(x => x.classList.toggle('on', x.dataset.t === t)); if (save) try { localStorage.setItem('theme', t); } catch (e) {} }
 $('#theme').onclick = ev => { const b = ev.target.closest('button'); if (b) setTheme(b.dataset.t, true); };
@@ -167,6 +235,9 @@ function setSize(v, save) { document.documentElement.style.setProperty('--ts', v
   $('#size').querySelectorAll('button').forEach(x => x.classList.toggle('on', x.dataset.s === String(v))); if (save) try { localStorage.setItem('size', v); } catch (e) {} }
 $('#size').onclick = ev => { const b = ev.target.closest('button'); if (b) setSize(b.dataset.s, true); };
 try { if (localStorage.getItem('read') === '0') setRead(false, false); const z = localStorage.getItem('size'); if (z) setSize(z, false); } catch (e) {}
+const setFold = (f, save) => { $('.bar').classList.toggle('fold', f); $('#fold').setAttribute('aria-expanded', f ? 'false' : 'true'); if (save) try { localStorage.setItem('fold', f ? '1' : '0'); } catch (e) {} };
+$('#fold').onclick = () => setFold(!$('.bar').classList.contains('fold'), true);
+try { const f = localStorage.getItem('fold'); setFold(f === null ? window.innerWidth < 640 : f === '1', false); } catch (e) { setFold(window.innerWidth < 640, false); }
 try { const t = localStorage.getItem('theme'); if (t !== null) setTheme(t, false); } catch (e) {}
 try { const r = localStorage.getItem('rate'); if (r) { const b = $('#rate button[data-r="' + r + '"]'); if (b) b.click(); } } catch (e) {}
 document.addEventListener('keydown', ev => { if (ev.target.tagName === 'INPUT') return;
@@ -183,14 +254,20 @@ def main():
     title, lines = parse(src)
     if not lines: sys.exit('no numbered lines found in ' + src)
     async def run():
-        for L in lines: L['mp3'], L['words'] = await clip(L['ko'], voice)
+        qa = any(L['role'] == 'a' for L in lines)
+        for L in lines: L['mp3'], L['words'] = await clip(L['ko'], VOICES['F'] if qa and L['role'] == 'q' else voice)
+        for L in lines:
+            L['html'] = ko_html(L['ko'], L['words']); L['thh'] = th_html(L['th'], L['ko']) if L['th'] else ''
+            L['ko'] = kotag.strip_tags(L['ko']); L['th'] = kotag.strip_tags(L['th'])
     asyncio.run(run())
     m = re.search(r'^\*\*ผู้พูด:\*\*\s*(.+?)\s*·', open(src, encoding='utf-8').read(), re.M)
     speaker = m.group(1) if m else ''
     page_title = re.sub(r'^.*?·\s*', '', title).split('(')[0].strip() or title   # "자기 소개"
     vals = {'title': page_title + (' · ' + speaker.split(' ')[0] if speaker else ''),
             'sub': f'{len(lines)} ประโยค · {title.split("(")[-1].rstrip(")") if "(" in title else ""} · ซ้อมพูดตามเสียง',
-            'voice': voice.replace('ko-KR-', '').replace('Neural', ''), 'data': json.dumps(lines, ensure_ascii=False)}
+            'voice': voice.replace('ko-KR-', '').replace('Neural', ''), 'data': json.dumps(lines, ensure_ascii=False),
+            'hidea': '<button data-h="a">ซ่อนคำตอบ</button>' if any(L['role'] == 'a' for L in lines) else '',
+            'colors': kotag.CSS_COLORS}
     out = PAGE
     for k, v in vals.items(): out = out.replace('@@' + k + '@@', v)
     camel = ''.join(p.capitalize() for p in name.split('_'))

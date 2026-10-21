@@ -1,0 +1,442 @@
+{
+ "_help": "แก้ตัวเลขเอง: เติม got (คะแนนที่ได้) ของช่องที่ครูประกาศแล้ว; null = ยังไม่ประกาศ. group: exam=시험 50 · review=복습시험 10+10 · course=คะแนนเก็บ 30. แล้วรัน build_mockweb.py --no-audio",
+ "terms": [
+  {
+   "id": "mid",
+   "title": "เทอมกลางภาค (중간 · เล่ม 1-1 · 1~21과)",
+   "skills": {
+    "speaking": [
+     {
+      "name": "중간시험 말하기",
+      "group": "exam",
+      "max": 50,
+      "got": null,
+      "date": "2026-10-22",
+      "note": ""
+     },
+     {
+      "name": "복습시험 ①",
+      "group": "review",
+      "max": 10,
+      "got": 10.0,
+      "date": "2026-10-06",
+      "note": ""
+     },
+     {
+      "name": "복습시험 ②",
+      "group": "review",
+      "max": 10,
+      "got": 10.0,
+      "date": "2026-10-20",
+      "note": ""
+     },
+     {
+      "name": "발표",
+      "group": "course",
+      "max": 20,
+      "got": null,
+      "date": "",
+      "note": "ครูประกาศตอนจบเทอม"
+     },
+     {
+      "name": "태도",
+      "group": "course",
+      "max": 10,
+      "got": null,
+      "date": "",
+      "note": "ครูประกาศตอนจบเทอม"
+     }
+    ],
+    "listening": [
+     {
+      "name": "중간시험 듣기",
+      "group": "exam",
+      "max": 50,
+      "got": null,
+      "date": "2026-10-23",
+      "note": ""
+     },
+     {
+      "name": "복습시험 ①",
+      "group": "review",
+      "max": 10,
+      "got": 7.5,
+      "date": "2026-10-06",
+      "note": ""
+     },
+     {
+      "name": "복습시험 ②",
+      "group": "review",
+      "max": 10,
+      "got": 8.5,
+      "date": "2026-10-20",
+      "note": ""
+     },
+     {
+      "name": "워크북 숙제",
+      "group": "course",
+      "max": 20,
+      "got": null,
+      "date": "",
+      "note": "ครูประกาศตอนจบเทอม"
+     },
+     {
+      "name": "태도",
+      "group": "course",
+      "max": 10,
+      "got": null,
+      "date": "",
+      "note": "ครูประกาศตอนจบเทอม"
+     }
+    ],
+    "writing": [
+     {
+      "name": "중간시험 쓰기",
+      "group": "exam",
+      "max": 50,
+      "got": null,
+      "date": "2026-10-23",
+      "note": ""
+     },
+     {
+      "name": "복습시험 ①",
+      "group": "review",
+      "max": 10,
+      "got": 8.8,
+      "date": "2026-10-06",
+      "note": ""
+     },
+     {
+      "name": "복습시험 ②",
+      "group": "review",
+      "max": 10,
+      "got": 7.5,
+      "date": "2026-10-20",
+      "note": ""
+     },
+     {
+      "name": "글쓰기",
+      "group": "course",
+      "max": 10,
+      "got": null,
+      "date": "",
+      "note": "ครูประกาศตอนจบเทอม"
+     },
+     {
+      "name": "매일시험",
+      "group": "course",
+      "max": 10,
+      "got": null,
+      "date": "",
+      "note": "ครูประกาศตอนจบเทอม"
+     },
+     {
+      "name": "공책 숙제",
+      "group": "course",
+      "max": 10,
+      "got": null,
+      "date": "",
+      "note": "ครูประกาศตอนจบเทอม"
+     }
+    ],
+    "reading": [
+     {
+      "name": "중간시험 읽기",
+      "group": "exam",
+      "max": 50,
+      "got": null,
+      "date": "2026-10-23",
+      "note": ""
+     },
+     {
+      "name": "복습시험 ①",
+      "group": "review",
+      "max": 10,
+      "got": 10.0,
+      "date": "2026-10-06",
+      "note": ""
+     },
+     {
+      "name": "복습시험 ②",
+      "group": "review",
+      "max": 10,
+      "got": 9.0,
+      "date": "2026-10-20",
+      "note": ""
+     },
+     {
+      "name": "낭독시험",
+      "group": "course",
+      "max": 20,
+      "got": null,
+      "date": "",
+      "note": "ครูประกาศตอนจบเทอม"
+     },
+     {
+      "name": "개인 과제 (대화 외우기)",
+      "group": "course",
+      "max": 10,
+      "got": null,
+      "date": "",
+      "note": "ครูประกาศตอนจบเทอม"
+     }
+    ]
+   }
+  },
+  {
+   "id": "fin",
+   "title": "เทอมปลายภาค (기말 · เล่ม 1-2 · 23~37과)",
+   "skills": {
+    "speaking": [
+     {
+      "name": "기말시험 말하기",
+      "group": "exam",
+      "max": 50,
+      "got": null,
+      "date": "2026-11-23",
+      "note": ""
+     },
+     {
+      "name": "복습시험 ③",
+      "group": "review",
+      "max": 10,
+      "got": null,
+      "date": "2026-11-06",
+      "note": ""
+     },
+     {
+      "name": "복습시험 ④",
+      "group": "review",
+      "max": 10,
+      "got": null,
+      "date": "2026-11-18",
+      "note": ""
+     },
+     {
+      "name": "발표",
+      "group": "course",
+      "max": 20,
+      "got": null,
+      "date": "",
+      "note": "ครูประกาศตอนจบเทอม"
+     },
+     {
+      "name": "태도",
+      "group": "course",
+      "max": 10,
+      "got": null,
+      "date": "",
+      "note": "ครูประกาศตอนจบเทอม"
+     }
+    ],
+    "listening": [
+     {
+      "name": "기말시험 듣기",
+      "group": "exam",
+      "max": 50,
+      "got": null,
+      "date": "2026-11-20",
+      "note": ""
+     },
+     {
+      "name": "복습시험 ③",
+      "group": "review",
+      "max": 10,
+      "got": null,
+      "date": "2026-11-06",
+      "note": ""
+     },
+     {
+      "name": "복습시험 ④",
+      "group": "review",
+      "max": 10,
+      "got": null,
+      "date": "2026-11-18",
+      "note": ""
+     },
+     {
+      "name": "워크북 숙제",
+      "group": "course",
+      "max": 20,
+      "got": null,
+      "date": "",
+      "note": "ครูประกาศตอนจบเทอม"
+     },
+     {
+      "name": "태도",
+      "group": "course",
+      "max": 10,
+      "got": null,
+      "date": "",
+      "note": "ครูประกาศตอนจบเทอม"
+     }
+    ],
+    "writing": [
+     {
+      "name": "기말시험 쓰기",
+      "group": "exam",
+      "max": 50,
+      "got": null,
+      "date": "2026-11-20",
+      "note": ""
+     },
+     {
+      "name": "복습시험 ③",
+      "group": "review",
+      "max": 10,
+      "got": null,
+      "date": "2026-11-06",
+      "note": ""
+     },
+     {
+      "name": "복습시험 ④",
+      "group": "review",
+      "max": 10,
+      "got": null,
+      "date": "2026-11-18",
+      "note": ""
+     },
+     {
+      "name": "글쓰기",
+      "group": "course",
+      "max": 10,
+      "got": null,
+      "date": "",
+      "note": "ครูประกาศตอนจบเทอม"
+     },
+     {
+      "name": "매일시험",
+      "group": "course",
+      "max": 10,
+      "got": null,
+      "date": "",
+      "note": "ครูประกาศตอนจบเทอม"
+     },
+     {
+      "name": "공책 숙제",
+      "group": "course",
+      "max": 10,
+      "got": null,
+      "date": "",
+      "note": "ครูประกาศตอนจบเทอม"
+     }
+    ],
+    "reading": [
+     {
+      "name": "기말시험 읽기",
+      "group": "exam",
+      "max": 50,
+      "got": null,
+      "date": "2026-11-20",
+      "note": ""
+     },
+     {
+      "name": "복습시험 ③",
+      "group": "review",
+      "max": 10,
+      "got": null,
+      "date": "2026-11-06",
+      "note": ""
+     },
+     {
+      "name": "복습시험 ④",
+      "group": "review",
+      "max": 10,
+      "got": null,
+      "date": "2026-11-18",
+      "note": ""
+     },
+     {
+      "name": "낭독시험",
+      "group": "course",
+      "max": 20,
+      "got": null,
+      "date": "",
+      "note": "ครูประกาศตอนจบเทอม"
+     },
+     {
+      "name": "개인 과제 (대화 외우기)",
+      "group": "course",
+      "max": 10,
+      "got": null,
+      "date": "",
+      "note": "ครูประกาศตอนจบเทอม"
+     }
+    ]
+   }
+  }
+ ],
+ "daily": [
+  {
+   "unit": 14,
+   "got": 7.5,
+   "max": 10,
+   "note": "매일시험 (หลักฐานของ 쓰기 คะแนนเก็บ)"
+  },
+  {
+   "unit": 15,
+   "got": 8.5,
+   "max": 10,
+   "note": "매일시험 (หลักฐานของ 쓰기 คะแนนเก็บ)"
+  },
+  {
+   "unit": 16,
+   "got": 10,
+   "max": 10,
+   "note": "매일시험 (หลักฐานของ 쓰기 คะแนนเก็บ)"
+  },
+  {
+   "unit": 17,
+   "got": 8,
+   "max": 10,
+   "note": "매일시험 (หลักฐานของ 쓰기 คะแนนเก็บ)"
+  },
+  {
+   "unit": 18,
+   "got": 10,
+   "max": 10,
+   "note": "매일시험 (หลักฐานของ 쓰기 คะแนนเก็บ)"
+  },
+  {
+   "unit": 19,
+   "got": 8.5,
+   "max": 10,
+   "note": "매일시험 (หลักฐานของ 쓰기 คะแนนเก็บ)"
+  }
+ ],
+ "review": [
+  {
+   "name": "복습시험 ①",
+   "date": "2026-10-06",
+   "speaking": 10.0,
+   "writing": 8.8,
+   "listening": 7.5,
+   "reading": 10.0
+  },
+  {
+   "name": "복습시험 ②",
+   "date": "2026-10-20",
+   "speaking": 10.0,
+   "writing": 7.5,
+   "listening": 8.5,
+   "reading": 9.0
+  }
+ ],
+ "presentations": [
+  {
+   "name": "발표 ① 제 방",
+   "date": "2026-10",
+   "got": null
+  },
+  {
+   "name": "발표 방학 계획",
+   "date": "2026-10-20",
+   "got": null
+  },
+  {
+   "name": "발표 ② 자기 소개",
+   "date": "2026-10-21",
+   "got": null
+  }
+ ]
+}

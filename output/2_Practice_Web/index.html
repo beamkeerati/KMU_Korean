@@ -94,6 +94,7 @@ button { cursor: pointer; }
 .badge.none { background: transparent; color: var(--muted); font-weight: 500; padding: 0; }
 .grp { margin-top: 14px; padding-top: 12px; border-top: 1px dashed var(--rule); }
 .exam-sum + .grp { border-top: 0; padding-top: 4px; }
+.grp-note { margin: -2px 0 8px; font-size: calc((13px) * var(--ts, 1)); color: var(--muted); }
 .grp-h { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; font-size: calc((14px) * var(--ts, 1)); }
 .grp-h b { font-size: calc((15px) * var(--ts, 1)); }
 .grp-bar { flex: 1; min-width: 80px; max-width: 220px; height: 6px; background: var(--rule); border-radius: 3px; overflow: hidden; }
@@ -304,6 +305,22 @@ audio { height: 32px; max-width: 100%; }
 .help li { margin: 2px 0; }
 .help code { font-family: ui-monospace, monospace; background: var(--navy-soft); padding: 1px 5px; border-radius: 4px; font-size: calc((13px) * var(--ts, 1)); word-break: break-all; }
 @media (max-width: 520px) { .paper-head { grid-template-columns: 1fr; } .item { padding-left: 38px; } .paper { padding-left: 12px; padding-right: 12px; } }
+/* score profile */
+.prof .ph3 { font-size: calc((15px) * var(--ts, 1)); margin: 18px 0 6px; }
+.ptw { overflow-x: auto; }
+.ptab { width: 100%; border-collapse: collapse; font-size: calc((13px) * var(--ts, 1)); min-width: 560px; font-variant-numeric: tabular-nums; }
+.ptab th, .ptab td { text-align: left; padding: 6px 8px; border: 1px solid var(--rule); vertical-align: top; }
+.ptab thead th { background: var(--navy-soft); font-weight: 700; }
+.ptab tbody th small { font-family: var(--f-th); font-weight: 500; color: var(--muted); }
+.pc.p-ok { background: var(--ok-soft); color: var(--ok); } .pc.p-mid { background: var(--half-soft); color: var(--half); } .pc.p-low { background: var(--red-soft); color: var(--red); } .pc.p-none { background: var(--desk); color: var(--muted); }
+.pc .muted { color: inherit; opacity: .75; } .pn { font-size: calc((11px) * var(--ts, 1)); }
+.subs { list-style: none; margin: 4px 0 0; padding: 0; font-size: calc((11px) * var(--ts, 1)); display: grid; gap: 1px; } .subs li.p-none { color: var(--muted); } .subs li.p-ok { color: var(--ok); } .subs li.p-mid { color: var(--half); } .subs li.p-low { color: var(--red); }
+.srow { display: flex; align-items: center; gap: 8px; margin-top: 10px; } .sk-l { width: 3.2em; font-weight: 700; } .sk-n { width: 3em; text-align: right; font-variant-numeric: tabular-nums; font-size: calc((13px) * var(--ts, 1)); }
+.sbar { flex: 1; display: flex; height: 18px; border-radius: 4px; overflow: hidden; background: var(--rule); border: 1px solid var(--rule); }
+.sbar i { display: block; height: 100%; } .s-earn { background: var(--ok); } .s-lost { background: repeating-linear-gradient(45deg, var(--red) 0 3px, var(--red-soft) 3px 6px); } .s-pend { background: var(--desk); flex: 1; }
+.sent { margin: 2px 0 0; font-size: calc((13px) * var(--ts, 1)); color: var(--muted); }
+.legend .l-lost::before { background: repeating-linear-gradient(45deg, var(--red) 0 3px, var(--red-soft) 3px 6px); } .legend .l-pend::before { background: var(--desk); border: 1px solid var(--muted); }
+.sumul { margin: 6px 0 0; padding-left: 20px; } .sumul li { margin: 4px 0; } .spark { display: block; }
 </style>
 </head>
 <body>
@@ -314,6 +331,7 @@ audio { height: 32px; max-width: 100%; }
 <script src="vendor.js"></script>
 <script src="data.js"></script>
 <script src="clips.js"></script>
+<script src="clips2.js"></script>
 <script>
 (() => {
 'use strict';
@@ -328,8 +346,8 @@ const CLIPS = window.KMU_CLIPS || {};
 const WORDS = window.KMU_WORDS || {};   // per clip: [[startSec, endSec, word], …] from edge-tts word boundaries
 const EXAMS = [
   { id: 'mini02', title: '복습시험 ②', date: '2026-10-20', when: 'อ. 20 ต.ค. · 14~20과', note: 'เก็งข้อสอบจากรูปแบบ 복습시험 ① — 쓰기 100 · 듣기 10 · 읽기 10 · 말하기 10' },
-  { id: 'review', title: '중간시험 복습문제 (ชุดทบทวนของครู)', date: '2026-10-22', when: 'ชุดที่ครูแจก 16 ต.ค.', note: 'พิมพ์เขียวของข้อสอบกลางภาค — 쓰기 14 ตอน · 읽기 25 ข้อ · 말하기 20 คำถาม (듣기 ของครูต้องใช้เสียงในห้อง จึงไม่มีในนี้)' },
-  { id: 'midterm', title: '중간시험 (สอบกลางภาค)', date: '2026-10-22', when: 'พฤ. 22 ต.ค. 말하기 · ศ. 23 ต.ค. 쓰기·듣기·읽기 · 1~21과', note: 'ข้อสอบจำลองจากเล่มเก็งข้อสอบ — 쓰기 2 ชุด · 읽기 2 ชุด · 듣기 2 ชุด · 말하기 25 คำถาม' }
+  { id: 'review', title: '중간시험 복습문제 (ชุดทบทวนของครู)', date: '2026-10-22', when: 'ชุดที่ครูแจก 16 ต.ค.', note: 'พิมพ์เขียวของข้อสอบกลางภาค — 쓰기 14 ตอน · 읽기 25 ข้อ · 듣기 12 ข้อ (เสียงจริงของครู) · 말하기 20 คำถาม' },
+  { id: 'midterm', title: '중간시험 (สอบกลางภาค)', date: '2026-10-22', when: 'พฤ. 22 ต.ค. 말하기 · ศ. 23 ต.ค. 쓰기·듣기·읽기 · 1~21과', note: 'ข้อสอบจำลอง 쓰기/읽기/듣기 2 ชุด · สัมภาษณ์จำลอง 말하기 · ฟังบทสนทนาหนังสือเสียงจริง · ทดสอบศัพท์และเขียนตามคำบอก' }
 ];
 const SKILL = { writing: ['쓰기', 'เขียน'], reading: ['읽기', 'อ่าน'], listening: ['듣기', 'ฟัง'], speaking: ['말하기', 'พูด'] };
 const ORDER = ['writing', 'reading', 'listening', 'speaking'];
@@ -526,9 +544,20 @@ document.addEventListener('visibilitychange', () => { if (document.visibilitySta
    exam-day order inside it; any other exam gets one row per skill */
 const SKILL_RE = /-(writing|reading|listening|speaking)(-[\w]+)?$/;
 const paperOf = st => st.id.replace(SKILL_RE, '');
+/* named groups of the home board: the first matching rule wins; sets with no rule fall back to paperOf() (ชุดที่ N) */
+const GROUPS = [
+  { re: /^mid-speaking-final|^mid-speaking$/, label: '🗣️ สัมภาษณ์จำลอง 말하기 (สอบ พฤ. 22 ต.ค.)', note: 'คำถามจากตาราง 말하기 연습 + ชีต 19과 + 자기 소개 + ครอบครัว · พูดตอบจริงแล้วให้ AI ตรวจ' },
+  { re: /^mid-\w+-a$/, label: '📝 ข้อสอบจำลองกลางภาค ชุด A (แบบชุดทบทวนของครู)', note: '쓰기 14 ตอน · 읽기 25 ข้อ · 듣기 12 ข้อ ตามรูปแบบ 복습문제 เปลี่ยนคำ' },
+  { re: /^mid-\w+-b$/, label: '📝 ข้อสอบจำลองกลางภาค ชุด B (แบบ 복습시험 ①+②)', note: 'รูปแบบเดียวกับ mini exam ที่สอบไปแล้ว 2 ครั้ง คำใหม่' },
+  { re: /^tb-listen/, label: '🔊 ฟังบทสนทนาจากหนังสือ · เสียงจริงของสำนักพิมพ์', note: 'ครูบอกว่า 듣기 วันศุกร์มาจากบทสนทนาในหนังสือเท่านั้น · โจทย์จากชีต 본문 듣기 ของศูนย์' },
+  { re: /^vocab-spelling/, label: '✏️ เขียนตามคำบอก · คำที่เคยสะกดผิด', note: 'ㅈ/ㅊ · ㅐ/ㅔ · 으 หาย · ㄹ หาย · 생활 · 열심히 · 시월/유월 — ฟังแล้วพิมพ์ทั้งวลี' },
+  { re: /^vocab-/, label: '🔤 ทดสอบจำศัพท์ 5–13과 · 14–21과', note: 'ไทย→เกาหลี พิมพ์เอง 30 ข้อ + เกาหลี→ไทย เลือก 30 ข้อ คัดคำที่ครูเคยออกสอบก่อน' },
+  { re: /^mini02r-/, label: 'ข้อสอบจริง (สอบแล้ว 20 ต.ค.)', note: '' },
+];
+const groupOf = st => { const g = GROUPS.find(g => g.re.test(st.id)); return g ? g.label : 'paper:' + paperOf(st); };
 function show(which) { batch(() => { view.value = which; }); const sc = $('#scroller'); if (sc) sc.scrollTo({ top: 0 }); }
 function go(id) { if (location.hash.slice(1) !== id) location.hash = id; else openSet(id); }
-function route() { const id = location.hash.slice(1); if (id && SETS.some(s => s.id === id)) openSet(id); else { leaveSet(); show('home'); } }
+function route() { const id = location.hash.slice(1); if (id === 'profile') { leaveSet(); show('profile'); } else if (id && SETS.some(s => s.id === id)) openSet(id); else { leaveSet(); show('home'); } }
 function leaveSet() { stopRuns(); stopExamClock(); curSt.value = null; }   // stopExamClock saves the remaining time
 window.addEventListener('hashchange', route);
 
@@ -571,6 +600,8 @@ async function playSection(si, id, round) {
   setSec(si, { live: true });
   playsS.value = { ...playsS.peek(), [si]: (playsS.peek()[si] || 0) + 1 };
   secStatus(si, round ? `🔊 ฟังรอบ ${round}/2` : '🔊 กำลังเล่น…');
+  if (sec.audio) {   // real recording (publisher / teacher mp3) — one file for the whole section, no karaoke
+    speaking.value = ''; await playClip(sec.audio, null, null); if (!round) secStatus(si, ''); return id === runId; }
   for (let i = 0; i < sec.script.length; i++) {
     if (id !== runId) break;
     const p = box.querySelector(`.script p[data-i="${i}"]`); speaking.value = `${si}-${i}`;
@@ -836,6 +867,7 @@ function Strip() {
         <div class="ctl">โทนสี <div class="swatches" role="group" aria-label="โทนสี">${PALS.map(([n, c, th]) => html`<button class="sw" type="button" data-pal=${n} style=${'background:' + c} aria-pressed=${String(n === (paletteS.value || 'navy'))} aria-label=${'โทน' + th} title=${th} onClick=${() => { paletteS.value = n; }}></button>`)}</div></div>
       </div>
     </details>
+    <button class="btn sm" type="button" id="prof-btn" onClick=${() => { location.hash = 'profile'; }}>👤 โปรไฟล์</button>
     <button class="btn sm" type="button" id="help-btn" onClick=${() => { stopRuns(); show('help'); }}>วิธีใช้</button>
   </div></div>`;
 }
@@ -890,8 +922,10 @@ function Home() {
   return html`<p class="home-tip">เลือกชุดข้อสอบ → หน้าปกจะบอกเวลาและกติกา → <b>เริ่มสอบจริง</b> (จับเวลา เสียงเล่นเอง) หรือ <b>ฝึกทำ</b> (ไม่จับเวลา ดูคำแปลได้)</p>
     ${EXAMS.map(ex => {
       const sets = SETS.filter(s => s.exam === ex.id); if (!sets.length) return null;
-      const done = sets.filter(s => lastScore(s.id)).length, papers = [...new Set(sets.map(paperOf))], byPaper = papers.length > 1;
-      const groups = byPaper ? papers.map((p, i) => { const ps = sets.filter(s => paperOf(s) === p); return { label: ps.every(s => /ข้อสอบจริง/.test(s.title)) ? 'ข้อสอบจริง (สอบแล้ว 20 ต.ค.)' : `ชุดที่ ${i + 1}`, sets: ps }; }) : [{ label: 'ทุกชุด · เรียงตาม 쓰기 → 읽기 → 듣기 → 말하기', sets }];
+      const done = sets.filter(s => lastScore(s.id)).length, papers = [...new Set(sets.map(groupOf))], byPaper = papers.length > 1;
+      let n = 0;
+      const groups = byPaper ? papers.map(p => { const ps = sets.filter(s => groupOf(s) === p), g = GROUPS.find(g => g.label === p);
+        return { label: g ? g.label : `ชุดที่ ${++n}`, note: g ? g.note : '', sets: ps }; }) : [{ label: 'ทุกชุด · เรียงตาม 쓰기 → 읽기 → 듣기 → 말하기', note: '', sets }];
       return html`<article class="exam">
         <div class="exam-h"><h2 class="ko">${ex.title}</h2><span class="dday">${dday(ex.date)}</span><span class="muted">${ex.when}</span><p>${ex.note}</p></div>
         <p class="exam-sum">ทำแล้ว ${done}/${sets.length} ชุด</p>
@@ -901,6 +935,7 @@ function Home() {
           const got = scored.reduce((a, s) => a + ((lastScore(s.id) || {}).s || 0), 0), all = scored.reduce((a, s) => a + setTotal(s), 0);
           return html`<section class="grp"><div class="grp-h"><b>${g.label}</b><span class="muted">ทำแล้ว ${dn}/${g.sets.length}${byPaper && dn ? ` · คะแนน ${Math.round(got * 100) / 100}/${all}` : ''}</span>
             <span class="grp-bar"><i style=${'width:' + (100 * dn / g.sets.length) + '%'}></i></span></div>
+            ${g.note ? html`<p class="grp-note">${g.note}</p>` : null}
             <div class="skills four">${g.sets.map(st => html`<${Card} st=${st} short=${byPaper} />`)}</div></section>`;
         })}
       </article>`;
@@ -1089,6 +1124,113 @@ function Results() {
   </section>`;
 }
 
+/* ------------------------------------------------------------------ components: score profile (#profile) — grade book from window.KMU_SCORES + the site's own saved results */
+const SCORES = window.KMU_SCORES || { terms: [] };
+const SKORD = ['speaking', 'listening', 'writing', 'reading'];
+const GRP = { exam: '시험', review: '복습시험', course: 'คะแนนเก็บ' };
+const n1 = x => String(Math.round(x * 10) / 10);
+const sum = (a, f) => a.reduce((s, x) => s + f(x), 0);
+const tone = (got, mx) => got === null || got === undefined ? 'p-none' : got / mx >= .9 ? 'p-ok' : got / mx >= .7 ? 'p-mid' : 'p-low';
+function skillStat(comps) {
+  const ann = comps.filter(c => c.got !== null && c.got !== undefined), pen = comps.filter(c => c.got === null || c.got === undefined);
+  const earned = sum(ann, c => c.got), annMax = sum(ann, c => c.max), pend = sum(pen, c => c.max);
+  const pg = {}; pen.forEach(c => { pg[c.group] = (pg[c.group] || 0) + c.max; });
+  return { earned, annMax, lost: annMax - earned, pend, pg, ann, pen };
+}
+function GroupCell({ comps, group }) {
+  const cs = comps.filter(c => c.group === group), mx = sum(cs, c => c.max), ann = cs.filter(c => c.got !== null && c.got !== undefined), got = sum(ann, c => c.got);
+  const t = ann.length ? tone(got, sum(ann, c => c.max)) : 'p-none';
+  let main;
+  if (group === 'review') main = html`<b>${cs.map((c, i) => html`${i ? '+' : ''}${c.got === null || c.got === undefined ? '–' : n1(c.got)}`)}</b> <span class="muted">= ${ann.length ? n1(got) : '–'}/${mx}</span>`;
+  else main = html`<b>${ann.length ? n1(got) : '–'}</b><span class="muted">/${mx}</span>`;
+  return html`<td class=${'pc ' + t}>${main}${ann.length ? null : html`<div class="pn">ยังไม่ประกาศ</div>`}
+    ${group === 'course' ? html`<ul class="subs">${cs.map(c => html`<li class=${tone(c.got, c.max)}>${c.name} ${c.got === null || c.got === undefined ? '–' : n1(c.got)}/${c.max}</li>`)}</ul>` : null}</td>`;
+}
+function termTable(tm) {
+  return html`<div class="ptw"><table class="ptab"><thead><tr><th>ทักษะ</th><th>시험 50</th><th>복습시험 20</th><th>คะแนนเก็บ 30</th><th>รวมที่รู้แล้ว</th><th>ยังไม่ประกาศ</th></tr></thead><tbody>
+    ${SKORD.map(s => { const c = tm.skills[s], st = skillStat(c);
+      return html`<tr><th class="ko">${SKILL[s][0]} <small>${SKILL[s][1]}</small></th>
+        <${GroupCell} comps=${c} group="exam" /><${GroupCell} comps=${c} group="review" /><${GroupCell} comps=${c} group="course" />
+        <td class=${'pc ' + (st.ann.length ? tone(st.earned, st.annMax) : 'p-none')}>${st.ann.length ? html`<b>${n1(st.earned)}</b><span class="muted">/${n1(st.annMax)}</span>` : '–'}</td>
+        <td class="pc p-none">${n1(st.pend)}</td></tr>`; })}
+  </tbody></table></div>`;
+}
+function stackBar(st, label) {
+  const f = x => (x / 100 * 100) + '%';
+  return html`<div class="sbar" role="img" aria-label=${label}><i class="s-earn" style=${'width:' + f(st.earned)}></i><i class="s-lost" style=${'width:' + f(st.lost)}></i><i class="s-pend" style=${'width:' + f(st.pend)}></i></div>`;
+}
+function pendTxt(pg) { const p = Object.entries(pg).map(([g, v]) => `${GRP[g]} ${n1(v)}`); return p.length ? p.join(' + ') : ''; }
+function annTxt(st) { const g = {}; st.ann.forEach(c => { g[c.group] = (g[c.group] || 0) + c.max; }); return Object.keys(g).map(k => GRP[k]).join(' + '); }
+function spark(pts) {
+  if (!pts.length) return null;
+  const W = 120, H = 28, x = i => pts.length === 1 ? W / 2 : 4 + i * (W - 8) / (pts.length - 1), y = p => H - 4 - p * (H - 8);
+  return html`<svg class="spark" viewBox=${`0 0 ${W} ${H}`} width="120" height="28" role="img" aria-label=${'แนวโน้ม ' + pts.map(p => Math.round(p * 100) + '%').join(', ')}>
+    ${pts.length > 1 ? html`<polyline points=${pts.map((p, i) => x(i) + ',' + y(p)).join(' ')} fill="none" stroke="var(--navy)" stroke-width="2" stroke-linejoin="round" />` : null}
+    <circle cx=${x(pts.length - 1)} cy=${y(pts[pts.length - 1])} r="3" fill="var(--navy)" /></svg>`;
+}
+/* the site's own results: every set's hist:<id> (score:<id> when hist is empty), grouped by skill */
+function practiceStats() {
+  const by = {}; SKORD.forEach(s => { by[s] = { n: 0, pts: [], sets: 0 }; }); const real = [];
+  SETS.forEach(st => {
+    const sc = store.get('score:' + st.id, null); let h = store.get('hist:' + st.id, []); if (!h.length && sc) h = [sc];
+    if (!h.length) return;
+    const g = by[st.skill]; if (!g) return; g.sets++;
+    if (st.skill === 'speaking') { g.n += 1; return; }
+    const tot = setTotal(st);
+    h.forEach(e => { g.n++; g.pts.push({ p: e.s / (e.t || tot), at: e.at || 0 }); });
+    if (st.id.indexOf('mini02r') === 0) { const last = h[h.length - 1]; real.push({ st, last, n: h.length, tot }); }
+  });
+  SKORD.forEach(s => { const g = by[s]; g.pts.sort((a, b) => a.at - b.at); g.best = g.pts.length ? Math.max(...g.pts.map(x => x.p)) : null; g.latest = g.pts.length ? g.pts[g.pts.length - 1].p : null; });
+  return { by, real };
+}
+const pc = p => p === null ? '–' : Math.round(p * 100) + '%';
+function Profile() {
+  storeVer.value;
+  const terms = SCORES.terms || [], pr = practiceStats();
+  const cur = terms.find(t => SKORD.some(s => t.skills[s].some(c => c.got !== null && c.got !== undefined))) || terms[0];
+  const anyPractice = SKORD.some(s => pr.by[s].sets > 0);
+  const tsum = [];
+  if (cur) {
+    const stats = SKORD.map(s => [s, skillStat(cur.skills[s])]).filter(([, st]) => st.ann.length);
+    if (stats.length) {
+      const r = stats.map(([s, st]) => [s, st.earned / st.annMax]).sort((a, b) => a[1] - b[1]);
+      const lo = r[0], hi = r[r.length - 1];
+      tsum.push(lo[1] === hi[1] ? `คะแนนที่ประกาศแล้วทุกทักษะได้ ${Math.round(lo[1] * 100)}% เท่ากัน` : `ทักษะที่คะแนนประกาศแล้วต่ำสุด: ${SKILL[lo[0]][0]} (${Math.round(lo[1] * 100)}% — ${n1(skillStat(cur.skills[lo[0]]).earned)}/${n1(skillStat(cur.skills[lo[0]]).annMax)}) · สูงสุด: ${SKILL[hi[0]][0]} (${Math.round(hi[1] * 100)}%)`);
+    }
+    SKORD.forEach(s => { const st = skillStat(cur.skills[s]);
+      const base = st.earned + sum(st.pen.filter(c => c.group !== 'exam'), c => c.max), pe = sum(st.pen.filter(c => c.group === 'exam'), c => c.max);
+      if (pe > 0) { const need = 90 - base;
+        tsum.push(need <= 0 ? `${SKILL[s][0]}: ถ้าคะแนนเก็บเต็มก็ถึง 90 แล้วตั้งแต่ยังไม่สอบ 시험` : `${SKILL[s][0]}: ถ้าคะแนนเก็บได้เต็ม ต้องได้ 시험 ${n1(need)}/${pe} (${Math.round(need / pe * 100)}%) ถึงจะได้ 90/100`); }
+      else tsum.push(`${SKILL[s][0]}: ประกาศครบแล้ว ${n1(st.earned)}/100 (ห่างจาก 90 อยู่ ${n1(Math.max(0, 90 - st.earned))})`); });
+  }
+  const pk = SKORD.filter(s => s !== 'speaking' && pr.by[s].best !== null).sort((a, b) => pr.by[a].best - pr.by[b].best)[0];
+  if (pk) tsum.push(`ทักษะที่ฝึกในเว็บแล้วได้ best ต่ำสุด: ${SKILL[pk][0]} (${pc(pr.by[pk].best)}, ทำ ${pr.by[pk].n} ครั้ง) — ควรฝึกเพิ่ม`);
+  else tsum.push('ยังไม่มีผลฝึกในเว็บ — ทำชุดข้อสอบสักชุดแล้วกลับมาดู');
+  return html`<section id="profile" class="paper prof">
+    <div class="paper-head"><div><h1>👤 โปรไฟล์คะแนน</h1><p>คะแนนที่ครูประกาศ (สมุดคะแนนในเว็บ) + ผลฝึกที่เก็บไว้ในเครื่องนี้ · แต่ละทักษะเต็ม 100 ต่อเทอม = 시험 50 + 복습시험 20 + คะแนนเก็บ 30</p></div></div>
+    <div class="sec"><h2 class="sec-h">1 · ตารางคะแนน</h2><p class="sec-th">เขียว ≥ 90% · เหลือง 70–90% · แดง ต่ำกว่า 70% · เทา = ยังไม่ประกาศ (ครูประกาศคะแนนเก็บตอนจบเทอม)</p>
+      ${terms.map(tm => html`<h3 class="ko ph3">${tm.title}</h3>${termTable(tm)}`)}
+      ${(SCORES.daily || []).length ? html`<p class="hist">หลักฐาน 쓰기 คะแนนเก็บ · 매일시험: ${SCORES.daily.map(d => html`<span>${d.unit}과 ${n1(d.got)}</span>`)} <span>เฉลี่ย ${n1(sum(SCORES.daily, d => d.got) / SCORES.daily.length)}/10</span></p>` : null}
+    </div>
+    <div class="sec"><h2 class="sec-h">2 · ช่องที่ขาด</h2>
+      <p class="legend"><span class="l-ok">ได้แล้ว</span><span class="l-lost">เสียไปแล้ว</span><span class="l-pend">ยังไม่ประกาศ</span></p>
+      ${terms.map(tm => { const rows = SKORD.map(s => [s, skillStat(tm.skills[s])]); if (!rows.some(([, st]) => st.ann.length)) return html`<p class="muted">${tm.title}: ยังไม่มีคะแนนประกาศ — ว่างทั้งหมด</p>`;
+        return html`<h3 class="ko ph3">${tm.title}</h3>${rows.map(([s, st]) => { const sent = st.ann.length ? `${SKILL[s][0]}: ได้ ${n1(st.earned)}/${n1(st.annMax)} จาก ${annTxt(st)} เสีย ${n1(st.lost)} คะแนน` : `${SKILL[s][0]}: ยังไม่มีคะแนนประกาศ`;
+          const full = sent + ` · ยังว่าง ${n1(st.pend)}${st.pend ? ` (${pendTxt(st.pg)})` : ''}`;
+          return html`<div class="srow"><div class="sk-l ko">${SKILL[s][0]}</div>${stackBar(st, full)}<div class="sk-n">${n1(st.earned)}</div></div><p class="sent">${full}</p>`; })}`; })}
+    </div>
+    <div class="sec"><h2 class="sec-h">3 · ผลฝึกในเว็บ</h2>
+      ${anyPractice ? html`<div class="ptw"><table class="ptab"><thead><tr><th>ทักษะ</th><th>ครั้งที่ทำ</th><th>best</th><th>ล่าสุด</th><th>แนวโน้ม</th></tr></thead><tbody>
+        ${SKORD.map(s => { const g = pr.by[s]; return html`<tr><th class="ko">${SKILL[s][0]} <small>${SKILL[s][1]}</small></th><td class="pc">${g.n || '–'}${s === 'speaking' && g.n ? html`<div class="pn">ไม่มีคะแนน %</div>` : null}</td><td class=${'pc ' + (g.best === null ? 'p-none' : tone(g.best, 1))}>${pc(g.best)}</td><td class=${'pc ' + (g.latest === null ? 'p-none' : tone(g.latest, 1))}>${pc(g.latest)}</td><td class="pc">${spark(g.pts.map(x => x.p))}</td></tr>`; })}
+      </tbody></table></div>
+      ${pr.real.length ? html`<p class="hist">ข้อสอบจริง 복습시험 ② (ที่สอบ 20 ต.ค. ทำซ้ำในเว็บ): ${pr.real.map(r => html`<span>${SKILL[r.st.skill][0]} ${r.st.skill === 'speaking' ? 'ตอบแล้ว' : Math.round(r.last.s / (r.last.t || r.tot) * 100) + '%'} (${r.n} ครั้ง)</span>`)}</p>` : null}`
+      : html`<p class="muted">ยังไม่มีผลที่บันทึกไว้ในเครื่องนี้ — ทำชุดข้อสอบแล้วกดส่งคำตอบ ผลจะมาแสดงที่นี่</p>`}
+    </div>
+    <div class="sec"><h2 class="sec-h">4 · สรุป</h2><ul class="sumul">${tsum.map(t => html`<li>${t}</li>`)}</ul></div>
+    <div class="actions"><button class="btn" type="button" id="prof-back" onClick=${() => { location.hash = ''; }}>← กลับหน้าแรก</button></div>
+  </section>`;
+}
+
 /* ------------------------------------------------------------------ components: help page, routing shell */
 function Help({ on }) {
   return html`<section id="help" class="paper help" hidden=${!on}>
@@ -1127,6 +1269,7 @@ function App() {
       <div class="wrap">
         <section id="home" hidden=${vw !== 'home'}>${vw === 'home' ? (SETS.length ? html`<${Home} />` : html`<p class="notice">โหลดข้อมูลแบบฝึกไม่ได้ (data.js หาย)</p>`) : null}</section>
         <section id="set" hidden=${vw !== 'set'}>${curSt.value ? html`<${SetView} />` : null}</section>
+        ${vw === 'profile' ? html`<${Profile} />` : null}
         <${Help} on=${vw === 'help'} />
       </div>
     </div>

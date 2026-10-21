@@ -10,7 +10,7 @@
 
 ## 🖼️ รูปประกอบ (발표 사진)
 
-<img src="/home/beamkeerati/Documents/KMU Korean/content/speaking/my_room.png" style="width:150mm; display:block; margin:10px auto; border:1px solid #d0d7de; border-radius:8px;">
+<img src="/home/beamkeerati/Documents/KMU_Korean/content/speaking/my_room.png" style="width:150mm; display:block; margin:10px auto; border:1px solid #d0d7de; border-radius:8px;">
 
 **โครงบทพูดตามแบบ 보기 ของอาจารย์**
 

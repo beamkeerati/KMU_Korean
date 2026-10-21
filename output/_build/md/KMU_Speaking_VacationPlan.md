@@ -30,7 +30,7 @@
 
 ## 🖼️ ภาพประกอบการนำเสนอ (발표 그림)
 
-<img src="/home/beamkeerati/Documents/KMU Korean/content/speaking/vacation_plan.png" style="width:170mm; display:block; margin:10px auto; border:1px solid #d0d7de; border-radius:8px;">
+<img src="/home/beamkeerati/Documents/KMU_Korean/content/speaking/vacation_plan.png" style="width:170mm; display:block; margin:10px auto; border:1px solid #d0d7de; border-radius:8px;">
 
 ภาพเดียวตอบครบ 4 คำถามของครู — ชี้ตามลูกศรขณะพูด: เครื่องบินจาก **서울** ไป **방콕** (ประโยค 4) · ปฏิทิน **2월 15일 → 3월 15일** (5) · ครอบครัวในทะเล **가족하고 같이 · 바다에서 수영할 거예요** (6–7) · ชาม **태국 음식** (8) · กล้อง **사진** (9) · ไฟล์ `content/speaking/vacation_plan.png` (รูปที่คุณสร้างจาก AI) พิมพ์ A4 แนวนอนหรือเปิดบนมือถือให้เพื่อนดูได้ · ข้อความในภาพเป็น 거예요 ตรงกับที่พูด
 

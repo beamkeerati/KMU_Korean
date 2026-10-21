@@ -22,7 +22,12 @@ Claude Code loads this file automatically when started in this folder.
   in content/predictions/miniexam/exam02.md §1. ① 10/6 = 5–13과 · ② **10/20 = 14–20과** (the syllabus said 10/19; the teacher's whiteboard on 10/15 moved it to Tue 10/20, same day as the 방학 계획 발표; Mon 10/19 = 21·22과) · ③ 11/6 = 22–29과 · ④ 11/18 = 30–37과.
   ② (sat 10/20, scan in source/miniexam/, transcription exercises/miniexam/exam02.md, scorecard at the top of predictions/miniexam/exam02.md) had a
   **7-section 쓰기** (반대말 · 해요→합니다 · 높임 · 조사 · answer-with-given-grammar -네요/-(으)시/-(으)러 · Q&A ×6 · picture timeline in 합니다체), 듣기 10×1 from the
-  textbook 17–20과 listening texts, and 읽기 = the three passages of the teacher's 복습문제 verbatim. Marks due 10/21.
+  textbook 17–20과 listening texts, and 읽기 = the three passages of the teacher's 복습문제 verbatim. **Score slip 10/21: 말하기 10.0 · 쓰기 7.5 · 듣기 8.5 · 읽기 9.0** (the marked papers were not returned, so
+  the per-item deductions are unknown. The scan in source/ is the QUESTION paper with the user's working; the answers were written on
+  a separate answer sheet the user could not photograph — so section 5 was NOT left blank, the §6b note on it is withdrawn).
+  복습시험 totals for the midterm term (①+②, /20 each skill): 말하기 20 · 쓰기 16.3 · 듣기 16.0 · 읽기 19.0 = 71.3/80.
+  The handout's footnote 「중간(1-1) 100점, 기말(1-2) 100점」 means the 50/20/30 table applies once per term: ①+② feed the midterm
+  term's 복습시험 20, ③+④ the final term's.
 - **중간시험 facts from the teacher (10/20):** "not far from 복습시험①, ② and the 복습문제 — maybe only the words change"; Fri 10/23 쓰기 1 h · 듣기 40 min ·
   읽기 1 h; 말하기 Wed 10/22 slot 3, 09:45–10:00, 20–25 questions like the review set's 말하기 table. Mock v2 built from those formats
   (content/specs/BRIEF_midterm_v2.md, 4 Sonnet agents 10/20).
@@ -61,6 +66,12 @@ source/        ต้นฉบับ — never modify the contents; file names f
   vocabulary/  KMU vocabulary unit 05 - 22.pdf   (centre's own vocab book, 48 pp: 1–17 word lists per unit · 18–35 본문 듣기 sheets · 36–48 picture themes)
   lecture/     KMU lecture note unit 05 - 12.pdf   (18 pp of the user's PHOTOS of the teacher's slides + notebook; 366 MB; slides actually run 9–22과)
   syllabus/    KMU syllabus 2026 fall unit 05 - 37.pdf
+  audio/       (2026-10-21, git-ignored: 147 MB of publisher/teacher mp3s) textbook/KMU audio student's book unit 01 - 37/N-M.mp3
+               (N = unit, M = track: 1 대화 · 2 읽어봅시다/듣기 text · 3 발음 drill; units 1–4 have more tracks = 자모) ·
+               review/KMU audio midterm review 01 listening/*.mp3 (the teacher's audio for her 복습문제 듣기 1–12; file ids = the
+               codes in the ฟัง headings of exercises/review/midterm01_part2.md, e.g. 1-1:01-06 ↔ 1-01…1-06.mp3)
+  textbook/    + KMU student's book appendices unit 01 - 21.pdf (2026-10-21, 6 pp = 부록: 듣기 대본 of 8·12·16·20과 + 읽기/듣기 answer keys
+               1–21 on pp.2–4, English 대화 translations 5–21 on pp.5–6) → extracted/textbook/appendices/page-N.png
 extracted/     intermediate extraction output (regenerable, ~300 MB) — same names as source/
   textbook/    unitNN/page-N.png (300 dpi) + unitNN.txt (tesseract)   ← written by scripts/ocr_extract.py
   workbook/    unit05-13/wb-01..41.png · unit14-22/wb-01..50.png       (graded scans, 150 dpi)
@@ -84,7 +95,12 @@ content/       ✍️ SOURCE OF TRUTH — edit here, never in output/
                everyday/unit00_classroom.md, unit05…20.md  (매일시험 + 연습지 merged per unit)
                miniexam/exam01.md  (복습시험 ① as sat: one `##` per paper — score sheet · 듣기 · 읽기 · 쓰기 — then `# 정답`)
                listening/unit05…22.md  (본문 듣기 sheets, user's pencil checked; key = textbook dialogue)
-               review/midterm01_part1.md + _part2.md  (teacher's 중간시험 복습문제; parts are merged by build.py review)
+               review/midterm01_part1.md + _part2.md  (teacher's 중간시험 복습문제; parts are merged by build.py review; since 2026-10-21 the
+               듣기 keys are real — derived from the teacher's audio in source/audio/review/, each ฟัง heading has a 🔊 line naming the file)
+               listening/scripts_appendix.md  (2026-10-21: the book's 부록 — 듣기 scripts of 8·12·16·20과 with Thai + the printed 읽기/듣기 keys 5–21;
+               not part of KMU_Listening.pdf. Disagreements found and NOT yet fixed: guide 01_units/unit12 answers 마키 씨가 아르바이트를 해요? with
+               "오늘 아르바이트를 안 해요" where the book says "아니요, 기숙사에서 쉬어요"; unit20 omits 다.3 방학에 뭘 할 거예요?; listening/unit15 A4
+               (남자는 영어와 일본어를 배워요 = O) is suspect — in the audio it is the sister; listening/unit19 B6 was fixed 10일 → 20일)
                each file = questions, then its own answer key (`# [PART 2]` / `# 정답`)
                00_header.md in each dir = ONE title line only (a longer header is printed before every unit)
   specs/       SPEC_extraction.md (original scan→md rules) · SPEC_14_22.md (unit 14–22 contract; reuse for 23+)
@@ -105,6 +121,15 @@ content/       ✍️ SOURCE OF TRUTH — edit here, never in output/
                2026-10-19, 2 Sonnet agents from content/specs/BRIEF_mini02_extra.md; b = most-tested items, c = the user's weak points + 19–20과) · review_p1/p2.json (teacher's
                복습문제; its 듣기 has no script so it is left out) · mid_writing / mid_reading / mid_listen_speak.json (중간시험
                prediction). Written by 6 Sonnet agents 2026-10-18 from the Markdown sources; when a source changes, fix the JSON too.
+               (2026-10-21) vocab_a/b.json (vocab-5-13 · vocab-14-21: 30 Thai→Korean blanks + 30 Korean→Thai MC each, most-tested words first) ·
+               vocab_spell.json (vocab-spelling: 30 dictation phrases built around the §6b trap words) · mid_speaking_final.json (mid-speaking-final-a/b =
+               mocks 1–2 of the interview bank, 25 speak items each) · review_listen.json (review-listening: the teacher's 듣기 1–12 with her real mp3s,
+               40 sections = one per audio file, 46 items; ⚠️ 거리/고리, 부모/보모, 형/성, 각자/가자, 신촌/신천 are best guesses from the audio) ·
+               textbook_listen.json (tb-listen-5-13 · tb-listen-14-21: one section per unit = the 본문 듣기 sheet items over the real 대화 track N-1.mp3) ·
+               scores.json (NOT a set: the grading table → window.KMU_SCORES for the profile view; fill new marks by hand: terms → skills → components
+               {name, group, max, got|null, date, note} + daily / review / presentations).
+               A section may carry `"audio": "audio/<textbook|review>/<file>.mp3"`: the site plays that real recording for ▶ ฟัง (no karaoke) and
+               build_mockweb.py copies it from source/audio/ to output/2_Practice_Web/audio/ — publish those files with the artifact.
   speaking/    발표 scripts in the my_room.md format (Korean line · Thai reading · Thai meaning · swap table · Q&A · pitfalls):
                my_room.md (발표 ① 제 방) · myself.md (발표 ② 자기 소개, 10/21) · vacation_plan.md (방학 계획, 10/20) → build.py speaking
   syllabus/    one-off PDF (Thai syllabus): python3 scripts/make_pdf.py <md> --pdf-dir output
@@ -126,6 +151,13 @@ scripts/
                  cached in extracted/mockweb_clips/<sha1>.mp3 — only new lines are generated. Needed because Chrome on Ubuntu
                  has no Korean voice (espeak-ng). After a rebuild, republish the artifact (file_path scripts/mockweb/app.html,
                  files data.js + clips.js from output/2_Practice_Web, url above).
+  build_speech_audio.py  (see 6_Speaking) — since 10/21 also: interview format (`**N. 질문**` + one or more `**→ 답**` lines, questions voiced
+                 by SunHi, answers by the chosen voice, hide mode "ซ่อนคำตอบ" blurs answers until tapped and play-all leaves 6 s to answer),
+                 colour by word function via kotag (nested .w karaoke spans → .k<cls> segments; Thai gloss coloured with tag_thai),
+                 collapsible options row (⚙, folded by default under 640 px).
+  Speech-to-text: faster-whisper 1.2.1 (pip --user; model "small", int8 CPU, decode the mp3 with ffmpeg to f32le 16 kHz and pass a numpy
+                 array — the bundled `av` 19 breaks faster-whisper's own decoder). ~95 % right on the clean course audio; numbers and rare
+                 words need checking. Scratch script: scratchpad/whisper_run.py (not in the repo).
   _archive/      superseded: mindmap_midterm.py (rejected poster), mock_clips.py + exam02_mock.html (first single-set mock page)
   kotag.py       ⭐ colour-by-function tagger used by make_pdf.py and build_mindmaps.py at render time. Tag syntax in
                  Markdown: `{n:학생}{p:이} {x:아니에요}` (one letter, UPPERCASE = honorific). Korean runs are tagged
@@ -164,8 +196,18 @@ output/        🤖 GENERATED — overwritten every build, never hand-edit. Reor
                  @preact/signals 2.11 + htm 3.1**, vendored as UMD builds in scripts/mockweb/vendor.js (copied to output/, published as a third
                  artifact file; no CDN, works offline). CSS, ids, `kmuweb:` keys, cloud/AI/karaoke modules and window.__kmu are unchanged, so old
                  progress loads as before; every harness driver matches v24 (only wall-clock stamps differ). Under the harness (window.__fake)
-                 rendering is flushed synchronously; real browsers keep Preact's batched rendering. Publish files = {data.js, clips.js, vendor.js}.
-  3_Exam_Prep/   KMU_Review_Midterm01.pdf (teacher's 중간시험 복습문제) · KMU_Predict_midterm01.pdf (v2 2026-10-20, 45 pp; parts assembled by
+                 rendering is flushed synchronously; real browsers keep Preact's batched rendering.
+                 v28 (2026-10-21): 34 sets · 906 items · 586 clips. clips.js is split in two (clips.js + clips2.js, each < 16 MB = the artifact file limit;
+                 clips2.js also carries KMU_WORDS) · sections with `audio` play real mp3s (57 files under output/2_Practice_Web/audio/, 33 MB) ·
+                 👤 โปรไฟล์ view (#profile, Sonnet agent): grading tables per term from scores.json, stacked earned/lost/pending bars, practice results per
+                 skill from hist:<id> with sparklines, Thai summary. v29: the home board names its groups through `GROUPS` in app.html (regex on set id →
+                 label + note: สัมภาษณ์จำลอง · ชุด A · ชุด B · ฟังหนังสือ · เขียนตามคำบอก · ทดสอบศัพท์ · ข้อสอบจริง); ids with no rule fall back to ชุดที่ N —
+                 add a rule when a new kind of set is added. **Publish files = {data.js, clips.js, clips2.js, vendor.js} + every audio/**/*.mp3**
+                 (`Artifact list scope files` first; 61 files ≈ 49 MB per publish, under the 64 MB limit). The scratchpad harness was lost with /tmp —
+                 regression now = headless-Chrome screenshots of #profile, a set cover and the home page.
+  3_Exam_Prep/   KMU_Predict_midterm01_speaking.pdf (2026-10-21, from content/predictions/midterm/speaking_exam.md via make_pdf.py --pdf-dir + rename:
+                 interview question bank A table/B 19과 sheet/C 자기 소개/D 가족 with 해요체·합니다체 model answers + alternatives, 3 mock interviews, key) ·
+                 KMU_Review_Midterm01.pdf (teacher's 중간시험 복습문제) · KMU_Predict_midterm01.pdf (v2 2026-10-20, 45 pp; parts assembled by
                  scripts/assemble_midterm.py, then build.py predict) · KMU_Predict_miniexam02.pdf · past/KMU_MiniExam_02.pdf (② as sat + AI key)
                  · past/KMU_MiniExam_NN.pdf (복습시험 as sat)
   4_Daily_Tests/ KMU_Everyday_unitNN.pdf ⭐ one small PDF per unit (what the user prints day to day) · predictions/KMU_Predict_unitNN.pdf
@@ -174,7 +216,17 @@ output/        🤖 GENERATED — overwritten every build, never hand-edit. Reor
                  · KMU_Speaking_Myself_Audio.html (2026-10-20, `python3 scripts/build_speech_audio.py myself`: one InJoon edge-tts clip per
                  numbered line of content/speaking/<name>.md with word timings, cached in extracted/speech_clips/; single-file player with
                  per-line / whole-speech play, karaoke highlight, 0.7–1× speed, hide-Thai / hide-Korean drill modes; published as
-                 https://claude.ai/artifact/UB8eXhn7DoTV6pVQDVMPSC — works for vacation_plan / my_room too)
+                 https://claude.ai/artifact/UB8eXhn7DoTV6pVQDVMPSC (public link since 10/20) — works for vacation_plan / my_room too)
+                 · KMU_Speaking_Interview_Audio.html (2026-10-21, `build_speech_audio.py interview` from content/speaking/interview.md = the question bank of
+                 speaking_exam.md in Q/A format: 75 questions × 2–3 answers = 299 clips, 8 MB; Thai readings were script-generated by the agent, spot-checked
+                 only; the flat list was superseded the same evening — kept on disk only)
+                 · KMU_Speaking_InterviewCards.html ⭐ (2026-10-21, `python3 scripts/build_interview.py interview_cards` from content/speaking/interview_cards.md:
+                 `## emoji 한국어 · ไทย` category → `### Thai intent (Korean key)` card → `**Q. …**` variants + `**→ …**` answers + `💡` tip, every Korean line with
+                 `*reading*` and `🇹🇭`; 12 categories · 68 cards · 198 question variants · 267 answers, 12 MB; Sonnet agent regrouped the bank, readings of the
+                 added lines are the agent's). Page = category chips filter + collapsible cards (▶ on a card = first question then every answer), same controls
+                 as the speech player (speed/loop/ซ่อนไทย/ซ่อนเกาหลี/ซ่อนคำตอบ/คำอ่าน/size/theme, kotag colours). Published PRIVATE as
+                 https://claude.ai/artifact/LCavjNUStqqQL4txtesUvj (the interview artifact's URL, replaced), watch stopped. build_interview.py imports clip()/
+                 ko_html()/th_html() from build_speech_audio.py.)
   _build/md/     the intermediate Markdown behind each PDF (grep here: `grep -c '~~' output/_build/md/*.md output/_build/md/*/*.md`)
 ```
 
@@ -483,7 +535,7 @@ starred ones cost real marks.
   said 윤아 씨를 만나러. Content of 7/8/12/14 was right — the site had only marked them ✕ because they did not match the model string.
 - 복습시험② (2026-10-20, pencil on the paper, not yet marked): ★ **테국** for 태국 (ㅐ/ㅔ, in the very first answer) · **먹으세요** for 드세요 (special
   honorific missed in a drill, next to 계세요 in the 보기) · **사과과** for 사과와 (와 after a vowel) · **먹습니다** for 먹습니까? (question mark ignored
-  when converting) · section 5 "answer with -네요 / -(으)시 / -(으)러" left blank (format not understood: pick the grammar that fits each question) ·
+  when converting) · section 5 "answer with -네요 / -(으)시 / -(으)러" has no pencil on the question paper (the answers went on a separate answer sheet, user 10/21 — not a blank) ·
   6-5 무엇을 드시겠습니까? → 저는 ___ unsure (→ 비빔밥을 먹겠습니다). 듣기 5 changed O→X (지훈 그림을 좋아하지 않아요).
 What the user does well: ㅂ니다/습니다 choice by 받침, -지 않- forms, 겠 forms, the ㅡ-drop past
 (바빴어요·컸어요), special honorific words (드세요·주무세요·계세요), 에서 for activity places.
@@ -639,4 +691,10 @@ Sonnet agents (125–160k tokens, 3–7 min each) transcribed the real paper (ex
 and rewrote the midterm mock as **v2** (parts 02–05 + mockweb mid_*.json: every section mirrors 복습시험①/② or the review set with changed words;
 쓰기 2 papers, 읽기 25+15, 듣기 29+10 with scripts, 말하기 25 questions with 해요/합니다 answers). scripts/assemble_midterm.py now lives in the repo.
 Site v26/v27 (26 sets · 601 items · 311 clips) published; the real paper shows as its own row "ข้อสอบจริง". Marks for ② are due 10/21.
+2026-10-21: 복습시험② marks arrived (쓰기 7.5 · 듣기 8.5 · 읽기 9.0 · 말하기 10; grading system explained, §1). The teacher's hints for the 말하기 midterm (25 Q /
+15 min from the 말하기 table + the 19과 sheet + self-intro + family) and three new sources arrived: the publisher's textbook audio, her own 듣기 audio for the
+복습문제, and the book's 부록 (filed under source/audio/ and source/textbook/, §2). faster-whisper transcribed both audio folders (~8 + 35 min). Four Sonnet
+agents (90–215k tokens): interview bank + 3 mocks + interview.md (speech-player Q/A format), vocab sets, real-audio listening sets + 부록 transcription +
+review 듣기 keys, profile view. Fable: speech player got a collapsible options row, the Q/A format with "ซ่อนคำตอบ", and kotag colours (nested karaoke/colour
+spans); the site got `audio` sections, clips split, v28 published with 57 mp3s; the user's old family paragraph was recovered from the 10/10 chat transcript.
 

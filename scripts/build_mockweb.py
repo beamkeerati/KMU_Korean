@@ -9,6 +9,7 @@ start.sh (serves the folder on localhost so Chrome allows the microphone).
 Voices (free edge-tts, Microsoft neural): T teacher + F female = SunHi, M male = InJoon, S the student's model answers = Hyunsu.
 Clips are cached in extracted/mockweb_clips/<sha1>.mp3, so only new or changed lines are generated.
 """
+import re
 import asyncio, base64, glob, hashlib, json, os, re, shutil, ssl, sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -48,6 +49,7 @@ def announce(sec):
 def load_sets():
     sets, bad = [], False
     for f in sorted(glob.glob(os.path.join(DATA, '*.json'))):
+        if os.path.basename(f) == 'scores.json': continue   # grade book, not an exercise set
         errs = validate(f)
         if errs:
             bad = True
@@ -118,6 +120,24 @@ def standalone(fragment):
     return head + fragment[:e] + '\n</head>\n<body>\n' + fragment[e:] + '\n</body>\n</html>\n'
 
 
+AUDIO_DIRS = {'textbook': "KMU audio student's book unit 01 - 37", 'review': 'KMU audio midterm review 01 listening'}
+def copy_audio(sets):
+    """A section may carry "audio": "audio/<kind>/<file>.mp3" (kind = textbook | review): the real recording is copied from
+    source/audio/<AUDIO_DIRS[kind]>/<file> into output/2_Practice_Web/audio/<kind>/ and the artifact publish must list it in files."""
+    out = []
+    for st in sets:
+        for sec in st['sections']:
+            a = sec.get('audio')
+            if not a: continue
+            m = re.fullmatch(r'audio/(textbook|review)/([^/]+\.mp3)', a)
+            if not m: raise SystemExit(f'bad audio path {a!r} in set {st["id"]}')
+            src = os.path.join(ROOT, 'source', 'audio', m.group(1), AUDIO_DIRS[m.group(1)], m.group(2))
+            if not os.path.exists(src): raise SystemExit(f'missing {src}')
+            dst = os.path.join(OUT, a); os.makedirs(os.path.dirname(dst), exist_ok=True)
+            if not os.path.exists(dst) or os.path.getsize(dst) != os.path.getsize(src): shutil.copyfile(src, dst)
+            out.append(a)
+    return out
+
 def main():
     os.makedirs(OUT, exist_ok=True)
     os.makedirs(CACHE, exist_ok=True)
@@ -130,11 +150,19 @@ def main():
              for v, t in lines if os.path.exists(clip_path(v, t))}
     with open(os.path.join(OUT, 'data.js'), 'w', encoding='utf-8') as f:
         f.write('window.KMU_SETS = ' + json.dumps(sets, ensure_ascii=False) + ';\n')
+    scores = json.load(open(os.path.join(DATA, 'scores.json'), encoding='utf-8'))
+    with open(os.path.join(OUT, 'data.js'), 'a', encoding='utf-8') as f:
+        f.write('window.KMU_SCORES = ' + json.dumps(scores, ensure_ascii=False) + ';\n')
     words = {f'{v}|{t}': json.load(open(clip_path(v, t) + '.json', encoding='utf-8'))
              for v, t in lines if os.path.exists(clip_path(v, t) + '.json')}
+    # two files: a claude.ai artifact file may not exceed 16 MB, and the clips passed that on 2026-10-21 (586 clips = 15.5 MB)
+    keys = sorted(clips); half = keys[:len(keys) // 2]
     with open(os.path.join(OUT, 'clips.js'), 'w', encoding='utf-8') as f:
-        f.write('window.KMU_CLIPS = ' + json.dumps(clips, ensure_ascii=False) + ';\n')
+        f.write('window.KMU_CLIPS = ' + json.dumps({k: clips[k] for k in half}, ensure_ascii=False) + ';\n')
+    with open(os.path.join(OUT, 'clips2.js'), 'w', encoding='utf-8') as f:
+        f.write('Object.assign(window.KMU_CLIPS, ' + json.dumps({k: clips[k] for k in keys[len(keys) // 2:]}, ensure_ascii=False) + ');\n')
         f.write('window.KMU_WORDS = ' + json.dumps(words, ensure_ascii=False) + ';\n')
+    audio = copy_audio(sets)
     shutil.copyfile(os.path.join(os.path.dirname(APP), 'vendor.js'), os.path.join(OUT, 'vendor.js'))   # Preact + Signals + htm (UMD)
     with open(os.path.join(OUT, 'index.html'), 'w', encoding='utf-8') as f:
         f.write(standalone(open(APP, encoding='utf-8').read()))
@@ -145,8 +173,9 @@ def main():
                 'python3 -m http.server 8000 --bind 127.0.0.1\n')
     os.chmod(sh, 0o755)
     n = sum(len(s['items']) for st in sets for s in st['sections'])
-    size = sum(os.path.getsize(os.path.join(OUT, x)) for x in ('data.js', 'clips.js', 'vendor.js', 'index.html')) // 1024
+    size = sum(os.path.getsize(os.path.join(OUT, x)) for x in ('data.js', 'clips.js', 'clips2.js', 'vendor.js', 'index.html')) // 1024
     print(f'mockweb   : {len(sets)} sets · {n} items · {len(clips)}/{len(lines)} clips · {size} KB -> output/2_Practice_Web/')
+    if audio: print(f'audio     : {len(audio)} real recordings copied to output/2_Practice_Web/audio/ (publish them as artifact files)')
 
 
 if __name__ == '__main__':
