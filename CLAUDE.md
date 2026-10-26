@@ -4,7 +4,7 @@ Claude Code loads this file automatically when started in this folder.
 
 ## 1. User & goal
 - Thai-speaking student at Kookmin University (KMU) Korean Language Center, level 1 (국민한국어 1).
-- Course covers **자모 + Units 5–37** (midterm = 1–21과 per the teacher's board = book 1-1; 22과 opens book 1-2; final = 23–37). Study material currently covers **5–22**. Exam schedule (from the 「2026 가을학기 1급 시험안내」 handout,
+- Course covers **자모 + Units 5–37** (midterm = 1–21과 per the teacher's board = book 1-1; 22과 opens book 1-2; final = 23–37). Study material covers **5–37** since 2026-10-26 (guides, vocab, mind maps; exercises/predictions still stop at 22). Exam schedule (from the 「2026 가을학기 1급 시험안내」 handout,
   including the teacher's red-pen correction): 복습시험1 2026-10-06, 복습시험2 2026-10-19,
   중간시험 2026-10-22 (말하기) / 10-23 (쓰기·듣기·읽기), 복습시험3 2026-11-06, 복습시험4 2026-11-18,
   기말시험 **2026-11-20** (쓰기·듣기·읽기) / **2026-11-23** (말하기).
@@ -62,7 +62,8 @@ source/        ต้นฉบับ — never modify the contents; file names f
   textbook/    KMU student's book unit 05.pdf … unit 22.pdf
   workbook/    KMU workbook unit 05 - 13.pdf · KMU workbook unit 14 - 22.pdf
   everyday/    KMU everyday test unit 05 - 13.pdf · KMU everyday sheet unit 05 - 13.pdf
-               KMU everyday test unit 14.pdf · test unit 15, 16, 17, 18, 19 · sheet unit 15, 16, 17, 18, 19, 20   ← daily hand-outs land HERE
+               KMU everyday test unit 14.pdf · test unit 15, 16, 17, 18, 19, 22 · sheet unit 15, 16, 17, 18, 19, 20, 23   ← daily hand-outs land HERE
+               (the user dropped the 23과 sheet as "sheet unit 22" on 10/26 — its content is 23과 ㅂ불규칙/(으)ㄴ 형태 연습, renamed to unit 23)
   miniexam/    KMU mini exam 01 unit 05 - 13.pdf   (복습시험 ①: score sheet + 듣기/읽기/쓰기 papers in one PDF)
                KMU mini exam 02 unit 14 - 20.pdf   (복습시험 ②, sat 2026-10-20: 쓰기 4 pp + 듣기 + 읽기, the student's pencil, no marks yet)
                ← 복습시험 scans land HERE, never in everyday/ (the user wants the two kept apart at every level)
@@ -78,27 +79,32 @@ source/        ต้นฉบับ — never modify the contents; file names f
                codes in the ฟัง headings of exercises/review/midterm01_part2.md, e.g. 1-1:01-06 ↔ 1-01…1-06.mp3)
   textbook/    + KMU student's book appendices unit 01 - 21.pdf (2026-10-21, 6 pp = 부록: 듣기 대본 of 8·12·16·20과 + 읽기/듣기 answer keys
                1–21 on pp.2–4, English 대화 translations 5–21 on pp.5–6) → extracted/textbook/appendices/page-N.png
+               + (2026-10-25) KMU student's book unit 23.pdf … unit 37.pdf (book 1-2; ⚠️ unit 26 has only 3 pp = grammar pages, the 대화/읽기/듣기/발음
+               pages look missing) · KMU student's book appendices unit 22 - 37.pdf (5 pp; its keys cover 22–37, the 1–21 file has no 22과 key)
+               · KMU student's book table of contents.pdf (4 pp) → OCR'd 23–37 into extracted/textbook/unitNN/ + unitNN.txt;
+               appendix → extracted/textbook/appendices_22-37/, contents → extracted/textbook/contents/ (200 dpi)
 extracted/     intermediate extraction output (regenerable, ~300 MB) — same names as source/
   textbook/    unitNN/page-N.png (300 dpi) + unitNN.txt (tesseract)   ← written by scripts/ocr_extract.py
   workbook/    unit05-13/wb-01..41.png · unit14-22/wb-01..50.png       (graded scans, 150 dpi)
-  everyday/    unit05-13/test-1..9.png + sheet-01..10.png · unit14/test-1.png · unit15/sheet-1..3.png + test-1.png · unit16/sheet-1..4.png + test-1.png · unit17/sheet-1..2.png + test-1.png · unit18/sheet-1..2.png + test-1.png · unit19/sheet-1..2.png + test-1.png · unit20/sheet-1.png
+  everyday/    unit05-13/test-1..9.png + sheet-01..10.png · unit14/test-1.png · unit15/sheet-1..3.png + test-1.png · unit16/sheet-1..4.png + test-1.png · unit17/sheet-1..2.png + test-1.png · unit18/sheet-1..2.png + test-1.png · unit19/sheet-1..2.png + test-1.png · unit20/sheet-1.png · unit22/test-1.png · unit23/sheet-1..2.png
   miniexam/    exam01/page-1..5.png (110 dpi; page 1 = score sheet, 2 듣기, 3 읽기, 4–5 쓰기)
   review/      midterm01/page-01..17.png (80 dpi) · vocabulary/page-01..48.png (80 dpi) · lecture/page-01..18.png (150 dpi — photos need it)
 content/       ✍️ SOURCE OF TRUTH — edit here, never in output/
   guide/       00_exam_info.md = ส่วนที่ 0 (shared cover of both books; `{{today}}` / `{{days:YYYY-MM-DD}}` are filled at build time,
-               so the countdown column never goes stale) · 01_units/unit05…22.md (ส่วนที่ 1 of the By_Unit book, unified template:
+               so the countdown column never goes stale) · 01_units/unit05…37.md (ส่วนที่ 1 of the By_Unit book, unified template:
                หลังจบบท → 🗣️ vocab → 📝 grammar with 📽️ slide material inline + "ไวยากรณ์ข้อ NN" refs → 💬 대화 → 📖 읽기·듣기 → 🔊 발음
-               → 🧪 tests → 🔗 links) · 02_grammar/NN_slug.md (ส่วนที่ 1 of the By_Topic book, topics 01–35, unified template:
+               → 🧪 tests → 🔗 links) · 02_grammar/NN_slug.md (ส่วนที่ 1 of the By_Topic book, topics 01–64 — 36–64 = 23–37과, numbering fixed in content/specs/SPEC_23_37.md, unified template:
                📌 รูปแบบและเงื่อนไข → 📖 ตัวอย่าง (slides merged) → ⚠️ จุดสับสน → 🧪 ออกสอบแล้ว → 🔗 เชื่อมโยง)
-               03_particles.md (ส่วนที่ 2) · 03b_question_words.md (ส่วนที่ 3, 5–22과; §3.3 = every answer pattern: 5 rules · yes/no questions by ending · each 의문사 · checklist) · 05_selftest.md (ส่วนที่ 5) ·
-               06_quickref.md (ส่วนที่ 6 — ASSEMBLED from per-topic snippets the rewrite agents wrote; regenerate it from the
-               topic files if a topic changes, keep 35 entries in topic order)
-               04_vocabulary/unit05…22.md (centre's word lists, `###` heading, Thai+English) · 90_themes.md (picture themes) · 91_categories.md (old AI list)
+               03_particles.md (ส่วนที่ 2) · 03b_question_words.md (ส่วนที่ 3, 5–37과; §3.3 = every answer pattern: 5 rules · yes/no questions by ending · each 의문사 · checklist) · 05_selftest.md (ส่วนที่ 5) ·
+               06_quickref.md (ส่วนที่ 6 — ASSEMBLED from per-topic snippets the rewrite agents wrote; 36–64 appended 2026-10-26 from
+               06_quickref_parts/NN.md (kept; re-append if a snippet changes); keep 64 entries in topic order)
+               04_vocabulary/unit05…22.md (centre's word lists, `###` heading, Thai+English) · unit23…37.md (2026-10-26: the textbook's margin
+               word lists — the centre's sheet for 23+ is not scanned except the 23과 photo; glosses are Sonnet's) · 90_themes.md (picture themes) · 91_categories.md (old AI list)
                07_lecture/unitNN.md = ARCHIVE of the slide transcription (`#### 📽️ [topic:NN] …` blocks). Since 2026-10-16 evening
                its content lives inside 01_units and 02_grammar; build.py no longer assembles it.
                (a part = one .md OR a directory joined in name order; dirs start with 00_header.md) · part banners say "ส่วนที่ N", never "ภาค"
   exercises/   workbook/unit05…22.md (+ unit21_review_5-21.md = 5~21과 종합문제)
-               everyday/unit00_classroom.md, unit05…20.md  (매일시험 + 연습지 merged per unit)
+               everyday/unit00_classroom.md, unit05…20.md, unit22.md (test 22, 8.5/10), unit23.md (sheet 23, user's pencil)  (매일시험 + 연습지 merged per unit)
                miniexam/exam01.md  (복습시험 ① as sat: one `##` per paper — score sheet · 듣기 · 읽기 · 쓰기 — then `# 정답`)
                listening/unit05…22.md  (본문 듣기 sheets, user's pencil checked; key = textbook dialogue)
                review/midterm01_part1.md + _part2.md  (teacher's 중간시험 복습문제; parts are merged by build.py review; since 2026-10-21 the
@@ -113,14 +119,15 @@ content/       ✍️ SOURCE OF TRUTH — edit here, never in output/
                SPEC_confusions.md (27 Thai-learner confusion pairs A1–C10 → `### ⚠️ จุดสับสน` in 02_grammar/)
                SPEC_colors.md (colour-by-function classes, the Korean↔Thai mirroring rule, ambiguous Thai words, batch format)
                SPEC_predict_midterm.md (brief for the midterm mock-paper agents: facts, file/markdown rules, house style, mistake list)
-  predictions/ everyday/unitNN.md (매일시험 — unit17, unit18, unit19, unit20) · miniexam/examNN.md (복습시험 — exam02) ·
+               SPEC_23_37.md (2026-10-26: contract for book 1-2 — sources, the fixed grammar numbering 36–64, templates per deliverable)
+  predictions/ everyday/unitNN.md (매일시험 — unit17 … unit20, unit22, unit23) · miniexam/examNN.md (복습시험 — exam02) ·
                midterm/midterm01.md (중간시험 1–21과, 2026-10-18) = ASSEMBLED from midterm/parts/01_analysis.md (Fable) +
                02_writing · 03_reading · 04_listening · 05_speaking (+ _key.md, Sonnet agents) by the scratch script
                assemble_midterm.py (questions, then `# 정답` + keys) — edit the parts, re-assemble, `build.py predict`
                🔮 analysis + mock tests, then `# 정답`; the kinds never share a folder
-  mindmaps/    unit05…22.md + all.md — mind-map OUTLINES (see scripts/build_mindmaps.py for the grammar). Per unit: 문법 (forms,
-               conditions, ⚠️) · 어휘 · 표현·대화 · 연결 (← 이전 / → 이후 / 시험). all.md = 7 cross-unit threads (문장 끝맺기 · 조사 ·
-               시제 · 숫자·시간 · 높임 · 부정·질문 · 묘사·장소) — the per-unit 연결 branches must agree with it.
+  mindmaps/    unit05…37.md + all.md — mind-map OUTLINES (see scripts/build_mindmaps.py for the grammar). Per unit: 문법 (forms,
+               conditions, ⚠️) · 어휘 · 표현·대화 · 연결 (← 이전 / → 이후 / 시험). all.md = 11 cross-unit threads (문장 끝맺기 · 조사 ·
+               시제 · 숫자·시간 · 높임 · 부정·질문 · 묘사·장소 + since 10/26 연결어미 · 관형형 · 희망·능력·의무 · 불규칙; 240 nodes, a tall poster page) — the per-unit 연결 branches must agree with it.
   mockweb/     practice-site data, one JSON per source: mini02.json (복습시험② prediction) · mini02_real.json (② as sat, ids mini02r-*, Agent T
                2026-10-20) · mid_writing / mid_reading / mid_listen_speak.json = **midterm mock v2** (2026-10-20, ids mid-writing-a/b, mid-reading-a/b,
                mid-listening-a/b, mid-speaking; brief content/specs/BRIEF_midterm_v2.md; the old midterm-* ids are gone) · mini02_b.json / mini02_c.json (papers 2 and 3,
@@ -177,7 +184,7 @@ output/        🤖 GENERATED — overwritten every build, never hand-edit. Reor
                a flat folder of PDFs). Entry point for the user = output/START_HERE.html (hand-written Thai index — update its
                links when a deliverable is added or renamed) + README.md at the workspace root.
   START_HERE.html
-  1_Guides/      KMU_Guide_By_Unit.pdf (เล่ม 1, ~105 pp) · KMU_Guide_By_Topic.pdf (เล่ม 2, ~210 pp) · KMU_Mindmaps.pdf (19 maps)
+  1_Guides/      KMU_Guide_By_Unit.pdf (เล่ม 1, 200 pp since 10/26) · KMU_Guide_By_Topic.pdf (เล่ม 2, 357 pp) · KMU_Mindmaps.pdf (34 maps)
                  · KMU_Syllabus_2026_Fall_TH.pdf (one-off: make_pdf.py <abs path to content/syllabus/syllabus_th.md> --pdf-dir
                  output/1_Guides, then rename) · mindmaps/KMU_Mindmap_<name>.{html,pdf,png} (build_mindmaps.py)
   2_Practice_Web/ ⭐ practice website (build_mockweb.py): index.html + data.js (window.KMU_SETS, 26 sets, 601 items as of 2026-10-20 evening) + vendor.js + clips.js
@@ -213,7 +220,7 @@ output/        🤖 GENERATED — overwritten every build, never hand-edit. Reor
                  SpeakOut shows ถูก/ครึ่ง/ผิด buttons + the verdict line; its ✓/✕ checks ignore spaces (a space in a check regex = \s*, sentence check = ≥3 syllables or a
                  요/다/까 ending) because the answer is a speech-to-text transcript, and AI_RULES tells the grader the same for type speak only. v32–v34: viewing an old result regrades and writes the score back (upgrades pre-v30 speaking
                  entries), the home group header shows คะแนน + ตอบ n ข้อ for speaking, and the cover has 🗑 ล้างผลชุดนี้ (two-step confirm; resetSet() store.set(null) on
-                 ans/self/ai/score/hist/attempt so the removal also syncs to the cloud). **Publish files = {data.js, clips.js, clips2.js, vendor.js} + every audio/**/*.mp3**
+                 ans/self/ai/score/hist/attempt so the removal also syncs to the cloud). v35 (10/22): dlg() in app.html puts every speaker turn of a dialogue prompt (q text and sec.box) on its own line at render time — a 가/나/A/B/남자/여자/○○ 씨 label, or any short label after .?!) or ___, starts a new line; 21 prompts in mid_writing.json were run-on, the rest already had \n. v36: Fix() under each graded item = three labelled rows 📘 เฉลย (stored key + why) · 🤖 AI (verdict/comment/แก้เป็น or ยังไม่ได้ตรวจ) · ✋ ตรวจเอง (ถูก/ครึ่ง/ผิด); the row whose result sets the score carries a นับคะแนน tag. v37: aiV(r, answer) — an AI h/x whose own `fix` equals the answer (spaces/punctuation ignored, squash()) is scored and shown as ถูก (with a note); applied in grade(), Fix, SpeakOut, AiBox, also to verdicts already stored. AI_RULES gained: fix == answer ⇒ v must be o, no h/x without a named error, open personal questions (뭐 하세요?) accept any sensible content. v38: the grader call uses AI_OPTS = {model 'claude-opus-5-5', effort 'high', modelTier 'complex' as fallback} (user's choice 10/22; was modelTier 'default'). It is the only sample call in app.html. v39: results AI line has 🔄 ให้ AI ตรวจใหม่อีกรอบ (RedoBtn, two-step confirm) → aiRedo() clears ai:<id> (self marks kept, they still win), regrade(), aiGradeAll() — re-grades without retaking. v40: new set vocab-mistakes (content/mockweb/vocab_mistakes.json, 73 items: A 40 Thai→Korean words the user has misspelled · B 8 number+counter · C 13 word-choice MC · D 12 spelling MC; every `why` names what the user wrote and where). Sources = the user's synced practice answers (ArtifactData list data/users/me on the site artifact → 94 wrong items) + §6b. Home group 🎯 ศัพท์ที่เคยผิด. **Publish files = {data.js, clips.js, clips2.js, vendor.js} + every audio/**/*.mp3**
                  (`Artifact list scope files` first; 61 files ≈ 49 MB per publish, under the 64 MB limit). The scratchpad harness was lost with /tmp —
                  regression now = headless-Chrome screenshots of #profile, a set cover and the home page.
   3_Exam_Prep/   KMU_Predict_midterm01_speaking.pdf (2026-10-21, from content/predictions/midterm/speaking_exam.md via make_pdf.py --pdf-dir + rename:
@@ -293,7 +300,7 @@ is not zero-padded will not be found.
   `01_units/unitNN.md` + `04_vocabulary/unitNN.md`.
   *By_Topic* = cover + `02_grammar/00_header.md` + `02_grammar/[0-9][0-9]_*.md` (00_ excluded — including it once printed the
   banner twice) + 03 + 03b + `# ส่วนที่ 4` (90_themes, 91_categories) + 05 + 06. `countdown()` fills the date placeholders.
-  `UNITS = range(5, 23)` — extend it when 23과 arrives.
+  `UNITS = range(5, 38)` since 2026-10-26.
 - **Review** (`build_review()`): `content/exercises/review/<name>_partN.md` are merged — all parts' questions, then all
   keys (each key gets the part's `##` title) → `output/3_Exam_Prep/KMU_Review_<Name>.pdf`.
 - **Speaking** (`build_speaking()`): `content/speaking/<snake>.md` → `output/6_Speaking/KMU_Speaking_<Camel>.pdf`; relative
@@ -378,6 +385,18 @@ Guide §13–15 add material the course materials never covered explicitly:
     1–42), key self-solved; agent flagged Q29/Q36/Q39/Q40 as judgment calls.
   - guide vocab tables for 14–22 came from noisy OCR; Thai glosses unverified against the page images.
   - 18과 clock items C.2/C.5 and 22과 food pictures A.2/A.5 were read from small line art — check.
+- **Units 23–37 (added 2026-10-26, book 1-2)** — 8 Sonnet agents from content/specs/SPEC_23_37.md (5 × unit chapter + vocab + mind map for 3 units
+  each, 3 × grammar topics 36–64 with quickref snippets; 300–460k tokens each, 11–22 min) + 1 integration agent (all.md threads, ส่วนที่ 3 to 5–37,
+  ส่วนที่ 5 sets N–T). Fable: SPEC, ส่วนที่ 0 (table 36–64, final-term plan, exam→reading map), quickref assembly, covers/headers, builds.
+  Provenance caveats: everything is from the textbook page images only (no workbook/exercise scans for 23+); all 연습/활동 answers the book
+  does not print are the agents' own and are labelled so; 읽기/듣기 keys come from the 22–37 appendix. Missing scans: 26과 has only pp.262–264
+  (대화 26-1 / 읽기 26-2 were transcribed from the mp3s by Whisper), pages 285, 294, 315, 323, 332, 359 (unit-closing/culture/발음 pages) are absent;
+  23/25/29/30/31/33/34/35 have no 듣기 in the appendix (scripts exist only for 24, 28, 32, 36). Book typos noted in the files: 33과 -(으)ㄹ box
+  "verb ending with 있다/없다", 32과 box "Lesson 9" (= 29), 35과 읽기 key 배우 vs 영화감독, 30과/28과 appendix keys not matching the printed
+  questions. Grammar the book has beyond the table was folded in as 📌 เสริม: 24과 -(으)세요 (ข้อ 39), 25과 ㄹ 탈락 (40), 28과 그래서/못 (48/46),
+  34과 frequency adverbs 자주·가끔·거의·전혀 (58), 35과 N이/가 되다 (59/60), 36과 -아/어도 되다 (61/64), 37과 -(으)려고 (unit file เสริม).
+  Agent-glossed words to double-check: 바뀌다, 길이 막히다, 보령, 스포츠 댄스, 하숙집, 포장하다, 돌아가시다, 호박 (zucchini), 게르, 앞머리; 25과 margin
+  word 이상하다 is not in its reading; 23과 reading has 카페 where the centre's sheet lists 카레.
 - **The workbook 5–13 has been fully proofread against the scans** (all 41 `extracted/workbook/unit05-13/wb-*.png` pages compared
   line by line, 2026-10-05). Two defects were found and fixed: 8과 A1 had the wrong number of
   blanks, and 13과 F had no answer key at all. Everything else matched.
@@ -456,7 +475,10 @@ Guide §13–15 add material the course materials never covered explicitly:
   작년에/지난주에 take 에, 한국에서 왔어요 is fine, -(으)시- can honour the listener, 서점 앞에 (textbook) not 옆에 (slide),
   phone numbers read with 의, textbook calls -지 않다 colloquial like 안, "있다/없다 never with 은/는" was false. Items labelled
   "เสริม" are not in the textbook (ㄹ-drop before ㅂ니다, 생신/댁, 에서~까지). Known leftovers: review key midterm01 is AI-solved.
-- **매일시험 score log** (teacher's red pen, all transcribed): 14과 7.5 · 15과 8.5 · 16과 10 · 17과 8 · 18과 10 · 19과 8.5. Earlier tests
+- **매일시험 score log** (teacher's red pen, all transcribed): 14과 7.5 · 15과 8.5 · 16과 10 · 17과 8 · 18과 10 · 19과 8.5 · 22과 8.5 (2026-10-26: A 4 × -(으)ㄹ까요? from
+  picture+word-pair cues, B 3 × -고 answers, C 무슨 색깔을 좋아해요? · 정문 앞에서 만나요 · 친구가 멋있고 똑똑해요; lost 산책고 → 산책하고, 좋아 하고 → 좋고, 색아리 → 색깔을;
+  the 22과 prediction matched A/B formats and C 3/3 partially — scorecard at the top of predictions/everyday/unit22.md). 23과 sheet (10/26, user's pencil): the ㅂ table
+  and all 16 (으)ㄴ cells right except 메워요 for 매워요. Earlier tests
   5–13 carry ⚠️ marks but no numeric score on the scan.
 - Known cosmetic gaps: 10과 A's third table row (30–10,000) is printed as given reference rather
   than as blanks; `왕쯔이` is transliterated `หวางจิ้ง` where `หวางจื่ออี` is closer.
@@ -548,6 +570,10 @@ starred ones cost real marks.
   honorific missed in a drill, next to 계세요 in the 보기) · **사과과** for 사과와 (와 after a vowel) · **먹습니다** for 먹습니까? (question mark ignored
   when converting) · section 5 "answer with -네요 / -(으)시 / -(으)러" has no pencil on the question paper (the answers went on a separate answer sheet, user 10/21 — not a blank) ·
   6-5 무엇을 드시겠습니까? → 저는 ___ unsure (→ 비빔밥을 먹겠습니다). 듣기 5 changed O→X (지훈 그림을 좋아하지 않아요).
+- 매일시험 22과 (2026-10-26, 8.5): **산책고 달립니다** for 산책하고 달려요 (dropped the 하 of a N하다 verb before -고, and answered a 해요 question in
+  ㅂ니다) · ★ **좋아 하고 재미있어요** for 좋고 재미있어요 (reached for the verb 좋아하다 where the adjective 좋다 was needed — the mirror image of the
+  earlier 좋아 안 해요) · dictation **색아리** for 색깔을 (ㄹ받침 + 을 heard as one syllable). Sheet 23과 the same day: **메워요** for 매워요 (ㅐ/ㅔ again,
+  in the very first cell) — everything else on the ㅂ/(으)ㄴ sheet was right.
 What the user does well: ㅂ니다/습니다 choice by 받침, -지 않- forms, 겠 forms, the ㅡ-drop past
 (바빴어요·컸어요), special honorific words (드세요·주무세요·계세요), 에서 for activity places.
 
@@ -702,6 +728,12 @@ Sonnet agents (125–160k tokens, 3–7 min each) transcribed the real paper (ex
 and rewrote the midterm mock as **v2** (parts 02–05 + mockweb mid_*.json: every section mirrors 복습시험①/② or the review set with changed words;
 쓰기 2 papers, 읽기 25+15, 듣기 29+10 with scripts, 말하기 25 questions with 해요/합니다 answers). scripts/assemble_midterm.py now lives in the repo.
 Site v26/v27 (26 sets · 601 items · 311 clips) published; the real paper shows as its own row "ข้อสอบจริง". Marks for ② are due 10/21.
+2026-10-26 (Fable 5.1 + 9 Sonnet agents, ~3.3M agent tokens): the user dropped the book 1-2 scans (23–37과, appendix 22–37, contents) →
+filed, OCR'd (extracted/textbook/unit23…37), then **both guide books, the vocab sheets and the mind maps were extended to 37과** (§6 "Units 23–37"):
+SPEC_23_37.md fixes grammar numbering 36–64; ส่วนที่ 0 gained the 23–37 table, the final-term plan and the exam→reading map; ส่วนที่ 3/5/6 and
+all.md extended; UNITS = range(5, 38); covers/headers/START_HERE say 5–37. Earlier that day: 매일시험 22과 prediction (Sonnet agent, no 22과
+practice sheet on file), the vocab-mistakes practice set (v40), AI grader switched to Opus high (v38) with a re-grade button (v39), dialogue
+prompts split per speaker (v35), three-row answer key under each item (v36), self-contradicting AI verdicts auto-corrected (v37).
 2026-10-21: 복습시험② marks arrived (쓰기 7.5 · 듣기 8.5 · 읽기 9.0 · 말하기 10; grading system explained, §1). The teacher's hints for the 말하기 midterm (25 Q /
 15 min from the 말하기 table + the 19과 sheet + self-intro + family) and three new sources arrived: the publisher's textbook audio, her own 듣기 audio for the
 복습문제, and the book's 부록 (filed under source/audio/ and source/textbook/, §2). faster-whisper transcribed both audio folders (~8 + 35 min). Four Sonnet

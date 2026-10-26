@@ -35,7 +35,7 @@ OUTPUT_EVERYDAY = OUTPUT_DAILY
 OUTPUT_MINIEXAM = os.path.join(OUTPUT_EXAM, 'past')      # 복습시험 papers as sat
 OUTPUT_REVIEW = OUTPUT_EXAM
 PREDICT_DIRS = {'everyday': os.path.join(OUTPUT_DAILY, 'predictions'), 'miniexam': OUTPUT_EXAM, 'midterm': OUTPUT_EXAM}
-UNITS = range(5, 23)                                   # units the study material covers
+UNITS = range(5, 38)                                   # units the study material covers
 
 # 매일시험 and 복습시험 predictions are kept apart at every level (the user asked for that):
 # (sub-folder under content/predictions/, file glob, PDF basename prefix, banner title with {n})
@@ -185,7 +185,7 @@ def unit_part(sub, unit):
 def build_guide():
     """Two books from the same content/guide/ sources (split on the user's request 2026-10-16; parts renamed ส่วนที่ 10/16):
 
-    KMU_Guide_By_Unit  = ส่วนที่ 0 exam info + ส่วนที่ 1: per unit 5–22 the 01_units chapter (teacher's slides merged inline)
+    KMU_Guide_By_Unit  = ส่วนที่ 0 exam info + ส่วนที่ 1: per unit 5–37 the 01_units chapter (teacher's slides merged inline)
                          followed by the centre's word list (04_vocabulary/unitNN.md)
     KMU_Guide_By_Topic = ส่วนที่ 0 + ส่วนที่ 1 grammar topics 01–35 (02_grammar, slides merged inline) + ส่วนที่ 2 은/는 vs 이/가
                          + ส่วนที่ 3 의문사 + ส่วนที่ 4 vocabulary by theme + ส่วนที่ 5 self-test + ส่วนที่ 6 quick table
@@ -197,8 +197,8 @@ def build_guide():
         parts = [unit_part('01_units', u), unit_part('04_vocabulary', u)]
         chapters.append('\n\n'.join(p for p in parts if p))
     by_unit = '\n\n'.join([
-        guide_cover('📘 KMU Korean 1 — คู่มือรายบท (5–22과)',
-                    'เล่ม 1 จาก 2 · ส่วนที่ 0 ข้อมูลสอบ + ตารางไวยากรณ์ตามบท · ส่วนที่ 1 สรุปรายบท 5–22 (ไวยากรณ์ · สไลด์อาจารย์ · '
+        guide_cover('📘 KMU Korean 1 — คู่มือรายบท (5–37과)',
+                    'เล่ม 1 จาก 2 · ส่วนที่ 0 ข้อมูลสอบ + ตารางไวยากรณ์ตามบท · ส่วนที่ 1 สรุปรายบท 5–37 (ไวยากรณ์ · สไลด์อาจารย์ · '
                     '대화 · 읽기 · ข้อสอบ) ตามด้วยคำศัพท์ของศูนย์ทุกบท · ไวยากรณ์เจาะลึกตามหัวข้ออยู่ในเล่ม 2 "คู่มือตามหัวข้อ" (อ้างเป็น ไวยากรณ์ข้อ NN)'),
         read(os.path.join(g, '01_units', '00_header.md')).strip(),
         *chapters])
@@ -208,10 +208,10 @@ def build_guide():
              '## 🖼️ คำศัพท์ตามหมวด (ชีตภาพของศูนย์)', read(os.path.join(g, '04_vocabulary', '90_themes.md')).strip()]
     cats = os.path.join(g, '04_vocabulary', '91_categories.md')
     if os.path.exists(cats):
-        vocab += ['## 📂 คำศัพท์แยกหมวด (รวบรวมจากตำรา 5–22과)', strip_own_titles(read(cats)).strip()]
+        vocab += ['## 📂 คำศัพท์แยกหมวด (รวบรวมจากตำรา 5–37과)', strip_own_titles(read(cats)).strip()]
     by_topic = '\n\n'.join([
-        guide_cover('📘 KMU Korean 1 — คู่มือตามหัวข้อ (5–22과)',
-                    'เล่ม 2 จาก 2 · ส่วนที่ 0 ข้อมูลสอบ · ส่วนที่ 1 ไวยากรณ์เจาะลึก 35 หัวข้อ (สไลด์อาจารย์รวมอยู่ในแต่ละข้อ) · ส่วนที่ 2 은/는 vs 이/가 · '
+        guide_cover('📘 KMU Korean 1 — คู่มือตามหัวข้อ (5–37과)',
+                    'เล่ม 2 จาก 2 · ส่วนที่ 0 ข้อมูลสอบ · ส่วนที่ 1 ไวยากรณ์เจาะลึก 64 หัวข้อ (สไลด์อาจารย์รวมอยู่ในแต่ละข้อ) · ส่วนที่ 2 은/는 vs 이/가 · '
                     'ส่วนที่ 3 คำถาม · ส่วนที่ 4 คำศัพท์ตามหมวด · ส่วนที่ 5 แบบทดสอบตัวเอง · ส่วนที่ 6 ตารางสรุป · สรุปรายบทอยู่ในเล่ม 1 "คู่มือรายบท"'),
         read(os.path.join(g, '02_grammar', '00_header.md')).strip(),
         *grammar,

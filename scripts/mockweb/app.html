@@ -223,6 +223,12 @@ textarea.wa { width: 100%; margin-top: 6px; border: 0; border-bottom: 1.5px soli
 .fix.tip { color: var(--tip); }                                    /* advice under an answer that is already right */
 .fix.tip .th { color: var(--tip); }
 .fix .th { font-family: var(--f-th); }
+.fix .fx { display: grid; grid-template-columns: 6.5em 1fr; gap: 8px; align-items: baseline; padding: 5px 0; border-top: 1px dashed var(--rule); }
+.fix .fx:first-child { border-top: 0; }
+.fix .fx-l { font-family: var(--f-th); font-weight: 700; color: var(--muted); white-space: nowrap; }
+.fix .fx > span:last-child { color: var(--ink); }
+.fix .fx:first-child > span:last-child { color: inherit; }
+.fix .th.hint { color: var(--muted); font-size: .92em; }
 .self { display: inline-flex; gap: 4px; margin-left: 6px; vertical-align: middle; }
 .self button { border: 1px solid var(--red); background: var(--paper); color: var(--red); border-radius: 4px; padding: 2px 9px; font-size: calc((13px) * var(--ts, 1)); min-height: 30px; }
 .self button[aria-pressed="true"] { background: var(--red); color: var(--paper); }
@@ -548,6 +554,7 @@ const GROUPS = [
   { re: /^mid-\w+-a$/, label: '📝 ข้อสอบจำลองกลางภาค ชุด A (แบบชุดทบทวนของครู)', note: '쓰기 14 ตอน · 읽기 25 ข้อ · 듣기 12 ข้อ ตามรูปแบบ 복습문제 เปลี่ยนคำ' },
   { re: /^mid-\w+-b$/, label: '📝 ข้อสอบจำลองกลางภาค ชุด B (แบบ 복습시험 ①+②)', note: 'รูปแบบเดียวกับ mini exam ที่สอบไปแล้ว 2 ครั้ง คำใหม่' },
   { re: /^tb-listen/, label: '🔊 ฟังบทสนทนาจากหนังสือ · เสียงจริงของสำนักพิมพ์', note: 'ครูบอกว่า 듣기 วันศุกร์มาจากบทสนทนาในหนังสือเท่านั้น · โจทย์จากชีต 본문 듣기 ของศูนย์' },
+  { re: /^vocab-mistakes/, label: '🎯 ศัพท์ที่เคยผิด · รวมทุกสนาม', note: 'คำที่เคยเขียนผิด/เลือกผิดจากเว็บนี้และข้อสอบกระดาษ — ดูใต้ข้อว่าเคยผิดเป็นอะไร' },
   { re: /^vocab-spelling/, label: '✏️ เขียนตามคำบอก · คำที่เคยสะกดผิด', note: 'ㅈ/ㅊ · ㅐ/ㅔ · 으 หาย · ㄹ หาย · 생활 · 열심히 · 시월/유월 — ฟังแล้วพิมพ์ทั้งวลี' },
   { re: /^vocab-/, label: '🔤 ทดสอบจำศัพท์ 5–13과 · 14–21과', note: 'ไทย→เกาหลี พิมพ์เอง 30 ข้อ + เกาหลี→ไทย เลือก 30 ข้อ คัดคำที่ครูเคยออกสอบก่อน' },
   { re: /^mini02r-/, label: 'ข้อสอบจริง (สอบแล้ว 20 ต.ค.)', note: '' },
@@ -720,6 +727,9 @@ function finishGrading(reason, record) {
 }
 /* precedence for a typed item: the student's ○△✕ > the AI verdict > string matching.
    Pure computation: returns the totals plus items[key] = what <Item> needs to draw its colour, input marks and correction line. */
+/* the AI verdict as scored: a "half"/"wrong" whose own correction is the student's answer (spaces and punctuation aside) is a self-contradiction → correct */
+const squash = t => String(Array.isArray(t) ? t.join('') : t || '').replace(/[\s.,?!~·…"'“”‘’()（）]/g, '');
+const aiV = (r, a) => !r ? '' : r.v !== 'o' && r.fix && squash(a) && squash(r.fix) === squash(a) ? 'o' : r.v;
 function grade() {
   C.graded = true;
   const st = curSt.peek(), ai = aiS.peek(), self = selfS.peek();
@@ -739,14 +749,14 @@ function grade() {
           if (r < 1) wrong.push(r ? `${i + 1}) ${k} (สะกด: ${diffText(norm(a[i]), norm(k))})` : `${i + 1}) ${k}`); });
         frac = s / it.ans.length; typed = frac < 1 && has;
         if (wrong.length) fix = '정답: ' + (it.ans.length === 1 ? wrong[0].replace(/^1\) /, '') : wrong.join(' · '));
-        if (typed) { if (self[key]) { frac = V2F[self[key]]; src = 'self'; } else if (ai[key]) { frac = V2F[ai[key].v]; src = 'ai'; if (frac === 1) inp = inp.map(() => 'ok'); } else if (AIS.peek()) pend = true; }
+        if (typed) { if (self[key]) { frac = V2F[self[key]]; src = 'self'; } else if (ai[key]) { frac = V2F[aiV(ai[key], C.ans[key])]; src = 'ai'; if (frac === 1) inp = inp.map(() => 'ok'); } else if (AIS.peek()) pend = true; }
       } else if (it.type === 'write') {
         const [r, k] = judgeText(ans || '', it.model);
         if (r === 1) frac = 1;
         else { typed = has; fix = '정답 (ตัวอย่าง): ' + it.model.join(' / ') + (r === .5 ? ` · เกือบตรง: ${diffText(norm(ans), norm(k))}` : '');
-          if (self[key]) { frac = V2F[self[key]]; src = 'self'; } else if (ai[key]) { frac = V2F[ai[key].v]; src = 'ai'; } else if (has) { pend = true; frac = 0; } }
+          if (self[key]) { frac = V2F[self[key]]; src = 'self'; } else if (ai[key]) { frac = V2F[aiV(ai[key], C.ans[key])]; src = 'ai'; } else if (has) { pend = true; frac = 0; } }
       } else if (it.type === 'speak') { checkSpeak(key); typed = has;
-        if (self[key]) { frac = V2F[self[key]]; src = 'self'; } else if (ai[key]) { frac = V2F[ai[key].v]; src = 'ai'; } else if (has) pend = true; }
+        if (self[key]) { frac = V2F[self[key]]; src = 'self'; } else if (ai[key]) { frac = V2F[aiV(ai[key], C.ans[key])]; src = 'ai'; } else if (has) pend = true; }
       const got = Math.round(frac * pts * 100) / 100; sum += got; tot += pts; ssum += got; stot += pts;
       items[key] = { cls: ' ' + (pend ? 'g-pend' : frac >= 1 ? 'g-ok' : frac > 0 ? 'g-half' : 'g-ng'), frac, fix, typed, pend, src, inp };
       if (pend) pending.push(key);
@@ -765,6 +775,8 @@ function regrade() { if (!curSt.peek() || mode.peek() !== 'result') return; cons
 /* ------------------------------------------------------------------ AI teacher (claude.ai only): grades every typed answer that string matching could not accept */
 let aiBusy = false, aiProg = null;   // aiProg = { done, total, failed: [] }; the aiVer signal tells the AI line / dock to redraw
 (async () => { if (!(window.claude && window.claude.use)) return; AIS.value = await window.claude.use('sample'); if (AIS.peek() && curSt.peek() && mode.peek() === 'result') { regrade(); aiGradeAll(); } })().catch(() => {});
+/* grader model: Opus at high effort (the user's choice 10/22); modelTier is the fallback if the viewer cannot run that model */
+const AI_OPTS = { model: 'claude-opus-5-5', effort: 'high', modelTier: 'complex' };
 const AI_RULES = `You grade answers on a mock exam for Kookmin University Korean Language Center, level 1 (국민한국어 1, units 1-21). The student is Thai.
 For each answer decide v:
 "o" = correct: answers what was asked, content agrees with the passage/script (or is a sensible personal answer when the question is about the student), grammar, particles and endings are right. 해요체 and 합니다체 are both fine unless the instruction asks for one. Extra correct words (repeating 한국에, adding 저는) are fine. The model answers / accepted answers are examples: a different valid answer (한테 for 에게, 뭐 for 무엇을, a synonym the passage supports) is correct. A missing final period or a small spacing slip (아홉시 for 아홉 시) costs nothing, but mention it.
@@ -772,6 +784,7 @@ For each answer decide v:
 "x" = wrong: wrong content, answers a different question word, the wrong person or place, or ungrammatical beyond small slips; for fill-in items, a word that does not fit the gap.
 Items have type "blank" (fill the ___ gaps; "answer" is the list of what the student typed per gap and "accepted" the accepted strings per gap), "write" (a sentence; "model" = example answers) or "speak" (spoken answer transcribed; "model" = example).
 Type "speak" answers are SPEECH-TO-TEXT transcripts of what the student said. Spacing and punctuation carry no information there: ignore them completely, never mention them and never lower v for them (태국사람입니다 = 태국 사람입니다 = "o"). A short answer that answers the question (빔입니다 for 이름이 무엇입니까?) is "o" — 저는 is optional. If a word is clearly a sound-alike mis-transcription of the intended word (same pronunciation, e.g. 안자요 for 앉아요, 가치 for 같이), treat it as the intended word. Still judge particles, endings, tense and content as above.
+Be consistent: if your "fix" is the same as the student's answer (ignoring spaces and punctuation), there is nothing to correct and v MUST be "o". Never give "h" or "x" without naming a concrete error in fb. When the question asks about a person's activity, preference or plan (뭐 하세요? 뭐 할 거예요? 뭘 좋아해요?) and no passage decides it, any sensible content in the right form is "o" — the model answers are only examples.
 Return JSON only: {"results":[{"k":"<same k>","v":"o|h|x","fb":"<Thai, at most 2 short sentences: what is wrong and why, or why it is right>","fix":"<the student's own answer minimally corrected, in Korean; the same if nothing to fix>"}]} with one result per item.`;
 function aiKeys() { const ks = [], st = curSt.peek(); if (!st) return ks;
   st.sections.forEach((sec, si) => sec.items.forEach((it, ii) => { const k = `${si}-${ii}`, a = C.ans[k]; if (!isAnswered(a) || aiS.peek()[k]) return;
@@ -789,7 +802,7 @@ async function aiCall(keys) {
   const secsJ = [...new Set(jobs.map(j => j.sec))].map(si => { const s = st.sections[si];
     return { sec: si, box: s.box || '', text: (s.passage || s.script || []).map(l => (l.who ? l.who + ': ' : '') + l.ko).join('\n') }; });
   const prompt = AI_RULES + '\n\nSECTIONS (passage or listening script):\n' + JSON.stringify(secsJ) + '\n\nITEMS:\n' + JSON.stringify(jobs);
-  const r = await AIS.peek().json(prompt, { modelTier: 'default' });
+  const r = await AIS.peek().json(prompt, AI_OPTS);
   const got = new Set(), nx = { ...aiS.peek() };
   (r && r.results || []).forEach(x => { if (!keys.includes(x.k) || !['o', 'h', 'x'].includes(x.v)) return; got.add(x.k);
     nx[x.k] = { v: x.v, fb: String(x.fb || ''), fix: String(x.fix || '') }; });
@@ -980,8 +993,8 @@ function Cover() {
 }
 
 /* ------------------------------------------------------------------ components: the paper (header, bars, sections, items) */
-function AiBox({ r }) {
-  const v = { o: 'ถูก', h: 'ครึ่งคะแนน', x: 'ผิด' }[r.v] || '';
+function AiBox({ r, a }) {
+  const v = { o: 'ถูก', h: 'ครึ่งคะแนน', x: 'ผิด' }[aiV(r, a)] || '';
   return html`<span class="aifb">🤖 ${v} · ${r.fb}${r.fix ? html` · แก้เป็น: <b class="ko">${r.fix}</b>` : null}</span>`;
 }
 function Paper() {
@@ -1024,7 +1037,7 @@ function Section({ sec, si }) {
     <div class="sec-l">
       <h2 class="sec-h">${sec.h}</h2>
       ${sec.th ? html`<p class="sec-th">${sec.th}</p>` : null}
-      ${sec.box ? html`<div class="box">${sec.box}</div>` : null}
+      ${sec.box ? html`<div class="box">${dlg(sec.box)}</div>` : null}
       ${sec.passage ? html`<div class="passage">${sec.passage.map(l => html`<p><span class="ko">${l.ko}</span><span class="th">${l.th}</span></p>`)}</div>` : null}
       ${sec.script ? html`<div class="lst">
           <button class="play" type="button" data-sec=${si} hidden=${exam} onClick=${async () => { stopRuns(); const id = ++runId; await playSection(si, id); setSec(si, { live: false }); }}>▶ ฟัง <span class="n">${n ? `(${n})` : ''}</span></button>
@@ -1037,6 +1050,10 @@ function Section({ sec, si }) {
     <div class="sec-r">${sec.items.map((it, ii) => html`<${Item} it=${it} k=${si + '-' + ii} />`)}</div>
   </section>`;
 }
+/* dialogue prompts: every speaker turn on its own line ("가: …? 나: …" → two lines); the label must follow sentence-final
+   punctuation, a blank or a closing bracket, or be one of the usual 가/나/다/A/B/남자/여자 labels */
+const SPK = /[ \t]+(?=(?:가|나|다|라|A|B|남자|여자|[가-힣]{1,4} 씨)[ \t]?:[ \t])|(?<=[.?!。)）]|___)[ \t]+(?=[가-힣A-Za-z]{1,5}[ \t]?:[ \t])/g;
+const dlg = t => typeof t === 'string' ? t.replace(SPK, '\n') : t;
 const setBlank = (k, i, v) => { const a = C.ans[k] || []; a[i] = v; setAns(k, a); };
 function Item({ it, k }) {
   const md = mode.peek(), ro = md === 'result', a = (kv(k).value, C.ans[k]);   // reading kv(k) subscribes this item (only) to its own answer
@@ -1046,12 +1063,12 @@ function Item({ it, k }) {
   let q;
   if (it.type === 'blank') {
     /* a conjugation row "받다 → -았/었/였어요 ___ · -(스)ㅂ니다 ___ · …" becomes a grid: the base word, then label + box pairs */
-    const cm = /^([^→\n]{1,24}?)\s*→\s*(.+)$/s.exec(it.q), segs = cm ? cm[2].split(/\s*·\s*/) : [];
+    const qt = dlg(it.q), cm = /^([^→\n]{1,24}?)\s*→\s*(.+)$/s.exec(qt), segs = cm ? cm[2].split(/\s*·\s*/) : [];
     if (cm && segs.length >= 2 && segs.every(g => (g.match(/___/g) || []).length === 1)) {
       q = html`<div class="conj"><b class="conj-base ko">${cm[1].trim()}</b><div class="conj-grid">${segs.map(sg => { const [pre, post] = sg.split('___');
         return html`<label class="conj-cell"><span class="conj-lab ko">${pre.trim()}</span>${mkInput()}${post.trim() ? html`<span class="ko">${post.trim()}</span>` : null}</label>`; })}</div></div>`;
     } else {   /* elsewhere keep the words right before each blank on the same line as the box */
-      const parts = it.q.split('___'), kids = [];
+      const parts = qt.split('___'), kids = [];
       parts.forEach((txt, i) => {
         if (i < parts.length - 1) {
           const m = /([^\s·→(（]*[(（]?[^\s·→]*\s?)$/.exec(txt), tail = m ? m[1] : '';
@@ -1062,7 +1079,7 @@ function Item({ it, k }) {
       });
       q = html`<div class="q">${kids}</div>`;
     }
-  } else q = html`<div class="q">${it.q}</div>`;
+  } else q = html`<div class="q">${dlg(it.q)}</div>`;
   const live = liveItem.value === k, rec = recS.value[k];
   const cls = 'item' + (gi ? gi.cls : isAnswered(a) ? ' done' : '') + (live ? ' live' : '');
   return html`<div class=${cls} id=${'it' + k}><span class="qn">${it.n}.</span><div class="mark" aria-hidden="true"></div><div>
@@ -1089,7 +1106,14 @@ function Item({ it, k }) {
 function Fix({ it, k, gi }) {
   const ai = aiS.value[k], self = selfS.value[k], tip = gi.frac >= 1 && !gi.pend;
   const pick = v => { const nx = { ...selfS.peek() }; if (nx[k] === v) delete nx[k]; else nx[k] = v; selfS.value = nx; store.set('self:' + curSt.peek().id, nx); regrade(); };
-  return html`<span class=${'fix ' + (tip ? 'tip' : 'corr')}>${tip && it.why ? '💡 ' : ''}${gi.fix}${it.why ? html` <span class="th">${gi.fix ? '· ' : ''}${it.why}</span>` : null}${gi.src === 'ai' ? html`<span class="tag">🤖 AI</span>` : null}${gi.src === 'self' ? html`<span class="tag">✎ ตรวจเอง</span>` : null}${gi.typed ? html` ตรวจเอง: <span class="self">${[['o', 'ถูก'], ['h', 'ครึ่ง'], ['x', 'ผิด']].map(([v, lab]) => html`<button type="button" class=${'v-' + v} aria-pressed=${String(self === v)} onClick=${() => pick(v)}>${lab}</button>`)}</span>${ai ? html`<${AiBox} r=${ai} />` : null}` : null}</span>`;
+  /* three labelled rows, one per source: the stored key, the AI verdict, the student's own mark; the row that sets the score says so */
+  const used = html`<span class="tag">นับคะแนน</span>`, VT = { o: 'ถูก', h: 'ครึ่งคะแนน', x: 'ผิด' };
+  const key = String(gi.fix || '').replace(/^정답( \(ตัวอย่าง\))?: /, (m, ex) => ex ? '(ตัวอย่าง) ' : '');
+  return html`<div class=${'fix ' + (tip ? 'tip' : 'corr')}>
+    ${key || it.why ? html`<div class="fx"><span class="fx-l">📘 เฉลย</span><span>${key}${it.why ? html` <span class="th">${key ? '· ' : '💡 '}${it.why}</span>` : null}${!gi.src && !gi.pend && key ? used : null}</span></div>` : null}
+    ${gi.typed ? html`<div class="fx"><span class="fx-l">🤖 AI</span><span>${ai ? html`<b>${VT[aiV(ai, C.ans[k])] || ''}</b>${aiV(ai, C.ans[k]) !== ai.v ? html` <span class="th hint">(AI ให้${VT[ai.v]} แต่คำที่แก้ตรงกับคำตอบ → นับถูก)</span>` : null} · ${ai.fb}${ai.fix ? html` · แก้เป็น: <b class="ko">${ai.fix}</b>` : null}` : html`<span class="th">ยังไม่ได้ตรวจ</span>`}${gi.src === 'ai' ? used : null}</span></div>` : null}
+    ${gi.typed ? html`<div class="fx"><span class="fx-l">✋ ตรวจเอง</span><span><span class="self">${[['o', 'ถูก'], ['h', 'ครึ่ง'], ['x', 'ผิด']].map(([v, lab]) => html`<button type="button" class=${'v-' + v} aria-pressed=${String(self === v)} onClick=${() => pick(v)}>${lab}</button>`)}</span>${gi.src === 'self' ? used : html` <span class="th hint">กดเมื่อไม่เห็นด้วย (กดซ้ำ = ยกเลิก)</span>`}</span></div>` : null}
+  </div>`;
 }
 /* speaking item: checklist + model answer + AI verdict, drawn from the snapshot checkSpeak() took */
 function SpeakOut({ it, k }) {
@@ -1102,13 +1126,19 @@ function SpeakOut({ it, k }) {
   const gi = mode.value === 'result' && G.value ? G.value.items[k] : null, self = selfS.value[k];
   const pick = v => { const nx = { ...selfS.peek() }; if (nx[k] === v) delete nx[k]; else nx[k] = v; selfS.value = nx; store.set('self:' + curSt.peek().id, nx); regrade(); };
   const VL = { o: 'ถูก 1', h: 'ครึ่ง 0.5', x: 'ผิด 0' };
-  const verdict = self ? `${VL[self]} (ตรวจเอง)` : ai ? `${VL[ai.v]} (🤖 AI)` : AIS.value ? 'รอ AI ตรวจ' : 'ยังไม่มีคะแนน — กดเลือกเอง';
+  const verdict = self ? `${VL[self]} (ตรวจเอง)` : ai ? `${VL[aiV(ai, s.a)]} (🤖 AI)` : AIS.value ? 'รอ AI ตรวจ' : 'ยังไม่มีคะแนน — กดเลือกเอง';
   return html`${au ? html`<div class="qth">เสียงของคุณ: <audio controls src=${au}></audio></div>` : null}
     <ul class="checks">${a ? rows.map(([ok, label]) => html`<li class=${ok ? undefined : 'ng'}>${label}</li>`) : html`<li class="ng">ยังไม่มีคำตอบ</li>`}${a ? html`<li class="hint">เช็กคำสำคัญเท่านั้น ไม่ใช่คะแนน · เว้นวรรคจากการถอดเสียงไม่นับ</li>` : null}</ul>
     ${a ? html`<div class=${'fix ' + (gi && gi.frac >= 1 && !gi.pend ? 'tip' : 'corr')}>คะแนนข้อนี้: <b>${verdict}</b> · ตรวจเอง: <span class="self">${[['o', 'ถูก'], ['h', 'ครึ่ง'], ['x', 'ผิด']].map(([v, lab]) => html`<button type="button" class=${'v-' + v} aria-pressed=${String(self === v)} onClick=${() => pick(v)}>${lab}</button>`)}</span></div>` : null}
     <div class="qth">คำตอบตัวอย่าง: <${Kline} cls="ko kline" text=${it.model} /> · ${it.mth || ''}${it.why ? ' · ' + it.why : ''} <button class="play" type="button" onClick=${e => { stopRuns(); say(it.model, 'S', e.currentTarget.parentNode.querySelector('.kline')); }}>▶ ฟังตัวอย่าง</button>${AIS.value && a && !ai && !aiBusy ? html`<button class="aibtn" type="button" onClick=${() => aiGradeAll([k])}>🤖 AI ตรวจ</button>` : null}</div>
-    ${ai ? html`<${AiBox} r=${ai} />` : null}`;
+    ${ai ? html`<${AiBox} r=${ai} a=${s.a} />` : null}`;
 }
+/* re-grade without retaking: drop this set's AI verdicts (self marks stay and still win) and send every typed answer again */
+const redoAsk = signal(false);
+function aiRedo() { const st = curSt.peek(); if (!st || aiBusy) return; redoAsk.value = false; aiS.value = {}; store.set('ai:' + st.id, {}); aiProg = null; regrade(); aiGradeAll(); }
+function RedoBtn() { if (aiBusy || !Object.keys(aiS.value).length) return null;
+  return redoAsk.value ? html`<span>ตรวจใหม่ทุกข้อด้วย Opus? (ผลที่ตรวจเองยังอยู่)</span><button class="aibtn" type="button" onClick=${aiRedo}>ยืนยัน</button><button class="aibtn" type="button" onClick=${() => { redoAsk.value = false; }}>ยกเลิก</button>`
+    : html`<button class="aibtn" type="button" onClick=${() => { redoAsk.value = true; }}>🔄 ให้ AI ตรวจใหม่อีกรอบ</button>`; }
 function AiLine() {
   aiVer.value; aiS.value; ansTick.value;
   const ai = AIS.value, left = ai ? aiKeys() : [];
@@ -1116,8 +1146,8 @@ function AiLine() {
   if (aiBusy && aiProg) return html`<span>🤖 AI กำลังตรวจ ${aiProg.done}/${aiProg.total} ข้อ…</span><span class="bar"><i style=${{ width: (100 * aiProg.done / aiProg.total) + '%' }}></i></span>`;
   if (aiProg && aiProg.failed.length) return html`<span>🤖 ตรวจไม่สำเร็จ ${aiProg.failed.length} ข้อ${aiProg.err ? ' — ' + aiProg.err : ''}</span><button class="aibtn" type="button" onClick=${() => aiGradeAll()}>ลองอีกครั้ง</button>`;
   if (left.length) return html`<span>🤖 มี ${left.length} ข้อที่ AI ยังไม่ได้ตรวจ</span><button class="aibtn" type="button" onClick=${() => aiGradeAll()}>ให้ AI ตรวจ</button>`;
-  if (aiProg) return `🤖 AI ตรวจครบ ${aiProg.total} ข้อแล้ว · ไม่เห็นด้วยกดแก้ที่ปุ่ม ถูก / ครึ่ง / ผิด ได้`;
-  return Object.keys(aiS.peek()).length ? '🤖 AI ตรวจแล้ว' : '🤖 ไม่มีข้อที่ต้องให้ AI ตรวจ';
+  if (aiProg) return html`<span>🤖 AI ตรวจครบ ${aiProg.total} ข้อแล้ว · ไม่เห็นด้วยกดแก้ที่ปุ่ม ถูก / ครึ่ง / ผิด ได้</span><${RedoBtn} />`;
+  return Object.keys(aiS.peek()).length ? html`<span>🤖 AI ตรวจแล้ว</span><${RedoBtn} />` : '🤖 ไม่มีข้อที่ต้องให้ AI ตรวจ';
 }
 function Results() {
   const g = G.value, st = curSt.peek(); if (!g) return null;
