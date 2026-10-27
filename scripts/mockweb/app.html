@@ -1,3 +1,4 @@
+<!-- v44 (2026-10-27 night): card mode = 4-choice quiz (한국어→ไทย · ไทย→한국어 · mix; distractors from the same unit first), no more self-grading -->
 <!-- v41 (2026-10-27): vocabulary drill (#vocab · วันนี้ / ตามบท / สถิติ · Leitner boxes in kmuweb:vocab:srs, synced as cloud doc "srs") + daily-test board (EXAMS daily / final, per-set "group", home teaser) -->
 <title>KMU 모의시험</title>
 <meta name="claude:viewport-fit-sides" content="cover">
@@ -376,9 +377,20 @@ section#vocab { scroll-margin-top: 90px; }   /* opened with #vocab in the URL: t
 .vans { font-family: var(--f-ko); font-weight: 700; font-size: calc((clamp(22px, 5vw, 30px)) * var(--ts, 1)); display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; overflow-wrap: anywhere; }
 .vnote { font-size: calc((13px) * var(--ts, 1)); color: var(--muted); }
 .vnote b { color: var(--ink); }
-.vgrade { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin-top: 14px; }
-.vgrade .btn { min-height: 48px; font-weight: 600; }
-.vgrade .g-o { border-color: var(--ok); color: var(--ok); } .vgrade .g-h { border-color: var(--half); color: var(--half); } .vgrade .g-x { border-color: var(--red); color: var(--red); }
+.vask { margin: 6px 0 0; color: var(--muted); font-size: calc((14px) * var(--ts, 1)); }
+/* card mode = 4 choices: 2 × 2 on a wide screen, one column on a phone; after the answer the right one turns green, a wrong pick red, the rest fade */
+.vmc { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: 14px; }
+@media (max-width: 480px) { .vmc { grid-template-columns: 1fr; } }
+.vopt { display: flex; align-items: center; gap: 10px; text-align: left; border: 1.5px solid var(--rule); background: var(--paper); color: var(--ink); border-radius: 10px; padding: 10px 14px; min-height: 56px; font-size: calc((17px) * var(--ts, 1)); line-height: 1.35; overflow-wrap: anywhere; }
+.vopt.ko { font-family: var(--f-ko); font-weight: 700; font-size: calc((22px) * var(--ts, 1)); }
+.vopt:not(:disabled):hover { border-color: var(--navy); }
+.vopt .k { flex: none; width: 24px; height: 24px; border-radius: 50%; border: 1px solid var(--rule); font-family: var(--f-ui, inherit); font-weight: 600; font-size: calc((12px) * var(--ts, 1)); line-height: 22px; text-align: center; color: var(--muted); }
+.vopt .d { flex: 1; min-width: 0; }
+.vopt .m { flex: none; font-weight: 800; }
+.vopt:disabled { cursor: default; opacity: 1; }
+.vopt.ok { border-color: var(--ok); background: var(--ok-soft); color: var(--ok); } .vopt.ok .k { border-color: var(--ok); color: var(--ok); }
+.vopt.ng { border-color: var(--red); background: var(--red-soft); color: var(--red); } .vopt.ng .k { border-color: var(--red); color: var(--red); }
+.vopt.dim { opacity: .45; }
 .vkeys { margin: 10px 0 0; font-size: calc((12px) * var(--ts, 1)); color: var(--muted); }
 .vsum.good { border-color: var(--ok); background: var(--ok-soft); } .vsum.good .stamp { color: var(--ok); }
 .vmiss { list-style: none; margin: 4px 0 0; padding: 0; display: grid; }
@@ -405,7 +417,7 @@ section#vocab { scroll-margin-top: 90px; }   /* opened with #vocab in the URL: t
 @media (max-width: 640px) { .brand small { display: none; } }
 @media (max-width: 560px) { .strip-in { gap: 6px; } .brand { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: calc((16px) * var(--ts, 1)); }
   .strip .btn.sm, .menu summary { white-space: nowrap; flex: none; padding-left: 9px; padding-right: 9px; } .strip .lbl { display: none; }
-  .vgrade .btn small { display: none; } .vtab { padding: 8px 12px; } }
+  .vopt .k { display: none; } .vtab { padding: 8px 12px; } }
 .vprog.all .prog-bar i { background: var(--ok); }
 </style>
 
@@ -1382,7 +1394,8 @@ function Profile() {
      b = box 0–5 · d = due day number (dayNum(): floor(local midnight / 86400000)) · n = answers · x = wrong answers · l = day number of the last answer
      days[date].n = answers given that day, .r = how many of them were fully right.
    Sync: 'vocab:srs' matches SYNCED, so it gets stamp:srs and the cloud doc 'srs' = { at, vocab } exactly like a set (last change wins). Only word strings are stored, never a name.
-   The preferences vocab:size / mode / auto / shuffle are written with store.put — store.set would sync them as cloud docs of their own. */
+   Card mode = a 4-choice quiz: s.mc = { dir: k2t | t2k, opts: [{ko, d}], ans } is drawn when a card comes to the top (vMc: distractors from the same unit first, then the same category, then units ±2, never a word with the same meaning or spelling).
+   The preferences vocab:size / mode / dir / auto / shuffle are written with store.put — store.set would sync them as cloud docs of their own. */
 const VOCAB = window.KMU_VOCAB || [];
 const VBY = {}; VOCAB.forEach(w => { VBY[w.ko] = w; });
 const VUNITS = [...new Set(VOCAB.map(w => w.u))].sort((a, b) => a - b);
@@ -1431,10 +1444,11 @@ function vOther(ans, ko) {
 const vsizeS = signal([20, 30, 40, 50].includes(+store.get('vocab:size', 40)) ? +store.get('vocab:size', 40) : 40);
 const vmodeS = signal(store.get('vocab:mode', 'type') === 'card' ? 'card' : 'type');
 const vautoS = signal(store.get('vocab:auto', 0) === 1), vshufS = signal(store.get('vocab:shuffle', 1) !== 0);
+const vdirS = signal(['k2t', 't2k', 'mix'].includes(store.get('vocab:dir', 'mix')) ? store.get('vocab:dir', 'mix') : 'mix');   // card mode: 한국어→ไทย · ไทย→한국어 · drawn per card
 const vnewS = signal([0, 10, 15, 20].includes(+store.get('vocab:newmin', 15)) ? +store.get('vocab:newmin', 15) : 15);   // slots of each daily session kept for NEW words: 15 by default so all 912 words are met before the 기말 (a 30-word session with 0 reserved met only ~180 words in 24 simulated days)
 const vPref = (sig, key, v) => { sig.value = v; store.put('vocab:' + key, typeof v === 'boolean' ? +v : v); };
 const vtabS = signal('today'), vresetS = signal(false);
-/* the running session (null = none): { src, label, mode, queue: [{ko, retry}], total, done, ok, half, ng, first: {ko: first score}, phase: ask | fb | end, fb, shown, seq, at } —
+/* the running session (null = none): { src, label, mode, queue: [{ko, retry}], total, done, ok, half, ng, first: {ko: first score}, phase: ask | fb | end, fb, mc, seq, at } —
    done counts words finished (right or half); a wrong word goes to the back of the queue until it is answered right */
 const vsS = signal(null);
 const vShuffle = a => { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
@@ -1463,14 +1477,28 @@ function vUnitStats(r) {
   VOCAB.forEach(w => { const o = m[w.u], e = r.w[w.ko]; o.total++; if (e && e.n) { o.seen++; if (e.b >= 2) o.learned++; if (e.b >= 4) o.mastered++; } });
   return m;
 }
+/* the four choices of a card: the word itself + 3 distractors — same unit first, then the same category, then units ±2, then anything;
+   never a word with the same meaning (계란 / 달걀 = ไข่) or the same spelling, and no two choices that read the same */
+function vMc(w) {
+  const pref = vdirS.peek(), dir = pref === 'mix' ? (Math.random() < .5 ? 'k2t' : 't2k') : pref;
+  const disp = x => dir === 'k2t' ? x.th : wordKeys(x.ko).keys[0];
+  const bad = new Set([w.th, w.ko, disp(w)]);
+  const pool = VOCAB.filter(x => x !== w && !bad.has(x.th) && !bad.has(x.ko) && !bad.has(disp(x)));
+  const tiers = [pool.filter(x => x.u === w.u), w.cat ? pool.filter(x => x.cat === w.cat) : [], pool.filter(x => Math.abs(x.u - w.u) <= 2), pool];
+  const picked = [], seen = new Set(bad);
+  for (const t of tiers) { for (const x of vShuffle(t.slice())) { if (picked.length >= 3) break; const d = disp(x); if (seen.has(d)) continue; seen.add(d); picked.push({ ko: x.ko, d }); } if (picked.length >= 3) break; }
+  const opts = vShuffle(picked.concat([{ ko: w.ko, d: disp(w) }]));
+  return { dir, opts, ans: opts.findIndex(o => o.ko === w.ko) };
+}
+const vWithMc = s => s && s.mode === 'card' && s.phase === 'ask' && s.queue.length ? { ...s, mc: vMc(VBY[s.queue[0].ko]) } : s;
 const vSay = ko => { stopRuns(); say(CLIPS['F|' + ko] ? ko : ko.replace(/\s*\[[^\]]*\]/g, '').replace(/[()]/g, '').replace(/\s*[—·\/]\s*/g, ', '), 'F'); };
 const vFocusNow = () => { const i = $('#vq-in'); if (i) i.focus({ preventScroll: true }); };   // the input persists from card to card, so a tap can keep the iPad keyboard open
 const vFocus = () => later(vFocusNow);
-const vAuto = () => { const s = vsS.peek(); if (vautoS.peek() && s && s.mode === 'card' && s.phase === 'ask') vSay(s.queue[0].ko); };
+const vAuto = () => { const s = vsS.peek(); if (vautoS.peek() && s && s.mode === 'card' && s.phase === 'ask' && s.mc && s.mc.dir === 'k2t') vSay(s.queue[0].ko); };   // ไทย→한국어 cards stay silent until answered (the clip would give the answer away)
 function vStart(src, words, label) {
   stopRuns();
   const list = src.kind === 'wrong' || (src.kind === 'unit' && vshufS.peek()) ? vShuffle(words.slice()) : words.slice();
-  vsS.value = list.length ? { src, label, mode: vmodeS.peek(), queue: list.map(w => ({ ko: w.ko, retry: false })), total: list.length, done: 0, ok: 0, half: 0, ng: 0, first: {}, phase: 'ask', fb: null, shown: false, seq: 1, at: Date.now() } : null;
+  vsS.value = list.length ? vWithMc({ src, label, mode: vmodeS.peek(), queue: list.map(w => ({ ko: w.ko, retry: false })), total: list.length, done: 0, ok: 0, half: 0, ng: 0, first: {}, phase: 'ask', fb: null, mc: null, seq: 1, at: Date.now() }) : null;
   vFocus(); vAuto();
 }
 const vStartDaily = () => vStart({ kind: 'daily' }, vBuildDaily(vsizeS.peek()), 'ชุดวันนี้');
@@ -1481,19 +1509,20 @@ function vStartWeak() {   // nothing due and nothing new: the words that sit in 
 }
 const vAgain = () => { const s = vsS.peek(), k = s ? s.src : { kind: 'daily' }; if (k.kind === 'unit') vStartUnit(k.u); else if (k.kind === 'weak') vStartWeak(); else vStartDaily(); };
 const vExit = () => { stopRuns(); vsS.value = null; };
-const vAdvance = s => s.queue.length ? { ...s, phase: 'ask', fb: null, shown: false, seq: s.seq + 1 } : { ...s, phase: 'end', fb: null, end: Date.now() };
-/* grade the card on top of the queue: Leitner update, tally, a wrong word goes to the back; typed mode shows the feedback first, card mode (self-graded) moves straight on */
-function vGrade(score, ans, key) {
+const vAdvance = s => s.queue.length ? vWithMc({ ...s, phase: 'ask', fb: null, seq: s.seq + 1 }) : { ...s, phase: 'end', fb: null, end: Date.now() };
+/* grade the card on top of the queue: Leitner update, tally, a wrong word goes to the back; both modes show the feedback first — a right choice in card mode moves on by itself after 0.7 s, a wrong one waits for ถัดไป */
+function vGrade(score, ans, key, pick) {
   const s = vsS.peek(); if (!s || s.phase !== 'ask') return;
   const q = s.queue[0], b0 = (srsGet().w[q.ko] || {}).b || 0, queue = s.queue.slice(1), first = { ...s.first };
   if (first[q.ko] === undefined) first[q.ko] = score;
   if (score === 0) queue.push({ ko: q.ko, retry: true });
   batch(() => {
     const e = srsApply(q.ko, score);
-    const nx = { ...s, queue, first, done: s.done + (score > 0 ? 1 : 0), ok: s.ok + (score === 1 ? 1 : 0), half: s.half + (score === .5 ? 1 : 0), ng: s.ng + (score === 0 ? 1 : 0), fb: { ko: q.ko, score, ans, key, b0, e, retry: q.retry } };
-    vsS.value = s.mode === 'card' ? vAdvance(nx) : { ...nx, phase: 'fb' };
+    const nx = { ...s, queue, first, done: s.done + (score > 0 ? 1 : 0), ok: s.ok + (score === 1 ? 1 : 0), half: s.half + (score === .5 ? 1 : 0), ng: s.ng + (score === 0 ? 1 : 0), fb: { ko: q.ko, score, ans, key, b0, e, retry: q.retry, pick: pick || null } };
+    vsS.value = { ...nx, phase: 'fb' };
   });
-  if (s.mode === 'type') { if (vautoS.peek()) vSay(q.ko); } else vAuto();
+  if (vautoS.peek() && !(s.mode === 'card' && s.mc && s.mc.dir === 'k2t')) vSay(q.ko);   // k2t cards were already heard at the question
+  if (s.mode === 'card' && score >= 1) { const seq = s.seq, at = s.at; setTimeout(() => { const c = vsS.peek(); if (c && c.phase === 'fb' && c.seq === seq && c.at === at) vNext(); }, 700); }
 }
 function vSubmit(text) {
   const s = vsS.peek(); if (!s || s.phase !== 'ask' || s.mode !== 'type') return;
@@ -1504,10 +1533,14 @@ function vGiveUp() { const s = vsS.peek(); if (s && s.phase === 'ask' && s.mode 
 function vNext() {
   const s = vsS.peek(); if (!s || s.phase !== 'fb') return;
   const i = $('#vq-in'); if (i) { i.value = ''; i.focus({ preventScroll: true }); }   // same element, same tap: the iPad keyboard stays open
-  vsS.value = vAdvance(s);
+  vsS.value = vAdvance(s); vAuto();
   later(() => { const c = $('#vcard'); if (c) c.scrollIntoView({ block: 'nearest' }); });
 }
-function vReveal() { const s = vsS.peek(); if (s && s.phase === 'ask' && s.mode === 'card' && !s.shown) vsS.value = { ...s, shown: true }; }
+function vPick(i) {   // card mode: choice i (0–3) of the current card
+  const s = vsS.peek(); if (!s || s.phase !== 'ask' || s.mode !== 'card' || !s.mc || !s.mc.opts[i]) return;
+  const o = s.mc.opts[i], w = VBY[o.ko];
+  vGrade(i === s.mc.ans ? 1 : 0, o.d, wordKeys(s.queue[0].ko).keys[0], { idx: i, ko: w.ko, th: w.th });
+}
 const vReset = () => { vresetS.value = false; vsS.value = null; store.set('vocab:srs', null); };
 function goVocab() { if (location.hash.slice(1) === 'vocab') { leaveSet(); show('vocab'); } else location.hash = 'vocab'; }
 /* Enter = check, Enter again = next (also when the IME is still composing: the answer is read when the composition ends) */
@@ -1517,24 +1550,25 @@ const vKey = e => { if (e.key !== 'Enter' && e.code !== 'Enter' && e.code !== 'N
   if (vComp || e.isComposing) { vPend = true; return; }
   e.preventDefault(); vEnter(e.target); };
 const vCompEnd = e => { vComp = false; if (vPend) { vPend = false; const el = e.target; later(() => vEnter(el)); } };
-/* card mode on a keyboard: Enter / Space = show the meaning, then 1 = จำได้ · 2 = ไม่แน่ใจ · 3 = จำไม่ได้ */
+/* card mode on a keyboard: 1–4 = pick that choice, then Enter / Space = next card */
 document.addEventListener('keydown', e => {
-  const s = vsS.peek(); if (view.peek() !== 'vocab' || !s || s.mode !== 'card' || s.phase !== 'ask' || e.ctrlKey || e.metaKey || e.altKey) return;
+  const s = vsS.peek(); if (view.peek() !== 'vocab' || !s || s.mode !== 'card' || e.ctrlKey || e.metaKey || e.altKey) return;
   const tg = e.target && e.target.tagName; if (tg === 'INPUT' || tg === 'TEXTAREA' || tg === 'SELECT') return;
-  if (!s.shown) { if ((e.key === 'Enter' || e.key === ' ') && tg !== 'BUTTON') { e.preventDefault(); vReveal(); } }
-  else if (e.key === '1' || e.key === '2' || e.key === '3') vGrade([1, .5, 0][+e.key - 1], '', wordKeys(s.queue[0].ko).keys[0]);
+  if (s.phase === 'ask') { if (/^[1-4]$/.test(e.key)) { e.preventDefault(); vPick(+e.key - 1); } }
+  else if (s.phase === 'fb' && (e.key === 'Enter' || e.key === ' ') && tg !== 'BUTTON') { e.preventDefault(); vNext(); }
 });
 
 /* components */
 const vchip = (on, label, onClick, id) => html`<button type="button" class="vchip" id=${id} aria-pressed=${String(!!on)} onClick=${onClick}>${label}</button>`;
 const vDays = n => n === 1 ? 'พรุ่งนี้' : `ใน ${n} วัน`;
 function VOpts({ shuffle, sizes }) {
-  const m = vmodeS.value, sz = vsizeS.value;
+  const m = vmodeS.value, sz = vsizeS.value, d = vdirS.value;
   return html`<div class="vopts">
     ${sizes ? html`<div class="vrow"><span class="vlab">คำต่อชุด</span>${[20, 30, 40, 50].map(n => vchip(sz === n, `${n} คำ`, () => vPref(vsizeS, 'size', n), 'vsize-' + n))}</div>
       <div class="vrow"><span class="vlab">คำใหม่อย่างน้อย</span>${[0, 10, 15, 20].map(n => vchip(vnewS.value === n, n ? `${n} คำ/ชุด` : 'ไม่กันที่', () => vPref(vnewS, 'newmin', n), 'vnew-' + n))}<span class="vnote">กันที่ไว้ให้คำใหม่ แม้มีคำค้างทบทวนเยอะ</span></div>` : null}
-    <div class="vrow"><span class="vlab">โหมด</span>${vchip(m === 'type', '✍ พิมพ์', () => vPref(vmodeS, 'mode', 'type'), 'vmode-type')}${vchip(m === 'card', '🃏 การ์ด', () => vPref(vmodeS, 'mode', 'card'), 'vmode-card')}
+    <div class="vrow"><span class="vlab">โหมด</span>${vchip(m === 'type', '✍ พิมพ์', () => vPref(vmodeS, 'mode', 'type'), 'vmode-type')}${vchip(m === 'card', '🃏 การ์ด 4 ตัวเลือก', () => vPref(vmodeS, 'mode', 'card'), 'vmode-card')}
       ${vchip(vautoS.value, '🔊 เล่นเสียงเอง', () => vPref(vautoS, 'auto', !vautoS.peek()), 'vauto')}${shuffle ? vchip(vshufS.value, '🔀 สุ่มลำดับ', () => vPref(vshufS, 'shuffle', !vshufS.peek()), 'vshuf') : null}</div>
+    ${m === 'card' ? html`<div class="vrow"><span class="vlab">ถามแบบ</span>${vchip(d === 'k2t', '한국어 → ไทย', () => vPref(vdirS, 'dir', 'k2t'), 'vdir-k2t')}${vchip(d === 't2k', 'ไทย → 한국어', () => vPref(vdirS, 'dir', 't2k'), 'vdir-t2k')}${vchip(d === 'mix', '🔀 สลับกัน', () => vPref(vdirS, 'dir', 'mix'), 'vdir-mix')}</div>` : null}
   </div>`;
 }
 function VTabs() {
@@ -1551,7 +1585,7 @@ function VToday() {
       <div class=${'vnum' + (q.streak ? ' good' : '')}><b id="v-streak">${q.streak}</b><span>วันติดต่อกัน</span></div>
     </div>
     <${VOpts} sizes=${true} />
-    <div class="vgo">${q.sess ? html`<button class="mode-btn primary" type="button" id="vstart" onClick=${vStartDaily}><span class="t">▶ เริ่มชุดวันนี้ · ${q.sess} คำ</span><span class="s">ทบทวน ${q.review} คำ + คำใหม่ ${q.add} คำ · ${md === 'type' ? 'เห็นคำไทย แล้วพิมพ์คำเกาหลี' : 'เห็นคำเกาหลี นึกความหมาย แล้วประเมินตัวเอง'}</span></button>`
+    <div class="vgo">${q.sess ? html`<button class="mode-btn primary" type="button" id="vstart" onClick=${vStartDaily}><span class="t">▶ เริ่มชุดวันนี้ · ${q.sess} คำ</span><span class="s">ทบทวน ${q.review} คำ + คำใหม่ ${q.add} คำ · ${md === 'type' ? 'เห็นคำไทย แล้วพิมพ์คำเกาหลี' : { k2t: 'เห็นคำเกาหลี เลือกคำแปลไทย 1 ใน 4', t2k: 'เห็นคำไทย เลือกคำเกาหลี 1 ใน 4', mix: 'สลับถามเกาหลี→ไทย และ ไทย→เกาหลี เลือก 1 ใน 4' }[vdirS.value]}</span></button>`
       : html`<p class="notice" id="vnone">วันนี้ไม่มีคำที่ถึงรอบทบทวน และไม่เหลือคำใหม่แล้ว 🎉 — เลือกฝึกตามบท หรือทวนคำที่ยังอ่อน</p>${q.seen ? html`<div class="actions"><button class="btn primary" type="button" id="vweak" onClick=${vStartWeak}>ทวนคำที่ยังอ่อน (${Math.min(vsizeS.value, q.seen)} คำ)</button></div>` : null}`}</div>
     <p class="sec-th">ลำดับคำ: คำที่ถึงรอบทบทวนมาก่อน (กล่องต่ำสุดก่อน แล้วบทหลังสุดก่อน) ตามด้วยคำใหม่${q.newUnits.length ? ` จากบท ${q.newUnits.join(' · ')} …` : ''} · ตอบผิด = ถามซ้ำท้ายชุดจนตอบถูก · ตอบถูก = นัดทวนอีก 1 · 2 · 4 · 7 · 14 · 30 วัน</p>
   </div>`;
@@ -1592,14 +1626,15 @@ function VStats() {
 }
 /* feedback under a typed answer: verdict, the word (▶), what was typed and where it differs, another word it happens to be, the Leitner consequence */
 function VFb({ fb, cls }) {
-  const other = fb.score === 0 && fb.ans ? vOther(fb.ans, fb.ko) : null;
+  const other = fb.score === 0 && fb.ans && !fb.pick ? vOther(fb.ans, fb.ko) : null;
   const head = fb.score >= 1 ? '✓ ถูก!' : fb.score > 0 ? '≈ เกือบถูก — สะกดผิดนิดเดียว นับครึ่งคะแนน' : fb.ans ? '✕ ผิด' : '✕ ยังไม่รู้ — ดูเฉลยแล้วจำไว้';
   const sched = fb.score >= 1 ? `📦 กล่อง ${fb.b0} → ${fb.e.b} · ถามอีกครั้ง: ${vDays(LEIT[Math.min(5, fb.b0)])}` : fb.score > 0 ? `📦 อยู่กล่อง ${fb.e.b} ต่อ · ถามอีกครั้ง: พรุ่งนี้` : '📦 กลับกล่อง 0 · จะถามซ้ำท้ายชุดนี้จนตอบถูก';
   return html`<div class=${'vfb ' + cls} id="vfb" aria-live="polite">
     <div class="vfb-h">${head}</div>
     <div class="vans"><span id="vans">${fb.ko}</span><button class="play" type="button" id="vplay" onClick=${() => { vSay(fb.ko); vFocusNow(); }}>▶ ฟัง</button></div>
-    ${fb.score < 1 && fb.ans ? html`<div class="vnote">คุณตอบ: <b class="ko">${fb.ans}</b>${fb.score > 0 ? html` · ต่างที่: <b class="ko">${diffText(norm(fb.ans), norm(fb.key))}</b>` : null}</div>` : null}
-    ${other ? html`<div class="vnote">「<b class="ko">${other.ko}</b>」 = ${other.th} — เป็นอีกคำหนึ่ง ไม่ใช่คำในโจทย์</div>` : null}
+    ${fb.pick ? html`<div class="vnote">${VBY[fb.ko].th} · ${VBY[fb.ko].en}</div>${fb.score < 1 ? html`<div class="vnote">คุณเลือก: 「<b class="ko">${fb.pick.ko}</b>」 = ${fb.pick.th} — คนละคำ</div>` : null}`
+      : html`${fb.score < 1 && fb.ans ? html`<div class="vnote">คุณตอบ: <b class="ko">${fb.ans}</b>${fb.score > 0 ? html` · ต่างที่: <b class="ko">${diffText(norm(fb.ans), norm(fb.key))}</b>` : null}</div>` : null}
+    ${other ? html`<div class="vnote">「<b class="ko">${other.ko}</b>」 = ${other.th} — เป็นอีกคำหนึ่ง ไม่ใช่คำในโจทย์</div>` : null}`}
     <div class="vnote">${sched}</div>
   </div>`;
 }
@@ -1636,13 +1671,14 @@ function VSess({ s }) {
       </div>
       ${fb ? html`<${VFb} fb=${fb} cls=${cls} />` : null}
     </div></div>`;
+  const mc = s.mc, k2t = mc.dir === 'k2t', pk = fb && fb.pick ? fb.pick.idx : -1;
   return html`<div class="vsess" id="vsess" key="card">${head}${prog}
-    <div class="vcard" id="vcard" onClick=${e => { if (!s.shown && !e.target.closest('button')) vReveal(); }}>${meta}
-      <div class="vface"><div class="vko ko" id="vko">${w.ko}</div><button class="play" type="button" id="vplay" onClick=${() => vSay(w.ko)}>▶ ฟัง</button></div>
-      ${s.shown ? html`<div id="vback"><div class="vth">${w.th}</div><div class="ven">${w.en}</div></div>
-        <div class="vgrade"><button class="btn g-o" type="button" id="vg-ok" onClick=${() => vGrade(1, '', wordKeys(w.ko).keys[0])}>✓ จำได้ <small>(1)</small></button><button class="btn g-h" type="button" id="vg-half" onClick=${() => vGrade(.5, '', wordKeys(w.ko).keys[0])}>≈ ไม่แน่ใจ <small>(2)</small></button><button class="btn g-x" type="button" id="vg-ng" onClick=${() => vGrade(0, '', wordKeys(w.ko).keys[0])}>✕ จำไม่ได้ <small>(3)</small></button></div>
-        <p class="vkeys">คีย์ลัด: 1 = จำได้ · 2 = ไม่แน่ใจ · 3 = จำไม่ได้</p>`
-        : html`<div class="vin"><button class="btn primary" type="button" id="vreveal" onClick=${vReveal}>แสดงคำแปล ⏎</button></div>`}
+    <div class="vcard" id="vcard">${meta}
+      ${k2t ? html`<div class="vface"><div class="vko ko" id="vko">${w.ko}</div><button class="play" type="button" id="vplay" onClick=${() => vSay(w.ko)}>▶ ฟัง</button></div><p class="vask">คำนี้แปลว่าอะไร</p>`
+        : html`<div class="vth" id="vth">${w.th}</div><div class="ven" id="ven">${w.en}</div><p class="vask">คำเกาหลีคือข้อไหน</p>`}
+      <div class="vmc" id="vmc" role="group" aria-label="ตัวเลือก">${mc.opts.map((o, i) => html`<button type="button" class=${'vopt' + (k2t ? '' : ' ko') + (fb ? (i === mc.ans ? ' ok' : i === pk ? ' ng' : ' dim') : '')} id=${'vopt-' + i} disabled=${!!fb} onClick=${() => vPick(i)}><span class="k">${i + 1}</span><span class="d">${o.d}</span>${fb && i === mc.ans ? html`<span class="m">✓</span>` : fb && i === pk ? html`<span class="m">✕</span>` : null}</button>`)}</div>
+      ${fb ? html`<${VFb} fb=${fb} cls=${cls} /><div class="vin"><button class="btn primary" type="button" id="vq-next" onClick=${vNext}>ถัดไป ⏎</button></div>`
+        : html`<p class="vkeys">คีย์ลัด: 1–4 = เลือกข้อ${k2t ? '' : ' · ยังไม่เล่นเสียงจนกว่าจะตอบ (ไม่ให้เฉลย)'}</p>`}
     </div></div>`;
 }
 function Vocab() {
@@ -1691,7 +1727,7 @@ function Help({ on }) {
     <ul>
       <li>ปุ่ม <b>🔤 ศัพท์</b> บนแถบด้านบน (หรือการ์ดบนหน้าแรก) = ฝึกจำศัพท์ <b>ทุกคำ</b> จากชีตศัพท์ของศูนย์ บท 5~37 (ราว 900 คำ) ทุกวัน เพราะข้อสอบประจำวันเสียคะแนนที่ศัพท์เป็นหลัก</li>
       <li><b>วันนี้</b> = ระบบจัดชุดให้: คำที่ถึงรอบทบทวนก่อน (กล่องต่ำสุดก่อน แล้วบทหลังสุดก่อน) ตามด้วยคำใหม่ที่ยังไม่เคยฝึก เลือกขนาดชุด 20 / 30 / 50 คำ (ถ้าคำค้างทบทวนเยอะจนไม่มีคำใหม่เข้ามา เลือก คำใหม่อย่างน้อย 5 / 10 คำต่อชุดเพื่อกันที่ไว้) · <b>ตามบท</b> = แตะเลขบทเพื่อฝึกทุกคำของบทนั้น (หรือ ทั้งหมด) · <b>สถิติ</b> = จำนวนคำที่จำได้ แถบรายบท คำที่ผิดบ่อย 20 อันดับ และ 14 วันล่าสุด</li>
-      <li>โหมด <b>✍ พิมพ์</b> = เห็นคำไทย/อังกฤษ แล้วพิมพ์คำเกาหลี (สะกดผิดไม่เกิน 1–2 ตัวอักษรย่อยได้ครึ่งคะแนนและบอกตัวที่ผิด) กด Enter เพื่อตรวจ กด Enter อีกครั้งไปคำถัดไป ▶ ฟังเสียงได้หลังตอบ · โหมด <b>🃏 การ์ด</b> = เห็นคำเกาหลีและฟังเสียง นึกความหมาย แล้วกด แสดงคำแปล และประเมินตัวเอง จำได้ / ไม่แน่ใจ / จำไม่ได้ (คีย์ลัด 1 2 3)</li>
+      <li>โหมด <b>✍ พิมพ์</b> = เห็นคำไทย/อังกฤษ แล้วพิมพ์คำเกาหลี (สะกดผิดไม่เกิน 1–2 ตัวอักษรย่อยได้ครึ่งคะแนนและบอกตัวที่ผิด) กด Enter เพื่อตรวจ กด Enter อีกครั้งไปคำถัดไป ▶ ฟังเสียงได้หลังตอบ · โหมด <b>🃏 การ์ด 4 ตัวเลือก</b> = เลือกคำตอบ 1 ใน 4 (คีย์ลัด 1–4) ตั้ง "ถามแบบ" ได้: <b>한국어 → ไทย</b> เห็นคำเกาหลี (ฟังได้) เลือกคำแปล · <b>ไทย → 한국어</b> เห็นคำไทย เลือกคำเกาหลี (เสียงเล่นหลังตอบ) · <b>สลับกัน</b> สุ่มทั้งสองแบบ ตัวลวงมาจากคำในบทเดียวกันก่อน ตอบถูกไปข้อถัดไปเอง ตอบผิดเห็นเฉลยแล้วกด ถัดไป</li>
       <li><b>กล่อง 0–5</b> (Leitner): ตอบถูก = ขึ้นกล่อง และระบบนัดทบทวนห่างขึ้น 1 · 2 · 4 · 7 · 14 · 30 วัน ตามกล่องเดิมของคำนั้น · เกือบถูก = อยู่กล่องเดิม ทวนพรุ่งนี้ · ตอบผิด = กลับกล่อง 0 และถามซ้ำท้ายชุดจนตอบถูก · "จำได้แล้ว" = กล่อง 2 ขึ้นไป · "แม่นแล้ว" = กล่อง 4 ขึ้นไป — ทำทุกวัน คำที่ถึงรอบจะโผล่มาเอง</li>
       <li>ความคืบหน้าบันทึกทุกคำที่ตอบ (เก็บเฉพาะตัวคำ ไม่เก็บชื่อ) และซิงก์ข้ามเครื่องผ่านบัญชี claude.ai เหมือนผลข้อสอบ (ดูสถานะ ☁️ บนแถบด้านบน) · ไฟล์ index.html ในเครื่องเก็บแยก ไม่ซิงก์ · ล้างได้ที่ สถิติ › 🗑 ล้างความคืบหน้าศัพท์</li>
     </ul>
@@ -1725,13 +1761,13 @@ function App() {
 /* ------------------------------------------------------------------ boot */
 render(html`<${App} />`, document.getElementById('app'));
 route();
-const vocabHooks = {   // test hooks of the vocabulary drill: start(n) = today's session of n words (typed unless mode('card')), answer(text) = type + check, next() = the next card, …
+const vocabHooks = {   // test hooks of the vocabulary drill: start(n) = today's session of n words (typed unless mode('card')), answer(text) = type + check, pick(i) = choice i of a card, next() = the next card, …
   start: n => { if (n) vsizeS.value = n; vsS.value = null; vStartDaily(); const s = vsS.peek(); return s ? s.queue.length : 0; },
   unit: u => { vsS.value = null; vStartUnit(u); const s = vsS.peek(); return s ? s.queue.length : 0; },
-  mode: m => vPref(vmodeS, 'mode', m === 'card' ? 'card' : 'type'), auto: on => vPref(vautoS, 'auto', !!on), newmin: n => vPref(vnewS, 'newmin', n), size: n => { vsizeS.value = n; }, tab: t => { vsS.value = null; vtabS.value = t; },
-  answer: t => { const i = $('#vq-in'); if (i) i.value = t; vSubmit(t); return vocabHooks.state(); }, giveUp: vGiveUp, reveal: vReveal, next: vNext, exit: vExit,
+  mode: m => vPref(vmodeS, 'mode', m === 'card' ? 'card' : 'type'), dir: d => vPref(vdirS, 'dir', d), auto: on => vPref(vautoS, 'auto', !!on), newmin: n => vPref(vnewS, 'newmin', n), size: n => { vsizeS.value = n; }, tab: t => { vsS.value = null; vtabS.value = t; },
+  answer: t => { const i = $('#vq-in'); if (i) i.value = t; vSubmit(t); return vocabHooks.state(); }, giveUp: vGiveUp, pick: i => { vPick(i); return vocabHooks.state(); }, next: vNext, exit: vExit,
   grade: v => { const s = vsS.peek(); if (s && s.phase === 'ask') vGrade({ o: 1, h: .5, x: 0 }[v] ?? v, '', wordKeys(s.queue[0].ko).keys[0]); return vocabHooks.state(); },
-  state: () => { const s = vsS.peek(); return s && { phase: s.phase, mode: s.mode, label: s.label, total: s.total, done: s.done, ok: s.ok, half: s.half, ng: s.ng, left: s.queue.length, ko: (s.phase === 'fb' ? s.fb : s.queue[0] || {}).ko, fb: s.fb && { score: s.fb.score, key: s.fb.key, b: s.fb.e.b } }; },
+  state: () => { const s = vsS.peek(); return s && { phase: s.phase, mode: s.mode, label: s.label, total: s.total, done: s.done, ok: s.ok, half: s.half, ng: s.ng, left: s.queue.length, ko: (s.phase === 'fb' ? s.fb : s.queue[0] || {}).ko, mc: s.mc && { dir: s.mc.dir, opts: s.mc.opts.map(o => o.d), ans: s.mc.ans }, fb: s.fb && { score: s.fb.score, key: s.fb.key, b: s.fb.e.b, pick: s.fb.pick && s.fb.pick.idx } }; },
   srs: srsGet, info: vInfo, keys: wordKeys, judge: judgeWord, today: vBuildDaily, groups: () => EXAMS.map(e => e.id),
 };
 window.__kmu = { get cur() { return snapshot(); }, openSet, startSet, submit, grade, aiGradeAll, vocab: vocabHooks };   // test hooks
