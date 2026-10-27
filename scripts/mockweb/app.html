@@ -1,3 +1,4 @@
+<!-- v41 (2026-10-27): vocabulary drill (#vocab · วันนี้ / ตามบท / สถิติ · Leitner boxes in kmuweb:vocab:srs, synced as cloud doc "srs") + daily-test board (EXAMS daily / final, per-set "group", home teaser) -->
 <title>KMU 모의시험</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -324,6 +325,88 @@ audio { height: 32px; max-width: 100%; }
 .sent { margin: 2px 0 0; font-size: calc((13px) * var(--ts, 1)); color: var(--muted); }
 .legend .l-lost::before { background: repeating-linear-gradient(45deg, var(--red) 0 3px, var(--red-soft) 3px 6px); } .legend .l-pend::before { background: var(--desk); border: 1px solid var(--muted); }
 .sumul { margin: 6px 0 0; padding-left: 20px; } .sumul li { margin: 4px 0; } .spark { display: block; }
+/* vocabulary drill (#vocab) + its home teaser — only the site's own variables, so every tone and theme works */
+section#vocab { scroll-margin-top: 90px; }   /* opened with #vocab in the URL: the browser's fragment scroll must not slide the heading under the sticky strip */
+.vtabs { display: flex; flex-wrap: wrap; gap: 4px; margin: 16px 0 0; border-bottom: 1px solid var(--rule); }
+.vtab { border: 1px solid transparent; border-bottom: 0; border-radius: 8px 8px 0 0; background: none; color: var(--muted); padding: 8px 18px; min-height: 42px; margin-bottom: -1px; font-weight: 500; font-size: calc((15px) * var(--ts, 1)); }
+.vtab:hover { color: var(--navy); }
+.vtab[aria-selected="true"] { background: var(--paper); border-color: var(--rule); border-bottom: 1px solid var(--paper); color: var(--navy); font-weight: 700; }
+.vnums { display: grid; grid-template-columns: repeat(auto-fill, minmax(128px, 1fr)); gap: 10px; margin: 4px 0 0; }
+.vnum { border: 1px solid var(--rule); border-radius: 8px; padding: 8px 12px 9px; display: grid; background: var(--paper); align-content: start; }
+.vnum b { font-family: var(--f-disp); font-size: calc((26px) * var(--ts, 1)); line-height: 1.2; font-variant-numeric: tabular-nums; }
+.vnum span { font-size: calc((12px) * var(--ts, 1)); color: var(--muted); }
+.vnum.hot b { color: var(--red); } .vnum.good b { color: var(--ok); }
+.vopts { display: grid; gap: 8px; margin: 16px 0 0; }
+.vrow { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; }
+.vlab { font-size: calc((13px) * var(--ts, 1)); color: var(--muted); min-width: 5.2em; }
+.vchip { border: 1px solid var(--rule); background: var(--paper); border-radius: 999px; padding: 4px 14px; min-height: 36px; font-size: calc((14px) * var(--ts, 1)); }
+.vchip:hover { border-color: var(--navy); }
+.vchip[aria-pressed="true"] { background: var(--navy); color: var(--paper); border-color: var(--navy); font-weight: 600; }
+.vgo { margin: 16px 0 0; }
+.vgo .mode-btn { width: 100%; }
+.vunits { display: grid; grid-template-columns: repeat(auto-fill, minmax(92px, 1fr)); gap: 8px; margin-top: 14px; }
+.vunit { text-align: left; border: 1px solid var(--rule); background: var(--paper); border-radius: 8px; padding: 8px 10px 9px; display: grid; gap: 3px; min-height: 60px; align-content: start; }
+.vunit:hover { border-color: var(--navy); }
+.vunit b { font-family: var(--f-ko); font-size: calc((16px) * var(--ts, 1)); }
+.vunit > span:not(.vbar) { font-size: calc((12px) * var(--ts, 1)); color: var(--muted); font-variant-numeric: tabular-nums; }
+.vunit.all { grid-column: span 2; border-color: var(--navy); }
+.vbar { height: 6px; background: var(--rule); border-radius: 3px; overflow: hidden; display: flex; }
+.vbar i { display: block; height: 100%; }
+.vbar .m { background: var(--ok); } .vbar .l { background: var(--ok); opacity: .42; }
+.vsess { margin-top: 16px; }
+.vhead { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; }
+.vhead .sp { flex: 1; }
+.vprog { margin-top: 10px; }
+.vtally { display: inline-flex; gap: 10px; font-variant-numeric: tabular-nums; font-size: calc((14px) * var(--ts, 1)); }
+.vtally .t-ok { color: var(--ok); } .vtally .t-half { color: var(--half); } .vtally .t-ng { color: var(--red); }
+.vcard { border: 1px solid var(--rule); border-radius: 10px; padding: 14px clamp(12px, 3vw, 24px) 18px; margin: 10px 0 0; background: var(--paper); scroll-margin-top: 150px; }
+.vmeta { display: flex; flex-wrap: wrap; gap: 6px; min-height: 22px; }
+.vmeta .tag { margin-left: 0; }
+.vmeta .tag.vretry { background: var(--half-soft); color: var(--half); }
+.vth { font-size: calc((clamp(22px, 4.6vw, 30px)) * var(--ts, 1)); font-weight: 700; line-height: 1.35; margin: 10px 0 2px; overflow-wrap: anywhere; }
+.ven { color: var(--muted); font-size: calc((15px) * var(--ts, 1)); overflow-wrap: anywhere; }
+.vko { font-family: var(--f-disp); font-weight: 800; font-size: calc((clamp(34px, 8vw, 52px)) * var(--ts, 1)); line-height: 1.25; margin: 10px 0 4px; overflow-wrap: anywhere; }
+.vface { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 14px; }
+.vin { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; margin-top: 14px; }
+.vq-in { flex: 1 1 240px; min-width: 0; border: 0; border-bottom: 2px solid var(--ink); background: transparent; padding: 8px 4px; font-family: var(--f-ko); font-size: calc((26px) * var(--ts, 1)); min-height: 52px; border-radius: 0; }
+.vq-in.ok { border-color: var(--ok); color: var(--ok); } .vq-in.half { border-color: var(--half); color: var(--half); } .vq-in.ng { border-color: var(--red); color: var(--red); }
+.vfb { margin-top: 14px; padding: 10px 14px; border-radius: 8px; border-left: 5px solid var(--muted); background: var(--desk); display: grid; gap: 4px; }
+.vfb.ok { border-color: var(--ok); background: var(--ok-soft); } .vfb.half { border-color: var(--half); background: var(--half-soft); } .vfb.ng { border-color: var(--red); background: var(--red-soft); }
+.vfb-h { font-weight: 700; } .vfb.ok .vfb-h { color: var(--ok); } .vfb.half .vfb-h { color: var(--half); } .vfb.ng .vfb-h { color: var(--red); }
+.vans { font-family: var(--f-ko); font-weight: 700; font-size: calc((clamp(22px, 5vw, 30px)) * var(--ts, 1)); display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; overflow-wrap: anywhere; }
+.vnote { font-size: calc((13px) * var(--ts, 1)); color: var(--muted); }
+.vnote b { color: var(--ink); }
+.vgrade { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin-top: 14px; }
+.vgrade .btn { min-height: 48px; font-weight: 600; }
+.vgrade .g-o { border-color: var(--ok); color: var(--ok); } .vgrade .g-h { border-color: var(--half); color: var(--half); } .vgrade .g-x { border-color: var(--red); color: var(--red); }
+.vkeys { margin: 10px 0 0; font-size: calc((12px) * var(--ts, 1)); color: var(--muted); }
+.vsum.good { border-color: var(--ok); background: var(--ok-soft); } .vsum.good .stamp { color: var(--ok); }
+.vmiss { list-style: none; margin: 4px 0 0; padding: 0; display: grid; }
+.results .vmiss { padding-left: 0; }
+.vmiss li { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; padding: 7px 0; border-top: 1px dashed var(--rule); cursor: pointer; }
+.vmiss li:first-child { border-top: 0; }
+.vmiss .vw { font-family: var(--f-ko); font-weight: 700; font-size: calc((18px) * var(--ts, 1)); }
+.vmiss .vt { flex: 1 1 180px; min-width: 0; font-size: calc((14px) * var(--ts, 1)); }
+.vmiss .vt small { color: var(--muted); }
+.vmiss .vx { font-size: calc((12px) * var(--ts, 1)); color: var(--red); font-weight: 700; font-variant-numeric: tabular-nums; }
+.vbrow { display: flex; align-items: center; gap: 8px; margin-top: 6px; }
+.vbrow .vb-l { width: 3.4em; font-weight: 700; font-family: var(--f-ko); font-size: calc((14px) * var(--ts, 1)); }
+.vbrow .vbar { flex: 1; height: 14px; border-radius: 4px; }
+.vbrow .vb-n { width: 4.6em; text-align: right; font-size: calc((13px) * var(--ts, 1)); font-variant-numeric: tabular-nums; color: var(--muted); }
+.vdays { display: flex; align-items: flex-end; gap: 4px; height: 64px; margin-top: 8px; }
+.vdays .vd { flex: 1; min-width: 0; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; }
+.vdays .vd i { display: flex; align-items: flex-end; background: var(--navy); border-radius: 3px 3px 0 0; min-height: 2px; overflow: hidden; }
+.vdays .vd i u { display: block; width: 100%; background: var(--ok); text-decoration: none; }
+.vdays-l { display: flex; gap: 4px; font-size: calc((11px) * var(--ts, 1)); color: var(--muted); }
+.vdays-l span { flex: 1; text-align: center; min-width: 0; font-variant-numeric: tabular-nums; }
+.vteaser .exam-h p b { font-variant-numeric: tabular-nums; }
+/* phone widths: the strip carries four buttons now, so ⚙ 🔤 👤 shrink to their icons (the label is a .lbl span) and the brand never wraps */
+.menu summary { gap: 5px; }
+@media (max-width: 640px) { .brand small { display: none; } }
+@media (max-width: 560px) { .strip-in { gap: 6px; } .brand { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: calc((16px) * var(--ts, 1)); }
+  .strip .btn.sm, .menu summary { white-space: nowrap; flex: none; padding-left: 9px; padding-right: 9px; } .strip .lbl { display: none; }
+  .vgrade .btn small { display: none; } .vtab { padding: 8px 12px; } }
+.vprog.all .prog-bar i { background: var(--ok); }
 </style>
 
 <div id="app"></div>
@@ -332,6 +415,8 @@ audio { height: 32px; max-width: 100%; }
 <script src="data.js"></script>
 <script src="clips.js"></script>
 <script src="clips2.js"></script>
+<script src="clips3.js"></script>
+<script src="vocab.js"></script>
 <script>
 (() => {
 'use strict';
@@ -345,6 +430,8 @@ const SETS = window.KMU_SETS || [];
 const CLIPS = window.KMU_CLIPS || {};
 const WORDS = window.KMU_WORDS || {};   // per clip: [[startSec, endSec, word], …] from edge-tts word boundaries
 const EXAMS = [
+  { id: 'daily', title: '매일시험 (ข้อสอบประจำวัน)', date: null, when: 'ทุกวันหลังเรียนบทใหม่ · 10 ข้อ · นับเป็นคะแนนเก็บ 쓰기 10', note: 'ข้อสอบจริงที่สอบไปแล้วทุกบท + เก็งข้อสอบของวันพรุ่งนี้ · ทำซ้ำได้ไม่จำกัด' },
+  { id: 'final', title: '기말시험 · 복습시험 ③④ (เล่ม 1-2)', date: '2026-11-06', when: 'ศ. 6 พ.ย. 복습시험 ③ 22~29과 · พ. 18 พ.ย. ④ 30~37과 · ศ. 20 / จ. 23 พ.ย. 기말', note: '' },
   { id: 'mini02', title: '복습시험 ②', date: '2026-10-20', when: 'อ. 20 ต.ค. · 14~20과', note: 'เก็งข้อสอบจากรูปแบบ 복습시험 ① — 쓰기 100 · 듣기 10 · 읽기 10 · 말하기 10' },
   { id: 'review', title: '중간시험 복습문제 (ชุดทบทวนของครู)', date: '2026-10-22', when: 'ชุดที่ครูแจก 16 ต.ค.', note: 'พิมพ์เขียวของข้อสอบกลางภาค — 쓰기 14 ตอน · 읽기 25 ข้อ · 듣기 12 ข้อ (เสียงจริงของครู) · 말하기 20 คำถาม' },
   { id: 'midterm', title: '중간시험 (สอบกลางภาค)', date: '2026-10-22', when: 'พฤ. 22 ต.ค. 말하기 · ศ. 23 ต.ค. 쓰기·듣기·읽기 · 1~21과', note: 'ข้อสอบจำลอง 쓰기/읽기/듣기 2 ชุด · สัมภาษณ์จำลอง 말하기 · ฟังบทสนทนาหนังสือเสียงจริง · ทดสอบศัพท์และเขียนตามคำบอก' }
@@ -359,7 +446,7 @@ const $ = s => document.querySelector(s);
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 const later = f => setTimeout(f, 0);   // run after the render that the current handler caused
-const SYNCED = /^(ans|self|score|ai|hist|attempt):(.+)$/;
+const SYNCED = /^(ans|self|score|ai|hist|attempt|vocab):(.+)$/;   // vocab:srs = the vocabulary drill record (cloud doc 'srs'); the other vocab:* preferences are written with store.put
 const storeVer = signal(0);            // bumped when stored scores / attempts change: Home and Cover re-read the store
 const store = { get(k, d) { try { const v = localStorage.getItem('kmuweb:' + k); return v ? JSON.parse(v) : d; } catch (e) { return d; } },
                 put(k, v) { try { if (v === null || v === undefined) localStorage.removeItem('kmuweb:' + k); else localStorage.setItem('kmuweb:' + k, JSON.stringify(v)); } catch (e) {} },
@@ -536,7 +623,7 @@ const resetAsk = signal('');
 function resetSet(id) { ['ans', 'self', 'ai', 'score', 'hist', 'attempt'].forEach(k => store.set(k + ':' + id, null)); resetAsk.value = '';
   if (curSt.peek() && curSt.peek().id === id) { C.ans = {}; selfS.value = {}; aiS.value = {}; G.value = null; C.graded = false; ansTick.value++; } }
 /* calendar days between today (viewer's clock) and the exam date — not hours, so the label changes at midnight */
-function dday(date) { const [y, m, dd] = date.split('-').map(Number), now = new Date();
+function dday(date) { if (!date) return ''; const [y, m, dd] = date.split('-').map(Number), now = new Date();
   const d = Math.round((Date.UTC(y, m - 1, dd) - Date.UTC(now.getFullYear(), now.getMonth(), now.getDate())) / 86400000);
   return d > 0 ? `D-${d}` : d === 0 ? 'วันนี้' : 'ผ่านแล้ว'; }
 let homeDay = new Date().toDateString();   // a tab left open overnight re-draws the countdown when the date changes
@@ -559,10 +646,13 @@ const GROUPS = [
   { re: /^vocab-/, label: '🔤 ทดสอบจำศัพท์ 5–13과 · 14–21과', note: 'ไทย→เกาหลี พิมพ์เอง 30 ข้อ + เกาหลี→ไทย เลือก 30 ข้อ คัดคำที่ครูเคยออกสอบก่อน' },
   { re: /^mini02r-/, label: 'ข้อสอบจริง (สอบแล้ว 20 ต.ค.)', note: '' },
 ];
-const groupOf = st => { const g = GROUPS.find(g => g.re.test(st.id)); return g ? g.label : 'paper:' + paperOf(st); };
+/* a set's own `group` string (daily sets) wins over the GROUPS rules; sets sharing the string form one group (note = '') */
+const groupOf = st => { if (st.group) return st.group; const g = GROUPS.find(g => g.re.test(st.id)); return g ? g.label : 'paper:' + paperOf(st); };
+/* the daily board lists the newest unit first (NN과 in the label); a 🔮 prediction group goes on top */
+const dailyRank = l => (l.includes('🔮') ? 1000 : 0) + (+((/(\d+)\s*과/.exec(l) || [])[1]) || 0);
 function show(which) { batch(() => { view.value = which; }); const sc = $('#scroller'); if (sc) sc.scrollTo({ top: 0 }); }
 function go(id) { if (location.hash.slice(1) !== id) location.hash = id; else openSet(id); }
-function route() { const id = location.hash.slice(1); if (id === 'profile') { leaveSet(); show('profile'); } else if (id && SETS.some(s => s.id === id)) openSet(id); else { leaveSet(); show('home'); } }
+function route() { const id = location.hash.slice(1); if (id === 'profile') { leaveSet(); show('profile'); } else if (id === 'vocab') { leaveSet(); show('vocab'); } else if (id && SETS.some(s => s.id === id)) openSet(id); else { leaveSet(); show('home'); } }
 function leaveSet() { stopRuns(); stopExamClock(); curSt.value = null; }   // stopExamClock saves the remaining time
 window.addEventListener('hashchange', route);
 
@@ -832,13 +922,14 @@ async function aiGradeAll(only) {
 const syncS = signal('');
 var cloud = (() => {
   let db = null, uid = null; const timers = {}, chains = {};
-  const KEYS = ['ans', 'self', 'ai', 'score', 'hist', 'attempt'];
+  const KEYS = ['ans', 'self', 'ai', 'score', 'hist', 'attempt', 'vocab'];
+  const keysOf = id => id === 'srs' ? ['vocab'] : KEYS.filter(k => k !== 'vocab');   // doc 'srs' = { at, vocab } (the vocabulary drill); a set's doc never carries the vocab record
   const say = t => { syncS.value = t; };
   const stampOf = id => store.get('stamp:' + id, 0) || (store.get('score:' + id, null) || {}).at || 0;
-  const hasLocal = id => KEYS.some(k => { const v = store.get(k + ':' + id, null); return v && (Array.isArray(v) ? v.length : typeof v === 'object' ? Object.keys(v).length : true); });
+  const hasLocal = id => keysOf(id).some(k => { const v = store.get(k + ':' + id, null); return v && (Array.isArray(v) ? v.length : typeof v === 'object' ? Object.keys(v).length : true); });
   const ref = id => db.collection('data/users/' + uid).doc(id);
   function push(id) {
-    const body = { at: stampOf(id) || Date.now() }; KEYS.forEach(k => { body[k] = store.get(k + ':' + id, null); });
+    const body = { at: stampOf(id) || Date.now() }; keysOf(id).forEach(k => { body[k] = store.get(k + ':' + id, null); });
     chains[id] = (chains[id] || Promise.resolve()).then(() => ref(id).set(body)).then(() => say('☁️ บันทึกแล้ว'), () => say('☁️ บันทึกไม่ได้'));
   }
   async function pull() {
@@ -846,10 +937,10 @@ var cloud = (() => {
     let snap; try { snap = await db.collection('data/users/' + uid).get(); } catch (e) { say('☁️ ออฟไลน์'); return; }
     const remote = {}; snap.docs.forEach(d => { if (d.exists) remote[d.id] = d.data(); });
     let changed = false;
-    SETS.forEach(st => {
-      const r = remote[st.id], lt = stampOf(st.id);
-      if (r && (r.at || 0) > lt) { KEYS.forEach(k => store.put(k + ':' + st.id, r[k] ?? null)); store.put('stamp:' + st.id, r.at); changed = true; }
-      else if (hasLocal(st.id) && (!r || lt > (r.at || 0))) push(st.id);
+    [...SETS.map(st => st.id), 'srs'].forEach(id => {   // every set + the vocabulary record
+      const r = remote[id], lt = stampOf(id);
+      if (r && (r.at || 0) > lt) { keysOf(id).forEach(k => store.put(k + ':' + id, r[k] ?? null)); store.put('stamp:' + id, r.at); changed = true; }
+      else if (hasLocal(id) && (!r || lt > (r.at || 0))) push(id);
     });
     say('☁️ ซิงก์แล้ว');
     if (changed) { storeVer.value++; if (view.peek() === 'set' && curSt.peek() && mode.peek() === 'cover') openSet(curSt.peek().id); }
@@ -861,9 +952,9 @@ var cloud = (() => {
     if (!d || !uid) return;              // signed out or db not served: stay local
     db = d; say('☁️ กำลังซิงก์…'); await pull();
     document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') pull(); });
-    setInterval(() => { if (document.visibilityState === 'visible' && (!curSt.peek() || mode.peek() === 'cover')) pull(); }, 20000);   // home / cover pages pick up another device's progress
+    setInterval(() => { if (document.visibilityState === 'visible' && (!curSt.peek() || mode.peek() === 'cover') && !(vsS.peek() && vsS.peek().phase !== 'end')) pull(); }, 20000);   // home / cover / vocabulary pages pick up another device's progress (not in the middle of a drill session)
   })().catch(() => {});
-  return { queue(id) { if (!db) return; clearTimeout(timers[id]); say('☁️ …'); timers[id] = setTimeout(() => push(id), 1500); } };
+  return { queue(id) { if (!db) return; clearTimeout(timers[id]); say('☁️ …'); timers[id] = setTimeout(() => push(id), id === 'srs' ? 3000 : 1500); } };   // the vocabulary record changes with every answer: a longer pause before the write
 })();
 
 /* ------------------------------------------------------------------ components: top strip, transport bar, dock */
@@ -871,10 +962,10 @@ const PALS = [['navy', '#0f4c81', 'น้ำเงิน'], ['sakura', '#a8326e'
 function Strip() {
   useLayoutEffect(() => { const s = $('.strip'); stripH(); const ro = typeof ResizeObserver === 'function' ? new ResizeObserver(stripH) : null; if (ro) ro.observe(s); return () => ro && ro.disconnect(); }, []);
   return html`<div class="strip"><div class="strip-in">
-    <button class="brand ko" id="home-btn" type="button" onClick=${() => { if (location.hash) location.hash = ''; else { leaveSet(); show('home'); } }}>KMU 모의시험 <small>รวมแบบฝึกก่อนสอบ · 1~21과</small></button>
+    <button class="brand ko" id="home-btn" type="button" onClick=${() => { if (location.hash) location.hash = ''; else { leaveSet(); show('home'); } }}>KMU 모의시험 <small>รวมแบบฝึกก่อนสอบ · 5~37과</small></button>
     <span class="sync" id="sync" aria-live="polite">${syncS.value || null}</span>
     <details class="menu" id="settings">
-      <summary aria-label="ตั้งค่า">⚙ ตั้งค่า</summary>
+      <summary aria-label="ตั้งค่า" title="ตั้งค่า">⚙<span class="lbl"> ตั้งค่า</span></summary>
       <div class="pop">
         <label class="ctl" for="rate">ความเร็วเสียง <select id="rate" value=${rateS.value} onChange=${e => { rateS.value = e.target.value; }}><option value="0.8">ช้า</option><option value="0.9">ปกติ</option><option value="1">เร็ว</option></select></label>
         <label class="ctl" for="tsize">ขนาดตัวอักษร <select id="tsize" value=${tsizeS.value} onChange=${e => { tsizeS.value = String(e.target.value || '1'); }}><option value="0.9">เล็ก</option><option value="1">ปกติ</option><option value="1.15">ใหญ่</option><option value="1.3">ใหญ่มาก</option><option value="1.5">ใหญ่พิเศษ</option></select></label>
@@ -883,7 +974,8 @@ function Strip() {
         <div class="ctl">โทนสี <div class="swatches" role="group" aria-label="โทนสี">${PALS.map(([n, c, th]) => html`<button class="sw" type="button" data-pal=${n} style=${'background:' + c} aria-pressed=${String(n === (paletteS.value || 'navy'))} aria-label=${'โทน' + th} title=${th} onClick=${() => { paletteS.value = n; }}></button>`)}</div></div>
       </div>
     </details>
-    <button class="btn sm" type="button" id="prof-btn" onClick=${() => { location.hash = 'profile'; }}>👤 โปรไฟล์</button>
+    ${VOCAB.length ? html`<button class="btn sm" type="button" id="vocab-btn" aria-label="ศัพท์ประจำวัน" title="ศัพท์ประจำวัน" onClick=${goVocab}>🔤<span class="lbl"> ศัพท์</span></button>` : null}
+    <button class="btn sm" type="button" id="prof-btn" aria-label="โปรไฟล์" title="โปรไฟล์" onClick=${() => { location.hash = 'profile'; }}>👤<span class="lbl"> โปรไฟล์</span></button>
     <button class="btn sm" type="button" id="help-btn" onClick=${() => { stopRuns(); show('help'); }}>วิธีใช้</button>
   </div></div>`;
 }
@@ -935,15 +1027,16 @@ function Card({ st, short }) {
 }
 function Home() {
   storeVer.value; dayS.value;
-  return html`<p class="home-tip">เลือกชุดข้อสอบ → หน้าปกจะบอกเวลาและกติกา → <b>เริ่มสอบจริง</b> (จับเวลา เสียงเล่นเอง) หรือ <b>ฝึกทำ</b> (ไม่จับเวลา ดูคำแปลได้)</p>
+  return html`<${VTeaser} /><p class="home-tip">เลือกชุดข้อสอบ → หน้าปกจะบอกเวลาและกติกา → <b>เริ่มสอบจริง</b> (จับเวลา เสียงเล่นเอง) หรือ <b>ฝึกทำ</b> (ไม่จับเวลา ดูคำแปลได้)</p>
     ${EXAMS.map(ex => {
       const sets = SETS.filter(s => s.exam === ex.id); if (!sets.length) return null;
-      const done = sets.filter(s => lastScore(s.id)).length, papers = [...new Set(sets.map(groupOf))], byPaper = papers.length > 1;
+      const done = sets.filter(s => lastScore(s.id)).length, papers = [...new Set(sets.map(groupOf))], byPaper = papers.length > 1 || sets.some(s => s.group);
       let n = 0;
-      const groups = byPaper ? papers.map(p => { const ps = sets.filter(s => groupOf(s) === p), g = GROUPS.find(g => g.label === p);
-        return { label: g ? g.label : `ชุดที่ ${++n}`, note: g ? g.note : '', sets: ps }; }) : [{ label: 'ทุกชุด · เรียงตาม 쓰기 → 읽기 → 듣기 → 말하기', note: '', sets }];
+      const groups = byPaper ? papers.map(p => { const ps = sets.filter(s => groupOf(s) === p), g = GROUPS.find(g => g.label === p), mine = !g && ps.some(s => s.group);
+        return { label: g ? g.label : mine ? p : `ชุดที่ ${++n}`, note: g ? g.note : '', sets: ps, mine }; }) : [{ label: 'ทุกชุด · เรียงตาม 쓰기 → 읽기 → 듣기 → 말하기', note: '', sets }];
+      if (ex.id === 'daily') groups.sort((a, b) => dailyRank(b.label) - dailyRank(a.label));
       return html`<article class="exam">
-        <div class="exam-h"><h2 class="ko">${ex.title}</h2><span class="dday">${dday(ex.date)}</span><span class="muted">${ex.when}</span><p>${ex.note}</p></div>
+        <div class="exam-h"><h2 class="ko">${ex.title}</h2>${ex.date ? html`<span class="dday">${dday(ex.date)}</span>` : null}<span class="muted">${ex.when}</span><p>${ex.note}</p></div>
         <p class="exam-sum">ทำแล้ว ${done}/${sets.length} ชุด</p>
         ${groups.map(g => {
           g.sets.sort((a, b) => ORDER.indexOf(a.skill) - ORDER.indexOf(b.skill) || a.id.localeCompare(b.id));
@@ -952,7 +1045,7 @@ function Home() {
           return html`<section class="grp"><div class="grp-h"><b>${g.label}</b><span class="muted">ทำแล้ว ${dn}/${g.sets.length}${byPaper && dn ? ` · คะแนน ${Math.round(got * 100) / 100}/${all}` : ''}${(() => { const sp = g.sets.filter(s => (lastScore(s.id) || {}).spoken); return sp.length ? ` · ตอบ ${sp.reduce((a, s) => { const e = lastScore(s.id); return a + (oldSpk(e) ? e.s : e.n || 0); }, 0)}/${sp.reduce((a, s) => a + itemCount(s), 0)} ข้อ` : ''; })()}</span>
             <span class="grp-bar"><i style=${'width:' + (100 * dn / g.sets.length) + '%'}></i></span></div>
             ${g.note ? html`<p class="grp-note">${g.note}</p>` : null}
-            <div class="skills four">${g.sets.map(st => html`<${Card} st=${st} short=${byPaper} />`)}</div></section>`;
+            <div class="skills four">${g.sets.map(st => html`<${Card} st=${st} short=${byPaper && !g.mine} />`)}</div></section>`;
         })}
       </article>`;
     })}`;
@@ -1283,13 +1376,304 @@ function Profile() {
   </section>`;
 }
 
+/* ------------------------------------------------------------------ vocabulary drill (#vocab) — every word of the centre's vocabulary sheets 5–37, Leitner boxes
+   Words: window.KMU_VOCAB = [{u, ko, th, en, cat}] (vocab.js, already in drill-priority order). Clips: clips3.js adds CLIPS['F|<ko>'] per word; say() falls back to the browser voice.
+   Progress = ONE record kmuweb:vocab:srs = { w: { [ko]: { b, d, n, x, l } }, days: { 'YYYY-MM-DD': { n, r } } }
+     b = box 0–5 · d = due day number (dayNum(): floor(local midnight / 86400000)) · n = answers · x = wrong answers · l = day number of the last answer
+     days[date].n = answers given that day, .r = how many of them were fully right.
+   Sync: 'vocab:srs' matches SYNCED, so it gets stamp:srs and the cloud doc 'srs' = { at, vocab } exactly like a set (last change wins). Only word strings are stored, never a name.
+   The preferences vocab:size / mode / auto / shuffle are written with store.put — store.set would sync them as cloud docs of their own. */
+const VOCAB = window.KMU_VOCAB || [];
+const VBY = {}; VOCAB.forEach(w => { VBY[w.ko] = w; });
+const VUNITS = [...new Set(VOCAB.map(w => w.u))].sort((a, b) => a - b);
+const LEIT = [1, 2, 4, 7, 14, 30];   // days until the next review after a RIGHT answer, indexed by the box the word was in BEFORE the answer
+const dayNum = (t = new Date()) => { const m = new Date(t); m.setHours(0, 0, 0, 0); return Math.floor(m.getTime() / 86400000); };
+const dayKey = (t = new Date()) => `${t.getFullYear()}-${String(t.getMonth() + 1).padStart(2, '0')}-${String(t.getDate()).padStart(2, '0')}`;
+const srsGet = () => { const r = store.get('vocab:srs', null); return r && typeof r === 'object' && r.w && typeof r.w === 'object' ? { w: r.w, days: r.days && typeof r.days === 'object' ? r.days : {} } : { w: {}, days: {} }; };
+/* one answer: right (1) → next box, due in LEIT[old box] days · half (0.5, near-miss spelling) → same box, due tomorrow · wrong (0) → box 0, due today, x + 1 */
+function srsApply(ko, score) {
+  const r = srsGet(), t = dayNum(), e = r.w[ko] || { b: 0, d: t, n: 0, x: 0, l: t }, ob = Math.max(0, Math.min(5, e.b | 0));
+  if (score >= 1) { e.b = Math.min(5, ob + 1); e.d = t + LEIT[ob]; } else if (score > 0) { e.b = ob; e.d = t + 1; } else { e.b = 0; e.d = t; e.x = (e.x || 0) + 1; }
+  e.n = (e.n || 0) + 1; e.l = t; r.w[ko] = e;
+  const k = dayKey(), dd = r.days[k] || { n: 0, r: 0 }; dd.n++; if (score >= 1) dd.r++; r.days[k] = dd;
+  store.set('vocab:srs', r);
+  return e;
+}
+
+/* the accepted spellings of an entry: "정류장 [정뉴장]" → 정류장 · "(돈을) 쓰다" → 쓰다 / 돈을 쓰다 · "공부(를) 하다" → 공부 하다 / 공부를 하다 · "녹색(초록색)" → 녹색 / 초록색 ·
+   "시다 — 레몬" → 시다 (or both) · "기차 · 기차표" is a pair: both words in either order count, one alone is half */
+const WKC = {};
+function wordKeys(ko) {
+  if (WKC[ko]) return WKC[ko];
+  const s = ko.replace(/\s*\[[^\]]*\]/g, '').trim(), dash = s.split(/\s+—\s+/), parts = dash[0].split(/\s+·\s+/);
+  const exp = p => { const out = [p], m = /\(([^)]*)\)/.exec(p);
+    if (m) { out.push(p.replace(/\s*\([^)]*\)/g, ' ').replace(/\s+/g, ' ').trim()); out.push(/[을를이가은는]$/.test(m[1]) || m[1].length === 1 ? p.replace(/\(([^)]*)\)/, '$1') : m[1]); }
+    return out; };
+  let keys;
+  if (parts.length > 1) keys = [parts.join(' '), parts.slice().reverse().join(' ')];
+  else { keys = exp(parts[0]); if (parts[0].includes('/')) parts[0].split(/\s*\/\s*/).forEach(a => keys.push(...exp(a))); if (dash.length > 1) keys.push(dash.join(' ')); }
+  return WKC[ko] = { keys: [...new Set(keys.map(k => k.trim()).filter(Boolean))], pair: parts.length > 1 ? parts : [] };
+}
+/* typed answer → [1 | 0.5 | 0, closest accepted spelling]; judgeText gives the half mark for ≤ 2 jamo (≤ 1 for words of two syllables or fewer) */
+function judgeWord(ans, ko) {
+  const { keys, pair } = wordKeys(ko), lc = x => String(x).toLowerCase(), a = lc(ans).replace(/[—–]/g, ''), ks = keys.map(lc), [r, k] = judgeText(a, ks);
+  if (r < 1 && pair.length && pair.some(p => norm(lc(p)) === norm(a))) return [.5, keys[0]];
+  return [r, keys[Math.max(0, ks.indexOf(k))]];
+}
+/* a wrong answer that is itself another word of the list: "「…」 = …" */
+let vIdx = null;
+function vOther(ans, ko) {
+  if (!vIdx) { vIdx = new Map(); VOCAB.forEach(w => wordKeys(w.ko).keys.forEach(k => { const n = norm(k).toLowerCase(); if (n && !vIdx.has(n)) vIdx.set(n, w.ko); })); }
+  const o = vIdx.get(norm(ans).toLowerCase()); return o && o !== ko ? VBY[o] : null;
+}
+
+/* preferences (signals; saved with store.put) and the session */
+const vsizeS = signal([20, 30, 40, 50].includes(+store.get('vocab:size', 40)) ? +store.get('vocab:size', 40) : 40);
+const vmodeS = signal(store.get('vocab:mode', 'type') === 'card' ? 'card' : 'type');
+const vautoS = signal(store.get('vocab:auto', 0) === 1), vshufS = signal(store.get('vocab:shuffle', 1) !== 0);
+const vnewS = signal([0, 10, 15, 20].includes(+store.get('vocab:newmin', 15)) ? +store.get('vocab:newmin', 15) : 15);   // slots of each daily session kept for NEW words: 15 by default so all 912 words are met before the 기말 (a 30-word session with 0 reserved met only ~180 words in 24 simulated days)
+const vPref = (sig, key, v) => { sig.value = v; store.put('vocab:' + key, typeof v === 'boolean' ? +v : v); };
+const vtabS = signal('today'), vresetS = signal(false);
+/* the running session (null = none): { src, label, mode, queue: [{ko, retry}], total, done, ok, half, ng, first: {ko: first score}, phase: ask | fb | end, fb, shown, seq, at } —
+   done counts words finished (right or half); a wrong word goes to the back of the queue until it is answered right */
+const vsS = signal(null);
+const vShuffle = a => { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+const vNewW = r => VOCAB.filter(w => !(r.w[w.ko] && r.w[w.ko].n));
+const vDueW = (r, t) => VOCAB.filter(w => { const e = r.w[w.ko]; return e && e.n > 0 && e.d <= t; });
+/* today's session: every DUE word (lowest box first, then the latest unit first), then NEW words in drill order — together up to the session size.
+   With vnewS = n > 0, n of the slots are kept for new words even when more reviews are due (otherwise a backlog of reviews keeps new words out for days). */
+function vPlan(size) {
+  const r = srsGet(), t = dayNum(), dueAll = vDueW(r, t).sort((a, b) => r.w[a.ko].b - r.w[b.ko].b || b.u - a.u), freshAll = vNewW(r);
+  const keep = Math.min(vnewS.peek(), freshAll.length, size), review = dueAll.slice(0, size - keep), add = freshAll.slice(0, size - review.length);
+  return { r, t, dueAll, freshAll, review, add };
+}
+const vBuildDaily = size => { const p = vPlan(size); return p.review.concat(p.add); };
+function vInfo() {
+  vnewS.value;   // subscribe: the plan depends on it
+  const size = vsizeS.value, p = vPlan(size), r = p.r, t = p.t, due = p.dueAll.length, fresh = p.freshAll.length;
+  let seen = 0, learned = 0, mastered = 0;
+  VOCAB.forEach(w => { const e = r.w[w.ko]; if (!e || !e.n) return; seen++; if (e.b >= 2) learned++; if (e.b >= 4) mastered++; });
+  let streak = 0; const d = new Date(); if (!(r.days[dayKey(d)] || {}).n) d.setDate(d.getDate() - 1);   // consecutive days with an answer, ending today (or yesterday while today is still empty)
+  while ((r.days[dayKey(d)] || {}).n > 0) { streak++; d.setDate(d.getDate() - 1); }
+  const review = p.review.length, sess = review + p.add.length, newUnits = [...new Set(p.add.map(w => w.u))].slice(0, 5);
+  return { r, t, due, fresh, newUnits, seen, learned, mastered, streak, practised: Object.keys(r.days).filter(k => r.days[k].n > 0).length, today: r.days[dayKey()] || { n: 0, r: 0 }, sess, review, add: sess - review };
+}
+function vUnitStats(r) {
+  const m = {}; VUNITS.forEach(u => { m[u] = { total: 0, seen: 0, learned: 0, mastered: 0 }; });
+  VOCAB.forEach(w => { const o = m[w.u], e = r.w[w.ko]; o.total++; if (e && e.n) { o.seen++; if (e.b >= 2) o.learned++; if (e.b >= 4) o.mastered++; } });
+  return m;
+}
+const vSay = ko => { stopRuns(); say(CLIPS['F|' + ko] ? ko : ko.replace(/\s*\[[^\]]*\]/g, '').replace(/[()]/g, '').replace(/\s*[—·\/]\s*/g, ', '), 'F'); };
+const vFocusNow = () => { const i = $('#vq-in'); if (i) i.focus({ preventScroll: true }); };   // the input persists from card to card, so a tap can keep the iPad keyboard open
+const vFocus = () => later(vFocusNow);
+const vAuto = () => { const s = vsS.peek(); if (vautoS.peek() && s && s.mode === 'card' && s.phase === 'ask') vSay(s.queue[0].ko); };
+function vStart(src, words, label) {
+  stopRuns();
+  const list = src.kind === 'wrong' || (src.kind === 'unit' && vshufS.peek()) ? vShuffle(words.slice()) : words.slice();
+  vsS.value = list.length ? { src, label, mode: vmodeS.peek(), queue: list.map(w => ({ ko: w.ko, retry: false })), total: list.length, done: 0, ok: 0, half: 0, ng: 0, first: {}, phase: 'ask', fb: null, shown: false, seq: 1, at: Date.now() } : null;
+  vFocus(); vAuto();
+}
+const vStartDaily = () => vStart({ kind: 'daily' }, vBuildDaily(vsizeS.peek()), 'ชุดวันนี้');
+const vStartUnit = u => vStart({ kind: 'unit', u }, u === 'all' ? VOCAB : VOCAB.filter(w => w.u === u), u === 'all' ? 'ทุกบท' : `บท ${u}과`);
+function vStartWeak() {   // nothing due and nothing new: the words that sit in the lowest boxes
+  const r = srsGet(), w = VOCAB.filter(x => (r.w[x.ko] || {}).n > 0).sort((a, b) => r.w[a.ko].b - r.w[b.ko].b || (r.w[b.ko].x || 0) - (r.w[a.ko].x || 0)).slice(0, vsizeS.peek());
+  vStart({ kind: 'weak' }, w, 'ทวนคำที่ยังอ่อน');
+}
+const vAgain = () => { const s = vsS.peek(), k = s ? s.src : { kind: 'daily' }; if (k.kind === 'unit') vStartUnit(k.u); else if (k.kind === 'weak') vStartWeak(); else vStartDaily(); };
+const vExit = () => { stopRuns(); vsS.value = null; };
+const vAdvance = s => s.queue.length ? { ...s, phase: 'ask', fb: null, shown: false, seq: s.seq + 1 } : { ...s, phase: 'end', fb: null, end: Date.now() };
+/* grade the card on top of the queue: Leitner update, tally, a wrong word goes to the back; typed mode shows the feedback first, card mode (self-graded) moves straight on */
+function vGrade(score, ans, key) {
+  const s = vsS.peek(); if (!s || s.phase !== 'ask') return;
+  const q = s.queue[0], b0 = (srsGet().w[q.ko] || {}).b || 0, queue = s.queue.slice(1), first = { ...s.first };
+  if (first[q.ko] === undefined) first[q.ko] = score;
+  if (score === 0) queue.push({ ko: q.ko, retry: true });
+  batch(() => {
+    const e = srsApply(q.ko, score);
+    const nx = { ...s, queue, first, done: s.done + (score > 0 ? 1 : 0), ok: s.ok + (score === 1 ? 1 : 0), half: s.half + (score === .5 ? 1 : 0), ng: s.ng + (score === 0 ? 1 : 0), fb: { ko: q.ko, score, ans, key, b0, e, retry: q.retry } };
+    vsS.value = s.mode === 'card' ? vAdvance(nx) : { ...nx, phase: 'fb' };
+  });
+  if (s.mode === 'type') { if (vautoS.peek()) vSay(q.ko); } else vAuto();
+}
+function vSubmit(text) {
+  const s = vsS.peek(); if (!s || s.phase !== 'ask' || s.mode !== 'type') return;
+  const ans = String(text || '').trim(); if (!ans) return;
+  const [score, key] = judgeWord(ans, s.queue[0].ko); vGrade(score, ans, key);
+}
+function vGiveUp() { const s = vsS.peek(); if (s && s.phase === 'ask' && s.mode === 'type') vGrade(0, '', wordKeys(s.queue[0].ko).keys[0]); }
+function vNext() {
+  const s = vsS.peek(); if (!s || s.phase !== 'fb') return;
+  const i = $('#vq-in'); if (i) { i.value = ''; i.focus({ preventScroll: true }); }   // same element, same tap: the iPad keyboard stays open
+  vsS.value = vAdvance(s);
+  later(() => { const c = $('#vcard'); if (c) c.scrollIntoView({ block: 'nearest' }); });
+}
+function vReveal() { const s = vsS.peek(); if (s && s.phase === 'ask' && s.mode === 'card' && !s.shown) vsS.value = { ...s, shown: true }; }
+const vReset = () => { vresetS.value = false; vsS.value = null; store.set('vocab:srs', null); };
+function goVocab() { if (location.hash.slice(1) === 'vocab') { leaveSet(); show('vocab'); } else location.hash = 'vocab'; }
+/* Enter = check, Enter again = next (also when the IME is still composing: the answer is read when the composition ends) */
+let vComp = false, vPend = false;
+const vEnter = el => { const s = vsS.peek(); if (!s || s.mode !== 'type') return; if (s.phase === 'fb') vNext(); else vSubmit(el && el.value); };
+const vKey = e => { if (e.key !== 'Enter' && e.code !== 'Enter' && e.code !== 'NumpadEnter') return;
+  if (vComp || e.isComposing) { vPend = true; return; }
+  e.preventDefault(); vEnter(e.target); };
+const vCompEnd = e => { vComp = false; if (vPend) { vPend = false; const el = e.target; later(() => vEnter(el)); } };
+/* card mode on a keyboard: Enter / Space = show the meaning, then 1 = จำได้ · 2 = ไม่แน่ใจ · 3 = จำไม่ได้ */
+document.addEventListener('keydown', e => {
+  const s = vsS.peek(); if (view.peek() !== 'vocab' || !s || s.mode !== 'card' || s.phase !== 'ask' || e.ctrlKey || e.metaKey || e.altKey) return;
+  const tg = e.target && e.target.tagName; if (tg === 'INPUT' || tg === 'TEXTAREA' || tg === 'SELECT') return;
+  if (!s.shown) { if ((e.key === 'Enter' || e.key === ' ') && tg !== 'BUTTON') { e.preventDefault(); vReveal(); } }
+  else if (e.key === '1' || e.key === '2' || e.key === '3') vGrade([1, .5, 0][+e.key - 1], '', wordKeys(s.queue[0].ko).keys[0]);
+});
+
+/* components */
+const vchip = (on, label, onClick, id) => html`<button type="button" class="vchip" id=${id} aria-pressed=${String(!!on)} onClick=${onClick}>${label}</button>`;
+const vDays = n => n === 1 ? 'พรุ่งนี้' : `ใน ${n} วัน`;
+function VOpts({ shuffle, sizes }) {
+  const m = vmodeS.value, sz = vsizeS.value;
+  return html`<div class="vopts">
+    ${sizes ? html`<div class="vrow"><span class="vlab">คำต่อชุด</span>${[20, 30, 40, 50].map(n => vchip(sz === n, `${n} คำ`, () => vPref(vsizeS, 'size', n), 'vsize-' + n))}</div>
+      <div class="vrow"><span class="vlab">คำใหม่อย่างน้อย</span>${[0, 10, 15, 20].map(n => vchip(vnewS.value === n, n ? `${n} คำ/ชุด` : 'ไม่กันที่', () => vPref(vnewS, 'newmin', n), 'vnew-' + n))}<span class="vnote">กันที่ไว้ให้คำใหม่ แม้มีคำค้างทบทวนเยอะ</span></div>` : null}
+    <div class="vrow"><span class="vlab">โหมด</span>${vchip(m === 'type', '✍ พิมพ์', () => vPref(vmodeS, 'mode', 'type'), 'vmode-type')}${vchip(m === 'card', '🃏 การ์ด', () => vPref(vmodeS, 'mode', 'card'), 'vmode-card')}
+      ${vchip(vautoS.value, '🔊 เล่นเสียงเอง', () => vPref(vautoS, 'auto', !vautoS.peek()), 'vauto')}${shuffle ? vchip(vshufS.value, '🔀 สุ่มลำดับ', () => vPref(vshufS, 'shuffle', !vshufS.peek()), 'vshuf') : null}</div>
+  </div>`;
+}
+function VTabs() {
+  const t = vtabS.value;
+  return html`<div class="vtabs" role="tablist" aria-label="ฝึกศัพท์">${[['today', 'วันนี้'], ['units', 'ตามบท'], ['stats', 'สถิติ']].map(([k, lab]) => html`<button type="button" class="vtab" role="tab" id=${'vtab-' + k} aria-selected=${String(t === k)} onClick=${() => { vtabS.value = k; }}>${lab}</button>`)}</div>`;
+}
+function VToday() {
+  const q = vInfo(), md = vmodeS.value;
+  return html`<div class="sec" id="vtoday">
+    <div class="vnums">
+      <div class=${'vnum' + (q.due ? ' hot' : '')}><b id="v-due">${q.due}</b><span>ถึงรอบทบทวนวันนี้ (คำ)</span></div>
+      <div class="vnum"><b id="v-new">${q.fresh}</b><span>คำใหม่ที่ยังไม่เคยฝึก</span></div>
+      <div class="vnum"><b id="v-today">${q.today.n}</b><span>ตอบแล้ววันนี้ · ถูก ${q.today.r}</span></div>
+      <div class=${'vnum' + (q.streak ? ' good' : '')}><b id="v-streak">${q.streak}</b><span>วันติดต่อกัน</span></div>
+    </div>
+    <${VOpts} sizes=${true} />
+    <div class="vgo">${q.sess ? html`<button class="mode-btn primary" type="button" id="vstart" onClick=${vStartDaily}><span class="t">▶ เริ่มชุดวันนี้ · ${q.sess} คำ</span><span class="s">ทบทวน ${q.review} คำ + คำใหม่ ${q.add} คำ · ${md === 'type' ? 'เห็นคำไทย แล้วพิมพ์คำเกาหลี' : 'เห็นคำเกาหลี นึกความหมาย แล้วประเมินตัวเอง'}</span></button>`
+      : html`<p class="notice" id="vnone">วันนี้ไม่มีคำที่ถึงรอบทบทวน และไม่เหลือคำใหม่แล้ว 🎉 — เลือกฝึกตามบท หรือทวนคำที่ยังอ่อน</p>${q.seen ? html`<div class="actions"><button class="btn primary" type="button" id="vweak" onClick=${vStartWeak}>ทวนคำที่ยังอ่อน (${Math.min(vsizeS.value, q.seen)} คำ)</button></div>` : null}`}</div>
+    <p class="sec-th">ลำดับคำ: คำที่ถึงรอบทบทวนมาก่อน (กล่องต่ำสุดก่อน แล้วบทหลังสุดก่อน) ตามด้วยคำใหม่${q.newUnits.length ? ` จากบท ${q.newUnits.join(' · ')} …` : ''} · ตอบผิด = ถามซ้ำท้ายชุดจนตอบถูก · ตอบถูก = นัดทวนอีก 1 · 2 · 4 · 7 · 14 · 30 วัน</p>
+  </div>`;
+}
+function VUnits() {
+  const us = vUnitStats(srsGet()), all = { total: VOCAB.length, learned: sum(VUNITS, u => us[u].learned), mastered: sum(VUNITS, u => us[u].mastered) };
+  const chip = (u, st, label) => html`<button type="button" class=${'vunit' + (u === 'all' ? ' all' : '')} data-unit=${u} onClick=${() => vStartUnit(u)}><b>${label}</b><span>${st.learned}/${st.total}</span><span class="vbar"><i class="m" style=${{ width: (100 * st.mastered / st.total) + '%' }}></i><i class="l" style=${{ width: (100 * (st.learned - st.mastered) / st.total) + '%' }}></i></span></button>`;
+  return html`<div class="sec" id="vunits">
+    <p class="sec-th">แตะบทเพื่อฝึกทุกคำของบทนั้น (ตามโหมดที่เลือก) · ตัวเลข = จำได้แล้ว/ทั้งหมด · แถบเขียวเข้ม = แม่นแล้ว</p>
+    <${VOpts} shuffle=${true} />
+    <div class="vunits">${VUNITS.map(u => chip(u, us[u], `${u}과`))}${chip('all', all, 'ทั้งหมด')}</div>
+  </div>`;
+}
+function VStats() {
+  const q = vInfo(), r = q.r, us = vUnitStats(r);
+  const miss = VOCAB.filter(w => (r.w[w.ko] || {}).x > 0).sort((a, b) => r.w[b.ko].x - r.w[a.ko].x || r.w[b.ko].n - r.w[a.ko].n).slice(0, 20);
+  const days = []; for (let k = 13; k >= 0; k--) { const d = new Date(); d.setDate(d.getDate() - k); const e = r.days[dayKey(d)] || {}; days.push({ d: d.getDate(), n: e.n || 0, r: e.r || 0 }); }
+  const mx = Math.max(1, ...days.map(x => x.n));
+  return html`<div class="sec" id="vstats">
+    <div class="vnums">
+      <div class="vnum"><b id="vs-total">${VOCAB.length}</b><span>คำทั้งหมด</span></div>
+      <div class="vnum"><b id="vs-seen">${q.seen}</b><span>เคยฝึกแล้ว</span></div>
+      <div class="vnum good"><b id="vs-learned">${q.learned}</b><span>จำได้แล้ว · กล่อง 2 ขึ้นไป</span></div>
+      <div class="vnum good"><b id="vs-mastered">${q.mastered}</b><span>แม่นแล้ว · กล่อง 4 ขึ้นไป</span></div>
+      <div class=${'vnum' + (q.due ? ' hot' : '')}><b id="vs-due">${q.due}</b><span>ถึงรอบทบทวนวันนี้</span></div>
+      <div class="vnum"><b id="vs-days">${q.practised}</b><span>วันที่ฝึก · ติดต่อกัน ${q.streak} วัน</span></div>
+    </div>
+    <h3 class="ph3">รายบท <span class="muted">· จำได้แล้ว/ทั้งหมด (สีเข้ม = แม่นแล้ว)</span></h3>
+    ${VUNITS.map(u => { const st = us[u]; return html`<div class="vbrow"><span class="vb-l">${u}과</span><span class="vbar"><i class="m" style=${{ width: (100 * st.mastered / st.total) + '%' }}></i><i class="l" style=${{ width: (100 * (st.learned - st.mastered) / st.total) + '%' }}></i></span><span class="vb-n">${st.learned}/${st.total}</span></div>`; })}
+    <h3 class="ph3">คำที่ตอบผิดบ่อยที่สุด <span class="muted">· แตะเพื่อฟัง</span></h3>
+    ${miss.length ? html`<ul class="vmiss" id="vmiss">${miss.map(w => html`<li onClick=${() => vSay(w.ko)}><button type="button" class="play" aria-label="ฟัง">▶</button><span class="vw">${w.ko}</span><span class="vt">${w.th}<br /><small>${w.en}</small></span><span class="vx">ผิด ${r.w[w.ko].x} / ${r.w[w.ko].n}</span><span class="tag">${w.u}과</span></li>`)}</ul>` : html`<p class="muted">ยังไม่มีคำที่ตอบผิด</p>`}
+    <h3 class="ph3">14 วันล่าสุด <span class="muted">· ความสูง = คำที่ตอบ · เขียว = ตอบถูก</span></h3>
+    <div class="vdays" role="img" aria-label=${'จำนวนคำที่ตอบ 14 วันล่าสุด: ' + days.map(x => x.n).join(', ')}>${days.map(x => html`<div class="vd"><i style=${{ height: (100 * x.n / mx) + '%' }}><u style=${{ height: x.n ? (100 * x.r / x.n) + '%' : '0' }}></u></i></div>`)}</div>
+    <div class="vdays-l">${days.map(x => html`<span>${x.d}</span>`)}</div>
+    ${q.seen ? (vresetS.value ? html`<p class="reset"><span>ล้างความคืบหน้าศัพท์ทั้งหมด (รวมที่ซิงก์ไว้) กลับเป็นเริ่มใหม่?</span> <button class="btn sm danger" type="button" id="vreset-ok" onClick=${vReset}>🗑 ยืนยันล้าง</button> <button class="btn sm" type="button" onClick=${() => { vresetS.value = false; }}>ยกเลิก</button></p>`
+      : html`<p class="reset"><button class="btn sm" type="button" id="vreset" onClick=${() => { vresetS.value = true; }}>🗑 ล้างความคืบหน้าศัพท์</button></p>`) : null}
+  </div>`;
+}
+/* feedback under a typed answer: verdict, the word (▶), what was typed and where it differs, another word it happens to be, the Leitner consequence */
+function VFb({ fb, cls }) {
+  const other = fb.score === 0 && fb.ans ? vOther(fb.ans, fb.ko) : null;
+  const head = fb.score >= 1 ? '✓ ถูก!' : fb.score > 0 ? '≈ เกือบถูก — สะกดผิดนิดเดียว นับครึ่งคะแนน' : fb.ans ? '✕ ผิด' : '✕ ยังไม่รู้ — ดูเฉลยแล้วจำไว้';
+  const sched = fb.score >= 1 ? `📦 กล่อง ${fb.b0} → ${fb.e.b} · ถามอีกครั้ง: ${vDays(LEIT[Math.min(5, fb.b0)])}` : fb.score > 0 ? `📦 อยู่กล่อง ${fb.e.b} ต่อ · ถามอีกครั้ง: พรุ่งนี้` : '📦 กลับกล่อง 0 · จะถามซ้ำท้ายชุดนี้จนตอบถูก';
+  return html`<div class=${'vfb ' + cls} id="vfb" aria-live="polite">
+    <div class="vfb-h">${head}</div>
+    <div class="vans"><span id="vans">${fb.ko}</span><button class="play" type="button" id="vplay" onClick=${() => { vSay(fb.ko); vFocusNow(); }}>▶ ฟัง</button></div>
+    ${fb.score < 1 && fb.ans ? html`<div class="vnote">คุณตอบ: <b class="ko">${fb.ans}</b>${fb.score > 0 ? html` · ต่างที่: <b class="ko">${diffText(norm(fb.ans), norm(fb.key))}</b>` : null}</div>` : null}
+    ${other ? html`<div class="vnote">「<b class="ko">${other.ko}</b>」 = ${other.th} — เป็นอีกคำหนึ่ง ไม่ใช่คำในโจทย์</div>` : null}
+    <div class="vnote">${sched}</div>
+  </div>`;
+}
+function VSum({ s }) {
+  const vals = Object.values(s.first), pts = sum(vals, v => v), pct = s.total ? Math.round(100 * pts / s.total) : 0;
+  const c = [vals.filter(v => v === 1).length, vals.filter(v => v === .5).length, vals.filter(v => v === 0).length];
+  const miss = Object.keys(s.first).filter(ko => s.first[ko] < 1).sort((a, b) => s.first[a] - s.first[b]).map(ko => VBY[ko]);
+  return html`<div class=${'results vsum' + (pct >= 80 ? ' good' : '')} id="vsum">
+    <div class="top"><span class="stamp" id="vsum-score">${n1(pts)}/${s.total}</span>
+      <div><div><b>${s.label} · จบชุดแล้ว — ถูกตั้งแต่ครั้งแรก ${pct}%</b></div>
+        <div class="sub">ถูก ${c[0]} · เกือบถูก ${c[1]} · ผิด ${c[2]} · ตอบทั้งหมด ${s.ok + s.half + s.ng} ครั้ง · ใช้เวลา ${fmtShort(Math.round(((s.end || Date.now()) - s.at) / 1000))}</div></div></div>
+    ${miss.length ? html`<div><b>คำที่ยังไม่แม่น ${miss.length} คำ</b> <span class="sub">· แตะเพื่อฟัง</span>
+      <ul class="vmiss" id="vsum-miss">${miss.map(w => html`<li onClick=${() => vSay(w.ko)}><button type="button" class="play" aria-label="ฟัง">▶</button><span class="vw">${w.ko}</span><span class="vt">${w.th}<br /><small>${w.en}</small></span><span class="tag">${w.u}과</span></li>`)}</ul></div>`
+      : html`<p><b>ถูกทุกคำตั้งแต่ครั้งแรก 🎉</b></p>`}
+    <div class="actions">${miss.length ? html`<button class="btn" type="button" id="vretry" onClick=${() => vStart({ kind: 'wrong' }, miss, 'ทวนคำที่ผิด')}>↻ ทำอีกรอบเฉพาะที่ผิด (${miss.length})</button>` : null}
+      <button class="btn primary" type="button" id="vnew" onClick=${vAgain}>▶ เริ่มชุดใหม่</button><button class="btn" type="button" id="vdone" onClick=${vExit}>← กลับหน้าศัพท์</button></div>
+  </div>`;
+}
+function VSess({ s }) {
+  if (s.phase === 'end') return html`<${VSum} s=${s} />`;
+  const fb = s.phase === 'fb' ? s.fb : null, cur = fb || s.queue[0], w = VBY[cur.ko], typed = s.mode === 'type';
+  const pct = s.total ? Math.round(100 * s.done / s.total) : 0, cls = fb ? (fb.score >= 1 ? 'ok' : fb.score > 0 ? 'half' : 'ng') : '';
+  const head = html`<div class="vhead"><b class="ko">${s.label}</b><span class="muted">${typed ? '✍ พิมพ์' : '🃏 การ์ด'} · ${s.total} คำ</span><span class="sp"></span><button class="btn sm" type="button" id="vexit" onClick=${vExit}>✕ ออกจากชุดนี้</button></div>`;
+  const prog = html`<div class=${'prog vprog' + (pct === 100 ? ' all' : '')} id="vprog"><div class="prog-row"><b id="vprog-n">ผ่านแล้ว ${s.done}/${s.total} คำ</b><span class="vtally" id="vtally"><span class="t-ok">✓ ${s.ok}</span><span class="t-half">≈ ${s.half}</span><span class="t-ng">✕ ${s.ng}</span></span><span class="sp"></span><span class="muted" id="vprog-p">${pct}%</span></div>
+    <div class="prog-bar"><i id="vprog-a" style=${{ width: pct + '%' }}></i></div></div>`;
+  const meta = html`<div class="vmeta"><span class="tag">${w.u}과</span>${w.cat ? html`<span class="tag">${w.cat}</span>` : null}${cur.retry ? html`<span class="tag vretry">🔁 ทวนซ้ำ</span>` : null}</div>`;
+  if (typed) return html`<div class="vsess" id="vsess" key="type">${head}${prog}
+    <div class="vcard" id="vcard">${meta}
+      <div class="vth" id="vth">${w.th}</div><div class="ven" id="ven">${w.en}</div>
+      <div class="vin">
+        <input id="vq-in" class=${'vq-in' + (cls ? ' ' + cls : '')} type="text" lang="ko" inputmode="text" enterkeyhint="done" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck=${false} placeholder="พิมพ์คำเกาหลี" aria-label="พิมพ์คำเกาหลีของคำนี้" onKeyDown=${vKey} oncompositionstart=${() => { vComp = true; vPend = false; }} oncompositionend=${vCompEnd} />
+        ${fb ? html`<button class="btn primary" type="button" id="vq-next" onClick=${vNext}>ถัดไป ⏎</button>`
+          : html`<button class="btn primary" type="button" id="vq-ok" onClick=${() => { vSubmit(($('#vq-in') || {}).value); vFocusNow(); }}>ตรวจ ⏎</button><button class="btn" type="button" id="vq-skip" onClick=${() => { vGiveUp(); vFocusNow(); }}>ไม่รู้</button>`}
+      </div>
+      ${fb ? html`<${VFb} fb=${fb} cls=${cls} />` : null}
+    </div></div>`;
+  return html`<div class="vsess" id="vsess" key="card">${head}${prog}
+    <div class="vcard" id="vcard" onClick=${e => { if (!s.shown && !e.target.closest('button')) vReveal(); }}>${meta}
+      <div class="vface"><div class="vko ko" id="vko">${w.ko}</div><button class="play" type="button" id="vplay" onClick=${() => vSay(w.ko)}>▶ ฟัง</button></div>
+      ${s.shown ? html`<div id="vback"><div class="vth">${w.th}</div><div class="ven">${w.en}</div></div>
+        <div class="vgrade"><button class="btn g-o" type="button" id="vg-ok" onClick=${() => vGrade(1, '', wordKeys(w.ko).keys[0])}>✓ จำได้ <small>(1)</small></button><button class="btn g-h" type="button" id="vg-half" onClick=${() => vGrade(.5, '', wordKeys(w.ko).keys[0])}>≈ ไม่แน่ใจ <small>(2)</small></button><button class="btn g-x" type="button" id="vg-ng" onClick=${() => vGrade(0, '', wordKeys(w.ko).keys[0])}>✕ จำไม่ได้ <small>(3)</small></button></div>
+        <p class="vkeys">คีย์ลัด: 1 = จำได้ · 2 = ไม่แน่ใจ · 3 = จำไม่ได้</p>`
+        : html`<div class="vin"><button class="btn primary" type="button" id="vreveal" onClick=${vReveal}>แสดงคำแปล ⏎</button></div>`}
+    </div></div>`;
+}
+function Vocab() {
+  storeVer.value; dayS.value;
+  const s = vsS.value, tab = vtabS.value;
+  if (!VOCAB.length) return html`<section id="vocab" class="paper vocab"><div class="paper-head"><div><h1>🔤 ศัพท์ประจำวัน</h1></div></div><p class="notice">โหลดคำศัพท์ไม่ได้ (vocab.js หาย)</p><div class="actions"><button class="btn" type="button" onClick=${() => { location.hash = ''; }}>← กลับหน้าแรก</button></div></section>`;
+  return html`<section id="vocab" class="paper vocab prof">
+    <div class="paper-head"><div><h1>🔤 ศัพท์ประจำวัน</h1><p>ทุกคำจากชีตศัพท์ของศูนย์ 5~37과 · ${VOCAB.length} คำ · ฝึกทุกวัน ระบบนัดทบทวนให้เอง (กล่อง 0–5) · ความคืบหน้าซิงก์ข้ามเครื่องบนลิงก์ claude.ai</p></div></div>
+    ${s ? html`<${VSess} s=${s} />` : html`<${VTabs} />${tab === 'units' ? html`<${VUnits} />` : tab === 'stats' ? html`<${VStats} />` : html`<${VToday} />`}`}
+    <div class="actions"><button class="btn" type="button" id="vocab-back" onClick=${() => { location.hash = ''; }}>← กลับหน้าแรก</button></div>
+  </section>`;
+}
+/* card at the top of the home board: today's due count, the new words suggested, a button to the drill */
+function VTeaser() {
+  storeVer.value; dayS.value; vsizeS.value;
+  if (!VOCAB.length) return null;
+  const q = vInfo(), s = vsS.value, live = s && s.phase !== 'end';
+  return html`<article class="exam vteaser" id="vteaser">
+    <div class="exam-h"><h2 class="ko">🔤 ศัพท์ประจำวัน</h2><span class="muted">ทุกคำจากชีตศัพท์ 5~37과 · ${VOCAB.length} คำ</span>
+      <p>ถึงรอบทบทวนวันนี้ <b>${q.due}</b> คำ · คำใหม่ที่ยังไม่เคยฝึก <b>${q.fresh}</b> คำ · จำได้แล้ว <b>${q.learned}</b>/${VOCAB.length}${q.streak ? html` · ฝึกติดต่อกัน <b>${q.streak}</b> วัน` : ''}<br />${q.sess ? html`ชุดวันนี้ ${q.sess} คำ = ทบทวน ${q.review} + แนะนำคำใหม่ ${q.add}` : 'วันนี้ไม่มีคำที่ถึงรอบทบทวนและไม่เหลือคำใหม่ 🎉'}</p></div>
+    <div class="actions"><button class="btn primary" type="button" id="vteaser-go" onClick=${goVocab}>${live ? '▶ ทำชุดศัพท์ที่ค้างอยู่ต่อ' : '▶ ฝึกศัพท์วันนี้'}</button></div>
+  </article>`;
+}
+
 /* ------------------------------------------------------------------ components: help page, routing shell */
 function Help({ on }) {
   return html`<section id="help" class="paper help" hidden=${!on}>
     <div class="paper-head"><div><h1>วิธีใช้</h1><p>เว็บฝึกสอบ 복습시험 ② และ 중간시험 · ใช้ได้บน iPad, มือถือ และ PC</p></div></div>
     <h2>ลำดับการทำข้อสอบ</h2>
     <ul>
-      <li><b>หน้าแรก</b> แบ่งตามการสอบ 3 ชุด กดการ์ดชุดที่ต้องการ → เข้าสู่<b>หน้าปกข้อสอบ</b> ซึ่งบอกจำนวนข้อ คะแนน เวลา และกติกา</li>
+      <li><b>หน้าแรก</b> แบ่งตามการสอบ (매일시험 ข้อสอบประจำวัน · 복습시험 · 중간시험) กดการ์ดชุดที่ต้องการ → เข้าสู่<b>หน้าปกข้อสอบ</b> ซึ่งบอกจำนวนข้อ คะแนน เวลา และกติกา</li>
       <li><b>▶ เริ่มสอบจริง</b> = จำลองห้องสอบ: จับเวลาตามข้อสอบจริง (ดูที่แถบลอยมุมล่างขวา) ซ่อนคำแปลและคำใบ้ ชุดฟังจะเล่นเสียงเองตอนละ 2 รอบแล้วให้เวลาตอบ ชุดพูดครูจะถามทีละข้อ หมดเวลาแล้วระบบส่งคำตอบให้อัตโนมัติ</li>
       <li><b>✎ ฝึกทำ</b> = ไม่จับเวลา เปิดคำแปลได้ กดฟังซ้ำได้ไม่จำกัด เปิดสคริปต์ได้ กด ▶ ถาม ทีละข้อได้</li>
       <li>ทำเสร็จกด <b>ส่งคำตอบ</b> → เห็น<b>ผลสอบ</b> คะแนนรวม คะแนนรายตอน ข้อที่เสียคะแนน และเฉลยทุกข้อ แต่ละข้อเปลี่ยนสีทั้งข้อ: เขียว = ถูก · ส้ม = ครึ่งคะแนน · แดง = ผิด · เทา = รอตรวจ</li>
@@ -1302,6 +1686,14 @@ function Help({ on }) {
       <li>🤖 <b>AI ตรวจอัตโนมัติ</b> (เฉพาะลิงก์ claude.ai): หลังส่งคำตอบ Claude จะตรวจทุกข้อที่พิมพ์ตอบซึ่งไม่ตรงเฉลยตรง ๆ — ข้อเขียนประโยค ข้อเติมคำ และข้อพูด — โดยอ่านบทอ่าน/สคริปต์ โจทย์ และคำตอบตัวอย่าง แล้วให้ ถูก / ครึ่ง / ผิด พร้อมเหตุผลภาษาไทยและประโยคที่แก้แล้ว คะแนนรวมอัปเดตเอง ใช้โควตา Claude ของคุณ ครั้งแรกจะถามขออนุญาต</li>
       <li>ไม่เห็นด้วยกับ AI หรือเปิดจากไฟล์ในเครื่อง (ไม่มี AI) ให้กด ถูก / ครึ่ง / ผิด ตรวจเองได้ทุกข้อที่พิมพ์ตอบ</li>
       <li>คำตอบ คะแนน และประวัติเก็บไว้ในเบราว์เซอร์ และซิงก์ข้ามเครื่องผ่านบัญชี claude.ai (ดูสถานะ ☁️ บนแถบด้านบน) ไฟล์ index.html ในเครื่องเก็บแยก ไม่ซิงก์</li>
+    </ul>
+    <h2>🔤 ศัพท์ประจำวัน</h2>
+    <ul>
+      <li>ปุ่ม <b>🔤 ศัพท์</b> บนแถบด้านบน (หรือการ์ดบนหน้าแรก) = ฝึกจำศัพท์ <b>ทุกคำ</b> จากชีตศัพท์ของศูนย์ บท 5~37 (ราว 900 คำ) ทุกวัน เพราะข้อสอบประจำวันเสียคะแนนที่ศัพท์เป็นหลัก</li>
+      <li><b>วันนี้</b> = ระบบจัดชุดให้: คำที่ถึงรอบทบทวนก่อน (กล่องต่ำสุดก่อน แล้วบทหลังสุดก่อน) ตามด้วยคำใหม่ที่ยังไม่เคยฝึก เลือกขนาดชุด 20 / 30 / 50 คำ (ถ้าคำค้างทบทวนเยอะจนไม่มีคำใหม่เข้ามา เลือก คำใหม่อย่างน้อย 5 / 10 คำต่อชุดเพื่อกันที่ไว้) · <b>ตามบท</b> = แตะเลขบทเพื่อฝึกทุกคำของบทนั้น (หรือ ทั้งหมด) · <b>สถิติ</b> = จำนวนคำที่จำได้ แถบรายบท คำที่ผิดบ่อย 20 อันดับ และ 14 วันล่าสุด</li>
+      <li>โหมด <b>✍ พิมพ์</b> = เห็นคำไทย/อังกฤษ แล้วพิมพ์คำเกาหลี (สะกดผิดไม่เกิน 1–2 ตัวอักษรย่อยได้ครึ่งคะแนนและบอกตัวที่ผิด) กด Enter เพื่อตรวจ กด Enter อีกครั้งไปคำถัดไป ▶ ฟังเสียงได้หลังตอบ · โหมด <b>🃏 การ์ด</b> = เห็นคำเกาหลีและฟังเสียง นึกความหมาย แล้วกด แสดงคำแปล และประเมินตัวเอง จำได้ / ไม่แน่ใจ / จำไม่ได้ (คีย์ลัด 1 2 3)</li>
+      <li><b>กล่อง 0–5</b> (Leitner): ตอบถูก = ขึ้นกล่อง และระบบนัดทบทวนห่างขึ้น 1 · 2 · 4 · 7 · 14 · 30 วัน ตามกล่องเดิมของคำนั้น · เกือบถูก = อยู่กล่องเดิม ทวนพรุ่งนี้ · ตอบผิด = กลับกล่อง 0 และถามซ้ำท้ายชุดจนตอบถูก · "จำได้แล้ว" = กล่อง 2 ขึ้นไป · "แม่นแล้ว" = กล่อง 4 ขึ้นไป — ทำทุกวัน คำที่ถึงรอบจะโผล่มาเอง</li>
+      <li>ความคืบหน้าบันทึกทุกคำที่ตอบ (เก็บเฉพาะตัวคำ ไม่เก็บชื่อ) และซิงก์ข้ามเครื่องผ่านบัญชี claude.ai เหมือนผลข้อสอบ (ดูสถานะ ☁️ บนแถบด้านบน) · ไฟล์ index.html ในเครื่องเก็บแยก ไม่ซิงก์ · ล้างได้ที่ สถิติ › 🗑 ล้างความคืบหน้าศัพท์</li>
     </ul>
     <h2>듣기 และ 말하기</h2>
     <ul>
@@ -1322,6 +1714,7 @@ function App() {
         <section id="home" hidden=${vw !== 'home'}>${vw === 'home' ? (SETS.length ? html`<${Home} />` : html`<p class="notice">โหลดข้อมูลแบบฝึกไม่ได้ (data.js หาย)</p>`) : null}</section>
         <section id="set" hidden=${vw !== 'set'}>${curSt.value ? html`<${SetView} />` : null}</section>
         ${vw === 'profile' ? html`<${Profile} />` : null}
+        ${vw === 'vocab' ? html`<${Vocab} />` : null}
         <${Help} on=${vw === 'help'} />
       </div>
     </div>
@@ -1332,6 +1725,15 @@ function App() {
 /* ------------------------------------------------------------------ boot */
 render(html`<${App} />`, document.getElementById('app'));
 route();
-window.__kmu = { get cur() { return snapshot(); }, openSet, startSet, submit, grade, aiGradeAll };   // test hooks
+const vocabHooks = {   // test hooks of the vocabulary drill: start(n) = today's session of n words (typed unless mode('card')), answer(text) = type + check, next() = the next card, …
+  start: n => { if (n) vsizeS.value = n; vsS.value = null; vStartDaily(); const s = vsS.peek(); return s ? s.queue.length : 0; },
+  unit: u => { vsS.value = null; vStartUnit(u); const s = vsS.peek(); return s ? s.queue.length : 0; },
+  mode: m => vPref(vmodeS, 'mode', m === 'card' ? 'card' : 'type'), auto: on => vPref(vautoS, 'auto', !!on), newmin: n => vPref(vnewS, 'newmin', n), size: n => { vsizeS.value = n; }, tab: t => { vsS.value = null; vtabS.value = t; },
+  answer: t => { const i = $('#vq-in'); if (i) i.value = t; vSubmit(t); return vocabHooks.state(); }, giveUp: vGiveUp, reveal: vReveal, next: vNext, exit: vExit,
+  grade: v => { const s = vsS.peek(); if (s && s.phase === 'ask') vGrade({ o: 1, h: .5, x: 0 }[v] ?? v, '', wordKeys(s.queue[0].ko).keys[0]); return vocabHooks.state(); },
+  state: () => { const s = vsS.peek(); return s && { phase: s.phase, mode: s.mode, label: s.label, total: s.total, done: s.done, ok: s.ok, half: s.half, ng: s.ng, left: s.queue.length, ko: (s.phase === 'fb' ? s.fb : s.queue[0] || {}).ko, fb: s.fb && { score: s.fb.score, key: s.fb.key, b: s.fb.e.b } }; },
+  srs: srsGet, info: vInfo, keys: wordKeys, judge: judgeWord, today: vBuildDaily, groups: () => EXAMS.map(e => e.id),
+};
+window.__kmu = { get cur() { return snapshot(); }, openSet, startSet, submit, grade, aiGradeAll, vocab: vocabHooks };   // test hooks
 })();
 </script>

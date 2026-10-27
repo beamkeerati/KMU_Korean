@@ -103,6 +103,9 @@ def split_exercise_source(src, answer_pattern):
     ans = ['---']
     for u in units:
         q, a = split_exercise(read(u), answer_pattern)
+        # '---' directly under another '---' is a setext heading named '---' to Python-Markdown (seen on 11 pages of the
+        # workbook book, 2026-10-27): keep one rule
+        q, a = (re.sub(r'(?m)^---[ \t]*\n(?:[ \t]*\n)*---[ \t]*$', '---', x) for x in (q, a))
         qs.append(q.strip())
         ans.append(a.strip())
     return '\n\n'.join(qs), '\n\n'.join(ans)
@@ -170,6 +173,9 @@ def countdown(md, today=None):
     return re.sub(r'\{\{days:(\d{4}-\d{2}-\d{2})\}\}', days, md)
 
 
+BOOK_MARK = '<!-- kmu:book -->'     # first line of the two guide books → make_pdf renders <body class="book"> (numbered sections, TOC leaders)
+
+
 def guide_cover(title, subtitle):
     """00_exam_info.md (ส่วนที่ 0, shared by both books) with its own title/subtitle swapped for the book's."""
     body = read(os.path.join(CONTENT, 'guide', '00_exam_info.md')).strip()
@@ -177,9 +183,18 @@ def guide_cover(title, subtitle):
     return body
 
 
+VOCAB_LEAD = ('รายการคำศัพท์ทั้งหมดของบทจากชีตของศูนย์ (ไทย · อังกฤษ) เรียงตามลำดับในชีต '
+              'ใช้ทบทวนก่อน 매일시험 และข้อสอบคำศัพท์ ส่วนคำที่ต้องรู้เพื่ออ่านบทคัดไว้แล้วในตอนแรกของบท')
+
+
 def unit_part(sub, unit):
     f = os.path.join(CONTENT, 'guide', sub, f'unit{unit:02d}.md')
-    return read(f).strip() if os.path.exists(f) else ''
+    if not os.path.exists(f):
+        return ''
+    text = read(f).strip()
+    if sub == '04_vocabulary':          # book style: a lead sentence between the sheet heading and its first table
+        text = re.sub(r'^(### [^\n]*\n)\s*\n(?=\|)', lambda m: m.group(1) + '\n' + VOCAB_LEAD + '\n\n', text, count=1)
+    return text
 
 
 def build_guide():
@@ -197,6 +212,7 @@ def build_guide():
         parts = [unit_part('01_units', u), unit_part('04_vocabulary', u)]
         chapters.append('\n\n'.join(p for p in parts if p))
     by_unit = '\n\n'.join([
+        BOOK_MARK,
         guide_cover('📘 KMU Korean 1 — คู่มือรายบท (5–37과)',
                     'เล่ม 1 จาก 2 · ส่วนที่ 0 ข้อมูลสอบ + ตารางไวยากรณ์ตามบท · ส่วนที่ 1 สรุปรายบท 5–37 (ไวยากรณ์ · สไลด์อาจารย์ · '
                     '대화 · 읽기 · ข้อสอบ) ตามด้วยคำศัพท์ของศูนย์ทุกบท · ไวยากรณ์เจาะลึกตามหัวข้ออยู่ในเล่ม 2 "คู่มือตามหัวข้อ" (อ้างเป็น ไวยากรณ์ข้อ NN)'),
@@ -205,11 +221,20 @@ def build_guide():
     grammar = [read(f).strip() for f in sorted(glob.glob(os.path.join(g, '02_grammar', '[0-9][0-9]_*.md')))
                if not os.path.basename(f).startswith('00_')]
     vocab = ['# ส่วนที่ 4 · คลังคำศัพท์',
-             '## 🖼️ คำศัพท์ตามหมวด (ชีตภาพของศูนย์)', read(os.path.join(g, '04_vocabulary', '90_themes.md')).strip()]
+             'ส่วนนี้รวมคำศัพท์ของทั้งคอร์สไว้สองแบบ: ตามหมวดภาพของศูนย์ (ร่างกาย · เวลา · อาหาร …) และตามหมวดความหมายที่รวบรวมจากตำรา '
+             'ใช้ท่องก่อนสอบคำศัพท์และใช้ค้นคำที่ลืม ส่วนคำศัพท์ของแต่ละบทอยู่ท้ายบทนั้นในเล่ม 1',
+             '## 🖼️ คำศัพท์ตามหมวด (ชีตภาพของศูนย์)',
+             '> [!INTRO] ส่วนนี้คืออะไร\n> ชีตภาพของศูนย์ (หน้า 36–48 ของสมุดคำศัพท์) จัดคำเป็นหมวดตามภาพ หัวข้อย่อยแต่ละหัวข้อบอกบทที่คำนั้นปรากฏ '
+             'ตารางให้ทั้งคำไทยและอังกฤษ คำที่เคยออกสอบหรือเคยเขียนผิดดูเพิ่มในตอน "ออกสอบอย่างไร" ของบทนั้น',
+             read(os.path.join(g, '04_vocabulary', '90_themes.md')).strip()]
     cats = os.path.join(g, '04_vocabulary', '91_categories.md')
     if os.path.exists(cats):
-        vocab += ['## 📂 คำศัพท์แยกหมวด (รวบรวมจากตำรา 5–37과)', strip_own_titles(read(cats)).strip()]
+        vocab += ['## 📂 คำศัพท์แยกหมวด (รวบรวมจากตำรา 5–37과)',
+                  '> [!INTRO] ส่วนนี้คืออะไร\n> รายการนี้รวบรวมจากตำราโดยจัดตามความหมาย (คน · สถานที่ · กริยา · คุณศัพท์ …) '
+                  'ใช้เมื่อต้องการคำในหมวดเดียวกันหลาย ๆ คำ เช่น ตอนเขียนเรียงความหรือเตรียมบทพูด',
+                  strip_own_titles(read(cats)).strip()]
     by_topic = '\n\n'.join([
+        BOOK_MARK,
         guide_cover('📘 KMU Korean 1 — คู่มือตามหัวข้อ (5–37과)',
                     'เล่ม 2 จาก 2 · ส่วนที่ 0 ข้อมูลสอบ · ส่วนที่ 1 ไวยากรณ์เจาะลึก 64 หัวข้อ (สไลด์อาจารย์รวมอยู่ในแต่ละข้อ) · ส่วนที่ 2 은/는 vs 이/가 · '
                     'ส่วนที่ 3 คำถาม · ส่วนที่ 4 คำศัพท์ตามหมวด · ส่วนที่ 5 แบบทดสอบตัวเอง · ส่วนที่ 6 ตารางสรุป · สรุปรายบทอยู่ในเล่ม 1 "คู่มือรายบท"'),

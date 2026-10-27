@@ -4,7 +4,8 @@
     python3 scripts/build_mockweb.py            # validate data, make missing voice clips, write the site
     python3 scripts/build_mockweb.py --no-audio # skip clip generation (browser voice is used for missing lines)
 
-Output: index.html (standalone page), data.js (window.KMU_SETS), clips.js (window.KMU_CLIPS = {"F|text": dataURI}),
+Output: index.html (standalone page), data.js (window.KMU_SETS), vocab.js (window.KMU_VOCAB: every word of the vocabulary sheets 5–37
+        for the daily drill), clips.js (window.KMU_CLIPS = {"F|text": dataURI}), clips3.js (one clip per vocabulary word),
 start.sh (serves the folder on localhost so Chrome allows the microphone).
 Voices (free edge-tts, Microsoft neural): T teacher + F female = SunHi, M male = InJoon, S the student's model answers = Hyunsu.
 Clips are cached in extracted/mockweb_clips/<sha1>.mp3, so only new or changed lines are generated.
@@ -50,6 +51,7 @@ def load_sets():
     sets, bad = [], False
     for f in sorted(glob.glob(os.path.join(DATA, '*.json'))):
         if os.path.basename(f) == 'scores.json': continue   # grade book, not an exercise set
+        if os.path.basename(f).startswith('_'): continue      # draft (an agent validates it before renaming)
         errs = validate(f)
         if errs:
             bad = True
@@ -63,6 +65,39 @@ def load_sets():
             for sec in st['sections']:
                 sec['say'] = announce(sec)
     return sets
+
+
+VOCAB_DIR = os.path.join(ROOT, 'content', 'guide', '04_vocabulary')
+ROW = re.compile(r'^\|\s*([^|]+?)\s*\|\s*([^|]+?)\s*\|\s*([^|]*?)\s*\|\s*$')
+# unit priority for the daily drill: the units of the coming exams first (복습시험 ③ 11/6 = 22–29과, then ④ = 30–37, then book 1-1)
+VOCAB_PRIO = [24, 23, 25, 22, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 21, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5]
+
+
+def load_vocab():
+    """content/guide/04_vocabulary/unitNN.md (+ 90_themes.md) -> [{u, ko, th, en, cat}]: one entry per distinct Korean word,
+    the first unit that lists it wins; the picture-theme sheet adds its category name and any word the unit lists lack."""
+    words, order = {}, []
+    def add(u, ko, th, en, cat=''):
+        ko = ko.strip(); th = th.strip(); en = en.strip()
+        if not re.search(r'[가-힣]', ko) or ko == '단어': return
+        if ko in words:
+            if cat and not words[ko]['cat']: words[ko]['cat'] = cat
+            return
+        words[ko] = {'u': u, 'ko': ko, 'th': th, 'en': en, 'cat': cat}; order.append(ko)
+    for f in sorted(glob.glob(os.path.join(VOCAB_DIR, 'unit*.md'))):
+        u = int(re.search(r'unit(\d+)', f).group(1))
+        for ln in open(f, encoding='utf-8'):
+            m = ROW.match(ln)
+            if m: add(u, *m.groups())
+    cat = None
+    for ln in open(os.path.join(VOCAB_DIR, '90_themes.md'), encoding='utf-8'):
+        h = re.match(r'^####\s+◆\s*(.+?)\s*\((\d+)과\)', ln)
+        if h: cat = (h.group(1).strip(), int(h.group(2))); continue
+        m = ROW.match(ln)
+        if m and cat: add(cat[1], m.group(1), m.group(2), m.group(3), cat[0])
+    out = [words[k] for k in order]
+    out.sort(key=lambda w: (VOCAB_PRIO.index(w['u']) if w['u'] in VOCAB_PRIO else 99, order.index(w['ko'])))
+    return out
 
 
 def spoken(sets):
@@ -143,9 +178,11 @@ def main():
     os.makedirs(CACHE, exist_ok=True)
     sets = load_sets()
     lines = spoken(sets)
+    vocab = load_vocab()
+    vlines = [('F', w['ko']) for w in vocab if ('F', w['ko']) not in set(lines)]
     if '--no-audio' not in sys.argv:
-        made = asyncio.run(make_clips(lines))
-        print(f'clips     : {len(lines)} spoken lines, {made} newly generated')
+        made = asyncio.run(make_clips(lines + vlines))
+        print(f'clips     : {len(lines)} spoken lines + {len(vlines)} vocabulary words, {made} newly generated')
     clips = {f'{v}|{t}': 'data:audio/mpeg;base64,' + base64.b64encode(open(clip_path(v, t), 'rb').read()).decode()
              for v, t in lines if os.path.exists(clip_path(v, t))}
     with open(os.path.join(OUT, 'data.js'), 'w', encoding='utf-8') as f:
@@ -162,6 +199,12 @@ def main():
     with open(os.path.join(OUT, 'clips2.js'), 'w', encoding='utf-8') as f:
         f.write('Object.assign(window.KMU_CLIPS, ' + json.dumps({k: clips[k] for k in keys[len(keys) // 2:]}, ensure_ascii=False) + ');\n')
         f.write('window.KMU_WORDS = ' + json.dumps(words, ensure_ascii=False) + ';\n')
+    with open(os.path.join(OUT, 'vocab.js'), 'w', encoding='utf-8') as f:
+        f.write('window.KMU_VOCAB = ' + json.dumps(vocab, ensure_ascii=False) + ';\n')
+    vclips = {f'{v}|{t}': 'data:audio/mpeg;base64,' + base64.b64encode(open(clip_path(v, t), 'rb').read()).decode()
+              for v, t in vlines if os.path.exists(clip_path(v, t))}
+    with open(os.path.join(OUT, 'clips3.js'), 'w', encoding='utf-8') as f:   # one clip per vocabulary word (no word timings needed)
+        f.write('Object.assign(window.KMU_CLIPS, ' + json.dumps(vclips, ensure_ascii=False) + ');\n')
     audio = copy_audio(sets)
     shutil.copyfile(os.path.join(os.path.dirname(APP), 'vendor.js'), os.path.join(OUT, 'vendor.js'))   # Preact + Signals + htm (UMD)
     with open(os.path.join(OUT, 'index.html'), 'w', encoding='utf-8') as f:
@@ -173,8 +216,8 @@ def main():
                 'python3 -m http.server 8000 --bind 127.0.0.1\n')
     os.chmod(sh, 0o755)
     n = sum(len(s['items']) for st in sets for s in st['sections'])
-    size = sum(os.path.getsize(os.path.join(OUT, x)) for x in ('data.js', 'clips.js', 'clips2.js', 'vendor.js', 'index.html')) // 1024
-    print(f'mockweb   : {len(sets)} sets · {n} items · {len(clips)}/{len(lines)} clips · {size} KB -> output/2_Practice_Web/')
+    size = sum(os.path.getsize(os.path.join(OUT, x)) for x in ('data.js', 'clips.js', 'clips2.js', 'clips3.js', 'vocab.js', 'vendor.js', 'index.html')) // 1024
+    print(f'mockweb   : {len(sets)} sets · {n} items · {len(clips)}/{len(lines)} clips · {len(vocab)} vocabulary words ({len(vclips)} clips) · {size} KB -> output/2_Practice_Web/')
     if audio: print(f'audio     : {len(audio)} real recordings copied to output/2_Practice_Web/audio/ (publish them as artifact files)')
 
 

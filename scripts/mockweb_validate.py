@@ -6,7 +6,7 @@ Prints OK per file, or the list of problems (exit 1).
 """
 import json, re, sys
 
-EXAMS = {'mini02', 'review', 'midterm'}
+EXAMS = {'mini02', 'review', 'midterm', 'daily', 'final'}   # daily = 매일시험 sets (real papers + tomorrow's prediction) · final = 기말/복습시험 ③④ material
 SKILLS = {'writing', 'reading', 'listening', 'speaking'}
 TYPES = {'mc', 'ox', 'blank', 'write', 'speak'}
 TAG = re.compile(r'\{[a-zA-Z]:')
@@ -49,7 +49,7 @@ def validate(path):
                 if not ln.get('ko') or 'th' not in ln: errs.append(f'{sw} passage[{li}]: needs ko and th')
                 check_text(f'{sw} passage[{li}]', ln.get('ko', ''), errs)
             for li, ln in enumerate(sec.get('script', [])):
-                if ln.get('s') not in ('F', 'M'): errs.append(f'{sw} script[{li}]: s must be F or M')
+                if ln.get('s') not in ('F', 'M', 'T', 'S'): errs.append(f'{sw} script[{li}]: s must be F, M, T (teacher = SunHi −5 %, dictation) or S (model answer)')
                 if not ln.get('ko') or 'th' not in ln: errs.append(f'{sw} script[{li}]: needs ko and th')
                 if DIGIT_IN_SCRIPT.search(ln.get('ko', '')): errs.append(f'{sw} script[{li}]: write numbers in Hangul: {ln["ko"][:50]}')
                 check_text(f'{sw} script[{li}]', ln.get('ko', ''), errs)
