@@ -69,8 +69,13 @@ def load_sets():
 
 VOCAB_DIR = os.path.join(ROOT, 'content', 'guide', '04_vocabulary')
 ROW = re.compile(r'^\|\s*([^|]+?)\s*\|\s*([^|]+?)\s*\|\s*([^|]*?)\s*\|\s*$')
-# unit priority for the daily drill: the units of the coming exams first (복습시험 ③ 11/6 = 22–29과, then ④ = 30–37, then book 1-1)
-VOCAB_PRIO = [24, 23, 25, 22, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 21, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5]
+# unit priority for the daily drill: the units of the coming exams first (매일시험 26과 11/2, then 27과, then the rest of 복습시험 ③ 11/6 = 22–29과,
+# then ④ = 30–37, then book 1-1)
+VOCAB_PRIO = [26, 27, 25, 24, 23, 22, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 21, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5]
+
+
+VCLIP_FILES = ('clips3.js', 'clips4.js')   # vocabulary word clips; app.html loads each with a <script> tag
+VCLIP_MAX = 13_500_000                      # bytes of base64 per file, under the 16 MB artifact file limit
 
 
 def load_vocab():
@@ -203,8 +208,19 @@ def main():
         f.write('window.KMU_VOCAB = ' + json.dumps(vocab, ensure_ascii=False) + ';\n')
     vclips = {f'{v}|{t}': 'data:audio/mpeg;base64,' + base64.b64encode(open(clip_path(v, t), 'rb').read()).decode()
               for v, t in vlines if os.path.exists(clip_path(v, t))}
-    with open(os.path.join(OUT, 'clips3.js'), 'w', encoding='utf-8') as f:   # one clip per vocabulary word (no word timings needed)
-        f.write('Object.assign(window.KMU_CLIPS, ' + json.dumps(vclips, ensure_ascii=False) + ');\n')
+    # one clip per vocabulary word (no word timings needed), split over VCLIP_FILES so no file passes the 16 MB artifact limit
+    # (clips3.js alone reached 14.1 MB with 909 words on 2026-10-28); every file is always written so app.html never 404s
+    chunks, cur, size = [], {}, 0
+    for k in sorted(vclips):
+        if cur and size + len(vclips[k]) > VCLIP_MAX:
+            chunks.append(cur); cur, size = {}, 0
+        cur[k] = vclips[k]; size += len(vclips[k]) + len(k) + 6
+    chunks.append(cur)
+    if len(chunks) > len(VCLIP_FILES):
+        raise SystemExit(f'vocabulary clips need {len(chunks)} files: add one to VCLIP_FILES and a <script> tag to app.html')
+    for name, part in zip(VCLIP_FILES, chunks + [{}] * (len(VCLIP_FILES) - len(chunks))):
+        with open(os.path.join(OUT, name), 'w', encoding='utf-8') as f:
+            f.write('Object.assign(window.KMU_CLIPS, ' + json.dumps(part, ensure_ascii=False) + ');\n')
     audio = copy_audio(sets)
     shutil.copyfile(os.path.join(os.path.dirname(APP), 'vendor.js'), os.path.join(OUT, 'vendor.js'))   # Preact + Signals + htm (UMD)
     with open(os.path.join(OUT, 'index.html'), 'w', encoding='utf-8') as f:
@@ -216,7 +232,7 @@ def main():
                 'python3 -m http.server 8000 --bind 127.0.0.1\n')
     os.chmod(sh, 0o755)
     n = sum(len(s['items']) for st in sets for s in st['sections'])
-    size = sum(os.path.getsize(os.path.join(OUT, x)) for x in ('data.js', 'clips.js', 'clips2.js', 'clips3.js', 'vocab.js', 'vendor.js', 'index.html')) // 1024
+    size = sum(os.path.getsize(os.path.join(OUT, x)) for x in ('data.js', 'clips.js', 'clips2.js', *VCLIP_FILES, 'vocab.js', 'vendor.js', 'index.html')) // 1024
     print(f'mockweb   : {len(sets)} sets · {n} items · {len(clips)}/{len(lines)} clips · {len(vocab)} vocabulary words ({len(vclips)} clips) · {size} KB -> output/2_Practice_Web/')
     if audio: print(f'audio     : {len(audio)} real recordings copied to output/2_Practice_Web/audio/ (publish them as artifact files)')
 

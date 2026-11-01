@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!-- v47 (2026-11-01): unit chips and the stats rows show practised words (blue segment + "ฝึกแล้ว N") so a first pass is visible before any word reaches box 2; vocab gap fill from textbook + workbook -->
 <!-- v44 (2026-10-27 night): card mode = 4-choice quiz (한국어→ไทย · ไทย→한국어 · mix; distractors from the same unit first), no more self-grading -->
 <!-- v41 (2026-10-27): vocabulary drill (#vocab · วันนี้ / ตามบท / สถิติ · Leitner boxes in kmuweb:vocab:srs, synced as cloud doc "srs") + daily-test board (EXAMS daily / final, per-set "group", home teaser) -->
 <title>KMU 모의시험</title>
@@ -359,6 +360,8 @@ section#vocab { scroll-margin-top: 90px; }   /* opened with #vocab in the URL: t
 .vbar { height: 6px; background: var(--rule); border-radius: 3px; overflow: hidden; display: flex; }
 .vbar i { display: block; height: 100%; }
 .vbar .m { background: var(--ok); } .vbar .l { background: var(--ok); opacity: .42; }
+.vbar .s { background: var(--navy); opacity: .5; }
+.vunit > span.vseen { color: var(--navy); font-size: calc((11px) * var(--ts, 1)); }
 .vsess { margin-top: 16px; }
 .vhead { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; }
 .vhead .sp { flex: 1; }
@@ -436,6 +439,7 @@ section#vocab { scroll-margin-top: 90px; }   /* opened with #vocab in the URL: t
 <script src="clips.js"></script>
 <script src="clips2.js"></script>
 <script src="clips3.js"></script>
+<script src="clips4.js"></script>
 <script src="vocab.js"></script>
 <script>
 (() => {
@@ -1598,11 +1602,16 @@ function VToday() {
     <p class="sec-th">ลำดับคำ: คำที่ถึงรอบทบทวนมาก่อน (กล่องต่ำสุดก่อน แล้วบทหลังสุดก่อน) ตามด้วยคำใหม่${q.newUnits.length ? ` จากบท ${q.newUnits.join(' · ')} …` : ''} · ตอบผิด = ถามซ้ำท้ายชุดจนตอบถูก · ตอบถูก = นัดทวนอีก 1 · 2 · 4 · 7 · 14 · 30 วัน</p>
   </div>`;
 }
+/* one progress bar = three segments: mastered (box ≥ 4) · learned (box 2–3) · seen but not yet learned (box 0–1 after a first answer) */
+function VBar({ st }) {
+  const w = n => ({ width: (100 * Math.max(0, n) / (st.total || 1)) + '%' });
+  return html`<span class="vbar"><i class="m" style=${w(st.mastered)}></i><i class="l" style=${w(st.learned - st.mastered)}></i><i class="s" style=${w(st.seen - st.learned)}></i></span>`;
+}
 function VUnits() {
-  const us = vUnitStats(srsGet()), all = { total: VOCAB.length, learned: sum(VUNITS, u => us[u].learned), mastered: sum(VUNITS, u => us[u].mastered) };
-  const chip = (u, st, label) => html`<button type="button" class=${'vunit' + (u === 'all' ? ' all' : '')} data-unit=${u} onClick=${() => vStartUnit(u)}><b>${label}</b><span>${st.learned}/${st.total}</span><span class="vbar"><i class="m" style=${{ width: (100 * st.mastered / st.total) + '%' }}></i><i class="l" style=${{ width: (100 * (st.learned - st.mastered) / st.total) + '%' }}></i></span></button>`;
+  const us = vUnitStats(srsGet()), all = { total: VOCAB.length, seen: sum(VUNITS, u => us[u].seen), learned: sum(VUNITS, u => us[u].learned), mastered: sum(VUNITS, u => us[u].mastered) };
+  const chip = (u, st, label) => html`<button type="button" class=${'vunit' + (u === 'all' ? ' all' : '')} data-unit=${u} onClick=${() => vStartUnit(u)}><b>${label}</b><span>จำได้ ${st.learned}/${st.total}</span>${st.seen > st.learned ? html`<span class="vseen">ฝึกแล้ว ${st.seen}</span>` : null}<${VBar} st=${st} /></button>`;
   return html`<div class="sec" id="vunits">
-    <p class="sec-th">แตะบทเพื่อฝึกทุกคำของบทนั้น (ตามโหมดที่เลือก) · ตัวเลข = จำได้แล้ว/ทั้งหมด · แถบเขียวเข้ม = แม่นแล้ว</p>
+    <p class="sec-th">แตะบทเพื่อฝึกทุกคำของบทนั้น (ตามโหมดที่เลือก) · <b>จำได้</b> = ตอบถูก 2 รอบขึ้นไป (รอบแรก + รอบทบทวนวันถัดไป) · แถบฟ้า = ฝึกแล้ว รอรอบทบทวน · เขียวอ่อน = จำได้ · เขียวเข้ม = แม่นแล้ว</p>
     <${VOpts} shuffle=${true} />
     <div class="vunits">${VUNITS.map(u => chip(u, us[u], `${u}과`))}${chip('all', all, 'ทั้งหมด')}</div>
   </div>`;
@@ -1621,8 +1630,8 @@ function VStats() {
       <div class=${'vnum' + (q.due ? ' hot' : '')}><b id="vs-due">${q.due}</b><span>ถึงรอบทบทวนวันนี้</span></div>
       <div class="vnum"><b id="vs-days">${q.practised}</b><span>วันที่ฝึก · ติดต่อกัน ${q.streak} วัน</span></div>
     </div>
-    <h3 class="ph3">รายบท <span class="muted">· จำได้แล้ว/ทั้งหมด (สีเข้ม = แม่นแล้ว)</span></h3>
-    ${VUNITS.map(u => { const st = us[u]; return html`<div class="vbrow"><span class="vb-l">${u}과</span><span class="vbar"><i class="m" style=${{ width: (100 * st.mastered / st.total) + '%' }}></i><i class="l" style=${{ width: (100 * (st.learned - st.mastered) / st.total) + '%' }}></i></span><span class="vb-n">${st.learned}/${st.total}</span></div>`; })}
+    <h3 class="ph3">รายบท <span class="muted">· ตัวเลข = จำได้แล้ว/ทั้งหมด · ฟ้า = ฝึกแล้ว รอทบทวน · เขียวอ่อน = จำได้ · เขียวเข้ม = แม่นแล้ว</span></h3>
+    ${VUNITS.map(u => { const st = us[u]; return html`<div class="vbrow"><span class="vb-l">${u}과</span><${VBar} st=${st} /><span class="vb-n" title=${'ฝึกแล้ว ' + st.seen}>${st.learned}/${st.total}</span></div>`; })}
     <h3 class="ph3">คำที่ตอบผิดบ่อยที่สุด <span class="muted">· แตะเพื่อฟัง</span></h3>
     ${miss.length ? html`<ul class="vmiss" id="vmiss">${miss.map(w => html`<li onClick=${() => vSay(w.ko)}><button type="button" class="play" aria-label="ฟัง">▶</button><span class="vw">${w.ko}</span><span class="vt">${w.th}<br /><small>${w.en}</small></span><span class="vx">ผิด ${r.w[w.ko].x} / ${r.w[w.ko].n}</span><span class="tag">${w.u}과</span></li>`)}</ul>` : html`<p class="muted">ยังไม่มีคำที่ตอบผิด</p>`}
     <h3 class="ph3">14 วันล่าสุด <span class="muted">· ความสูง = คำที่ตอบ · เขียว = ตอบถูก</span></h3>
@@ -1694,7 +1703,7 @@ function Vocab() {
   const s = vsS.value, tab = vtabS.value;
   if (!VOCAB.length) return html`<section id="vocab" class="paper vocab"><div class="paper-head"><div><h1>🔤 ศัพท์ประจำวัน</h1></div></div><p class="notice">โหลดคำศัพท์ไม่ได้ (vocab.js หาย)</p><div class="actions"><button class="btn" type="button" onClick=${() => { location.hash = ''; }}>← กลับหน้าแรก</button></div></section>`;
   return html`<section id="vocab" class="paper vocab prof">
-    <div class="paper-head"><div><h1>🔤 ศัพท์ประจำวัน</h1><p>ทุกคำจากชีตศัพท์ของศูนย์ 5~37과 · ${VOCAB.length} คำ · ฝึกทุกวัน ระบบนัดทบทวนให้เอง (กล่อง 0–5) · ความคืบหน้าซิงก์ข้ามเครื่องบนลิงก์ claude.ai</p></div></div>
+    <div class="paper-head"><div><h1>🔤 ศัพท์ประจำวัน</h1><p>ทุกคำจากชีตศัพท์ของศูนย์ + ตำรา + เวิร์กบุ๊ก 5~37과 · ${VOCAB.length} คำ · ฝึกทุกวัน ระบบนัดทบทวนให้เอง (กล่อง 0–5) · ความคืบหน้าซิงก์ข้ามเครื่องบนลิงก์ claude.ai</p></div></div>
     ${s ? html`<${VSess} s=${s} />` : html`<${VTabs} />${tab === 'units' ? html`<${VUnits} />` : tab === 'stats' ? html`<${VStats} />` : html`<${VToday} />`}`}
     <div class="actions"><button class="btn" type="button" id="vocab-back" onClick=${() => { location.hash = ''; }}>← กลับหน้าแรก</button></div>
   </section>`;
@@ -1705,7 +1714,7 @@ function VTeaser() {
   if (!VOCAB.length) return null;
   const q = vInfo(), s = vsS.value, live = s && s.phase !== 'end';
   return html`<article class="exam vteaser" id="vteaser">
-    <div class="exam-h"><h2 class="ko">🔤 ศัพท์ประจำวัน</h2><span class="muted">ทุกคำจากชีตศัพท์ 5~37과 · ${VOCAB.length} คำ</span>
+    <div class="exam-h"><h2 class="ko">🔤 ศัพท์ประจำวัน</h2><span class="muted">ทุกคำจากชีตศัพท์ ตำรา และเวิร์กบุ๊ก 5~37과 · ${VOCAB.length} คำ</span>
       <p>ถึงรอบทบทวนวันนี้ <b>${q.due}</b> คำ · คำใหม่ที่ยังไม่เคยฝึก <b>${q.fresh}</b> คำ · จำได้แล้ว <b>${q.learned}</b>/${VOCAB.length}${q.streak ? html` · ฝึกติดต่อกัน <b>${q.streak}</b> วัน` : ''}<br />${q.sess ? html`ชุดวันนี้ ${q.sess} คำ = ทบทวน ${q.review} + แนะนำคำใหม่ ${q.add}` : 'วันนี้ไม่มีคำที่ถึงรอบทบทวนและไม่เหลือคำใหม่ 🎉'}</p></div>
     <div class="actions"><button class="btn primary" type="button" id="vteaser-go" onClick=${goVocab}>${live ? '▶ ทำชุดศัพท์ที่ค้างอยู่ต่อ' : '▶ ฝึกศัพท์วันนี้'}</button></div>
   </article>`;
@@ -1733,7 +1742,7 @@ function Help({ on }) {
     </ul>
     <h2>🔤 ศัพท์ประจำวัน</h2>
     <ul>
-      <li>ปุ่ม <b>🔤 ศัพท์</b> บนแถบด้านบน (หรือการ์ดบนหน้าแรก) = ฝึกจำศัพท์ <b>ทุกคำ</b> จากชีตศัพท์ของศูนย์ บท 5~37 (ราว 900 คำ) ทุกวัน เพราะข้อสอบประจำวันเสียคะแนนที่ศัพท์เป็นหลัก</li>
+      <li>ปุ่ม <b>🔤 ศัพท์</b> บนแถบด้านบน (หรือการ์ดบนหน้าแรก) = ฝึกจำศัพท์ <b>ทุกคำ</b> จากชีตศัพท์ของศูนย์ ตำรา และเวิร์กบุ๊ก บท 5~37 (ราว 900 คำ) ทุกวัน เพราะข้อสอบประจำวันเสียคะแนนที่ศัพท์เป็นหลัก</li>
       <li><b>วันนี้</b> = ระบบจัดชุดให้: คำที่ถึงรอบทบทวนก่อน (กล่องต่ำสุดก่อน แล้วบทหลังสุดก่อน) ตามด้วยคำใหม่ที่ยังไม่เคยฝึก เลือกขนาดชุด 20 / 30 / 50 คำ (ถ้าคำค้างทบทวนเยอะจนไม่มีคำใหม่เข้ามา เลือก คำใหม่อย่างน้อย 5 / 10 คำต่อชุดเพื่อกันที่ไว้) · <b>ตามบท</b> = แตะเลขบทเพื่อฝึกทุกคำของบทนั้น (หรือ ทั้งหมด) · <b>สถิติ</b> = จำนวนคำที่จำได้ แถบรายบท คำที่ผิดบ่อย 20 อันดับ และ 14 วันล่าสุด</li>
       <li>โหมด <b>✍ พิมพ์</b> = เห็นคำไทย/อังกฤษ แล้วพิมพ์คำเกาหลี (สะกดผิดไม่เกิน 1–2 ตัวอักษรย่อยได้ครึ่งคะแนนและบอกตัวที่ผิด) กด Enter เพื่อตรวจ กด Enter อีกครั้งไปคำถัดไป ▶ ฟังเสียงได้หลังตอบ · โหมด <b>🃏 การ์ด 4 ตัวเลือก</b> = เลือกคำตอบ 1 ใน 4 (คีย์ลัด 1–4) ตั้ง "ถามแบบ" ได้: <b>한국어 → ไทย</b> เห็นคำเกาหลี (ฟังได้) เลือกคำแปล · <b>ไทย → 한국어</b> เห็นคำไทย เลือกคำเกาหลี (เสียงเล่นหลังตอบ) · <b>สลับกัน</b> สุ่มทั้งสองแบบ ตัวลวงมาจากคำในบทเดียวกันก่อน ตอบถูกไปข้อถัดไปเอง ตอบผิดเห็นเฉลยแล้วกด ถัดไป</li>
       <li><b>กล่อง 0–5</b> (Leitner): ตอบถูก = ขึ้นกล่อง และระบบนัดทบทวนห่างขึ้น 1 · 2 · 4 · 7 · 14 · 30 วัน ตามกล่องเดิมของคำนั้น · เกือบถูก = อยู่กล่องเดิม ทวนพรุ่งนี้ · ตอบผิด = กลับกล่อง 0 และถามซ้ำท้ายชุดจนตอบถูก · "จำได้แล้ว" = กล่อง 2 ขึ้นไป · "แม่นแล้ว" = กล่อง 4 ขึ้นไป — ทำทุกวัน คำที่ถึงรอบจะโผล่มาเอง</li>

@@ -78,7 +78,8 @@ source/        ต้นฉบับ — never modify the contents; file names f
                (22~37과 종합문제, 45 items, pp.174–183)
   midterm/     KMU midterm score unit 05 - 21.pdf (the 중간시험 score slip, 2026-10-27 — the papers themselves may not be photographed)
   everyday/    KMU everyday test unit 05 - 13.pdf · KMU everyday sheet unit 05 - 13.pdf
-               KMU everyday test unit 14.pdf · test unit 15, 16, 17, 18, 19, 22, 23 · sheet unit 15, 16, 17, 18, 19, 20, 23, 24   ← daily hand-outs land HERE
+               KMU everyday test unit 14.pdf · test unit 15, 16, 17, 18, 19, 22, 23, 24, 25 · sheet unit 15, 16, 17, 18, 19, 20, 23, 24, 25, 26   ← daily hand-outs land HERE
+               (the user dropped test 24 / sheet 25 in source/ itself on 10/28, test 25 / sheet 26 on 11/1 — moved here; check source/ root after each drop)
                (the user dropped the 23과 sheet as "sheet unit 22" on 10/26 — its content is 23과 ㅂ불규칙/(으)ㄴ 형태 연습, renamed to unit 23)
   miniexam/    KMU mini exam 01 unit 05 - 13.pdf   (복습시험 ①: score sheet + 듣기/읽기/쓰기 papers in one PDF)
                KMU mini exam 02 unit 14 - 20.pdf   (복습시험 ②, sat 2026-10-20: 쓰기 4 pp + 듣기 + 읽기, the student's pencil, no marks yet)
@@ -86,6 +87,9 @@ source/        ต้นฉบับ — never modify the contents; file names f
   review/      KMU midterm review 01 unit 05 - 22.pdf   (teacher's 「1급 중간시험 복습문제」, 16 pp: 쓰기 1–14 · 읽기 1–25 · 듣기 1–12 · 말하기 1–20;
                p.17 of the scan is the 19과 sheet again — ignored)
   vocabulary/  KMU vocabulary unit 05 - 22.pdf   (centre's own vocab book, 48 pp: 1–17 word lists per unit · 18–35 본문 듣기 sheets · 36–48 picture themes)
+               KMU vocabulary unit 23 - 37.pdf   (2026-11-01, dropped as "vocabulary unit 23 - 37.pdf" in source/ root → renamed; 36 pp: 1–15 = book pp.20–34
+               word lists 23–37 (the user's pencil glosses on 23–27) · 16–30 본문 듣기 23–37 (pencil on 23–26) · 31–34 irregular-verb pages ㅂ 23 · ㄹ 25 ·
+               ㄷ 31 · 르 32 · 35 ◆동사 2 · 36 ◆형용사 2)
   lecture/     KMU lecture note unit 05 - 12.pdf   (18 pp of the user's PHOTOS of the teacher's slides + notebook; 366 MB; slides actually run 9–22과)
   syllabus/    KMU syllabus 2026 fall unit 05 - 37.pdf · KMU orientation guide 2026 fall GKS.pdf (2026-10-21, 33 pp English, was
                「KOOKMIN_KLC_Fall 2026 GKS Freshman Orientation Guide(노현서수정)」; pages → extracted/syllabus/orientation_2026fall/)
@@ -103,9 +107,9 @@ extracted/     intermediate extraction output (regenerable, ~300 MB) — same na
   textbook/    unitNN/page-N.png (300 dpi) + unitNN.txt (tesseract)   ← written by scripts/ocr_extract.py
   workbook/    unit05-13/wb-01..41.png · unit14-22/wb-01..50.png       (graded scans, 150 dpi) · unit23…unit37/wb-N.png (150 dpi) ·
                key/key-01..12.png (printed key, 150 dpi) · review22-37/p-01..10.png (종합문제) · ../midterm/score-1.png
-  everyday/    unit05-13/test-1..9.png + sheet-01..10.png · unit14/test-1.png · unit15/sheet-1..3.png + test-1.png · unit16/sheet-1..4.png + test-1.png · unit17/sheet-1..2.png + test-1.png · unit18/sheet-1..2.png + test-1.png · unit19/sheet-1..2.png + test-1.png · unit20/sheet-1.png · unit22/test-1.png · unit23/sheet-1..2.png + test-1.png · unit24/sheet-1..2.png
+  everyday/    unit05-13/test-1..9.png + sheet-01..10.png · unit14/test-1.png · unit15/sheet-1..3.png + test-1.png · unit16/sheet-1..4.png + test-1.png · unit17/sheet-1..2.png + test-1.png · unit18/sheet-1..2.png + test-1.png · unit19/sheet-1..2.png + test-1.png · unit20/sheet-1.png · unit22/test-1.png · unit23/sheet-1..2.png + test-1.png · unit24/sheet-1..2.png + test-1.png · unit25/sheet-1..2.png + test-1.png · unit26/sheet-1..2.png
   miniexam/    exam01/page-1..5.png (110 dpi; page 1 = score sheet, 2 듣기, 3 읽기, 4–5 쓰기)
-  review/      midterm01/page-01..17.png (80 dpi) · vocabulary/page-01..48.png (80 dpi) · lecture/page-01..18.png (150 dpi — photos need it)
+  review/      midterm01/page-01..17.png (80 dpi) · vocabulary/page-01..48.png (80 dpi) + vocabulary/unit23-37/page-01..36.png (100 dpi) · lecture/page-01..18.png (150 dpi — photos need it)
 content/       ✍️ SOURCE OF TRUTH — edit here, never in output/
   guide/       00_exam_info.md = ส่วนที่ 0 (shared cover of both books; `{{today}}` / `{{days:YYYY-MM-DD}}` are filled at build time,
                so the countdown column never goes stale) · 01_units/unit05…37.md (ส่วนที่ 1 of the By_Unit book, unified template:
@@ -115,15 +119,22 @@ content/       ✍️ SOURCE OF TRUTH — edit here, never in output/
                03_particles.md (ส่วนที่ 2) · 03b_question_words.md (ส่วนที่ 3, 5–37과; §3.3 = every answer pattern: 5 rules · yes/no questions by ending · each 의문사 · checklist) · 05_selftest.md (ส่วนที่ 5) ·
                06_quickref.md (ส่วนที่ 6 — ASSEMBLED from per-topic snippets the rewrite agents wrote; 36–64 appended 2026-10-26 from
                06_quickref_parts/NN.md (kept; re-append if a snippet changes); keep 64 entries in topic order)
-               04_vocabulary/unit05…22.md (centre's word lists, `###` heading, Thai+English) · unit23…37.md (2026-10-26: the textbook's margin
-               word lists — the centre's sheet for 23+ is not scanned except the 23과 photo; glosses are Sonnet's) · 90_themes.md (picture themes) · 91_categories.md (old AI list)
+               04_vocabulary/unit05…22.md (centre's word lists, `###` heading, Thai+English) · unit23…37.md (since 2026-11-01 = the centre's sheet for 23–37
+               in sheet order + `#### ∞ 읽기/듣기 ∞` blocks + `#### ศัพท์เพิ่มเติมจากตำรา` = the textbook-margin words of the 10/26 version the sheet lacks;
+               glosses are Sonnet's, the user's pencil ignored) · 90_themes.md (picture themes; 11/1 gained ◆ ㅂ 불규칙 23 · ㄹ 탈락 25 · ㄷ 불규칙 31 · 르 불규칙 32 ·
+               동사 2 · 형용사 2, the last two headed "(23과)" only for the loader; ◆ 문제 지시어 — คำในคำสั่งโจทย์ (5과) = 29 instruction words) · 91_categories.md (old AI list)
+               **Since 2026-11-01 evening every unit file 5–37 ends with `#### ศัพท์เพิ่มเติมจากตำราและเวิร์กบุ๊ก (ไม่อยู่ในชีตของศูนย์)`** (the 23–37 margin sections were
+               renamed into it): 416 words of the textbook and workbook the centre's sheets lack (있다/없다, numerals 영…만 / 하나…아흔, months 일월…십이월, 선물, 계획,
+               중국집, 분위기 …), each in the FIRST unit it appears. Found by scratchpad Kiwi lemmatiser diff (textbook OCR ∩ guide chapter, + workbook) minus the site
+               words, judged and glossed by 3 Sonnet agents (content/specs/BRIEF_vocab_gapfill.md); duplicates across units removed by hand. 1,366 words on the site.
                07_lecture/unitNN.md = ARCHIVE of the slide transcription (`#### 📽️ [topic:NN] …` blocks). Since 2026-10-16 evening
                its content lives inside 01_units and 02_grammar; build.py no longer assembles it.
                (a part = one .md OR a directory joined in name order; dirs start with 00_header.md) · part banners say "ส่วนที่ N", never "ภาค"
   exercises/   workbook/unit05…22.md (+ unit21_review_5-21.md = 5~21과 종합문제)
                everyday/unit00_classroom.md, unit05…20.md, unit22.md (test 22, 8.5/10), unit23.md (sheet 23, user's pencil)  (매일시험 + 연습지 merged per unit)
                miniexam/exam01.md  (복습시험 ① as sat: one `##` per paper — score sheet · 듣기 · 읽기 · 쓰기 — then `# 정답`)
-               listening/unit05…22.md  (본문 듣기 sheets, user's pencil checked; key = textbook dialogue)
+               listening/unit05…37.md  (본문 듣기 sheets, user's pencil checked; key = textbook dialogue; 23–37 added 2026-11-01 from the 23–37 vocab book —
+               every sheet uses 대화 NN-1, verified against Whisper; O/X and choice keys of 27–37 are the agent's reasoning, the appendix has none for 29–31/33–35)
                review/midterm01_part1.md + _part2.md  (teacher's 중간시험 복습문제; parts are merged by build.py review; since 2026-10-21 the
                듣기 keys are real — derived from the teacher's audio in source/audio/review/, each ฟัง heading has a 🔊 line naming the file)
                listening/scripts_appendix.md  (2026-10-21: the book's 부록 — 듣기 scripts of 8·12·16·20과 with Thai + the printed 읽기/듣기 keys 5–21;
@@ -137,9 +148,11 @@ content/       ✍️ SOURCE OF TRUTH — edit here, never in output/
                SPEC_colors.md (colour-by-function classes, the Korean↔Thai mirroring rule, ambiguous Thai words, batch format)
                SPEC_predict_midterm.md (brief for the midterm mock-paper agents: facts, file/markdown rules, house style, mistake list)
                SPEC_23_37.md (2026-10-26: contract for book 1-2 — sources, the fixed grammar numbering 36–64, templates per deliverable)
+               SPEC_derivations.md (2026-10-28: the "สูตรและวิธีทำ" contract — teacher-whiteboard-style numbered rules + step-column worked tables
+               for every formula-type grammar point; §5 = topic→agent/unit assignment, §3 = which stem classes each family must show, §4 = the user's ✗ forms)
                SPEC_book_style.md (2026-10-27: the book-style contract for both guides — heading levels, INTRO/SUMMARY boxes, lead sentences,
                one-example-per-line density rules, chapter/topic skeletons, what may never be dropped, the pre-submit checks)
-  predictions/ everyday/unitNN.md (매일시험 — unit17 … unit20, unit22, unit23) · miniexam/examNN.md (복습시험 — exam02) ·
+  predictions/ everyday/unitNN.md (매일시험 — unit17 … unit20, unit22 … unit26) · miniexam/examNN.md (복습시험 — exam02) ·
                midterm/midterm01.md (중간시험 1–21과, 2026-10-18) = ASSEMBLED from midterm/parts/01_analysis.md (Fable) +
                02_writing · 03_reading · 04_listening · 05_speaking (+ _key.md, Sonnet agents) by the scratch script
                assemble_midterm.py (questions, then `# 정답` + keys) — edit the parts, re-assemble, `build.py predict`
@@ -163,7 +176,16 @@ content/       ✍️ SOURCE OF TRUTH — edit here, never in output/
                (2026-10-27) daily_a.json (units 05–13) · daily_b.json (14–24): every 매일시험 as sat = `daily-NN-writing` (A/B parts) + `daily-NN-listening`
                (the dictation, one section per sentence, voice T = teacher) + `sheet-NN-writing/-listening` (the practice sheets; sheet-20-listening plays the
                real 20-2.mp3), exam id `daily`, and a per-paper `"group"` string ("매일시험 23과 · 27 Oct · 4.5/10") that the home board groups by ·
-               daily_predict24.json = the 24과 prediction (3 writing mocks + `predict-24-listening`, 35 dictation candidates read by the teacher voice).
+               daily_predict24.json = the 24과 prediction (3 writing mocks + `predict-24-listening`, 35 dictation candidates read by the teacher voice). (2026-10-28) daily_b.json gained `daily-24-writing/-listening` (test 24, 8/10) and `sheet-25-writing`; daily_predict25.json = the
+               25과 prediction (`predict-25-1/2/3-writing` = textbook / workbook / sheet-table mocks, `predict-25-vocab` 30 words, `predict-25-listening` 20 short
+               dictation phrases); the predict-24 sets' group lost its 🔮 ("เก็ง 매일시험 24과 · สอบแล้ว …") so the board no longer pins a finished prediction —
+               do the same to each old prediction when its test comes back. Site published as version 45: 96 sets · 1,882 items · 723 clips.
+               (2026-11-01) v46: daily_b.json + daily-25-writing/-listening (test 25, 9/10) and sheet-26-writing; daily_predict26.json (predict-26-1/2/3-writing =
+               workbook / sheet / textbook mocks, predict-26-vocab 30, predict-26-listening 20; predict-25 lost its 🔮); textbook_listen2.json = tb-listen-23-29 ·
+               tb-listen-30-37 (본문 듣기 23–37 over the real NN-1.mp3, 41 items); vocab.js = 950 words from the centre's 23–37 sheets (v47, same evening: 1,366 with the textbook/workbook gap fill); VOCAB_PRIO now starts
+               26, 27, 25, 24, 23, 22, 28 …. The word clips are split by build_mockweb.py over VCLIP_FILES = clips3.js + clips4.js (13.5 MB cap each; clips3 alone
+               had reached 14.1 MB) — app.html loads both; add a file + <script> tag when the build says so. 106 sets · 2,029 items · 834 clips + 947 word clips ·
+               73 real mp3s. **Publish files now = {data.js, clips.js, clips2.js, clips3.js, clips4.js, vocab.js, vendor.js} + any NEW mp3** (v46 sent 23-1 … 37-1).
                Rules learned: the validator accepts `s` = F/M/T/S now; `<보기>` is rejected (write [보기]); a file whose name starts with `_` is a draft the
                build ignores (agents validate `_x.json`, then rename) — several agents can write sets while another builds the site.
                A section may carry `"audio": "audio/<textbook|review>/<file>.mp3"`: the site plays that real recording for ▶ ฟัง (no karaoke) and
@@ -313,6 +335,11 @@ output/        🤖 GENERATED — overwritten every build, never hand-edit. Reor
    The 18과 prediction scored even better (test = 10/10): mock 1 had two of the four clocks (08:15, 11:20), two of the
    three B pairs (도서관/책을 빌리러, 은행/돈을 찾으러) and C8 exact, C10 half (체육관에 가요). The teacher now also drops
    hints the day before (19과: "부터~까지 time + 거예요") — put them at the top of the prediction when given.
+   Since 22과 the paper is always A 4 (grammar 1) + B 4 (grammar 2) + C 2–3 dictation, and A/B items are lifted from the textbook 연습 and the
+   workbook almost verbatim (24과: workbook C2/C4, 연습 2 p.243 cues, 연습 2 p.245 signs); the sheet the day before names the grammar but not the item
+   format. Mock set 1 of a prediction should therefore copy the textbook 연습 lists, set 2 the workbook (predictions/everyday/unit25.md does this). 25과 B was the
+   workbook F pictures in full (2nd time in a row a workbook section was lifted whole) → since 26과 mock 1 = workbook, 2 = sheet, 3 = textbook, and the dictation
+   list also carries grammar example sentences (25과 C10 기숙사에 삽니다 was one).
 6. A returned 복습시험 (the user says "mini exam"): save as `source/miniexam/KMU mini exam NN unit AA - BB.pdf`
    (score sheet + all papers in one PDF), `pdftoppm -r 110 -png "<pdf>" extracted/miniexam/examNN/page`, transcribe to
    `content/exercises/miniexam/examNN.md` (one `##` per paper, Thai glosses, ⚠️ where the teacher deducted; there is
@@ -472,6 +499,22 @@ Guide §13–15 add material the course materials never covered explicitly:
   34과 frequency adverbs 자주·가끔·거의·전혀 (58), 35과 N이/가 되다 (59/60), 36과 -아/어도 되다 (61/64), 37과 -(으)려고 (unit file เสริม).
   Agent-glossed words to double-check: 바뀌다, 길이 막히다, 보령, 스포츠 댄스, 하숙집, 포장하다, 돌아가시다, 호박 (zucchini), 게르, 앞머리; 25과 margin
   word 이상하다 is not in its reading; 23과 reading has 카페 where the centre's sheet lists 카레.
+  **25과 teacher's slide 문법 1 (photo 2026-10-28):** the -지만 table has a 명사 row — 이지만 (both 받침) · past 이었지만 (받침 O) / 였지만
+  (받침 X), annotated "17과 +". The book's 준비 1 box (p.250) is V/A only, but 연습 2-6 cues 저는 학생이다. Topic 40's table was
+  mis-labelled "(เสริม)" and had no noun-past row → rewritten to mirror the slide (topic 40 + unit25 + quickref 40, 10/28).
+  Same day the whiteboard gave ㄹ 탈락 as a 2-rule procedure (① ㄹ + (으) → drop 으 · ② ㄹ + ㄴ ㅂ ㅅ 받침ㄹ → drop the stem ㄹ; 만들러 ·
+  만드네요 · 만드세요 · 만들 거예요) — the user asked for it "as numbered steps showing what merges/dissolves" → step tables added to
+  topic 40 (full, 10 rows + TIP), unit25 (4 board rows) and quickref 40. Slide 문법 2 (252쪽): 받침 ㄹ + 으 ✗ for -(으)러/-(으)ㄹ 거예요/
+  -(으)ㄹ까요?/-(으)세요 with 놀다 O/X (놀러 가요 O · 놀ㄹ 거예요 ✗ · 놀ㄹ까요 ✗ · 놀세요 ✗ → 노세요) and 살 + (스)ㅂ니다 → 삽니다 vs 읽습니다/봅니다
+  (ㄹ-stem picks ㅂ니다 like a vowel stem) → O/X tables added to topic 40 + unit25, ✗ 놀세요 row in the pitfalls table. Its second half
+  (받침 ㄹ + ㄴ/ㅂ/ㅅ/받침ㄹ → 놀다: 노네요 놉니다 노세요 놀 거예요 놀까요? vs 놀러 가요) → one-verb-all-endings strip table (5 verbs) in topic 40, 2 rows in unit25.
+- **"สูตรและวิธีทำ" blocks (2026-10-28, 6 Sonnet agents from content/specs/SPEC_derivations.md, 245–265k tokens / 9–11 min each):** the user asked that every
+  formula-type grammar point be explained "like the teacher, like showing the work in a math solution". 45 topics (all except 03 05 09 11 12 13 14 15 17 18 24
+  27 29 31 35 41 45 52, which have no formula) now carry `#### สูตรและวิธีทำ: … (แบบกระดานครู)` as the last sub-section of 📌 รูปแบบและเงื่อนไข (rules table
+  กฎ 1–5 → "ลำดับทำคือ ①②③" → step-column worked table, 8–24 rows, ✗ forms from §6b → `> [!TIP] วิธีจำสั้น ๆ`; many also a one-verb-all-endings strip and a
+  ✗/✓ table) and the owning unit chapter carries `#### แสดงวิธีทำ: … (ย่อ · ตารางเต็มในไวยากรณ์ข้อ NN)` (4–8 rows) inside its 📝 section. Each block shows only the
+  irregulars taught by that unit (ㅂ 23과 · ㄹ 25과 · ㄷ 31과 · 르 32과). Agents' own illustrative ✗ forms (읽아요, 쓰어요, 앉어서, 가실게요 …) are labelled as risky
+  forms, not as the user's; Thai lead sentences are the agents' and not proofread beyond spot checks (06, 40). +2,633 lines over 82 files; both books rebuilt.
 - **Workbook 23–37 + 22~37과 종합문제 (2026-10-27, 6 Sonnet agents, 340–460k tokens each)** → content/exercises/workbook/unit23…37.md +
   unit37_review_22-37.md, keys copied from the publisher's printed 워크북 정답 (source/workbook/KMU workbook key unit 05 - 37.pdf) — the first
   workbook keys in this repo that are not AI-solved. Scans: only 23과 carries the user's pencil (and a pink teacher highlight + signature on
@@ -569,11 +612,23 @@ Guide §13–15 add material the course materials never covered explicitly:
   어려운 · 영화은 for 재미있는), C only 2 dictation items (불고기가 안 매워요 ✓ · 친절한 사람은 → 사람을, half). The per-item split is inferred from the red
   pen (ticks = deducted, circles = given) and sums to 4.5. The user's own diagnosis: "I could not remember the words" — the sheet tables the day
   before were almost all right, so the failure is recall under exam conditions, not the rule. 24과 sheet (10/27, user's pencil): -(으)세요 / -지 마세요
-  tables all 12 right (incl. 돕다 → 도우세요); the teacher's own restaurant dialogue (듣기 보충, 13 blanks) filled plausibly, no audio to check. Earlier tests
+  tables all 12 right (incl. 돕다 → 도우세요); the teacher's own restaurant dialogue (듣기 보충, 13 blanks) filled plausibly, no audio to check. **24과 test (10/28) = 8/10:** A 4 × situation sentence → -고 싶어요
+  (보기 경치가 아름다워요. 사진을 찍고 싶어요 · 피곤해요. 집에서 자고 · 배가 고파요. 빨리 밥을 먹고 · 다리가 아파요. 의자에 앉고 · 예쁜 가방… 사고) — items 2–3 are
+  workbook 24과 C2/C4 almost word for word and all four cues are in textbook 연습 2 p.243; B 4 × no-entry pictogram → -지 마세요 (보기 쓰레기를 버리지 ·
+  사진을 찍지 · 전화를 하지 · 담배를 피우지 · 이야기하지 — 3 of the 4 signs are textbook 연습 2 p.245); C 2 bare phrases from 대화 24-1 (뭘 시킬까요 · 냉면 한 그릇).
+  Lost: 만나고 for 앉고 (−1, word recall), 담배 피우지 without 를 (−0.5), 뭘 시킬까요 half (teacher gave no reason; the pencil spaces 시킬 까요). The 24과
+  prediction's mock 2 (textbook-based) matched A's format and 3 of 4 items; its dictation list had both phrases but at ranks 5 and 9 inside long sentences —
+  the user said "none matched", which is how it looked. Lesson used for 25과: rank 대화 lines first and list the short form. 25과 sheet (10/28, user's pencil):
+  -지만 table 18/18 and ㄹ 탈락 table (-네요 · -ㅂ니다 · -(으)세요 · -(으)ㄹ 거예요 · -(으)러 가요 · -(으)ㄴ) 38/38 right; the 어때요 dialogue page has no answers. **25과 test (~10/29, scanned 10/30) = 9/10:** A 4 × pick a word from a 보기 box (재미있다 · 어렵다 · 깨끗하다 ·
+  불친절하다) after -지만 (좁지만 깨끗해요 · 재미있지만 좀 어려워요 · 종업원이 불친절해요 · 무섭지만 재미있어요), B 4 × **the workbook 25과 F pictures, all of them**
+  (보기 아기가 웁니다 · 집이 멉니다 · 창문을 여세요 · 케이크를 만드세요 · 바람이 많이 부네요 — endings mixed), C 맛있게 드셨어요 (rank 1 of the prediction's list) ·
+  기숙사에 삽니다 (a grammar example, not a 대화 line). Lost only 요리하세요 for 만드세요 (−1: grammatical, but the test targets ㄹ 탈락 — pick the ㄹ verb).
+  The 25과 prediction's mock 2 had the four B pictures exactly. 26과 sheet (~10/30, user's pencil on 문장 연습 2 only): 5 of 6 보다 sentences right, ★ item 2
+  reversed the winner (압둘라 씨가 왕쯔이보다 시험을 잘 봤어요 — 왕쯔이 had 90점). Earlier tests
   5–13 DO carry a red score at the top of each scan (re-read 2026-10-27, CLAUDE.md said otherwise before): 5과 7.5 (the paper is titled 단어 시험) ·
-  6과 7 · 7과 8 · 8과 9.5 · 9과 5 · 10과 8.5 · 11과 5.7 · 12과 6.2 · 13과 4. All 17 daily tests so far average 7.46/10; the ≤ 5 papers (9과, 13과,
+  6과 7 · 7과 8 · 8과 9.5 · 9과 5 · 10과 8.5 · 11과 5.7 · 12과 6.2 · 13과 4. All 19 daily tests so far average 7.57/10 (25과 = 9); the ≤ 5 papers (9과, 13과,
   23과) are the vocabulary-heavy units (position words · dates/places · ㅂ adjectives) — recall of words, not grammar, is the chronic loss. All
-  17 are in scores.json `daily`. The 11과 test key was wrong in two places and is fixed (scan re-read 10/27): A1 = 기다려요 (the teacher circled the
+  19 are in scores.json `daily`. The 11과 test key was wrong in two places and is fixed (scan re-read 10/27): A1 = 기다려요 (the teacher circled the
   student's answer; the old key said 만나요) and A14 = 가르쳐요 (a teaching scene; the student's 기다려요 was slashed — the old key had copied it).
 - Known cosmetic gaps: 10과 A's third table row (30–10,000) is printed as given reference rather
   than as blanks; `왕쯔이` is transliterated `หวางจิ้ง` where `หวางจื่ออี` is closer.
@@ -673,6 +728,24 @@ starred ones cost real marks.
   무서 워요 for 무서웠어요 (question in the past, answer in the present + a space inside the word) · 영화은 for 재미있는 (noun + 은 where an adjective
   + 는 modifier was needed) · 친절안 (ㅎ drawn like ㅇ) · 사람은 → 사람을 (object of 좋아하다). The sheet tables the day before were all right:
   the loss is recall under test conditions. Workbook 23과 (teacher-checked): 어렵니다 → 어렵습니다, 중식집 → 중국집.
+- 24과 prediction mock 1 (2026-10-28, photo, ≈9.5/10): all -고 싶어요 / -(으)세요 / -지 마세요 forms right — 앉으세요 · 닫으세요 (으 kept) ·
+  도우세요 (ㅂ irregular) · 넣지 (ㅎ받침) · 매운 (ㅐ) · 산책하고 (하 kept). Only slip: **비빔밥은 고기를 넣지 마세요** for 비빔밥에 — 넣다 marks the
+  container with 에 (where it goes in), 은/는 belongs on the thing left out (고기는).
+- 매일시험 24과 (2026-10-28, 8/10): ★ **만나고 싶어요** for 의자에 앉고 싶어요 (knew the grammar, could not recall 앉다 = sit — vocabulary again) ·
+  **담배 피우지 마세요** without 를 (−0.5) · dictation **시킬 까요** written with a space (half).
+- Workbook 25과 (2026-10-28, photos, no teacher marks): A–C all right; ★ **만들아요** for 만들어요 (took ㅏ from 만, the first syllable — 힘들어요 in the
+  same table was right) · ★ **머세요** in F5 where the printed ending was (스)ㅂ니다 → 멉니다 (carried (으)세요 over from F3–F4; also 멀다 is an adjective) ·
+  **여쁘지만** for 예쁘지만 (ㅖ/ㅕ, the word was printed in the 보기 above) · 맑지만 춥지 않아요 (grammatical but both halves positive — -지만 needs a
+  contrast) · G5 냉면을 잘 만듭니다 to 어머니께서 … 만드세요? (→ 만드십니다) · G4 어디에서 사십니까? left blank — did not recognise 사십니까 as 살다 +
+  (으)시 + ㅂ니까 (explained in chat; answer = …에서 삽니다, no 시 for oneself). Pencil glosses: what looks like "Unkind" over 불편하다 (small photo, uncertain; 불편하다 =
+  uncomfortable/inconvenient, unkind = 불친절하다 — the C page has "Unkind" over 불친절하다 correctly) and "Happy" over 재미있다 (= fun, not 행복하다).
+- Workbook 26과 C/D 보다 (2026-10-30, photos): C1–2 and D1 right; ★ D2/D3 **국민식당이 분위기가 학생식당이 분위기보다** / **학생식당이 음식보다** —
+  a stray 이 on the noun inside the 보다 phrase (→ 국민식당이 학생 식당보다 분위기가 더 좋아요, or 학생식당의 분위기보다). The user asked why 식당이 분위기가
+  carries two 이/가 (whole + part, like 저는 키가 커요) and why 싸다/좋다/맛있다 take no 을/를 (adjectives have a subject, not an object) — explained in chat.
+- 매일시험 25과 (9/10): ★ **요리하세요** for 케이크를 만드세요 — grammatical, but the paper tested ㄹ 탈락 (same picture as workbook F): in a unit's test, reach for the
+  unit's target verb. Sheet 26 (~10/30): ★ **압둘라 씨가 왕쯔이보다 시험을 잘 봤어요** with 왕쯔이 90점 / 압둘라 70점 — reversed winner (the 보다 noun is the loser).
+  본문 듣기 23–25 (pencil, checked 11/1): 매운 음식이에요 written into a blank followed by the printed 음식이에요 (copy only what the gap needs) · 냉면 먹고
+  싶어요 without 을 · 우리 for 우리 집. Vocab-sheet pencil glosses (11/1): 만지다 = "to teach" (→ to touch), 스키장 = คนเล่นสกี (→ ลานสกี), 부터 = "first" (→ from).
 What the user does well: ㅂ니다/습니다 choice by 받침, -지 않- forms, 겠 forms, the ㅡ-drop past
 (바빴어요·컸어요), special honorific words (드세요·주무세요·계세요), 에서 for activity places.
 
@@ -867,3 +940,11 @@ agents (90–215k tokens): interview bank + 3 mocks + interview.md (speech-playe
 review 듣기 keys, profile view. Fable: speech player got a collapsible options row, the Q/A format with "ซ่อนคำตอบ", and kotag colours (nested karaoke/colour
 spans); the site got `audio` sections, clips split, v28 published with 57 mp3s; the user's old family paragraph was recovered from the 10/10 chat transcript.
 
+2026-11-01 (Opus 5.5 + 3 Sonnet agents, ~660k agent tokens, 6–9 min each): the user dropped test 25 (9/10), sheet 26 and the centre's vocabulary book 23–37 in
+source/ root → filed (§2), test 25 + sheet 26 transcribed by hand, 25과 prediction scored (B = workbook F pictures, C9 = rank 1). Agents: vocab 23–37 sheets →
+04_vocabulary/unit23…37 + 90_themes (950 words on the site) · 본문 듣기 23–37 → listening/unit23…37 + textbook_listen2.json · 26과 prediction (24 pp) + its site
+sets + daily-25/sheet-26 sets. Site v46 published; both guides rebuilt (639 / 726 pp). Earlier on 10/30: workbook 26과 checked from photos (§6b). Not committed.
+Evening (same day, 3 more Sonnet agents, ~420k tokens, 2–3 min each): the user asked why 26과 still showed 0/46 after a full pass (all 46 words sat in box 1 —
+"จำได้" = box ≥ 2 needs a second right answer, and a correct first answer gives box 1) and whether the words came from the workbook/textbook too (they did
+not: centre's sheets only). Site v47: unit chips + stats rows carry a blue "ฝึกแล้ว N" segment (VBar component: mastered · learned · seen) and the vocab
+gap fill above (950 → 1,366 words; 410 new word clips, clips3 13.5 MB + clips4 7.7 MB; v47 sent app.html + vocab.js + clips3.js + clips4.js); guides rebuilt 655 / 728 pp, scan clean. Note: srsApply() does not check the due date, so re-doing a unit the same day also promotes words — left as is.
