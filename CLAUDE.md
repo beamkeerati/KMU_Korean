@@ -78,8 +78,8 @@ source/        ต้นฉบับ — never modify the contents; file names f
                (22~37과 종합문제, 45 items, pp.174–183)
   midterm/     KMU midterm score unit 05 - 21.pdf (the 중간시험 score slip, 2026-10-27 — the papers themselves may not be photographed)
   everyday/    KMU everyday test unit 05 - 13.pdf · KMU everyday sheet unit 05 - 13.pdf
-               KMU everyday test unit 14.pdf · test unit 15, 16, 17, 18, 19, 22, 23, 24, 25 · sheet unit 15, 16, 17, 18, 19, 20, 23, 24, 25, 26   ← daily hand-outs land HERE
-               (the user dropped test 24 / sheet 25 in source/ itself on 10/28, test 25 / sheet 26 on 11/1 — moved here; check source/ root after each drop)
+               KMU everyday test unit 14.pdf · test unit 15, 16, 17, 18, 19, 22, 23, 24, 25, 26, 27 · sheet unit 15, 16, 17, 18, 19, 20, 23, 24, 25, 26, 27, 28   ← daily hand-outs land HERE
+               (the user dropped test 24 / sheet 25 in source/ itself on 10/28, test 25 / sheet 26 on 11/1, test 26 / sheet 27 on 11/2, test 27 / sheet 28 on 11/3 — moved here; check source/ root after each drop)
                (the user dropped the 23과 sheet as "sheet unit 22" on 10/26 — its content is 23과 ㅂ불규칙/(으)ㄴ 형태 연습, renamed to unit 23)
   miniexam/    KMU mini exam 01 unit 05 - 13.pdf   (복습시험 ①: score sheet + 듣기/읽기/쓰기 papers in one PDF)
                KMU mini exam 02 unit 14 - 20.pdf   (복습시험 ②, sat 2026-10-20: 쓰기 4 pp + 듣기 + 읽기, the student's pencil, no marks yet)
@@ -107,7 +107,7 @@ extracted/     intermediate extraction output (regenerable, ~300 MB) — same na
   textbook/    unitNN/page-N.png (300 dpi) + unitNN.txt (tesseract)   ← written by scripts/ocr_extract.py
   workbook/    unit05-13/wb-01..41.png · unit14-22/wb-01..50.png       (graded scans, 150 dpi) · unit23…unit37/wb-N.png (150 dpi) ·
                key/key-01..12.png (printed key, 150 dpi) · review22-37/p-01..10.png (종합문제) · ../midterm/score-1.png
-  everyday/    unit05-13/test-1..9.png + sheet-01..10.png · unit14/test-1.png · unit15/sheet-1..3.png + test-1.png · unit16/sheet-1..4.png + test-1.png · unit17/sheet-1..2.png + test-1.png · unit18/sheet-1..2.png + test-1.png · unit19/sheet-1..2.png + test-1.png · unit20/sheet-1.png · unit22/test-1.png · unit23/sheet-1..2.png + test-1.png · unit24/sheet-1..2.png + test-1.png · unit25/sheet-1..2.png + test-1.png · unit26/sheet-1..2.png
+  everyday/    unit05-13/test-1..9.png + sheet-01..10.png · unit14/test-1.png · unit15/sheet-1..3.png + test-1.png · unit16/sheet-1..4.png + test-1.png · unit17/sheet-1..2.png + test-1.png · unit18/sheet-1..2.png + test-1.png · unit19/sheet-1..2.png + test-1.png · unit20/sheet-1.png · unit22/test-1.png · unit23/sheet-1..2.png + test-1.png · unit24/sheet-1..2.png + test-1.png · unit25/sheet-1..2.png + test-1.png · unit26/sheet-1..2.png + test-1.png · unit27/sheet-1..3.png + test-1.png · unit28/sheet-1.png
   miniexam/    exam01/page-1..5.png (110 dpi; page 1 = score sheet, 2 듣기, 3 읽기, 4–5 쓰기)
   review/      midterm01/page-01..17.png (80 dpi) · vocabulary/page-01..48.png (80 dpi) + vocabulary/unit23-37/page-01..36.png (100 dpi) · lecture/page-01..18.png (150 dpi — photos need it)
 content/       ✍️ SOURCE OF TRUTH — edit here, never in output/
@@ -152,7 +152,7 @@ content/       ✍️ SOURCE OF TRUTH — edit here, never in output/
                for every formula-type grammar point; §5 = topic→agent/unit assignment, §3 = which stem classes each family must show, §4 = the user's ✗ forms)
                SPEC_book_style.md (2026-10-27: the book-style contract for both guides — heading levels, INTRO/SUMMARY boxes, lead sentences,
                one-example-per-line density rules, chapter/topic skeletons, what may never be dropped, the pre-submit checks)
-  predictions/ everyday/unitNN.md (매일시험 — unit17 … unit20, unit22 … unit26) · miniexam/examNN.md (복습시험 — exam02) ·
+  predictions/ everyday/unitNN.md (매일시험 — unit17 … unit20, unit22 … unit28) · miniexam/examNN.md (복습시험 — exam02) ·
                midterm/midterm01.md (중간시험 1–21과, 2026-10-18) = ASSEMBLED from midterm/parts/01_analysis.md (Fable) +
                02_writing · 03_reading · 04_listening · 05_speaking (+ _key.md, Sonnet agents) by the scratch script
                assemble_midterm.py (questions, then `# 정답` + keys) — edit the parts, re-assemble, `build.py predict`
@@ -183,7 +183,7 @@ content/       ✍️ SOURCE OF TRUTH — edit here, never in output/
                (2026-11-01) v46: daily_b.json + daily-25-writing/-listening (test 25, 9/10) and sheet-26-writing; daily_predict26.json (predict-26-1/2/3-writing =
                workbook / sheet / textbook mocks, predict-26-vocab 30, predict-26-listening 20; predict-25 lost its 🔮); textbook_listen2.json = tb-listen-23-29 ·
                tb-listen-30-37 (본문 듣기 23–37 over the real NN-1.mp3, 41 items); vocab.js = 950 words from the centre's 23–37 sheets (v47, same evening: 1,366 with the textbook/workbook gap fill); VOCAB_PRIO now starts
-               26, 27, 25, 24, 23, 22, 28 …. The word clips are split by build_mockweb.py over VCLIP_FILES = clips3.js + clips4.js (13.5 MB cap each; clips3 alone
+               28, 22, 26, 27, 25, 24, 23 … (11/3: the teacher said test 28 WILL ask 28 · 22 · 26 words — colours, fruits, animals, weather, sports 하다/타다/치다). The word clips are split by build_mockweb.py over VCLIP_FILES = clips3.js + clips4.js (13.5 MB cap each; clips3 alone
                had reached 14.1 MB) — app.html loads both; add a file + <script> tag when the build says so. 106 sets · 2,029 items · 834 clips + 947 word clips ·
                73 real mp3s. **Publish files now = {data.js, clips.js, clips2.js, clips3.js, clips4.js, vocab.js, vendor.js} + any NEW mp3** (v46 sent 23-1 … 37-1).
                Rules learned: the validator accepts `s` = F/M/T/S now; `<보기>` is rejected (write [보기]); a file whose name starts with `_` is a draft the
@@ -624,7 +624,7 @@ Guide §13–15 add material the course materials never covered explicitly:
   (보기 아기가 웁니다 · 집이 멉니다 · 창문을 여세요 · 케이크를 만드세요 · 바람이 많이 부네요 — endings mixed), C 맛있게 드셨어요 (rank 1 of the prediction's list) ·
   기숙사에 삽니다 (a grammar example, not a 대화 line). Lost only 요리하세요 for 만드세요 (−1: grammatical, but the test targets ㄹ 탈락 — pick the ㄹ verb).
   The 25과 prediction's mock 2 had the four B pictures exactly. 26과 sheet (~10/30, user's pencil on 문장 연습 2 only): 5 of 6 보다 sentences right, ★ item 2
-  reversed the winner (압둘라 씨가 왕쯔이보다 시험을 잘 봤어요 — 왕쯔이 had 90점). Earlier tests
+  reversed the winner (압둘라 씨가 왕쯔이보다 시험을 잘 봤어요 — 왕쯔이 had 90점).  **26과 test (11/2) = 5.5/10:** A 4 × 보다 picture pairs (1 = workbook C1, 4 = the workbook C 보기 몽골이 한국보다 더 추워요 verbatim) — lost 3: two winners reversed (빵이 우유보다 싸요 · 윤아 집이 가오루 집보다) + the Mongolian flag read as 사우디아라비아; B 4 × -겠- = all four cue cards of textbook 연습 2 pp.264–265 — 패가 고파겠어요 (ㅂ→ㅍ, 고프 + 겠) and 덥겠어요 with 겠 drawn like 첬 got half; C 기온이 영하 40도예요 (대화 26-1) ✓ · 힘들러지만 for 힘들었지만 (읽기 26-2) half. The teacher marks ○ full · △ half · / zero. 27과 sheet (11/2, user's pencil, 4 pink highlights): -아/어지다 picture table 20/21 (아파요 → 아파졌어요; cell 20 = 생겼어요), school afternoon/night = textbook 연습 3 (책을 읽어졌어요 ✗), -는 table 22/24 (팔는 → 파는 · 정소 → 청소). 27과 prediction (Sonnet agent, 280k tokens / 12 min; mock 1 = workbook G/D/E, 2 = sheet, 3 = textbook 연습 + the teacher's slide sentences) + site v48 (114 sets · 2,166 items). **27과 test (11/3) = 7.5/10:** A 4 × -는 "who is who" pictures ([보기] 운동하는 사람이 윤아 씨입니다; same format as sheet 27 p.4 / workbook E) — all four half for 이/가 on the object (책이 읽는 · 주스가 마시는 · 음식이 먹는 · 한국어가 공부하는, copied from the 보기's 사람이); B 4 × -아/어지다 from the afternoon/night picture (textbook 연습 3 p.271 = sheet 27 p.2) 4/4 — the 27 prediction's mock 2 A had all four; C 자주 입는 옷이에요 ✓ (연습 1 p.272 example) · 유즘은 장마절입니다 for 요즘은 장마철입니다 (first line of 읽기 27-2) half. The teacher put the SECOND grammar point in A — the A/B order is not fixed. Sheet 28 (11/3, blank): 중에서 제일 class dialogue + -(으)ㄹ 수 있다/없다 12-cell table → exercises/everyday/unit28.md. Earlier tests
   5–13 DO carry a red score at the top of each scan (re-read 2026-10-27, CLAUDE.md said otherwise before): 5과 7.5 (the paper is titled 단어 시험) ·
   6과 7 · 7과 8 · 8과 9.5 · 9과 5 · 10과 8.5 · 11과 5.7 · 12과 6.2 · 13과 4. All 19 daily tests so far average 7.57/10 (25과 = 9); the ≤ 5 papers (9과, 13과,
   23과) are the vocabulary-heavy units (position words · dates/places · ㅂ adjectives) — recall of words, not grammar, is the chronic loss. All
@@ -746,6 +746,8 @@ starred ones cost real marks.
   unit's target verb. Sheet 26 (~10/30): ★ **압둘라 씨가 왕쯔이보다 시험을 잘 봤어요** with 왕쯔이 90점 / 압둘라 70점 — reversed winner (the 보다 noun is the loser).
   본문 듣기 23–25 (pencil, checked 11/1): 매운 음식이에요 written into a blank followed by the printed 음식이에요 (copy only what the gap needs) · 냉면 먹고
   싶어요 without 을 · 우리 for 우리 집. Vocab-sheet pencil glosses (11/1): 만지다 = "to teach" (→ to touch), 스키장 = คนเล่นสกี (→ ลานสกี), 부터 = "first" (→ from).
+- Workbook 27과 (2026-11-02, photos, no teacher marks): vocab / -는 table / -아/어지다 table and G all right (ㄹ 탈락 사는·만드는·여는, 듣는 kept). ★ **자가 / 자는 for 차가 / 차는** in H (차를 right one line above — ㅈ/ㅊ, 8th sighting) · **음식를** (E2, → 음식을) · **음료수이에요** (→ 음료수예요) · E answers broader than the picture (음식을 먹는 for 빵을, 책을 읽는 for 공부하는) · H 따뜻해졌어요 + "drunk in winter" (contradiction) · spacing 추워 졌어요 / 쉬워 졌어요 / 길어 졌어요 (-아/어지다 is one word) · ㅈ of 졌 in 쉬워졌어요 drawn with a crossbar (reads ㅊ) · ㅎ of 하 in 좋아하는 floats (reads 아). Asked in chat: 있어졌어요 ✗ → 생기다 (33과), 돼요 vs -아/어지다, 잘 vs 좋아요, ช่วย = 돕다 vs -아/어 주세요.
+- ★ **매일시험 27과 (2026-11-03, 7.5):** **책이 읽는 · 주스가 마시는 · 음식이 먹는 · 한국어가 공부하는** — 이/가 on the object inside a -는 clause in all four items (−2; the 보기 ended 사람이 and the 이 was copied forward). The object keeps 을/를 inside -는 / -(으)ㄹ 수 있다 phrases (책을 읽는 사람 · 자전거를 탈 수 있어요). Same family as 음식를 / 시계가 받았어요. Dictation **유즘은 장마절입니다** for 요즘은 장마철입니다 (ㅛ → ㅠ, and ㅈ/ㅊ for the 9th time).
 What the user does well: ㅂ니다/습니다 choice by 받침, -지 않- forms, 겠 forms, the ㅡ-drop past
 (바빴어요·컸어요), special honorific words (드세요·주무세요·계세요), 에서 for activity places.
 

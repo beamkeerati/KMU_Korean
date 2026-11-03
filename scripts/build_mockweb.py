@@ -71,7 +71,7 @@ VOCAB_DIR = os.path.join(ROOT, 'content', 'guide', '04_vocabulary')
 ROW = re.compile(r'^\|\s*([^|]+?)\s*\|\s*([^|]+?)\s*\|\s*([^|]*?)\s*\|\s*$')
 # unit priority for the daily drill: the units of the coming exams first (매일시험 26과 11/2, then 27과, then the rest of 복습시험 ③ 11/6 = 22–29과,
 # then ④ = 30–37, then book 1-1)
-VOCAB_PRIO = [26, 27, 25, 24, 23, 22, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 21, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5]
+VOCAB_PRIO = [28, 22, 26, 27, 25, 24, 23, 29, 30, 31, 32, 33, 34, 35, 36, 37, 21, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5]
 
 
 VCLIP_FILES = ('clips3.js', 'clips4.js')   # vocabulary word clips; app.html loads each with a <script> tag
