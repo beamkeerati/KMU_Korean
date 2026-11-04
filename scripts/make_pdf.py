@@ -283,6 +283,58 @@ def wrap_korean_words(text):
     return '\n'.join(out)
 
 
+ZWSP = '​'
+_THAI_RUN = re.compile(r'[ก-๛]{4,}')
+_THAI_CHAR = re.compile(r'[ก-๛]')
+# a line may not start with a following vowel / tone mark, nor end on a leading vowel
+_TH_NOSTART = set('ะัาำิีึืฺุูๅ'
+                  '็่้๊๋์ํ๎')
+_TH_LEAD = set('เแโใไ')
+_TAG_SPLIT = re.compile(r'(<[^>]+>)')
+_thai_cache = {}
+
+
+def _can_break(left, right):
+    return bool(left and right and _THAI_CHAR.match(left[-1]) and _THAI_CHAR.match(right[0])
+                and right[0] not in _TH_NOSTART and left[-1] not in _TH_LEAD)
+
+
+def _thai_words(run):
+    if run not in _thai_cache:
+        kotag._thai_init()
+        out = ''
+        for tok in kotag._th_tok(run):
+            out += (ZWSP if _can_break(out, tok) else '') + tok
+        _thai_cache[run] = out
+    return _thai_cache[run]
+
+
+def thai_break_opportunities(html):
+    """Measured 2026-11-03: this WeasyPrint/Pango has no Thai line breaking — Thai has no spaces between words, so a
+    Thai phrase never wraps and a table cell full of Thai pushes the table past the right margin. Put U+200B (invisible)
+    between Thai words (PyThaiNLP, the tokenizer kotag already uses) and at colour-span boundaries between two Thai words.
+    Text nodes only; <style> is skipped."""
+    parts = _TAG_SPLIT.split(html)
+    prev = None                                   # index of the last non-empty text part
+    in_style = False
+    for i, p in enumerate(parts):
+        if i % 2:
+            low = p[:7].lower()
+            if low.startswith('<style'):
+                in_style = True
+            elif low.startswith('</style'):
+                in_style = False
+            continue
+        if in_style or not p:
+            continue
+        if _THAI_CHAR.search(p):
+            p = parts[i] = _THAI_RUN.sub(lambda m: _thai_words(m.group(0)), p)
+            if prev is not None and _can_break(parts[prev], p):
+                parts[prev] += ZWSP
+        prev = i
+    return ''.join(parts)
+
+
 def github_compat(content):
     """Make GitHub-flavoured quirks work with Python-Markdown.
 
@@ -340,6 +392,7 @@ def md_file_to_pdf(md_filename, pdf_dir=None):
     body = render_md(text)
     # a section heading that already carries its own number (06_quickref: "### 08. 안 …") gets no automatic counter
     body = re.sub(r'<h3 id="([^"]*)">(\s*(?:<[^>]+>\s*)*\d{1,2}\.)', r'<h3 id="\1" class="nonum">\2', body)
+    body = thai_break_opportunities(body)         # Thai would otherwise never wrap (tables ran off the page)
 
     title = os.path.splitext(md_filename)[0]
     html = f"""<!DOCTYPE html>

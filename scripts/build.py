@@ -125,7 +125,9 @@ def add_writing_space(md):
     md = re.sub(r'(^|\s)(나|가)\s*:\s*\(　+\)\s*[.?]', lambda m: f'{m.group(1)}{m.group(2)}: {WL}', md, flags=re.M)
     md = re.sub(r'→[ \t]*\(　+\)[ \t]*[.?]?', '→ ' + WL, md)   # [ \t] not \s: never swallow the newline
     md = re.sub(r'_{6,}[ \t]*[.?]?', WL, md)
-    md = re.sub(r'\(　{2,}\)', '(　　　　　　　　)', md)
+    # 8 em per blank — but in a table of 6+ columns four 8-em blanks are wider than the page, so 5 em there
+    md = '\n'.join(re.sub(r'\(　{2,}\)', '(　　　　　)' if l.lstrip().startswith('|') and l.count('|') >= 7
+                          else '(　　　　　　　　)', l) for l in md.split('\n'))
     # sentence-writing sections: every numbered item that ends a line gets two ruled lines
     out, writing = [], False
     for line in md.split('\n'):
