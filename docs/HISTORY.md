@@ -164,3 +164,11 @@ Same day, on "แก้ดิ": fixed the two left-alone items → site v53 (num
 dumping the card order of 32 category/unit pages and the cover subtitle of 18 sets before and after (only #x/listen and those 9 covers changed), 22과 practice still 6/6 and 4/6 on the slips, live data.js
 sha256 = local, the live page contains the new code. Not fixable from here: the link is shared as "Anyone with the link" and data.js carries KMU_SCORES (the user's scores) — only the page's Share menu
 changes that; told the user. Not committed.
+2026-11-05 (afternoon, D-1 of 복습시험③; Sonnet 5.5, no agents): the user asked whether the clocks on the 복습시험③ cover (쓰기 43 items / 30 min · 읽기 22 / 20 · 듣기 23 / 15) fit the item counts, then "แก้ให้เหมาะสมทั้งหมด".
+Measured / estimated: the cards counted the 예비 spares (pts 0) too — the scored parts are 27 / 10 / 10 items (real ②: 26 / 10 / 10). 듣기 exam-mode flow (mp3 lengths × 2 plays + the app's answer pauses) = 12.2 min for
+the scored 10 items, 23.1 min with the spares → the 15-min clock would have cut the 23과 spare section off mid-play. 읽기 ≈ 11–18 min for 10 items vs ≈ 25–41 min for all 22 (1,568 syllables of passage); 쓰기 ≈ 12–19 min for 27
+vs ≈ 17–28 for 43 (these two are estimates from answer length, not measurements). Real 복습시험 clocks are in no doc (only 중간시험: 쓰기 1 h · 듣기 40 min · 읽기 1 h); the site never stored time-used. The old 듣기 intro also
+said "ข้อ 11–15 เป็นชุดสำรอง" while the spares were items 11–23. Fix = site v54 (LAYOUT.md): spares split into `mini03x-*` sets with real points and their own clocks (10 / 25 / 14 min), main sets keep 30 / 20 / 15, two
+groups on #x/mini03; CLAUDE.md §2.3 gained a one-line sizing rule. Checked: validator OK, per-set items / points / minutes / listening flow recomputed from the built data.js, headless-Chrome screenshots of #x/mini03 and the
+듣기 예비 cover, live data.js sha256 = local. Not verified: a full exam-mode run of the new sets (headless virtual time does not play audio). The publish was refused twice by the stale-version guard (the live page differed
+only by my own three edits) and went through on the third try. Not committed.

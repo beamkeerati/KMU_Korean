@@ -77,7 +77,9 @@ output/       🤖 GENERATED, never hand-edit. Entry = output/START_HERE.html (h
   omit `capabilities` (keeps db, sample, user). If refused as "unread", run `Artifact list scope:files` on the url first. Compare file sizes with that
   listing to see what changed. Each clips file must stay < 16 MB (build_mockweb splits word clips over VCLIP_FILES; add a file + `<script>` tag in
   app.html when the build says so). Do not re-enable the artifact watch on your own.
-- Current: **v53** — 134 sets · 2,578 items · 924 clips · 1,366 vocab words (vocab.js, Leitner drill, VOCAB_PRIO in build_mockweb.py line ~74).
+- Current: **v54** — 137 sets · 2,578 items · 922 clips · 1,366 vocab words (vocab.js, Leitner drill, VOCAB_PRIO in build_mockweb.py line ~74).
+  **Sizing rule (v54):** a set's `minutes` must fit its own items — listening clock ≥ flow (2 plays + answer pauses, ffprobe the mp3s) + ~3 min; spare/예비 items go in their own set
+  (`mini03x-<skill>`, own clock), never inside a timed set (the clock auto-submits). 복습시험③ = `mini03-*` (scored: 30/20/15 min) + `mini03x-*` (예비: 10/25/14); two GROUPS rules in app.html.
   **Navigation (v51):** home = hub of tiles (`CATS` in app.html, first match wins, `other` = catch-all) → `#x/<cat>` → daily tests only `#x/daily/<unit>`
   (unit titles = `window.KMU_UNITS`, read from the first line of content/guide/01_units/unitNN.md by build_mockweb.py) → set cover `#<setId>` (back button =
   `parentOf(st)`). A new exam family = a `CATS` entry + its `exam` id in mockweb_validate.py `EXAMS` (+ EXAMS in app.html for the cover title).

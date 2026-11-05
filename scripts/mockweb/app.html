@@ -1,3 +1,4 @@
+<!-- v54 (2026-11-05): 복습시험③ is split into two groups via two GROUPS rules — "ชุดสอบจำลอง" (mini03-*: only the scored items, 쓰기 27 · 읽기 10 · 듣기 10, 30 / 20 / 15 min like ②) and "ฝึกเพิ่ม 예비" (mini03x-*: the old spare sections as real sets with real points, own clocks 10 / 25 / 14 min); the single sets had mixed 43 / 22 / 23 items into 30 / 20 / 15 min (the listening flow alone needed 23 min) -->
 <!-- v53 (2026-11-05): set cards inside a group sort by id with numeric collation (5-13 before 14-21); the textbook-listen and vocab-test sets get their own exam families (textbook, vocab) so their cover no longer says 중간시험 -->
 <!-- v52 (2026-11-05): + tb-listen-22 (22과 본문 듣기 over the real 22-1.mp3) — the textbook-listening sheets now cover 5–37과 without a gap; listen tile subtitle says 5~37과 -->
 <!-- v51 (2026-11-04): home = hub of tiles (CATS) → category page (#x/<cat>) → unit page for the daily tests (#x/daily/<unit>) → set cover whose back button follows parentOf(); ResumeBar + Crumbs; new exam family mini03 = 복습시험③ (쓰기 100 · 읽기 10 · 듣기 10 over real textbook tracks); build_mockweb.py adds window.KMU_UNITS -->
@@ -696,6 +697,8 @@ const GROUPS = [
   { re: /^vocab-spelling/, label: '✏️ เขียนตามคำบอก · คำที่เคยสะกดผิด', note: 'ㅈ/ㅊ · ㅐ/ㅔ · 으 หาย · ㄹ หาย · 생활 · 열심히 · 시월/유월 — ฟังแล้วพิมพ์ทั้งวลี' },
   { re: /^vocab-/, label: '🔤 ทดสอบจำศัพท์ 5–13과 · 14–21과', note: 'ไทย→เกาหลี พิมพ์เอง 30 ข้อ + เกาหลี→ไทย เลือก 30 ข้อ คัดคำที่ครูเคยออกสอบก่อน' },
   { re: /^mini02r-/, label: 'ข้อสอบจริง (สอบแล้ว 20 ต.ค.)', note: '' },
+  { re: /^mini03-/, label: '🎯 ชุดสอบจำลอง · ขนาดและเวลาเท่าข้อสอบจริง', note: 'นับเฉพาะข้อที่ให้คะแนน: 쓰기 27 · 읽기 10 · 듣기 10 ข้อ (② ที่ออกจริง 26 · 10 · 10) · เวลา 30 · 20 · 15 นาที — กด "เริ่มสอบจริง" ได้เลย' },
+  { re: /^mini03x-/, label: '🧩 ฝึกเพิ่ม 예비 · ไม่ใช่ส่วนของข้อสอบ', note: 'ข้อสำรองที่ตัดออกจากชุดสอบ: รูปแบบ ① · ศัพท์หมวดอากาศ ฤดู สี ผลไม้ สัตว์ กีฬา · บทอ่าน 22 · 24 · 25 · 27과 · บทฟัง 22 · 23 · 24 · 27 · 28과 — ตั้งเวลาให้พอทำครบทุกข้อ ทำหลังจบชุดสอบจำลอง' },
 ];
 /* a set's own `group` string (daily sets) wins over the GROUPS rules; sets sharing the string form one group (note = '') */
 const groupOf = st => { if (st.group) return st.group; const g = GROUPS.find(g => g.re.test(st.id)); return g ? g.label : 'paper:' + paperOf(st); };
@@ -1086,7 +1089,7 @@ const UNITS = window.KMU_UNITS || {};   // {unit: {ko, th}} from the first line 
 const CATS = [
   { id: 'mini03', sec: 0, icon: '🎯', title: '복습시험 ③', sub: 'ข้อสอบจำลอง 쓰기 · 읽기 · 듣기 (บท 22~29)', hero: true, date: '2026-11-06',
     when: 'ศ. 6 พ.ย. · บท 22~29 · 쓰기 100 · 읽기 10 · 듣기 10 (말하기 = พูดแนะนำอาหาร ไม่อยู่ในชุดนี้)',
-    note: 'เก็งจากรูปแบบ 복습시험 ①② ที่ครูออกจริง: 쓰기 โครง 7 ตอนแบบ ② · 읽기 ยกบทอ่านจากหนังสือ (26과 · 29과 ตำราพิมพ์โจทย์ 대화로 만들기 ไว้เอง) · 듣기 ใช้เสียงจริงของตำรา รวมบทฟังทางการ 24과 · 28과 · ข้อ "예비" ไม่นับคะแนน', match: s => s.exam === 'mini03' },
+    note: 'เก็งจากรูปแบบ 복습시험 ①② ที่ครูออกจริง: 쓰기 โครง 7 ตอนแบบ ② · 읽기 ยกบทอ่านจากหนังสือ (26과 · 29과 ตำราพิมพ์โจทย์ 대화로 만들기 ไว้เอง) · 듣기 ใช้เสียงจริงของตำรา รวมบทฟังทางการ 24과 · 28과 · ข้อ "예비" แยกเป็นชุด "ฝึกเพิ่ม" ต่างหาก ไม่ปนกับเวลาสอบ', match: s => s.exam === 'mini03' },
   { id: 'daily', sec: 1, icon: '📝', title: '매일시험', sub: 'ข้อสอบประจำวัน · เลือกบทที่ต้องการ', kind: 'units',
     when: 'ทุกวันหลังเรียนบทใหม่ · 10 ข้อ · นับเป็นคะแนนเก็บ 쓰기 10', note: 'ข้อสอบจริงที่สอบไปแล้วทุกบท · ใบฝึกที่ครูแจก · เก็งข้อสอบ — เลือกบท แล้วเลือกชุด · ทำซ้ำได้ไม่จำกัด', match: s => s.exam === 'daily' },
   { id: 'vocab', sec: 1, icon: '🔤', title: 'ทดสอบศัพท์', sub: 'ศัพท์ที่เคยผิด · เขียนตามคำบอก · ไทย↔เกาหลี',

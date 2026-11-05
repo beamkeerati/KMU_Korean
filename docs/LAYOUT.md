@@ -134,6 +134,13 @@ content/       ✍️ SOURCE OF TRUTH — edit here, never in output/
                (the 5 tb-listen sets) and `vocab` (vocab-5-13 · vocab-14-21 · vocab-mistakes · vocab-spelling) in EXAMS + mockweb_validate.py + SPEC, so their cover no longer says 중간시험 (the 9 real
                mid-* sets keep it). Checked by dumping the card order of all 32 category/unit pages and the cover subtitle of 18 sets before and after: only #x/listen and those 9 covers changed.
                Published as artifact version 53, files = {data.js}.
+               (2026-11-05) v54: 복습시험③ split. The single `mini03-<skill>` sets had counted the 예비 spares (pts 0) inside the clock: 43 / 22 / 23 items in 30 / 20 / 15 min, and the listening flow alone (2 plays +
+               answer pause per section, from the mp3 lengths) = 23.1 min, so the 15-min clock cut the spares off mid-section. Now `mini03-<skill>` = scored items only (쓰기 27 · 100 pts · 30 min; 읽기 10 · 20 min;
+               듣기 10 · 15 min, flow 12.2 min) and `mini03x-<skill>` = the old 예비 sections as real sets, 1 pt per item (쓰기 16 · 10 min; 읽기 12 · 25 min; 듣기 13 · 14 min, flow 11.1 min); exam stays "mini03".
+               Two GROUPS rules in app.html (/^mini03-/, /^mini03x-/) give #x/mini03 two titled groups with notes. The extras are renumbered 1–n (the teacher's `일 번부터 이 번까지` announcements are built
+               from `n` → 3 new clips). Sizing rule: listening clock = measured flow + ~3 min; 읽기/쓰기 clocks from a slow-case estimate (0.8 s/syllable reading, 1.5 s/syllable writing + think time) — an
+               estimate: the real 복습시험 clock is recorded nowhere and the site stores no time-used (hist = {s,t,at,mode}). 137 sets · 2,578 items · 922 clips. Published as artifact version 54,
+               files = {data.js, clips.js, clips2.js}; live data.js sha256 = local, live clips sizes = local.
                Rules learned: the validator accepts `s` = F/M/T/S now; `<보기>` is rejected (write [보기]); a file whose name starts with `_` is a draft the
                build ignores (agents validate `_x.json`, then rename) — several agents can write sets while another builds the site.
                A section may carry `"audio": "audio/<textbook|review>/<file>.mp3"`: the site plays that real recording for ▶ ฟัง (no karaoke) and

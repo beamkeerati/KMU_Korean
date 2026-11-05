@@ -1,5 +1,7 @@
 # Brief — 복습시험③ mock (22–29과) · 쓰기 + 읽기 (2026-11-04)
 
+> **Update 2026-11-05:** the 예비 sections this brief asks for were split out of the timed sets into `mini03x-<skill>` sets (own points and clock) — see docs/LAYOUT.md v54. Keep spares out of a timed set.
+
 The student sits 복습시험③ on **Fri 2026-11-06**, scope **22–29과** (textbook 1-2, units 22–29). Four papers in the real exam: 말하기 (a 음식 소개 speech, NOT in
 this mock) · 쓰기 100 (counts /10) · 듣기 10 · 읽기 10. This brief covers the two papers written by agents: **쓰기** (agent W) and **읽기** (agent R).
 The lead writes 듣기. Goal = the most accurate prediction possible, so every item must be lifted from, or built on, material the teacher really uses.
