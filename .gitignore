@@ -8,3 +8,4 @@ extracted/
 __pycache__/
 # publisher mp3s (147 MB) — re-copy from the TalkFile folders if needed
 source/audio/
+*.pyc
