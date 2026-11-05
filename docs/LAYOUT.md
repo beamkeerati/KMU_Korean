@@ -152,6 +152,12 @@ content/       ✍️ SOURCE OF TRUTH — edit here, never in output/
                Every write = get → merge → set, one doc at a time (global chain); a live collection onSnapshot merges other devices' writes (falls back to a 20-s collection get when the
                runtime has no listener); pending writes flush on tab hide. AI replies are pinned to their set + attempt (gens). Tests: scratch merge scenarios + a 2-device fake-cloud replay.
                mini03-writing restored into the cloud from the LevelDB log (ans of 19:21:13 + the AI verdicts, regraded with the app's rules = 57/100). Artifact versions 55–56.
+               (2026-11-05 night) v56: "results vanish until I reload". Reproduced in headless Chrome: a 2nd tab of the same browser never redrew — the cloud merge found
+               the data already in the shared localStorage, so no refresh. Fix: `storage` listener → externalChange() (redraw; a cover re-reads in place without scrolling); an exam/practice
+               paper whose attempt was submitted/cancelled/restarted elsewhere (staleAttempt: stored attempt.startedAt ≠ C.startedAt) returns to its cover instead of writing stale answers
+               or auto-submitting an empty paper at time-up; saveLeft only rewrites its own attempt; regrade() only rewrites the attempt on screen (C.resAt) and its hist entry.
+               Cards carry data-set; __kmu also exposes go / setAns / store / C. Tests kept in scripts/mockweb/test/ (run.sh: merge + 2-device node tests, then the built page in
+               5 iframes — 3 same-storage tabs, a 2nd device, a poll-only device — on a fake cloud; 14 checks; before the fix 3 of them failed). Artifact version 57.
   speaking/    발표 scripts in the my_room.md format (Korean line · Thai reading · Thai meaning · swap table · Q&A · pitfalls):
                my_room.md (발표 ① 제 방) · myself.md (발표 ② 자기 소개, 10/21) · vacation_plan.md (방학 계획, 10/20) → build.py speaking
   syllabus/    one-off PDF (Thai syllabus): python3 scripts/make_pdf.py <md> --pdf-dir output

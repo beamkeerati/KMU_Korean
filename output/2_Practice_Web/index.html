@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!-- v56 (2026-11-05 night): results no longer go missing until a reload — a `storage` listener redraws when another tab of the same browser writes (the cloud merge alone never redrew it: the shared localStorage already held the data), a cover re-reads in place (no scroll), an exam/practice paper whose attempt was submitted, cancelled or restarted elsewhere returns to its cover instead of writing stale answers or auto-submitting an empty paper at time-up, regrade() only rewrites the attempt on screen (C.resAt). Cards carry data-set; __kmu exposes go/setAns/store/C for the headless harness -->
 <!-- v55 (2026-11-05): cloud sync MERGES instead of overwriting — per-key write times (kmuweb:kt:<id> / cloud field t), score + hist = union by attempt time (only 🗑 ล้างผล's t.reset removes attempts), vocab record merged per word (ep = clear count), read → merge → write one doc at a time + a live onSnapshot listener; pre-v55 docs' nulls never erase local data. Late AI grades stay in their own set/attempt (gens). Cause: v54's whole-doc "last change wins" let a stale copy wipe the finished mini03-writing (57/100) and mini02-listening -->
 <!-- v54 (2026-11-05): 복습시험③ is split into two groups via two GROUPS rules — "ชุดสอบจำลอง" (mini03-*: only the scored items, 쓰기 27 · 읽기 10 · 듣기 10, 30 / 20 / 15 min like ②) and "ฝึกเพิ่ม 예비" (mini03x-*: the old spare sections as real sets with real points, own clocks 10 / 25 / 14 min); the single sets had mixed 43 / 22 / 23 items into 30 / 20 / 15 min (the listening flow alone needed 23 min) -->
 <!-- v53 (2026-11-05): set cards inside a group sort by id with numeric collation (5-13 before 14-21); the textbook-listen and vocab-test sets get their own exam families (textbook, vocab) so their cover no longer says 중간시험 -->
@@ -566,7 +567,7 @@ const itemCount = st => st.sections.reduce((a, s) => a + s.items.length, 0);
 const setMinutes = st => st.minutes || 20;
 const answeredIn = (st, ans) => { let n = 0; st.sections.forEach((sec, si) => sec.items.forEach((_, ii) => { if (isAnswered(ans[`${si}-${ii}`])) n++; })); return n; };
 const answeredN = computed(() => { ansTick.value; const st = curSt.value; return st ? answeredIn(st, C.ans) : 0; });
-function setAns(key, val) { C.ans[key] = val; batch(() => { kv(key).value++; ansTick.value++; }); store.set('ans:' + curSt.peek().id, C.ans); }
+function setAns(key, val) { if (staleAttempt()) { leaveStale(); return; } C.ans[key] = val; batch(() => { kv(key).value++; ansTick.value++; }); store.set('ans:' + curSt.peek().id, C.ans); }
 const snapshot = () => curSt.peek() ? { st: curSt.peek(), mode: mode.peek(), ans: C.ans, self: selfS.peek(), ai: aiS.peek(), played: C.played, left: leftS.peek(), endAt: C.endAt,
   startedAt: C.startedAt, lastMode: C.lastMode, used: C.used, reason: C.reason, graded: C.graded, plays: playsS.peek() } : null;
 
@@ -671,12 +672,12 @@ function startExamClock() {
   const tick = () => { if (!curSt.peek() || mode.peek() !== 'exam') { clearInterval(examTimer); examTimer = null; return; }
     const left = Math.max(0, Math.round((C.endAt - Date.now()) / 1000)); leftS.value = left;
     if (left % 10 === 0) saveLeft();
-    if (left <= 0) { clearInterval(examTimer); examTimer = null; submit('timeup'); } };
+    if (left <= 0) { clearInterval(examTimer); examTimer = null; if (staleAttempt()) leaveStale(); else submit('timeup'); } };
   tick(); examTimer = setInterval(tick, 1000);
 }
 function stopExamClock() { if (examTimer) saveLeft(); clearInterval(examTimer); examTimer = null; }
 /* the remaining time is stored, not the end time — a paused or closed attempt does not lose time, and every device shows the same clock */
-function saveLeft() { if (!curSt.peek() || mode.peek() !== 'exam') return; const id = curSt.peek().id, att = store.get('attempt:' + id, null), left = leftS.peek(); if (att && att.left !== left) { att.left = left; store.set('attempt:' + id, att); } }
+function saveLeft() { if (!curSt.peek() || mode.peek() !== 'exam') return; const id = curSt.peek().id, att = store.get('attempt:' + id, null), left = leftS.peek(); if (att && att.startedAt === C.startedAt && att.left !== left) { att.left = left; store.set('attempt:' + id, att); } }
 window.addEventListener('pagehide', () => saveLeft());
 document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') saveLeft(); });
 const attLeft = att => att.left ?? (att.endAt ? Math.max(0, Math.round((att.endAt - Date.now()) / 1000)) : null);
@@ -727,12 +728,22 @@ window.addEventListener('hashchange', route);
 
 /* ------------------------------------------------------------------ open a set (cover) / start or resume an attempt */
 function resetRun() { kvs = {}; secs = {}; notice.value = ''; showTh.value = false; running.value = false; confirmN.value = 0; liveItem.value = ''; speaking.value = ''; recS.value = {}; spkS.value = {}; audioS.value = {}; }
-function openSet(id) {
+/* another tab (storage event) or device (cloud merge) changed the stored data: redraw what reads the store; a cover re-reads its set;
+   an open paper whose attempt was submitted / cancelled / restarted elsewhere returns to its cover instead of writing over the newer data */
+const staleAttempt = () => { const st = curSt.peek(), m = mode.peek(); if (!st || (m !== 'exam' && m !== 'practice')) return false;
+  const a = store.get('attempt:' + st.id, null); return !a || a.startedAt !== C.startedAt; };
+function leaveStale() { const st = curSt.peek(); if (!st) return; stopRuns(); clearInterval(examTimer); examTimer = null; openSet(st.id); syncS.value = '↻ ชุดนี้ถูกส่งหรือเริ่มใหม่จากหน้าต่างอื่น'; }
+let extT = null;
+function externalChange() { clearTimeout(extT); extT = setTimeout(() => { storeVer.value = storeVer.peek() + 1;
+  if (view.peek() !== 'set' || !curSt.peek()) return;
+  if (mode.peek() === 'cover') openSet(curSt.peek().id, true); else if (staleAttempt()) leaveStale(); }, 120); }
+window.addEventListener('storage', e => { if (e.key === null || /^kmuweb:/.test(e.key)) externalChange(); });
+function openSet(id, quiet) {   // quiet = re-read in place (data changed elsewhere): no scroll to the top
   const st = SETS.find(s => s.id === id); if (!st) { leaveSet(); return show('home'); }
   stopRuns(); stopExamClock();
   batch(() => { resetRun(); C.ans = store.get('ans:' + id, {}); selfS.value = store.get('self:' + id, {}); aiS.value = store.get('ai:' + id, {});
     Object.assign(C, { played: [], endAt: null, startedAt: null, lastMode: undefined, used: undefined, reason: undefined, graded: false });
-    playsS.value = {}; leftS.value = null; G.value = null; ansTick.value++; curSt.value = st; mode.value = 'cover'; show('set'); });
+    playsS.value = {}; leftS.value = null; G.value = null; ansTick.value++; curSt.value = st; mode.value = 'cover'; if (quiet) view.value = 'set'; else show('set'); });
 }
 function startSet(m, att, expired) {
   const st = curSt.peek(); stopRuns(); stopExamClock();
@@ -874,9 +885,10 @@ function submit(reason) {
 }
 /* grade, show the results card, start the AI pass; `record` = store this attempt in the history */
 function finishGrading(reason, record) {
-  const st = curSt.peek(), g = grade();
+  const st = curSt.peek(); if (!record) C.resAt = (store.get('score:' + st.id, null) || {}).at;
+  const g = grade();
   if (record) {
-    const entry = { s: g.sum, t: g.tot, at: Date.now(), mode: C.lastMode };
+    const entry = { s: g.sum, t: g.tot, at: Date.now(), mode: C.lastMode }; C.resAt = entry.at;
     if (st.skill === 'speaking') { entry.spoken = true; entry.n = answeredIn(st, C.ans); }   // n = answered count; old entries without n held the count in s
     store.set('score:' + st.id, entry);
     const hist = store.get('hist:' + st.id, []); hist.push(entry); store.set('hist:' + st.id, hist.slice(-8));
@@ -928,9 +940,12 @@ function grade() {
   G.value = res;
   return res;
 }
+/* rewrite the stored points of the attempt on screen (C.resAt) — never a newer attempt made in another tab or on another device */
 function regrade() { if (!curSt.peek() || mode.peek() !== 'result') return; const g = grade(), id = curSt.peek().id, entry = store.get('score:' + id, null);
-  if (entry) { if (entry.spoken) entry.n = answeredIn(curSt.peek(), C.ans);   /* speaking: n = answered count (pre-v30 entries held it in s) */
-    entry.s = g.sum; entry.t = g.tot; store.set('score:' + id, entry); const hist = store.get('hist:' + id, []); if (hist.length) { Object.assign(hist[hist.length - 1], { s: g.sum, n: entry.n }); store.set('hist:' + id, hist); } else if (entry.spoken) store.set('hist:' + id, [entry]); } }
+  const hist = store.get('hist:' + id, []), he = hist.find(e => e && e.at === C.resAt);
+  if (he) { Object.assign(he, { s: g.sum, n: curSt.peek().skill === 'speaking' ? answeredIn(curSt.peek(), C.ans) : he.n }); if (he.n === undefined) delete he.n; store.set('hist:' + id, hist); }
+  if (entry && entry.at === C.resAt) { if (entry.spoken) entry.n = answeredIn(curSt.peek(), C.ans);   /* speaking: n = answered count (pre-v30 entries held it in s) */
+    entry.s = g.sum; entry.t = g.tot; store.set('score:' + id, entry); if (!hist.length && entry.spoken) store.set('hist:' + id, [entry]); } }
 
 /* ------------------------------------------------------------------ AI teacher (claude.ai only): grades every typed answer that string matching could not accept */
 let aiBusy = false, aiProg = null;   // aiProg = { done, total, failed: [] }; the aiVer signal tells the AI line / dock to redraw
@@ -1073,12 +1088,7 @@ var cloud = (() => {
     if (canon(store.get('kt:' + id, null)) !== canon(M.t)) { store.put('kt:' + id, M.t); store.put('stamp:' + id, Math.max(0, ...Object.values(M.t))); }
     return changed;
   }
-  let refreshing = false;
-  function refresh() {   // other devices' data landed here: redraw cards / the open cover (an open paper keeps what is on screen)
-    if (refreshing) return; refreshing = true;
-    later(() => { refreshing = false; storeVer.value = storeVer.peek() + 1;
-      if (view.peek() === 'set' && curSt.peek() && mode.peek() === 'cover') openSet(curSt.peek().id); });
-  }
+  const refresh = () => externalChange();   // merged data from another device landed here
   /* read → merge → write for one doc; the calls run one at a time for all docs */
   async function syncOne(id) {
     let snap; try { snap = await ref(id).get(); } catch (e) { say('☁️ ออฟไลน์ — เก็บไว้ในเครื่องก่อน'); return; }
@@ -1206,7 +1216,7 @@ function Card({ st, short }) {
   if (att) badge = html`<span class="badge live">⏸ กำลังทำ ${answeredIn(st, store.get('ans:' + st.id, {}))}/${itemCount(st)}${att.mode === 'exam' && attLeft(att) !== null ? ' · เหลือ ' + fmt(attLeft(att)) : ''}</span>`;
   else if (sc) badge = html`<span class=${'badge' + (pct >= .8 ? ' good' : '')}>${oldSpk(sc) ? `ตอบ ${sc.s}/${sc.t}` : sc.spoken ? `${sc.s}/${sc.t} · ตอบ ${sc.n}/${sc.t} ข้อ` : `${sc.s}/${sc.t || tot}`}${sc.mode ? ' · ' + MODE_TH[sc.mode] : ''}</span>`;
   else badge = html`<span class="badge none">ยังไม่ได้ทำ</span>`;
-  return html`<button class=${'card' + (att ? ' c-live' : sc ? (pct >= .8 ? ' c-good' : ' c-done') : '')} type="button" onClick=${() => go(st.id)}>${short
+  return html`<button class=${'card' + (att ? ' c-live' : sc ? (pct >= .8 ? ' c-good' : ' c-done') : '')} type="button" data-set=${st.id} onClick=${() => go(st.id)}>${short
     ? html`<span class="tt ko">${SKILL[st.skill][0]} <small>${SKILL[st.skill][1]}</small></span><span class="meta">${meta}</span>${badge}`
     : html`<span class="sk">${SKILL[st.skill][0]} · ${SKILL[st.skill][1]}</span><span class="tt">${st.title}</span><span class="meta">${meta}</span>${badge}`}</button>`;
 }
@@ -2043,7 +2053,7 @@ const vocabHooks = {   // test hooks of the vocabulary drill: start(n) = today's
   state: () => { const s = vsS.peek(); return s && { phase: s.phase, mode: s.mode, label: s.label, total: s.total, done: s.done, ok: s.ok, half: s.half, ng: s.ng, left: s.queue.length, ko: (s.phase === 'fb' ? s.fb : s.queue[0] || {}).ko, mc: s.mc && { dir: s.mc.dir, opts: s.mc.opts.map(o => o.d), ans: s.mc.ans }, fb: s.fb && { score: s.fb.score, key: s.fb.key, b: s.fb.e.b, pick: s.fb.pick && s.fb.pick.idx } }; },
   srs: srsGet, info: vInfo, keys: wordKeys, judge: judgeWord, today: vBuildDaily, groups: () => EXAMS.map(e => e.id),
 };
-window.__kmu = { get cur() { return snapshot(); }, openSet, startSet, submit, grade, aiGradeAll, vocab: vocabHooks, cats: () => CATS.map(c => [c.id, CAT_SETS[c.id].length]) };   // test hooks
+window.__kmu = { get cur() { return snapshot(); }, openSet, startSet, submit, grade, aiGradeAll, vocab: vocabHooks, go, setAns, store, get C() { return C; }, cats: () => CATS.map(c => [c.id, CAT_SETS[c.id].length]) };   // test hooks
 })();
 </script>
 

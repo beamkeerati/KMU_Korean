@@ -182,3 +182,9 @@ per-word merge, read-merge-write, live listener with a polling fallback, AI repl
 incident (also in polling mode); node --check on the page script. Restored mini03-writing in the cloud (answers of 19:21:13, AI verdicts, score 57/100 recomputed with the app's
 rules; submit time ≈ 19:21:25 estimated). After publish (artifact v55, then v56 with the fallback) the user's browser converted every doc to the new format and re-graded
 mini03-writing to the same 57/100. Not verified: a real second device; the stored runtime contract is 0.2.85 (types read were 0.2.96) — hence the fallback. Not committed.
+2026-11-05 (night; Opus 5.5, no agents): grammar summary 22–29과 and the ㅂ-irregular exceptions answered in chat (textbook p.234: 돕다·곱다 → 와, 입다·잡다·좁다 regular;
+the teacher's sheet starred only 돕다). Then "อยู่ดีดีบางทีผลสอบมันก็หายไป ต้อง Refresh". Cloud docs showed no write loop (versions unchanged). Built a headless-Chrome harness (fake
+claude runtime + fake cloud, 5 iframes) and reproduced it: another tab of the same browser never redrew after an exam elsewhere (card + open cover stale until reload), and a
+forgotten exam tab auto-submitted an empty paper over the real score. Fix = site v56 (LAYOUT.md): storage listener, stale-attempt guard, regrade pinned to the attempt on screen.
+14/14 harness checks + the node merge tests pass; harness kept in scripts/mockweb/test/run.sh (CLAUDE.md §2.3). Published as artifact version 57. Not verified: claude.ai's real
+runtime (contract 0.2.85) — the harness fakes it; Safari/iPad storage behaviour. Not committed.

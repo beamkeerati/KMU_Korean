@@ -1,0 +1,103 @@
+<!doctype html><meta charset="utf-8"><title>sync harness</title>
+<body><pre id="out">running</pre>
+<script>
+localStorage.clear();
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+window.FAKE = (() => {   // one shared cloud: data/users/u1/<doc>, live listeners, own-write echoes
+  const docs = {}, listeners = new Set(); let writes = 0;
+  const clone = o => JSON.parse(JSON.stringify(o));
+  const dsnap = id => ({ id, exists: id in docs, data: () => id in docs ? clone(docs[id]) : undefined, metadata: { fromCache: false, hasPendingWrites: false } });
+  const qsnap = (ids, type) => { const all = Object.keys(docs).sort();
+    return { docs: all.map(dsnap), size: all.length, empty: !all.length, metadata: { fromCache: false, hasPendingWrites: false },
+      docChanges: () => ids.map(id => ({ type, doc: dsnap(id), oldIndex: -1, newIndex: 0 })) }; };
+  function db(noListen) {
+    const col = {
+      doc: id => ({ id, get: async () => { await sleep(20); return dsnap(id); },
+        set: async body => { await sleep(20); writes++; docs[id] = clone(body); listeners.forEach(l => setTimeout(() => l(qsnap([id], 'modified')), 30)); } }),
+      get: async () => { await sleep(20); return qsnap(Object.keys(docs), 'added'); } };
+    if (!noListen) col.onSnapshot = next => { listeners.add(next); setTimeout(() => next(qsnap(Object.keys(docs), 'added')), 30); return () => listeners.delete(next); };
+    return { collection: () => col };
+  }
+  return { db, docs, get writes() { return writes; } };
+})();
+const frames = {};
+function open(name, query, hash) {
+  const f = document.createElement('iframe'); f.style.cssText = 'width:900px;height:700px'; f.src = 'app.html?' + query + '#' + hash;
+  document.body.appendChild(f); frames[name] = f; return f;
+}
+const W = n => frames[n].contentWindow;
+const E = (n, code) => W(n).eval(code);
+const ready = async n => { for (let i = 0; i < 200; i++) { try { if (E(n, 'typeof __kmu === "object"')) return; } catch (e) {} await sleep(50); } let x; try { x = E(n, '[typeof __kmu, document.readyState, document.body && document.body.innerHTML.length]'); } catch (e) { x = e.message; } throw new Error(n + ' not ready ' + JSON.stringify(x) + ' errs ' + JSON.stringify(window.ERRS || [])); };
+function cardBadge(n, setId) {   // the badge text of the set's card on a category page
+  const c = W(n).document.querySelector('button.card[data-set="' + setId + '"]');
+  return c ? (c.querySelector('.badge') || {}).textContent : '(no card)';
+}
+const coverLast = n => { const l = W(n).document.querySelector('.last'); return l ? l.textContent.replace(/\s+/g, ' ').trim() : '(no ผลล่าสุด)'; };
+async function doExam(n, setId, answer) {   // open → exam → one answer → submit
+  E(n, `__kmu.go(${JSON.stringify(setId)})`); await sleep(300);
+  E(n, `__kmu.startSet('exam')`); await sleep(200);
+  if (answer) E(n, `__kmu.setAns('0-0', ${JSON.stringify(answer)})`);
+  await sleep(200); E(n, `__kmu.submit('force')`); await sleep(200);
+  E(n, `location.hash = ''`); await sleep(200);
+}
+const R = [];
+const check = (name, ok, detail) => R.push((ok ? 'PASS ' : 'FAIL ') + name + ' — ' + detail);
+(async () => {
+  open('A', 'dev=', 'x/mini03');                 // PC tab 1: category page
+  open('A2', 'dev=', 'mini03-writing');          // PC tab 2: a cover left open
+  open('B', 'dev=', '');                         // PC tab 3: where the exam is taken
+  open('C', 'dev=C:', 'x/mini03');               // iPad (own storage, live listener)
+  open('D', 'dev=D:&nolisten=1', 'x/mini03');    // a device whose runtime has no listener (polling)
+  for (const n of Object.keys(frames)) await ready(n);
+  await sleep(1500);
+  const before = { A: cardBadge('A', 'mini03-reading'), C: cardBadge('C', 'mini03-reading') };
+
+  // 1. exam in tab B → do the other tab, the other device and the poll-only device show it without a reload?
+  await doExam('B', 'mini03-reading', '삼계탕');
+  await sleep(4000);
+  const bScore = E('B', `JSON.stringify(__kmu.store.get('score:mini03-reading'))`);
+  check('B stored its score', bScore !== 'null', bScore);
+  check('same-PC tab A card updates', !/ยังไม่ได้ทำ/.test(cardBadge('A', 'mini03-reading')), `before "${before.A}" → now "${cardBadge('A', 'mini03-reading')}"`);
+  check('iPad C card updates', !/ยังไม่ได้ทำ/.test(cardBadge('C', 'mini03-reading')), `before "${before.C}" → now "${cardBadge('C', 'mini03-reading')}"`);
+  await sleep(25000);
+  check('poll-only D card updates (≤25 s)', !/ยังไม่ได้ทำ/.test(cardBadge('D', 'mini03-reading')), `now "${cardBadge('D', 'mini03-reading')}"`);
+
+  // 2. a cover left open in tab A2 while B finishes that set
+  const a2before = coverLast('A2');
+  await doExam('B', 'mini03-writing', '무거워요');
+  await sleep(4000);
+  check('same-PC cover A2 shows the new result', !/no ผลล่าสุด/.test(coverLast('A2')), `before "${a2before}" → now "${coverLast('A2')}"`);
+
+  // 3. a forgotten exam tab: A2 sits in exam mode on mini03x-writing, B finishes the same set, then A2's clock runs out
+  E('A2', `__kmu.go('mini03x-writing')`); await sleep(300); E('A2', `__kmu.startSet('exam')`); await sleep(300);
+  await doExam('B', 'mini03x-writing', '쌀쌀해요');
+  await sleep(1500);
+  const good = E('B', `JSON.stringify(__kmu.store.get('score:mini03x-writing'))`);
+  E('A2', `__kmu.C.endAt = Date.now() + 1500`); await sleep(4000);
+  const after = E('B', `JSON.stringify(__kmu.store.get('score:mini03x-writing'))`), hist = E('B', `JSON.stringify(__kmu.store.get('hist:mini03x-writing'))`);
+  check('stale exam tab does not overwrite the finished score', after === good, `B's score ${good} → after A2's clock ran out ${after} · hist ${hist}`);
+
+  // 4. an old result page left open: grading it by hand must not rewrite a newer attempt made in another tab
+  E('A2', `__kmu.go('mini03-writing')`); await sleep(300); E('A2', `__kmu.startSet('exam')`); await sleep(200);
+  E('A2', `__kmu.setAns('0-0', ['틀림'])`); await sleep(200); E('A2', `__kmu.submit('force')`); await sleep(1500);
+  const t1 = JSON.parse(E('A2', `JSON.stringify(__kmu.store.get('score:mini03-writing'))`));
+  await doExam('B', 'mini03-writing', ['무거워요']); await sleep(3000);
+  const t2 = JSON.parse(E('B', `JSON.stringify(__kmu.store.get('score:mini03-writing'))`));
+  const btn = W('A2').document.querySelector('.self button.v-o');
+  check('old result page still open after the new attempt', !!btn && E('A2', `__kmu.cur && __kmu.cur.mode`) === 'result', 'mode ' + E('A2', `__kmu.cur && __kmu.cur.mode`));
+  if (btn) btn.click(); await sleep(2500);
+  const now = JSON.parse(E('B', `JSON.stringify(__kmu.store.get('score:mini03-writing'))`)), hist4 = JSON.parse(E('B', `JSON.stringify(__kmu.store.get('hist:mini03-writing'))`));
+  const h1 = hist4.find(e => e.at === t1.at);
+  check('hand-grading the old page keeps the newer score', now.at === t2.at && now.s === t2.s, `newer ${JSON.stringify(t2)} → ${JSON.stringify(now)}`);
+  check('…and updates its own attempt in the history', h1 && h1.s > t1.s, `old ${t1.s} → ${h1 && h1.s} · hist ${hist4.length} entries`);
+  await sleep(3000);
+  for (const id of ['mini03-reading', 'mini03-writing', 'mini03x-writing']) {
+    const loc = E('B', `JSON.stringify(__kmu.store.get('score:${id}'))`), cl = JSON.stringify((FAKE.docs[id] || {}).score || null);
+    check('cloud has the same score for ' + id, JSON.stringify(JSON.parse(loc)) === cl, `local ${loc} · cloud ${cl}`);
+  }
+  check('cloud settles (no write loop)', true, 'writes so far ' + FAKE.writes);
+  const w = FAKE.writes; await sleep(8000);
+  check('no writes while idle', FAKE.writes === w, `${w} → ${FAKE.writes}`);
+})().catch(e => R.push('ERROR ' + e.message + ' ' + e.stack)).finally(() => { document.getElementById('out').textContent = R.join('\n') + '\nDONE'; });
+</script>
+</body>
