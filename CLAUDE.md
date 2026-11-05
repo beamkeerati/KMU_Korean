@@ -6,7 +6,7 @@ Claude Code loads this file into every message, so it is kept short (target ≤ 
 | File | What it holds |
 |:---|:---|
 | docs/COURSE.md | full course facts: exam schedule details, pass rules, grading, 복습시험 formats, midterm notes, 낭독시험, unit→grammar map 5–13, presentations |
-| docs/LAYOUT.md | full folder tree with every file's provenance, practice-site version log v9–v50, how the books are assembled |
+| docs/LAYOUT.md | full folder tree with every file's provenance, practice-site version log v9–v53, how the books are assembled |
 | docs/RENDERER.md | every make_pdf.py gotcha, environment notes, plugin policy (why each plugin is off) |
 | docs/STATUS.md | content status + provenance caveats per unit, textbook/workbook audits, **the daily-test score log with per-item details** |
 | docs/MISTAKES.md | the user's recurring mistakes, every sighting with dates |
@@ -77,7 +77,10 @@ output/       🤖 GENERATED, never hand-edit. Entry = output/START_HERE.html (h
   omit `capabilities` (keeps db, sample, user). If refused as "unread", run `Artifact list scope:files` on the url first. Compare file sizes with that
   listing to see what changed. Each clips file must stay < 16 MB (build_mockweb splits word clips over VCLIP_FILES; add a file + `<script>` tag in
   app.html when the build says so). Do not re-enable the artifact watch on your own.
-- Current: **v50** — 130 sets · 2,488 items · 900 clips · 1,366 vocab words (vocab.js, Leitner drill, VOCAB_PRIO in build_mockweb.py line ~74).
+- Current: **v53** — 134 sets · 2,578 items · 924 clips · 1,366 vocab words (vocab.js, Leitner drill, VOCAB_PRIO in build_mockweb.py line ~74).
+  **Navigation (v51):** home = hub of tiles (`CATS` in app.html, first match wins, `other` = catch-all) → `#x/<cat>` → daily tests only `#x/daily/<unit>`
+  (unit titles = `window.KMU_UNITS`, read from the first line of content/guide/01_units/unitNN.md by build_mockweb.py) → set cover `#<setId>` (back button =
+  `parentOf(st)`). A new exam family = a `CATS` entry + its `exam` id in mockweb_validate.py `EXAMS` (+ EXAMS in app.html for the cover title).
 - Daily sets: content/mockweb/daily_a.json (05–13) · daily_b.json (14+): `daily-NN-writing` / `daily-NN-listening` (voice T) / `sheet-NN-writing`, each
   with a `group` string like "매일시험 28과 · 4 Nov · 7/10". Predictions: daily_predictNN.json, group "🔮 เก็งข้อสอบ 매일시험 NN과 (…)"; **when the
   test comes back, change it to "เก็ง 매일시험 NN과 · สอบแล้ว D Mon · X/10"** so the board stops pinning it.
@@ -105,6 +108,10 @@ flipped). Items are lifted almost verbatim from the workbook (25과 B = workbook
 before. Dictation = 대화/읽기 first lines, 연습 examples, grammar example sentences — rank 대화 lines first and list the SHORT phrase.
 Mock 1 = workbook · 2 = sheet (+ any teacher hint) · 3 = textbook. **Teacher hints are reliable** (28과: the hinted categories 동물/음식/과일/운동
 all appeared) — put them at the top of the prediction and drill them first.
+
+**Predicting a 복습시험** (method + evidence: content/specs/BRIEF_mini03.md §1): 쓰기 format changes every time (① 5 sections, ② 7) → keep ②'s 7-section skeleton for the
+main 100 and put the other formats in 예비 sections; 읽기 = textbook 읽기 passages, and the textbook itself prints a 대화로 만들기 frame in 23·26·29·30과 (top picks);
+듣기 = the centre's 본문 듣기 sheets (track NN-1) + the formal 듣기 of 8·12·16·20·24·28·32·36과 (tracks NN-2/-3). ③ mock = content/mockweb/mini03_{writing,reading,listening}.json.
 
 **A returned 복습시험:** `source/miniexam/KMU mini exam NN unit AA - BB.pdf` → extracted/miniexam/examNN/ → content/exercises/miniexam/examNN.md
 (one `##` per paper, ⚠️ where deducted) → `build.py miniexam`. Prediction for the next one → content/predictions/miniexam/examNN.md → `build.py predict`.

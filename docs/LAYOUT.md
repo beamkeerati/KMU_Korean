@@ -121,6 +121,19 @@ content/       ✍️ SOURCE OF TRUTH — edit here, never in output/
                28, 22, 26, 27, 25, 24, 23 … (11/3: the teacher said test 28 WILL ask 28 · 22 · 26 words — colours, fruits, animals, weather, sports 하다/타다/치다). The word clips are split by build_mockweb.py over VCLIP_FILES = clips3.js + clips4.js (13.5 MB cap each; clips3 alone
                had reached 14.1 MB) — app.html loads both; add a file + <script> tag when the build says so. 106 sets · 2,029 items · 834 clips + 947 word clips ·
                73 real mp3s. **Publish files now = {data.js, clips.js, clips2.js, clips3.js, clips4.js, vocab.js, vendor.js} + any NEW mp3** (v46 sent 23-1 … 37-1).
+               (2026-11-04) v51: **home hub** — Home() is now a hub of tiles (`CATS`: mini03 hero · daily · vocab tests · textbook listening · mini02 · midterm · review · other) →
+               `#x/<cat>` category page (groupsOf/Group) → `#x/daily/<unit>` unit page (UnitGrid/UnitPage, titles from window.KMU_UNITS in data.js) → cover; Crumbs, ResumeBar (⏸ attempts),
+               Cover back button = parentOf(st). mini03 = 복습시험③ (11/6, 22–29과) prediction: mini03_writing.json (43 items, 쓰기 100 = ②'s 7 sections + 예비 H/I/J, incl. -겠- item 5-4),
+               mini03_reading.json (23·26·29과 main = 10 pts, 24·25·22·27과 예비; 26·29 use the textbook's own 대화로 만들기 frames), mini03_listening.json (10 pts over real tracks
+               29-1 · 24-1 · 26-1 · 28-2 · 24-2 · 25-1 + 예비 22-1 · 23-1 · 27-1; 22-1 / 24-2 / 28-2 are NEW mp3s to publish). Agents wrote 쓰기 + 읽기 from content/specs/BRIEF_mini03.md.
+               133 sets · 2,576 items · 924 clips. Publish files = {data.js (+ clips*.js when the build changed them)} + the new mp3s.
+               (2026-11-05) v52: + `tb-listen-22` in textbook_listen.json (22과 본문 듣기 over the real 22-1.mp3: A = 4-statement choice, B = 5-blank dictation, 6 pts, 10 min) — 22 was the one unit
+               missing from the textbook-listening sets (tb-listen jumped 21 → 23); the listen tile now says 5~37과. 134 sets · 2,578 items · 924 clips. Published as artifact version 52 with
+               files = {data.js} only (clips/vocab/vendor sizes unchanged, 22-1.mp3 already live from v51).
+               (2026-11-05) v53: the group sort in groupsOf() is now `a.id.localeCompare(b.id, undefined, { numeric: true })` (5-13 before 14-21 on the listening page); new exam families `textbook`
+               (the 5 tb-listen sets) and `vocab` (vocab-5-13 · vocab-14-21 · vocab-mistakes · vocab-spelling) in EXAMS + mockweb_validate.py + SPEC, so their cover no longer says 중간시험 (the 9 real
+               mid-* sets keep it). Checked by dumping the card order of all 32 category/unit pages and the cover subtitle of 18 sets before and after: only #x/listen and those 9 covers changed.
+               Published as artifact version 53, files = {data.js}.
                Rules learned: the validator accepts `s` = F/M/T/S now; `<보기>` is rejected (write [보기]); a file whose name starts with `_` is a draft the
                build ignores (agents validate `_x.json`, then rename) — several agents can write sets while another builds the site.
                A section may carry `"audio": "audio/<textbook|review>/<file>.mp3"`: the site plays that real recording for ▶ ฟัง (no karaoke) and
@@ -232,7 +245,7 @@ output/        🤖 GENERATED — overwritten every build, never hand-edit. Reor
                  scripts/assemble_midterm.py, then build.py predict) · KMU_Predict_miniexam02.pdf · past/KMU_MiniExam_02.pdf (② as sat + AI key)
                  · past/KMU_MiniExam_NN.pdf (복습시험 as sat)
   4_Daily_Tests/ KMU_Everyday_unitNN.pdf ⭐ one small PDF per unit (what the user prints day to day) · predictions/KMU_Predict_unitNN.pdf
-  5_Homework/    KMU_Workbook.pdf (워크북 5–22 + 종합문제) · KMU_Listening.pdf (본문 듣기 5–22)
+  5_Homework/    KMU_Workbook.pdf (워크북 5–22 + 종합문제) · KMU_Listening.pdf (본문 듣기 5–37, 71 pp)
   6_Speaking/    KMU_Speaking_MyRoom.pdf · KMU_Speaking_Myself.pdf · KMU_Speaking_VacationPlan.pdf
                  · KMU_Speaking_Myself_Audio.html (2026-10-20, `python3 scripts/build_speech_audio.py myself`: one InJoon edge-tts clip per
                  numbered line of content/speaking/<name>.md with word timings, cached in extracted/speech_clips/; single-file player with

@@ -105,6 +105,19 @@ def load_vocab():
     return out
 
 
+UNIT_DIR = os.path.join(ROOT, 'content', 'guide', '01_units')
+UNIT_H = re.compile(r'^##\s*(\d+)과\s*[·:]\s*(.+?)\s+\((?=[^)]*[\u0e00-\u0e7f])(.*)\)\s*$')
+
+
+def load_units():
+    """content/guide/01_units/unitNN.md first line `## NN과 · 한국어 제목 (ชื่อไทย)` -> {NN: {ko, th}} for the unit tiles of the daily-test page."""
+    out = {}
+    for f in sorted(glob.glob(os.path.join(UNIT_DIR, 'unit*.md'))):
+        m = UNIT_H.match(open(f, encoding='utf-8').readline().strip())
+        if m: out[int(m.group(1))] = {'ko': m.group(2), 'th': m.group(3)}
+    return out
+
+
 def spoken(sets):
     lines = [('T', t) for t in FIXED_T]
     for st in sets:
@@ -195,6 +208,7 @@ def main():
     scores = json.load(open(os.path.join(DATA, 'scores.json'), encoding='utf-8'))
     with open(os.path.join(OUT, 'data.js'), 'a', encoding='utf-8') as f:
         f.write('window.KMU_SCORES = ' + json.dumps(scores, ensure_ascii=False) + ';\n')
+        f.write('window.KMU_UNITS = ' + json.dumps(load_units(), ensure_ascii=False) + ';\n')
     words = {f'{v}|{t}': json.load(open(clip_path(v, t) + '.json', encoding='utf-8'))
              for v, t in lines if os.path.exists(clip_path(v, t) + '.json')}
     # two files: a claude.ai artifact file may not exceed 16 MB, and the clips passed that on 2026-10-21 (586 clips = 15.5 MB)

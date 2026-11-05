@@ -3,6 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!-- v53 (2026-11-05): set cards inside a group sort by id with numeric collation (5-13 before 14-21); the textbook-listen and vocab-test sets get their own exam families (textbook, vocab) so their cover no longer says 중간시험 -->
+<!-- v52 (2026-11-05): + tb-listen-22 (22과 본문 듣기 over the real 22-1.mp3) — the textbook-listening sheets now cover 5–37과 without a gap; listen tile subtitle says 5~37과 -->
+<!-- v51 (2026-11-04): home = hub of tiles (CATS) → category page (#x/<cat>) → unit page for the daily tests (#x/daily/<unit>) → set cover whose back button follows parentOf(); ResumeBar + Crumbs; new exam family mini03 = 복습시험③ (쓰기 100 · 읽기 10 · 듣기 10 over real textbook tracks); build_mockweb.py adds window.KMU_UNITS -->
 <!-- v47 (2026-11-01): unit chips and the stats rows show practised words (blue segment + "ฝึกแล้ว N") so a first pass is visible before any word reaches box 2; vocab gap fill from textbook + workbook -->
 <!-- v44 (2026-10-27 night): card mode = 4-choice quiz (한국어→ไทย · ไทย→한국어 · mix; distractors from the same unit first), no more self-grading -->
 <!-- v41 (2026-10-27): vocabulary drill (#vocab · วันนี้ / ตามบท / สถิติ · Leitner boxes in kmuweb:vocab:srs, synced as cloud doc "srs") + daily-test board (EXAMS daily / final, per-set "group", home teaser) -->
@@ -107,6 +110,35 @@ button { cursor: pointer; }
 .card .tt small { font-family: var(--f-th); font-weight: 500; font-size: calc((13px) * var(--ts, 1)); color: var(--muted); }
 .card.c-good { border-color: var(--ok); } .card.c-done { border-color: var(--navy); } .card.c-live { border-color: var(--half); }
 .home-tip { font-size: calc((13px) * var(--ts, 1)); color: var(--muted); margin: 0 0 12px; }
+
+/* home hub → category page → unit page → set cover */
+.hub-h { font-family: var(--f-disp); font-size: calc((17px) * var(--ts, 1)); margin: 22px 0 10px; display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 10px; }
+.hub-h small { font-family: var(--f-th); font-weight: 500; font-size: calc((12.5px) * var(--ts, 1)); color: var(--muted); }
+.tiles { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 12px; }
+.tile { position: relative; text-align: left; background: var(--paper); border: 1px solid var(--rule); border-radius: 12px; padding: 16px 44px 14px 16px; display: grid; gap: 5px; min-height: 124px; align-content: start; min-width: 0; }
+.tile:hover { border-color: var(--navy); box-shadow: 0 2px 10px rgba(0, 0, 0, .08); }
+.tile .ic { font-size: 26px; line-height: 1; }
+.tile .t { font-family: var(--f-ko); font-weight: 800; font-size: calc((18px) * var(--ts, 1)); line-height: 1.3; }
+.tile .s { font-size: calc((13px) * var(--ts, 1)); color: var(--muted); line-height: 1.5; }
+.tile .m { display: flex; flex-wrap: wrap; align-items: center; gap: 2px 12px; font-size: calc((12px) * var(--ts, 1)); color: var(--muted); font-variant-numeric: tabular-nums; margin-top: 2px; }
+.tile .grp-bar { max-width: none; width: 100%; flex: none; }
+.tile .go { position: absolute; right: 14px; top: 50%; transform: translateY(-50%); font-size: 28px; line-height: 1; color: var(--navy); font-weight: 700; }
+.tile.hero { grid-column: 1 / -1; border: 2px solid var(--navy); background: var(--navy-soft); min-height: 0; }
+.tile.hero .t { font-size: calc((clamp(21px, 3vw, 27px)) * var(--ts, 1)); }
+.tile .dday { font-size: .72em; margin-left: 8px; padding: 1px 10px; border-radius: 999px; background: var(--red-soft); white-space: nowrap; }
+.resume-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; background: var(--hi); border: 1px solid var(--half); border-radius: 8px; padding: 8px 12px; margin-bottom: 12px; font-size: calc((13px) * var(--ts, 1)); }
+.crumbs { display: flex; flex-wrap: wrap; align-items: center; gap: 2px 4px; font-size: calc((13px) * var(--ts, 1)); color: var(--muted); margin: 0 0 10px; }
+.crumb { background: none; border: 0; padding: 6px 4px; min-height: 36px; color: var(--navy); text-decoration: underline; text-underline-offset: 3px; }
+.unit-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(165px, 1fr)); gap: 10px; margin-top: 12px; }
+.utile { text-align: left; background: var(--paper); border: 1px solid var(--rule); border-radius: 10px; padding: 10px 12px; display: grid; gap: 2px; align-content: start; min-height: 112px; min-width: 0; }
+.utile:hover { border-color: var(--navy); }
+.utile.pred { border: 2px solid var(--half); background: var(--hi); }
+.utile .un { font-family: var(--f-disp); font-weight: 800; font-size: calc((24px) * var(--ts, 1)); line-height: 1.1; color: var(--navy); }
+.utile .un small { font-size: .55em; margin-left: 2px; color: var(--muted); font-weight: 700; }
+.utile .ut { font-weight: 700; font-size: calc((13px) * var(--ts, 1)); line-height: 1.35; }
+.utile .uth { font-size: calc((12px) * var(--ts, 1)); color: var(--muted); line-height: 1.4; }
+.utile .um { font-size: calc((11.5px) * var(--ts, 1)); color: var(--muted); font-variant-numeric: tabular-nums; margin-top: 2px; }
+@media (max-width: 560px) { .tiles { grid-template-columns: 1fr; } .unit-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 
 .paper { background: var(--paper); border: 1px solid var(--rule); border-radius: 4px; padding: 22px clamp(14px, 4vw, 40px) 30px; }
 .paper-head { display: grid; grid-template-columns: 1fr auto; gap: 8px 20px; align-items: end; border-bottom: 2px solid var(--ink); padding-bottom: 10px; }
@@ -455,10 +487,13 @@ const CLIPS = window.KMU_CLIPS || {};
 const WORDS = window.KMU_WORDS || {};   // per clip: [[startSec, endSec, word], …] from edge-tts word boundaries
 const EXAMS = [
   { id: 'daily', title: '매일시험 (ข้อสอบประจำวัน)', date: null, when: 'ทุกวันหลังเรียนบทใหม่ · 10 ข้อ · นับเป็นคะแนนเก็บ 쓰기 10', note: 'ข้อสอบจริงที่สอบไปแล้วทุกบท + เก็งข้อสอบของวันพรุ่งนี้ · ทำซ้ำได้ไม่จำกัด' },
-  { id: 'final', title: '기말시험 · 복습시험 ③④ (เล่ม 1-2)', date: '2026-11-06', when: 'ศ. 6 พ.ย. 복습시험 ③ 22~29과 · พ. 18 พ.ย. ④ 30~37과 · ศ. 20 / จ. 23 พ.ย. 기말', note: '' },
+  { id: 'mini03', title: '복습시험 ③', date: '2026-11-06', when: 'ศ. 6 พ.ย. · 22~29과', note: 'เก็งข้อสอบจากรูปแบบ 복습시험 ①② — 쓰기 100 · 읽기 10 · 듣기 10 (말하기 = พูดแนะนำอาหาร ไม่อยู่ในชุดนี้)' },
+  { id: 'final', title: '기말시험 · 복습시험 ④ (เล่ม 1-2)', date: '2026-11-18', when: 'พ. 18 พ.ย. 복습시험 ④ 30~37과 · ศ. 20 / จ. 23 พ.ย. 기말', note: '' },
   { id: 'mini02', title: '복습시험 ②', date: '2026-10-20', when: 'อ. 20 ต.ค. · 14~20과', note: 'เก็งข้อสอบจากรูปแบบ 복습시험 ① — 쓰기 100 · 듣기 10 · 읽기 10 · 말하기 10' },
   { id: 'review', title: '중간시험 복습문제 (ชุดทบทวนของครู)', date: '2026-10-22', when: 'ชุดที่ครูแจก 16 ต.ค.', note: 'พิมพ์เขียวของข้อสอบกลางภาค — 쓰기 14 ตอน · 읽기 25 ข้อ · 듣기 12 ข้อ (เสียงจริงของครู) · 말하기 20 คำถาม' },
-  { id: 'midterm', title: '중간시험 (สอบกลางภาค)', date: '2026-10-22', when: 'พฤ. 22 ต.ค. 말하기 · ศ. 23 ต.ค. 쓰기·듣기·읽기 · 1~21과', note: 'ข้อสอบจำลอง 쓰기/읽기/듣기 2 ชุด · สัมภาษณ์จำลอง 말하기 · ฟังบทสนทนาหนังสือเสียงจริง · ทดสอบศัพท์และเขียนตามคำบอก' }
+  { id: 'midterm', title: '중간시험 (สอบกลางภาค)', date: '2026-10-22', when: 'พฤ. 22 ต.ค. 말하기 · ศ. 23 ต.ค. 쓰기·듣기·읽기 · 1~21과', note: 'ข้อสอบจำลอง 쓰기/읽기/듣기 2 ชุด · สัมภาษณ์จำลอง 말하기' },
+  { id: 'textbook', title: 'ตำรา KMU · เสียงจริงของสำนักพิมพ์', date: null, when: '', note: 'ชีต 본문 듣기 ของศูนย์ ทำกับแทร็กเสียงจริงของตำรา' },
+  { id: 'vocab', title: 'ทดสอบศัพท์', date: null, when: '', note: 'คำศัพท์ประจำบท · คำที่เคยผิด · เขียนตามคำบอก' }
 ];
 const SKILL = { writing: ['쓰기', 'เขียน'], reading: ['읽기', 'อ่าน'], listening: ['듣기', 'ฟัง'], speaking: ['말하기', 'พูด'] };
 const ORDER = ['writing', 'reading', 'listening', 'speaking'];
@@ -506,7 +541,7 @@ const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
 /* ------------------------------------------------------------------ state: signals
    Set-level state is `curSt` (null = no set open) + `mode` + the signals below; the non-reactive remainder lives in C.
    Answers: C.ans is the plain {key: value} object that is stored; kv(key) is a per-item version signal so typing re-renders only that item. */
-const view = signal('home');                      // home | set | help
+const view = signal('home');                      // home (hub) | cat (category / unit page) | set | profile | vocab | help
 const curSt = signal(null), mode = signal('cover'), leftS = signal(null);   // mode: cover | exam | practice | result
 const selfS = signal({}), aiS = signal({}), playsS = signal({}), G = signal(null);   // G = last grade() result
 const ansTick = signal(0), notice = signal(''), showTh = signal(false), running = signal(false), confirmN = signal(0);
@@ -672,11 +707,12 @@ const GROUPS = [
 ];
 /* a set's own `group` string (daily sets) wins over the GROUPS rules; sets sharing the string form one group (note = '') */
 const groupOf = st => { if (st.group) return st.group; const g = GROUPS.find(g => g.re.test(st.id)); return g ? g.label : 'paper:' + paperOf(st); };
-/* the daily board lists the newest unit first (NN과 in the label); a 🔮 prediction group goes on top */
-const dailyRank = l => (l.includes('🔮') ? 1000 : 0) + (+((/(\d+)\s*과/.exec(l) || [])[1]) || 0);
 function show(which) { batch(() => { view.value = which; }); const sc = $('#scroller'); if (sc) sc.scrollTo({ top: 0 }); }
 function go(id) { if (location.hash.slice(1) !== id) location.hash = id; else openSet(id); }
-function route() { const id = location.hash.slice(1); if (id === 'profile') { leaveSet(); show('profile'); } else if (id === 'vocab') { leaveSet(); show('vocab'); } else if (id && SETS.some(s => s.id === id)) openSet(id); else { leaveSet(); show('home'); } }
+function route() { const id = location.hash.slice(1), mx = /^x\/([\w-]+)(?:\/(\d+))?$/.exec(id);
+  if (id === 'profile') { leaveSet(); show('profile'); } else if (id === 'vocab') { leaveSet(); show('vocab'); }
+  else if (mx && CATS.some(c => c.id === mx[1])) { leaveSet(); catS.value = { id: mx[1], unit: mx[2] ? +mx[2] : null }; show('cat'); }
+  else if (id && SETS.some(s => s.id === id)) openSet(id); else { leaveSet(); show('home'); } }
 function leaveSet() { stopRuns(); stopExamClock(); curSt.value = null; }   // stopExamClock saves the remaining time
 window.addEventListener('hashchange', route);
 
@@ -1049,30 +1085,124 @@ function Card({ st, short }) {
     ? html`<span class="tt ko">${SKILL[st.skill][0]} <small>${SKILL[st.skill][1]}</small></span><span class="meta">${meta}</span>${badge}`
     : html`<span class="sk">${SKILL[st.skill][0]} · ${SKILL[st.skill][1]}</span><span class="tt">${st.title}</span><span class="meta">${meta}</span>${badge}`}</button>`;
 }
+/* ------------------------------------------------------------------ components: home hub → category page → (unit page) → set cover
+   The hub (#) shows one tile per category; a tile opens #x/<cat> (the groups of that category, or — for the daily tests — a grid of unit tiles that
+   opens #x/daily/<unit>); a card opens the set cover (#<setId>) whose back button returns to the page it came from. */
+const unitOf = st => { const m = /^(?:daily|sheet|predict)-(\d+)/.exec(st.id); return m ? +m[1] : 0; };
+const UNITS = window.KMU_UNITS || {};   // {unit: {ko, th}} from the first line of content/guide/01_units/unitNN.md
+/* first matching category wins, so the vocabulary and textbook-listening sets leave the midterm page. sec: 0 next exam · 1 daily practice · 2 past papers */
+const CATS = [
+  { id: 'mini03', sec: 0, icon: '🎯', title: '복습시험 ③', sub: 'ข้อสอบจำลอง 쓰기 · 읽기 · 듣기 (บท 22~29)', hero: true, date: '2026-11-06',
+    when: 'ศ. 6 พ.ย. · บท 22~29 · 쓰기 100 · 읽기 10 · 듣기 10 (말하기 = พูดแนะนำอาหาร ไม่อยู่ในชุดนี้)',
+    note: 'เก็งจากรูปแบบ 복습시험 ①② ที่ครูออกจริง: 쓰기 โครง 7 ตอนแบบ ② · 읽기 ยกบทอ่านจากหนังสือ (26과 · 29과 ตำราพิมพ์โจทย์ 대화로 만들기 ไว้เอง) · 듣기 ใช้เสียงจริงของตำรา รวมบทฟังทางการ 24과 · 28과 · ข้อ "예비" ไม่นับคะแนน', match: s => s.exam === 'mini03' },
+  { id: 'daily', sec: 1, icon: '📝', title: '매일시험', sub: 'ข้อสอบประจำวัน · เลือกบทที่ต้องการ', kind: 'units',
+    when: 'ทุกวันหลังเรียนบทใหม่ · 10 ข้อ · นับเป็นคะแนนเก็บ 쓰기 10', note: 'ข้อสอบจริงที่สอบไปแล้วทุกบท · ใบฝึกที่ครูแจก · เก็งข้อสอบ — เลือกบท แล้วเลือกชุด · ทำซ้ำได้ไม่จำกัด', match: s => s.exam === 'daily' },
+  { id: 'vocab', sec: 1, icon: '🔤', title: 'ทดสอบศัพท์', sub: 'ศัพท์ที่เคยผิด · เขียนตามคำบอก · ไทย↔เกาหลี',
+    when: 'จำศัพท์ไม่ได้ = จุดที่เสียคะแนนบ่อยสุด', note: 'ชุดทดสอบศัพท์แยกตามบท · ฝึกจำรายวันแบบกล่อง 0–5 ที่การ์ด "ศัพท์ประจำวัน" บนหน้าแรก', match: s => /^vocab-/.test(s.id) },
+  { id: 'listen', sec: 1, icon: '🔊', title: 'ฟังบทสนทนาจากหนังสือ', sub: 'เสียงจริงของสำนักพิมพ์ · ชีต 본문 듣기 5~37과',
+    when: 'ครูบอกว่า 듣기 มาจากบทสนทนาในหนังสือ', note: 'ทุกบทมีเสียงจริง · ทำข้อ A (เลือก / O-X) แล้วเติมช่องว่างข้อ B เหมือนชีตของศูนย์', match: s => /^tb-listen/.test(s.id) },
+  { id: 'mini02', sec: 2, icon: '📄', title: '복습시험 ②', sub: 'บท 14~20 · สอบแล้ว 20 ต.ค.',
+    when: 'อ. 20 ต.ค. · บท 14~20', note: 'ข้อสอบจริงที่ถอดจากกระดาษ + ชุดเก็ง 3 ชุด — 쓰기 100 · 듣기 10 · 읽기 10 · 말하기 10', match: s => s.exam === 'mini02' },
+  { id: 'midterm', sec: 2, icon: '🏫', title: '중간시험', sub: 'กลางภาค บท 1~21 · ข้อสอบจำลอง 2 ชุด + สัมภาษณ์',
+    when: 'พฤ. 22 ต.ค. 말하기 · ศ. 23 ต.ค. 쓰기·듣기·읽기', note: 'ชุด A ตามแบบ 복습문제 · ชุด B ตามแบบ 복습시험 ①② · สัมภาษณ์จำลอง 말하기', match: s => s.exam === 'midterm' },
+  { id: 'review', sec: 2, icon: '📋', title: '중간시험 복습문제', sub: 'ชุดทบทวนของครู (พิมพ์เขียวของข้อสอบกลางภาค)',
+    when: 'ชุดที่ครูแจก 16 ต.ค.', note: '쓰기 14 ตอน · 읽기 25 ข้อ · 듣기 12 ข้อ (เสียงจริงของครู) · 말하기 20 คำถาม', match: s => s.exam === 'review' },
+  { id: 'other', sec: 2, icon: '📦', title: 'ชุดอื่น ๆ', sub: 'ชุดข้อสอบที่ยังไม่มีหมวด (เช่น 복습시험 ④ · 기말)', when: '', note: '', match: () => true },   // catch-all: a set is never lost from the hub
+];
+const CAT_SETS = {}, CAT_OF = {};
+CATS.forEach(c => { CAT_SETS[c.id] = []; });
+SETS.forEach(s => { const c = CATS.find(c => c.match(s)); if (c) { CAT_SETS[c.id].push(s); CAT_OF[s.id] = c; } });
+/* where a set's back button goes: its unit page (daily tests) or its category page */
+const parentOf = st => { const c = CAT_OF[st.id]; if (!c) return { hash: '', label: 'หน้าแรก' };
+  const u = c.kind === 'units' ? unitOf(st) : 0; return u ? { hash: `x/${c.id}/${u}`, label: `${c.title} ${u}과` } : { hash: `x/${c.id}`, label: c.title }; };
+const catS = signal({ id: '', unit: null });
+const groupRank = l => l.includes('🔮') ? 0 : l.startsWith('매일시험') ? 1 : l.startsWith('연습지') ? 2 : 3;   // unit page: tomorrow's prediction, the real test, the sheet, past predictions
+
+/* groups of a list of sets: an exam with several parallel papers (ids mini02-, mini02b-, mini02c-) gets one group per paper; a set's own `group` string wins */
+function groupsOf(sets) {
+  const papers = [...new Set(sets.map(groupOf))], byPaper = papers.length > 1 || sets.some(s => s.group);
+  let n = 0;
+  const groups = byPaper ? papers.map(p => { const ps = sets.filter(s => groupOf(s) === p), g = GROUPS.find(g => g.label === p), mine = !g && ps.some(s => s.group);
+    return { label: g ? g.label : mine ? p : `ชุดที่ ${++n}`, note: g ? g.note : '', sets: ps, mine }; }) : [{ label: '', note: '', sets }];
+  groups.forEach(g => g.sets.sort((a, b) => ORDER.indexOf(a.skill) - ORDER.indexOf(b.skill) || a.id.localeCompare(b.id, undefined, { numeric: true })));
+  return { groups, byPaper };
+}
+function Group({ g, byPaper }) {
+  const scored = g.sets.filter(s => !oldSpk(lastScore(s.id))), dn = g.sets.filter(s => lastScore(s.id)).length;
+  const got = scored.reduce((a, s) => a + ((lastScore(s.id) || {}).s || 0), 0), all = scored.reduce((a, s) => a + setTotal(s), 0);
+  const sp = g.sets.filter(s => (lastScore(s.id) || {}).spoken);
+  return html`<section class="grp"><div class="grp-h" hidden=${!g.label}>${g.label ? html`<b>${g.label}</b>` : null}<span class="muted">ทำแล้ว ${dn}/${g.sets.length}${byPaper && dn ? ` · คะแนน ${Math.round(got * 100) / 100}/${all}` : ''}${sp.length ? ` · ตอบ ${sp.reduce((a, s) => { const e = lastScore(s.id); return a + (oldSpk(e) ? e.s : e.n || 0); }, 0)}/${sp.reduce((a, s) => a + itemCount(s), 0)} ข้อ` : ''}</span>
+      <span class="grp-bar"><i style=${'width:' + (100 * dn / g.sets.length) + '%'}></i></span></div>
+    ${g.note ? html`<p class="grp-note">${g.note}</p>` : null}
+    <div class="skills four">${g.sets.map(st => html`<${Card} st=${st} short=${byPaper && !g.mine} />`)}</div></section>`;
+}
+function Crumbs({ items }) {
+  return html`<nav class="crumbs" aria-label="เส้นทาง">${items.map((it, i) => html`${i ? html`<span aria-hidden="true">›</span>` : null}${it.hash === undefined ? html`<b>${it.label}</b>` : html`<button type="button" class="crumb" onClick=${() => { location.hash = it.hash; }}>${it.label}</button>`}`)}</nav>`;
+}
+function Tile({ c }) {
+  const sets = CAT_SETS[c.id], n = sets.length, done = sets.filter(s => lastScore(s.id)).length, live = sets.filter(s => store.get('attempt:' + s.id, null)).length;
+  return html`<button type="button" class=${'tile' + (c.hero ? ' hero' : '')} id=${'tile-' + c.id} onClick=${() => { location.hash = 'x/' + c.id; }}>
+    <span class="ic" aria-hidden="true">${c.icon}</span>
+    <span class="t ko">${c.title}${c.date ? html` <span class="dday">${dday(c.date)}</span>` : null}</span>
+    <span class="s">${c.sub}</span>
+    <span class="m"><span>${n} ชุด</span><span>ทำแล้ว ${done}/${n}</span>${live ? html`<span class="badge live">⏸ ค้างอยู่ ${live}</span>` : null}</span>
+    <span class="grp-bar"><i style=${'width:' + (100 * done / n) + '%'}></i></span>
+    <span class="go" aria-hidden="true">›</span></button>`;
+}
+/* sets left half-done (an attempt is stored), straight from the home hub */
+function ResumeBar() {
+  storeVer.value;
+  const live = SETS.filter(s => store.get('attempt:' + s.id, null));
+  if (!live.length) return null;
+  return html`<div class="resume-bar" id="resume-bar"><span>⏸ <b>ทำค้างอยู่</b></span>${live.slice(0, 4).map(s => html`<button class="btn sm" type="button" onClick=${() => go(s.id)}>${s.title} · ${answeredIn(s, store.get('ans:' + s.id, {}))}/${itemCount(s)}</button>`)}${live.length > 4 ? html`<span class="muted">+${live.length - 4}</span>` : null}</div>`;
+}
 function Home() {
   storeVer.value; dayS.value;
-  return html`<${VTeaser} /><p class="home-tip">เลือกชุดข้อสอบ → หน้าปกจะบอกเวลาและกติกา → <b>เริ่มสอบจริง</b> (จับเวลา เสียงเล่นเอง) หรือ <b>ฝึกทำ</b> (ไม่จับเวลา ดูคำแปลได้)</p>
-    ${EXAMS.map(ex => {
-      const sets = SETS.filter(s => s.exam === ex.id); if (!sets.length) return null;
-      const done = sets.filter(s => lastScore(s.id)).length, papers = [...new Set(sets.map(groupOf))], byPaper = papers.length > 1 || sets.some(s => s.group);
-      let n = 0;
-      const groups = byPaper ? papers.map(p => { const ps = sets.filter(s => groupOf(s) === p), g = GROUPS.find(g => g.label === p), mine = !g && ps.some(s => s.group);
-        return { label: g ? g.label : mine ? p : `ชุดที่ ${++n}`, note: g ? g.note : '', sets: ps, mine }; }) : [{ label: 'ทุกชุด · เรียงตาม 쓰기 → 읽기 → 듣기 → 말하기', note: '', sets }];
-      if (ex.id === 'daily') groups.sort((a, b) => dailyRank(b.label) - dailyRank(a.label));
-      return html`<article class="exam">
-        <div class="exam-h"><h2 class="ko">${ex.title}</h2>${ex.date ? html`<span class="dday">${dday(ex.date)}</span>` : null}<span class="muted">${ex.when}</span><p>${ex.note}</p></div>
-        <p class="exam-sum">ทำแล้ว ${done}/${sets.length} ชุด</p>
-        ${groups.map(g => {
-          g.sets.sort((a, b) => ORDER.indexOf(a.skill) - ORDER.indexOf(b.skill) || a.id.localeCompare(b.id));
-          const scored = g.sets.filter(s => !oldSpk(lastScore(s.id))), dn = g.sets.filter(s => lastScore(s.id)).length;
-          const got = scored.reduce((a, s) => a + ((lastScore(s.id) || {}).s || 0), 0), all = scored.reduce((a, s) => a + setTotal(s), 0);
-          return html`<section class="grp"><div class="grp-h"><b>${g.label}</b><span class="muted">ทำแล้ว ${dn}/${g.sets.length}${byPaper && dn ? ` · คะแนน ${Math.round(got * 100) / 100}/${all}` : ''}${(() => { const sp = g.sets.filter(s => (lastScore(s.id) || {}).spoken); return sp.length ? ` · ตอบ ${sp.reduce((a, s) => { const e = lastScore(s.id); return a + (oldSpk(e) ? e.s : e.n || 0); }, 0)}/${sp.reduce((a, s) => a + itemCount(s), 0)} ข้อ` : ''; })()}</span>
-            <span class="grp-bar"><i style=${'width:' + (100 * dn / g.sets.length) + '%'}></i></span></div>
-            ${g.note ? html`<p class="grp-note">${g.note}</p>` : null}
-            <div class="skills four">${g.sets.map(st => html`<${Card} st=${st} short=${byPaper && !g.mine} />`)}</div></section>`;
-        })}
-      </article>`;
-    })}`;
+  const sec = (i, h, sub, lead) => { const cs = CATS.filter(c => c.sec === i && CAT_SETS[c.id].length);
+    return cs.length ? html`<h3 class="hub-h">${h} <small>${sub}</small></h3>${lead || null}<div class="tiles">${cs.map(c => html`<${Tile} c=${c} />`)}</div>` : null; };
+  return html`<p class="home-tip">เลือกหมวดข้อสอบ → เลือกชุด → หน้าปกจะบอกเวลาและกติกา → <b>เริ่มสอบจริง</b> (จับเวลา เสียงเล่นเอง) หรือ <b>ฝึกทำ</b> (ไม่จับเวลา ดูคำแปลได้)</p>
+    <${ResumeBar} />
+    ${sec(0, '⏳ ใกล้ถึงวันสอบ', 'ทำชุดจำลองก่อนสอบจริง')}
+    ${sec(1, '📚 ฝึกประจำวัน', 'ศัพท์ · ข้อสอบรายบท · ฟังเสียงจริง', html`<${VTeaser} />`)}
+    ${sec(2, '🗂️ ข้อสอบที่ผ่านมาแล้ว', '복습시험 ② · 중간시험 · ชุดทบทวนของครู')}`;
+}
+function CatHead({ c, sub, done, n }) {
+  return html`<div class="exam-h"><h2 class="ko">${c.icon} ${c.title}${sub ? ' · ' + sub : ''}</h2>${c.date ? html`<span class="dday">${dday(c.date)}</span>` : null}<span class="muted">${c.when}</span>${c.note ? html`<p>${c.note}</p>` : null}</div>
+    <p class="exam-sum">ทำแล้ว ${done}/${n} ชุด</p>`;
+}
+/* #x/daily — one tile per unit, newest first */
+function UnitGrid({ c }) {
+  const sets = CAT_SETS[c.id], us = [...new Set(sets.map(unitOf))].sort((a, b) => b - a), score = u => ((window.KMU_SCORES || {}).daily || []).find(d => d.unit === u);
+  return html`<section id="cat"><${Crumbs} items=${[{ label: 'หน้าแรก', hash: '' }, { label: c.title }]} />
+    <article class="exam"><${CatHead} c=${c} done=${sets.filter(s => lastScore(s.id)).length} n=${sets.length} />
+      <div class="unit-grid" id="unit-grid">${us.map(u => { const ss = sets.filter(s => unitOf(s) === u), dn = ss.filter(s => lastScore(s.id)).length, pred = ss.some(s => (s.group || '').includes('🔮')), ds = score(u), t = UNITS[u];
+        return html`<button type="button" class=${'utile' + (pred ? ' pred' : '')} data-unit=${u} onClick=${() => { location.hash = `x/${c.id}/${u}`; }}>
+          <span class="un">${u}<small>과</small></span>
+          <span class="ut ko">${t ? t.ko : ''}</span><span class="uth">${t ? t.th : ''}</span>
+          <span class="um">ทำแล้ว ${dn}/${ss.length} ชุด${ds ? html` · สอบจริง <b>${ds.got}/${ds.max}</b>` : ''}</span>
+          ${pred ? html`<span class="badge live">🔮 เก็งข้อสอบพรุ่งนี้</span>` : null}</button>`; })}</div>
+    </article></section>`;
+}
+/* #x/daily/28 — the sets of one unit: tomorrow's prediction, the real test, the sheet, earlier predictions */
+function UnitPage({ c, u }) {
+  const sets = CAT_SETS[c.id].filter(s => unitOf(s) === u), t = UNITS[u], { groups, byPaper } = groupsOf(sets);
+  groups.sort((a, b) => groupRank(a.label) - groupRank(b.label));
+  return html`<section id="cat"><${Crumbs} items=${[{ label: 'หน้าแรก', hash: '' }, { label: c.title, hash: 'x/' + c.id }, { label: u + '과' }]} />
+    <article class="exam"><div class="exam-h"><h2 class="ko">${c.icon} ${u}과${t ? ' · ' + t.ko : ''}</h2>${t ? html`<span class="muted">${t.th}</span>` : null}</div>
+      <p class="exam-sum">ทำแล้ว ${sets.filter(s => lastScore(s.id)).length}/${sets.length} ชุด</p>
+      ${sets.length ? groups.map(g => html`<${Group} g=${g} byPaper=${byPaper} />`) : html`<p class="notice">ยังไม่มีชุดข้อสอบของบทนี้</p>`}
+    </article></section>`;
+}
+function Category() {
+  storeVer.value; dayS.value;
+  const { id, unit } = catS.value, c = CATS.find(x => x.id === id);
+  if (!c) return null;
+  if (c.kind === 'units') return unit ? html`<${UnitPage} c=${c} u=${unit} />` : html`<${UnitGrid} c=${c} />`;
+  const sets = CAT_SETS[c.id], { groups, byPaper } = groupsOf(sets);
+  return html`<section id="cat"><${Crumbs} items=${[{ label: 'หน้าแรก', hash: '' }, { label: c.title }]} />
+    <article class="exam"><${CatHead} c=${c} done=${sets.filter(s => lastScore(s.id)).length} n=${sets.length} />
+      ${groups.map(g => html`<${Group} g=${g} byPaper=${byPaper} />`)}
+    </article></section>`;
 }
 
 /* ------------------------------------------------------------------ components: cover page */
@@ -1105,7 +1235,7 @@ function Cover() {
       <button class="btn sm" type="button" onClick=${() => { C.lastMode = last.mode; mode.value = 'result'; finishGrading('view'); }}>📊 ดูผลและเฉลย</button></div>` : null}
     ${last || att || hist.length ? html`<p class="reset">${resetAsk.value === st.id ? html`<span>ล้างคำตอบ คะแนน ประวัติ และสถานะของชุดนี้ทั้งหมด (รวมที่ซิงก์ไว้) กลับเป็น "ยังไม่ได้ทำ"?</span> <button class="btn sm danger" type="button" onClick=${() => resetSet(st.id)}>🗑 ยืนยันล้าง</button> <button class="btn sm" type="button" onClick=${() => { resetAsk.value = ''; }}>ยกเลิก</button>` : html`<button class="btn sm" type="button" onClick=${() => { resetAsk.value = st.id; }}>🗑 ล้างผลชุดนี้</button>`}</p>` : null}
     ${hist.length > 1 ? html`<p class="hist">ประวัติ: ${hist.slice().reverse().map(e => html`<span>${e.s}/${e.t} ${MODE_TH[e.mode] ? '(' + MODE_TH[e.mode] + ')' : ''} ${dateTh(e.at)}</span>`)}</p>` : null}
-    <div class="actions"><button class="btn" type="button" onClick=${() => { location.hash = ''; }}>← กลับหน้าแรก</button></div>
+    <div class="actions"><button class="btn" type="button" id="cover-back" onClick=${() => { location.hash = parentOf(st).hash; }}>← กลับ ${parentOf(st).label}</button></div>
   </article>`;
 }
 
@@ -1723,10 +1853,10 @@ function VTeaser() {
 /* ------------------------------------------------------------------ components: help page, routing shell */
 function Help({ on }) {
   return html`<section id="help" class="paper help" hidden=${!on}>
-    <div class="paper-head"><div><h1>วิธีใช้</h1><p>เว็บฝึกสอบ 복습시험 ② และ 중간시험 · ใช้ได้บน iPad, มือถือ และ PC</p></div></div>
+    <div class="paper-head"><div><h1>วิธีใช้</h1><p>เว็บฝึกสอบ 복습시험 ③ · ② · 중간시험 · 매일시험 · ใช้ได้บน iPad, มือถือ และ PC</p></div></div>
     <h2>ลำดับการทำข้อสอบ</h2>
     <ul>
-      <li><b>หน้าแรก</b> แบ่งตามการสอบ (매일시험 ข้อสอบประจำวัน · 복습시험 · 중간시험) กดการ์ดชุดที่ต้องการ → เข้าสู่<b>หน้าปกข้อสอบ</b> ซึ่งบอกจำนวนข้อ คะแนน เวลา และกติกา</li>
+      <li><b>หน้าแรก</b> เป็นหน้าเลือกหมวด: ข้อสอบที่ใกล้ที่สุด (복습시험 ③) อยู่บนสุด ตามด้วยฝึกประจำวัน (매일시험 · ทดสอบศัพท์ · ฟังจากหนังสือ) และข้อสอบที่ผ่านมาแล้ว กดหมวด → เลือกชุด (매일시험 เลือก<b>บท</b>ก่อน) → เข้าสู่<b>หน้าปกข้อสอบ</b> ซึ่งบอกจำนวนข้อ คะแนน เวลา และกติกา · แถบ "หน้าแรก › …" และปุ่ม ← กลับ พาย้อนขึ้นทีละชั้น · ถ้ามีชุดที่ทำค้างไว้ จะมีแถบสีเหลือง ⏸ บนหน้าแรกให้กดทำต่อ</li>
       <li><b>▶ เริ่มสอบจริง</b> = จำลองห้องสอบ: จับเวลาตามข้อสอบจริง (ดูที่แถบลอยมุมล่างขวา) ซ่อนคำแปลและคำใบ้ ชุดฟังจะเล่นเสียงเองตอนละ 2 รอบแล้วให้เวลาตอบ ชุดพูดครูจะถามทีละข้อ หมดเวลาแล้วระบบส่งคำตอบให้อัตโนมัติ</li>
       <li><b>✎ ฝึกทำ</b> = ไม่จับเวลา เปิดคำแปลได้ กดฟังซ้ำได้ไม่จำกัด เปิดสคริปต์ได้ กด ▶ ถาม ทีละข้อได้</li>
       <li>ทำเสร็จกด <b>ส่งคำตอบ</b> → เห็น<b>ผลสอบ</b> คะแนนรวม คะแนนรายตอน ข้อที่เสียคะแนน และเฉลยทุกข้อ แต่ละข้อเปลี่ยนสีทั้งข้อ: เขียว = ถูก · ส้ม = ครึ่งคะแนน · แดง = ผิด · เทา = รอตรวจ</li>
@@ -1765,6 +1895,7 @@ function App() {
       <${Strip} />
       <div class="wrap">
         <section id="home" hidden=${vw !== 'home'}>${vw === 'home' ? (SETS.length ? html`<${Home} />` : html`<p class="notice">โหลดข้อมูลแบบฝึกไม่ได้ (data.js หาย)</p>`) : null}</section>
+        ${vw === 'cat' ? html`<${Category} />` : null}
         <section id="set" hidden=${vw !== 'set'}>${curSt.value ? html`<${SetView} />` : null}</section>
         ${vw === 'profile' ? html`<${Profile} />` : null}
         ${vw === 'vocab' ? html`<${Vocab} />` : null}
@@ -1787,7 +1918,7 @@ const vocabHooks = {   // test hooks of the vocabulary drill: start(n) = today's
   state: () => { const s = vsS.peek(); return s && { phase: s.phase, mode: s.mode, label: s.label, total: s.total, done: s.done, ok: s.ok, half: s.half, ng: s.ng, left: s.queue.length, ko: (s.phase === 'fb' ? s.fb : s.queue[0] || {}).ko, mc: s.mc && { dir: s.mc.dir, opts: s.mc.opts.map(o => o.d), ans: s.mc.ans }, fb: s.fb && { score: s.fb.score, key: s.fb.key, b: s.fb.e.b, pick: s.fb.pick && s.fb.pick.idx } }; },
   srs: srsGet, info: vInfo, keys: wordKeys, judge: judgeWord, today: vBuildDaily, groups: () => EXAMS.map(e => e.id),
 };
-window.__kmu = { get cur() { return snapshot(); }, openSet, startSet, submit, grade, aiGradeAll, vocab: vocabHooks };   // test hooks
+window.__kmu = { get cur() { return snapshot(); }, openSet, startSet, submit, grade, aiGradeAll, vocab: vocabHooks, cats: () => CATS.map(c => [c.id, CAT_SETS[c.id].length]) };   // test hooks
 })();
 </script>
 

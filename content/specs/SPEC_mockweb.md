@@ -12,7 +12,7 @@ The practice site renders exercise *sets* from JSON files in `content/mockweb/*.
 ```json
 {
   "id": "mini02-writing",            // unique, lowercase-kebab: <exam>-<skill>[-<n>]
-  "exam": "mini02",                  // mini02 = 복습시험② 10/20 (14–20과) · review = teacher's 중간시험 복습문제 · midterm = 중간시험 prediction
+  "exam": "mini02",                  // mini02 = 복습시험② 10/20 (14–20과) · mini03 = 복습시험③ 11/6 (22–29과) · review = teacher's 중간시험 복습문제 · midterm = 중간시험 prediction · textbook = tb-listen-* (본문 듣기 over the textbook tracks) · vocab = vocab-* word tests
   "skill": "writing",                // writing | reading | listening | speaking
   "title": "쓰기 · 제1회",            // short, Korean/Thai
   "intro": "คำแนะนำภาษาไทย 1–2 ประโยค", // optional

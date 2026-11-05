@@ -176,3 +176,11 @@
   student's answer; the old key said 만나요) and A14 = 가르쳐요 (a teaching scene; the student's 기다려요 was slashed — the old key had copied it).
 - Known cosmetic gaps: 10과 A's third table row (30–10,000) is printed as given reference rather
   than as blanks; `왕쯔이` is transliterated `หวางจิ้ง` where `หวางจื่ออี` is closer.
+
+## 복습시험③ mock (2026-11-04) — provenance
+- content/mockweb/mini03_{writing,reading,listening}.json are a PREDICTION (the real paper is unknown until Fri 11/6). Method + evidence = content/specs/BRIEF_mini03.md §1.
+- 듣기 plays the real publisher tracks 22-1 · 24-1 · 24-2 · 25-1 · 26-1 · 27-1 · 28-2 · 29-1 and 23-1; their wording was checked with faster-whisper against the scripts
+  (24-1 이인분, 26-1 영하 40도, 29-1 날씨가 추워서, 25-1 맛있지만 / 친절한 all match). The O/X and short-answer items of 28-2 and 24-2 are the textbook's own 나/가 questions.
+- 읽기 main = 23·26·29과 (26 and 29 use the textbook's printed 대화로 만들기 frames); 쓰기 items are lifted from the workbook / 매일시험 22–29 with the student's past slips in `why`.
+  Written by two Sonnet agents; the lead added the -겠- item 5-4 (26과 daily test: 고파겠어요 ✗) and reviewed every item. Grammar coverage 22–29: every point appears at least once.
+- When the real ③ comes back: transcribe it to content/exercises/miniexam/exam03.md, put a scorecard at the top of a new predictions/miniexam/exam03.md (as exam02.md has) and record the score.

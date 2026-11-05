@@ -143,3 +143,24 @@ Evening (same day, 3 more Sonnet agents, ~420k tokens, 2–3 min each): the user
 "จำได้" = box ≥ 2 needs a second right answer, and a correct first answer gives box 1) and whether the words came from the workbook/textbook too (they did
 not: centre's sheets only). Site v47: unit chips + stats rows carry a blue "ฝึกแล้ว N" segment (VBar component: mastered · learned · seen) and the vocab
 gap fill above (950 → 1,366 words; 410 new word clips, clips3 13.5 MB + clips4 7.7 MB; v47 sent app.html + vocab.js + clips3.js + clips4.js); guides rebuilt 655 / 728 pp, scan clean. Note: srsApply() does not check the due date, so re-doing a unit the same day also promotes words — left as is.
+
+2026-11-04 night (Sonnet 5.5 main + 2 Sonnet agents, ~820k agent tokens: 쓰기 484k / 22 min, 읽기 336k / 19 min): the user found the site's exam page too long and messy
+(asked for a pick-a-category step first, like the KMUTT curriculum page), asked for a 복습시험③ mock (쓰기·읽기·듣기, 22–29과, "predict as accurately as possible") and
+asked which model to use / whether to switch to Opus. Site v51 published as artifact version 51: hub → category → unit page → cover (§2.3 + LAYOUT.md) and mini03 sets
+(133 sets · 2,576 items). Prediction evidence found this session (BRIEF_mini03.md §1): ②'s scorecard (쓰기 format 50 % hit, content 85 %, 읽기 format 100 %); ②'s 듣기 items
+trace back to the centre's 본문 듣기 sheets and to the formal 듣기 of 20과; the textbook prints a 대화로 만들기 frame only in 23·26·29·30과; formal 듣기 in 22–29 = 24과 + 28과.
+Model answer given to the user: stay on Sonnet — accuracy is limited by evidence (the teacher changes formats), the earlier Opus-planned prediction also hit only ~50 % of ②'s
+쓰기 format; every set was validated, graded in a headless browser and the audio checked with faster-whisper. The publish was refused twice as "unread": run `Artifact list
+scope:files`, read the diff, and add a changed line (a `<!-- vNN -->` comment at the top of app.html) before the third try. Not committed.
+
+2026-11-05 (Sonnet 5.5, no agents): the user asked what 본문 듣기 is (answered from the docs, no edit), then to add the 22과 sheet if it could be on the exam. Evidence: ②'s 10 듣기 items trace to
+5 of its 7 units (14 · 17 · 18 · 19 · 20; reconstruction in exam02.md), so a given unit of the range showed up about 70 % of the time (one exam, rough); 22과 is in ③'s range and was the only unit with
+no textbook-listening set (22-1 only sat in mini03's 예비 items 11–12). Added `tb-listen-22` to textbook_listen.json (A 4-statement MC + B 5-blank dictation, 6 pts) and fixed the listen tile subtitle
+(5~29 → 5~37과). Build 134 sets · 2,578 items, 0 new clips. Headless Chrome: the category lists it between 14–21 and 23–29; all correct = 6/6; slips (먹러 · 한식집에서 · wrong MC) = 4/6. Published as artifact
+version 52 (files = data.js; the live data.js sha256 equals the local one). Not verified: playback of 22-1.mp3 in a browser (headless virtual time never fired loadedmetadata / decodeAudioData; ffprobe says
+40.15 s and faster-whisper matched the script). Left alone: set cards inside a group sort by id as plain strings (5–13 lands last); the textbook-listen sets carry exam "midterm", so their cover says 중간시험
+even for 23–37과. Also corrected LAYOUT.md's stale "KMU_Listening.pdf (본문 듣기 5–22)" — the PDF holds all of 5–37 (71 pp, checked per unit). Not committed.
+Same day, on "แก้ดิ": fixed the two left-alone items → site v53 (numeric group sort; exam families `textbook` / `vocab` for the 5 tb-listen + 4 vocab-test sets, which all carried `midterm`). Verified by
+dumping the card order of 32 category/unit pages and the cover subtitle of 18 sets before and after (only #x/listen and those 9 covers changed), 22과 practice still 6/6 and 4/6 on the slips, live data.js
+sha256 = local, the live page contains the new code. Not fixable from here: the link is shared as "Anyone with the link" and data.js carries KMU_SCORES (the user's scores) — only the page's Share menu
+changes that; told the user. Not committed.

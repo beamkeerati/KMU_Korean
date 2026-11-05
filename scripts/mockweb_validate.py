@@ -6,7 +6,7 @@ Prints OK per file, or the list of problems (exit 1).
 """
 import json, re, sys
 
-EXAMS = {'mini02', 'review', 'midterm', 'daily', 'final'}   # daily = 매일시험 sets (real papers + tomorrow's prediction) · final = 기말/복습시험 ③④ material
+EXAMS = {'mini02', 'mini03', 'review', 'midterm', 'daily', 'final', 'textbook', 'vocab'}   # daily = 매일시험 sets (real papers + tomorrow's prediction) · mini03 = 복습시험③ 11/6 (22–29과) · final = 기말/복습시험④ material · textbook = tb-listen-* (본문 듣기 over the textbook tracks) · vocab = vocab-* word tests
 SKILLS = {'writing', 'reading', 'listening', 'speaking'}
 TYPES = {'mc', 'ox', 'blank', 'write', 'speak'}
 TAG = re.compile(r'\{[a-zA-Z]:')
