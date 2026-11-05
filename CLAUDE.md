@@ -77,7 +77,7 @@ output/       🤖 GENERATED, never hand-edit. Entry = output/START_HERE.html (h
   omit `capabilities` (keeps db, sample, user). If refused as "unread", run `Artifact list scope:files` on the url first. Compare file sizes with that
   listing to see what changed. Each clips file must stay < 16 MB (build_mockweb splits word clips over VCLIP_FILES; add a file + `<script>` tag in
   app.html when the build says so). Do not re-enable the artifact watch on your own.
-- Current: **v54** — 137 sets · 2,578 items · 922 clips · 1,366 vocab words (vocab.js, Leitner drill, VOCAB_PRIO in build_mockweb.py line ~74).
+- Current: **v55** — 137 sets · 2,578 items · 922 clips · 1,366 vocab words (vocab.js, Leitner drill, VOCAB_PRIO in build_mockweb.py line ~74).
   **Sizing rule (v54):** a set's `minutes` must fit its own items — listening clock ≥ flow (2 plays + answer pauses, ffprobe the mp3s) + ~3 min; spare/예비 items go in their own set
   (`mini03x-<skill>`, own clock), never inside a timed set (the clock auto-submits). 복습시험③ = `mini03-*` (scored: 30/20/15 min) + `mini03x-*` (예비: 10/25/14); two GROUPS rules in app.html.
   **Navigation (v51):** home = hub of tiles (`CATS` in app.html, first match wins, `other` = catch-all) → `#x/<cat>` → daily tests only `#x/daily/<unit>`
@@ -86,6 +86,8 @@ output/       🤖 GENERATED, never hand-edit. Entry = output/START_HERE.html (h
 - Daily sets: content/mockweb/daily_a.json (05–13) · daily_b.json (14+): `daily-NN-writing` / `daily-NN-listening` (voice T) / `sheet-NN-writing`, each
   with a `group` string like "매일시험 28과 · 4 Nov · 7/10". Predictions: daily_predictNN.json, group "🔮 เก็งข้อสอบ 매일시험 NN과 (…)"; **when the
   test comes back, change it to "เก็ง 매일시험 NN과 · สอบแล้ว D Mon · X/10"** so the board stops pinning it.
+- **Cloud sync (v55):** per-key times (`kt:<id>` / field `t`), score+hist = union, never a whole-doc overwrite — keep it that way when touching `cloud` in app.html
+  (a whole-doc push lost the 복습시험③ 쓰기 score on 11-05). Recovery source if it ever happens again: Chrome `Local Storage/leveldb` (*.log keeps old values).
 - scores.json: load, append to `daily` ({unit, got, max, note}), dump with indent=1, ensure_ascii=False. The profile view reads it.
 - The claude.ai frame refuses the microphone; local `start.sh` serves it for mic use. Feature history → docs/LAYOUT.md.
 

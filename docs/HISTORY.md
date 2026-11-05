@@ -172,3 +172,13 @@ said "ข้อ 11–15 เป็นชุดสำรอง" while the spares w
 groups on #x/mini03; CLAUDE.md §2.3 gained a one-line sizing rule. Checked: validator OK, per-set items / points / minutes / listening flow recomputed from the built data.js, headless-Chrome screenshots of #x/mini03 and the
 듣기 예비 cover, live data.js sha256 = local. Not verified: a full exam-mode run of the new sets (headless virtual time does not play audio). The publish was refused twice by the stale-version guard (the live page differed
 only by my own three edits) and went through on the third try. Not committed.
+2026-11-05 (evening, D-1 of 복습시험③; Opus 5.5, no agents): the user finished 복습시험③ 쓰기 (exam mode, ~19:21) and the score vanished from the cover; asked
+"มันต้อง sync กันทั้งหมด ทั้งเว็บตลอดเวลา" + "เช็คให้หมดทุกข้อสอบ อย่าให้เกิดเหตุการณ์แบบนี้อีก". Found: the cloud doc mini03-writing held the AI verdicts but ans/score/hist = null.
+Chrome's Local Storage LevelDB (copied to scratch, parsed with a pure-python log/sstable + snappy reader) showed the sequence: answers + clock saves every 20 s until 19:21:13
+(left 40 s), then in one commit window ans/attempt/self were deleted and only the AI verdicts written back → a pull of a whole doc with nulls and a newer `at` (v54 = whole-doc
+"last change wins"; a stale copy on another device/tab won). Same signature on mini02-listening (10-21 15:15: score + hist deleted by a pull, unrecoverable — no copy anywhere);
+mid-speaking was emptied 10-21 20:39 (all keys incl. ai: looks like 🗑 ล้างผล, unknown). Fix = site v55 (LAYOUT.md, CLAUDE.md §2.3): per-key merge, score/hist union, vocab
+per-word merge, read-merge-write, live listener with a polling fallback, AI replies pinned to their set/attempt. Tested with 7 merge scenarios + a 2-device fake-cloud replay of the
+incident (also in polling mode); node --check on the page script. Restored mini03-writing in the cloud (answers of 19:21:13, AI verdicts, score 57/100 recomputed with the app's
+rules; submit time ≈ 19:21:25 estimated). After publish (artifact v55, then v56 with the fallback) the user's browser converted every doc to the new format and re-graded
+mini03-writing to the same 57/100. Not verified: a real second device; the stored runtime contract is 0.2.85 (types read were 0.2.96) — hence the fallback. Not committed.

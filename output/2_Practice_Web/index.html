@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!-- v55 (2026-11-05): cloud sync MERGES instead of overwriting — per-key write times (kmuweb:kt:<id> / cloud field t), score + hist = union by attempt time (only 🗑 ล้างผล's t.reset removes attempts), vocab record merged per word (ep = clear count), read → merge → write one doc at a time + a live onSnapshot listener; pre-v55 docs' nulls never erase local data. Late AI grades stay in their own set/attempt (gens). Cause: v54's whole-doc "last change wins" let a stale copy wipe the finished mini03-writing (57/100) and mini02-listening -->
 <!-- v54 (2026-11-05): 복습시험③ is split into two groups via two GROUPS rules — "ชุดสอบจำลอง" (mini03-*: only the scored items, 쓰기 27 · 읽기 10 · 듣기 10, 30 / 20 / 15 min like ②) and "ฝึกเพิ่ม 예비" (mini03x-*: the old spare sections as real sets with real points, own clocks 10 / 25 / 14 min); the single sets had mixed 43 / 22 / 23 items into 30 / 20 / 15 min (the listening flow alone needed 23 min) -->
 <!-- v53 (2026-11-05): set cards inside a group sort by id with numeric collation (5-13 before 14-21); the textbook-listen and vocab-test sets get their own exam families (textbook, vocab) so their cover no longer says 중간시험 -->
 <!-- v52 (2026-11-05): + tb-listen-22 (22과 본문 듣기 over the real 22-1.mp3) — the textbook-listening sheets now cover 5–37과 without a gap; listen tile subtitle says 5~37과 -->
@@ -510,7 +511,10 @@ const SYNCED = /^(ans|self|score|ai|hist|attempt|vocab):(.+)$/;   // vocab:srs =
 const storeVer = signal(0);            // bumped when stored scores / attempts change: Home and Cover re-read the store
 const store = { get(k, d) { try { const v = localStorage.getItem('kmuweb:' + k); return v ? JSON.parse(v) : d; } catch (e) { return d; } },
                 put(k, v) { try { if (v === null || v === undefined) localStorage.removeItem('kmuweb:' + k); else localStorage.setItem('kmuweb:' + k, JSON.stringify(v)); } catch (e) {} },
-                set(k, v) { this.put(k, v); const m = SYNCED.exec(k); if (m) { this.put('stamp:' + m[2], Date.now()); cloud.queue(m[2]); storeVer.value = storeVer.peek() + 1; } } };
+                /* a synced key also records its own write time in kt:<id> (the cloud merge compares keys one by one, see "cloud sync") */
+                set(k, v) { this.put(k, v); const m = SYNCED.exec(k); if (m) { const now = Date.now(), kt = this.get('kt:' + m[2], null) || {}; kt[m[1]] = now;
+                  this.put('kt:' + m[2], kt); this.put('stamp:' + m[2], now); cloud.queue(m[2]); storeVer.value = storeVer.peek() + 1; } },
+                mark(id, k) { const kt = this.get('kt:' + id, null) || {}; kt[k] = Date.now(); this.put('kt:' + id, kt); cloud.queue(id); } };
 const fmt = s => `${String(Math.floor(s / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`;
 const fmtShort = s => `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`;
 const ptsOf = it => typeof it.pts === 'number' ? it.pts : 1;
@@ -680,7 +684,9 @@ const attLeft = att => att.left ?? (att.endAt ? Math.max(0, Math.round((att.endA
 /* ------------------------------------------------------------------ routing: home / set / help */
 const lastScore = id => store.get('score:' + id, null);
 const resetAsk = signal('');
-function resetSet(id) { ['ans', 'self', 'ai', 'score', 'hist', 'attempt'].forEach(k => store.set(k + ':' + id, null)); resetAsk.value = '';
+/* t.reset is the only thing that removes finished attempts from the cloud union (score + hist) */
+const gens = {}, genOf = id => gens[id] || 0;   // per set: bumped by a fresh attempt or a reset, so late AI replies for older answers are dropped
+function resetSet(id) { gens[id] = genOf(id) + 1; ['ans', 'self', 'ai', 'score', 'hist', 'attempt'].forEach(k => store.set(k + ':' + id, null)); store.mark(id, 'reset'); resetAsk.value = '';
   if (curSt.peek() && curSt.peek().id === id) { C.ans = {}; selfS.value = {}; aiS.value = {}; G.value = null; C.graded = false; ansTick.value++; } }
 /* calendar days between today (viewer's clock) and the exam date — not hours, so the label changes at midnight */
 function dday(date) { if (!date) return ''; const [y, m, dd] = date.split('-').map(Number), now = new Date();
@@ -734,6 +740,7 @@ function startSet(m, att, expired) {
     resetRun();
     if (!att) {   // a fresh attempt: wipe the previous answers and grades
       C.ans = {}; selfS.value = {}; aiS.value = {}; C.played = []; G.value = null;
+      gens[st.id] = genOf(st.id) + 1;
       store.set('ans:' + st.id, {}); store.set('self:' + st.id, {}); store.set('ai:' + st.id, {});
       C.startedAt = Date.now(); leftS.value = m === 'exam' ? setMinutes(st) * 60 : null;
     } else { C.played = att.played || []; C.startedAt = att.startedAt || Date.now(); leftS.value = attLeft(att); }
@@ -946,9 +953,10 @@ function aiKeys() { const ks = [], st = curSt.peek(); if (!st) return ks;
     else if (it.type === 'speak') ks.push(k); }));
   return ks; }
 const AI_ERR = { not_granted: 'ไม่ได้อนุญาตให้ใช้ Claude — ตรวจเองด้วยปุ่ม ถูก / ครึ่ง / ผิด', rate_limited: 'ใช้ Claude ถี่หรือครบโควตา ลองใหม่ภายหลัง', cancelled: 'ยกเลิก' };
-async function aiCall(keys) {
-  const st = curSt.peek(), jobs = [];
-  keys.forEach(k => { const [si, ii] = k.split('-').map(Number), it = st.sections[si].items[ii], a = C.ans[k];
+/* st / ans / gen are fixed when the grading starts: the reply may land after the viewer has opened another set or started a new attempt */
+async function aiCall(st, ans, gen, keys) {
+  const jobs = [];
+  keys.forEach(k => { const [si, ii] = k.split('-').map(Number), it = st.sections[si].items[ii], a = ans[k];
     const j = { k, type: it.type, sec: si, instruction: st.sections[si].h, q: it.q, q_th: it.th || '', note: it.why || it.hint || '', answer: a };
     if (it.type === 'blank') j.accepted = it.ans; else j.model = [].concat(it.model);
     jobs.push(j); });
@@ -956,21 +964,23 @@ async function aiCall(keys) {
     return { sec: si, box: s.box || '', text: (s.passage || s.script || []).map(l => (l.who ? l.who + ': ' : '') + l.ko).join('\n') }; });
   const prompt = AI_RULES + '\n\nSECTIONS (passage or listening script):\n' + JSON.stringify(secsJ) + '\n\nITEMS:\n' + JSON.stringify(jobs);
   const r = await AIS.peek().json(prompt, AI_OPTS);
-  const got = new Set(), nx = { ...aiS.peek() };
+  if (gen !== genOf(st.id)) return [];   // a new attempt or a reset began meanwhile: these grades belong to answers that are gone
+  const here = curSt.peek() === st, got = new Set(), nx = { ...(here ? aiS.peek() : store.get('ai:' + st.id, null) || {}) };
   (r && r.results || []).forEach(x => { if (!keys.includes(x.k) || !['o', 'h', 'x'].includes(x.v)) return; got.add(x.k);
     nx[x.k] = { v: x.v, fb: String(x.fb || ''), fix: String(x.fix || '') }; });
-  aiS.value = nx; store.set('ai:' + st.id, nx);
+  if (here) aiS.value = nx;
+  store.set('ai:' + st.id, nx);
   return keys.filter(k => !got.has(k));
 }
 async function aiGradeAll(only) {
   if (!AIS.peek() || !curSt.peek() || aiBusy) return;
-  const st = curSt.peek(), keys = only || aiKeys();
+  const st = curSt.peek(), keys = only || aiKeys(), ans = C.ans, gen = genOf(st.id);
   if (!keys.length) { aiVer.value++; return; }
   const chunks = []; for (let i = 0; i < keys.length; i += 12) chunks.push(keys.slice(i, i + 12));
   aiBusy = true; aiProg = { done: 0, total: keys.length, failed: [], err: '' }; aiVer.value++;
   let idx = 0;
   const worker = async () => { while (idx < chunks.length) { const c = chunks[idx++];
-    try { const miss = await aiCall(c); aiProg.failed.push(...miss); aiProg.done += c.length - miss.length; }
+    try { const miss = await aiCall(st, ans, gen, c); aiProg.failed.push(...miss); aiProg.done += c.length - miss.length; }
     catch (e) { aiProg.failed.push(...c); aiProg.err = AI_ERR[e && e.code] || `ตรวจไม่ได้ (${(e && e.code) || 'error'})`; if (e && e.code === 'not_granted') { AIS.value = null; idx = chunks.length; } }
     if (curSt.peek() === st && mode.peek() === 'result') regrade(); aiVer.value++; } };
   await Promise.all([worker(), worker()]);
@@ -980,44 +990,156 @@ async function aiGradeAll(only) {
 
 /* ------------------------------------------------------------------ cloud sync
    On claude.ai the answers, grades and scores of each set also live in the viewer's private db subtree
-   (data/users/<id>/<setId>), so the same account sees them on every device. Last change wins, per set.
-   Opened from a file or localhost there is no claude runtime and nothing below runs. */
+   (data/users/<id>/<setId>; the vocabulary record = doc 'srs'), so the same account sees them on every device.
+   Opened from a file or localhost there is no claude runtime and nothing below runs.
+   v55 — MERGE, never overwrite. v54 sent the whole doc and "last change wins": a device holding an older copy wiped the
+   finished 복습시험③ 쓰기 (score, hist, answers) on 2026-11-05, and mini02-listening the same way on 10-21. Now:
+   · every key carries its own write time (local kmuweb:kt:<id>, cloud field t): ans / self / ai / attempt — the newer write wins, key by key
+   · score + hist are a union by attempt time: no finished attempt is lost; only 🗑 ล้างผล (t.reset) drops the attempts before it
+   · the vocabulary record merges word by word (more answers wins); "ล้างสถิติ" raises ep and the higher ep wins whole
+   · a doc written by pre-v55 code (no t) counts as written at its `at`, and its nulls never erase data held here
+   · every write = read → merge → write, one doc at a time; a live listener merges other devices' writes the moment they land. */
 const syncS = signal('');
+const canon = v => v === undefined || v === null ? 'null' : Array.isArray(v) ? '[' + v.map(canon).join(',') + ']'
+  : typeof v === 'object' ? '{' + Object.keys(v).filter(k => v[k] !== undefined).sort().map(k => JSON.stringify(k) + ':' + canon(v[k])).join(',') + '}' : JSON.stringify(v);
 var cloud = (() => {
-  let db = null, uid = null; const timers = {}, chains = {};
-  const KEYS = ['ans', 'self', 'ai', 'score', 'hist', 'attempt', 'vocab'];
-  const keysOf = id => id === 'srs' ? ['vocab'] : KEYS.filter(k => k !== 'vocab');   // doc 'srs' = { at, vocab } (the vocabulary drill); a set's doc never carries the vocab record
+  let db = null, uid = null, unsub = null, seeded = false, lastSub = 0, polling = null, chain = Promise.resolve();
+  const timers = {}, waiting = new Set();
+  const SET_KEYS = ['ans', 'self', 'ai', 'attempt', 'score', 'hist'], LWW = ['ans', 'self', 'ai', 'attempt'];
+  const keysOf = id => id === 'srs' ? ['vocab'] : SET_KEYS;
+  const KNOWN = new Set([...SETS.map(st => st.id), 'srs']);
   const say = t => { syncS.value = t; };
-  const stampOf = id => store.get('stamp:' + id, 0) || (store.get('score:' + id, null) || {}).at || 0;
-  const hasLocal = id => keysOf(id).some(k => { const v = store.get(k + ':' + id, null); return v && (Array.isArray(v) ? v.length : typeof v === 'object' ? Object.keys(v).length : true); });
   const ref = id => db.collection('data/users/' + uid).doc(id);
-  function push(id) {
-    const body = { at: stampOf(id) || Date.now() }; keysOf(id).forEach(k => { body[k] = store.get(k + ':' + id, null); });
-    chains[id] = (chains[id] || Promise.resolve()).then(() => ref(id).set(body)).then(() => say('☁️ บันทึกแล้ว'), () => say('☁️ บันทึกไม่ได้'));
+  const filled = v => v !== null && v !== undefined && (typeof v !== 'object' || (Array.isArray(v) ? v.length > 0 : Object.keys(v).length > 0));
+  const hasLocal = id => keysOf(id).some(k => filled(store.get(k + ':' + id, null)));
+  /* one side of a merge = { vals: {key: value}, t: {key: write time, reset?}, legacy } */
+  function localDoc(id) {
+    const kt = store.get('kt:' + id, null) || {}, st0 = store.get('stamp:' + id, 0) || (store.get('score:' + id, null) || {}).at || 0, vals = {}, t = {};
+    keysOf(id).forEach(k => { vals[k] = store.get(k + ':' + id, null); t[k] = kt[k] || (vals[k] !== null ? st0 : 0); });   // pre-v55 local data: its keys count as written at stamp:<id>
+    if (kt.reset) t.reset = kt.reset;
+    return { vals, t, legacy: false };
   }
-  async function pull() {
-    if (!db) return;
-    let snap; try { snap = await db.collection('data/users/' + uid).get(); } catch (e) { say('☁️ ออฟไลน์'); return; }
-    const remote = {}; snap.docs.forEach(d => { if (d.exists) remote[d.id] = d.data(); });
+  function remoteDoc(id, r) {
+    const legacy = !r.t || typeof r.t !== 'object', vals = {}, t = {};
+    keysOf(id).forEach(k => { vals[k] = r[k] === undefined ? null : r[k]; t[k] = legacy ? (r.at || 0) : (r.t[k] || 0); });
+    if (!legacy && r.t.reset) t.reset = r.t.reset;
+    return { vals, t, legacy };
+  }
+  /* ans / self / ai / attempt: the newer write wins; equal times → the cloud's copy, so every device settles on the same value */
+  function lww(k, L, R) {
+    const lv = L.vals[k], rv = R.vals[k], lt = L.t[k] || 0, rt = R.t[k] || 0;
+    if (R.legacy && rv === null && lv !== null) return [lv, lt];   // a pre-v55 null is "never had it", not "deleted it"
+    return rt >= lt ? [rv, rt] : [lv, lt];
+  }
+  /* score + hist: the union of both sides' attempts (one entry per attempt time `at`; for the same attempt the later regrade wins) */
+  function mergeScores(L, R) {
+    const reset = Math.max(L.t.reset || 0, R.t.reset || 0), rFirst = (R.t.hist || 0) >= (L.t.hist || 0), byAt = new Map();
+    const add = (list, win) => (Array.isArray(list) ? list : []).forEach(e => { if (e && typeof e.at === 'number' && e.at > reset && (win || !byAt.has(e.at))) byAt.set(e.at, e); });
+    if (rFirst) { add(L.vals.hist, false); add(R.vals.hist, true); } else { add(R.vals.hist, false); add(L.vals.hist, true); }
+    const hist = [...byAt.values()].sort((a, b) => a.at - b.at).slice(-8);
+    const cands = [[L.vals.score, L.t.score || 0, 0], [R.vals.score, R.t.score || 0, 1]].filter(([s]) => s && typeof s.at === 'number' && s.at > reset)
+      .sort((a, b) => a[0].at - b[0].at || a[1] - b[1] || a[2] - b[2]);   // newest attempt last; same attempt → later regrade last; then the cloud's copy
+    let score = cands.length ? cands[cands.length - 1][0] : null;
+    const last = hist[hist.length - 1];
+    if (last && (!score || last.at > score.at)) score = last;
+    return { score, hist: hist.length ? hist : null, ts: Math.max(L.t.score || 0, R.t.score || 0), th: Math.max(L.t.hist || 0, R.t.hist || 0), reset };
+  }
+  /* vocabulary record { w: {ko: {b, d, n, x, l}}, days: {date: {n, r}}, ep }: a word keeps the side with more answers (then the later day) */
+  function mergeVocab(L, R) {
+    const ok = v => v && typeof v === 'object' && v.w && typeof v.w === 'object', lv = L.vals.vocab, rv = R.vals.vocab, t = Math.max(L.t.vocab || 0, R.t.vocab || 0);
+    if (!ok(lv) || !ok(rv)) return [ok(lv) ? lv : ok(rv) ? rv : null, t];
+    const le = lv.ep || 0, re = rv.ep || 0;
+    if (le !== re) return [le > re ? lv : rv, t];   // one side cleared its statistics after the other's answers
+    const w = { ...lv.w }, days = { ...(lv.days || {}) };
+    Object.entries(rv.w).forEach(([ko, e]) => { const l = w[ko]; if (!l || (e.n || 0) > (l.n || 0) || ((e.n || 0) === (l.n || 0) && (e.l || 0) >= (l.l || 0))) w[ko] = e; });
+    Object.entries(rv.days || {}).forEach(([k, d]) => { const l = days[k]; if (!l || (d.n || 0) >= (l.n || 0)) days[k] = d; });
+    const out = { w, days }; if (le) out.ep = le;
+    return [out, t];
+  }
+  function merge(id, L, R) {
+    const vals = {}, t = {};
+    if (id === 'srs') [vals.vocab, t.vocab] = mergeVocab(L, R);
+    else {
+      LWW.forEach(k => { [vals[k], t[k]] = lww(k, L, R); });
+      const s = mergeScores(L, R); vals.score = s.score; vals.hist = s.hist; t.score = s.ts; t.hist = s.th; if (s.reset) t.reset = s.reset;
+    }
+    return { vals, t };
+  }
+  const bodyOf = M => ({ ...M.vals, t: M.t, at: Math.max(0, ...Object.values(M.t)) });   // `at` stays for pre-v55 tabs still open somewhere
+  /* write the merged doc into this browser; true when a stored value changed */
+  function adopt(id, M) {
     let changed = false;
-    [...SETS.map(st => st.id), 'srs'].forEach(id => {   // every set + the vocabulary record
-      const r = remote[id], lt = stampOf(id);
-      if (r && (r.at || 0) > lt) { keysOf(id).forEach(k => store.put(k + ':' + id, r[k] ?? null)); store.put('stamp:' + id, r.at); changed = true; }
-      else if (hasLocal(id) && (!r || lt > (r.at || 0))) push(id);
+    keysOf(id).forEach(k => { if (canon(store.get(k + ':' + id, null)) !== canon(M.vals[k])) { store.put(k + ':' + id, M.vals[k]); changed = true; } });
+    if (canon(store.get('kt:' + id, null)) !== canon(M.t)) { store.put('kt:' + id, M.t); store.put('stamp:' + id, Math.max(0, ...Object.values(M.t))); }
+    return changed;
+  }
+  let refreshing = false;
+  function refresh() {   // other devices' data landed here: redraw cards / the open cover (an open paper keeps what is on screen)
+    if (refreshing) return; refreshing = true;
+    later(() => { refreshing = false; storeVer.value = storeVer.peek() + 1;
+      if (view.peek() === 'set' && curSt.peek() && mode.peek() === 'cover') openSet(curSt.peek().id); });
+  }
+  /* read → merge → write for one doc; the calls run one at a time for all docs */
+  async function syncOne(id) {
+    let snap; try { snap = await ref(id).get(); } catch (e) { say('☁️ ออฟไลน์ — เก็บไว้ในเครื่องก่อน'); return; }
+    const r = snap.exists ? snap.data() : null, L = localDoc(id);
+    const M = r ? merge(id, L, remoteDoc(id, r)) : { vals: L.vals, t: L.t };
+    if (r && adopt(id, M)) refresh();
+    const body = bodyOf(M);
+    if (r ? canon(body) === canon(r) : !hasLocal(id)) { say('☁️ บันทึกแล้ว'); return; }
+    try { await ref(id).set(body); say('☁️ บันทึกแล้ว'); }
+    catch (e) { say(e && e.code === 'quota_exceeded' ? '☁️ พื้นที่คลาวด์เต็ม' : '☁️ บันทึกไม่ได้ — เก็บไว้ในเครื่องก่อน'); }
+  }
+  function enqueue(id) {
+    if (waiting.has(id)) return; waiting.add(id);
+    chain = chain.then(() => { waiting.delete(id); return syncOne(id); }).catch(() => {});
+  }
+  function flush() { Object.keys(timers).forEach(id => { clearTimeout(timers[id]); delete timers[id]; enqueue(id); }); }
+  /* live listener on the viewer's own collection (or, where the runtime has none, a read every 20 s): merge each changed doc as it lands */
+  function onDocs(snap) {
+    const docs = typeof snap.docChanges === 'function' ? snap.docChanges().filter(ch => ch.type !== 'removed').map(ch => ch.doc) : snap.docs;
+    docs.forEach(d => {
+      if (!d || !d.exists || !KNOWN.has(d.id)) return;
+      const id = d.id, r = d.data(), M = merge(id, localDoc(id), remoteDoc(id, r));
+      if (adopt(id, M)) refresh();
+      if (canon(bodyOf(M)) !== canon(r) && !timers[id]) enqueue(id);   // this browser holds something the cloud lacks
     });
-    say('☁️ ซิงก์แล้ว');
-    if (changed) { storeVer.value++; if (view.peek() === 'set' && curSt.peek() && mode.peek() === 'cover') openSet(curSt.peek().id); }
+    if (!(snap.metadata && snap.metadata.fromCache) && !seeded) {   // first full answer: upload what only this browser has
+      seeded = true; clearTimeout(loadT);
+      const there = new Set(snap.docs.map(d => d.id));
+      KNOWN.forEach(id => { if (!there.has(id) && hasLocal(id)) enqueue(id); });
+      say('☁️ ซิงก์แล้ว');
+    }
+  }
+  let loadT = null;
+  async function poll() {
+    let snap; try { snap = await db.collection('data/users/' + uid).get(); } catch (e) { say('☁️ ออฟไลน์ — เก็บไว้ในเครื่องก่อน'); return; }
+    onDocs(snap);
+  }
+  function listen() {
+    if (unsub || !db) return;
+    if (Date.now() - lastSub >= 60000) {   // (re)subscribe at most once a minute
+      lastSub = Date.now(); clearTimeout(loadT); loadT = setTimeout(() => { if (!seeded) say('☁️ ยังเชื่อมต่อไม่ได้ — เก็บไว้ในเครื่องก่อน'); }, 10000);
+      try { const col = db.collection('data/users/' + uid);
+        if (typeof col.onSnapshot === 'function') unsub = col.onSnapshot(onDocs, e => { unsub = null; say(e && e.code === 'revoked' ? '☁️ ปิดการซิงก์' : '☁️ ขาดการเชื่อมต่อ'); if (!e || e.code !== 'revoked') listen(); }); }
+      catch (e) { unsub = null; }
+    }
+    if (!unsub) { poll(); if (!polling) polling = setInterval(() => { if (!unsub && document.visibilityState === 'visible') poll(); }, 20000); }
   }
   (async () => {
     if (!(window.claude && window.claude.use)) return;
     const [d, u] = await Promise.all([window.claude.use('db'), window.claude.use('user')]);
     uid = u ? await u.id() : null;
     if (!d || !uid) return;              // signed out or db not served: stay local
-    db = d; say('☁️ กำลังซิงก์…'); await pull();
-    document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') pull(); });
-    setInterval(() => { if (document.visibilityState === 'visible' && (!curSt.peek() || mode.peek() === 'cover') && !(vsS.peek() && vsS.peek().phase !== 'end')) pull(); }, 20000);   // home / cover / vocabulary pages pick up another device's progress (not in the middle of a drill session)
+    db = d; say('☁️ กำลังซิงก์…'); listen();
+    document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') flush(); else listen(); });
+    window.addEventListener('pagehide', flush);
   })().catch(() => {});
-  return { queue(id) { if (!db) return; clearTimeout(timers[id]); say('☁️ …'); timers[id] = setTimeout(() => push(id), id === 'srs' ? 3000 : 1500); } };   // the vocabulary record changes with every answer: a longer pause before the write
+  return {
+    queue(id) { if (!db) return; clearTimeout(timers[id]); say('☁️ …');   // a burst of changes = one sync per pause
+      timers[id] = setTimeout(() => { delete timers[id]; enqueue(id); }, id === 'srs' ? 3000 : 1500); },
+    _merge: merge, _local: localDoc, _remote: remoteDoc, _body: bodyOf,   // for the console / tests
+  };
 })();
 
 /* ------------------------------------------------------------------ components: top strip, transport bar, dock */
@@ -1547,7 +1669,7 @@ const VUNITS = [...new Set(VOCAB.map(w => w.u))].sort((a, b) => a - b);
 const LEIT = [1, 2, 4, 7, 14, 30];   // days until the next review after a RIGHT answer, indexed by the box the word was in BEFORE the answer
 const dayNum = (t = new Date()) => { const m = new Date(t); m.setHours(0, 0, 0, 0); return Math.floor(m.getTime() / 86400000); };
 const dayKey = (t = new Date()) => `${t.getFullYear()}-${String(t.getMonth() + 1).padStart(2, '0')}-${String(t.getDate()).padStart(2, '0')}`;
-const srsGet = () => { const r = store.get('vocab:srs', null); return r && typeof r === 'object' && r.w && typeof r.w === 'object' ? { w: r.w, days: r.days && typeof r.days === 'object' ? r.days : {} } : { w: {}, days: {} }; };
+const srsGet = () => { const r = store.get('vocab:srs', null); return r && typeof r === 'object' && r.w && typeof r.w === 'object' ? { w: r.w, days: r.days && typeof r.days === 'object' ? r.days : {}, ...(r.ep ? { ep: r.ep } : {}) } : { w: {}, days: {} }; };   // ep = how many times the statistics were cleared (cloud merge)
 /* one answer: right (1) → next box, due in LEIT[old box] days · half (0.5, near-miss spelling) → same box, due tomorrow · wrong (0) → box 0, due today, x + 1 */
 function srsApply(ko, score) {
   const r = srsGet(), t = dayNum(), e = r.w[ko] || { b: 0, d: t, n: 0, x: 0, l: t }, ob = Math.max(0, Math.min(5, e.b | 0));
@@ -1686,7 +1808,7 @@ function vPick(i) {   // card mode: choice i (0–3) of the current card
   const o = s.mc.opts[i], w = VBY[o.ko];
   vGrade(i === s.mc.ans ? 1 : 0, o.d, wordKeys(s.queue[0].ko).keys[0], { idx: i, ko: w.ko, th: w.th });
 }
-const vReset = () => { vresetS.value = false; vsS.value = null; store.set('vocab:srs', null); };
+const vReset = () => { vresetS.value = false; vsS.value = null; store.set('vocab:srs', { w: {}, days: {}, ep: (srsGet().ep || 0) + 1 }); };   // a higher ep beats the other devices' older statistics
 function goVocab() { if (location.hash.slice(1) === 'vocab') { leaveSet(); show('vocab'); } else location.hash = 'vocab'; }
 /* Enter = check, Enter again = next (also when the IME is still composing: the answer is read when the composition ends) */
 let vComp = false, vPend = false;

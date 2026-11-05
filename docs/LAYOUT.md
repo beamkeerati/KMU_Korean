@@ -145,6 +145,13 @@ content/       ✍️ SOURCE OF TRUTH — edit here, never in output/
                build ignores (agents validate `_x.json`, then rename) — several agents can write sets while another builds the site.
                A section may carry `"audio": "audio/<textbook|review>/<file>.mp3"`: the site plays that real recording for ▶ ฟัง (no karaoke) and
                build_mockweb.py copies it from source/audio/ to output/2_Practice_Web/audio/ — publish those files with the artifact.
+               (2026-11-05) v55: cloud sync MERGES, never overwrites. v54 pushed the whole per-set doc with "last change wins"; a stale copy elsewhere (no score) beat the
+               finished mini03-writing (57/100) at 19:21 and wiped ans/score/hist on every device (seen in Chrome's Local Storage LevelDB log; mini02-listening lost its score the same way on 10-21).
+               Now: per-key write times (localStorage kmuweb:kt:<id>, cloud field `t`); ans/self/ai/attempt = newer key wins; score + hist = union by attempt `at` (only 🗑 ล้างผล's t.reset drops
+               attempts); vocab srs merged per word (more answers wins, `ep` = clear count, higher ep wins whole); a pre-v55 doc (no t) counts as written at its `at` and its nulls never erase.
+               Every write = get → merge → set, one doc at a time (global chain); a live collection onSnapshot merges other devices' writes (falls back to a 20-s collection get when the
+               runtime has no listener); pending writes flush on tab hide. AI replies are pinned to their set + attempt (gens). Tests: scratch merge scenarios + a 2-device fake-cloud replay.
+               mini03-writing restored into the cloud from the LevelDB log (ans of 19:21:13 + the AI verdicts, regraded with the app's rules = 57/100). Artifact versions 55–56.
   speaking/    발표 scripts in the my_room.md format (Korean line · Thai reading · Thai meaning · swap table · Q&A · pitfalls):
                my_room.md (발표 ① 제 방) · myself.md (발표 ② 자기 소개, 10/21) · vacation_plan.md (방학 계획, 10/20) → build.py speaking
   syllabus/    one-off PDF (Thai syllabus): python3 scripts/make_pdf.py <md> --pdf-dir output
