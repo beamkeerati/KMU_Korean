@@ -158,6 +158,12 @@ content/       ✍️ SOURCE OF TRUTH — edit here, never in output/
                or auto-submitting an empty paper at time-up; saveLeft only rewrites its own attempt; regrade() only rewrites the attempt on screen (C.resAt) and its hist entry.
                Cards carry data-set; __kmu also exposes go / setAns / store / C. Tests kept in scripts/mockweb/test/ (run.sh: merge + 2-device node tests, then the built page in
                5 iframes — 3 same-storage tabs, a 2nd device, a poll-only device — on a fake cloud; 14 checks; before the fix 3 of them failed). Artifact version 57.
+               (2026-11-06) v57 (data only, app.html unchanged): daily-29-writing/-listening (7.5/10) + sheet-30-writing in daily_b.json, predict-29 lost its 🔮,
+               daily_predict30.json (predict-30-1/2/3-writing · -vocab 45 · -listening 22), scores.json: 29과 daily + 복습시험③ unofficial (쓰기 9 · 듣기 9 · 읽기 10).
+               145 sets · 2,705 items · 945 clips (23 new). Sent data.js, clips.js, clips2.js. Artifact version 58.
+               Same day: the profile's "หลักฐาน 매일시험" line ran past the card (1216 px in an 818 px box) — `.hist span` was nowrap and the spans are emitted with no
+               whitespace between them, so the whole list was one unbreakable run; fix = `display: inline-block` on `.hist span` (also covers the set-history and 복습시험 ②
+               lines). Checked in headless Chrome at 1000 px (818/818). Artifact version 59 (page only).
   speaking/    발표 scripts in the my_room.md format (Korean line · Thai reading · Thai meaning · swap table · Q&A · pitfalls):
                my_room.md (발표 ① 제 방) · myself.md (발표 ② 자기 소개, 10/21) · vacation_plan.md (방학 계획, 10/20) → build.py speaking
   syllabus/    one-off PDF (Thai syllabus): python3 scripts/make_pdf.py <md> --pdf-dir output

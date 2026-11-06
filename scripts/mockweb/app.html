@@ -165,7 +165,7 @@ button { cursor: pointer; }
 .mode-btn .s { font-size: calc((13px) * var(--ts, 1)); opacity: .85; }
 .last { margin: 14px 0 0; display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; font-size: calc((14px) * var(--ts, 1)); }
 .hist { font-size: calc((13px) * var(--ts, 1)); color: var(--muted); margin: 10px 0 0; }
-.hist span { margin-right: 10px; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.hist span { display: inline-block; margin-right: 10px; white-space: nowrap; font-variant-numeric: tabular-nums; }   /* inline-block: the spans come with no space between them, so the line can only wrap between boxes */
 @media (max-width: 560px) { .modes { grid-template-columns: 1fr; } .cover-meta { grid-template-columns: auto auto; } }
 
 /* paper in progress */

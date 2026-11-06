@@ -188,3 +188,14 @@ claude runtime + fake cloud, 5 iframes) and reproduced it: another tab of the sa
 forgotten exam tab auto-submitted an empty paper over the real score. Fix = site v56 (LAYOUT.md): storage listener, stale-attempt guard, regrade pinned to the attempt on screen.
 14/14 harness checks + the node merge tests pass; harness kept in scripts/mockweb/test/run.sh (CLAUDE.md §2.3). Published as artifact version 57. Not verified: claude.ai's real
 runtime (contract 0.2.85) — the harness fakes it; Safari/iPad storage behaviour. Not committed.
+
+2026-11-06 (Opus 5.5 main + 1 Sonnet agent, 301k tokens / 13 min): the user dropped 3 scans — 매일시험 29과, 연습지 30과, 복습시험③ (6 pp, red pen = the class went
+through the key, so UNOFFICIAL; official marks next week) — and asked for the usual routine, a verdict on the ③ prediction, and every score updated. Filed to
+source/everyday/ and source/miniexam/KMU mini exam 03 unit 22 - 29.pdf; test 29 (7.5: A -(으)ㄴ 4/4, B "왜 …?" -아/어서 all half — 멀서 ×2 · 맛있서 · 시험 있어서 ·
+off-topic reason; C 어뗐어요 half) added to exercises/everyday/unit29.md + scorecard on predictions/everyday/unit29.md; sheet 30 (all right) → exercises/everyday/unit30.md;
+③ transcribed in exercises/miniexam/exam03.md with the prediction scorecard as its §2 (읽기 passages 3/3 · 듣기 9/10 items from mock dialogues · 쓰기 grammar 100 %,
+format 4/7 sections). Unofficial ③: 쓰기 90/100 (−6 작는/예쁘는, −4 늦게 오지 마세요) · 듣기 9/10 (추워서 → 날씨가 나빴어요) · 읽기 10 inferred from ✓ marks on blank
+lines (asked the user) · 말하기 unknown. Risk flagged: 쓰기 §2 answered with item numbers over the 보기 words. Page 6 = the teacher's "고향의 계절" worksheet (purpose
+unknown). 30과 prediction (Sonnet agent: predictions/everyday/unit30.md 526 lines + daily_predict30.json); the lead rewrote its mock 2 B (왜 택시를 타요? → 타세요 is
+unnatural → -(으)ㄹ까요? prompts answered with -(으)니까 + suggestion). scores.json, 00_exam_info.md (복습시험②/③ rows, all 23 daily scores), STATUS, MISTAKES, LAYOUT,
+CLAUDE.md, START_HERE updated. Site v57 (145 sets · 2,705 items · 945 clips) published as artifact version 58 (data.js, clips.js, clips2.js). Not committed.
