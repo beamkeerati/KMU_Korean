@@ -127,5 +127,6 @@ starred ones cost real marks.
   **(오)지 마세요** for 늦게 오지 마세요 — did not read 나's reply 일찍 오겠습니다 · weather section answered by writing item numbers above the 보기 words instead
   of the words in the blanks · 깨끗해졌어요 written in full before a printed 아/어/여졌어요 (write only what the gap needs — 3rd sighting).
   듣기: 바트 … 왜 바다에 가지 않았어요? → **날씨가 나빴어요** (paraphrased the gist; the word said was 추워서 — write the word you hear).
+- ★ **매일시험 30과 (2026-11-09, 9/10) + Sheet 31과:** test 30 wrote **들어가세요 / 내려가세요 / 나오세요 / 올라가세요** in full inside a blank followed by printed `(으)세요` (4th sighting of writing the printed suffix into the gap; accepted this time) · **오른으로 가세요** for 오른쪽으로 가세요 (dropped 쪽; accepted) · dictation **에리베터** for 엘리베이터 (△, loanword spelling: 엘 + 베이) · **아름다왔어요** for 아름다웠어요 (△, ㅂ-irregular takes 워/어 except 돕다/곱다). **Sheet 31과 (same day):** ★ **걸 거예요 · 들 거예요 · 물 거예요** for **걸을 거예요 · 들을 거예요 · 물을 거예요** in the -(으)ㄹ 거예요 column of 걷다 · 듣다 · 묻다 (treated the ㄹ from ㄷ 불규칙 like an ㄹ-stem and dropped 을; 닫을 / 받을 거예요 right, 걸으세요 / 들으세요 / 물으세요 right).
 What the user does well: ㅂ니다/습니다 choice by 받침, -지 않- forms, 겠 forms, the ㅡ-drop past
 (바빴어요·컸어요), special honorific words (드세요·주무세요·계세요), 에서 for activity places.

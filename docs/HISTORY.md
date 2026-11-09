@@ -199,3 +199,10 @@ lines (asked the user) · 말하기 unknown. Risk flagged: 쓰기 §2 answered w
 unknown). 30과 prediction (Sonnet agent: predictions/everyday/unit30.md 526 lines + daily_predict30.json); the lead rewrote its mock 2 B (왜 택시를 타요? → 타세요 is
 unnatural → -(으)ㄹ까요? prompts answered with -(으)니까 + suggestion). scores.json, 00_exam_info.md (복습시험②/③ rows, all 23 daily scores), STATUS, MISTAKES, LAYOUT,
 CLAUDE.md, START_HERE updated. Site v57 (145 sets · 2,705 items · 945 clips) published as artifact version 58 (data.js, clips.js, clips2.js). Not committed.
+
+2026-11-09: the user dropped 매일시험 30과 and 연습지 31과 in source/ root → filed to source/everyday/; test 30 (9/10: A 4 × textbook 연습 1 icons + 보기 before (으)세요 4/4,
+B 3 × textbook 연습 3 map 3/3 with 오른으로 not deducted, C 실례합니다 ✓ · 아주 빠른 엘리베이터 △ 에리베터 · 정말 아름다웠어요 △ 아름다왔어요; -(으)니까 not tested) added to
+exercises/everyday/unit30.md + scorecard on predictions/everyday/unit30.md; sheet 31 (ㄷ 불규칙 table 22/25 — 걸/들/물 거예요 ✗ → 걸을/들을/물을 거예요; (으)로² boxes;
+활동 걸리다 table) → exercises/everyday/unit31.md. 31과 prediction (predictions/everyday/unit31.md 29 pp + daily_predict31.json): mock 1 = textbook 연습 1–5, 2 = sheet 31,
+3 = workbook 31. Rebuilt everyday + predict (artifact + overflow scans clean on all 4 PDFs) and site v58 (153 sets · 2,836 items · 970 clips, 25 new; VOCAB_PRIO
+updated to 31, 30, 32–37 first). scores.json, 00_exam_info.md, STATUS, MISTAKES, LAYOUT, CLAUDE.md, START_HERE updated. Not committed.

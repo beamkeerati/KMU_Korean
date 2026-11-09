@@ -164,6 +164,9 @@ content/       ✍️ SOURCE OF TRUTH — edit here, never in output/
                Same day: the profile's "หลักฐาน 매일시험" line ran past the card (1216 px in an 818 px box) — `.hist span` was nowrap and the spans are emitted with no
                whitespace between them, so the whole list was one unbreakable run; fix = `display: inline-block` on `.hist span` (also covers the set-history and 복습시험 ②
                lines). Checked in headless Chrome at 1000 px (818/818). Artifact version 59 (page only).
+               (2026-11-09) v58 (data + vocab.js): daily-30-writing/-listening (9/10) + sheet-31-writing in daily_b.json, predict-30 lost its 🔮,
+               daily_predict31.json (predict-31-1/2/3-writing · -vocab 46 · -listening 22), scores.json: 30과 daily (9/10), VOCAB_PRIO moved 31, 30, 32–37 to the front.
+               153 sets · 2,836 items · 970 clips (25 new).
   speaking/    발표 scripts in the my_room.md format (Korean line · Thai reading · Thai meaning · swap table · Q&A · pitfalls):
                my_room.md (발표 ① 제 방) · myself.md (발표 ② 자기 소개, 10/21) · vacation_plan.md (방학 계획, 10/20) → build.py speaking
   syllabus/    one-off PDF (Thai syllabus): python3 scripts/make_pdf.py <md> --pdf-dir output
