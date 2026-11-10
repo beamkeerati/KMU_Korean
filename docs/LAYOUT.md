@@ -14,10 +14,12 @@ source/        ต้นฉบับ — never modify the contents; file names f
   midterm/     KMU midterm score unit 05 - 21.pdf (the 중간시험 score slip, 2026-10-27 — the papers themselves may not be photographed)
   everyday/    KMU everyday test unit 05 - 13.pdf · KMU everyday sheet unit 05 - 13.pdf
                KMU everyday test unit 14.pdf · test unit 15, 16, 17, 18, 19, 22, 23, 24, 25, 26, 27, 28 · sheet unit 15, 16, 17, 18, 19, 20, 23, 24, 25, 26, 27, 28, 29   ← daily hand-outs land HERE
-               (the user dropped test 24 / sheet 25 in source/ itself on 10/28, test 25 / sheet 26 on 11/1, test 26 / sheet 27 on 11/2, test 27 / sheet 28 on 11/3, test 28 / sheet 29 on 11/4 — moved here; check source/ root after each drop)
+               (the user dropped test 24 / sheet 25 in source/ itself on 10/28, test 25 / sheet 26 on 11/1, test 26 / sheet 27 on 11/2, test 27 / sheet 28 on 11/3, test 28 / sheet 29 on 11/4, test 30 / sheet 31 on 11/9, test 31 / sheet 32 on 11/10 — moved here; check source/ root after each drop)
                (the user dropped the 23과 sheet as "sheet unit 22" on 10/26 — its content is 23과 ㅂ불규칙/(으)ㄴ 형태 연습, renamed to unit 23)
   miniexam/    KMU mini exam 01 unit 05 - 13.pdf   (복습시험 ①: score sheet + 듣기/읽기/쓰기 papers in one PDF)
                KMU mini exam 02 unit 14 - 20.pdf   (복습시험 ②, sat 2026-10-20: 쓰기 4 pp + 듣기 + 읽기, the student's pencil, no marks yet)
+               KMU mini exam 03 unit 22 - 29.pdf   (복습시험 ③, sat 2026-11-06: the papers with the class-key red pen)
+               KMU mini exam 03 score unit 22 - 29.pdf   (복습시험 ③ official score slip, photo 2026-11-10)
                ← 복습시험 scans land HERE, never in everyday/ (the user wants the two kept apart at every level)
   review/      KMU midterm review 01 unit 05 - 22.pdf   (teacher's 「1급 중간시험 복습문제」, 16 pp: 쓰기 1–14 · 읽기 1–25 · 듣기 1–12 · 말하기 1–20;
                p.17 of the scan is the 19과 sheet again — ignored)
@@ -25,6 +27,7 @@ source/        ต้นฉบับ — never modify the contents; file names f
                KMU vocabulary unit 23 - 37.pdf   (2026-11-01, dropped as "vocabulary unit 23 - 37.pdf" in source/ root → renamed; 36 pp: 1–15 = book pp.20–34
                word lists 23–37 (the user's pencil glosses on 23–27) · 16–30 본문 듣기 23–37 (pencil on 23–26) · 31–34 irregular-verb pages ㅂ 23 · ㄹ 25 ·
                ㄷ 31 · 르 32 · 35 ◆동사 2 · 36 ◆형용사 2)
+  speaking/    KMU speaking final presentation unit 23 - 37.pdf   (기말 발표 handout 「쓰고 발표하기」, 2 pp, dropped 2026-11-10 as "Final Presentation.pdf")
   lecture/     KMU lecture note unit 05 - 12.pdf   (18 pp of the user's PHOTOS of the teacher's slides + notebook; 366 MB; slides actually run 9–22과)
   syllabus/    KMU syllabus 2026 fall unit 05 - 37.pdf · KMU orientation guide 2026 fall GKS.pdf (2026-10-21, 33 pp English, was
                「KOOKMIN_KLC_Fall 2026 GKS Freshman Orientation Guide(노현서수정)」; pages → extracted/syllabus/orientation_2026fall/)
@@ -165,9 +168,14 @@ content/       ✍️ SOURCE OF TRUTH — edit here, never in output/
                whitespace between them, so the whole list was one unbreakable run; fix = `display: inline-block` on `.hist span` (also covers the set-history and 복습시험 ②
                lines). Checked in headless Chrome at 1000 px (818/818). Artifact version 59 (page only).
                (2026-11-09) v58 (data + vocab.js): daily-30-writing/-listening (9/10) + sheet-31-writing in daily_b.json, predict-30 lost its 🔮,
+               (2026-11-10) v59 (data + clips + clips2 + vocab.js, artifact version 62): daily-31-writing/-listening (7.5/10, new format:
+                 8-cell table + picture sentences with pic + dictation) + sheet-32-writing (39 items) in daily_b.json, predict-31 retired,
+                 daily_predict32.json (5 sets · 95 items), VOCAB_PRIO 32, 31, 30, 33–37 first — 161 sets · 2,980 items · 997 clips.
+               (2026-11-10) artifact version 61 = data.js only (복습시험③ official scores in scores.json); version 60 = v58 published (built on 11-09).
                daily_predict31.json (predict-31-1/2/3-writing · -vocab 46 · -listening 22), scores.json: 30과 daily (9/10), VOCAB_PRIO moved 31, 30, 32–37 to the front.
                153 sets · 2,836 items · 970 clips (25 new).
   speaking/    발표 scripts in the my_room.md format (Korean line · Thai reading · Thai meaning · swap table · Q&A · pitfalls):
+               travel_chengdu.md (기말 발표 여행 소개, 11/24 — draft 2026-11-10) ·
                my_room.md (발표 ① 제 방) · myself.md (발표 ② 자기 소개, 10/21) · vacation_plan.md (방학 계획, 10/20) → build.py speaking
   syllabus/    one-off PDF (Thai syllabus): python3 scripts/make_pdf.py <md> --pdf-dir output
 scripts/

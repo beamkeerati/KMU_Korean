@@ -174,6 +174,12 @@
   23과) are the vocabulary-heavy units (position words · dates/places · ㅂ adjectives) — recall of words, not grammar, is the chronic loss. All
   19 are in scores.json `daily`. The 11과 test key was wrong in two places and is fixed (scan re-read 10/27): A1 = 기다려요 (the teacher circled the
   student's answer; the old key said 만나요) and A14 = 가르쳐요 (a teaching scene; the student's 기다려요 was slashed — the old key had copied it).
+  **31과 test (11/10) = 7.5/10 — NEW FORMAT** (exercises/everyday/unit31.md): ※ <보기>처럼 맞는 단어를 쓰세요 (각 0.5점) = picture rows 걷다 · 묻다 ·
+  닫다 · 받다 (verb not printed) × 습니다 · 아/어요 · 으세요 · 을 거예요 with crossed cells, 8 blanks — 3.5 (6 닫으세요 scribbled 받침 → 0; the regular
+  verbs are the trap) · ※ 그림을 보고 문장을 완성하세요 (각 1점) = 서울→제주도 비행기 1시간 · 국민대→서울역 버스 30분 · 기숙사→교실 걸어서 10분
+  (blanks 에서 · 까지 · means · 걸려요) — 1.5, half each for 거려요 · dictation 어떻게 가요 ✓ · 얼마나 걸려요 △ (거려요) · 백 미터쯤 똑바로 오세요 ✓.
+  The table = sheet 31 page 1; item 9 = the prediction's mock 3 extra (서울 → 제주도 비행기 1시간); all 3 dictation lines were in its list (ranks 1, 3, 12).
+  The teacher said the 32과 paper will again have a conjugation table. 32과 sheet (11/10): 르불규칙 형태 연습 42/42 right (exercises/everyday/unit32.md).
 - Known cosmetic gaps: 10과 A's third table row (30–10,000) is printed as given reference rather
   than as blanks; `왕쯔이` is transliterated `หวางจิ้ง` where `หวางจื่ออี` is closer.
 
@@ -186,6 +192,8 @@
 - **Result (paper sat 2026-11-06, transcribed in content/exercises/miniexam/exam03.md — the prediction scorecard is its section 2, not a separate predictions/ file, because the
   ③ prediction lived on the site, not in a PDF).** Red pen = the class went through the key, so the scores are UNOFFICIAL (official ones due the week of 11/9):
   쓰기 90/100 · 듣기 9/10 · 읽기 10/10 (all ten answer lines carry a red ✓ but 3–10 are blank — ① and ② papers had no written 읽기 answers either; ask the user) · 말하기 unknown.
+  **Official slip 11/10: 말하기 10.0 · 쓰기 8.9 · 듣기 9.0 · 읽기 10.0 (37.9/40)** — 읽기 10 confirmed; 쓰기 one point below the class key (item unknown;
+  the §2 numbers-over-보기 risk cost at most that point, so the teacher accepted the section).
   - 읽기: passages 3/3 (23 · 29 · 26과, textbook text shortened by the teacher), format 100 %, 6/10 questions were mock items, the 26과 frame was the textbook's printed one.
   - 듣기: 9/10 items from dialogues that are in the mock (6 main set: 26-1, 28-2 ×3, 29-1 ×2; 3 spare set: 22-1, 23-1 ×2); item 2 = the 24과 sheet's restaurant dialogue.
     Items 1–3 = pick the ending heard (갈까요 · 좋네요 · 따뜻해요). Lost: 9 바트 왜 바다에 가지 않았어요? → wrote 날씨가 나빴어요 (heard gist, not 추워서) — mock item 1 verbatim.

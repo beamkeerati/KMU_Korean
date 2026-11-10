@@ -128,5 +128,19 @@ starred ones cost real marks.
   of the words in the blanks · 깨끗해졌어요 written in full before a printed 아/어/여졌어요 (write only what the gap needs — 3rd sighting).
   듣기: 바트 … 왜 바다에 가지 않았어요? → **날씨가 나빴어요** (paraphrased the gist; the word said was 추워서 — write the word you hear).
 - ★ **매일시험 30과 (2026-11-09, 9/10) + Sheet 31과:** test 30 wrote **들어가세요 / 내려가세요 / 나오세요 / 올라가세요** in full inside a blank followed by printed `(으)세요` (4th sighting of writing the printed suffix into the gap; accepted this time) · **오른으로 가세요** for 오른쪽으로 가세요 (dropped 쪽; accepted) · dictation **에리베터** for 엘리베이터 (△, loanword spelling: 엘 + 베이) · **아름다왔어요** for 아름다웠어요 (△, ㅂ-irregular takes 워/어 except 돕다/곱다). **Sheet 31과 (same day):** ★ **걸 거예요 · 들 거예요 · 물 거예요** for **걸을 거예요 · 들을 거예요 · 물을 거예요** in the -(으)ㄹ 거예요 column of 걷다 · 듣다 · 묻다 (treated the ㄹ from ㄷ 불규칙 like an ㄹ-stem and dropped 을; 닫을 / 받을 거예요 right, 걸으세요 / 들으세요 / 물으세요 right).
+- ★ **매일시험 31과 (2026-11-10, 7.5/10 — new format: 8-cell table × 0.5 + 3 picture sentences + 3 dictation):** **거려요 ×4** for 걸려요
+  (items 9–11 and dictation 13 — cost 2 points; 걸리다 keeps the ㄹ 받침: 걸려요 · 걸릴 거예요) · **닫으세요** written over a scribbled 받침 → 0
+  (regular 닫다/받다 sat next to ㄷ-irregular 걷다/묻다 in the table; the student starred 닫다/받다 in the margin). Right: 걸으세요 · 걸을 거예요 ·
+  물어요 · 물을 거예요 (yesterday's sheet slip 걸/들/물 거예요 fixed) · 걸어서 · 어떻게 가요 · 백 미터쯤 똑바로 오세요.
+- ★ **Workbook 32과 르 불규칙 table (2026-11-10, 23/25):** **다르는 · 빠르는** (→ 다른 · 빠른) in the -(으)ㄴ/는 column — 2nd sighting of -는 on adjectives
+  (복습시험③ 작는/예쁘는). The verbs (자르는 · 부르는 · 모르는) and every 르 form (잘라요 · 불러요 · 몰라요 · 달라요 · 빨라요) were right.
+  Same day, exercise 2 (보기와 같이 대화): **네,** in front of answers to 어디에서 questions (1 and 3 — a 어디 question takes no 네/아니요) ·
+  1) answered 머리를 잘라요 without the place (→ 미용실에서 머리를 잘라요) · 3) **불라요** (→ 불러요; the table had 불러요 — 4 of the 5 르 verbs end in 라요,
+  부르다 is the only ㅜ one) · 4) left blank (the `( ) 씨` gap = the addressee's name).
+  Workbook 32과 E (-아/어서² picture pairs): 5/5 grammar right (no tense before 서, 만들어서, 가서, 한테 + 줬어요) — only **성물을** (→ 선물을, ㄴ written as ㅇ)
+  and 여자친구 (→ 여자 친구, spacing).
+  Workbook 32과 F (match + -아/어서²): matching 1/4 — 2) 사과를 씻었어요 → 쇼핑, 3) 일어났어요 → 친구하고 같이 먹었어요, 4) 돈을 찾을 거예요 → 신문을 읽었어요;
+  the halves were matched without checking that the tenses agree (찾을 거예요 future ↔ 할 거예요) or that B uses what A produced. Sentences left blank.
+
 What the user does well: ㅂ니다/습니다 choice by 받침, -지 않- forms, 겠 forms, the ㅡ-drop past
 (바빴어요·컸어요), special honorific words (드세요·주무세요·계세요), 에서 for activity places.

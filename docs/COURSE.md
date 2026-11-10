@@ -33,6 +33,8 @@
   복습시험 totals for the midterm term (①+②, /20 each skill): 말하기 20 · 쓰기 16.3 · 듣기 16.0 · 읽기 19.0 = 71.3/80.
   The handout's footnote 「중간(1-1) 100점, 기말(1-2) 100점」 means the 50/20/30 table applies once per term: ①+② feed the midterm
   term's 복습시험 20, ③+④ the final term's.
+  ③ (sat 11/6, 22–29과): **score slip 11/10: 말하기 10.0 · 쓰기 8.9 · 듣기 9.0 · 읽기 10.0 = 37.9/40** (the class-key marking had 쓰기 90/100;
+  the official 89 took one more point, item unknown). Slip: source/miniexam/KMU mini exam 03 score unit 22 - 29.pdf.
 - **중간시험 facts from the teacher (10/20):** "not far from 복습시험①, ② and the 복습문제 — maybe only the words change"; Fri 10/23 쓰기 1 h · 듣기 40 min ·
   읽기 1 h; 말하기 Wed 10/22 slot 3, 09:45–10:00, 20–25 questions like the review set's 말하기 table. Mock v2 built from those formats
   (content/specs/BRIEF_midterm_v2.md, 4 Sonnet agents 10/20).
@@ -102,7 +104,12 @@ Guide §13–15 add material the course materials never covered explicitly:
   PDF says to swap back to 거예요 if the teacher insists). Closing line 이상입니다. 감사합니다;
   Fable's corrected version was given in chat on 2026-10-10 (16 fixes: 안녕하십니까, 매일, 먹어요, 좋아해요,
   한국 생활, 고등학생, 여동생은, 가족은, 다섯 명, 법대에 다녀요, + 감사합니다). The user pasted it into the file
-  themselves. 기말 발표 2026-11-24, topic announced 11/10.
+  themselves. 기말 발표 2026-11-24, topic announced 11/10: 「쓰고 발표하기」 — 1. 여러분이 여행한 곳은 어디예요? = a 16-question table in 6 groups
+  (어떤 곳 · 날씨/경치 · 유명 · 있어요 / 언제 · 누구와 · 어떻게 · 얼마나 / 했어요 · 좋았어요 · 힘들었어요 / 음식 · 맛 / 쇼핑 · 샀어요 · 왜 / 그곳 · 여행) with
+  the teacher's 제주도 column; 2. [보기]와 같이 쓰세요 = a 합니다체 speech (발표 시작 · 내용 · 마무리). The user's topic: Chengdu, Aug 2026, 3 days, with a
+  Thai 선배 met on the trip, BKK→CTU 3 h by plane, bikes in town + subway when far (fast), malls (Global Center · SKP fake bamboo · IFS · Taikoo Li),
+  철상사 · 무후사 · 콴자이샹즈 street food · 안순교 · 인민공원 marriage market, 훠궈 + spicy noodles, bought nothing, never saw a panda.
+  Script content/speaking/travel_chengdu.md → output/6_Speaking/KMU_Speaking_TravelChengdu.pdf.
 - 쓰기(1) essay (200-cell manuscript paper, 2026-10-10): teacher's fixes were 에 after time words, 한국어
   spelling, cutting a repeated 국민대학교, 오늘 날씨 → 한국 날씨, and she added 한국 생활이 재미있어요 as a closer.
   쓰기② (일기, diary) is due in class 2026-10-13 — workbook 17과 ex.5 is the same task; a model diary was

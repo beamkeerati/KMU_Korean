@@ -15,10 +15,10 @@ Claude Code loads this file into every message, so it is kept short (target ≤ 
 ## 1. User, goal, exams
 - Thai GKS scholar at Kookmin University Korean Language Center, level 1 (국민한국어 1). **Reply in Thai, short.** Study material = Korean with Thai explanations.
 - Course = 자모 + Units 5–37. Midterm covered 1–21과 (book 1-1); final = 23–37과 (book 1-2).
-- **Dates still ahead:** 매일시험 31과 Tue 11/10 · 낭독시험 ⑦ 11/12 (31과) · ⑧ 11/18 · 복습시험④ 11/18 (30–37과) · 기말 **11/20** (쓰기·듣기·읽기) / **11/23** (말하기) · 기말 발표 11/24 (topic announced 11/10). (The handout's 10/20 for 기말 was corrected to 11/20 by the teacher.) 복습시험③ was sat 11/6.
+- **Dates still ahead:** 매일시험 32과 Wed 11/11 · 낭독시험 ⑦ 11/12 (31과) · ⑧ 11/18 · 복습시험④ 11/18 (30–37과) · 기말 **11/20** (쓰기·듣기·읽기) / **11/23** (말하기) · 기말 발표 11/24 (topic announced 11/10). (The handout's 10/20 for 기말 was corrected to 11/20 by the teacher.) 복습시험③ was sat 11/6.
 - **Pass rule:** every skill's average of 중간 + 기말 ≥ 70; < 60 = fail; 60–69 may re-test. Each skill /100 = 시험 50 + 복습시험 20 + coursework 30 (per term). Details → docs/COURSE.md.
-- **Results so far:** 중간 말하기 41.2 · 듣기 42.0 · 쓰기 45.5 · 읽기 49.0 (/50). 복습시험①+② 말하기 20 · 쓰기 16.3 · 듣기 16.0 · 읽기 19.0 (/20). 복습시험③ **unofficial**
-  (red pen = class key, official marks due the week of 11/9): 쓰기 9.0 (90/100) · 듣기 9 · 읽기 10 (inferred from ✓ marks — confirm) · 말하기 ? (/10 each). Weakest: 말하기, 듣기. 매일시험 average ≈ 7.5/10; the losses are **word recall**, not grammar.
+- **Results so far:** 중간 말하기 41.2 · 듣기 42.0 · 쓰기 45.5 · 읽기 49.0 (/50). 복습시험①+② 말하기 20 · 쓰기 16.3 · 듣기 16.0 · 읽기 19.0 (/20). 복습시험③ (slip 11/10)
+  말하기 10 · 쓰기 8.9 · 듣기 9.0 · 읽기 10 (/10 each, 37.9/40 — best of the three). Weakest: 말하기, 듣기. 매일시험 average ≈ 7.5/10; the losses are **word recall**, not grammar.
 - 복습시험 (user says "mini exam") = 말하기 interview + 쓰기 (several short sections) + 듣기 + 읽기 (textbook 읽기 passages lifted almost verbatim). Exams "look like the book": predictions should lift textbook 대화/읽기/연습 nearly verbatim.
 
 ### 1.1 Stated preferences (all deliverables)
@@ -34,7 +34,7 @@ Claude Code loads this file into every message, so it is kept short (target ≤ 
 ## 2. Layout (one folder per material type at every level; full tree → docs/LAYOUT.md)
 ```
 source/       originals — never modify contents; only move/rename (naming §2.1). The user drops new scans in source/ root → file them.
-  textbook/ workbook/ everyday/ miniexam/ review/ vocabulary/ lecture/ syllabus/ midterm/ audio/ (git-ignored mp3s)
+  textbook/ workbook/ everyday/ miniexam/ review/ vocabulary/ lecture/ syllabus/ midterm/ speaking/ audio/ (git-ignored mp3s)
 extracted/    regenerable page images/OCR (git-ignored)
 content/      ✍️ SOURCE OF TRUTH — edit here, never in output/
   guide/        00_exam_info.md (ส่วนที่ 0) · 01_units/unitNN.md (book 1, 5–37) · 02_grammar/NN_slug.md (book 2, topics 01–64;
@@ -78,7 +78,7 @@ output/       🤖 GENERATED, never hand-edit. Entry = output/START_HERE.html (h
   omit `capabilities` (keeps db, sample, user). If refused as "unread", run `Artifact list scope:files` on the url first. Compare file sizes with that
   listing to see what changed. Each clips file must stay < 16 MB (build_mockweb splits word clips over VCLIP_FILES; add a file + `<script>` tag in
   app.html when the build says so). Do not re-enable the artifact watch on your own.
-- Current: **v58** — 153 sets · 2,836 items · 970 clips · 1,366 vocab words (vocab.js, Leitner drill, VOCAB_PRIO in build_mockweb.py line ~74).
+- Current: **v59** — 161 sets · 2,980 items · 997 clips · 1,366 vocab words (vocab.js, Leitner drill, VOCAB_PRIO in build_mockweb.py line ~74).
   **Sizing rule (v54):** a set's `minutes` must fit its own items — listening clock ≥ flow (2 plays + answer pauses, ffprobe the mp3s) + ~3 min; spare/예비 items go in their own set
   (`mini03x-<skill>`, own clock), never inside a timed set (the clock auto-submits). 복습시험③ = `mini03-*` (scored: 30/20/15 min) + `mini03x-*` (예비: 10/25/14); two GROUPS rules in app.html.
   **Navigation (v51):** home = hub of tiles (`CATS` in app.html, first match wins, `other` = catch-all) → `#x/<cat>` → daily tests only `#x/daily/<unit>`
@@ -139,16 +139,18 @@ sections (with a 보기) in the MAIN set, keep 보기 word-choice + 질문에 �
   to f32le 16 kHz and pass a numpy array).
 
 ## 5. Content status (details and caveats → docs/STATUS.md)
-- Guides, vocab, mind maps, listening sheets, workbook (with the publisher's printed keys) cover **5–37과**. Everyday tests transcribed for 5–30, sheets
-  for 5–31; predictions for 17–31 (scorecards on 22–30). 복습시험 ①②③ papers in content/exercises/miniexam/ (exam03.md §2 = how the ③ mock scored). The 중간시험 복습문제 key is AI-solved; agents' sample answers are labelled ตัวอย่างตอบ.
+- Guides, vocab, mind maps, listening sheets, workbook (with the publisher's printed keys) cover **5–37과**. Everyday tests transcribed for 5–31, sheets
+  for 5–32; predictions for 17–32 (scorecards on 22–31). 복습시험 ①②③ papers in content/exercises/miniexam/ (exam03.md §2 = how the ③ mock scored). The 중간시험 복습문제 key is AI-solved; agents' sample answers are labelled ตัวอย่างตอบ.
 - `extracted/everyday/unit05-13/test-N.png` is not unit N — check the page header (`1급 매일 시험_N과`).
 - 매일시험 score log (details per item in docs/STATUS.md): 5과 7.5 · 6과 7 · 7과 8 · 8과 9.5 · 9과 5 · 10과 8.5 · 11과 5.7 · 12과 6.2 · 13과 4 · 14과 7.5 ·
-  15과 8.5 · 16과 10 · 17과 8 · 18과 10 · 19과 8.5 · 22과 8.5 · 23과 4.5 · 24과 8 · 25과 9 · 26과 5.5 · 27과 7.5 · 28과 7 · 29과 7.5 · **30과 9** (A+B 7/7 on (으)로 direction, -(으)니까 not tested; C 에리베터, 아름다왔어요 half each).
+  15과 8.5 · 16과 10 · 17과 8 · 18과 10 · 19과 8.5 · 22과 8.5 · 23과 4.5 · 24과 8 · 25과 9 · 26과 5.5 · 27과 7.5 · 28과 7 · 29과 7.5 · 30과 9 · **31과 7.5** (NEW FORMAT: 8-cell conjugation table × 0.5 + 3 picture
+  sentences + 3 dictation; 거려요 ×4 for 걸려요 cost 2; 닫으세요 scribbled 받침 = 0). Teacher: 32과 will have a table again.
 - Low papers (9과, 13과, 23과, 26과) are the vocabulary-heavy units → recall of words is the chronic loss; the site's daily vocab drill targets it.
 
 ## 6. The user's recurring mistakes — top list (every sighting → docs/MISTAKES.md)
 Use these when checking work or writing predictions. ★ = has cost marks repeatedly.
-- ★ **ㅈ/ㅊ shapes** (9+ tests: 젝/책, 몆/몇, 장마절, 자가/차가, 남차) · ★ **ㅐ/ㅔ** (네 게, 테국, 메워요) · **ㅖ/ㅕ** (여쁘지만, 여뻐서) · 가 written like 기.
+- ★ **ㅈ/ㅊ shapes** (9+ tests: 젝/책, 몆/몇, 장마절, 자가/차가, 남차) · ★ **ㅐ/ㅔ** (네 게, 테국, 메워요) · **ㅖ/ㅕ** (여쁘지만, 여뻐서) · 가 written like 기 ·
+  ★ **걸려요 written 거려요** ×4 on test 31 (−2) · 선물 written 성물.
 - ★ **Object marked with 이/가 instead of 을/를**, esp. inside -는/-(으)ㄴ/-(으)ㄹ 수 phrases (책이 읽는 ×4 on test 27; 시계가 받았어요; 음식를).
 - ★ **Vocabulary recall under test conditions** (23과 4.5; 만나고 for 앉고; 요리하세요 for 만드세요 — use the unit's target verb; 동물).
 - ★ **Verb choice 하다/타다/치다** (피아노를 할 ✗ → 칠; 운전을 탈 ✗ → 할) — read the printed sentences first; the answer is often on the paper.
@@ -156,8 +158,8 @@ Use these when checking work or writing predictions. ★ = has cost marks repeat
   ㄹ-stems keep ㄹ before 어, drop it only before ㄴ: 머니까).
 - -아/어서: no tense before 서 (✗ 왔어서); not before commands/suggestions (-(으)세요, -(으)ㄹ까요, 같이 -아요 ✗ → -(으)니까).
 - -는 vs -(으)ㄴ by time words: 지금/자주/요즘 → -는; 어제/지난주 → -(으)ㄴ (지금 배운 ✗). Adjective -(으)ㄴ = present (큰), verb -(으)ㄴ = past (먹은).
-  ★ The time-word test is for VERBS only: 작는 / 예쁘는 ✗ → 작은 / 예쁜 (복습시험③, −6).
-- ㄹ-stems: 만들은 ✗ → 만든, 만들아요 ✗ → 만들어요, 머세요 vs 멉니다; **ㄷ-irregular -(으)ㄹ 거예요 keeps 을** (걸 거예요 · 들 거예요 · 물 거예요 ✗ → 걸을 · 들을 · 물을 거예요 on sheet 31); ㅂ-irregular is usually right (30과 아름다왔어요 ✗ → 아름다웠어요; only 돕다/곱다 → 와).
+  ★ The time-word test is for VERBS only: 작는 / 예쁘는 ✗ → 작은 / 예쁜 (복습시험③, −6); 다르는 / 빠르는 ✗ → 다른 / 빠른 (workbook 32).
+- ㄹ-stems: 만들은 ✗ → 만든, 만들아요 ✗ → 만들어요, 머세요 vs 멉니다; **ㄷ-irregular -(으)ㄹ 거예요 keeps 을** (걸 거예요 · 들 거예요 · 물 거예요 ✗ → 걸을 · 들을 · 물을 거예요 on sheet 31); ㅂ-irregular is usually right (30과 아름다왔어요 ✗ → 아름다웠어요; only 돕다/곱다 → 와); 르: 부르다 → **불러요** (불라요 ✗ in a sentence while the table was right — the other five give 라요).
 - Noun + 이다: 학생였어요 ✗ → 학생이었어요 (also 학생여서 ✗ → 학생이어서); 친구에요 ✗ → 친구예요.
 - 보다 comparisons: the noun before 보다 is the loser (reversed winners twice); no stray 이 on the noun inside the 보다 phrase.
 - Position words: landmark reversed (A가 B 앞에 = A is in front of B). 한테/한테서/께 direction; places/things take 에/에서, not 한테.
@@ -170,7 +172,9 @@ Use these when checking work or writing predictions. ★ = has cost marks repeat
 - Done: 제 방 · 방학 계획 (10/20) · 자기 소개 (10/21, myself.md — the user edits it by hand; don't rewrite it).
 - **음식 소개 = 팟타이** (content/speaking/food_intro.md + food_intro.jpeg, the user's Gemini picture) for Fri 11/6: slide requires -(으)ㄴ · -고 싶다 ·
   -고 · -지만 · 보다 · 중에서 제일 and 5 questions (이름 · 무엇으로 · 언제/어디/누구 · 왜 · 맛). 13 lines in 해요체.
-- 기말 발표 11/24 — topic on 11/10. The teacher said a self-introduction should not talk about family; not every sentence has to be formal.
+- **기말 발표 11/24 = 쓰고 발표하기 「여러분이 여행한 곳」** (handout source/speaking/KMU speaking final presentation unit 23 - 37.pdf: 16-question table + a
+  합니다체 speech like its 제주도 <보기>). Topic = the user's Aug 2026 Chengdu trip → content/speaking/travel_chengdu.md (draft 11/10, §❔ lists
+  the guessed parts). The teacher said a self-introduction should not talk about family; not every sentence has to be formal.
 
 ## 8. Working rules
 - **Checking homework from photos:** rotate with PIL `ImageOps.exif_transpose` + `rotate(90, expand=True)`, crop and zoom (2–3×); say when the
