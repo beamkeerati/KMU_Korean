@@ -180,6 +180,12 @@
   (blanks 에서 · 까지 · means · 걸려요) — 1.5, half each for 거려요 · dictation 어떻게 가요 ✓ · 얼마나 걸려요 △ (거려요) · 백 미터쯤 똑바로 오세요 ✓.
   The table = sheet 31 page 1; item 9 = the prediction's mock 3 extra (서울 → 제주도 비행기 1시간); all 3 dictation lines were in its list (ranks 1, 3, 12).
   The teacher said the 32과 paper will again have a conjugation table. 32과 sheet (11/10): 르불규칙 형태 연습 42/42 right (exercises/everyday/unit32.md).
+  **32과 test (11/11) = 8/10 — same format as 31과** (exercises/everyday/unit32.md): table = picture rows [보기] 모르다 → 몰라요 · 부르다 · 자르다 ·
+  빠르다 (runner) × ㅂ니다 · 고 · 아/어요 · 았/었어요 · 니까 — 2.5 (불렀어요 · 부르니까 · 자릅니다 · 잘라요 · 잘랐어요 ✓; the runner read as 바르다 →
+  바르고 · 발라요 · 바르니까 all 0: conjugation right, word wrong) · picture pairs with -아/어서 sequence (학교에 가서 한국어를 공부했어요 · 음식을 요리해서
+  먹을 거예요 · 케이크를 만들어서 친구한테 선물을 줬어요) 3/3 · dictation 6호선으로 갈아타세요 ✓ · 1번 출구에 있어요 ✓ · 길을 몰라요 △ (글음). All three parts
+  were in the prediction (table = sheet 32 page 7; pictures = textbook 연습 1 + sheet p.4 + workbook E; dictation = short tails of 대화 32-1 ranks 1 · 5 · 7,
+  with the exit number changed 3 → 1). 33과 sheet (11/11): (으)면 / (으)ㄹ picture grids + 문장 연습 (exercises/everyday/unit33.md).
 - Known cosmetic gaps: 10과 A's third table row (30–10,000) is printed as given reference rather
   than as blanks; `왕쯔이` is transliterated `หวางจิ้ง` where `หวางจื่ออี` is closer.
 

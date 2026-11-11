@@ -141,6 +141,22 @@ starred ones cost real marks.
   and 여자친구 (→ 여자 친구, spacing).
   Workbook 32과 F (match + -아/어서²): matching 1/4 — 2) 사과를 씻었어요 → 쇼핑, 3) 일어났어요 → 친구하고 같이 먹었어요, 4) 돈을 찾을 거예요 → 신문을 읽었어요;
   the halves were matched without checking that the tenses agree (찾을 거예요 future ↔ 할 거예요) or that B uses what A produced. Sentences left blank.
+  Workbook 33과 C (-(으)면, checked 2026-11-11): matching 4/4, sentences 3/4 — ★ **맵으면** for **매우면** (ㅂ-irregular not applied before 으,
+  although ㅂ tables are usually right) · **선생님게** for 선생님께 (single ㄱ). 거예요 / 이메일 / 세일 vowels all right.
+  Workbook 33과 D (dialogues, same day): **음식을 사수 없어요** for 살 수 없어요 (dropped the ㄹ of -(으)ㄹ 수, no space) and it states a
+  consequence instead of answering 어떻게 해요 · items 2–5 dropped the -(으)면 clause that the 보기 repeats · 6 left blank. Right: 선생님께
+  말씀드릴 거예요, 경복궁에 같이 갈 거예요, 수영하고 싶어요.
+  Workbook 33과 E (-(으)ㄹ table, same day): 5/14 — wrote 다 after the form (잘다 · 볼다 · 내릴다 · 쉴다; 살다 · 알다 · 열다 = just the
+  dictionary form) · ★ **잘를 / 불를** for 자를 / 부를 (carried the 르-irregular ㄹ of 잘라요 / 불러요 into -(으)ㄹ; 르 only changes before 아/어).
+  Right: 마실, 읽을, 만들, 걸을, 들을.
+  Workbook 33과 F (two sentences → -(으)ㄹ + N, same day): 5/6 — ★ **이사할 아파트로는** for 아파트는 (kept 로 from sentence 1 instead of
+  the second sentence's particle — same slip as 공원에 → 공원이) · 다음 looks like **디음** (ㅏ stroke missing). 볼 / 갈 / 줄 / 배울 all right.
+- ★ **매일시험 32과 (2026-11-11, 8/10):** picture table — the runner row read as **바르다** for **빠르다** → 바르고 · 발라요 · 바르니까 all 0 (−1.5; the 르
+  conjugation itself was right, the word/tense consonant ㅃ was wrong; the picture carried no printed verb) · dictation **글음 몰라요** for 길을 몰라요 (△,
+  ㅣ → ㅡ and 받침 ㄹ → ㅁ). Right: 불렀어요 (the 불라요 trap from the sheet was fixed), 부르니까, 자릅니다 · 잘라요 · 잘랐어요, all three -아/어서 picture
+  sentences, 6호선으로 갈아타세요, 1번 출구에 있어요.
+  Sheet 33 (same day): (으)면 picture grid 23/23 (도우면 · 가까우면 · 좁으면 · 학생이면 right) · (으)ㄹ 사람 grid 5/7 written, 16 cells left blank —
+  **동울 사람** for 도울 사람 (stray ㅇ 받침) · **듣을 사람** for 들을 사람 (ㄷ-irregular not applied in the grid, although 들을 was right on page 5).
 
 What the user does well: ㅂ니다/습니다 choice by 받침, -지 않- forms, 겠 forms, the ㅡ-drop past
 (바빴어요·컸어요), special honorific words (드세요·주무세요·계세요), 에서 for activity places.

@@ -168,6 +168,9 @@ content/       ✍️ SOURCE OF TRUTH — edit here, never in output/
                whitespace between them, so the whole list was one unbreakable run; fix = `display: inline-block` on `.hist span` (also covers the set-history and 복습시험 ②
                lines). Checked in headless Chrome at 1000 px (818/818). Artifact version 59 (page only).
                (2026-11-09) v58 (data + vocab.js): daily-30-writing/-listening (9/10) + sheet-31-writing in daily_b.json, predict-30 lost its 🔮,
+               (2026-11-11) v60 (data + clips + clips2 = artifact version 63, vocab.js = 64): daily-32-writing/-listening (8/10) + sheet-33-writing
+                 (97 items) in daily_b.json, predict-32 retired, daily_predict33.json (5 sets · 164 items), VOCAB_PRIO 33, 32, 31, 30, 34–37 first —
+                 169 sets · 3,250 items · 1,030 clips (33 new). Watch stopped after publishing.
                (2026-11-10) v59 (data + clips + clips2 + vocab.js, artifact version 62): daily-31-writing/-listening (7.5/10, new format:
                  8-cell table + picture sentences with pic + dictation) + sheet-32-writing (39 items) in daily_b.json, predict-31 retired,
                  daily_predict32.json (5 sets · 95 items), VOCAB_PRIO 32, 31, 30, 33–37 first — 161 sets · 2,980 items · 997 clips.
