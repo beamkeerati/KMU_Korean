@@ -53,7 +53,7 @@
 | 너무 | มาก…เกินไป (ในบทนี้ = มาก) | too, very |
 | 데이트 | การเดท นัดพบ | date |
 | 뚱뚱하다 | อ้วน | to be fat |
-| 싫다 | ไม่ชอบ ไม่อยาก | to be disliked |
+| 싫다 | ไม่ชอบ ไม่อยาก | to dislike, to not want |
 | 온천 | บ่อน้ำพุร้อน | hot spring |
 | 풍경 | ทิวทัศน์ | scenery |
 | 사계절 | สี่ฤดู | four seasons |

@@ -78,7 +78,10 @@ output/       🤖 GENERATED, never hand-edit. Entry = output/START_HERE.html (h
   omit `capabilities` (keeps db, sample, user). If refused as "unread", run `Artifact list scope:files` on the url first. Compare file sizes with that
   listing to see what changed. Each clips file must stay < 16 MB (build_mockweb splits word clips over VCLIP_FILES; add a file + `<script>` tag in
   app.html when the build says so). Do not re-enable the artifact watch on your own.
-- Current: **v60** — 169 sets · 3,250 items · 1,030 clips · 1,366 vocab words (vocab.js, Leitner drill, VOCAB_PRIO in build_mockweb.py line ~74).
+- Current: **v61** — 169 sets · 3,250 items · 1,030 clips · 1,366 vocab words (vocab.js, Leitner drill, VOCAB_PRIO in build_mockweb.py line ~74).
+  **v61:** every word has an example sentence + Thai translation + usage note in content/guide/04_vocabulary/examples/unitNN.json (brief
+  content/specs/BRIEF_vocab_examples.md, check `python3 scripts/vocab_examples_check.py`); card mode gained 📝 เติมคำในประโยค (cloze); a new word in
+  04_vocabulary/unitNN.md needs its example entry too (the checker compares the lists).
   **Sizing rule (v54):** a set's `minutes` must fit its own items — listening clock ≥ flow (2 plays + answer pauses, ffprobe the mp3s) + ~3 min; spare/예비 items go in their own set
   (`mini03x-<skill>`, own clock), never inside a timed set (the clock auto-submits). 복습시험③ = `mini03-*` (scored: 30/20/15 min) + `mini03x-*` (예비: 10/25/14); two GROUPS rules in app.html.
   **Navigation (v51):** home = hub of tiles (`CATS` in app.html, first match wins, `other` = catch-all) → `#x/<cat>` → daily tests only `#x/daily/<unit>`

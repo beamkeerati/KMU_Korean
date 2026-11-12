@@ -421,6 +421,15 @@ section#vocab { scroll-margin-top: 90px; }   /* opened with #vocab in the URL: t
 .vnote { font-size: calc((13px) * var(--ts, 1)); color: var(--muted); }
 .vnote b { color: var(--ink); }
 .vask { margin: 6px 0 0; color: var(--muted); font-size: calc((14px) * var(--ts, 1)); }
+/* v61 example sentences: the cloze face, and the example under every answer */
+.vsent { font-family: var(--f-ko); font-weight: 700; font-size: calc((clamp(21px, 4.8vw, 28px)) * var(--ts, 1)); line-height: 1.55; margin: 12px 0 2px; word-break: keep-all; overflow-wrap: break-word; }
+.vblank { color: var(--navy); white-space: nowrap; }
+.vsent-t { font-size: calc((17px) * var(--ts, 1)); line-height: 1.45; overflow-wrap: anywhere; }
+mark.vbk { background: var(--paper); color: var(--navy); border: 1.5px solid var(--navy); border-radius: 5px; padding: 0 4px; font-weight: 800; }
+.vex { border-top: 1px dashed var(--rule); margin-top: 4px; padding-top: 8px; display: grid; gap: 2px; }
+.vex-s { font-family: var(--f-ko); font-weight: 600; font-size: calc((19px) * var(--ts, 1)); line-height: 1.5; word-break: keep-all; overflow-wrap: break-word; }
+.vex-t { font-size: calc((15px) * var(--ts, 1)); line-height: 1.45; }
+.vnt { font-size: calc((14px) * var(--ts, 1)); line-height: 1.45; }
 /* card mode = 4 choices: 2 × 2 on a wide screen, one column on a phone; after the answer the right one turns green, a wrong pick red, the rest fade */
 .vmc { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: 14px; }
 @media (max-width: 480px) { .vmc { grid-template-columns: 1fr; } }
@@ -1671,8 +1680,12 @@ function Profile() {
      b = box 0–5 · d = due day number (dayNum(): floor(local midnight / 86400000)) · n = answers · x = wrong answers · l = day number of the last answer
      days[date].n = answers given that day, .r = how many of them were fully right.
    Sync: 'vocab:srs' matches SYNCED, so it gets stamp:srs and the cloud doc 'srs' = { at, vocab } exactly like a set (last change wins). Only word strings are stored, never a name.
-   Card mode = a 4-choice quiz: s.mc = { dir: k2t | t2k, opts: [{ko, d}], ans } is drawn when a card comes to the top (vMc: distractors from the same unit first, then the same category, then units ±2, never a word with the same meaning or spelling).
-   The preferences vocab:size / mode / dir / auto / shuffle are written with store.put — store.set would sync them as cloud docs of their own. */
+   Card mode = a 4-choice quiz: s.mc = { dir: k2t | t2k | cloze, opts: [{ko, d}], ans, exi } is drawn when a card comes to the top (vMc: distractors from the same unit first, then the same category, then units ±2, never a word with the same meaning or spelling).
+   v61: a word may carry ex = [[sentence, Thai translation, blank], …] and nt = Thai usage note (content/guide/04_vocabulary/examples/unitNN.json, attached by build_mockweb.py).
+   dir 'cloze' = the sentence ex[exi] with the blank + its Thai translation, 4 Korean dictionary forms to choose from (distractors of the same word class — verb/adjective vs noun,
+   by an English gloss that starts with "to"); 'mix' draws among k2t · t2k · cloze. Every feedback shows the sentence (blank highlighted), its translation and the note.
+   vocab:fast = a right card answer moves on by itself after 0.7 s (off by default since v61, so the example can be read).
+   The preferences vocab:size / mode / dir / auto / shuffle / fast are written with store.put — store.set would sync them as cloud docs of their own. */
 const VOCAB = window.KMU_VOCAB || [];
 const VBY = {}; VOCAB.forEach(w => { VBY[w.ko] = w; });
 const VUNITS = [...new Set(VOCAB.map(w => w.u))].sort((a, b) => a - b);
@@ -1721,7 +1734,8 @@ function vOther(ans, ko) {
 const vsizeS = signal([20, 30, 40, 50].includes(+store.get('vocab:size', 40)) ? +store.get('vocab:size', 40) : 40);
 const vmodeS = signal(store.get('vocab:mode', 'type') === 'card' ? 'card' : 'type');
 const vautoS = signal(store.get('vocab:auto', 0) === 1), vshufS = signal(store.get('vocab:shuffle', 1) !== 0);
-const vdirS = signal(['k2t', 't2k', 'mix'].includes(store.get('vocab:dir', 'mix')) ? store.get('vocab:dir', 'mix') : 'mix');   // card mode: 한국어→ไทย · ไทย→한국어 · drawn per card
+const vdirS = signal(['k2t', 't2k', 'cloze', 'mix'].includes(store.get('vocab:dir', 'mix')) ? store.get('vocab:dir', 'mix') : 'mix');   // card mode: 한국어→ไทย · ไทย→한국어 · fill the blank of an example sentence · drawn per card
+const vfastS = signal(store.get('vocab:fast', 0) === 1);   // card mode: a right answer moves on by itself (otherwise the feedback with the example waits for ถัดไป)
 const vnewS = signal([0, 10, 15, 20].includes(+store.get('vocab:newmin', 15)) ? +store.get('vocab:newmin', 15) : 15);   // slots of each daily session kept for NEW words: 15 by default so all 912 words are met before the 기말 (a 30-word session with 0 reserved met only ~180 words in 24 simulated days)
 const vPref = (sig, key, v) => { sig.value = v; store.put('vocab:' + key, typeof v === 'boolean' ? +v : v); };
 const vtabS = signal('today'), vresetS = signal(false);
@@ -1756,17 +1770,28 @@ function vUnitStats(r) {
 }
 /* the four choices of a card: the word itself + 3 distractors — same unit first, then the same category, then units ±2, then anything;
    never a word with the same meaning (계란 / 달걀 = ไข่) or the same spelling, and no two choices that read the same */
+const vVerb = x => /^to\b/i.test(x.en || '');   // verb or adjective (the English gloss starts with "to") — a cloze offers choices of the same class
 function vMc(w) {
-  const pref = vdirS.peek(), dir = pref === 'mix' ? (Math.random() < .5 ? 'k2t' : 't2k') : pref;
+  const pref = vdirS.peek(), can = !!(w.ex && w.ex.length), dirs = can ? ['k2t', 't2k', 'cloze'] : ['k2t', 't2k'];
+  const dir = pref === 'mix' ? dirs[Math.floor(Math.random() * dirs.length)] : pref === 'cloze' && !can ? 't2k' : pref;
+  const exi = dir === 'cloze' ? Math.floor(Math.random() * w.ex.length) : 0, sent = dir === 'cloze' ? w.ex[exi][0] : '';
   const disp = x => dir === 'k2t' ? x.th : wordKeys(x.ko).keys[0];
   const bad = new Set([w.th, w.ko, disp(w)]);
-  const pool = VOCAB.filter(x => x !== w && !bad.has(x.th) && !bad.has(x.ko) && !bad.has(disp(x)));
-  const tiers = [pool.filter(x => x.u === w.u), w.cat ? pool.filter(x => x.cat === w.cat) : [], pool.filter(x => Math.abs(x.u - w.u) <= 2), pool];
+  // a cloze never offers a word that is already written elsewhere in the sentence (사진작가도 … 또 소설가도 → not 소설가)
+  const pool = VOCAB.filter(x => x !== w && !bad.has(x.th) && !bad.has(x.ko) && !bad.has(disp(x)) && !(sent && sent.includes(disp(x))));
+  const same = dir === 'cloze' ? x => vVerb(x) === vVerb(w) : () => true;
+  const tiers = [pool.filter(x => x.u === w.u && same(x)), w.cat ? pool.filter(x => x.cat === w.cat && same(x)) : [], pool.filter(x => Math.abs(x.u - w.u) <= 2 && same(x)), pool.filter(same), pool];
   const picked = [], seen = new Set(bad);
   for (const t of tiers) { for (const x of vShuffle(t.slice())) { if (picked.length >= 3) break; const d = disp(x); if (seen.has(d)) continue; seen.add(d); picked.push({ ko: x.ko, d }); } if (picked.length >= 3) break; }
   const opts = vShuffle(picked.concat([{ ko: w.ko, d: disp(w) }]));
-  return { dir, opts, ans: opts.findIndex(o => o.ko === w.ko) };
+  return { dir, opts, ans: opts.findIndex(o => o.ko === w.ko), exi };
 }
+/* an example sentence with its blank: hidden → (　　　), shown → the word highlighted */
+function vSent(ex, show) {
+  const i = ex[0].indexOf(ex[2]); if (i < 0) return ex[0];
+  return html`${ex[0].slice(0, i)}${show ? html`<mark class="vbk">${ex[2]}</mark>` : html`<span class="vblank" aria-label="ช่องว่าง">(　　　　)</span>`}${ex[0].slice(i + ex[2].length)}`;
+}
+const vSaySent = t => { stopRuns(); say(t, 'F'); };   // no clip for sentences: the browser's Korean voice reads it
 const vWithMc = s => s && s.mode === 'card' && s.phase === 'ask' && s.queue.length ? { ...s, mc: vMc(VBY[s.queue[0].ko]) } : s;
 const vSay = ko => { stopRuns(); say(CLIPS['F|' + ko] ? ko : ko.replace(/\s*\[[^\]]*\]/g, '').replace(/[()]/g, '').replace(/\s*[—·\/]\s*/g, ', '), 'F'); };
 const vFocusNow = () => { const i = $('#vq-in'); if (i) i.focus({ preventScroll: true }); };   // the input persists from card to card, so a tap can keep the iPad keyboard open
@@ -1799,7 +1824,7 @@ function vGrade(score, ans, key, pick) {
     vsS.value = { ...nx, phase: 'fb' };
   });
   if (vautoS.peek() && !(s.mode === 'card' && s.mc && s.mc.dir === 'k2t')) vSay(q.ko);   // k2t cards were already heard at the question
-  if (s.mode === 'card' && score >= 1) { const seq = s.seq, at = s.at; setTimeout(() => { const c = vsS.peek(); if (c && c.phase === 'fb' && c.seq === seq && c.at === at) vNext(); }, 700); }
+  if (s.mode === 'card' && score >= 1 && vfastS.peek()) { const seq = s.seq, at = s.at; setTimeout(() => { const c = vsS.peek(); if (c && c.phase === 'fb' && c.seq === seq && c.at === at) vNext(); }, 700); }
 }
 function vSubmit(text) {
   const s = vsS.peek(); if (!s || s.phase !== 'ask' || s.mode !== 'type') return;
@@ -1845,7 +1870,8 @@ function VOpts({ shuffle, sizes }) {
       <div class="vrow"><span class="vlab">คำใหม่อย่างน้อย</span>${[0, 10, 15, 20].map(n => vchip(vnewS.value === n, n ? `${n} คำ/ชุด` : 'ไม่กันที่', () => vPref(vnewS, 'newmin', n), 'vnew-' + n))}<span class="vnote">กันที่ไว้ให้คำใหม่ แม้มีคำค้างทบทวนเยอะ</span></div>` : null}
     <div class="vrow"><span class="vlab">โหมด</span>${vchip(m === 'type', '✍ พิมพ์', () => vPref(vmodeS, 'mode', 'type'), 'vmode-type')}${vchip(m === 'card', '🃏 การ์ด 4 ตัวเลือก', () => vPref(vmodeS, 'mode', 'card'), 'vmode-card')}
       ${vchip(vautoS.value, '🔊 เล่นเสียงเอง', () => vPref(vautoS, 'auto', !vautoS.peek()), 'vauto')}${shuffle ? vchip(vshufS.value, '🔀 สุ่มลำดับ', () => vPref(vshufS, 'shuffle', !vshufS.peek()), 'vshuf') : null}</div>
-    ${m === 'card' ? html`<div class="vrow"><span class="vlab">ถามแบบ</span>${vchip(d === 'k2t', '한국어 → ไทย', () => vPref(vdirS, 'dir', 'k2t'), 'vdir-k2t')}${vchip(d === 't2k', 'ไทย → 한국어', () => vPref(vdirS, 'dir', 't2k'), 'vdir-t2k')}${vchip(d === 'mix', '🔀 สลับกัน', () => vPref(vdirS, 'dir', 'mix'), 'vdir-mix')}</div>` : null}
+    ${m === 'card' ? html`<div class="vrow"><span class="vlab">ถามแบบ</span>${vchip(d === 'k2t', '한국어 → ไทย', () => vPref(vdirS, 'dir', 'k2t'), 'vdir-k2t')}${vchip(d === 't2k', 'ไทย → 한국어', () => vPref(vdirS, 'dir', 't2k'), 'vdir-t2k')}${vchip(d === 'cloze', '📝 เติมคำในประโยค', () => vPref(vdirS, 'dir', 'cloze'), 'vdir-cloze')}${vchip(d === 'mix', '🔀 สลับกัน', () => vPref(vdirS, 'dir', 'mix'), 'vdir-mix')}</div>
+      <div class="vrow"><span class="vlab">ตอบถูกแล้ว</span>${vchip(!vfastS.value, '📖 หยุดอ่านตัวอย่าง', () => vPref(vfastS, 'fast', false), 'vfast-off')}${vchip(vfastS.value, '⏩ ไปข้อต่อไปเลย', () => vPref(vfastS, 'fast', true), 'vfast-on')}</div>` : null}
   </div>`;
 }
 function VTabs() {
@@ -1862,7 +1888,7 @@ function VToday() {
       <div class=${'vnum' + (q.streak ? ' good' : '')}><b id="v-streak">${q.streak}</b><span>วันติดต่อกัน</span></div>
     </div>
     <${VOpts} sizes=${true} />
-    <div class="vgo">${q.sess ? html`<button class="mode-btn primary" type="button" id="vstart" onClick=${vStartDaily}><span class="t">▶ เริ่มชุดวันนี้ · ${q.sess} คำ</span><span class="s">ทบทวน ${q.review} คำ + คำใหม่ ${q.add} คำ · ${md === 'type' ? 'เห็นคำไทย แล้วพิมพ์คำเกาหลี' : { k2t: 'เห็นคำเกาหลี เลือกคำแปลไทย 1 ใน 4', t2k: 'เห็นคำไทย เลือกคำเกาหลี 1 ใน 4', mix: 'สลับถามเกาหลี→ไทย และ ไทย→เกาหลี เลือก 1 ใน 4' }[vdirS.value]}</span></button>`
+    <div class="vgo">${q.sess ? html`<button class="mode-btn primary" type="button" id="vstart" onClick=${vStartDaily}><span class="t">▶ เริ่มชุดวันนี้ · ${q.sess} คำ</span><span class="s">ทบทวน ${q.review} คำ + คำใหม่ ${q.add} คำ · ${md === 'type' ? 'เห็นคำไทย แล้วพิมพ์คำเกาหลี' : { k2t: 'เห็นคำเกาหลี เลือกคำแปลไทย 1 ใน 4', t2k: 'เห็นคำไทย เลือกคำเกาหลี 1 ใน 4', cloze: 'เห็นประโยคที่เว้นช่องว่าง + คำแปลไทย เลือกคำที่เติมได้ 1 ใน 4', mix: 'สลับ 3 แบบ: เกาหลี→ไทย · ไทย→เกาหลี · เติมคำในประโยค' }[vdirS.value]}</span></button>`
       : html`<p class="notice" id="vnone">วันนี้ไม่มีคำที่ถึงรอบทบทวน และไม่เหลือคำใหม่แล้ว 🎉 — เลือกฝึกตามบท หรือทวนคำที่ยังอ่อน</p>${q.seen ? html`<div class="actions"><button class="btn primary" type="button" id="vweak" onClick=${vStartWeak}>ทวนคำที่ยังอ่อน (${Math.min(vsizeS.value, q.seen)} คำ)</button></div>` : null}`}</div>
     <p class="sec-th">ลำดับคำ: คำที่ถึงรอบทบทวนมาก่อน (กล่องต่ำสุดก่อน แล้วบทหลังสุดก่อน) ตามด้วยคำใหม่${q.newUnits.length ? ` จากบท ${q.newUnits.join(' · ')} …` : ''} · ตอบผิด = ถามซ้ำท้ายชุดจนตอบถูก · ตอบถูก = นัดทวนอีก 1 · 2 · 4 · 7 · 14 · 30 วัน</p>
   </div>`;
@@ -1907,8 +1933,9 @@ function VStats() {
   </div>`;
 }
 /* feedback under a typed answer: verdict, the word (▶), what was typed and where it differs, another word it happens to be, the Leitner consequence */
-function VFb({ fb, cls }) {
+function VFb({ fb, cls, exi, cz }) {   // cz = the card itself is the cloze sentence (now filled in): only the form line + note are added here
   const other = fb.score === 0 && fb.ans && !fb.pick ? vOther(fb.ans, fb.ko) : null;
+  const w = VBY[fb.ko], ex = w.ex && (w.ex[exi || 0] || w.ex[0]), dict = wordKeys(w.ko).keys[0];
   const head = fb.score >= 1 ? '✓ ถูก!' : fb.score > 0 ? '≈ เกือบถูก — สะกดผิดนิดเดียว นับครึ่งคะแนน' : fb.ans ? '✕ ผิด' : '✕ ยังไม่รู้ — ดูเฉลยแล้วจำไว้';
   const sched = fb.score >= 1 ? `📦 กล่อง ${fb.b0} → ${fb.e.b} · ถามอีกครั้ง: ${vDays(LEIT[Math.min(5, fb.b0)])}` : fb.score > 0 ? `📦 อยู่กล่อง ${fb.e.b} ต่อ · ถามอีกครั้ง: พรุ่งนี้` : '📦 กลับกล่อง 0 · จะถามซ้ำท้ายชุดนี้จนตอบถูก';
   return html`<div class=${'vfb ' + cls} id="vfb" aria-live="polite">
@@ -1917,6 +1944,11 @@ function VFb({ fb, cls }) {
     ${fb.pick ? html`<div class="vnote">${VBY[fb.ko].th} · ${VBY[fb.ko].en}</div>${fb.score < 1 ? html`<div class="vnote">คุณเลือก: 「<b class="ko">${fb.pick.ko}</b>」 = ${fb.pick.th} — คนละคำ</div>` : null}`
       : html`${fb.score < 1 && fb.ans ? html`<div class="vnote">คุณตอบ: <b class="ko">${fb.ans}</b>${fb.score > 0 ? html` · ต่างที่: <b class="ko">${diffText(norm(fb.ans), norm(fb.key))}</b>` : null}</div>` : null}
     ${other ? html`<div class="vnote">「<b class="ko">${other.ko}</b>」 = ${other.th} — เป็นอีกคำหนึ่ง ไม่ใช่คำในโจทย์</div>` : null}`}
+    ${ex ? html`<div class="vex" id="vex">${cz ? html`<div><button class="btn sm" type="button" id="vexplay" onClick=${() => vSaySent(ex[0])}>▶ ฟังประโยค</button></div>`
+      : html`<div class="vex-s ko"><span id="vex-s">${vSent(ex, true)}</span> <button class="play" type="button" id="vexplay" aria-label="ฟังประโยค" onClick=${() => { vSaySent(ex[0]); vFocusNow(); }}>▶</button></div>
+      <div class="vex-t" id="vex-t">${ex[1]}</div>`}
+      ${ex[2] !== dict ? html`<div class="vnote">รูปในประโยค: <b class="ko">${dict}</b> → <b class="ko">${ex[2]}</b></div>` : null}</div>` : null}
+    ${w.nt ? html`<div class="vnt" id="vnt">💡 ${w.nt}</div>` : null}
     <div class="vnote">${sched}</div>
   </div>`;
 }
@@ -1953,13 +1985,14 @@ function VSess({ s }) {
       </div>
       ${fb ? html`<${VFb} fb=${fb} cls=${cls} />` : null}
     </div></div>`;
-  const mc = s.mc, k2t = mc.dir === 'k2t', pk = fb && fb.pick ? fb.pick.idx : -1;
+  const mc = s.mc, k2t = mc.dir === 'k2t', cz = mc.dir === 'cloze' && w.ex, pk = fb && fb.pick ? fb.pick.idx : -1;
   return html`<div class="vsess" id="vsess" key="card">${head}${prog}
     <div class="vcard" id="vcard">${meta}
       ${k2t ? html`<div class="vface"><div class="vko ko" id="vko">${w.ko}</div><button class="play" type="button" id="vplay" onClick=${() => vSay(w.ko)}>▶ ฟัง</button></div><p class="vask">คำนี้แปลว่าอะไร</p>`
+        : cz ? html`<div class="vsent ko" id="vsent">${vSent(w.ex[mc.exi] || w.ex[0], !!fb)}</div><div class="vsent-t" id="vsent-t">🇹🇭 ${(w.ex[mc.exi] || w.ex[0])[1]}</div><p class="vask">เลือกคำที่เติมในช่องว่างได้ (ตัวเลือกเป็นรูปพจนานุกรม ในประโยคอาจผันรูปแล้ว)</p>`
         : html`<div class="vth" id="vth">${w.th}</div><div class="ven" id="ven">${w.en}</div><p class="vask">คำเกาหลีคือข้อไหน</p>`}
       <div class="vmc" id="vmc" role="group" aria-label="ตัวเลือก">${mc.opts.map((o, i) => html`<button type="button" class=${'vopt' + (k2t ? '' : ' ko') + (fb ? (i === mc.ans ? ' ok' : i === pk ? ' ng' : ' dim') : '')} id=${'vopt-' + i} disabled=${!!fb} onClick=${() => vPick(i)}><span class="k">${i + 1}</span><span class="d">${o.d}</span>${fb && i === mc.ans ? html`<span class="m">✓</span>` : fb && i === pk ? html`<span class="m">✕</span>` : null}</button>`)}</div>
-      ${fb ? html`<${VFb} fb=${fb} cls=${cls} /><div class="vin"><button class="btn primary" type="button" id="vq-next" onClick=${vNext}>ถัดไป ⏎</button></div>`
+      ${fb ? html`<${VFb} fb=${fb} cls=${cls} exi=${mc.exi} cz=${!!cz} /><div class="vin"><button class="btn primary" type="button" id="vq-next" onClick=${vNext}>ถัดไป ⏎</button></div>`
         : html`<p class="vkeys">คีย์ลัด: 1–4 = เลือกข้อ${k2t ? '' : ' · ยังไม่เล่นเสียงจนกว่าจะตอบ (ไม่ให้เฉลย)'}</p>`}
     </div></div>`;
 }
@@ -2047,10 +2080,10 @@ route();
 const vocabHooks = {   // test hooks of the vocabulary drill: start(n) = today's session of n words (typed unless mode('card')), answer(text) = type + check, pick(i) = choice i of a card, next() = the next card, …
   start: n => { if (n) vsizeS.value = n; vsS.value = null; vStartDaily(); const s = vsS.peek(); return s ? s.queue.length : 0; },
   unit: u => { vsS.value = null; vStartUnit(u); const s = vsS.peek(); return s ? s.queue.length : 0; },
-  mode: m => vPref(vmodeS, 'mode', m === 'card' ? 'card' : 'type'), dir: d => vPref(vdirS, 'dir', d), auto: on => vPref(vautoS, 'auto', !!on), newmin: n => vPref(vnewS, 'newmin', n), size: n => { vsizeS.value = n; }, tab: t => { vsS.value = null; vtabS.value = t; },
+  mode: m => vPref(vmodeS, 'mode', m === 'card' ? 'card' : 'type'), dir: d => vPref(vdirS, 'dir', d), fast: on => vPref(vfastS, 'fast', !!on), auto: on => vPref(vautoS, 'auto', !!on), newmin: n => vPref(vnewS, 'newmin', n), size: n => { vsizeS.value = n; }, tab: t => { vsS.value = null; vtabS.value = t; },
   answer: t => { const i = $('#vq-in'); if (i) i.value = t; vSubmit(t); return vocabHooks.state(); }, giveUp: vGiveUp, pick: i => { vPick(i); return vocabHooks.state(); }, next: vNext, exit: vExit,
   grade: v => { const s = vsS.peek(); if (s && s.phase === 'ask') vGrade({ o: 1, h: .5, x: 0 }[v] ?? v, '', wordKeys(s.queue[0].ko).keys[0]); return vocabHooks.state(); },
-  state: () => { const s = vsS.peek(); return s && { phase: s.phase, mode: s.mode, label: s.label, total: s.total, done: s.done, ok: s.ok, half: s.half, ng: s.ng, left: s.queue.length, ko: (s.phase === 'fb' ? s.fb : s.queue[0] || {}).ko, mc: s.mc && { dir: s.mc.dir, opts: s.mc.opts.map(o => o.d), ans: s.mc.ans }, fb: s.fb && { score: s.fb.score, key: s.fb.key, b: s.fb.e.b, pick: s.fb.pick && s.fb.pick.idx } }; },
+  state: () => { const s = vsS.peek(); return s && { phase: s.phase, mode: s.mode, label: s.label, total: s.total, done: s.done, ok: s.ok, half: s.half, ng: s.ng, left: s.queue.length, ko: (s.phase === 'fb' ? s.fb : s.queue[0] || {}).ko, mc: s.mc && { dir: s.mc.dir, opts: s.mc.opts.map(o => o.d), ans: s.mc.ans, exi: s.mc.exi }, fb: s.fb && { score: s.fb.score, key: s.fb.key, b: s.fb.e.b, pick: s.fb.pick && s.fb.pick.idx } }; },
   srs: srsGet, info: vInfo, keys: wordKeys, judge: judgeWord, today: vBuildDaily, groups: () => EXAMS.map(e => e.id),
 };
 window.__kmu = { get cur() { return snapshot(); }, openSet, startSet, submit, grade, aiGradeAll, vocab: vocabHooks, go, setAns, store, get C() { return C; }, cats: () => CATS.map(c => [c.id, CAT_SETS[c.id].length]) };   // test hooks

@@ -63,7 +63,7 @@
 | 운동장 | สนามกีฬา ลานกว้างของโรงเรียน | playground, sports field |
 | 눈길 | ทางที่มีหิมะ ถนนหิมะ | snowy road |
 | 깨끗하다 | สะอาด | to be clean |
-| 고프다 | หิว (배가 고프다 = หิวข้าว) | to be hungry (배가 고프다) |
+| 고프다 | หิว | to be hungry |
 | 편지 | จดหมาย | letter |
 | 창문 | หน้าต่าง | window |
 | 약속 | นัด คำมั่นสัญญา | appointment, promise |
@@ -71,7 +71,7 @@
 | 일기예보 | พยากรณ์อากาศ | weather forecast |
 | 기상 캐스터 | ผู้ประกาศพยากรณ์อากาศ | weather caster |
 | 여보세요 | ฮัลโหล (ตอนรับโทรศัพท์) | hello (on the phone) |
-| 지내다 | ใช้ชีวิต อยู่ (잘 지냈어요? = สบายดีไหม) | to spend time, to get along |
+| 지내다 | ใช้ชีวิต อยู่ | to spend time, to get along |
 | 돌아가다 | กลับไป | to go back, to return |
 | 통화하다 | คุยโทรศัพท์ | to talk on the phone |
 | 어울리다 | เข้ากัน เหมาะกัน | to suit, to go well with |

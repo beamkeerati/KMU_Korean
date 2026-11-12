@@ -28,7 +28,7 @@
 | 안국동 | ย่านอันกุก | Anguk-dong |
 | 안내 방송 | ประกาศแจ้งข่าว (ในรถ สถานี) | announcement (on a bus/train) |
 | 김포공항역 | สถานีสนามบินกิมโป | Gimpo Airport Station |
-| 종로3가역 | สถานีช็องโน 3 กา | Jongno 3-ga Station |
+| 종로3가역 | สถานีจงโน 3 กา | Jongno 3-ga Station |
 
 #### ∞ 읽기 ∞ (ศัพท์จากบทอ่าน)
 

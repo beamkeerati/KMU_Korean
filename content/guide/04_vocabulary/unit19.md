@@ -37,7 +37,7 @@
 | 단어 | ไทย | English |
 |---|---|---|
 | 하루 | หนึ่งวัน | one day |
-| 세우다 | วาง (แผน) ตั้ง (계획을 세우다 = วางแผน) | to make (a plan), to set up |
+| 세우다 | วาง (แผน) ตั้ง | to make (a plan), to set up |
 | 마트 | มาร์ท ซูเปอร์มาร์เก็ต | mart, supermarket |
 | 자리 | ที่นั่ง ตำแหน่ง | seat, place |
 | 높다 | สูง | high, tall |

@@ -19,7 +19,7 @@
 | 열다 | เปิด | to open |
 | 치마 | กระโปรง | skirt |
 | 질문 | คำถาม | question |
-| 들다 | ยก (มือ) ถือ | to raise, to hold (손을 들다 = ยกมือ) |
+| 들다 | ยก (มือ) ถือ | to raise, to hold |
 | 알다 | รู้ รู้จัก | to know |
 | 놀다 | เล่น เที่ยว | to play, to hang out |
 | 맞다 | ถูก ใช่ ตรงกัน | to be right, correct |
@@ -50,8 +50,8 @@
 
 | 단어 | ไทย | English |
 |---|---|---|
-| 이상하다 | แปลก ประหลาด (นักเรียนจดเพิ่มในบล็อกอ่าน) | to be strange, odd |
-| 숟가락 | ช้อน (นักเรียนจดเพิ่มในบล็อกอ่าน) | spoon |
+| 이상하다 | แปลก ประหลาด | to be strange, odd |
+| 숟가락 | ช้อน | spoon |
 | 식사하다 | ทานอาหาร | to have a meal |
 | 멀다 | ไกล | to be far |
 | 길다 | ยาว | to be long |

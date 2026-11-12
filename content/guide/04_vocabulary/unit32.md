@@ -12,7 +12,7 @@
 | 여의도역 | สถานียออีโด | Yeouido Station |
 | 인도 | อินเดีย (ในบทนี้) อีกความหมายคือทางเท้า | India (also: sidewalk) |
 | 돌아오다 | กลับมา | to come back |
-| 정류장 | ป้ายรถ ป้ายรถเมล์ (อ่านว่า [정뉴장]) | bus stop |
+| 정류장 | ป้ายรถ ป้ายรถเมล์ | bus stop |
 | KTX | รถไฟความเร็วสูง KTX | KTX (high-speed train) |
 | 빠르다 | เร็ว | to be fast |
 | 다르다 | ต่าง ไม่เหมือน | to be different |

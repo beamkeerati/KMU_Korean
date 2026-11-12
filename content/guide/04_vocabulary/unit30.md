@@ -53,7 +53,7 @@
 
 | 단어 | ไทย | English |
 |---|---|---|
-| 명동역 | สถานีมยองดง | Myeongdong Station |
+| 명동역 | สถานีเมียงดง | Myeongdong Station |
 | 지하철역 | สถานีรถไฟใต้ดิน | subway station |
 | 지나가다 | ผ่านไป เดินผ่าน | to pass by |
 | 신호등 | ไฟจราจร | traffic light |

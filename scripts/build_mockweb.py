@@ -105,6 +105,26 @@ def load_vocab():
     return out
 
 
+EX_DIR = os.path.join(VOCAB_DIR, 'examples')
+
+
+def attach_examples(vocab):
+    """content/guide/04_vocabulary/examples/unitNN.json (brief: content/specs/BRIEF_vocab_examples.md, checker: scripts/vocab_examples_check.py)
+    -> w['ex'] = [[sentence, Thai translation, blank], …] and w['nt'] = Thai usage note. The drill turns ex into fill-in-the-blank cards
+    and shows sentence + note after every answer. Only examples whose blank occurs in the sentence are kept."""
+    by = {w['ko']: w for w in vocab}
+    n = 0
+    for f in sorted(glob.glob(os.path.join(EX_DIR, 'unit*.json'))):
+        for e in json.load(open(f, encoding='utf-8')).get('words', []):
+            w = by.get(e.get('ko'))
+            if not w: continue
+            ex = [[x['ko'].strip(), x.get('th', '').strip(), x['b']] for x in e.get('ex', [])
+                  if x.get('ko') and x.get('b') and x['ko'].count(x['b']) == 1]
+            if ex: w['ex'] = ex; n += 1
+            if e.get('note', '').strip(): w['nt'] = e['note'].strip()
+    return n
+
+
 UNIT_DIR = os.path.join(ROOT, 'content', 'guide', '01_units')
 UNIT_H = re.compile(r'^##\s*(\d+)과\s*[·:]\s*(.+?)\s+\((?=[^)]*[\u0e00-\u0e7f])(.*)\)\s*$')
 
@@ -197,7 +217,8 @@ def main():
     sets = load_sets()
     lines = spoken(sets)
     vocab = load_vocab()
-    vlines = [('F', w['ko']) for w in vocab if ('F', w['ko']) not in set(lines)]
+    nex = attach_examples(vocab)
+    vlines =[('F', w['ko']) for w in vocab if ('F', w['ko']) not in set(lines)]
     if '--no-audio' not in sys.argv:
         made = asyncio.run(make_clips(lines + vlines))
         print(f'clips     : {len(lines)} spoken lines + {len(vlines)} vocabulary words, {made} newly generated')
@@ -247,7 +268,7 @@ def main():
     os.chmod(sh, 0o755)
     n = sum(len(s['items']) for st in sets for s in st['sections'])
     size = sum(os.path.getsize(os.path.join(OUT, x)) for x in ('data.js', 'clips.js', 'clips2.js', *VCLIP_FILES, 'vocab.js', 'vendor.js', 'index.html')) // 1024
-    print(f'mockweb   : {len(sets)} sets · {n} items · {len(clips)}/{len(lines)} clips · {len(vocab)} vocabulary words ({len(vclips)} clips) · {size} KB -> output/2_Practice_Web/')
+    print(f'mockweb   : {len(sets)} sets · {n} items · {len(clips)}/{len(lines)} clips · {len(vocab)} vocabulary words ({len(vclips)} clips, {nex} with example sentences) · {size} KB -> output/2_Practice_Web/')
     if audio: print(f'audio     : {len(audio)} real recordings copied to output/2_Practice_Web/audio/ (publish them as artifact files)')
 
 

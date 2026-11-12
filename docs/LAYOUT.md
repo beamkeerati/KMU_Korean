@@ -171,6 +171,12 @@ content/       ✍️ SOURCE OF TRUTH — edit here, never in output/
                (2026-11-11) v60 (data + clips + clips2 = artifact version 63, vocab.js = 64): daily-32-writing/-listening (8/10) + sheet-33-writing
                  (97 items) in daily_b.json, predict-32 retired, daily_predict33.json (5 sets · 164 items), VOCAB_PRIO 33, 32, 31, 30, 34–37 first —
                  169 sets · 3,250 items · 1,030 clips (33 new). Watch stopped after publishing.
+               (2026-11-12) v61 (index.html + vocab.js = artifact version 65): example sentence + Thai + note for all 1,366 words
+                 (examples/unitNN.json: 35 by Opus as the gold sample, 5–34/36–37 by 6 Sonnet agents from BRIEF_vocab_examples.md, all pass the
+                 checker); build_mockweb attach_examples() → w.ex [[sentence, th, blank]] + w.nt; card dir 'cloze' (same-class distractors, none
+                 already in the sentence), mix = k2t/t2k/cloze, every feedback shows sentence + translation + form + 💡 note; vocab:fast (default off)
+                 replaces the old 0.7 s auto-advance. Sentences play with the browser voice (no clips). Agents flagged th/cat oddities: 닫다/잡다
+                 cat ㅂ/ㄷ 불규칙 (regular), 무겁다/이상하다/숟가락/호박 th carry provenance remarks, 좋다 'ชอบ', 나쁘다 'เลว', 63빌딩, 혹시.
                (2026-11-10) v59 (data + clips + clips2 + vocab.js, artifact version 62): daily-31-writing/-listening (7.5/10, new format:
                  8-cell table + picture sentences with pic + dictation) + sheet-32-writing (39 items) in daily_b.json, predict-31 retired,
                  daily_predict32.json (5 sets · 95 items), VOCAB_PRIO 32, 31, 30, 33–37 first — 161 sets · 2,980 items · 997 clips.
