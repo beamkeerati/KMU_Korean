@@ -1,3 +1,4 @@
+<!-- v64 (2026-11-15): new families mini04 = 복습시험④ 11/18 (30–37과: mini04-* scored sets + mini04x-* spares) and a 기말 tile (exam 'final': the teacher's 복습문제 + 불규칙 정리 + 말하기 기말 연습 handed out 11/13); mini03 moves to the archive row -->
 <!-- v56 (2026-11-05 night): results no longer go missing until a reload — a `storage` listener redraws when another tab of the same browser writes (the cloud merge alone never redrew it: the shared localStorage already held the data), a cover re-reads in place (no scroll), an exam/practice paper whose attempt was submitted, cancelled or restarted elsewhere returns to its cover instead of writing stale answers or auto-submitting an empty paper at time-up, regrade() only rewrites the attempt on screen (C.resAt). Cards carry data-set; __kmu exposes go/setAns/store/C for the headless harness -->
 <!-- v55 (2026-11-05): cloud sync MERGES instead of overwriting — per-key write times (kmuweb:kt:<id> / cloud field t), score + hist = union by attempt time (only 🗑 ล้างผล's t.reset removes attempts), vocab record merged per word (ep = clear count), read → merge → write one doc at a time + a live onSnapshot listener; pre-v55 docs' nulls never erase local data. Late AI grades stay in their own set/attempt (gens). Cause: v54's whole-doc "last change wins" let a stale copy wipe the finished mini03-writing (57/100) and mini02-listening -->
 <!-- v54 (2026-11-05): 복습시험③ is split into two groups via two GROUPS rules — "ชุดสอบจำลอง" (mini03-*: only the scored items, 쓰기 27 · 읽기 10 · 듣기 10, 30 / 20 / 15 min like ②) and "ฝึกเพิ่ม 예비" (mini03x-*: the old spare sections as real sets with real points, own clocks 10 / 25 / 14 min); the single sets had mixed 43 / 22 / 23 items into 30 / 20 / 15 min (the listening flow alone needed 23 min) -->
@@ -474,6 +475,7 @@ mark.vbk { background: var(--paper); color: var(--navy); border: 1.5px solid var
 <script src="data.js"></script>
 <script src="clips.js"></script>
 <script src="clips2.js"></script>
+<script src="clips5.js"></script>
 <script src="clips3.js"></script>
 <script src="clips4.js"></script>
 <script src="vocab.js"></script>
@@ -491,8 +493,9 @@ const CLIPS = window.KMU_CLIPS || {};
 const WORDS = window.KMU_WORDS || {};   // per clip: [[startSec, endSec, word], …] from edge-tts word boundaries
 const EXAMS = [
   { id: 'daily', title: '매일시험 (ข้อสอบประจำวัน)', date: null, when: 'ทุกวันหลังเรียนบทใหม่ · 10 ข้อ · นับเป็นคะแนนเก็บ 쓰기 10', note: 'ข้อสอบจริงที่สอบไปแล้วทุกบท + เก็งข้อสอบของวันพรุ่งนี้ · ทำซ้ำได้ไม่จำกัด' },
+  { id: 'mini04', title: '복습시험 ④', date: '2026-11-18', when: 'พ. 18 พ.ย. · 30~37과', note: 'เก็งข้อสอบจากรูปแบบ 복습시험 ①②③ — 쓰기 100 · 읽기 10 · 듣기 10 (말하기 = พูดแนะนำสถานที่ ไม่อยู่ในชุดนี้)' },
   { id: 'mini03', title: '복습시험 ③', date: '2026-11-06', when: 'ศ. 6 พ.ย. · 22~29과', note: 'เก็งข้อสอบจากรูปแบบ 복습시험 ①② — 쓰기 100 · 읽기 10 · 듣기 10 (말하기 = พูดแนะนำอาหาร ไม่อยู่ในชุดนี้)' },
-  { id: 'final', title: '기말시험 · 복습시험 ④ (เล่ม 1-2)', date: '2026-11-18', when: 'พ. 18 พ.ย. 복습시험 ④ 30~37과 · ศ. 20 / จ. 23 พ.ย. 기말', note: '' },
+  { id: 'final', title: '기말시험 (สอบปลายภาค · เล่ม 1-2)', date: '2026-11-20', when: 'ศ. 20 พ.ย. 쓰기·듣기·읽기 · จ. 23 พ.ย. 말하기 · 23~37과', note: 'ชุด 복습문제 และใบซ้อม 말하기 ที่ครูแจก 13 พ.ย.' },
   { id: 'mini02', title: '복습시험 ②', date: '2026-10-20', when: 'อ. 20 ต.ค. · 14~20과', note: 'เก็งข้อสอบจากรูปแบบ 복습시험 ① — 쓰기 100 · 듣기 10 · 읽기 10 · 말하기 10' },
   { id: 'review', title: '중간시험 복습문제 (ชุดทบทวนของครู)', date: '2026-10-22', when: 'ชุดที่ครูแจก 16 ต.ค.', note: 'พิมพ์เขียวของข้อสอบกลางภาค — 쓰기 14 ตอน · 읽기 25 ข้อ · 듣기 12 ข้อ (เสียงจริงของครู) · 말하기 20 คำถาม' },
   { id: 'midterm', title: '중간시험 (สอบกลางภาค)', date: '2026-10-22', when: 'พฤ. 22 ต.ค. 말하기 · ศ. 23 ต.ค. 쓰기·듣기·읽기 · 1~21과', note: 'ข้อสอบจำลอง 쓰기/읽기/듣기 2 ชุด · สัมภาษณ์จำลอง 말하기' },
@@ -713,6 +716,8 @@ const GROUPS = [
   { re: /^vocab-spelling/, label: '✏️ เขียนตามคำบอก · คำที่เคยสะกดผิด', note: 'ㅈ/ㅊ · ㅐ/ㅔ · 으 หาย · ㄹ หาย · 생활 · 열심히 · 시월/유월 — ฟังแล้วพิมพ์ทั้งวลี' },
   { re: /^vocab-/, label: '🔤 ทดสอบจำศัพท์ 5–13과 · 14–21과', note: 'ไทย→เกาหลี พิมพ์เอง 30 ข้อ + เกาหลี→ไทย เลือก 30 ข้อ คัดคำที่ครูเคยออกสอบก่อน' },
   { re: /^mini02r-/, label: 'ข้อสอบจริง (สอบแล้ว 20 ต.ค.)', note: '' },
+  { re: /^mini04-/, label: '🎯 ชุดสอบจำลอง ④ · ขนาดและเวลาเท่าข้อสอบจริง', note: 'นับเฉพาะข้อที่ให้คะแนน: 쓰기 32 · 읽기 10 · 듣기 10 ข้อ · เวลา 30 · 20 · 18 นาที — กด "เริ่มสอบจริง" ได้เลย' },
+  { re: /^mini04x-/, label: '🧩 ฝึกเพิ่ม 예비 ④ · ไม่ใช่ส่วนของข้อสอบ', note: 'ข้อสำรองที่ตัดออกจากชุดสอบ ทำหลังจบชุดสอบจำลอง' },
   { re: /^mini03-/, label: '🎯 ชุดสอบจำลอง · ขนาดและเวลาเท่าข้อสอบจริง', note: 'นับเฉพาะข้อที่ให้คะแนน: 쓰기 27 · 읽기 10 · 듣기 10 ข้อ (② ที่ออกจริง 26 · 10 · 10) · เวลา 30 · 20 · 15 นาที — กด "เริ่มสอบจริง" ได้เลย' },
   { re: /^mini03x-/, label: '🧩 ฝึกเพิ่ม 예비 · ไม่ใช่ส่วนของข้อสอบ', note: 'ข้อสำรองที่ตัดออกจากชุดสอบ: รูปแบบ ① · ศัพท์หมวดอากาศ ฤดู สี ผลไม้ สัตว์ กีฬา · บทอ่าน 22 · 24 · 25 · 27과 · บทฟัง 22 · 23 · 24 · 27 · 28과 — ตั้งเวลาให้พอทำครบทุกข้อ ทำหลังจบชุดสอบจำลอง' },
 ];
@@ -1228,7 +1233,12 @@ const unitOf = st => { const m = /^(?:daily|sheet|predict)-(\d+)/.exec(st.id); r
 const UNITS = window.KMU_UNITS || {};   // {unit: {ko, th}} from the first line of content/guide/01_units/unitNN.md
 /* first matching category wins, so the vocabulary and textbook-listening sets leave the midterm page. sec: 0 next exam · 1 daily practice · 2 past papers */
 const CATS = [
-  { id: 'mini03', sec: 0, icon: '🎯', title: '복습시험 ③', sub: 'ข้อสอบจำลอง 쓰기 · 읽기 · 듣기 (บท 22~29)', hero: true, date: '2026-11-06',
+  { id: 'mini04', sec: 0, icon: '🎯', title: '복습시험 ④', sub: 'ข้อสอบจำลอง 쓰기 · 읽기 · 듣기 (บท 30~37)', hero: true, date: '2026-11-18',
+    when: 'พ. 18 พ.ย. · บท 30~37 · 쓰기 100 · 읽기 10 · 듣기 10 (말하기 = พูดแนะนำสถานที่ ไม่อยู่ในชุดนี้)',
+    note: 'เก็งจากรูปแบบ 복습시험 ①②③: 쓰기 มีตอนภาพ → คำศัพท์และตอนเติมย่อหน้ากริยาไม่ปกติอยู่ในชุดหลัก (บทเรียนจาก ③) · 읽기 ยกบทอ่านจากหนังสือ · 듣기 ใช้เสียงจริงของตำรา · ข้อ "예비" แยกเป็นชุด "ฝึกเพิ่ม"', match: s => s.exam === 'mini04' },
+  { id: 'final', sec: 0, icon: '🎓', title: '기말시험', sub: 'ชุด 복습문제 ของครู · ตารางกริยาไม่ปกติ · ซ้อม 말하기 19 คำถาม', date: '2026-11-20',
+    when: 'ศ. 20 พ.ย. 쓰기·듣기·읽기 · จ. 23 พ.ย. 말하기 · บท 23~37', note: 'ถอดจากชุดที่ครูแจก 13 พ.ย.: 복습문제 6 หน้า · 불규칙 정리 7 หน้า · 1급 말하기 기말 연습 2 หน้า', match: s => s.exam === 'final' },
+  { id: 'mini03', sec: 2, icon: '📄', title: '복습시험 ③', sub: 'บท 22~29 · สอบแล้ว 6 พ.ย.', date: '2026-11-06',
     when: 'ศ. 6 พ.ย. · บท 22~29 · 쓰기 100 · 읽기 10 · 듣기 10 (말하기 = พูดแนะนำอาหาร ไม่อยู่ในชุดนี้)',
     note: 'เก็งจากรูปแบบ 복습시험 ①② ที่ครูออกจริง: 쓰기 โครง 7 ตอนแบบ ② · 읽기 ยกบทอ่านจากหนังสือ (26과 · 29과 ตำราพิมพ์โจทย์ 대화로 만들기 ไว้เอง) · 듣기 ใช้เสียงจริงของตำรา รวมบทฟังทางการ 24과 · 28과 · ข้อ "예비" แยกเป็นชุด "ฝึกเพิ่ม" ต่างหาก ไม่ปนกับเวลาสอบ', match: s => s.exam === 'mini03' },
   { id: 'daily', sec: 1, icon: '📝', title: '매일시험', sub: 'ข้อสอบประจำวัน · เลือกบทที่ต้องการ', kind: 'units',

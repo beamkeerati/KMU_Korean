@@ -74,19 +74,30 @@ ROW = re.compile(r'^\|\s*([^|]+?)\s*\|\s*([^|]+?)\s*\|\s*([^|]*?)\s*\|\s*$')
 VOCAB_PRIO = [33, 32, 31, 30, 34, 35, 36, 37, 28, 26, 27, 25, 24, 23, 29, 22, 21, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5]
 
 
+SCLIP_FILES = ('clips.js', 'clips2.js', 'clips5.js')   # spoken-line clips (+ KMU_WORDS in clips2.js); one <script> tag each in app.html
 VCLIP_FILES = ('clips3.js', 'clips4.js')   # vocabulary word clips; app.html loads each with a <script> tag
 VCLIP_MAX = 13_500_000                      # bytes of base64 per file, under the 16 MB artifact file limit
 
 
+# same spelling, different words (counter / dog · class / half · pear / boat · write / bitter · work / day of the month). The drill keys
+# progress (vocab:srs) and clips by the spelling, so a later meaning is appended to the first entry ("… · …" / "…; …"), like 눈 = ตา หิมะ;
+# give the entry one example per meaning in examples/unitNN.json.
+HOMONYMS = {'개', '반', '배', '쓰다', '일'}
+
+
 def load_vocab():
     """content/guide/04_vocabulary/unitNN.md (+ 90_themes.md) -> [{u, ko, th, en, cat}]: one entry per distinct Korean word,
-    the first unit that lists it wins; the picture-theme sheet adds its category name and any word the unit lists lack."""
+    the first unit that lists it wins (a HOMONYMS spelling collects every meaning); the picture-theme sheet adds its category
+    name and any word the unit lists lack."""
     words, order = {}, []
     def add(u, ko, th, en, cat=''):
         ko = ko.strip(); th = th.strip(); en = en.strip()
         if not re.search(r'[가-힣]', ko) or ko == '단어': return
         if ko in words:
-            if cat and not words[ko]['cat']: words[ko]['cat'] = cat
+            w = words[ko]
+            if ko in HOMONYMS and en and en.lower() not in w['en'].lower():   # another word with the same spelling
+                w['th'] += ' · ' + th; w['en'] += '; ' + en
+            if cat and not w['cat']: w['cat'] = cat
             return
         words[ko] = {'u': u, 'ko': ko, 'th': th, 'en': en, 'cat': cat}; order.append(ko)
     for f in sorted(glob.glob(os.path.join(VOCAB_DIR, 'unit*.md'))):
@@ -232,13 +243,17 @@ def main():
         f.write('window.KMU_UNITS = ' + json.dumps(load_units(), ensure_ascii=False) + ';\n')
     words = {f'{v}|{t}': json.load(open(clip_path(v, t) + '.json', encoding='utf-8'))
              for v, t in lines if os.path.exists(clip_path(v, t) + '.json')}
-    # two files: a claude.ai artifact file may not exceed 16 MB, and the clips passed that on 2026-10-21 (586 clips = 15.5 MB)
-    keys = sorted(clips); half = keys[:len(keys) // 2]
-    with open(os.path.join(OUT, 'clips.js'), 'w', encoding='utf-8') as f:
-        f.write('window.KMU_CLIPS = ' + json.dumps({k: clips[k] for k in half}, ensure_ascii=False) + ';\n')
-    with open(os.path.join(OUT, 'clips2.js'), 'w', encoding='utf-8') as f:
-        f.write('Object.assign(window.KMU_CLIPS, ' + json.dumps({k: clips[k] for k in keys[len(keys) // 2:]}, ensure_ascii=False) + ');\n')
-        f.write('window.KMU_WORDS = ' + json.dumps(words, ensure_ascii=False) + ';\n')
+    # spoken-line clips split by size over SCLIP_FILES: a claude.ai artifact file may not exceed 16 MB (two files passed 16 MB on 2026-11-12)
+    keys = sorted(clips); per = sum(len(clips[k]) for k in keys) // len(SCLIP_FILES) + 1
+    parts = [{} for _ in SCLIP_FILES]; i = n = 0
+    for k in keys:
+        if n >= per and i < len(parts) - 1: i += 1; n = 0
+        parts[i][k] = clips[k]; n += len(clips[k])
+    for j, (name, part) in enumerate(zip(SCLIP_FILES, parts)):
+        with open(os.path.join(OUT, name), 'w', encoding='utf-8') as f:
+            body = json.dumps(part, ensure_ascii=False)
+            f.write(('window.KMU_CLIPS = ' + body + ';\n') if j == 0 else ('Object.assign(window.KMU_CLIPS, ' + body + ');\n'))
+            if j == 1: f.write('window.KMU_WORDS = ' + json.dumps(words, ensure_ascii=False) + ';\n')
     with open(os.path.join(OUT, 'vocab.js'), 'w', encoding='utf-8') as f:
         f.write('window.KMU_VOCAB = ' + json.dumps(vocab, ensure_ascii=False) + ';\n')
     vclips = {f'{v}|{t}': 'data:audio/mpeg;base64,' + base64.b64encode(open(clip_path(v, t), 'rb').read()).decode()
@@ -267,7 +282,7 @@ def main():
                 'python3 -m http.server 8000 --bind 127.0.0.1\n')
     os.chmod(sh, 0o755)
     n = sum(len(s['items']) for st in sets for s in st['sections'])
-    size = sum(os.path.getsize(os.path.join(OUT, x)) for x in ('data.js', 'clips.js', 'clips2.js', *VCLIP_FILES, 'vocab.js', 'vendor.js', 'index.html')) // 1024
+    size = sum(os.path.getsize(os.path.join(OUT, x)) for x in ('data.js', *SCLIP_FILES, *VCLIP_FILES, 'vocab.js', 'vendor.js', 'index.html')) // 1024
     print(f'mockweb   : {len(sets)} sets · {n} items · {len(clips)}/{len(lines)} clips · {len(vocab)} vocabulary words ({len(vclips)} clips, {nex} with example sentences) · {size} KB -> output/2_Practice_Web/')
     if audio: print(f'audio     : {len(audio)} real recordings copied to output/2_Practice_Web/audio/ (publish them as artifact files)')
 

@@ -2,13 +2,13 @@
 
 | 단어 | ไทย | English |
 |---|---|---|
-| 몇 | กี่ เท่าไร | how many, what (number) |
+| 몇 | กี่ เท่าไร (ถามจำนวนนับ ตามด้วยหน่วย) | how many, what (number) |
 | 층 | ชั้น | floor |
 | 화장실 | ห้องน้ำ | restroom, toilet |
 | 사무실 | ออฟฟิศ สำนักงาน | office |
 | 호 | ห้องเลขที่ (หมายเลขห้อง) | room number |
 | 기숙사 | หอพัก | dormitory |
-| 방 | ห้อง | room |
+| 방 | ห้อง (ตัวห้อง เช่น ห้องนอน ห้องพัก) | room |
 | 버스 | รถบัส | bus |
 | 번 | หมายเลข (เบอร์) | number |
 | 원룸 | ห้องเดี่ยว (วันรูม) | studio apartment |
@@ -31,7 +31,7 @@
 | 가게 | ร้านค้า | shop, store |
 | 서점 | ร้านหนังสือ | bookstore |
 | 휴게실 | ห้องพักผ่อน | lounge |
-| 많이 | มาก | a lot, many |
+| 많이 | มาก เยอะ (ปริมาณ ใช้กับกริยา) | a lot, much (with verbs) |
 | 학생회관 | อาคารสโมสรนักศึกษา | student union building |
 
 *โน้ตที่คุณเขียนไว้ท้ายหน้า:* 지하 (ชั้นใต้ดิน = basement); copy (ถ่ายเอกสาร)
@@ -42,8 +42,8 @@
 
 | 단어 | ไทย | English |
 |---|---|---|
-| 있다 | มี อยู่ | to exist, to have |
-| 없다 | ไม่มี ไม่อยู่ | to not exist, to not have |
+| 있다 | มี อยู่ | to be (at), to exist, to have |
+| 없다 | ไม่มี ไม่อยู่ | to not be (at), to not exist, to not have |
 | 단위 | หน่วย | unit |
 | 단위 명사 | ลักษณนาม | counter (bound noun) |
 | 한자어 | คำที่มาจากภาษาจีน | Sino-Korean word |

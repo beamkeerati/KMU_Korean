@@ -171,6 +171,16 @@ content/       ✍️ SOURCE OF TRUTH — edit here, never in output/
                (2026-11-11) v60 (data + clips + clips2 = artifact version 63, vocab.js = 64): daily-32-writing/-listening (8/10) + sheet-33-writing
                  (97 items) in daily_b.json, predict-32 retired, daily_predict33.json (5 sets · 164 items), VOCAB_PRIO 33, 32, 31, 30, 34–37 first —
                  169 sets · 3,250 items · 1,030 clips (33 new). Watch stopped after publishing.
+               (2026-11-13) v63 (data + vocab = artifact version 68): vocabulary MEANING audit — 5 Sonnet agents (brief
+                 content/specs/BRIEF_vocab_meaning_audit.md, collision list extracted/vocab_audit/collisions.txt) → 221 fixes applied by
+                 extracted/vocab_audit/apply.py (old value checked first): ~140 overlapping glosses split (고민/걱정하다, 놀다/치다, 몇/얼마,
+                 늦게/느리다, 좋다/좋아하다 by particle, 열다/켜다, 미안하다/죄송하다 …), 통역 ≠ ล่าม, 이때 = ตอนนั้น, adjectives "to be …";
+                 HOMONYMS in build_mockweb.load_vocab (개 · 반 · 배 · 쓰다 · 일 had lost their 2nd meaning) + a 2nd example each;
+                 unit23.md stray rows moved back into their table; old glosses fixed in workbook 17/30/35/36, grammar 51, vocab_b.json.
+               (2026-11-12) v62 (index.html + data + clips + clips2 + NEW clips5.js = artifact version 67): daily-33-writing/-listening
+                 (8.5/10, sentence format again) + sheet-34-writing in daily_b.json, daily_predict34.json (6 sets · 147 items, incl. a
+                 spare 31–32-style table set), 33 prediction retired; clips.js had reached 16.2 MB → spoken-line clips now split by
+                 size over SCLIP_FILES (clips.js · clips2.js · clips5.js, ~9.7 MB each) — 178 sets · 3,419 items · 1,063 clips.
                (2026-11-12) v61 (index.html + vocab.js = artifact version 65): example sentence + Thai + note for all 1,366 words
                  (examples/unitNN.json: 35 by Opus as the gold sample, 5–34/36–37 by 6 Sonnet agents from BRIEF_vocab_examples.md, all pass the
                  checker); build_mockweb attach_examples() → w.ex [[sentence, th, blank]] + w.nt; card dir 'cloze' (same-class distractors, none

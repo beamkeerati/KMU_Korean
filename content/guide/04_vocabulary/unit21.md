@@ -6,10 +6,10 @@
 | 설탕 | น้ำตาล | sugar |
 | 넣다 | ใส่ (ลงไป) | to put in |
 | 여러 가지 | หลายอย่าง หลายชนิด | various kinds |
-| 멀다 | ไกล | far |
-| 놀다 | เล่น เที่ยว | to play, hang out |
+| 멀다 | ไกล | to be far |
+| 놀다 | เล่น เที่ยวเล่น (ไม่ใช่ดนตรี/กีฬา) | to play, hang out (not music/sport) |
 | 음료수 | เครื่องดื่ม | beverage, drink |
-| 열다 | เปิด | to open |
+| 열다 | เปิด (ประตู หน้าต่าง ร้านค้า) | to open (door, window, shop) |
 | 그리다 | วาด | to draw |
 | 북한강 | แม่น้ำบุกฮัน | Bukhan River |
 | 처음 | ครั้งแรก แรกเริ่ม | first time |

@@ -52,12 +52,12 @@
 | 주차장 | ที่จอดรถ | parking lot |
 | 월드컵 | ฟุตบอลโลก | World Cup |
 | 경기장 | สนามแข่ง | stadium |
-| 느리다 | ช้า | to be slow |
+| 느리다 | ช้า (ความเร็วต่ำ ตรงข้าม 빠르다) | to be slow (speed) |
 | 끝내다 | ทำให้เสร็จ จบ | to finish |
 | 노선 | เส้นทาง สายรถ | route, line |
 | 인천공항 | สนามบินอินชอน | Incheon Airport |
 | 중국말 | ภาษาจีน | Chinese (language) |
 | 대통령 | ประธานาธิบดี | president |
-| 전화(를) 드리다 | โทรหา (สุภาพ) | to phone (honorific) |
+| 전화(를) 드리다 | โทรหา (ถ่อมตัว ใช้กับผู้ใหญ่) | to phone (humble, to a senior) |
 | 길(을) 모르다 | ไม่รู้ทาง | to not know the way |
 | 걱정하지 마세요 | ไม่ต้องห่วง | don't worry |

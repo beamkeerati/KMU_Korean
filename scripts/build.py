@@ -34,7 +34,7 @@ OUTPUT_MD = os.path.join(OUTPUT, '_build', 'md')         # intermediate .md, one
 OUTPUT_EVERYDAY = OUTPUT_DAILY
 OUTPUT_MINIEXAM = os.path.join(OUTPUT_EXAM, 'past')      # 복습시험 papers as sat
 OUTPUT_REVIEW = OUTPUT_EXAM
-PREDICT_DIRS = {'everyday': os.path.join(OUTPUT_DAILY, 'predictions'), 'miniexam': OUTPUT_EXAM, 'midterm': OUTPUT_EXAM}
+PREDICT_DIRS = {'everyday': os.path.join(OUTPUT_DAILY, 'predictions'), 'miniexam': OUTPUT_EXAM, 'midterm': OUTPUT_EXAM, 'final': OUTPUT_EXAM}
 UNITS = range(5, 38)                                   # units the study material covers
 
 # 매일시험 and 복습시험 predictions are kept apart at every level (the user asked for that):
@@ -43,6 +43,7 @@ PREDICTION_KINDS = [
     ('everyday', 'unit*.md', 'KMU_Predict_unit', '🔮 매일 시험 เก็งข้อสอบ — {n}과'),
     ('miniexam', 'exam*.md', 'KMU_Predict_miniexam', '🔮 복습시험 (mini exam) เก็งข้อสอบ — ครั้งที่ {n}'),
     ('midterm', 'midterm*.md', 'KMU_Predict_midterm', '🔮 중간시험 (สอบกลางภาค) เก็งข้อสอบ — 1~21과'),
+    ('final', 'final*.md', 'KMU_Predict_final', '🔮 기말시험 (สอบปลายภาค) เตรียมสอบ — 23~37과'),
 ]
 
 # Each exercise source holds its questions, then its answer key. The heading
@@ -324,7 +325,7 @@ def build_review():
             title = re.search(r'^## (.*)$', q, re.M)
             qs.append(q.strip())
             ans.append((f'## {title.group(1)}\n\n' if title else '') + re.sub(EVERYDAY_ANSWER_PATTERN, '', a, flags=re.M).strip())
-        md = (f'# 📝 {name.replace("midterm", "중간시험 복습문제 ")} (แบบฝึกทบทวนที่ครูแจก)\n\n'
+        md = (f'# 📝 {name.replace("midterm", "중간시험 복습문제 ").replace("final", "기말시험 복습문제 ")} (แบบฝึกทบทวนที่ครูแจก)\n\n'
               f'*โจทย์ทุกข้อพร้อมคำแปลไทย · เฉลยท้ายเล่มเป็นเฉลยที่ AI ทำ ไม่ใช่ของครู*\n\n## 목차 (สารบัญ)\n\n[TOC]\n\n'
               f'# ส่วนที่ 1 · โจทย์ (문제)\n\n' + add_writing_space('\n\n'.join(qs)) +
               f'\n\n# ส่วนที่ 2 · เฉลย (정답)\n\n' + one_answer_per_line('\n\n'.join(ans)))
@@ -368,8 +369,9 @@ def build_predictions():
             name = os.path.splitext(os.path.basename(u))[0]        # unit18 · exam02
             n = re.sub(r'^[a-z]+0*', '', name)                     # 18 · 2
             q, a = split_exercise(read(u), EVERYDAY_ANSWER_PATTERN)
-            md = (f'# {banner.format(n=n)}\n\n{add_writing_space(strip_own_titles(q)).strip()}\n\n'
-                  f'# 정답 (เฉลยข้อสอบจำลอง)\n\n{one_answer_per_line(strip_own_titles(a)).strip()}')
+            md = f'# {banner.format(n=n)}\n\n{add_writing_space(strip_own_titles(q)).strip()}'
+            if strip_own_titles(a).strip():      # a prediction without a key (e.g. final01 speaking sheet) gets no empty 정답 page
+                md += f'\n\n# 정답 (เฉลยข้อสอบจำลอง)\n\n{one_answer_per_line(strip_own_titles(a)).strip()}'
             path = os.path.join(md_dir, f'{prefix}{n.zfill(2)}.md')
             write(path, md)
             out.append((path, pdf_dir))

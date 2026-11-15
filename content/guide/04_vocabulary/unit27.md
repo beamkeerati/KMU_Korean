@@ -15,7 +15,7 @@
 | 단어 | คำศัพท์ | word, vocabulary |
 | 채소 | ผัก | vegetable |
 | 장마 | ฤดูฝนยาวนานของเกาหลี (ช่วงมรสุมฝนตกต่อเนื่องราวมิถุนายน–กรกฎาคม) | rainy season |
-| 그런데 | แต่ว่า · ว่าแต่ (เปลี่ยนเรื่อง) | by the way, but |
+| 그런데 | ว่าแต่ แต่ (เปลี่ยนเรื่อง/แย้งเบา ๆ) | by the way; but (soft contrast) |
 | 자주 | บ่อยๆ | often |
 | 팥빙수 | พัตบิงซู น้ำแข็งไสราดถั่วแดง | red bean shaved ice |
 | 빨리 | เร็ว ๆ รีบ | quickly |
@@ -28,7 +28,7 @@
 | 잘 지내다 | สบายดี ใช้ชีวิตอยู่ดี | to get along well |
 | 파전 | พาจอน แพนเค้กเกาหลีใส่ต้นหอม | green onion pancake |
 | 종로 | จงโน (ย่านในโซล) | Jongno |
-| 유명하다 | มีชื่อเสียง | famous |
+| 유명하다 | มีชื่อเสียง | to be famous |
 | 날 | วัน (눈이 오는 날 = วันที่หิมะตก) | day |
 | 막걸리 | มักกอลลี เหล้าข้าวเกาหลีสีขาวขุ่น | makgeolli, rice wine |
 
@@ -51,14 +51,14 @@
 | 군고구마 | มันเทศเผา | roasted sweet potato |
 | 유자차 | ชาส้มยูจา (ชาผลไม้ตระกูลส้มเชื่อม) | citron tea |
 | 너무 | มาก…เกินไป (ในบทนี้ = มาก) | too, very |
-| 데이트 | การเดท นัดพบ | date |
+| 데이트 | การเดท นัดพบ | date (with a partner) |
 | 뚱뚱하다 | อ้วน | to be fat |
-| 싫다 | ไม่ชอบ ไม่อยาก | to dislike, to not want |
+| 싫다 | ไม่ชอบ ไม่อยาก (N이/가 싫어요) | to dislike, not want (N이/가 싫다) |
 | 온천 | บ่อน้ำพุร้อน | hot spring |
 | 풍경 | ทิวทัศน์ | scenery |
 | 사계절 | สี่ฤดู | four seasons |
 | 알아보다 | ลองหาข้อมูล สืบดู | to look into, to find out |
 | 실력 | ความสามารถ ทักษะ | skill, ability |
-| 달라지다 | เปลี่ยนไป | to change, to become different |
-| 이제 | ตอนนี้ แล้วนี่ | now |
+| 달라지다 | เปลี่ยนไป กลายเป็นต่างจากเดิม | to become different (in state) |
+| 이제 | ตอนนี้ แล้ว (ต่างจากเมื่อก่อน) | now, by now (changed from before) |
 | 치킨 | ไก่ทอด | fried chicken |

@@ -5,8 +5,8 @@
 | 주다 | ให้ | to give |
 | 보내다 | ส่ง | to send |
 | 질문하다 | ถามคำถาม | to ask a question |
-| 드리다 | ให้ (สุภาพ) | to give (honorific) |
-| 강아지 | ลูกสุนัข หมา | puppy, dog |
+| 드리다 | ให้ (แก่ผู้ใหญ่ ใช้กับ 께) มอบให้ | to give (to a senior, humble) |
+| 강아지 | ลูกสุนัข ลูกหมา (หมาเลี้ยงก็ใช้) | puppy (also a pet dog) |
 | 향수 | น้ำหอม | perfume |
 | 액세서리 | เครื่องประดับ | accessory |
 | 자주 | บ่อยๆ | often |
@@ -16,7 +16,7 @@
 | 장갑 | ถุงมือ | gloves |
 | 눈 | ตา หิมะ | eye, snow |
 | 지하철 | รถไฟใต้ดิน | subway |
-| 복잡하다 | ซับซ้อน แออัด | complicated, crowded |
+| 복잡하다 | ซับซ้อน แออัด | to be complicated, crowded |
 | 날마다 | ทุกวัน | every day |
 | 선글라스 | แว่นกันแดด | sunglasses |
 | 졸업식 | พิธีสำเร็จการศึกษา | graduation ceremony |
@@ -28,7 +28,7 @@
 |---|---|---|
 | 해운대 | แฮอุนแด (ชายหาดในปูซาน) | Haeundae (beach in Busan) |
 | 참 | จริงๆ มาก | really, very |
-| 유명하다 | มีชื่อเสียง | famous |
+| 유명하다 | มีชื่อเสียง | to be famous |
 
 #### ศัพท์เพิ่มเติมจากตำราและเวิร์กบุ๊ก (ไม่อยู่ในชีตของศูนย์)
 

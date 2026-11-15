@@ -16,12 +16,12 @@
 | 문화 | วัฒนธรรม | culture |
 | 수박 | แตงโม | watermelon |
 | 달다 | หวาน | to be sweet |
-| 열다 | เปิด | to open |
+| 열다 | เปิด (ประตู หน้าต่าง ร้านค้า) | to open (door, window, shop) |
 | 치마 | กระโปรง | skirt |
 | 질문 | คำถาม | question |
-| 들다 | ยก (มือ) ถือ | to raise, to hold |
+| 들다 | ยกขึ้น ถือ (ยกมือ ถือกระเป๋า) | to lift, to carry (in hand) |
 | 알다 | รู้ รู้จัก | to know |
-| 놀다 | เล่น เที่ยว | to play, to hang out |
+| 놀다 | เล่น เที่ยวเล่น (ไม่ใช่ดนตรี/กีฬา) | to play, hang out (not music/sport) |
 | 맞다 | ถูก ใช่ ตรงกัน | to be right, correct |
 | 잘하다 | ทำได้ดี เก่ง | to do well, be good at |
 
@@ -33,14 +33,14 @@
 |---|---|---|
 | 식사 | การทานอาหาร มื้ออาหาร | meal |
 | 초대하다 | เชิญ | to invite |
-| 먼저 | ก่อน | first, before |
+| 먼저 | ก่อน (ก่อนคนอื่น/ลำดับแรก) | first, ahead of others |
 | 미역국 | ซุปสาหร่ายวากาเมะ (ซุปมิยอก) | seaweed soup |
 | 부터 | ตั้งแต่ เริ่มจาก | from, starting from |
 | 왜 | ทำไม | why |
 | 대답하다 | ตอบ | to answer |
 | 수프 | ซุป | soup |
 | 웃다 | หัวเราะ ยิ้ม | to laugh, to smile |
-| 밥 | ข้าว อาหาร | rice, meal |
+| 밥 | ข้าวสวย มื้ออาหาร | cooked rice, meal |
 | 국 | ซุป (แบบเกาหลี) | soup (Korean style) |
 | 반찬 | กับข้าว เครื่องเคียง | side dishes |
 

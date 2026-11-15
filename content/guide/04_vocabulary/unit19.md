@@ -14,10 +14,10 @@
 | 미술관 | พิพิธภัณฑ์ศิลปะ หอศิลป์ | art museum |
 | 장소 | สถานที่ | place |
 | 기간 | ช่วงเวลา ระยะเวลา | period, duration |
-| 시간 | เวลา ชั่วโมง | time, hour |
+| 시간 | เวลา ชั่วโมง (ปริมาณเวลา) | time, hour (amount of time) |
 | 사진전 | นิทรรศการภาพถ่าย | photo exhibition |
 | 가야금 | กายาคึม (เครื่องดนตรีเกาหลี) | gayageum (Korean zither) |
-| 연주회 | การแสดงดนตรี รีไซทัล | recital, concert |
+| 연주회 | การแสดงดนตรี รีไซทัล (บรรเลงเครื่องดนตรี) | recital (instrumental performance) |
 | 남산 | เขานัมซัน | Namsan (Mountain) |
 | 한옥마을 | หมู่บ้านฮันอก (บ้านเกาหลีดั้งเดิม) | Hanok Village |
 
@@ -26,7 +26,7 @@
 | 단어 | ไทย | English |
 |---|---|---|
 | 달 | เดือน | month |
-| 전에 | ก่อน เมื่อก่อน | before, ago |
+| 전에 | ก่อน (เวลา/เหตุการณ์) เมื่อก่อน | before (a time), ago |
 | 한식집 | ร้านอาหารเกาหลี | Korean restaurant |
 | 불고기 | พุลโกกิ (เนื้อหมักย่าง) | bulgogi |
 
@@ -37,10 +37,10 @@
 | 단어 | ไทย | English |
 |---|---|---|
 | 하루 | หนึ่งวัน | one day |
-| 세우다 | วาง (แผน) ตั้ง | to make (a plan), to set up |
+| 세우다 | ตั้งขึ้น (วางแผน = 계획을 세우다) | to set up, to make (a plan) |
 | 마트 | มาร์ท ซูเปอร์มาร์เก็ต | mart, supermarket |
 | 자리 | ที่นั่ง ตำแหน่ง | seat, place |
-| 높다 | สูง | high, tall |
+| 높다 | สูง (ภูเขา ตึก ราคา ไม่ใช่ส่วนสูงคน) | to be high (not for a person) |
 | 아마 | อาจจะ คงจะ | perhaps, probably |
 | 우선 | ก่อนอื่น | first of all |
 | 갖다 | มี ถือ | to have, to hold |

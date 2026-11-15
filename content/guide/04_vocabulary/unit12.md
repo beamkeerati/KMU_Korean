@@ -9,7 +9,7 @@
 | 내일 | พรุ่งนี้ | tomorrow |
 | 시장 | ตลาด | market |
 | 날씨 | อากาศ | weather |
-| 좋다 | ดี ชอบ | to be good, nice |
+| 좋다 | ดี · ชอบ (N이/가 좋아요) | to be good, nice |
 | 김밥 | คิมบับ | kimbap |
 | 편의점 | ร้านสะดวกซื้อ | convenience store |
 | 과일 | ผลไม้ | fruit |
@@ -39,6 +39,6 @@
 | 단어 | ไทย | English |
 |---|---|---|
 | 극장 | โรงภาพยนตร์ | movie theater |
-| 헬스장 | ฟิตเนส ยิม | gym |
+| 헬스장 | ฟิตเนส ห้องเวทเทรนนิง | fitness center (weights) |
 | 축구하다 | เล่นฟุตบอล | to play soccer |
 | 돼지 | หมู | pig |

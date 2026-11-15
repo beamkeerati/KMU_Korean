@@ -10,7 +10,7 @@
 | 고양이 | แมว | cat |
 | 개 | ชิ้น อัน ลูก (ลักษณนามสิ่งของ) | counter for items |
 | 장 | ใบ แผ่น (ลักษณนามกระดาษ ตั๋ว) | counter for sheets, tickets |
-| 잔 | แก้ว ถ้วย (ลักษณนามเครื่องดื่ม) | counter for cups, glasses |
+| 잔 | แก้ว (ลักษณนามนับแก้ว/ถ้วยเครื่องดื่ม) | counter for drinks (a cup/glass of) |
 | 병 | ขวด (ลักษณนาม) | counter for bottles |
 | 명 | คน (ลักษณนามคน) | counter for people |
 | 마리 | ตัว (ลักษณนามสัตว์) | counter for animals |
@@ -23,10 +23,10 @@
 | 치약 | ยาสีฟัน | toothpaste |
 | 칫솔 | แปรงสีฟัน | toothbrush |
 | 라면 | ราเมียน บะหมี่กึ่งสำเร็จรูป | ramyeon, instant noodles |
-| 얼마 | เท่าไร | how much |
+| 얼마 | เท่าไร (ถามราคา จำนวนเงิน) | how much (price, amount) |
 | 원 | วอน (สกุลเงินเกาหลี) | won |
 | 수건 | ผ้าเช็ดตัว | towel |
-| 컵 | ถ้วย แก้ว | cup |
+| 컵 | ถ้วย แก้วน้ำ (ตัวภาชนะ นับด้วย 개) | cup (the container) |
 | 티셔츠 | เสื้อยืด | T-shirt |
 | 운동화 | รองเท้าผ้าใบ | sneakers |
 | 아이스크림 | ไอศกรีม | ice cream |
@@ -78,6 +78,6 @@
 | 서로 | ซึ่งกันและกัน | each other |
 | 비교하다 | เปรียบเทียบ | to compare |
 | 짝 | คู่ เพื่อนคู่ | partner, pair |
-| 쓰이다 | ถูกใช้ | to be used |
+| 쓰이다 | ถูกเขียน ถูกใช้ (쓰여 있다 = มีเขียนไว้) | to be written, to be used |
 | 나이 | อายุ | age |
 | 음료 | เครื่องดื่ม (= 음료수) | beverage |

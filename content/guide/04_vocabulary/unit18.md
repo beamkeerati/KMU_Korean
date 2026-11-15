@@ -10,9 +10,9 @@
 | 노래방 | ร้านคาราโอเกะ | karaoke room |
 | 부르다 | ร้อง (เพลง) เรียก | to sing, to call |
 | 점심 | อาหารกลางวัน เที่ยง | lunch, noon |
-| 근처 | ใกล้ๆ บริเวณใกล้เคียง | nearby |
-| 그림 | รูปภาพ ภาพวาด | picture, drawing |
-| 체육관 | โรงยิม | gym |
+| 근처 | บริเวณใกล้เคียง แถวๆ | vicinity, nearby area |
+| 그림 | ภาพวาด รูปวาด | drawing, painting |
+| 체육관 | โรงยิม (โรงกีฬาในร่ม) | gymnasium, sports hall |
 | 자르다 | ตัด | to cut |
 | 학원 | โรงเรียนกวดวิชา | academy, cram school |
 
@@ -20,7 +20,7 @@
 
 | 단어 | ไทย | English |
 |---|---|---|
-| 쯤 | ประมาณ | about, around |
+| 쯤 | ประมาณ (ต่อท้ายจุดเวลา 세 시쯤) | about, around (a point in time) |
 | 헤어지다 | แยกจากกัน เลิกกัน | to part, break up |
 
 *โน้ตที่คุณเขียนไว้ท้ายหน้า:* 만들다 = make

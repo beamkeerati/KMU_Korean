@@ -4,7 +4,7 @@
 |---|---|---|
 | 날짜 | วันที่ | date |
 | 며칠 | วันที่เท่าไร กี่วัน | what date, how many days |
-| 일 | วัน | day |
+| 일 | วันที่ (ต่อท้ายเลข เช่น 5일) | day of the month (after a number) |
 | 월요일 | วันจันทร์ | Monday |
 | 화요일 | วันอังคาร | Tuesday |
 | 수요일 | วันพุธ | Wednesday |
@@ -12,17 +12,17 @@
 | 금요일 | วันศุกร์ | Friday |
 | 토요일 | วันเสาร์ | Saturday |
 | 일요일 | วันอาทิตย์ | Sunday |
-| 무슨 | อะไร ชนิดไหน | what, what kind of |
+| 무슨 | อะไร ชนิดไหน (ถามประเภท + นาม) | what, what kind of (+ noun) |
 | 언제 | เมื่อไร | when |
-| 오전 | ช่วงเช้า (ก่อนเที่ยง) | morning, a.m. |
+| 오전 | ช่วงเช้า (ก่อนเที่ยง) | a.m., before noon |
 | 한국어 | ภาษาเกาหลี | Korean language |
 | 오후 | ช่วงบ่าย (หลังเที่ยง) | afternoon, p.m. |
-| 아침 | ตอนเช้า อาหารเช้า | morning, breakfast |
+| 아침 | เช้า (ตื่นนอน) อาหารเช้า | morning (early), breakfast |
 | 저녁 | ตอนเย็น อาหารเย็น | evening, dinner |
 | 주말 | วันหยุดสุดสัปดาห์ | weekend |
 | 방학 | ปิดเทอม | school vacation |
-| 여행 | การท่องเที่ยว | travel, trip |
-| 배우다 | เรียน เรียนรู้ | to learn |
+| 여행 | การเดินทางท่องเที่ยว ทริป | travel, trip |
+| 배우다 | เรียน เรียนรู้ (รับการสอน/ฝึกทักษะ) | to learn (be taught) |
 | 바지 | กางเกง | pants |
 | 배 | ลูกแพร์ | pear |
 | 어머니 | คุณแม่ | mother |
@@ -38,7 +38,7 @@
 |---|---|---|
 | 인사동 | อินซาดง (ย่านวัฒนธรรมในโซล) | Insadong |
 | 옛날 | สมัยก่อน อดีต | old days, the past |
-| 구경 | การเที่ยวชม | sightseeing |
+| 구경 | การเที่ยวชม ดูเล่น (ดูของ/สถานที่) | looking around, sightseeing |
 | 찻집 | ร้านชา | teahouse |
 | 된장찌개 | ซุปเต้าเจี้ยวเกาหลี | soybean paste stew |
 | 차 | ชา / รถยนต์ | tea / car |

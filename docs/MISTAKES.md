@@ -157,6 +157,17 @@ starred ones cost real marks.
   sentences, 6호선으로 갈아타세요, 1번 출구에 있어요.
   Sheet 33 (same day): (으)면 picture grid 23/23 (도우면 · 가까우면 · 좁으면 · 학생이면 right) · (으)ㄹ 사람 grid 5/7 written, 16 cells left blank —
   **동울 사람** for 도울 사람 (stray ㅇ 받침) · **듣을 사람** for 들을 사람 (ㄷ-irregular not applied in the grid, although 들을 was right on page 5).
+- ★ **매일시험 33과 (2026-11-12, 8.5/10):** three half marks, all vowel spelling — **아르바으트** for 아르바이트 (이 → 으) · **예약갈** for 예약할
+  (said [예야칼]; the third syllable looks like 갈, maybe 할 without its top stroke) · **음료스를** for 음료수를 (ㅜ → ㅡ). With 32과's 글음 that is ㅡ written
+  for another vowel 3 times in 2 days. Right: 매우면 (ㅂ-irregular, wrong in workbook 33), 좋으면 · 되면 · 있으면, 만날 친구 · 먹을 빵 · 할 일, 걱정하지 마세요.
+- ★ **매일시험 34과 (2026-11-13, 8.5/10):** three half marks. ★ **ㅈ/ㅊ again, twice in one paper:** **자를** for 차를 (item 1, 커피나 차를) and **젝을** for 책을 (item 3, 책을 읽거나 영화를 봐요)
+  — the teacher circled both; 10th and 11th sightings (책 was already written 젝 on test 17, with the ㅐ/ㅔ slip). **New: extra particle in dictation** — wrote **주말에 잘 보내셨어요** for 주말 잘 보내셨어요
+  (대화 34-1 first line has no 에: 주말을 잘 보내다, 주말 = object with 을 dropped); the teacher circled and struck 에 (△). Dictate only what is heard; do not add 에/에서/을 from habit. The opposite slip (a particle dropped: 책 읽는, 사수 없어요) is also on record. Right: 커피숍이나 공원에서 (ㅂ + 이나, then 에서), 읽거나 / 운동하거나 (-거나 straight on the stem),
+  자주 · 거의 안 · 전혀 안 from the calendar, 액션 영화를 좋아해요, 집에서 쉬어요. Copied the question's 주말에 보통 into item 4 (accepted).
+  Sheet 35 (2026-11-13): -아/어 보다 table 24/24 right (도와 · 들어 · 걸어 · 불러 included); the -는 것 table left blank.
+- **Workbook 34 (2026-11-12, photos):** **김치이나** for 김치나 (vowel-final noun + 나) · **태국 음악을 불러요** for 태국 노래를 불러요 (음악 goes with 듣다,
+  노래 with 부르다) · answered 간식 (snack) with 김치/국 · 영마산 (용마산?) · in the 대화 task wrote two different names where both 씨 blanks address the same
+  person. Right: 안경이나 휴대폰을 드려요, 선물이나 음식을 가지고 갈 거예요, 태국 with ㅐ.
 
 What the user does well: ㅂ니다/습니다 choice by 받침, -지 않- forms, 겠 forms, the ㅡ-drop past
 (바빴어요·컸어요), special honorific words (드세요·주무세요·계세요), 에서 for activity places.

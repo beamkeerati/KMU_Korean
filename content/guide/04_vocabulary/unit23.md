@@ -11,16 +11,16 @@
 | 쉽다 | ง่าย | to be easy |
 | 고맙다 | ขอบคุณ น่าขอบคุณ | to be thankful, grateful |
 | 아름답다 | สวยงาม | to be beautiful |
-| 귀엽다 | น่ารัก | to be cute |
+| 귀엽다 | น่ารัก น่าเอ็นดู (เด็ก สัตว์เลี้ยง) | to be cute (adorable) |
 | 더럽다 | สกปรก | to be dirty |
 | 춥다 | หนาว | to be cold (weather) |
 | 가깝다 | ใกล้ | to be near, close |
 | 떡볶이 | ต๊อกบกกี (ต๊อกผัดซอสเผ็ด) | tteokbokki (spicy rice cakes) |
-| 어떤 | แบบไหน ลักษณะอย่างไร | what kind of |
+| 어떤 | แบบไหน (ถามลักษณะ สภาพ) | what sort of (what it is like) |
 | 시원하다 | เย็นสบาย สดชื่น | to be cool, refreshing |
 | 뜨겁다 | ร้อนจัด (ของที่จับ/กิน) | to be hot (to the touch) |
 | 시다 | เปรี้ยว | to be sour |
-| 착하다 | นิสัยดี ใจดี | to be kind, good-natured |
+| 착하다 | นิสัยดี อ่อนโยน (เป็นคนดี ไม่ร้าย) | to be good-natured, gentle |
 | 똑똑하다 | ฉลาด | to be smart |
 | 무섭다 | น่ากลัว | to be scary |
 | 가볍다 | เบา | to be light (weight) |
@@ -53,7 +53,7 @@
 |---|---|---|
 | 맵다 | เผ็ด | to be spicy |
 | 짜다 | เค็ม | to be salty |
-| 쓰다 | ขม (ต่างจาก 쓰다 = เขียน ใช้) | to be bitter |
+| 쓰다 | ขม (รสชาติ) | to be bitter |
 | 레몬 | เลมอน มะนาวเหลือง | lemon |
 | 설탕 | น้ำตาล | sugar |
 | 소금 | เกลือ | salt |
@@ -64,6 +64,17 @@
 | 무겁다 | หนัก | to be heavy |
 | 갈비찜 | คัลบีจิม (ซี่โครงตุ๋น) | braised short ribs |
 | 카페 | คาเฟ่ | cafe |
+| 일식집 | ร้านอาหารญี่ปุ่น | Japanese restaurant |
+| 중국집 | ร้านอาหารจีน | Chinese restaurant |
+| 메뉴판 | เมนู (แผ่นรายการอาหาร) | menu board |
+| 분식집 | ร้านของกินเล่น (ต๊อกบกกี กิมบับ) | snack bar |
+| 양식 | อาหารตะวันตก | Western food |
+| 슬프다 | เศร้า | to be sad |
+| 우동 | อุด้ง | udon |
+| 초밥 | ซูชิ | sushi |
+| 탕수육 | ทังซูยุก (หมูเปรี้ยวหวานทอด) | sweet and sour pork |
+| 스테이크 | สเต็ก | steak |
+| 모으다 | สะสม รวบรวม เก็บ (เก็บเงิน) | to collect, to save up |
 
 #### บันทึกจากกระดานครู (23과)
 
@@ -82,14 +93,3 @@
   - 덥다 춥다 어렵다 쉽다 고맙다 아름답다 귀엽다
   - 더럽다 가깝다 뜨겁다 무섭다 가볍다 맵다
 - ส่วน 좁다 입다 잡다 เป็นคำปกติ ไม่เปลี่ยนรูป
-| 일식집 | ร้านอาหารญี่ปุ่น | Japanese restaurant |
-| 중국집 | ร้านอาหารจีน | Chinese restaurant |
-| 메뉴판 | เมนู (แผ่นรายการอาหาร) | menu board |
-| 분식집 | ร้านของกินเล่น (ต็อกบกกี กิมบับ) | snack bar |
-| 양식 | อาหารตะวันตก | Western food |
-| 슬프다 | เศร้า | to be sad |
-| 우동 | อุด้ง | udon |
-| 초밥 | ซูชิ | sushi |
-| 탕수육 | ทังซูยุก (หมูเปรี้ยวหวานทอด) | sweet and sour pork |
-| 스테이크 | สเต็ก | steak |
-| 모으다 | สะสม รวบรวม | to collect, to gather |

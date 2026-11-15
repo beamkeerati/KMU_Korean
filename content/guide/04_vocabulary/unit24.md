@@ -18,19 +18,19 @@
 | 모자 | หมวก | hat, cap |
 | 손님 | ลูกค้า แขก | customer, guest |
 | 넣다 | ใส่ลงไป | to put in, to add |
-| 닫다 | ปิด | to close |
+| 닫다 | ปิด (ประตู หน้าต่าง ร้านค้า) | to close (door, window, shop) |
 | 지각하다 | มาสาย | to be late (for class/work) |
-| 만지다 | แตะ จับ | to touch |
+| 만지다 | แตะ สัมผัส (ป้ายห้ามจับ) | to touch |
 | 담배를 피우다 | สูบบุหรี่ | to smoke |
-| 싫어하다 | ไม่ชอบ เกลียด | to dislike |
+| 싫어하다 | ไม่ชอบ เกลียด (N을/를 싫어해요) | to dislike |
 | 고추장 | โคชูจัง (พริกหมักเกาหลี) | gochujang (red pepper paste) |
 | 계란 = 달걀 | ไข่ (ไข่ไก่) | egg |
 | 설탕 | น้ำตาล | sugar |
 | 약 | ยา | medicine |
 | 시키다 | สั่ง (อาหาร) | to order |
-| 종업원 | พนักงาน พนักงานเสิร์ฟ | employee, waiter |
+| 종업원 | พนักงานเสิร์ฟ พนักงานร้าน | waiter, shop/restaurant staff |
 | 인분 | ที่ ชุด (ลักษณนามจำนวนที่) | serving, portion |
-| 그릇 | ชาม ถ้วย | bowl (counter for bowls) |
+| 그릇 | ชาม ถ้วยใส่อาหาร (ไม่ใช่แก้วน้ำ) | bowl (counter for bowls of food) |
 | 주문하다 | สั่ง (สินค้า/อาหาร) | to order |
 | 짜장면 | จาจังมยอน (บะหมี่ซอสถั่วดำ) | jajangmyeon (black bean noodles) |
 | 짬뽕 | จัมปง (บะหมี่ทะเลซุปเผ็ด) | jjamppong (spicy seafood noodle soup) |

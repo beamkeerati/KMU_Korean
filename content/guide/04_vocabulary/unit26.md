@@ -16,10 +16,10 @@
 | 비 | ฝน | rain |
 | (비가) 오다 | ฝนตก (มา ตก) | to rain, to fall (rain) |
 | 세일 | ลดราคา เซล | sale |
-| 시간 | เวลา ชั่วโมง | time, hour |
+| 시간 | เวลา ชั่วโมง (ปริมาณเวลา) | time, hour (amount of time) |
 | 기분 | อารมณ์ ความรู้สึก | mood, feeling |
 | 행복하다 | มีความสุข | to be happy |
-| 늦게 | สาย ช้า | late (adv.) |
+| 늦게 | สาย ดึก (ไม่ใช่ ช้า ๆ) | late (not slowly) |
 | 얼굴 | ใบหน้า | face |
 | 눈(eye) | ตา (อวัยวะ) | eye |
 | 목소리 | เสียง (เสียงพูด เสียงร้อง) | voice |
@@ -46,7 +46,7 @@
 | 끝나다 | จบ เสร็จสิ้น | to end, to be over |
 | 나가다 | ออกไป | to go out |
 | 눈사람 | ตุ๊กตาหิมะ | snowman |
-| 힘들다 | เหนื่อย ลำบาก | to be hard, tiring |
+| 힘들다 | ลำบาก ยาก เหนื่อยเพราะงานหนัก | to be hard, exhausting (effort) |
 | 채팅 | แชต | chatting |
 | 스키(를) 타다 | เล่นสกี | to ski |
 | 스키장 | ลานสกี | ski resort |
@@ -71,12 +71,12 @@
 | 일기예보 | พยากรณ์อากาศ | weather forecast |
 | 기상 캐스터 | ผู้ประกาศพยากรณ์อากาศ | weather caster |
 | 여보세요 | ฮัลโหล (ตอนรับโทรศัพท์) | hello (on the phone) |
-| 지내다 | ใช้ชีวิต อยู่ | to spend time, to get along |
+| 지내다 | ใช้ชีวิต ความเป็นอยู่ (잘 지내요? = สบายดีไหม) | to get by, spend time (how are you) |
 | 돌아가다 | กลับไป | to go back, to return |
 | 통화하다 | คุยโทรศัพท์ | to talk on the phone |
 | 어울리다 | เข้ากัน เหมาะกัน | to suit, to go well with |
 | 역할 | บทบาท | role |
-| 분위기 | บรรยากาศ | atmosphere, mood |
+| 분위기 | บรรยากาศ | atmosphere, ambience |
 | 상황 | สถานการณ์ | situation |
 | 표현 | สำนวน การแสดงออก | expression |
 | 연애편지 | จดหมายรัก | love letter |

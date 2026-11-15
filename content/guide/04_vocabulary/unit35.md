@@ -10,7 +10,7 @@
 | 한복 | ฮันบก (ชุดประจำชาติเกาหลี) | hanbok (traditional Korean clothes) |
 | 유람선 | เรือล่องแม่น้ำ เรือท่องเที่ยว | tour boat, cruise boat |
 | 찜질방 | ชิมจิลบัง (สปา/ซาวน่าเกาหลี) | jjimjilbang (Korean sauna) |
-| 간단하다 | ง่าย ไม่ซับซ้อน | to be simple |
+| 간단하다 | เรียบง่าย ไม่ซับซ้อน (ขั้นตอนน้อย) | to be simple, uncomplicated |
 | 시골 | ชนบท บ้านนอก | countryside |
 | 반바지 | กางเกงขาสั้น | shorts |
 | 정장 | ชุดสูท ชุดทางการ | formal suit |
@@ -24,7 +24,7 @@
 | 또 | อีก นอกจากนี้ และยัง | also, again |
 | 소설가 | นักเขียนนิยาย | novelist |
 | 영화감독 | ผู้กำกับภาพยนตร์ | film director |
-| 고민 | ความกังวล ความลำบากใจ | worry, concern |
+| 고민 | เรื่องกลุ้มใจ ความลังเลคิดไม่ตก | worry, trouble (can't decide what to do) |
 
 #### ∞ 읽기 ∞ (ศัพท์จากบทอ่าน)
 
@@ -32,12 +32,12 @@
 
 | 단어 | ไทย | English |
 |---|---|---|
-| 떠나다 | ออกเดินทาง จากไป | to leave, to depart |
+| 떠나다 | จากไป ออกจาก (ที่ที่อยู่ไปที่อื่น) | to leave (a place), to set off |
 | 글 | ข้อเขียน งานเขียน | writing, text |
 | 지난번 | ครั้งที่แล้ว | last time |
 | 대회 | การแข่งขัน งานประกวด | contest, competition |
 | 상 | รางวัล | prize, award |
-| 즐겁다 | สนุก เพลิดเพลิน | to be enjoyable |
+| 즐겁다 | เพลิดเพลิน สุขใจ (เรารู้สึกสนุกสบาย) | to be joyful, to be enjoyable |
 
 #### ศัพท์เพิ่มเติมจากตำราและเวิร์กบุ๊ก (ไม่อยู่ในชีตของศูนย์)
 

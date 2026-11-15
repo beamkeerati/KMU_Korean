@@ -186,6 +186,19 @@
   먹을 거예요 · 케이크를 만들어서 친구한테 선물을 줬어요) 3/3 · dictation 6호선으로 갈아타세요 ✓ · 1번 출구에 있어요 ✓ · 길을 몰라요 △ (글음). All three parts
   were in the prediction (table = sheet 32 page 7; pictures = textbook 연습 1 + sheet p.4 + workbook E; dictation = short tails of 대화 32-1 ranks 1 · 5 · 7,
   with the exit number changed 3 → 1). 33과 sheet (11/11): (으)면 / (으)ㄹ picture grids + 문장 연습 (exercises/everyday/unit33.md).
+  **33과 test (11/12) = 8.5/10 — back to the sentence format of 22–30과** (not the 31–32 table): A 4 = match two columns → -(으)면 sentence ([보기] 제주도에 가면
+  수영할까요? · 날씨가 좋으면 등산을 해요 · 김치가 매우면 먹지 마세요 · 방학이 되면 아르바이트 할 거예요 · 돈이 있으면 컴퓨터를 사고 싶어요) 3.5 (아르바으트 △) ·
+  B 3 = -(으)ㄹ 거예요 → -(으)ㄹ + N (만날 친구 · 먹을 빵 · 할 일, from sheet p.4) 3/3 · C dictation 예약할 수 있어요 △ (예약갈) · 걱정하지 마세요 ✓ · 음료수를
+  준비할까요 △ (음료스를). Content all predicted (A = textbook 연습 -(으)면 first exercise; all 3 dictation lines ★★★ from 대화 33-1); format not.
+  34과 sheet (11/12): (이)나 / -거나 응답 연습, picture pairs, blank (exercises/everyday/unit34.md).
+  **34과 test (11/13) = 8.5/10 — picture pairs + calendar + dictation** (exercises/everyday/unit34.md): A 4 = picture pair → write 나's answer with (이)나 / -거나
+  ([보기] 옷이나 모자를 선물 받고 싶어요 · 1 커피나 차를 마실 거예요 · 2 커피숍이나 공원에서 친구를 만나요 · 3 책을 읽거나 영화를 봐요 · 4 운동하거나 친구를 만나요;
+  questions 3–4 = sheet 34 p.2 items 2 · 1 verbatim) 3/4 — **자를** for 차를 △ and **젝을** for 책을 △ (ㅈ/ㅊ, 10th + 11th sightings) · B 3 = calendar of 제프리 씨
+  (운동 Mon/Wed/Fri × 4 weeks = 12 · 요리 3 · 등산 0) choose from 자주 · 가끔 · 거의 안 · 전혀 안 → 자주 · 거의 안 · 전혀 안, 3/3 (가끔 unused) · C dictation
+  주말 잘 보내셨어요 △ (wrote **주말에** — extra 에, circled and struck) · 액션 영화를 좋아해요 ✓ · 집에서 쉬어요 ✓. All three dictation lines = trimmed 대화 34-1 lines
+  (prediction ranks 9 · 4/10 · 1/7); the calendar format was not predicted (the frequency words were). The student's pencil note at the top: "Adj, verb 거나 / Noun 이나".
+  35과 sheet (11/13): -는 것 table (12 verbs, left blank) + -아/어 보다 table (12 verbs × 봤어요 / 보세요, all 24 cells written, all right incl. 도와 · 들어 · 걸어 · 불러) +
+  활동 취미 questions (speaking, blank) (exercises/everyday/unit35.md).
 - Known cosmetic gaps: 10과 A's third table row (30–10,000) is printed as given reference rather
   than as blanks; `왕쯔이` is transliterated `หวางจิ้ง` where `หวางจื่ออี` is closer.
 

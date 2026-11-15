@@ -83,7 +83,7 @@
 | 영화관 | โรงภาพยนตร์ | movie theater |
 | 문구점 | ร้านเครื่องเขียน | stationery store |
 | 운동장 | สนามกีฬา ลานกีฬา | playground, sports field |
-| 체육관 | ยิม โรงยิม | gym |
+| 체육관 | โรงยิม (โรงกีฬาในร่ม) | gymnasium, sports hall |
 | 편의점 | ร้านสะดวกซื้อ | convenience store |
 | 시장 | ตลาด | market |
 | 공원 | สวนสาธารณะ | park |
@@ -106,15 +106,15 @@
 | 읽다 | อ่าน | to read |
 | 쉬다 | พัก | to rest |
 | 입다 | สวม (เสื้อผ้า) | to wear |
-| 씻다 | ล้าง อาบน้ำ | to wash |
+| 씻다 | ล้าง ล้างตัว (มือ หน้า ตัว) | to wash (hands, face, body) |
 | 마시다 | ดื่ม | to drink |
 | 기다리다 | รอ | to wait |
 | 가르치다 | สอน | to teach |
-| 배우다 | เรียน | to learn |
+| 배우다 | เรียน เรียนรู้ (รับการสอน/ฝึกทักษะ) | to learn (be taught) |
 | 주다 | ให้ | to give |
 | 춤(을) 추다 | เต้นรำ | to dance |
 | 쓰다 | เขียน | to write |
-| 공부(를) 하다 | เรียน ศึกษา อ่านหนังสือ | to study |
+| 공부(를) 하다 | ศึกษา ทบทวนบทเรียน อ่านหนังสือสอบ | to study (on one's own) |
 | 운동(을) 하다 | ออกกำลังกาย | to exercise |
 | 이야기(를) 하다 | คุย เล่าเรื่อง | to talk |
 | 노래(를) 하다 | ร้องเพลง | to sing |
@@ -156,7 +156,7 @@
 | 작년 | ปีที่แล้ว | last year |
 | 올해 | ปีนี้ | this year |
 | 내년 | ปีหน้า | next year |
-| 아침 | เช้า / อาหารเช้า | morning |
+| 아침 | เช้า (ตื่นนอน) / อาหารเช้า | morning (early), breakfast |
 | 점심 | เที่ยง / อาหารกลางวัน | noon, lunch |
 | 저녁 | เย็น / อาหารเย็น | evening |
 
@@ -164,32 +164,32 @@
 
 | 단어 | ไทย | English |
 |---|---|---|
-| 많다 | มาก เยอะ | many, much |
-| 적다 | น้อย | few, little |
-| 좋다 | ดี ชอบ | good |
-| 나쁘다 | แย่ ไม่ดี | bad |
-| 크다 | ใหญ่ | big |
-| 작다 | เล็ก | small |
-| 싸다 | ถูก | cheap |
-| 비싸다 | แพง | expensive |
-| 길다 | ยาว | long |
-| 짧다 | สั้น | short |
-| 예쁘다 | สวย น่ารัก | pretty |
-| 멋있다 | เท่ หล่อ | stylish, handsome |
-| 맛있다 | อร่อย | delicious |
-| 맛없다 | ไม่อร่อย | not tasty |
-| 재미있다 | สนุก น่าสนใจ | fun, interesting |
-| 재미없다 | ไม่สนุก น่าเบื่อ | boring |
-| 바쁘다 | ยุ่ง | busy |
-| 아프다 | เจ็บ ป่วย | sick, painful |
-| 넓다 | กว้าง | spacious |
-| 좁다 | แคบ | narrow |
-| 친절하다 | ใจดี สุภาพ มีน้ำใจ | kind |
-| 피곤하다 | เหนื่อย | tired |
-| 조용하다 | เงียบ | quiet |
-| 깨끗하다 | สะอาด | clean |
-| 똑똑하다 | ฉลาด | smart |
-| 중요하다 | สำคัญ | important |
+| 많다 | มาก เยอะ (เป็นกริยา: 사람이 많다) | to be many, much |
+| 적다 | น้อย | to be few, little |
+| 좋다 | ดี · ชอบ (N이/가 좋아요) | to be good; to like (N이/가) |
+| 나쁘다 | แย่ ไม่ดี | to be bad |
+| 크다 | ใหญ่ | to be big |
+| 작다 | เล็ก | to be small |
+| 싸다 | ราคาถูก | to be cheap |
+| 비싸다 | แพง | to be expensive |
+| 길다 | ยาว | to be long |
+| 짧다 | สั้น | to be short |
+| 예쁘다 | สวย น่ารัก | to be pretty |
+| 멋있다 | เท่ หล่อ | to be stylish, handsome |
+| 맛있다 | อร่อย | to be delicious |
+| 맛없다 | ไม่อร่อย | to be not tasty |
+| 재미있다 | สนุก น่าสนใจ (ตัวสิ่งนั้นสนุก) | to be fun, interesting |
+| 재미없다 | ไม่สนุก น่าเบื่อ | to be boring |
+| 바쁘다 | ยุ่ง | to be busy |
+| 아프다 | เจ็บ ป่วย | to be sick, to hurt |
+| 넓다 | กว้าง | to be wide, spacious |
+| 좁다 | แคบ | to be narrow |
+| 친절하다 | ใจดี สุภาพ (ปฏิบัติต่อผู้อื่นดี) | to be kind (to others) |
+| 피곤하다 | เหนื่อย อ่อนเพลีย (ร่างกายล้า) | to be tired |
+| 조용하다 | เงียบ | to be quiet |
+| 깨끗하다 | สะอาด | to be clean |
+| 똑똑하다 | ฉลาด | to be smart |
+| 중요하다 | สำคัญ | to be important |
 
 #### ◆ 음식 (22과) — อาหาร
 
@@ -201,7 +201,7 @@
 | 된장찌개 | แกงเต้าเจี้ยวเกาหลี | soybean paste stew |
 | 삼계탕 | ซัมเกทัง (ซุปไก่ตุ๋นโสม) | ginseng chicken soup |
 | 김밥 | คิมบับ (ข้าวห่อสาหร่าย) | gimbap |
-| 떡볶이 | ต็อกบกกี (ต็อกผัดซอสเผ็ด) | stir-fried rice cakes |
+| 떡볶이 | ต๊อกบกกี (ต๊อกผัดซอสเผ็ด) | stir-fried rice cakes |
 | 팥빙수 | ปัทบิงซู (น้ำแข็งไสถั่วแดง) | red bean shaved ice |
 | 미역국 | ซุปสาหร่ายวากาเมะ | seaweed soup |
 
@@ -237,7 +237,7 @@
 
 | 단어 | ไทย | English |
 |---|---|---|
-| 개 | หมา สุนัข | dog |
+| 개 | หมา สุนัข (ทั่วไป) | dog |
 | 고양이 | แมว | cat |
 | 토끼 | กระต่าย | rabbit |
 | 쥐 | หนู | mouse, rat |
@@ -259,16 +259,16 @@
 
 | 단어 | ไทย | English |
 |---|---|---|
-| 맑다 | แจ่มใส ฟ้าโปร่ง | clear, sunny |
+| 맑다 | แจ่มใส ฟ้าโปร่ง | to be clear, sunny |
 | 비가 오다 | ฝนตก | to rain |
-| 흐리다 | มีเมฆมาก ครึ้ม | cloudy |
+| 흐리다 | มีเมฆมาก ครึ้ม | to be cloudy |
 | 눈이 오다 | หิมะตก | to snow |
-| 바람이 불다 | ลมพัด | windy, the wind blows |
-| 춥다 | หนาว | cold |
-| 쌀쌀하다 | เย็น ๆ หนาวนิด ๆ | chilly |
-| 시원하다 | เย็นสบาย | cool, refreshing |
-| 따뜻하다 | อบอุ่น | warm |
-| 덥다 | ร้อน | hot |
+| 바람이 불다 | ลมพัด | the wind blows |
+| 춥다 | หนาว (อากาศ) | to be cold (weather) |
+| 쌀쌀하다 | เย็น ๆ หนาวนิด ๆ | to be chilly |
+| 시원하다 | เย็นสบาย | to be cool, refreshing |
+| 따뜻하다 | อบอุ่น | to be warm |
+| 덥다 | ร้อน (อากาศ) | to be hot (weather) |
 
 #### ◆ 위치 명사 (9과) — คำบอกตำแหน่ง
 
@@ -334,7 +334,7 @@
 | 춥다 | หนาว | to be cold (weather) |
 | 가깝다 | ใกล้ | to be near, close |
 | 고맙다 | ขอบคุณ น่าขอบคุณ | to be thankful, grateful |
-| 귀엽다 | น่ารัก | to be cute |
+| 귀엽다 | น่ารัก น่าเอ็นดู (เด็ก สัตว์เลี้ยง) | to be cute (adorable) |
 | 더럽다 | สกปรก | to be dirty |
 | 맵다 | เผ็ด | to be spicy |
 | 무섭다 | น่ากลัว | to be scary |
@@ -343,7 +343,7 @@
 | 아름답다 | สวยงาม | to be beautiful |
 | 돕다 | ช่วย ช่วยเหลือ | to help |
 | 좁다 | แคบ คับแคบ (ปกติ) | to be narrow |
-| 잡다 | จับ ถือ (ปกติ) | to hold, to grab |
+| 잡다 | จับ คว้า กำไว้ในมือ (ปกติ) | to grab, to catch, to hold |
 | 입다 | สวมใส่ (เสื้อผ้า) | to wear (clothes) |
 
 #### ◆ ㄹ 탈락 (25과) — คำที่ ㄹ ท้ายก้านหายไป
@@ -352,13 +352,13 @@
 
 | 단어 | ไทย | English |
 |---|---|---|
-| 놀다 | เล่น เที่ยว | to play, to hang out |
-| 들다 | ยก (มือ) ถือ | to raise, to hold |
+| 놀다 | เล่น เที่ยวเล่น (ไม่ใช่ดนตรี/กีฬา) | to play, hang out (not music/sport) |
+| 들다 | ยกขึ้น ถือ (ยกมือ ถือกระเป๋า) | to lift, to carry (in hand) |
 | 만들다 | ทำ สร้าง | to make |
 | 불다 | พัด (ลม) เป่า | to blow |
 | 살다 | อยู่ อาศัย มีชีวิต | to live |
 | 알다 | รู้ รู้จัก | to know |
-| 열다 | เปิด | to open |
+| 열다 | เปิด (ประตู หน้าต่าง ร้านค้า) | to open (door, window, shop) |
 | 울다 | ร้องไห้ | to cry |
 | 팔다 | ขาย | to sell |
 | 길다 | ยาว | to be long |
@@ -375,7 +375,7 @@
 | 걷다 | เดิน (ㄷ불규칙: 걸어요) | to walk |
 | 묻다 | ถาม (ㄷ불규칙: 물어요) | to ask |
 | 받다 | ได้รับ (ปกติ: 받아요) | to receive |
-| 닫다 | ปิด (ปกติ: 닫아요) | to close |
+| 닫다 | ปิด (ประตู/หน้าต่าง) (ปกติ: 닫아요) | to close |
 
 #### ◆ 르 불규칙 (32과) — กริยาและคำคุณศัพท์ 르 ไม่ปกติ
 
@@ -405,13 +405,13 @@
 | 끝나다 | จบ เสร็จสิ้น | to end, to be over |
 | 놀다 | เล่น เที่ยว | to play, hang out |
 | 내리다 | ลง (จากรถ) | to get off |
-| 닫다 | ปิด | to close |
+| 닫다 | ปิด (ประตู หน้าต่าง ร้านค้า) | to close (door, window, shop) |
 | 담배를 피우다 | สูบบุหรี่ | to smoke |
 | 돈을 찾다 | ถอนเงิน | to withdraw money |
 | 듣다 | ฟัง ได้ยิน | to listen |
 | 만들다 | ทำ สร้าง | to make |
 | 모르다 | ไม่รู้ ไม่ทราบ | to not know |
-| 물어보다 | ลองถาม สอบถาม | to ask (try asking) |
+| 물어보다 | ถาม สอบถาม | to ask, to inquire |
 | 보내다 | ส่ง | to send |
 | 부르다 | ร้อง (เพลง) เรียก | to sing, to call |
 | 빌리다 | ยืม | to borrow |
@@ -427,10 +427,10 @@
 | 외우다 | ท่องจำ | to memorize |
 | 운전(을) 하다 | ขับรถ | to drive |
 | 여행(을) 하다 | เดินทางท่องเที่ยว | to travel |
-| 열다 | เปิด | to open |
+| 열다 | เปิด (ประตู หน้าต่าง ร้านค้า) | to open (door, window, shop) |
 | 예약(을) 하다 | จอง | to reserve |
 | 일어나다 | ตื่นนอน ลุกขึ้น | to get up |
-| 좋아하다 | ชอบ | to like |
+| 좋아하다 | ชอบ (N을/를 좋아해요) | to like |
 | 주문(을) 하다 | สั่ง (สินค้า/อาหาร) | to order |
 | 지각(을) 하다 | มาสาย | to be late (for class/work) |
 | 초대(를) 하다 | เชิญ | to invite |
@@ -446,10 +446,10 @@
 | 건강하다 | แข็งแรง สุขภาพดี | to be healthy |
 | 가깝다 | ใกล้ | to be near, close |
 | 가볍다 | เบา | to be light (weight) |
-| 간단하다 | ง่าย ไม่ซับซ้อน | to be simple |
+| 간단하다 | เรียบง่าย ไม่ซับซ้อน (ขั้นตอนน้อย) | to be simple, uncomplicated |
 | 고맙다 | ขอบคุณ น่าขอบคุณ | to be thankful, grateful |
 | 괜찮다 | ไม่เป็นไร โอเค | to be okay, fine |
-| 귀엽다 | น่ารัก | to be cute |
+| 귀엽다 | น่ารัก น่าเอ็นดู (เด็ก สัตว์เลี้ยง) | to be cute (adorable) |
 | 기쁘다 | ดีใจ | to be glad |
 | 날씬하다 | ผอมเพรียว หุ่นดี | to be slim |
 | 느끼하다 | เลี่ยน มันเลี่ยน | to be greasy, oily |
@@ -464,7 +464,7 @@
 | 맵다 | เผ็ด | to be spicy |
 | 멀다 | ไกล | to be far |
 | 무섭다 | น่ากลัว | to be scary |
-| 미안하다 | ขอโทษ รู้สึกผิด | to be sorry |
+| 미안하다 | ขอโทษ รู้สึกผิด (กับเพื่อน คนสนิท) | to be sorry (casual) |
 | 반갑다 | ดีใจที่ได้พบหรือได้ข่าว | to be glad (to meet, to hear from) |
 | 밝다 | สว่าง | to be bright |
 | 배가 고프다 | หิว (ท้องหิว) | to be hungry |
@@ -484,15 +484,15 @@
 | 어렵다 | ยาก | to be difficult |
 | 유명하다 | มีชื่อเสียง | to be famous |
 | 이상하다 | แปลก ประหลาด | to be strange, odd |
-| 죄송하다 | ขอโทษ (สุภาพ) | to be sorry (formal) |
-| 즐겁다 | สนุก เพลิดเพลิน | to be enjoyable |
+| 죄송하다 | ขอโทษ (สุภาพ ใช้กับผู้ใหญ่) | to be sorry (polite, to seniors) |
+| 즐겁다 | เพลิดเพลิน สุขใจ (เรารู้สึกสนุกสบาย) | to be joyful, to be enjoyable |
 | 차갑다 | เย็นเฉียบ (ของที่สัมผัส) | to be cold (to the touch) |
-| 착하다 | นิสัยดี ใจดี | to be kind, good-natured |
+| 착하다 | นิสัยดี อ่อนโยน (เป็นคนดี ไม่ร้าย) | to be good-natured, gentle |
 | 춥다 | หนาว | to be cold (weather) |
 | 필요하다 | จำเป็น ต้องการ | to be necessary |
 | 행복하다 | มีความสุข | to be happy |
 | 흐리다 | ครึ้ม เมฆมาก | to be cloudy |
-| 힘들다 | เหนื่อย ลำบาก | to be hard, tiring |
+| 힘들다 | ลำบาก ยาก เหนื่อยเพราะงานหนัก | to be hard, exhausting (effort) |
 
 #### ◆ 문제 지시어 — คำในคำสั่งโจทย์ (5과)
 
@@ -502,7 +502,7 @@
 |---|---|---|
 | 보기 | ตัวอย่าง (กล่อง [보기] ในโจทย์) | example |
 | 문제 | โจทย์ ข้อสอบ | problem, question |
-| 알맞다 | เหมาะสม ถูกต้อง (알맞은 = ที่เหมาะสม) | to be appropriate |
+| 알맞다 | เหมาะสม เข้ากัน (알맞은 것 = ข้อที่ใช่) | to be appropriate |
 | 선택하다 | เลือก | to select |
 | 완성하다 | ทำให้สมบูรณ์ เติมให้ครบ | to complete |
 | 빈칸 | ช่องว่าง | blank space |

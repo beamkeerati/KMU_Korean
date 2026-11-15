@@ -11,11 +11,11 @@
 | (신발을) 신다 | สวม (รองเท้า ถุงเท้า) | to wear (shoes, socks) |
 | 가지고 가다 | ถือไป เอาไปด้วย | to take (along) |
 | 밤늦게 | ดึก ๆ ตอนดึกมาก | late at night |
-| 죄송하다 | ขอโทษ (สุภาพ) | to be sorry (formal) |
+| 죄송하다 | ขอโทษ (สุภาพ ใช้กับผู้ใหญ่) | to be sorry (polite, to seniors) |
 | 술 | เหล้า เครื่องดื่มแอลกอฮอล์ | alcohol, liquor |
 | 일어나다 | ตื่นนอน ลุกขึ้น | to get up |
 | 택시 | แท็กซี่ | taxi |
-| 늦다 | สาย ช้า มาสาย | to be late |
+| 늦다 | สาย มาสาย (เลยเวลา) | to be late (past the time) |
 | 이사(를) 하다 | ย้ายบ้าน | to move (house) |
 | 빨래(를) 하다 | ซักผ้า | to do laundry |
 | 취미 | งานอดิเรก | hobby |

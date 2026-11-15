@@ -23,7 +23,7 @@
 |---|---|---|
 | 돈 | เงิน | money |
 | 그리고 | และ แล้วก็ | and |
-| 사진 | รูปถ่าย | photo, picture |
+| 사진 | รูปถ่าย | photo |
 | 여자 친구 | แฟนสาว เพื่อนผู้หญิง | girlfriend |
 | 대학교 | มหาวิทยาลัย | university |
 
@@ -38,11 +38,11 @@
 | 같다 | เหมือนกัน | to be the same |
 | 대하다 | เกี่ยวกับ (에 대해) | to concern (about) |
 | 보이다 | เห็น ปรากฏให้เห็น | to be seen |
-| 사물 | สิ่งของ | object, thing |
+| 사물 | วัตถุ สิ่งของ (เทียบกับคน/สัตว์) | object, inanimate thing |
 | 기억하다 | จำได้ | to remember |
 | 각자 | ต่างคน แต่ละคน | each person |
 | 자신 | ตัวเอง | oneself |
-| 이때 | ตอนนี้ เวลานั้น | at this time |
+| 이때 | ตอนนั้น (ช่วงที่เพิ่งพูดถึง) | at this point, then |
 | 정도 | ประมาณ ระดับ | about, degree |
 | 진행하다 | ดำเนินการ | to carry on, to proceed |
 | 뒤집다 | พลิก คว่ำ | to turn over |

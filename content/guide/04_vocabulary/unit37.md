@@ -8,9 +8,9 @@
 | 밤 | กลางคืน ยามค่ำคืน | night |
 | 앞머리 | ผมหน้าม้า ผมด้านหน้า | bangs, fringe |
 | 남대문 | นัมแดมุน (ประตู/ตลาดในโซล) | Namdaemun (gate, market in Seoul) |
-| 봉지 | ถุง (ถุงพลาสติก ถุงกระดาษ) | bag (plastic or paper) |
+| 봉지 | ถุง (ถุงพลาสติก ถุงใส่ของ) | bag (plastic bag, pouch) |
 | 포장하다 | ห่อ แพ็ก (ห่อกลับบ้าน) | to wrap, to pack, to take away |
-| 바꾸다 | เปลี่ยน แลก | to change, to exchange |
+| 바꾸다 | เปลี่ยน แลก (เราเปลี่ยนสิ่งของ) | to change, to exchange (something) |
 | 고장(이) 나다 | เสีย พัง ขัดข้อง | to break down |
 | 서비스 센터 | ศูนย์บริการ | service center |
 | 부탁하다 | ขอร้อง ฝาก ขอให้ช่วย | to ask a favor, to request |
@@ -30,7 +30,7 @@
 | 단어 | ไทย | English |
 |---|---|---|
 | 갑자기 | ทันทีทันใด จู่ ๆ | suddenly |
-| 안내하다 | นำทาง พาชม แนะนำ | to guide, to show around |
+| 안내하다 | นำทาง พาชม แจ้งข้อมูล (안내 방송 = ประกาศ) | to guide, to show around, to inform |
 | 취소하다 | ยกเลิก | to cancel |
 | 계획하다 | วางแผน | to plan |
 
@@ -41,7 +41,7 @@
 | 단어 | ไทย | English |
 |---|---|---|
 | 수강료 | ค่าเรียน | course fee |
-| 걸다 | โทร (전화를 걸다) แขวน | to call, to hang |
+| 걸다 | โทร (전화를 걸다) แขวน | to phone (전화를 걸다), to hang |
 | 도와주다 | ช่วย | to help |
 | 의미 | ความหมาย | meaning |
 | 최저 | ต่ำสุด | lowest |
@@ -57,7 +57,7 @@
 | 피다 | (ดอกไม้) บาน | to bloom |
 | 도시 | เมือง | city |
 | 몰다 | ขับ (รถ) | to drive |
-| 바르다 | ถูกต้อง ทา | to be correct, to apply |
+| 바르다 | ทา (ครีม ยา สี) · ถูกต้อง ตรง (바른) | to apply (cream); to be correct |
 | 닦다 | เช็ด ถู ขัด | to wipe, to polish |
 | 기대 | ความคาดหวัง | expectation |
 | 시간표 | ตารางเวลา | timetable |

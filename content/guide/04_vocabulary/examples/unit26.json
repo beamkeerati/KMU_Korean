@@ -392,8 +392,8 @@
   },
   {
    "ko": "힘들다",
-   "th": "เหนื่อย ลำบาก",
-   "en": "to be hard, tiring",
+   "th": "ลำบาก ยาก เหนื่อยเพราะงานหนัก",
+   "en": "to be hard, exhausting (effort)",
    "cat": "형용사 2",
    "note": "ㄹ-stem: 힘들어요 · 힘든 (ไม่ใช่ 힘들은)",
    "ex": [
@@ -537,8 +537,8 @@
   },
   {
    "ko": "지내다",
-   "th": "ใช้ชีวิต อยู่",
-   "en": "to spend time, to get along",
+   "th": "ใช้ชีวิต ความเป็นอยู่ (잘 지내요? = สบายดีไหม)",
+   "en": "to get by, spend time (how are you)",
    "note": "ถามสารทุกข์สุกดิบ: 잘 지냈어요? · ตอบ 잘 지냈어요",
    "ex": [
     {
@@ -603,7 +603,7 @@
   {
    "ko": "분위기",
    "th": "บรรยากาศ",
-   "en": "atmosphere, mood",
+   "en": "atmosphere, ambience",
    "note": "분위기가 좋다 = บรรยากาศดี · อ่านว่า [부뉘기]",
    "ex": [
     {
@@ -709,7 +709,7 @@
   {
    "ko": "바람이 불다",
    "th": "ลมพัด",
-   "en": "windy, the wind blows",
+   "en": "the wind blows",
    "cat": "날씨",
    "note": "ลมพัดใช้ 불다 · ㄹ-stem: 불어요 / 불었어요",
    "ex": [

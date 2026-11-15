@@ -16,8 +16,8 @@
 | 묻다 | ถาม | to ask |
 | 주소 | ที่อยู่ | address |
 | 길음역 | สถานีคิลึม | Gireum Station |
-| 얼마나 | เท่าไร นานแค่ไหน | how (long, much) |
-| 걸리다 | ใช้เวลา | to take (time) |
+| 얼마나 | นานแค่ไหน มากแค่ไหน (ถามเวลา/ปริมาณ) | how (long, much) |
+| 걸리다 | ใช้เวลา (เวลาที่ต้องใช้กว่าจะถึง/เสร็จ) | to take (time) (how long it needs) |
 | 비행기 | เครื่องบิน | airplane |
 | 인천 | อินชอน (เมืองท่า มีสนามบินนานาชาติ) | Incheon |
 | 교통수단 | วิธีเดินทาง พาหนะ | means of transportation |
@@ -52,7 +52,7 @@
 | 루브르 | พิพิธภัณฑ์ลูฟร์ | the Louvre |
 | 전체 | ทั้งหมด | whole, all |
 | 기차역 | สถานีรถไฟ | train station |
-| 추천하다 | แนะนำ | to recommend |
+| 추천하다 | แนะนำ (เสนอว่าสิ่งนี้ดี น่าลอง) | to recommend (suggest as good) |
 | 답장 | จดหมายตอบกลับ | reply |
 | 앞문 | ประตูหน้า | front door |
 | 뒷문 | ประตูหลัง | back door |
