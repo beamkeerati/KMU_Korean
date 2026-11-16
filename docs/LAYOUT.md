@@ -177,6 +177,9 @@ content/       ✍️ SOURCE OF TRUTH — edit here, never in output/
                  늦게/느리다, 좋다/좋아하다 by particle, 열다/켜다, 미안하다/죄송하다 …), 통역 ≠ ล่าม, 이때 = ตอนนั้น, adjectives "to be …";
                  HOMONYMS in build_mockweb.load_vocab (개 · 반 · 배 · 쓰다 · 일 had lost their 2nd meaning) + a 2nd example each;
                  unit23.md stray rows moved back into their table; old glosses fixed in workbook 17/30/35/36, grammar 51, vocab_b.json.
+               (2026-11-16) v65 (data + clips + clips2 + clips5 = artifact version 70, vocab.js = 71): daily-35-writing/-listening (10/10) +
+                 sheet-36-writing (37 items incl. the 게요/거예요 choice as mc) in daily_b.json, predict-35 retired, daily_predict36.json (3 sets · 28
+                 items, Sonnet agent), VOCAB_PRIO 36, 37, 35, 34 … first — 200 sets · 3,833 items · 1,125 clips (14 new). Watch stopped after publishing.
                (2026-11-12) v62 (index.html + data + clips + clips2 + NEW clips5.js = artifact version 67): daily-33-writing/-listening
                  (8.5/10, sentence format again) + sheet-34-writing in daily_b.json, daily_predict34.json (6 sets · 147 items, incl. a
                  spare 31–32-style table set), 33 prediction retired; clips.js had reached 16.2 MB → spoken-line clips now split by

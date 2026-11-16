@@ -187,6 +187,74 @@ pre code { background: none; padding: 0; }
 .book .toc > ul > li > ul > li, .cover .toc > ul > li > ul > li { font-weight: normal; margin: 1px 0; }
 .book .toc a::after, .cover .toc a::after { content: leader('. ') target-counter(attr(href), page); color: #6e7781; font-weight: normal; }
 @page { @top-center { content: none; } }
+
+/* ================= book layout v2 (2026-11-15) =================
+   The two guides only (<body class="book">). Content is untouched; this is typography.
+   Principles (the user: "not cramped, not empty — know what is small, what sits together, what shares a page"):
+   1. A type scale with clear ranks: chapter 27 > section 20 > sub-section 16.5 > body 14.5 > table 13.5 >
+      table head / gloss / note 12.5. Hangul is the thing being studied, so it is 6 % larger than the Thai around it.
+   2. Proximity: a heading has a big gap above and a small one below (it belongs to what follows); a lead sentence
+      sits close to its table or list; rows and list items are tight inside their group; the gap comes after the group.
+   3. Tables are open (horizontal hairlines only) but their rows stay compact — a conjugation table is one unit.
+   4. Paging: a chapter starts a page; a heading never ends a page and keeps its lead sentence; a table of up to
+      6 rows, a nested list item and a SHORT dialogue or callout (< 420 characters) are never split (class "keep" is added in md_file_to_pdf). */
+.book { line-height: 1.66; }
+.book p { margin: 0 0 0.7em; orphans: 3; widows: 3; }
+.book .kw { font-size: 1.06em; }
+.book em { font-size: 0.94em; color: #5b6570; }                 /* glosses and asides: one rank below the text */
+
+/* --- headings: rank by size AND by form --- */
+.book h2 {
+    font-size: 27px; line-height: 1.35; border-bottom: none; border-left: 8px solid #0f4c81; background: #f1f6fb;
+    border-radius: 0 10px 10px 0; padding: 15px 20px; margin: 0 0 20px;
+}
+.book h3 { font-size: 20px; margin: 34px 0 8px; padding: 0 0 6px; border-bottom: 2px solid #dbe5ef; }
+.book h2 + h3, .book h2 + p + h3, .book h2 + .alert + h3 { margin-top: 22px; }
+.book h4 { font-size: 16.5px; margin: 24px 0 6px; padding: 0 0 0 10px; border-left: 4px solid #9db9d6; border-bottom: none; }
+.book h5 { font-size: 14.5px; margin: 16px 0 4px; color: #1a4d7a; }
+.book h3 + h4 { margin-top: 12px; }
+
+/* --- tables: open, compact, one rank smaller --- */
+.book table { margin: 0.1em 0 1.5em; font-size: 0.93em; line-height: 1.5;
+              border-top: 2px solid #0f4c81; border-bottom: 1.5px solid #9aa7b4; }
+.book th, .book td { border: none; border-bottom: 1px solid #e4e9ef; padding: 5px 11px; }
+.book th { background: #eef4fa; border-bottom: 1.5px solid #0f4c81; font-size: 0.92em; color: #3d5a78; padding: 6px 11px; }
+.book tr:nth-child(even) td { background: none; }
+.book tbody tr:last-child td { border-bottom: none; }
+.book td strong .kw, .book td strong.kw { font-size: 1.1em; }          /* the answer form in a table is the largest thing in its row */
+.book table.keep { page-break-inside: avoid; }
+.book tbody > tr:nth-child(2) { break-after: auto; }                   /* one row after the head is enough company (two cost big gaps) */
+.book tbody > tr:last-child { break-before: avoid; }                    /* never one row alone on the next page (16 pages in the 11/15 audit) */
+.book p.lead { page-break-after: avoid; margin-bottom: 0.4em; }        /* a short line right before a table goes with the table (class set in md_file_to_pdf) */
+/* no "last bullet stays with the list" rule: WeasyPrint backtracks over the whole table before the list to satisfy it (70 % blank page, measured 11/16) */
+.book h3 + table, .book h4 + table { margin-top: 0.5em; }
+
+/* --- lists: tight inside, space after --- */
+.book ul, .book ol { margin: 0.1em 0 1.1em; padding-left: 1.8em; }
+.book li { margin: 0 0 0.3em; }
+.book li li { page-break-inside: avoid; }
+.book li > ul, .book li > ol { margin: 0.25em 0 0.35em; }
+.book li li { font-size: 0.97em; }
+
+/* --- dialogue and callouts: a little air inside, kept whole --- */
+.book blockquote { margin: 0.5em 0 1.4em; padding: 12px 20px; line-height: 1.8; border-left-width: 5px; border-radius: 0 8px 8px 0; }
+.book blockquote p { margin: 0 0 0.35em; }
+.book .alert { padding: 12px 18px; margin: 0.7em 0 1.5em; border-radius: 0 8px 8px 0; font-size: 0.96em; line-height: 1.6; }
+.book .alert p { margin: 0 0 0.45em; }
+.book .alert-title { margin-bottom: 5px; font-size: 1.04em; break-after: avoid; }
+.book .alert > :last-child, .book blockquote > :last-child { break-before: avoid; }   /* no one-line sliver of a box on the next page */
+.book .alert p, .book blockquote p { orphans: 2; widows: 2; }
+/* bullets INSIDE a box: never the title plus one bullet at a page bottom, never one bullet alone on the next page
+   (10 pages in the second audit). Scoped to boxes on purpose — the same rule for every list dragged whole tables. */
+.book .alert li:first-child, .book blockquote li:first-child { break-after: avoid; }
+.book .alert li:last-child, .book blockquote li:last-child { break-before: avoid; }
+.book p.lead + ul > li:first-child, .book p.lead + ol > li:first-child { break-after: avoid; }
+.book h3 + ul > li:first-child, .book h4 + ul > li:first-child, .book h5 + ul > li:first-child,
+.book h3 + ol > li:first-child, .book h4 + ol > li:first-child, .book h5 + ol > li:first-child { break-after: avoid; }   /* a heading never keeps just one bullet */
+.book .alert-intro { font-size: 0.95em; margin-bottom: 1.2em; }
+.book .alert table { margin: 0.4em 0 0.3em; }
+.book hr { margin: 1.6em 0; }
+.book .toc { line-height: 1.6; }
 """.replace('__FONT__', FONT_STACK).replace('__MONO__', MONO_STACK).replace('__BASE__', str(BASE_PX))
 
 CSS_STYLE = FONT_FACES + CSS_BOOK + kotag.CSS_COLORS + """
@@ -393,6 +461,26 @@ def md_file_to_pdf(md_filename, pdf_dir=None):
     # a section heading that already carries its own number (06_quickref: "### 08. 안 …") gets no automatic counter
     body = re.sub(r'<h3 id="([^"]*)">(\s*(?:<[^>]+>\s*)*\d{1,2}\.)', r'<h3 id="\1" class="nonum">\2', body)
     body = thai_break_opportunities(body)         # Thai would otherwise never wrap (tables ran off the page)
+    if body_class == 'book':                       # a short table is one unit: never split it across pages
+        # a short paragraph directly before a table or a dialogue box (lead sentence or bold label) must not be left at a page bottom
+        # (tried 11/16: the same for EVERY lead paragraph after a heading — pages with > 1/3 blank went 8 → 27 in By_Unit; rejected)
+        body = re.sub(r'<p>((?:(?!</p>).)*)</p>(\s*)<(table|blockquote)',
+                      lambda m: (('<p class="lead">' if len(re.sub(r'<[^>]+>', '', m.group(1))) < 220 else '<p>')
+                                 + m.group(1) + '</p>' + m.group(2) + '<' + m.group(3)), body, flags=re.S)
+        # a bold label line directly before a list ("⚠️ 주의", "ระวัง") stays with the first two bullets
+        body = re.sub(r'<p>(<strong>(?:(?!</p>).)*</strong>)</p>(\s*)<(ul|ol)>',
+                      lambda m: (f'<p class="lead">{m.group(1)}</p>{m.group(2)}<{m.group(3)}>'
+                                 if len(re.sub(r'<[^>]+>', '', m.group(1))) < 80 else m.group(0)), body, flags=re.S)
+        # a long callout or dialogue may split (kept whole it pushed half a page of white space ahead of it)
+        def _long(m):
+            plain = re.sub(r'<[^>]+>', '', m.group(0))
+            return m.group(0) if len(plain) < 420 else m.group(0).replace(m.group(1), m.group(1)[:-1] + ' style="page-break-inside:auto">', 1)
+        body = re.sub(r'(<div class="alert alert-(?!intro)[a-z]+">)\s*<div class="alert-title">.*?</div>.*?</div>', _long, body, flags=re.S)
+        body = re.sub(r'(<blockquote>).*?</blockquote>', _long, body, flags=re.S)
+        body = re.sub(r'<table>(.*?)</table>',
+                      lambda m: ('<table class="keep">' if m.group(1).count('<tr') <= 7 and len(re.sub(r'<[^>]+>', '', m.group(1))) < 520
+                                 else '<table>') + m.group(1) + '</table>',   # few rows AND little text: tall rows made 'short' tables half a page
+                      body, flags=re.S)
 
     title = os.path.splitext(md_filename)[0]
     html = f"""<!DOCTYPE html>

@@ -87,3 +87,17 @@ this project's document work.
 Do not re-enable these or suggest installing them again unless the user asks. In particular,
 HandwritingOCR would read the homework scans more reliably than reading them by eye, but it uploads
 the images to a third party and bills per page — the user considered that and declined.
+
+## Book layout v2 (2026-11-15/16)
+- Only the two guides (`<body class="book">`); block "book layout v2" at the end of CSS_BOOK in scripts/make_pdf.py.
+- Type scale: chapter 27 · section 20 · sub-section 16.5 · body 14.5 · table 0.93em · table head / gloss 0.92–0.94em; Hangul `.kw` 1.06em.
+- Proximity: big gap above a heading, small below; rows and list items tight, the gap comes after the group. Tables: horizontal hairlines only.
+- Paging rules (each one measured — keep-together rules are expensive):
+  - `class="keep"` (never split) only for tables with ≤ 7 `<tr>` AND < 520 characters of text (row count alone kept tall-row tables whole: half-page gaps).
+  - `tbody > tr:last-child`, `li:last-child`, the last child of a callout/dialogue: `break-before: avoid` (no one-row / one-line sliver on the next page — the 11/15 audit found 23 such pages).
+  - `p.lead` (a paragraph < 220 characters directly before a table; class added in md_file_to_pdf) stays with the table — this also fixes bold labels like "∞ 읽기 ∞" left at a page bottom.
+  - Callouts and dialogues ≥ 420 characters may split; short ones stay whole. Top-level list items may split.
+  - REJECTED: `h3/h4 + p { break-after: avoid }` for every lead sentence, `li { break-inside: avoid }`, keep for ≤ 10 rows → 174 pages with > 1/5 blank at the bottom (old layout: 17).
+  - Bullets: inside a box the first bullet keeps the second and the last keeps the one before it; a list right after an h3–h5 or a bold label keeps its first two bullets with the heading. NO general "last bullet" rule for every list — WeasyPrint satisfies it by backtracking over the whole table that precedes the list (one page 70 % blank, By_Topic 61과).
+- Results 11/16 (final): By_Unit 674 pages (was 652), By_Topic 761 (was 722, incl. the merged slide content). Pages with > 1/3 blank at the bottom, chapter ends excluded: Unit 8, Topic 12; > 2/5: 2 + 2 (a heading moving with its small table). Second Haiku audit after the fixes: one-row table slivers 16 → 0 (one doubtful), orphan headings 2 → 0, overflow 0; the box/label slivers it still found (10) were fixed afterwards and checked by eye on those pages only. First attempt (line-height 1.8, 9 px padding) was rejected by the user as "too empty".
+- Measuring tool: last text yMax per page from `pdftotext -bbox` (header = yMax < 66, footer > 782); a chapter end = the next page's header differs. Visual audit = 4-page contact sheets at 52 dpi read by Haiku agents (9 agents, ≈ 2 min, 1,419 pages).

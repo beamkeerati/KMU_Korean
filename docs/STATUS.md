@@ -199,6 +199,12 @@
   (prediction ranks 9 · 4/10 · 1/7); the calendar format was not predicted (the frequency words were). The student's pencil note at the top: "Adj, verb 거나 / Noun 이나".
   35과 sheet (11/13): -는 것 table (12 verbs, left blank) + -아/어 보다 table (12 verbs × 봤어요 / 보세요, all 24 cells written, all right incl. 도와 · 들어 · 걸어 · 불러) +
   활동 취미 questions (speaking, blank) (exercises/everyday/unit35.md).
+  **35과 test (11/16) = 10/10** — paper titled "1급 단어 시험_35과" (exercises/everyday/unit35.md): A 4 = picture → one inline blank with V-는 것 (영화 보는 것 ·
+  사진 찍는 것 · 음식 만드는 것 · 음악 듣는 것) · B 4 = picture → 가/나 dialogue with -아/어 보다, 0.5 per blank (말을 타 봤어요 · 한국 음식을 안 만들어 봤어요 ·
+  안 들어 봤어요) + 8 그럼 한번 들어 보세요 (1 pt) · C 2 dictation cut shorter than 대화 35-1 (스포츠 댄스를 배워요 · 어렵지 않아요). All three parts predicted (rank 4 + 5
+  dictation; the format was inline blanks, not whole sentences). Third full mark (16과, 18과).
+  36과 sheet (11/16): -는데요/-었는데요 verb table (10) · adjective -(으)ㄴ데요 + noun 인데요 table (7) · -(으)ㄹ게요 table (12, incl. 걸을게요 · 도울게요 · 고를게요 ·
+  열게요) · -(으)ㄹ게요 vs -(으)ㄹ 거예요 choice (8) — every cell and circle right (exercises/everyday/unit36.md).
 - Known cosmetic gaps: 10과 A's third table row (30–10,000) is printed as given reference rather
   than as blanks; `왕쯔이` is transliterated `หวางจิ้ง` where `หวางจื่ออี` is closer.
 

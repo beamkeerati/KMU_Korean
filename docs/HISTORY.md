@@ -218,3 +218,11 @@ format as 31: 르 picture table 2.5 — runner = 빠르다 written 바르다 ×3
 (으)면 grid 23/23, (으)ㄹ 사람 grid 5/7 with 16 blank — 동울 · 듣을 사람) → exercises/everyday/unit33.md. 33과 prediction (Sonnet agent:
 predictions/everyday/unit33.md 950 lines, 47 pp + daily_predict33.json 164 items): three mocks in the 31/32 format with picture tables mixing
 (으)면 / (으)ㄹ and the day's slips (도울 · 들을 · 자를 · 매우면), picture → word drill for every sheet picture. Builds clean; site v60 published.
+
+**2026-11-16** — 매일시험 35과 = **10/10** ("1급 단어 시험": inline-blank -는 것 + -아/어 보다 + 2 short dictation lines, all three parts predicted) →
+exercises/everyday/unit35.md (test section; the `______` in the printed instruction became `(　　)` because six underscores render as a ruled line;
+the A/B headings carry "단어 시험" so build.py adds no ruled lines under inline-blank items) + scorecard on predictions/everyday/unit35.md.
+Sheet 36 (-는데요 / -(으)ㄴ데요 / 인데요 tables, -(으)ㄹ게요 table, 게요 vs 거예요 choice — all right) → exercises/everyday/unit36.md (`\*` before
+irregular verbs; `**` prints literally and trips the artifact scan). 36과 prediction (Sonnet agent, short: 17.5 KB, 8 pp) + daily_predict36.json.
+기말 발표 deck: slides 3 and 8 lost their keyword chips (teacher's request); a chip-less slide lets its pictures grow into the chip band
+(BOT_NOCHIP in build_chengdu_deck.py); the script's slide-3 tip now lists the speaking order instead. Site v65.

@@ -15,7 +15,7 @@ Claude Code loads this file into every message, so it is kept short (target ≤ 
 ## 1. User, goal, exams
 - Thai GKS scholar at Kookmin University Korean Language Center, level 1 (국민한국어 1). **Reply in Thai, short.** Study material = Korean with Thai explanations.
 - Course = 자모 + Units 5–37. Midterm covered 1–21과 (book 1-1); final = 23–37과 (book 1-2).
-- **Dates still ahead:** 매일시험 35과 Mon 11/16 · 낭독시험 ⑧ 11/18 · 복습시험④ 11/18 (30–37과; its 말하기 = 장소 소개 발표, content/speaking/place_intro.md = 한강 공원) · 기말 **11/20** (쓰기·듣기·읽기) / **11/23** (말하기) · 기말 발표 11/24 (topic announced 11/10). (The handout's 10/20 for 기말 was corrected to 11/20 by the teacher.) 복습시험③ was sat 11/6.
+- **Dates still ahead:** 매일시험 36과 Tue 11/17 · 낭독시험 ⑧ 11/18 · 복습시험④ 11/18 (30–37과; its 말하기 = 장소 소개 발표, content/speaking/place_intro.md = 한강 공원) · 기말 **11/20** (쓰기·듣기·읽기) / **11/23** (말하기) · 기말 발표 11/24 (topic announced 11/10). (The handout's 10/20 for 기말 was corrected to 11/20 by the teacher.) 복습시험③ was sat 11/6.
 - **Pass rule:** every skill's average of 중간 + 기말 ≥ 70; < 60 = fail; 60–69 may re-test. Each skill /100 = 시험 50 + 복습시험 20 + coursework 30 (per term). Details → docs/COURSE.md.
 - **Results so far:** 중간 말하기 41.2 · 듣기 42.0 · 쓰기 45.5 · 읽기 49.0 (/50). 복습시험①+② 말하기 20 · 쓰기 16.3 · 듣기 16.0 · 읽기 19.0 (/20). 복습시험③ (slip 11/10)
   말하기 10 · 쓰기 8.9 · 듣기 9.0 · 읽기 10 (/10 each, 37.9/40 — best of the three). Weakest: 말하기, 듣기. 매일시험 average ≈ 7.5/10; the losses are **word recall**, not grammar.
@@ -23,7 +23,7 @@ Claude Code loads this file into every message, so it is kept short (target ≤ 
 
 ### 1.1 Stated preferences (all deliverables)
 - Deliverables as **PDF**. Fonts: Thai/Latin = TH Sarabun (installed as Laksaman), Korean = Noto Serif CJK KR; mind maps keep Noto Sans.
-- **Book style** for the two guides (contract content/specs/SPEC_book_style.md, checker scripts/book_style_check.py): INTRO box per chapter, lead sentence per section, one Korean example per line with its gloss, no `·`-chains, no bold pseudo-headings.
+- **Book style** for the two guides (contract content/specs/SPEC_book_style.md, checker scripts/book_style_check.py): page look = "book layout v2" block in make_pdf.py (`.book` only: 6-rank type scale, open tables, paging rules + what was rejected → docs/RENDERER.md — the user wants neither cramped nor empty pages; teacher-slide material is MERGED into the chapter's own sections, never a separate "from the slides" section); INTRO box per chapter, lead sentence per section, one Korean example per line with its gloss, no `·`-chains, no bold pseudo-headings.
 - Every exercise needs a **Thai translation**; pictures become Thai text `🖼️ …`. Docs need a TOC; each `#`/`##` starts a page.
 - Answer keys ordered by question number, one item per line; sentence answers get long ruled lines.
 - Wants detail and full coverage; likes deep-dive explanations.
@@ -78,7 +78,7 @@ output/       🤖 GENERATED, never hand-edit. Entry = output/START_HERE.html (h
   omit `capabilities` (keeps db, sample, user). If refused as "unread", run `Artifact list scope:files` on the url first. Compare file sizes with that
   listing to see what changed. Each clips file must stay < 16 MB (build_mockweb splits spoken-line clips over SCLIP_FILES and word clips over VCLIP_FILES; add a file + `<script>` tag in
   app.html when the build says so). Do not re-enable the artifact watch on your own.
-- Current: **v64** (mini04 = 복습시험④ + a 기말 tile for exam `final`) — 194 sets · 3,758 items · 1,111 clips · 1,366 vocab words (vocab.js, Leitner drill, VOCAB_PRIO in build_mockweb.py line ~74).
+- Current: **v65** (매일시험 35 + sheet 36 + 36과 prediction; v64 = mini04 복습시험④ + a 기말 tile for exam `final`) — 200 sets · 3,833 items · 1,125 clips · 1,366 vocab words (vocab.js, Leitner drill, VOCAB_PRIO in build_mockweb.py line ~74).
   **v61:** every word has an example sentence + Thai translation + usage note in content/guide/04_vocabulary/examples/unitNN.json (brief
   content/specs/BRIEF_vocab_examples.md, check `python3 scripts/vocab_examples_check.py`); card mode gained 📝 เติมคำในประโยค (cloze); a new word in
   04_vocabulary/unitNN.md needs its example entry too (the checker compares the lists).
@@ -144,11 +144,11 @@ sections (with a 보기) in the MAIN set, keep 보기 word-choice + 질문에 �
   to f32le 16 kHz and pass a numpy array).
 
 ## 5. Content status (details and caveats → docs/STATUS.md)
-- Guides, vocab, mind maps, listening sheets, workbook (with the publisher's printed keys) cover **5–37과**. Everyday tests transcribed for 5–34, sheets
-  for 5–35; predictions for 17–35 (scorecards on 22–34; **from 35과 predictions are SHORT — ≤ 22 KB / ≤ 12 pages, the user found 30–50 pages too long; same for exam predictions**). 기말 pack (teacher's handout 11/13, source/review/KMU final review 02 unit 23 - 37.pdf): content/exercises/review/final02_part{1,2}.md (AI key) · content/predictions/final/final01.md (말하기 기말 연습, 19 questions) · 복습시험④ mock = content/predictions/miniexam/exam04.md + content/mockweb/mini04_*.json. 복습시험 ①②③ papers in content/exercises/miniexam/ (exam03.md §2 = how the ③ mock scored). The 중간시험 복습문제 key is AI-solved; agents' sample answers are labelled ตัวอย่างตอบ.
+- Guides, vocab, mind maps, listening sheets, workbook (with the publisher's printed keys) cover **5–37과**. Everyday tests transcribed for 5–35, sheets
+  for 5–36; predictions for 17–36 (scorecards on 22–35; **from 35과 predictions are SHORT — ≤ 22 KB / ≤ 12 pages, the user found 30–50 pages too long; same for exam predictions**). 기말 pack (teacher's handout 11/13, source/review/KMU final review 02 unit 23 - 37.pdf): content/exercises/review/final02_part{1,2}.md (AI key) · content/predictions/final/final01.md (말하기 기말 연습, 19 questions) · 복습시험④ mock = content/predictions/miniexam/exam04.md + content/mockweb/mini04_*.json. 복습시험 ①②③ papers in content/exercises/miniexam/ (exam03.md §2 = how the ③ mock scored). The 중간시험 복습문제 key is AI-solved; agents' sample answers are labelled ตัวอย่างตอบ.
 - `extracted/everyday/unit05-13/test-N.png` is not unit N — check the page header (`1급 매일 시험_N과`).
 - 매일시험 score log (details per item in docs/STATUS.md): 5과 7.5 · 6과 7 · 7과 8 · 8과 9.5 · 9과 5 · 10과 8.5 · 11과 5.7 · 12과 6.2 · 13과 4 · 14과 7.5 ·
-  15과 8.5 · 16과 10 · 17과 8 · 18과 10 · 19과 8.5 · 22과 8.5 · 23과 4.5 · 24과 8 · 25과 9 · 26과 5.5 · 27과 7.5 · 28과 7 · 29과 7.5 · 30과 9 · 31과 7.5 · 32과 8 · 33과 8.5 · **34과 8.5** (lost 차→자, 책→젝, an extra 에 in dictation) (31과–32과 used an 8-cell picture conjugation table × 0.5 + 3 picture sentences + 3 dictation;
+  15과 8.5 · 16과 10 · 17과 8 · 18과 10 · 19과 8.5 · 22과 8.5 · 23과 4.5 · 24과 8 · 25과 9 · 26과 5.5 · 27과 7.5 · 28과 7 · 29과 7.5 · 30과 9 · 31과 7.5 · 32과 8 · 33과 8.5 · 34과 8.5 (lost 차→자, 책→젝, an extra 에 in dictation) · **35과 10** ("단어 시험": inline blanks -는 것 + -아/어 보다 + 2 dictation) (31과–32과 used an 8-cell picture conjugation table × 0.5 + 3 picture sentences + 3 dictation;
   33과 went back to sentences A 4 + B 3 + C 3 — the format is not fixed; 32과 lost 빠르다 written 바르다 ×3; 33과 lost only vowel spellings).
 - Low papers (9과, 13과, 23과, 26과) are the vocabulary-heavy units → recall of words is the chronic loss; the site's daily vocab drill targets it.
 
@@ -178,7 +178,7 @@ Use these when checking work or writing predictions. ★ = has cost marks repeat
 - **음식 소개 = 팟타이** (content/speaking/food_intro.md + food_intro.jpeg, the user's Gemini picture) for Fri 11/6: slide requires -(으)ㄴ · -고 싶다 ·
   -고 · -지만 · 보다 · 중에서 제일 and 5 questions (이름 · 무엇으로 · 언제/어디/누구 · 왜 · 맛). 13 lines in 해요체.
 - **기말 발표 11/24 = 쓰고 발표하기 「여러분이 여행한 곳」** (handout source/speaking/KMU speaking final presentation unit 23 - 37.pdf: 16-question table + a
-  합니다체 speech like its 제주도 <보기>). Topic = the user's Aug 2026 Chengdu trip → content/speaking/travel_chengdu.md (script + slide-by-slide plan in ONE file since 11/15; the real deck = `python3 scripts/build_chengdu_deck.py` → output/6_Speaking/KMU_Speaking_TravelChengdu_Deck.pdf from content/speaking/travel_chengdu_img/NNx_*.jpg (NN = slide); `python3 scripts/wongoji.py <name>` lays a script on the 발표 (2) 원고지 (20 cells × front 14 + back 16 rows = 600 cells, ONE sheet, for 11/24) → `<name>_wongoji_N.png`, rerun after editing; cut 11/15 to 24 lines = exactly 30 rows ≈ 4–4.7 min — no room to add words, §❔ lists
+  합니다체 speech like its 제주도 <보기>). Topic = the user's Aug 2026 Chengdu trip → content/speaking/travel_chengdu.md (script + slide-by-slide plan in ONE file since 11/15; the real deck = `python3 scripts/build_chengdu_deck.py` → output/6_Speaking/KMU_Speaking_TravelChengdu_Deck.pdf from content/speaking/travel_chengdu_img/NNx_*.jpg (NN = slide); `python3 scripts/wongoji.py <name>` lays a script on the 발표 (2) 원고지 (20 cells × front 14 + back 16 rows = 600 cells, ONE sheet, for 11/24) → `<name>_wongoji_N.png`, rerun after editing; slides 3 + 8 lost their keyword chips 11/16 (teacher; pictures fill the band); cut 11/15 to 24 lines = exactly 30 rows ≈ 4–4.7 min — no room to add words, §❔ lists
   the guessed parts). The teacher said a self-introduction should not talk about family; not every sentence has to be formal.
 
 ## 8. Working rules

@@ -74,7 +74,7 @@
 
 เรื่องมีมุกแพนด้าเป็นแกน: สไลด์ 2 บอกว่าเฉิงตูดังเรื่องแพนด้า สไลด์ 4 บอกว่าไม่ได้ไปดู สไลด์ 9 ปิดว่าทุกคนไปดูแทนด้วย
 
-บนสไลด์มีแต่คำสำคัญ ไม่มีประโยคเต็ม จึงต้องพูดจากความจำ ป้ายคำใต้รูปเรียงตามลำดับที่พูด ใช้เป็นโพยได้
+บนสไลด์มีแต่คำสำคัญ ไม่มีประโยคเต็ม จึงต้องพูดจากความจำ ป้ายคำใต้รูปเรียงตามลำดับที่พูด ใช้เป็นโพยได้ ยกเว้นสไลด์ 3 กับ 8 ที่ครูให้ลบป้ายคำออก (16 พ.ย.)
 
 แก้สไลด์: เปลี่ยนรูปใน content/speaking/travel_chengdu_img/ แล้วรัน `python3 scripts/build_chengdu_deck.py` จากนั้น `python3 scripts/build.py speaking`
 
@@ -120,7 +120,7 @@
 
 <div style="page-break-before:always;"></div>
 
-<div style="page-break-inside:avoid; margin:14px 0 8px;"><div style="font-weight:bold; color:#c0392b; margin-bottom:4px;">🎞️ สไลด์ 3 · 언제? 누구와? 어떻게? (ไปเมื่อไร กับใคร ยังไง) — บรรทัด 7–10 · ราว 34 วินาที</div><img src="travel_chengdu_deck_3.jpg" style="width:125mm; display:block; margin:0 auto; border:1px solid #d0d7de; border-radius:6px;"><div style="font-size:11pt; color:#555; margin-top:4px;">💡 ชี้รูปเพื่อนตอนพูดข้อ 7 และชี้รูปจักรยานตอนพูดข้อ 9 ป้ายคำด้านล่างเรียงตามลำดับที่ต้องพูดพอดี</div></div>
+<div style="page-break-inside:avoid; margin:14px 0 8px;"><div style="font-weight:bold; color:#c0392b; margin-bottom:4px;">🎞️ สไลด์ 3 · 언제? 누구와? 어떻게? (ไปเมื่อไร กับใคร ยังไง) — บรรทัด 7–10 · ราว 34 วินาที</div><img src="travel_chengdu_deck_3.jpg" style="width:125mm; display:block; margin:0 auto; border:1px solid #d0d7de; border-radius:6px;"><div style="font-size:11pt; color:#555; margin-top:4px;">💡 ชี้รูปเพื่อนตอนพูดข้อ 7 และชี้รูปจักรยานตอนพูดข้อ 9 สไลด์นี้ไม่มีป้ายคำแล้ว (ครูให้ลบ 16 พ.ย.) ต้องจำลำดับเอง: 8월 → 친구 → 비행기 → 자전거 · 지하철</div></div>
 
 **7. 저는 지난 8월에 태국 친구와 같이 갔습니다.**
 *ชอนึน ชีนัน พัลวอเร แทกุก ชินกู-วา คาชี กัซซึมนีดา*

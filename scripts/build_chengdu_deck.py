@@ -22,6 +22,7 @@ OUT = os.path.join(ROOT, 'output', '6_Speaking', 'KMU_Speaking_TravelChengdu_Dec
 W, H = 338.67, 190.5            # mm, 16:9
 MX = 12                         # side margin
 TOP, BOT = 37, 157              # picture area (y from / to)
+BOT_NOCHIP = 176                # a slide without keyword chips lets its pictures use the chip band
 GAP = 4
 
 # fractional crop boxes (left, top, right, bottom) — only where a stranger fills the foreground or the frame is empty
@@ -35,14 +36,13 @@ CROP = {
 SLIDES = [
     ('cover', ['01b_city_day', '01a_towers_night'], []),
     ('청두는 어떤 곳?', ['02a_map', '02b_panda_food'], ['중국 서쪽', '큰 도시', '판다 🐼', '매운 음식 🌶️']),
-    ('언제? 누구와? 어떻게?', ['03b_friend', '03a_bike'], ['지난 8월', '태국 친구', '비행기 3시간 ✈️', '자전거 🚲', '지하철 🚇']),
+    ('언제? 누구와? 어떻게?', ['03b_friend', '03a_bike'], []),          # chips removed 11/16 (teacher)
     ('판다? <span class="x">✗</span> → 쇼핑몰!', ['04a_ifs_panda', '04c_global_center', '04b_screen', '04d_mall_night'],
      ['판다 🐼 &lt; 쇼핑몰 🛍️']),
     ('절 · 박물관', ['05a_garden_pond', '05c_temple_gate', '05b_old_street'], ['유명한 절', '박물관']),
     ('제일 좋았습니다: 인민공원', ['06a_marriage_corner', '06b_bike_day'], ['결혼할 사람 찾기 💍', '8월 = 더운 날씨 ☀️']),
     ('무슨 음식을 먹었습니까?', ['07a_spicy_pot', '07b_fried_dumpling'], ['훠궈', '매운 국수', '맵다 🌶️ → 맛있다!']),
-    ('쇼핑 · 여행이 어땠습니까?', ['08b_mall_inside', '08a_mall_night_wide', '08c_bike_path', '08d_bridge_night'],
-     ['구경 ○', '쇼핑 <span class="x">✗</span> (비싸다)', '3일', '즐거웠습니다 😊']),
+    ('쇼핑 · 여행이 어땠습니까?', ['08b_mall_inside', '08a_mall_night_wide', '08c_bike_path', '08d_bridge_night'], []),  # chips removed 11/16
     ('closing', ['09_closing'], []),
 ]
 WHO = '1A · 빔'
@@ -114,8 +114,9 @@ def build():
             chips = ''.join(f'<span class="chip">{c}</span>' for c in kw)
             body = ('<div class="blob"></div><div class="blob2"></div><div class="side"></div>'
                     f'<div class="num">{n:02d}</div><div class="title">{title}</div><div class="rule"></div>'
-                    + row(pics, MX + 6, TOP, W - MX, BOT) +
-                    f'<div class="kw">{chips}</div>{dots(n)}<div class="who">청두 여행 · {WHO}</div>')
+                    + row(pics, MX + 6, TOP, W - MX, BOT if kw else BOT_NOCHIP) +
+                    (f'<div class="kw">{chips}</div>' if kw else '') +
+                    f'{dots(n)}<div class="who">청두 여행 · {WHO}</div>')
         pages.append(f'<section>{body}</section>')
     css = f"""
 @page {{ size: {W}mm {H}mm; margin: 0; }}

@@ -71,7 +71,7 @@ VOCAB_DIR = os.path.join(ROOT, 'content', 'guide', '04_vocabulary')
 ROW = re.compile(r'^\|\s*([^|]+?)\s*\|\s*([^|]+?)\s*\|\s*([^|]*?)\s*\|\s*$')
 # unit priority for the daily drill: the units of the coming exams first (매일시험 31과 11/10, then the rest of 복습시험 ④ 11/18 = 30–37과,
 # then 23–29과 for 기말, then 22과 and book 1-1)
-VOCAB_PRIO = [33, 32, 31, 30, 34, 35, 36, 37, 28, 26, 27, 25, 24, 23, 29, 22, 21, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5]
+VOCAB_PRIO = [36, 37, 35, 34, 33, 32, 31, 30, 28, 26, 27, 25, 24, 23, 29, 22, 21, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5]
 
 
 SCLIP_FILES = ('clips.js', 'clips2.js', 'clips5.js')   # spoken-line clips (+ KMU_WORDS in clips2.js); one <script> tag each in app.html
