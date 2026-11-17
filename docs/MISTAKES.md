@@ -165,6 +165,10 @@ starred ones cost real marks.
   (대화 34-1 first line has no 에: 주말을 잘 보내다, 주말 = object with 을 dropped); the teacher circled and struck 에 (△). Dictate only what is heard; do not add 에/에서/을 from habit. The opposite slip (a particle dropped: 책 읽는, 사수 없어요) is also on record. Right: 커피숍이나 공원에서 (ㅂ + 이나, then 에서), 읽거나 / 운동하거나 (-거나 straight on the stem),
   자주 · 거의 안 · 전혀 안 from the calendar, 액션 영화를 좋아해요, 집에서 쉬어요. Copied the question's 주말에 보통 into item 4 (accepted).
   Sheet 35 (2026-11-13): -아/어 보다 table 24/24 right (도와 · 들어 · 걸어 · 불러 included); the -는 것 table left blank.
+- **매일시험 36과 (2026-11-17, 8.5/10):** three half marks. **New: wrong column in a one-blank-per-row table** — wrote the present form in the past
+  column twice (**먹는데요** for 먹었는데요 · **학생인데요** for 학생이었는데요) although sheet 36 had both right; check the column header of each blank.
+  **Dropped final consonant in dictation:** **야속** for 약속 ([약쏙]; the ㄱ is heard only as tensing). Right: 사는데요 · 추운데요 · 먼데요 · 맛있는데요 · 열게요 · 안 피울게요.
+  Sheet 37 (2026-11-17): **교실이야 해요** for 교실이어야 해요 (dropped 어 — same family as 읽어세요/맛있서); the 12 -아/어 주세요 and 12 -아/어야 cells all right.
 - **Workbook 34 (2026-11-12, photos):** **김치이나** for 김치나 (vowel-final noun + 나) · **태국 음악을 불러요** for 태국 노래를 불러요 (음악 goes with 듣다,
   노래 with 부르다) · answered 간식 (snack) with 김치/국 · 영마산 (용마산?) · in the 대화 task wrote two different names where both 씨 blanks address the same
   person. Right: 안경이나 휴대폰을 드려요, 선물이나 음식을 가지고 갈 거예요, 태국 with ㅐ.

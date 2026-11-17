@@ -226,3 +226,13 @@ Sheet 36 (-는데요 / -(으)ㄴ데요 / 인데요 tables, -(으)ㄹ게요 table
 irregular verbs; `**` prints literally and trips the artifact scan). 36과 prediction (Sonnet agent, short: 17.5 KB, 8 pp) + daily_predict36.json.
 기말 발표 deck: slides 3 and 8 lost their keyword chips (teacher's request); a chip-less slide lets its pictures grow into the chip band
 (BOT_NOCHIP in build_chengdu_deck.py); the script's slide-3 tip now lists the speaking order instead. Site v65.
+
+**2026-11-17** — 매일시험 36과 = **8.5/10** (8-cell -(으)ㄴ/는데요 table: two present forms in past cells; -(으)ㄹ게요 4/4; dictation 야속 △) →
+exercises/everyday/unit36.md (test section + key) + scorecard on predictions/everyday/unit36.md (all three parts predicted, the table as the reserve set).
+Sheet 37 (-아/어 주세요 · -아/어야 해요 tables, taxi + burger activities; 교실이야 ✗) → new exercises/everyday/unit37.md. scores.json daily +36;
+daily_b.json + daily-36-writing / daily-36-listening / sheet-37-writing; the 36 prediction group retired. 37과 prediction (Sonnet agent, 19.8 KB, 8 pp)
++ daily_predict37.json — the syllabus shows 11/19 = 총복습, so a 37과 test is unconfirmed. **기말 analysis** (user: "analyse thoroughly from every source"):
+content/predictions/final/final02.md → output/3_Exam_Prep/KMU_Predict_final02.pdf (6 pp): evidence table (teacher's midterm remark, the 기말 복습문제 has
+no 읽기/듣기, ③ 쓰기 = 5 of 7 sections in the handout's formats), 쓰기 sections ranked + every 23–37 grammar mapped to a handout item, picture-vocab themes
+not yet used, the 12 textbook 읽기 passages with ③/④ status and practice sets, the 15 대화 + 28/32/36 듣기 with the facts to catch, a 3-day plan, checklist.
+Site v66 (206 sets · 3,905 items) published. Not committed.

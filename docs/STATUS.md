@@ -205,6 +205,13 @@
   dictation; the format was inline blanks, not whole sentences). Third full mark (16과, 18과).
   36과 sheet (11/16): -는데요/-었는데요 verb table (10) · adjective -(으)ㄴ데요 + noun 인데요 table (7) · -(으)ㄹ게요 table (12, incl. 걸을게요 · 도울게요 · 고를게요 ·
   열게요) · -(으)ㄹ게요 vs -(으)ㄹ 거예요 choice (8) — every cell and circle right (exercises/everyday/unit36.md).
+  **36과 test (11/17) = 8.5/10** — "1급 매일 시험_36과" (exercises/everyday/unit36.md): A 8-cell table × 0.5, each row asks ONE column (가다/먹다/학생 = past,
+  살다 좋다 춥다 멀다 맛있다 = present): 3/4 — **먹는데요** and **학생인데요** written in past-column cells (→ 먹었는데요 · 학생이었는데요; the sheet the day before had
+  both right) · B 4 -(으)ㄹ게요 dialogues from workbook F + sheet p.4 (전화할게요 · 내일 일찍 올게요 · 안 피울게요 · 열게요) 4/4 · C dictation from 대화 36-1 cut short:
+  **야속**이 있는데요 △ (→ 약속) · 금요일에는 시간이 괜찮아요 ✓. Predicted: dictation ranks 1 + 5, B items 5 + 7, the table = the reserve set (§4).
+  37과 sheet (11/17): -아/어/여 주세요 table 12/12 (잘라 · 들어 · 도와 right) · taxi (명동역 4번 출구 / 길음역 3번 출구, 에어컨 꺼/켜) and hamburger-order
+  activities (speaking, blank) · -아/어/여야 해요 table 13/14 — **교실이야 해요** (→ 교실이어야, self-checked) (exercises/everyday/unit37.md).
+  37과 prediction (Sonnet agent, 19.8 KB, 8 pp; date unconfirmed — 11/19 is 총복습 in the syllabus) + daily_predict37.json. 기말 analysis: predictions/final/final02.md (6 pp).
 - Known cosmetic gaps: 10과 A's third table row (30–10,000) is printed as given reference rather
   than as blanks; `왕쯔이` is transliterated `หวางจิ้ง` where `หวางจื่ออี` is closer.
 
