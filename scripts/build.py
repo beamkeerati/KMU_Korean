@@ -205,8 +205,8 @@ def build_guide():
 
     KMU_Guide_By_Unit  = ส่วนที่ 0 exam info + ส่วนที่ 1: per unit 5–37 the 01_units chapter (teacher's slides merged inline)
                          followed by the centre's word list (04_vocabulary/unitNN.md)
-    KMU_Guide_By_Topic = ส่วนที่ 0 + ส่วนที่ 1 grammar topics 01–35 (02_grammar, slides merged inline) + ส่วนที่ 2 은/는 vs 이/가
-                         + ส่วนที่ 3 의문사 + ส่วนที่ 4 vocabulary by theme + ส่วนที่ 5 self-test + ส่วนที่ 6 quick table
+    KMU_Guide_By_Topic = ส่วนที่ 0 + ส่วนที่ 1 grammar topics 01–64 (02_grammar, slides merged inline) + ส่วนที่ 2 은/는 vs 이/가
+                         + ส่วนที่ 3 의문사 + ส่วนที่ 4 vocabulary (picture themes + every word by meaning, scripts/vocab_categories.py) + ส่วนที่ 5 self-test + ส่วนที่ 6 quick table
     07_lecture/ is the slide transcription archive; its content now lives inside the chapters, so it is not assembled.
     """
     g = os.path.join(CONTENT, 'guide')
@@ -230,12 +230,15 @@ def build_guide():
              '> [!INTRO] ส่วนนี้คืออะไร\n> ชีตภาพของศูนย์ (หน้า 36–48 ของสมุดคำศัพท์) จัดคำเป็นหมวดตามภาพ หัวข้อย่อยแต่ละหัวข้อบอกบทที่คำนั้นปรากฏ '
              'ตารางให้ทั้งคำไทยและอังกฤษ คำที่เคยออกสอบหรือเคยเขียนผิดดูเพิ่มในตอน "ออกสอบอย่างไร" ของบทนั้น',
              read(os.path.join(g, '04_vocabulary', '90_themes.md')).strip()]
-    cats = os.path.join(g, '04_vocabulary', '91_categories.md')
-    if os.path.exists(cats):
-        vocab += ['## 📂 คำศัพท์แยกหมวด (รวบรวมจากตำรา 5–37과)',
-                  '> [!INTRO] ส่วนนี้คืออะไร\n> รายการนี้รวบรวมจากตำราโดยจัดตามความหมาย (คน · สถานที่ · กริยา · คุณศัพท์ …) '
-                  'ใช้เมื่อต้องการคำในหมวดเดียวกันหลาย ๆ คำ เช่น ตอนเขียนเรียงความหรือเตรียมบทพูด',
-                  strip_own_titles(read(cats)).strip()]
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    import vocab_categories          # every word of 5–37과 by meaning, from 04_vocabulary/91_categories.tsv
+    if not vocab_categories.check(verbose=False):
+        print('guide     : ⚠️ 91_categories.tsv is incomplete — run python3 scripts/vocab_categories.py --check')
+    vocab += ['## 📂 คำศัพท์แยกหมวด (ครบทุกคำ 5–37과)',
+              '> [!INTRO] ส่วนนี้คืออะไร\n> คำศัพท์ทุกคำของคอร์ส (บท 5–37) จัดตามความหมาย เริ่มจากคำนาม แล้วกริยา คุณศัพท์ และคำอื่น ๆ '
+              'ในแต่ละหมวดเรียงตามบท วงเล็บหลังคำบอกบทที่เรียนคำนั้นครั้งแรก กริยาและคุณศัพท์มีรูป -아/어요 ให้ด้วย '
+              'ใช้เมื่อต้องการคำในหมวดเดียวกันหลาย ๆ คำ เช่น ตอนเขียนเรียงความหรือเตรียมบทพูด',
+              vocab_categories.render()]
     by_topic = '\n\n'.join([
         BOOK_MARK,
         guide_cover('📘 KMU Korean 1 — คู่มือตามหัวข้อ (5–37과)',

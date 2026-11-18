@@ -173,5 +173,13 @@ starred ones cost real marks.
   노래 with 부르다) · answered 간식 (snack) with 김치/국 · 영마산 (용마산?) · in the 대화 task wrote two different names where both 씨 blanks address the same
   person. Right: 안경이나 휴대폰을 드려요, 선물이나 음식을 가지고 갈 거예요, 태국 with ㅐ.
 
+- **복습시험④ (2026-11-18, the user's own recall; official score not out):** 쓰기 ≈ 77 — **반대말 swapped** 밝다 ↔ 느리다 / 빠르다 ↔ 어둡다 (−4;
+  noted "สลับกัน" on the paper) · **printed ending written again:** 물어요 + printed 아/어 보세요 (−4; same family as ③'s 깨끗해졌어요 + 졌어요; 불렀어요
+  before 았/었어요 passed) · **printed particle ignored:** 그럼 학생증이 ___ (-아/어야 하다) → wrote 을 가지고 와야 해요; 이 needs 있어야 해요 (−5) ·
+  **left 7-1 blank** (-(으)면: 한국어를 잘하면 …고 싶어요, −5) · **포장하다 not known:** 드실 거예요? 포장하실 거예요? → 불고기를 먹어 주세요 for 포장해 주세요
+  (−5; it is the 37과 model sentence). 듣기 9 (37-1): wrote 약속이 and stopped — heard 약속을 바꿀 수 있어요, hesitated between 취소 (reading 37과) and
+  바꾸다 (−1; object again with 이). 읽기 3: only half of a two-part answer (스파게티 without 야경도 봤어요 that the next question asks about, −0.5) ·
+  읽기 10: a blank that is a QUESTION (그 친구와 뭐 할 거예요?) — wrong (−1).
+
 What the user does well: ㅂ니다/습니다 choice by 받침, -지 않- forms, 겠 forms, the ㅡ-drop past
 (바빴어요·컸어요), special honorific words (드세요·주무세요·계세요), 에서 for activity places.

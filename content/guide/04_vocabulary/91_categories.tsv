@@ -1,0 +1,1367 @@
+# ko	category id (scripts/vocab_categories.py CATS)	-아/어요 form for verbs/adjectives — one row per word of examples/unitNN.json, course order
+중국	country	
+사람	people	
+일본	country	
+몽골	country	
+베트남	country	
+러시아	country	
+호주	country	
+어느 나라	pron	
+한국	country	
+미국	country	
+캐나다	country	
+사우디아라비아	country	
+태국	country	
+씨	people	
+선생님	job	
+저	pron	
+학생	job	
+요리사	job	
+회사원	job	
+변호사	job	
+경찰관	job	
+의사	job	
+간호사	job	
+가수	job	
+운동선수	job	
+이름	abstract	
+직업	job	
+친구	people	
+안녕하세요?	expr	
+병원	place	
+호텔	place	
+이메일	comm	
+전화번호	comm	
+만나서 반갑습니다	expr	
+아니요	expr	
+네	expr	
+안녕하세요	expr	
+이다	v_act	이에요
+아니다	v_act	아니에요
+어느	pron	
+소개	abstract	
+명함	things	
+국민대학교	place	
+법원	place	
+법률 회사	money	
+또는	conj	
+내용	abstract	
+부분	abstract	
+확인하다	v_act	확인해요
+얘기(를) 하다	v_mind	얘기(를) 해요
+자모	study	
+받침	study	
+발음	study	
+연음	study	
+얘기	abstract	
+기자	job	
+통역사	job	
+배우	job	
+운전기사	job	
+주부	job	
+보기	instr	
+문제	instr	
+알맞다	instr	알맞아요
+선택하다	instr	선택해요
+완성하다	instr	완성해요
+빈칸	instr	
+밑줄	instr	
+연결하다	instr	연결해요
+관계있다	instr	관계있어요
+반대말	instr	
+문장	instr	
+어휘	instr	
+대화	instr	
+틀리다	instr	틀려요
+동사	study	
+명사	study	
+조사	study	
+말하다	v_mind	말해요
+활동	instr	
+정답	instr	
+복습시험	study	
+복습문제	study	
+중간시험	study	
+매일시험	study	
+답안	instr	
+예시	instr	
+답하다	instr	답해요
+물음	instr	
+누가	pron	
+무엇	pron	
+이것	pron	
+그것	pron	
+저것	pron	
+책상	home	
+의자	home	
+시계	things	
+책	things	
+휴지통	home	
+에어컨	home	
+지도	things	
+달력	things	
+텔레비전	home	
+창문	home	
+물건	things	
+지갑	things	
+누구	pron	
+휴대 전화	comm	
+가방	things	
+사전	study	
+안경	things	
+여기	pron	
+우리	pron	
+교실	place	
+-들	abstract	
+모두	adv	
+반	study	
+휴대폰	comm	
+그게	pron	
+팀	people	
+모이다	v_act	모여요
+속	travel	
+꺼내다	v_act	꺼내요
+놓다	v_act	놓아요
+휴대전화	comm	
+연필	things	
+지우개	things	
+카메라	things	
+공책	things	
+필통	things	
+전자사전	things	
+수첩	things	
+볼펜	things	
+이게	pron	
+뭐	pron	
+컴퓨터	comm	
+학생증	things	
+카드	things	
+잡지	comm	
+돈	money	
+그리고	conj	
+사진	comm	
+여자 친구	people	
+대학교	place	
+같다	a_quality	같아요
+대하다	v_act	대해요
+보이다	v_mind	보여요
+사물	abstract	
+기억하다	v_mind	기억해요
+각자	people	
+자신	pron	
+이때	time	
+정도	number	
+진행하다	v_act	진행해요
+뒤집다	v_act	뒤집어요
+저게	pron	
+띄어쓰기	study	
+몇	pron	
+층	number	
+화장실	home	
+사무실	place	
+호	number	
+기숙사	place	
+방	home	
+버스	travel	
+번	number	
+원룸	home	
+라디오	home	
+학교	place	
+꽃 가게	place	
+운동장	place	
+어디	pron	
+과자	food	
+가족	people	
+남자 친구	people	
+컴퓨터실	place	
+복사실	place	
+커피숍	place	
+가게	place	
+서점	place	
+휴게실	place	
+많이	adv	
+학생회관	place	
+있다	v_act	있어요
+없다	v_act	없어요
+단위	number	
+단위 명사	number	
+한자어	study	
+외국인	country	
+등록	study	
+안내판	things	
+대기	abstract	
+교육	study	
+센터	place	
+한 번	number	
+영	number	
+공	number	
+삼	number	
+사	number	
+오	number	
+육	number	
+칠	number	
+팔	number	
+구	number	
+십	number	
+백	number	
+천	number	
+만	number	
+가족사진	comm	
+앞	travel	
+뒤	travel	
+위	travel	
+아래	travel	
+옆	travel	
+안	travel	
+밖	travel	
+칠판	study	
+우산	things	
+나무	nature	
+도서관	place	
+우체국	place	
+미용실	place	
+공항	place	
+식당	place	
+영화관	place	
+PC방	place	
+은행	place	
+약국	place	
+문구점	place	
+안경점	place	
+매일	time	
+위층	travel	
+학생 식당	place	
+음식	food	
+맛있다	a_sense	맛있어요
+빵집	place	
+위치	travel	
+엄마	people	
+표시하다	v_act	표시해요
+테이블	home	
+계시다	v_act	계세요
+신발	things	
+사과	food	
+빵	food	
+표	travel	
+커피	food	
+주스	food	
+고양이	nature	
+개	number	
+장	number	
+잔	number	
+병	number	
+명	number	
+마리	number	
+권	number	
+어서 오세요	expr	
+주세요	expr	
+여기 있어요	expr	
+자루	number	
+비누	things	
+치약	things	
+칫솔	things	
+라면	food	
+얼마	pron	
+원	number	
+수건	things	
+컵	things	
+티셔츠	things	
+운동화	things	
+아이스크림	food	
+아주머니	people	
+우유	food	
+영수증	money	
+봉투	things	
+합계	money	
+주인	people	
+고유어	study	
+감사합니다	expr	
+한	number	
+두	number	
+세	number	
+하나	number	
+둘	number	
+셋	number	
+넷	number	
+다섯	number	
+여섯	number	
+일곱	number	
+여덟	number	
+아홉	number	
+열	number	
+스물	number	
+스무	number	
+서른	number	
+마흔	number	
+쉰	number	
+예순	number	
+일흔	number	
+여든	number	
+아흔	number	
+점원	job	
+우표	comm	
+어른	people	
+서로	adv	
+비교하다	v_mind	비교해요
+짝	people	
+쓰이다	v_act	쓰여요
+나이	abstract	
+음료	food	
+아이	people	
+자다	v_daily	자요
+만나다	v_act	만나요
+오다	v_move	와요
+먹다	v_daily	먹어요
+읽다	v_mind	읽어요
+마시다	v_daily	마셔요
+일하다	v_act	일해요
+노래	hobby	
+쉬다	v_free	쉬어요
+공부	study	
+씻다	v_daily	씻어요
+영화	hobby	
+보다	v_mind	봐요
+청소	home	
+물	food	
+옷	things	
+입다	v_daily	입어요
+손	body	
+신문	comm	
+운동	hobby	
+쓰다	v_mind	써요
+춤	hobby	
+추다	v_free	춰요
+이야기	abstract	
+요리	food	
+샤워	abstract	
+숙제	study	
+전화	comm	
+빨래	things	
+기다리다	v_act	기다려요
+집	home	
+지금	time	
+명동	place	
+밥	food	
+쇼핑	money	
+생일	event	
+축하	event	
+케이크	food	
+찍다	v_act	찍어요
+파티	event	
+재미있다	a_quality	재미있어요
+선물	things	
+선물하다	v_act	선물해요
+아기	people	
+축하하다	v_act	축하해요
+형태	abstract	
+가다	v_move	가요
+사다	v_act	사요
+앉다	v_daily	앉아요
+춤(을) 추다	v_free	춤(을) 춰요
+공부(를) 하다	v_mind	공부(를) 해요
+운동(을) 하다	v_free	운동(을) 해요
+이야기(를) 하다	v_mind	이야기(를) 해요
+노래(를) 하다	v_free	노래(를) 해요
+청소(를) 하다	v_daily	청소(를) 해요
+쇼핑(을) 하다	v_act	쇼핑(을) 해요
+일(을) 하다	v_act	일(을) 해요
+전화(를) 하다	v_act	전화(를) 해요
+요리(를) 하다	v_daily	요리(를) 해요
+샤워(를) 하다	v_daily	샤워(를) 해요
+숙제(를) 하다	v_mind	숙제(를) 해요
+돼지고기	food	
+축구	hobby	
+담배	things	
+피우다	v_act	피워요
+내일	time	
+시장	place	
+날씨	nature	
+좋다	a_quality	좋아요
+김밥	food	
+편의점	place	
+과일	food	
+오늘	time	
+그럼	conj	
+백화점	place	
+찾다	v_act	찾아요
+산책	hobby	
+일	money	
+아르바이트	money	
+공원	place	
+농구장	place	
+농구	hobby	
+약속	event	
+극장	place	
+헬스장	place	
+축구하다	v_free	축구해요
+돼지	nature	
+날짜	time	
+며칠	pron	
+월요일	time	
+화요일	time	
+수요일	time	
+목요일	time	
+금요일	time	
+토요일	time	
+일요일	time	
+무슨	pron	
+언제	pron	
+오전	time	
+한국어	country	
+오후	time	
+아침	time	
+저녁	time	
+주말	time	
+방학	event	
+여행	hobby	
+배우다	v_mind	배워요
+바지	things	
+배	food	
+어머니	people	
+아버지	people	
+여동생	people	
+남동생	people	
+휴지	things	
+고기	food	
+인사동	place	
+옛날	time	
+구경	hobby	
+찻집	place	
+된장찌개	food	
+차	food	
+월	time	
+요일	time	
+곳	place	
+그곳	place	
+외국	country	
+프랑스	country	
+계획표	abstract	
+주간	time	
+일주일	time	
+주	time	
+어린이날	event	
+그저께	time	
+부산	country	
+홍대	place	
+깎다	v_act	깎아요
+의문사	study	
+일월	time	
+이월	time	
+삼월	time	
+사월	time	
+오월	time	
+유월	time	
+칠월	time	
+팔월	time	
+구월	time	
+시월	time	
+십일월	time	
+십이월	time	
+계획	abstract	
+산	nature	
+지난주	time	
+다음 주	time	
+낮	time	
+지난달	time	
+이번 달	time	
+다음 달	time	
+올해	time	
+작다	a_quality	작아요
+자동차	travel	
+비싸다	a_quality	비싸요
+적다	a_quality	적어요
+친절하다	a_person	친절해요
+멋있다	a_person	멋있어요
+나쁘다	a_quality	나빠요
+어떻다	a_quality	어때요
+길다	a_quality	길어요
+짧다	a_quality	짧아요
+많다	a_quality	많아요
+싸다	a_quality	싸요
+재미없다	a_quality	재미없어요
+예쁘다	a_quality	예뻐요
+크다	a_quality	커요
+여자	people	
+남자	people	
+서울	country	
+고향	place	
+김치	food	
+좋아하다	v_mind	좋아해요
+꽃	nature	
+키	body	
+냉장고	home	
+영어	country	
+녹차	food	
+팔다	v_act	팔아요
+뉴스	comm	
+드라마	hobby	
+살다	v_daily	살아요
+한국말	country	
+일본어	country	
+잘	adv	
+언니	people	
+대학생	job	
+수업	study	
+좀	adv	
+그래서	conj	
+여러	adv	
+피곤하다	a_person	피곤해요
+베트남 말	country	
+생활	abstract	
+머리	body	
+인터뷰	comm	
+다니다	v_move	다녀요
+형용사	study	
+학교생활	study	
+맛없다	a_sense	맛없어요
+조용하다	a_quality	조용해요
+중요하다	a_quality	중요해요
+동생	people	
+누나	people	
+오빠	people	
+형	people	
+할아버지	people	
+할머니	people	
+외할아버지	people	
+외할머니	people	
+(한) 살	number	
+교과서	study	
+구두	things	
+양말	things	
+가르치다	v_mind	가르쳐요
+회사	money	
+타다	v_move	타요
+부모님	people	
+이분	people	
+건강하다	a_person	건강해요
+고등학생	job	
+잘하다	v_act	잘해요
+정말	adv	
+중국어	country	
+러시아어	country	
+말씀	abstract	
+연세	abstract	
+주무시다	v_daily	주무세요
+윗사람	people	
+다시	adv	
+드시다	v_daily	드세요
+잡수시다	v_daily	잡수세요
+먼저	adv	
+홍차	food	
+콜라	food	
+소개하다	v_act	소개해요
+인사하다	v_act	인사해요
+어제	time	
+지난	time	
+작년	time	
+일찍	adv	
+늦게	adv	
+등산	hobby	
+베이징	country	
+아주	adv	
+바쁘다	a_person	바빠요
+도쿄	country	
+신문사	money	
+교수님	job	
+통역	abstract	
+열심히	adv	
+감사하다	v_mind	감사해요
+안녕히 계십시오	expr	
+올림	expr	
+받다	v_act	받아요
+별로	adv	
+아저씨	people	
+호칭	abstract	
+하노이	country	
+워싱턴	country	
+울란바토르	country	
+시	number	
+분	number	
+일어나다	v_daily	일어나요
+빌리다	v_act	빌려요
+노래방	place	
+부르다	v_free	불러요
+점심	time	
+근처	travel	
+그림	hobby	
+체육관	place	
+자르다	v_act	잘라요
+학원	place	
+쯤	adv	
+헤어지다	v_act	헤어져요
+태권도	hobby	
+동대문	place	
+들어오다	v_move	들어와요
+야채	food	
+용산	place	
+이태원	place	
+맞히다	v_mind	맞혀요
+어젯밤	time	
+사진관	place	
+비자	travel	
+연습	study	
+슈퍼마켓	place	
+콘서트	hobby	
+만들다	v_act	만들어요
+모레	time	
+N서울타워	place	
+경치	nature	
+전시회	event	
+덕수궁	place	
+미술관	place	
+장소	place	
+기간	time	
+시간	number	
+사진전	event	
+가야금	hobby	
+연주회	event	
+남산	nature	
+한옥마을	place	
+달	time	
+전에	time	
+한식집	place	
+불고기	food	
+하루	time	
+세우다	v_act	세워요
+마트	place	
+자리	travel	
+높다	a_quality	높아요
+아마	adv	
+우선	adv	
+갖다	v_act	가져요
+사귀다	v_act	사귀어요
+한식	food	
+주다	v_act	줘요
+보내다	v_act	보내요
+질문하다	v_mind	질문해요
+드리다	v_act	드려요
+강아지	nature	
+향수	things	
+액세서리	things	
+자주	adv	
+듣다	v_mind	들어요
+용돈	money	
+문법	study	
+장갑	things	
+눈	body	
+지하철	travel	
+복잡하다	a_quality	복잡해요
+날마다	time	
+선글라스	things	
+졸업식	event	
+화장품	things	
+해운대	place	
+참	adv	
+유명하다	a_quality	유명해요
+생신	event	
+크리스마스	event	
+특별하다	a_quality	특별해요
+밸런타인데이	event	
+초콜릿	food	
+사랑하다	v_mind	사랑해요
+설탕	food	
+넣다	v_act	넣어요
+여러 가지	adv	
+멀다	a_quality	멀어요
+놀다	v_free	놀아요
+음료수	food	
+열다	v_act	열어요
+그리다	v_free	그려요
+북한강	nature	
+처음	time	
+함께	adv	
+눈사람	nature	
+카페	place	
+편지	comm	
+계속	adv	
+여기저기	adv	
+생각하다	v_mind	생각해요
+남이섬	place	
+동작	abstract	
+발표하다	v_mind	발표해요
+표현하다	v_mind	표현해요
+정하다	v_act	정해요
+스위스	country	
+나누다	v_act	나눠요
+대표	people	
+기관	place	
+공공 기관	place	
+상대	people	
+상자	things	
+잘못	adv	
+못	adv	
+같이	adv	
+미안하다	a_person	미안해요
+다음	time	
+준비하다	v_act	준비해요
+삼계탕	food	
+갈비찜	food	
+비빔밥	food	
+액션 영화	hobby	
+공포 영화	hobby	
+코미디 영화	hobby	
+수영	hobby	
+음악	hobby	
+케이팝(K-POP)	hobby	
+클래식	hobby	
+힙합	hobby	
+색깔	color	
+하얀색	color	
+빨간색	color	
+파란색	color	
+동물	nature	
+시험	study	
+쓰기	study	
+듣기	study	
+읽기	study	
+밝다	a_quality	밝아요
+값	money	
+맵다	a_sense	매워요
+넓다	a_quality	넓어요
+거기	pron	
+냉면	food	
+카푸치노	food	
+아이스커피	food	
+대화방	comm	
+경복궁	place	
+삼청동	place	
+괜찮다	a_quality	괜찮아요
+문	home	
+거리	travel	
+삼겹살	food	
+정문	place	
+경주	country	
+벌써	adv	
+입장하다	v_move	입장해요
+생선회	food	
+김포공항	place	
+뜻	abstract	
+소설책	things	
+아메리카노	food	
+요약하다	v_mind	요약해요
+숙박	travel	
+메뉴	food	
+관광	travel	
+포도	food	
+감	food	
+분홍색	color	
+녹색(초록색)	color	
+남색	color	
+보라색	color	
+갈색	color	
+쥐	nature	
+원숭이	nature	
+판다	nature	
+곰	nature	
+사자	nature	
+맛	food	
+김치찌개	food	
+덥다	a_sense	더워요
+어렵다	a_quality	어려워요
+쉽다	a_quality	쉬워요
+고맙다	a_person	고마워요
+아름답다	a_quality	아름다워요
+귀엽다	a_quality	귀여워요
+더럽다	a_quality	더러워요
+춥다	a_sense	추워요
+가깝다	a_quality	가까워요
+떡볶이	food	
+어떤	pron	
+시원하다	a_sense	시원해요
+뜨겁다	a_sense	뜨거워요
+시다	a_sense	{v:셔}{e:요}
+착하다	a_person	착해요
+똑똑하다	a_person	똑똑해요
+무섭다	a_quality	무서워요
+가볍다	a_quality	가벼워요
+순두부찌개	food	
+조금	adv	
+달다	a_sense	달아요
+짬뽕	food	
+짜장면	food	
+회덮밥	food	
+튀김	food	
+카레	food	
+스파게티	food	
+레스토랑	place	
+닭고기	food	
+인삼	food	
+짜다	a_sense	짜요
+레몬	food	
+소금	food	
+약	body	
+재미있는 영화	hobby	
+무겁다	a_quality	무거워요
+일식집	place	
+중국집	place	
+메뉴판	food	
+분식집	place	
+양식	food	
+슬프다	a_person	슬퍼요
+우동	food	
+초밥	food	
+탕수육	food	
+스테이크	food	
+모으다	v_act	모아요
+돕다	v_act	도와요
+구경(을) 하다	v_free	구경(을) 해요
+돈을 찾다	v_act	돈을 찾아요
+사진을 찍다	v_free	사진을 찍어요
+산책(을) 하다	v_free	산책(을) 해요
+식사(를) 하다	v_daily	식사(를) 해요
+신다	v_daily	신어요
+아르바이트(를) 하다	v_act	아르바이트(를) 해요
+여행(을) 하다	v_move	여행(을) 해요
+예약(을) 하다	v_act	예약(을) 해요
+주문(을) 하다	v_act	주문(을) 해요
+지각(을) 하다	v_act	지각(을) 해요
+초대(를) 하다	v_act	초대(를) 해요
+포장(을) 하다	v_act	포장(을) 해요
+날씬하다	a_person	날씬해요
+차갑다	a_sense	차가워요
+필요하다	a_quality	필요해요
+갈비탕	food	
+배가 고프다	a_person	배가 고파요
+다리	body	
+아프다	a_person	아파요
+심심하다	a_person	심심해요
+제주도	country	
+하와이	country	
+파리	country	
+북한산	nature	
+한라산	nature	
+설악산	nature	
+모자	things	
+손님	people	
+닫다	v_act	닫아요
+지각하다	v_act	지각해요
+만지다	v_act	만져요
+담배를 피우다	v_daily	담배를 피워요
+싫어하다	v_mind	싫어해요
+고추장	food	
+계란 = 달걀	food	
+시키다	v_act	시켜요
+종업원	job	
+인분	number	
+그릇	number	
+주문하다	v_act	주문해요
+인터넷	comm	
+블로그	comm	
+요리법	food	
+요리책	food	
+당근	food	
+호박	food	
+양파	food	
+파	food	
+콩나물	food	
+시금치	food	
+소고기	food	
+말씀하다	v_mind	말씀해요
+소리	abstract	
+시작하다	v_act	시작해요
+가장	adv	
+재료	food	
+편리하다	a_quality	편리해요
+잠실	country	
+알겠습니다	expr	
+불친절하다	a_person	불친절해요
+불편하다	a_quality	불편해요
+좁다	a_quality	좁아요
+바람	nature	
+(바람이) 불다	v_act	(바람이) 불어요
+평일	time	
+사용하다	v_act	사용해요
+젓가락	things	
+포크	things	
+문화	abstract	
+수박	food	
+치마	things	
+질문	study	
+들다	v_act	들어요
+알다	v_mind	알아요
+맞다	v_mind	맞아요
+식사	food	
+초대하다	v_act	초대해요
+미역국	food	
+부터	adv	
+왜	pron	
+대답하다	v_mind	대답해요
+수프	food	
+웃다	v_mind	웃어요
+국	food	
+반찬	food	
+이상하다	a_quality	이상해요
+숟가락	things	
+식사하다	v_daily	식사해요
+편하다	a_quality	편해요
+사탕	food	
+만두	food	
+소파	home	
+실수하다	v_act	실수해요
+이렇게	adv	
+잘 먹겠습니다	expr	
+불다	v_act	불어요
+울다	v_mind	울어요
+따뜻하다	a_sense	따뜻해요
+맑다	a_sense	맑아요
+이번 주	time	
+지난 주	time	
+흐리다	a_sense	흐려요
+더	adv	
+말하기	study	
+곧	adv	
+비	nature	
+(비가) 오다	v_act	(비가) 와요
+세일	money	
+기분	abstract	
+행복하다	a_person	행복해요
+얼굴	body	
+눈(eye)	body	
+목소리	body	
+발	body	
+겨울	nature	
+여름	nature	
+가을	nature	
+봄	nature	
+보통	adv	
+기온	nature	
+영하	nature	
+도 (℃)	number	
+쌀쌀하다	a_sense	쌀쌀해요
+일기	study	
+끝나다	v_act	끝나요
+나가다	v_move	나가요
+힘들다	a_quality	힘들어요
+채팅	comm	
+스키(를) 타다	v_free	스키(를) 타요
+스키장	place	
+눈길	travel	
+깨끗하다	a_quality	깨끗해요
+고프다	a_person	고파요
+기분이 나쁘다	a_person	기분이 나빠요
+일기예보	nature	
+기상 캐스터	job	
+여보세요	expr	
+지내다	v_daily	지내요
+돌아가다	v_move	돌아가요
+통화하다	v_mind	통화해요
+어울리다	v_act	어울려요
+역할	abstract	
+분위기	abstract	
+상황	abstract	
+표현	study	
+연애편지	comm	
+선택	abstract	
+기분이 좋다	a_person	기분이 좋아요
+비가 오다	v_act	비가 와요
+눈이 오다	v_act	눈이 와요
+바람이 불다	v_act	바람이 불어요
+건강	body	
+하늘	nature	
+점수	study	
+화장(을) 하다	v_daily	화장(을) 해요
+요즘	time	
+외국어	country	
+채소	food	
+장마	nature	
+그런데	conj	
+팥빙수	food	
+빨리	adv	
+간식	food	
+그때	time	
+메시지	comm	
+반갑다	a_person	반가워요
+잘 지내다	v_daily	잘 지내요
+파전	food	
+종로	country	
+날	time	
+막걸리	food	
+장마철	nature	
+주일	time	
+동안	time	
+군고구마	food	
+유자차	food	
+너무	adv	
+데이트	event	
+뚱뚱하다	a_person	뚱뚱해요
+싫다	a_person	싫어요
+온천	place	
+풍경	nature	
+사계절	nature	
+알아보다	v_mind	알아봐요
+실력	study	
+달라지다	v_act	달라져요
+이제	adv	
+치킨	food	
+제일	adv	
+장미	nature	
+계절	nature	
+때	time	
+새	nature	
+토끼	nature	
+뱀	nature	
+노란색	color	
+까만색	color	
+초록색(녹색)	color	
+딸기	food	
+바나나	food	
+귤	food	
+야구	hobby	
+요가	hobby	
+스케이트(를) 타다	v_free	스케이트(를) 타요
+운전(을) 하다	v_move	운전(을) 해요
+한자	study	
+자전거	travel	
+골프	hobby	
+테니스	hobby	
+탁구	hobby	
+말	nature	
+기타	hobby	
+피아노	hobby	
+치다	v_free	쳐요
+단풍	nature	
+수영장	place	
+꽃구경	hobby	
+자유	abstract	
+오토바이	travel	
+도시락	food	
+과목	study	
+황사	nature	
+재즈	hobby	
+햄버거	food	
+피자	food	
+인터뷰하다	v_mind	인터뷰해요
+수학	study	
+연주하다	v_free	연주해요
+바이올린	hobby	
+갈비	food	
+사장	job	
+악기	hobby	
+배구	hobby	
+조깅	hobby	
+스케이트	hobby	
+스키	hobby	
+다녀오다	v_move	다녀와요
+(모자, 안경) 쓰다	v_daily	(모자, 안경) 써요
+(신발을) 신다	v_daily	(신발을) 신어요
+가지고 가다	v_move	가지고 가요
+밤늦게	adv	
+죄송하다	a_person	죄송해요
+술	food	
+택시	travel	
+늦다	a_quality	늦어요
+이사(를) 하다	v_move	이사(를) 해요
+빨래(를) 하다	v_daily	빨래(를) 해요
+취미	hobby	
+바다	nature	
+축제	event	
+마사지(를) 하다	v_free	마사지(를) 해요
+머드 게임	hobby	
+수영복	things	
+머드	nature	
+보령	country	
+내년	time	
+설날	event	
+나머지	abstract	
+복습하다	v_mind	복습해요
+떡국	food	
+세뱃돈	money	
+윷놀이	hobby	
+재미	abstract	
+인기	abstract	
+특징	abstract	
+종합하다	v_act	종합해요
+해당하다	v_act	해당해요
+꽃다발	things	
+연휴	event	
+세배	event	
+사거리	travel	
+왼쪽	travel	
+오른쪽	travel	
+나오다	v_move	나와요
+들어가다	v_move	들어가요
+올라가다	v_move	올라가요
+내려가다	v_move	내려가요
+출구	travel	
+주차장	place	
+지하	travel	
+건물	place	
+출근	money	
+길이 막히다	v_move	길이 막혀요
+모르다	v_mind	몰라요
+물어보다	v_mind	물어봐요
+켜다	v_act	켜요
+감기에 걸리다	v_act	감기에 걸려요
+외우다	v_mind	외워요
+놀이공원	place	
+실례하다	v_act	실례해요
+그렇지만	conj	
+경찰서	place	
+휴일	time	
+신호	travel	
+똑바로	adv	
+바뀌다	v_act	바뀌어요
+건너다	v_move	건너요
+케이블카	travel	
+엘리베이터	home	
+타고 가다	v_move	타고 가요
+(1)초	number	
+전망대	place	
+잡다	v_act	잡아요
+방법	abstract	
+명동역	travel	
+지하철역	travel	
+지나가다	v_move	지나가요
+신호등	travel	
+조심하다	v_act	조심해요
+서류	money	
+버리다	v_act	버려요
+홈페이지	comm	
+사이트	comm	
+야경	travel	
+상가	place	
+문(을) 닫다	v_act	문(을) 닫아요
+손(을) 잡다	v_act	손(을) 잡아요
+게시판	comm	
+기차	travel	
+걸어서 가다	v_move	걸어서 가요
+육교	travel	
+횡단보도	travel	
+갈아타다	v_move	갈아타요
+63빌딩	place	
+경복궁역	travel	
+걷다	v_move	걸어요
+묻다	v_mind	물어요
+주소	abstract	
+길음역	travel	
+얼마나	adv	
+걸리다	v_act	걸려요
+비행기	travel	
+인천	country	
+교통수단	travel	
+출발	travel	
+도착	travel	
+출입국관리사무소	place	
+내리다	v_move	내려요
+안국동	country	
+안내 방송	comm	
+김포공항역	travel	
+종로3가역	travel	
+초대장	event	
+꼭	adv	
+대사관	place	
+역	travel	
+박물관	place	
+선착장	travel	
+루브르	place	
+전체	abstract	
+기차역	travel	
+추천하다	v_mind	추천해요
+답장	comm	
+앞문	home	
+뒷문	home	
+롯데월드	place	
+시청	place	
+서울역	travel	
+(4)호선	travel	
+동대문역	travel	
+공항버스	travel	
+여의도역	travel	
+인도	country	
+돌아오다	v_move	돌아와요
+정류장	travel	
+빠르다	a_quality	빨라요
+다르다	a_quality	달라요
+이해하다	v_mind	이해해요
+비밀번호	comm	
+목	body	
+숫자	number	
+이따가	adv	
+이태원역	travel	
+삼각지역	travel	
+결혼식	event	
+삼성역	travel	
+신도림역	travel	
+월드컵	hobby	
+경기장	place	
+느리다	a_quality	느려요
+끝내다	v_act	끝내요
+노선	travel	
+인천공항	travel	
+중국말	country	
+대통령	job	
+전화(를) 드리다	v_act	전화(를) 드려요
+길(을) 모르다	v_mind	길(을) 몰라요
+걱정하지 마세요	expr	
+고르다	instr	골라요
+노래/이름 부르다	v_mind	노래/이름 불러요
+배가 부르다	a_person	배가 불러요
+되다	v_act	돼요
+소설	hobby	
+스트레스	abstract	
+졸업하다	v_mind	졸업해요
+생기다	v_act	생겨요
+영화배우	job	
+노트북	things	
+(1)급	study	
+(돈을) 쓰다	v_act	(돈을) 써요
+걱정하다	v_mind	걱정해요
+스키복	things	
+여행사	place	
+직원	job	
+뉴욕	country	
+잠시만	expr	
+성함	abstract	
+여권	things	
+어떻게 되다	expr	
+비행기표	travel	
+출발하다	v_move	출발해요
+예약하다	v_act	예약해요
+기차표	travel	
+국제시장	place	
+기념품	things	
+죄송합니다	expr	
+충전하다	v_act	충전해요
+티머니	money	
+일정표	event	
+샌드위치	food	
+아파트	home	
+아직	adv	
+생각나다	v_mind	생각나요
+그만	adv	
+예매하다	v_act	예매해요
+옆방	home	
+회의	money	
+메모	study	
+시간이 있다	v_act	시간이 있어요
+집안일	home	
+졸리다	a_person	졸려요
+싸우다	v_act	싸워요
+가끔	adv	
+거의	adv	
+전혀	adv	
+(1)년	number	
+혼자	adv	
+검은색	color	
+(1시간) 후	time	
+(시간을) 보내다	v_daily	(시간을) 보내요
+특히	adv	
+독서	hobby	
+항상	adv	
+기쁘다	a_person	기뻐요
+앞자리	travel	
+실망하다	v_mind	실망해요
+산책하다	v_free	산책해요
+대학로	country	
+힌트	instr	
+빈도	abstract	
+부사	study	
+설거지	home	
+비슷하다	a_quality	비슷해요
+관람	hobby	
+대학원	study	
+취직하다	v_act	취직해요
+넥타이	things	
+연락	comm	
+설명하다	v_mind	설명해요
+춤추다	v_free	춤춰요
+고속버스	travel	
+한복	things	
+유람선	travel	
+찜질방	place	
+간단하다	a_quality	간단해요
+시골	place	
+반바지	things	
+정장	things	
+목걸이	things	
+반지	things	
+스포츠 댄스	hobby	
+나중에	adv	
+꿈	abstract	
+사진작가	job	
+세계	country	
+또	adv	
+소설가	job	
+영화감독	job	
+고민	abstract	
+떠나다	v_move	떠나요
+글	study	
+지난번	time	
+대회	event	
+상	abstract	
+즐겁다	a_person	즐거워요
+한강	nature	
+칼국수	food	
+비타민	body	
+궁금하다	a_person	궁금해요
+전통	abstract	
+게르	home	
+이집트	country	
+열쇠	things	
+잃어버리다	v_act	잃어버려요
+테니스장	place	
+상(을) 받다	v_act	상(을) 받아요
+여행(을) 떠나다	v_move	여행(을) 떠나요
+(1시간) 전	time	
+중	abstract	
+시끄럽다	a_quality	시끄러워요
+조용히	adv	
+어둡다	a_quality	어두워요
+1등	number	
+결혼하다	v_act	결혼해요
+벚꽃	nature	
+진짜	adv	
+느끼하다	a_sense	느끼해요
+접시	things	
+거절하다	v_act	거절해요
+가짜	abstract	
+아까	adv	
+남편	people	
+기구	things	
+가져오다	v_act	가져와요
+혹시	adv	
+공주	people	
+끄다	v_act	꺼요
+밤	time	
+앞머리	body	
+남대문	place	
+봉지	things	
+포장하다	v_act	포장해요
+바꾸다	v_act	바꿔요
+고장(이) 나다	v_act	고장(이) 나요
+서비스 센터	place	
+부탁하다	v_act	부탁해요
+하숙집	home	
+잠깐만	expr	
+연락하다	v_mind	연락해요
+다치다	v_act	다쳐요
+돌아가시다	v_act	돌아가세요
+드디어	adv	
+지나다	v_act	지나요
+하지만	conj	
+갑자기	adv	
+안내하다	v_act	안내해요
+취소하다	v_act	취소해요
+계획하다	v_mind	계획해요
+수강료	money	
+걸다	v_act	걸어요
+도와주다	v_act	도와줘요
+의미	abstract	
+최저	abstract	
+글씨	study	
+움직이다	v_move	움직여요
+이어지다	v_act	이어져요
+상상하다	v_mind	상상해요
+죽다	v_act	죽어요
+기사	job	
+사고	abstract	
+가격	money	
+구름	nature	
+피다	v_act	피어요
+도시	place	
+몰다	v_move	몰아요
+바르다	v_act	발라요
+닦다	v_daily	닦아요
+기대	abstract	
+시간표	study	
+세수	body	

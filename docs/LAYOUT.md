@@ -60,7 +60,7 @@ content/       ✍️ SOURCE OF TRUTH — edit here, never in output/
                04_vocabulary/unit05…22.md (centre's word lists, `###` heading, Thai+English) · unit23…37.md (since 2026-11-01 = the centre's sheet for 23–37
                in sheet order + `#### ∞ 읽기/듣기 ∞` blocks + `#### ศัพท์เพิ่มเติมจากตำรา` = the textbook-margin words of the 10/26 version the sheet lacks;
                glosses are Sonnet's, the user's pencil ignored) · 90_themes.md (picture themes; 11/1 gained ◆ ㅂ 불규칙 23 · ㄹ 탈락 25 · ㄷ 불규칙 31 · 르 불규칙 32 ·
-               동사 2 · 형용사 2, the last two headed "(23과)" only for the loader; ◆ 문제 지시어 — คำในคำสั่งโจทย์ (5과) = 29 instruction words) · 91_categories.md (old AI list)
+               동사 2 · 형용사 2, the last two headed "(23과)" only for the loader; ◆ 문제 지시어 — คำในคำสั่งโจทย์ (5과) = 29 instruction words) · 91_categories.tsv (every word → meaning category + -아/어요 form, rendered by scripts/vocab_categories.py; replaced the old 91_categories.md 2026-11-17)
                **Since 2026-11-01 evening every unit file 5–37 ends with `#### ศัพท์เพิ่มเติมจากตำราและเวิร์กบุ๊ก (ไม่อยู่ในชีตของศูนย์)`** (the 23–37 margin sections were
                renamed into it): 416 words of the textbook and workbook the centre's sheets lack (있다/없다, numerals 영…만 / 하나…아흔, months 일월…십이월, 선물, 계획,
                중국집, 분위기 …), each in the FIRST unit it appears. Found by scratchpad Kiwi lemmatiser diff (textbook OCR ∩ guide chapter, + workbook) minus the site
@@ -177,6 +177,16 @@ content/       ✍️ SOURCE OF TRUTH — edit here, never in output/
                  늦게/느리다, 좋다/좋아하다 by particle, 열다/켜다, 미안하다/죄송하다 …), 통역 ≠ ล่าม, 이때 = ตอนนั้น, adjectives "to be …";
                  HOMONYMS in build_mockweb.load_vocab (개 · 반 · 배 · 쓰다 · 일 had lost their 2nd meaning) + a 2nd example each;
                  unit23.md stray rows moved back into their table; old glosses fixed in workbook 17/30/35/36, grammar 51, vocab_b.json.
+               (2026-11-18) v68 (index.html + data + clips + clips2 + clips5 = artifact version 75): 기말 mock A + B for 쓰기/읽기/듣기 (3 Sonnet
+                 agents, BRIEF_final_mock.md; final_1_writing 78 items · final_1_reading 35 · final_1_listening 22 on the unused tracks 24-1 25-1 27-1
+                 33-1 34-1 35-1 36-2 24-2; clocks 60/30 · 60/20 · 13/14 min); the 기말 CAT now matches exam final|mini03|mini04 (user thought the ③④
+                 mocks were deleted when the ④ tile moved to past papers); review_final.json → final_review.json; GROUPS labels name ③ / ④.
+               (2026-11-18) v67 (index.html + data.js = artifact version 73): content/mockweb/final_drill.json (Sonnet agent, brief
+                 BRIEF_final_drill.md) = mini04r-writing (28) / mini04r-reading (10) real 복습시험④ papers with ⚠️ on the lost items + final-combine
+                 (24, ข้อ 6 type the teacher promised for the 기말) · final-antonym (16) · final-question (10); CATS: 기말 = hero, mini04 → sec 2;
+                 GROUPS rule ^mini04r- — 211 sets · 3,993 items · no new clips. Watch stopped after publishing.
+                 Same day, artifact version 74 (data.js only): clocks re-sized on the real ④ pace — final-combine 40 · final-review-writing 60 ·
+                 final-review-irregular 35 · final-speaking-qa/-tasks 13 (flow ≈ 9–9.5 min had only ~30–60 s spare in 10).
                (2026-11-16) v65 (data + clips + clips2 + clips5 = artifact version 70, vocab.js = 71): daily-35-writing/-listening (10/10) +
                  sheet-36-writing (37 items incl. the 게요/거예요 choice as mc) in daily_b.json, predict-35 retired, daily_predict36.json (3 sets · 28
                  items, Sonnet agent), VOCAB_PRIO 36, 37, 35, 34 … first — 200 sets · 3,833 items · 1,125 clips (14 new). Watch stopped after publishing.
@@ -380,7 +390,7 @@ is not zero-padded will not be found.
   *By_Unit* = `00_exam_info.md` (title swapped by `guide_cover()`) + `01_units/00_header.md` + for each unit 5–22:
   `01_units/unitNN.md` + `04_vocabulary/unitNN.md`.
   *By_Topic* = cover + `02_grammar/00_header.md` + `02_grammar/[0-9][0-9]_*.md` (00_ excluded — including it once printed the
-  banner twice) + 03 + 03b + `# ส่วนที่ 4` (90_themes, 91_categories) + 05 + 06. `countdown()` fills the date placeholders.
+  banner twice) + 03 + 03b + `# ส่วนที่ 4` (90_themes + every word by meaning: scripts/vocab_categories.py renders 04_vocabulary/91_categories.tsv — the hand-written 91_categories.md that stopped at 22과 was replaced 2026-11-17) + 05 + 06. `countdown()` fills the date placeholders.
   `UNITS = range(5, 38)` since 2026-10-26.
 - **Review** (`build_review()`): `content/exercises/review/<name>_partN.md` are merged — all parts' questions, then all
   keys (each key gets the part's `##` title) → `output/3_Exam_Prep/KMU_Review_<Name>.pdf`.

@@ -15,10 +15,11 @@ Claude Code loads this file into every message, so it is kept short (target ≤ 
 ## 1. User, goal, exams
 - Thai GKS scholar at Kookmin University Korean Language Center, level 1 (국민한국어 1). **Reply in Thai, short.** Study material = Korean with Thai explanations.
 - Course = 자모 + Units 5–37. Midterm covered 1–21과 (book 1-1); final = 23–37과 (book 1-2).
-- **Dates still ahead:** 낭독시험 ⑧ 11/18 · 복습시험④ 11/18 (30–37과; its 말하기 = 장소 소개 발표, content/speaking/place_intro.md = 한강 공원) · 11/19 총복습 (no new unit; a 37과 매일시험 is unconfirmed) · 기말 **11/20** (쓰기·듣기·읽기; analysis = content/predictions/final/final02.md) / **11/23** (말하기) · 기말 발표 11/24 (topic announced 11/10). (The handout's 10/20 for 기말 was corrected to 11/20 by the teacher.) 복습시험③ was sat 11/6.
+- **Dates still ahead:** 11/19 총복습 (no new unit; a 37과 매일시험 is unconfirmed) · 기말 **11/20** (쓰기·듣기·읽기; analysis = content/predictions/final/final02.md) / **11/23** (말하기) · 기말 발표 11/24 (topic announced 11/10). (The handout's 10/20 for 기말 was corrected to 11/20 by the teacher.) 복습시험③ was sat 11/6, ④ (30–37과) 11/18. **Teacher after ④: its ข้อ 6 type
+  (두 문장 → 한 문장 with a 보기 of 4 grammar points, connectors + -(으)ㄹ/-는/-(으)ㄴ + N mixed) WILL be on the 기말** — drill sets final-combine + 복습문제 §3/§5.
 - **Pass rule:** every skill's average of 중간 + 기말 ≥ 70; < 60 = fail; 60–69 may re-test. Each skill /100 = 시험 50 + 복습시험 20 + coursework 30 (per term). Details → docs/COURSE.md.
 - **Results so far:** 중간 말하기 41.2 · 듣기 42.0 · 쓰기 45.5 · 읽기 49.0 (/50). 복습시험①+② 말하기 20 · 쓰기 16.3 · 듣기 16.0 · 읽기 19.0 (/20). 복습시험③ (slip 11/10)
-  말하기 10 · 쓰기 8.9 · 듣기 9.0 · 읽기 10 (/10 each, 37.9/40 — best of the three). Weakest: 말하기, 듣기. 매일시험 average ≈ 7.5/10; the losses are **word recall**, not grammar.
+  말하기 10 · 쓰기 8.9 · 듣기 9.0 · 읽기 10 (/10 each, 37.9/40 — best of the three). ④ by the user's recall (official score not out): 말하기 ≈ 10 · 쓰기 ≈ 7.7 · 듣기 9 · 읽기 8.5. Weakest: 말하기, 듣기. 매일시험 average ≈ 7.5/10; the losses are **word recall**, not grammar.
 - 복습시험 (user says "mini exam") = 말하기 interview + 쓰기 (several short sections) + 듣기 + 읽기 (textbook 읽기 passages lifted almost verbatim). Exams "look like the book": predictions should lift textbook 대화/읽기/연습 nearly verbatim.
 
 ### 1.1 Stated preferences (all deliverables)
@@ -78,10 +79,13 @@ output/       🤖 GENERATED, never hand-edit. Entry = output/START_HERE.html (h
   omit `capabilities` (keeps db, sample, user). If refused as "unread", run `Artifact list scope:files` on the url first. Compare file sizes with that
   listing to see what changed. Each clips file must stay < 16 MB (build_mockweb splits spoken-line clips over SCLIP_FILES and word clips over VCLIP_FILES; add a file + `<script>` tag in
   app.html when the build says so). Do not re-enable the artifact watch on your own.
-- Current: **v66** (매일시험 36 + sheet 37 + 37과 prediction; v64 = mini04 복습시험④ + a 기말 tile for exam `final`) — 206 sets · 3,905 items · 1,139 clips · 1,366 vocab words (vocab.js, Leitner drill, VOCAB_PRIO in build_mockweb.py line ~74).
+- Current: **v68** — 기말 tile (hero) gathers everything for 23–37 (match exam final|mini03|mini04, so the ③ ④ tiles hide): 기말 mock A (복습문제 shape) + B
+  (복습시험 shape) in final_1_{writing,reading,listening}.json (brief BRIEF_final_mock.md) · ⭐ final_drill.json · 📋 final_review.json (renamed so it sorts
+  before 말하기; group order = file order) — 217 sets · 4,128 items · 1,139 clips · 1,366 vocab words (vocab.js, Leitner drill, VOCAB_PRIO in build_mockweb.py line ~74).
   **v61:** every word has an example sentence + Thai translation + usage note in content/guide/04_vocabulary/examples/unitNN.json (brief
   content/specs/BRIEF_vocab_examples.md, check `python3 scripts/vocab_examples_check.py`); card mode gained 📝 เติมคำในประโยค (cloze); a new word in
-  04_vocabulary/unitNN.md needs its example entry too (the checker compares the lists).
+  04_vocabulary/unitNN.md needs its example entry too (the checker compares the lists) **and a row in 04_vocabulary/91_categories.tsv** (meaning category +
+  -아/어요 form → the By-Topic book's 📂 คำศัพท์แยกหมวด; check `python3 scripts/vocab_categories.py --check`, brief content/specs/BRIEF_vocab_categories.md).
   **v63 meaning audit** (content/specs/BRIEF_vocab_meaning_audit.md): two words must never share a gloss (고민 ≠ 걱정하다, 놀다 ≠ 치다, 늦게 ≠ 느리다) —
   give each a nuance in brackets; same-spelling words (개 · 반 · 배 · 쓰다 · 일) are merged into one card by `HOMONYMS` in build_mockweb.py (one example per meaning).
   **Sizing rule (v54):** a set's `minutes` must fit its own items — listening clock ≥ flow (2 plays + answer pauses, ffprobe the mp3s) + ~3 min; spare/예비 items go in their own set
@@ -125,6 +129,8 @@ main 100 and put the other formats in 예비 sections; 읽기 = textbook 읽기 
 듣기 = the centre's 본문 듣기 sheets (track NN-1) + the formal 듣기 of 8·12·16·20·24·28·32·36과 (tracks NN-2/-3). ③ mock = content/mockweb/mini03_{writing,reading,listening}.json.
 **How ③ scored** (exam03.md §2): 읽기 passages 3/3 · 듣기 9/10 items from mock dialogues · 쓰기 grammar 100 % but format 4/7 sections — for ④ put picture → theme-word
 sections (with a 보기) in the MAIN set, keep 보기 word-choice + 질문에 대답하세요, add a paragraph fill with irregular verbs.
+**How ④ scored** (exam04.md §2): 읽기 3/3 passages in the same order · 듣기 10/10 items from mock tracks (6 main + 4 예비) · 쓰기 5/7 sections in the main set
+(+ 달력 in 예비; 반대말 new). ④ = a cut-down 기말 복습문제 (§4 ← §1 · §6 ← §3+§5, 6-1 verbatim · §7 ← §6): the 기말 will lift that handout.
 
 **A returned 복습시험:** `source/miniexam/KMU mini exam NN unit AA - BB.pdf` → extracted/miniexam/examNN/ → content/exercises/miniexam/examNN.md
 (one `##` per paper, ⚠️ where deducted) → `build.py miniexam`. Prediction for the next one → content/predictions/miniexam/examNN.md → `build.py predict`.
@@ -145,7 +151,7 @@ sections (with a 보기) in the MAIN set, keep 보기 word-choice + 질문에 �
 
 ## 5. Content status (details and caveats → docs/STATUS.md)
 - Guides, vocab, mind maps, listening sheets, workbook (with the publisher's printed keys) cover **5–37과**. Everyday tests transcribed for 5–36, sheets
-  for 5–37; predictions for 17–37 (scorecards on 22–36; **from 35과 predictions are SHORT — ≤ 22 KB / ≤ 12 pages, the user found 30–50 pages too long; same for exam predictions**). 기말 pack (teacher's handout 11/13, source/review/KMU final review 02 unit 23 - 37.pdf): content/exercises/review/final02_part{1,2}.md (AI key) · content/predictions/final/final01.md (말하기 기말 연습, 19 questions) · 복습시험④ mock = content/predictions/miniexam/exam04.md + content/mockweb/mini04_*.json. 복습시험 ①②③ papers in content/exercises/miniexam/ (exam03.md §2 = how the ③ mock scored). The 중간시험 복습문제 key is AI-solved; agents' sample answers are labelled ตัวอย่างตอบ.
+  for 5–37; predictions for 17–37 (scorecards on 22–36; **from 35과 predictions are SHORT — ≤ 22 KB / ≤ 12 pages, the user found 30–50 pages too long; same for exam predictions**). 기말 pack (teacher's handout 11/13, source/review/KMU final review 02 unit 23 - 37.pdf): content/exercises/review/final02_part{1,2}.md (AI key) · content/predictions/final/final01.md (말하기 기말 연습, 19 questions) · 복습시험④ mock = content/predictions/miniexam/exam04.md + content/mockweb/mini04_*.json; real ④ = content/exercises/miniexam/exam04.md + sets mini04r-* and the 기말 drills final-combine/-antonym/-question in content/mockweb/final_drill.json; 기말 mock A/B = final_1_*.json. 복습시험 ①②③④ papers in content/exercises/miniexam/ (exam03.md §2 = how the ③ mock scored). The 중간시험 복습문제 key is AI-solved; agents' sample answers are labelled ตัวอย่างตอบ.
 - `extracted/everyday/unit05-13/test-N.png` is not unit N — check the page header (`1급 매일 시험_N과`).
 - 매일시험 score log (details per item in docs/STATUS.md): 5과 7.5 · 6과 7 · 7과 8 · 8과 9.5 · 9과 5 · 10과 8.5 · 11과 5.7 · 12과 6.2 · 13과 4 · 14과 7.5 ·
   15과 8.5 · 16과 10 · 17과 8 · 18과 10 · 19과 8.5 · 22과 8.5 · 23과 4.5 · 24과 8 · 25과 9 · 26과 5.5 · 27과 7.5 · 28과 7 · 29과 7.5 · 30과 9 · 31과 7.5 · 32과 8 · 33과 8.5 · 34과 8.5 (lost 차→자, 책→젝, an extra 에 in dictation) · **35과 10** ("단어 시험": inline blanks -는 것 + -아/어 보다 + 2 dictation) · 36과 8.5 (8-cell table: present form written in 2 past-column cells; 약속 → 야속) (31과–32과 used an 8-cell picture conjugation table × 0.5 + 3 picture sentences + 3 dictation;
@@ -169,6 +175,8 @@ Use these when checking work or writing predictions. ★ = has cost marks repeat
 - 보다 comparisons: the noun before 보다 is the loser (reversed winners twice); no stray 이 on the noun inside the 보다 phrase.
 - Position words: landmark reversed (A가 B 앞에 = A is in front of B). 한테/한테서/께 direction; places/things take 에/에서, not 한테.
 - Answers the wrong question word (언제 → 가족을 만날 거예요); keeps the question's tense and noun when answering.
+- ★ **Reads past what is printed around a blank** (복습시험④ −14): wrote the printed ending again (물어요 + 아/어 보세요 ✗ → 물어), ignored a printed particle
+  (학생증이 ___ → 있어야 해요, wrote 을 가지고 와야), left a -(으)면 item blank instead of reusing the question's verb. Also 반대말 swapped (밝다↔어둡다 · 빠르다↔느리다), 포장하다 unknown.
 - Rewrite tasks: copy the second sentence's particles exactly (공원에 → 공원이 ✗; two sentences → -(으)ㄹ + N: 이사할 아파트로는 ✗ → 아파트는) and don't drop words (좀); no doubled particle (음식은 은).
 - Spacing: 학생 중에서 · -아/어지다 is one word (추워졌어요) · 갈 거예요 has a space · particles attach.
 - Does well: ㅂ니다/습니다, -지 않-, 겠, ㅡ-drop past, special honorific verbs, 에서 for activity places, ㅂ irregular tables.

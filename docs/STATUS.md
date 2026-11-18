@@ -239,3 +239,19 @@
     add a paragraph-fill with irregular verbs (ㄷ 31과, 르 34과), 읽기 = textbook passages with printed 대화로 만들기 frames (30과 has one).
 - Page 6 of the scan = the teacher's 4-slide worksheet "고향의 계절" (questions about each season of the hometown, use 22–29 grammar; writing frame "제 고향에는 사계절이
   있습니다 …"). Purpose unknown (speaking topic or 글쓰기 homework); Thailand has 3 seasons, not 4 — worth flagging if the user writes it.
+
+
+### Guide books — audit 2026-11-17
+Exam sections of units 23–37 and grammar topics 33–64 now carry the real test records (매일시험 23–36, sheets, workbooks, 복습시험③); 복습시험④ is "ผลยังไม่ออก" until its paper comes back — update those sections (and the 2 lead lines in topics 63–64 when a 37과 매일시험 happens). Workbooks 28, 30, 31, 35–37 have no recorded learner answers. By-Topic vocabulary by meaning is generated (scripts/vocab_categories.py).
+
+## 복습시험④ (2026-11-18) — real paper vs the mock
+- Scan: source/miniexam/KMU mini exam 04 unit 30 - 37.pdf (6 pages: 쓰기 2 · 듣기 1 · 읽기 2 · 취미 handout 1) → content/exercises/miniexam/exam04.md
+  (+ real-paper sets mini04r-writing / mini04r-reading in content/mockweb/final_drill.json). Official score not out; losses from the user's recall:
+  쓰기 1-2 1-3 5-4 7-1 7-3 7-5 (≈ 77/100) · 듣기 9 (9/10) · 읽기 3 half + 10 (8.5/10) · 말하기 (한강 공원 장소 소개) "probably full".
+- Mock fit: 읽기 3/3 passages (30 · 34 · 37과, same order as the mock's main set) · 듣기 10/10 items from mock tracks (main 31-1 · 32-2 · 37-1; 예비 30-1 ·
+  32-1 · 36-1) · 쓰기 5/7 sections in the main set (A 교통 · C particles · E/F irregular · G combine · H dialogue), 1 in 예비 (달력 → 빈도), 1 new (반대말).
+- ④ is a cut-down 기말 복습문제: §4 = 복습문제 §1 · §6 = §3 + §5 (6-1 = 3-7 verbatim) · §7 = §6 · §5 = 불규칙 정리. Teacher: "ข้อ 6 type is on the 기말 for sure".
+- Page 6 = 취미 handout (7 합니다체 questions, grammar list, tennis model; teacher circled 얼마나 자주). It is a writing homework the user already handed in (shown for reference only);
+  final01.md §5 stays the teacher's 6-question 해요체 version.
+- Clocks re-sized 11/18 (user asked): final-combine 30→40 · final-review-writing 40→60 · final-review-irregular 30→35 · final-speaking-qa/-tasks 10→13
+  (yardstick = real ④ paper: one-word item ≈ 30 s, sentence item ≈ 110 s in 30 min; speaking flow = q audio + 25 s + 0.6 s per item ≈ 9–9.5 min).

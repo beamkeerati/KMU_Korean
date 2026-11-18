@@ -236,3 +236,22 @@ content/predictions/final/final02.md → output/3_Exam_Prep/KMU_Predict_final02.
 no 읽기/듣기, ③ 쓰기 = 5 of 7 sections in the handout's formats), 쓰기 sections ranked + every 23–37 grammar mapped to a handout item, picture-vocab themes
 not yet used, the 12 textbook 읽기 passages with ③/④ status and practice sets, the 15 대화 + 28/32/36 듣기 with the facts to catch, a 3-day plan, checklist.
 Site v66 (206 sets · 3,905 items) published. Not committed.
+
+2026-11-17 (later, Opus 5.5 + 5 Sonnet agents): **guide-book audit** after the user found the By-Topic vocabulary stopped at 22과.
+- 📂 คำศัพท์แยกหมวด: the hand-written 91_categories.md (5–22 only, ~70 of 280 words for 14–22) replaced by `scripts/vocab_categories.py`
+  rendering every word of examples/unitNN.json (1,366) into 32 meaning categories from `04_vocabulary/91_categories.tsv` (+ -아/어요 form for
+  verbs/adjectives, rule-checked; `--check` flags uncategorised words; brief content/specs/BRIEF_vocab_categories.md). By-Topic 765 → 792 pp.
+- Exam sections of units 23–37 (🧪 ออกสอบอย่างไร) and grammar topics 33–64 (🧪 ออกสอบแล้ว) all still said "ยังไม่มีข้อสอบจริง" (written ~10/27):
+  rewritten from the real 매일시험 23–36, sheets, workbooks, 복습시험③ and the 기말 handout (brief content/specs/BRIEF_exam_sections_23_37.md).
+- ส่วนที่ 0: midterm scores, 총복습 11/19, 낭독 table, coursework status to 36과, final-week plan from final02, slip list refreshed; past midterm-week plan removed.
+- 03b §3.6: the 복습시험② guess replaced by the real ② and ③ question sections + likely 기말 questions (handout §6).
+- Style checker now 0 warnings on all guide sources; both PDFs 0 leftovers, 0 overflow. One colour fix: 시다 → {v:셔}{e:요} (was tagged honorific).
+
+- **2026-11-18** 복습시험④ sat; scan filed as source/miniexam/KMU mini exam 04 unit 30 - 37.pdf, transcribed into content/exercises/miniexam/exam04.md (paper +
+  the user's answers + key + mock comparison + lessons). final02.md re-analysed after ④ (§0 mapping ④ ↔ 복습문제, teacher's hint on ข้อ 6, used/unused
+  passages and tracks, plan, new slips); p6 = 취미 writing homework already handed in (recorded only; final01 §5 left as is).
+  Set clocks re-sized from the real ④ pace (final-combine 40 · final-review-writing 60 · -irregular 35 · final speaking 13 min).
+  Site: final_drill.json (mini04r-writing/-reading real papers · final-combine · final-antonym · final-question; brief content/specs/BRIEF_final_drill.md).
+- **2026-11-18 (late)** The user saw no predicted exams in the 기말 tile (the ③④ mocks had moved with the ④ tile) and pointed out that "ข้อ 6 ออกแน่"
+  does not mean the other types won't appear → 기말 mock A/B built like the midterm's (3 Sonnet agents, reviewed: listening B answers tightened to the exact
+  heard word, reading B-10 answers 왜 with -아/어서 first, writing stem-only forms added), and the 기말 tile now holds every 23–37 set (27 sets, 10 groups).
