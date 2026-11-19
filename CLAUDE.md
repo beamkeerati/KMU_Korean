@@ -17,6 +17,9 @@ Claude Code loads this file into every message, so it is kept short (target ≤ 
 - Course = 자모 + Units 5–37. Midterm covered 1–21과 (book 1-1); final = 23–37과 (book 1-2).
 - **Dates still ahead:** 11/19 총복습 (no new unit; a 37과 매일시험 is unconfirmed) · 기말 **11/20** (쓰기·듣기·읽기; analysis = content/predictions/final/final02.md) / **11/23** (말하기) · 기말 발표 11/24 (topic announced 11/10). (The handout's 10/20 for 기말 was corrected to 11/20 by the teacher.) 복습시험③ was sat 11/6, ④ (30–37과) 11/18. **Teacher after ④: its ข้อ 6 type
   (두 문장 → 한 문장 with a 보기 of 4 grammar points, connectors + -(으)ㄹ/-는/-(으)ㄴ + N mixed) WILL be on the 기말** — drill sets final-combine + 복습문제 §3/§5.
+  **총복습 11/19 hints:** 3 h, 쓰기 (50 min, includes a ~300-자 composition on the 쓰기 (3) 계절 or 쓰기 (4) 취미 topic — source/writing/) → 듣기 (all
+  multiple choice) → 읽기; review ④ (words + task types); memorise 대화 32-1 + 37-1; picture description from textbook 245쪽 연습 2 · 263쪽 연습 2 ·
+  271쪽 연습 3; 말하기 11/23 = review handout pp.14–16 (p.16 식사 예절 new). Pack = content/predictions/final/final03.md + site sets final_0_hints.json.
 - **Pass rule:** every skill's average of 중간 + 기말 ≥ 70; < 60 = fail; 60–69 may re-test. Each skill /100 = 시험 50 + 복습시험 20 + coursework 30 (per term). Details → docs/COURSE.md.
 - **Results so far:** 중간 말하기 41.2 · 듣기 42.0 · 쓰기 45.5 · 읽기 49.0 (/50). 복습시험①+② 말하기 20 · 쓰기 16.3 · 듣기 16.0 · 읽기 19.0 (/20). 복습시험③ (slip 11/10)
   말하기 10 · 쓰기 8.9 · 듣기 9.0 · 읽기 10 (/10 each, 37.9/40 — best of the three). ④ by the user's recall (official score not out): 말하기 ≈ 10 · 쓰기 ≈ 7.7 · 듣기 9 · 읽기 8.5. Weakest: 말하기, 듣기. 매일시험 average ≈ 7.5/10; the losses are **word recall**, not grammar.
@@ -25,7 +28,8 @@ Claude Code loads this file into every message, so it is kept short (target ≤ 
 ### 1.1 Stated preferences (all deliverables)
 - Deliverables as **PDF**. Fonts: Thai/Latin = TH Sarabun (installed as Laksaman), Korean = Noto Serif CJK KR; mind maps keep Noto Sans.
 - **Book style** for the two guides (contract content/specs/SPEC_book_style.md, checker scripts/book_style_check.py): page look = "book layout v2" block in make_pdf.py (`.book` only: 6-rank type scale, open tables, paging rules + what was rejected → docs/RENDERER.md — the user wants neither cramped nor empty pages; teacher-slide material is MERGED into the chapter's own sections, never a separate "from the slides" section); INTRO box per chapter, lead sentence per section, one Korean example per line with its gloss, no `·`-chains, no bold pseudo-headings.
-- Every exercise needs a **Thai translation**; pictures become Thai text `🖼️ …`. Docs need a TOC; each `#`/`##` starts a page.
+- Every exercise needs a **Thai translation**; pictures = the **real picture** (crop of the book/paper, or a clear redraw when none exists — user 11/19)
+  + its Thai `🖼️ …` caption; in PDFs the picture sits left of ALL its item text (never 가 beside and 나 below). Docs need a TOC; each `#`/`##` starts a page.
 - Answer keys ordered by question number, one item per line; sentence answers get long ruled lines.
 - Wants detail and full coverage; likes deep-dive explanations.
 - **Colour by word function** in every PDF (scripts/kotag.py, SPEC content/specs/SPEC_colors.md): n blue · p orange · v green · e purple · q teal · x red · m brown · a grey · dotted underline = honorific; the Thai gloss mirrors the colours. Fix a wrong colour by writing an explicit `{c:…}` tag in content.
@@ -70,6 +74,11 @@ output/       🤖 GENERATED, never hand-edit. Entry = output/START_HERE.html (h
 - Speech audio page: `python3 scripts/build_speech_audio.py <name>` → output/6_Speaking/KMU_Speaking_<Camel>_Audio.html (numbered lines
   `**N. 한국어**` + `*reading*` + `🇹🇭 ไทย` in content/speaking/<name>.md; clips cached in extracted/speech_clips/).
 - Mind maps: `python3 scripts/build_mindmaps.py` (`--check` = parse only).
+- **Real pictures** (11/19): `![🖼️ caption](img:ID)` in Markdown / `"img": "ID"` on a site item or section; crops listed in content/img/*.tsv (one
+  manifest per writer; `card:` = drawn), built by `python3 scripts/crop_images.py` (`--grid`, `--sheet`, `--check`); make_pdf puts a picture LEFT of its
+  item text (stacked when > 100 mm wide); site packs = img_<json>.js. Open 🖼️ list: `scripts/pic_inventory.py`; agents' site rows: content/img/map_*.tsv
+  → `scripts/apply_pic_map.py`. Brief: content/specs/BRIEF_pictures.md. Crops are remastered by Real-ESRGAN (extracted/tools/esrgan, GPU; raw crops in
+  extracted/img/_raw/) — details docs/RENDERER.md. 원고지 essay pictures: `scripts/wongoji.py --plain <txt> <prefix>`.
 
 ### 2.3 Practice website (output/2_Practice_Web/)
 - Build: `python3 scripts/build_mockweb.py` (reads content/mockweb/*.json; files starting `_` are drafts and ignored; edge-tts clips cached in
@@ -79,7 +88,7 @@ output/       🤖 GENERATED, never hand-edit. Entry = output/START_HERE.html (h
   omit `capabilities` (keeps db, sample, user). If refused as "unread", run `Artifact list scope:files` on the url first. Compare file sizes with that
   listing to see what changed. Each clips file must stay < 16 MB (build_mockweb splits spoken-line clips over SCLIP_FILES and word clips over VCLIP_FILES; add a file + `<script>` tag in
   app.html when the build says so). Do not re-enable the artifact watch on your own.
-- Current: **v68** — 기말 tile (hero) gathers everything for 23–37 (match exam final|mini03|mini04, so the ③ ④ tiles hide): 기말 mock A (복습문제 shape) + B
+- Current: **v71** (11/19: 693 real pictures — Real-ESRGAN remastered — via `img` in 31 lazy packs img_<json>.js — publish the packs that changed; written answers auto-grow, essays get a big box + ⤢ full-screen popup; 📌 hint sets final_0_hints.json) · v68 — 기말 tile (hero) gathers everything for 23–37 (match exam final|mini03|mini04, so the ③ ④ tiles hide): 기말 mock A (복습문제 shape) + B
   (복습시험 shape) in final_1_{writing,reading,listening}.json (brief BRIEF_final_mock.md) · ⭐ final_drill.json · 📋 final_review.json (renamed so it sorts
   before 말하기; group order = file order) — 217 sets · 4,128 items · 1,139 clips · 1,366 vocab words (vocab.js, Leitner drill, VOCAB_PRIO in build_mockweb.py line ~74).
   **v61:** every word has an example sentence + Thai translation + usage note in content/guide/04_vocabulary/examples/unitNN.json (brief

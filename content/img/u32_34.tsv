@@ -1,0 +1,76 @@
+# 32과 + 34과 pictures (units 32 and 34) — textbook / workbook / teacher sheets & tests; cd* = drawn card (no original)
+# id	src	page	box x0 y0 x1 y1 (%)	w	note
+tb32-321-map	source/textbook/KMU student's book unit 32.pdf	6	12.7 19.8 90.2 54.8	95	แผนที่รถไฟใต้ดินสาย 1–6 (ตำรา 활동 หน้า 321) มีรูปสถานที่ประกอบ
+wb32-3-ex	source/workbook/KMU workbook unit 32.pdf	3	19.8 20.2 46.4 30.2	35	보기 E: ชายตื่นนอนบิดขี้เกียจ (ในวงกลม) → ชายดื่มนม
+wb32-3-1	source/workbook/KMU workbook unit 32.pdf	3	19.0 33.0 50.4 42.5	40	E1: ชายหญิงทักทายกัน → ชายหญิงดูหนัง (แว่น 3 มิติ ป๊อปคอร์น)
+wb32-3-2	source/workbook/KMU workbook unit 32.pdf	3	19.4 45.3 50.4 55.2	40	E2: พ่อครัวแต่งหน้าเค้ก → ชายยื่นของขวัญให้หญิง
+wb32-3-3	source/workbook/KMU workbook unit 32.pdf	3	21.4 58.4 51.2 68.0	40	E3: พ่อครัวถือกระบวยกับชาม → คนนั่งที่โต๊ะอาหารเต็มโต๊ะ
+wb32-3-4	source/workbook/KMU workbook unit 32.pdf	3	19.4 70.6 48.4 81.0	40	E4: หญิงสะพายกระเป๋าเดินไปอาคารเรียน → หญิงนั่งเขียนหนังสือที่โต๊ะ
+wb32-3-5	source/workbook/KMU workbook unit 32.pdf	3	19.2 84.3 48.8 92.6	40	E5: ร้านกาแฟ COFFEE SHOP → หญิงนั่งอ่านนิตยสารในร้าน
+wb32-4-map	source/workbook/KMU workbook unit 32.pdf	4	26.0 55.4 60.6 75.9	50	G: แผนที่รถไฟใต้ดิน สาย 4 (혜화 → 서울역 → 삼각지) × สาย 6 (삼각지 → 월드컵경기장)
+ev32-t-ex	source/everyday/KMU everyday test unit 32.pdf	1	10.2 15.5 20.1 20.0	14	보기: คนเกาหัว มีเครื่องหมายคำถาม (모르다)
+ev32-t-sing	source/everyday/KMU everyday test unit 32.pdf	1	10.0 21.6 17.9 26.5	14	ผู้ชายถือไมค์ร้องเพลง (부르다)
+ev32-t-cut	source/everyday/KMU everyday test unit 32.pdf	1	9.7 27.2 18.9 31.4	14	ช่างถือกรรไกรตัดผม (자르다)
+ev32-t-fast	source/everyday/KMU everyday test unit 32.pdf	1	9.2 32.6 19.6 36.5	14	คนวิ่งเร็ว มีเส้นความเร็วด้านหลัง (빠르다)
+ev32-s-1	source/everyday/KMU everyday sheet unit 32.pdf	2	17.7 54.8 47.3 59.6	35	ใบฝึก 32 ข้อ 1: ผู้หญิงยืดแขนบนที่นอน → ล้างหน้า
+ev32-s-2	source/everyday/KMU everyday sheet unit 32.pdf	2	17.7 60.5 47.3 65.0	35	ใบฝึก 32 ข้อ 2: ล้างหน้า → นั่งกินอาหารเช้า
+ev32-s-3	source/everyday/KMU everyday sheet unit 32.pdf	2	17.7 66.2 47.3 72.0	35	ใบฝึก 32 ข้อ 3: ปั่นจักรยานพร้อมของที่ซื้อ → หั่นเนื้อทำอาหาร
+ev32-s-4	source/everyday/KMU everyday sheet unit 32.pdf	2	17.7 73.0 47.3 77.6	35	ใบฝึก 32 ข้อ 4: หั่นเนื้อทำอาหาร → นั่งกินอาหารที่ทำเสร็จ
+ev32-s-5	source/everyday/KMU everyday sheet unit 32.pdf	2	17.7 79.1 47.3 84.5	35	ใบฝึก 32 ข้อ 5: คนนั่งยองล้างตัวข้างถังน้ำ → คนคาดผ้าที่หัวนั่งอ่านหนังสือ
+ev32-s-6	source/everyday/KMU everyday sheet unit 32.pdf	2	17.7 85.4 47.3 90.4	35	ใบฝึก 32 ข้อ 6: นั่งคุยโทรศัพท์ → ถือเครื่องดูดฝุ่นทำความสะอาด
+ev32-s-7	source/everyday/KMU everyday sheet unit 32.pdf	2	17.7 91.3 47.3 96.3	35	ใบฝึก 32 ข้อ 7: หญิงสองคนเดินเข้ามาหากัน → ยืนคุยกัน (มีกรอบคำพูด)
+ev32-s-map0	source/everyday/KMU everyday sheet unit 32.pdf	4	18.1 61.0 88.8 74.0	85	ใบฝึก 32 หน้า 8 (보기): 길음역 → 삼각지역 → 이태원역 3번 출구 บ้านชื่อ 차차 (25분 / 10분)
+ev32-s-map1	source/everyday/KMU everyday sheet unit 32.pdf	5	16.3 9.7 74.2 23.2	80	ใบฝึก 32 หน้า 9: 길음역 → 충무로역 → 경복궁역 3번 출구 국민 호텔 (15분 / 10분)
+ev32-s-map2	source/everyday/KMU everyday sheet unit 32.pdf	5	17.6 59.2 76.0 72.0	80	ใบฝึก 32 หน้า 10: 길음역 → 서울역 → 시청역 4번 출구 국민 백화점 (10분 / 10분)
+cd32-shirt	card:👕				มือหยิบเสื้อจากราว (고르다) — ไม่มีภาพต้นฉบับ
+cd32-pen	card:✍️				คนกำลังเขียนด้วยปากกา (쓰다)
+cd32-ktx	card:🚄				รถไฟความเร็วสูง KTX วิ่งเร็ว
+cd32-cheetah	card:🐆				เสือชีตาห์วิ่งเร็ว (ใกล้เคียง: เสือดาว)
+cd32-apples	card:🍎 | 🍏				แอปเปิลสองลูกสีไม่เหมือนกัน (다르다)
+cd32-sick	card:🤒				ผู้ชายจับท้องทำหน้าเจ็บ (ใกล้เคียง: หน้าไม่สบาย)
+cd32-twins	card:👧 | 👦				ฝาแฝดสองคนหน้าตาไม่เหมือนกัน
+cd32-busy	card:😫 | 📚				คนยุ่งกับกองเอกสาร (바쁘다)
+cd32-sign23	card:text=2호선 → text=3호선				ป้ายสาย 2 ลูกศรไปป้ายสาย 3
+cd32-signexit	card:text=동대문역 | text=1번 출구				ป้ายสถานีทงแดมุนและทางออก 1
+cd32-chair	card:💺 → ⌛				หญิงนั่งลงบนเก้าอี้ → นั่งรอ
+tb34-337-shop	source/textbook/KMU student's book unit 34.pdf	2	17.2 21.2 24.8 28.9	18	ผู้หญิงถือถุงช้อปปิ้ง (쇼핑을 하다)
+tb34-337-game	source/textbook/KMU student's book unit 34.pdf	2	38.6 21.1 46.0 28.6	18	ผู้ชายนั่งเล่นเกม (게임을 하다)
+tb34-337-read	source/textbook/KMU student's book unit 34.pdf	2	60.0 20.9 66.5 28.2	18	ผู้หญิงนั่งกอดเข่าอ่านหนังสือ (책을 읽다)
+tb34-337-cook	source/textbook/KMU student's book unit 34.pdf	2	17.2 31.9 25.6 40.4	18	ผู้ชายกำลังผัดไข่ในกระทะ (저녁을 만들다)
+tb34-337-meet	source/textbook/KMU student's book unit 34.pdf	2	57.5 32.9 68.5 40.2	18	ผู้หญิงสองคนเดินมาพบกัน (친구를 만나다)
+tb34-337-clean	source/textbook/KMU student's book unit 34.pdf	2	16.8 43.6 27.2 51.6	18	ผู้ชายถือเครื่องดูดฝุ่น (집안일을 하다)
+tb34-337-tv	source/textbook/KMU student's book unit 34.pdf	2	36.7 43.9 50.1 51.4	18	ผู้หญิงนั่งห่มผ้าดูโทรทัศน์ (텔레비전을 보다)
+tb34-337-walk	source/textbook/KMU student's book unit 34.pdf	2	59.0 43.6 67.6 51.6	18	หญิงเดินเล่นกับสุนัข (산책하다)
+ev34-t-shirt	source/everyday/KMU everyday test unit 34.pdf	1	14.5 14.8 22.9 20.0	14	보기: เสื้อยืดลายแถบ
+ev34-t-cap	source/everyday/KMU everyday test unit 34.pdf	1	24.2 14.8 35.7 20.0	14	보기: หมวกแก๊ปสีดำ
+ev34-t-1a	source/everyday/KMU everyday test unit 34.pdf	1	13.4 20.4 23.3 25.8	14	ข้อ 1: ถ้วยกาแฟ (มีเมล็ดกาแฟ)
+ev34-t-1b	source/everyday/KMU everyday test unit 34.pdf	1	24.0 20.4 35.4 25.8	14	ข้อ 1: ถ้วยชาเปล่า
+ev34-t-2a	source/everyday/KMU everyday test unit 34.pdf	1	12.3 26.3 23.6 31.7	14	ข้อ 2: อาคารร้านกาแฟหน้ากระจก
+ev34-t-2b	source/everyday/KMU everyday test unit 34.pdf	1	24.2 26.3 35.4 31.7	14	ข้อ 2: สวนสาธารณะ ต้นไม้เรียงแถว
+ev34-t-3a	source/everyday/KMU everyday test unit 34.pdf	1	14.3 32.0 22.9 38.2	14	ข้อ 3: ผู้หญิงนั่งกอดเข่าอ่านหนังสือ
+ev34-t-3b	source/everyday/KMU everyday test unit 34.pdf	1	24.4 32.0 34.9 38.2	14	ข้อ 3: ผู้หญิงนั่งบนเก้าอี้โรงภาพยนตร์
+ev34-t-4a	source/everyday/KMU everyday test unit 34.pdf	1	14.5 38.6 23.3 44.1	14	ข้อ 4: ผู้หญิงกางแขน มีเส้นการเคลื่อนไหว (ออกกำลังกาย)
+ev34-t-4b	source/everyday/KMU everyday test unit 34.pdf	1	24.4 38.6 35.4 44.1	14	ข้อ 4: ผู้หญิงสองคนยืนคุยกัน (พบเพื่อน)
+ev34-t-cal	source/everyday/KMU everyday test unit 34.pdf	1	12.3 50.1 90.1 63.6	80	ปฏิทิน 4 สัปดาห์ของ 제프리 (운동 · 요리) จากข้อสอบ 34과 ข้อ 5–7
+ev34-s-a1a	source/everyday/KMU everyday sheet unit 34.pdf	1	10.4 11.0 29.9 18.3	16	ใบฝึก 34 หน้า 1 ข้อ 1: กิมบับหั่นเป็นชิ้นบนจาน
+ev34-s-a1b	source/everyday/KMU everyday sheet unit 34.pdf	1	31.0 11.1 49.5 18.2	16	ข้อ 1: ต๊อกบกกีในจาน
+ev34-s-a2a	source/everyday/KMU everyday sheet unit 34.pdf	1	15.6 24.7 28.8 32.0	16	ข้อ 2: กล้องถ่ายรูป
+ev34-s-a2b	source/everyday/KMU everyday sheet unit 34.pdf	1	32.5 25.3 47.5 31.9	16	ข้อ 2: สมาร์ตโฟน
+ev34-s-a3a	source/everyday/KMU everyday sheet unit 34.pdf	1	14.1 35.6 28.4 42.6	16	ข้อ 3: ผู้ชายแจ็กเก็ตบางยิ้มกลางแดดอ่อน (ฤดูใบไม้ผลิ)
+ev34-s-a3b	source/everyday/KMU everyday sheet unit 34.pdf	1	33.3 35.6 49.2 42.6	16	ข้อ 3: ผู้หญิงชุดว่ายน้ำถือห่วงยางที่ชายหาด (ฤดูร้อน)
+ev34-s-a4a	source/everyday/KMU everyday sheet unit 34.pdf	1	51.9 12.3 69.2 19.4	16	ข้อ 4: รถเมล์
+ev34-s-a4b	source/everyday/KMU everyday sheet unit 34.pdf	1	72.0 11.5 87.9 19.6	16	ข้อ 4: แท็กซี่
+ev34-s-a5a	source/everyday/KMU everyday sheet unit 34.pdf	1	51.9 24.2 69.5 31.0	16	ข้อ 5: ร้านสะดวกซื้อ ป้ายเขียน 24
+ev34-s-a5b	source/everyday/KMU everyday sheet unit 34.pdf	1	70.9 24.2 87.4 31.5	16	ข้อ 5: ร้านเล็ก ๆ มีรูปถ้วยกาแฟหน้าร้าน (คาเฟ่)
+ev34-s-a6a	source/everyday/KMU everyday sheet unit 34.pdf	1	51.9 35.9 68.7 43.5	16	ข้อ 6: สวนสาธารณะ ต้นไม้กับม้านั่ง
+ev34-s-a6b	source/everyday/KMU everyday sheet unit 34.pdf	1	72.0 35.9 88.5 42.8	16	ข้อ 6: อาคารโรงเรียนกับลานกีฬา
+ev34-s-b1b	source/everyday/KMU everyday sheet unit 34.pdf	1	34.9 61.2 47.3 69.0	16	หน้า 2 ข้อ 1: ผู้หญิงนั่งเหยียดขาพักผ่อน
+ev34-s-b3a	source/everyday/KMU everyday sheet unit 34.pdf	1	13.0 84.8 28.8 92.6	16	หน้า 2 ข้อ 3: พนักงานร้านเสื้อผ้ายิ้มช่วยลูกค้าเลือกเสื้อ (ใจดี)
+ev34-s-b3b	source/everyday/KMU everyday sheet unit 34.pdf	1	33.0 84.8 48.9 92.2	16	หน้า 2 ข้อ 3: เด็กชี้นิ้วขึ้น มีหลอดไฟสว่างข้างหัว (ฉลาด)
+ev34-s-b2b	source/everyday/KMU everyday sheet unit 34.pdf	1	36.8 73.0 47.5 81.0	16	หน้า 2 ข้อ 2: ผู้หญิงนั่งอ่านหนังสือ
+ev34-s-p1	source/everyday/KMU everyday sheet unit 34.pdf	1	9.9 8.2 90.3 45.2	40	ใบฝึก 34 หน้า 1: 이나 응답 연습 (ภาพคู่ 6 ข้อ)
+ev34-s-p2	source/everyday/KMU everyday sheet unit 34.pdf	1	9.9 57.7 90.3 94.2	40	ใบฝึก 34 หน้า 2: 거나 응답 연습 (ภาพคู่ข้อ 1–3 ข้อ 4–6 ไม่มีภาพ)
+cd34-bread	card:🍞				ขนมปังหนึ่งก้อน
+cd34-rice	card:🍚				ข้าวหนึ่งชาม
+cd34-play	card:🧸				เด็กสองคนเล่นกันบนพื้น (놀다)
+cd34-listen	card:🎧				ชายสวมหูฟังนั่งฟังเพลง (듣다)

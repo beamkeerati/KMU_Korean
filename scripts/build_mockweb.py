@@ -57,7 +57,10 @@ def load_sets():
             bad = True
             print(f'{os.path.basename(f)}: {len(errs)} problem(s)'); [print('  -', e) for e in errs[:20]]
             continue
-        sets += json.load(open(f, encoding='utf-8'))['sets']
+        stem = os.path.splitext(os.path.basename(f))[0]
+        for st in json.load(open(f, encoding='utf-8'))['sets']:
+            st['_file'] = stem                                  # picture pack name (removed again by write_pictures)
+            sets.append(st)
     if bad:
         sys.exit('fix the data files first')
     for st in sets:
@@ -204,6 +207,63 @@ def standalone(fragment):
     return head + fragment[:e] + '\n</head>\n<body>\n' + fragment[e:] + '\n</body>\n</html>\n'
 
 
+PIC_MAX = 12_000_000     # bytes per picture pack (artifact files must stay < 16 MB)
+def write_pictures(sets):
+    """Real pictures ("img": "ID" or [IDs] on an item or a section; crops listed in content/img/*.tsv, built by
+    scripts/crop_images.py) → WebP data URIs in img_<json file>.js packs, loaded by app.html only when a set that needs them opens.
+    Returns {id: [pack file, display width px, height px]} for data.js (window.KMU_IMGS)."""
+    from PIL import Image
+    sys.path.insert(0, os.path.join(ROOT, 'scripts'))
+    import crop_images
+    webdir = os.path.join(crop_images.OUT, '_web')
+    os.makedirs(webdir, exist_ok=True)
+    order, seen = [], set()
+    for st in sets:
+        stem = st.pop('_file', 'misc')
+        for sec in st['sections']:
+            for o in [sec] + sec.get('items', []):
+                v = o.get('img')
+                for iid in ([v] if isinstance(v, str) else v or []):
+                    if iid not in seen:
+                        seen.add(iid); order.append((stem, iid))
+    if not order:
+        return {}
+    rows = crop_images.load_manifest()
+    missing = [i for _, i in order if i not in rows]
+    if missing:
+        sys.exit('pictures not in content/img/*.tsv: ' + ' '.join(missing))
+    unbuilt = [i for _, i in order if not os.path.exists(os.path.join(crop_images.OUT, i + '.jpg'))]
+    if unbuilt:
+        crop_images.build(rows)
+    meta, packs = {}, {}
+    for stem, iid in order:
+        src = os.path.join(crop_images.OUT, iid + '.jpg')
+        web = os.path.join(webdir, iid + '.webp')
+        im = Image.open(src)
+        w, h = im.size
+        if not os.path.exists(web) or os.path.getmtime(web) < os.path.getmtime(src):
+            if w > 900:
+                im = im.resize((900, round(h * 900 / w)), Image.LANCZOS)
+            im.convert('RGB').save(web, 'WEBP', quality=74, method=6)
+        uri = 'data:image/webp;base64,' + base64.b64encode(open(web, 'rb').read()).decode()
+        names = packs.setdefault(stem, [{}])
+        if sum(len(x) for x in names[-1].values()) + len(uri) > PIC_MAX:
+            names.append({})
+        names[-1][iid] = uri
+        name = f'img_{stem}.js' if len(names) == 1 else f'img_{stem}_{len(names)}.js'
+        nw, nh = crop_images.natural_px(iid) or (w, h)      # printed size = the plain crop (a remastered file is 2× larger)
+        disp = max(150, min(720, round(nw * 0.5)))          # CSS px: about the printed size on a phone, never tiny
+        meta[iid] = [name, disp, round(nh * disp / nw)]
+    for old in glob.glob(os.path.join(OUT, 'img_*.js')):
+        os.remove(old)
+    for stem, names in packs.items():
+        for k, part in enumerate(names, 1):
+            name = f'img_{stem}.js' if k == 1 else f'img_{stem}_{k}.js'
+            with open(os.path.join(OUT, name), 'w', encoding='utf-8') as f:
+                f.write('KMU_IMG_ADD(' + json.dumps(part) + ');\n')
+    return meta
+
+
 AUDIO_DIRS = {'textbook': "KMU audio student's book unit 01 - 37", 'review': 'KMU audio midterm review 01 listening'}
 def copy_audio(sets):
     """A section may carry "audio": "audio/<kind>/<file>.mp3" (kind = textbook | review): the real recording is copied from
@@ -235,8 +295,10 @@ def main():
         print(f'clips     : {len(lines)} spoken lines + {len(vlines)} vocabulary words, {made} newly generated')
     clips = {f'{v}|{t}': 'data:audio/mpeg;base64,' + base64.b64encode(open(clip_path(v, t), 'rb').read()).decode()
              for v, t in lines if os.path.exists(clip_path(v, t))}
+    pics = write_pictures(sets)                                 # also strips the _file tags before data.js is written
     with open(os.path.join(OUT, 'data.js'), 'w', encoding='utf-8') as f:
         f.write('window.KMU_SETS = ' + json.dumps(sets, ensure_ascii=False) + ';\n')
+        f.write('window.KMU_IMGS = ' + json.dumps(pics) + ';\n')
     scores = json.load(open(os.path.join(DATA, 'scores.json'), encoding='utf-8'))
     with open(os.path.join(OUT, 'data.js'), 'a', encoding='utf-8') as f:
         f.write('window.KMU_SCORES = ' + json.dumps(scores, ensure_ascii=False) + ';\n')
@@ -284,6 +346,9 @@ def main():
     n = sum(len(s['items']) for st in sets for s in st['sections'])
     size = sum(os.path.getsize(os.path.join(OUT, x)) for x in ('data.js', *SCLIP_FILES, *VCLIP_FILES, 'vocab.js', 'vendor.js', 'index.html')) // 1024
     print(f'mockweb   : {len(sets)} sets · {n} items · {len(clips)}/{len(lines)} clips · {len(vocab)} vocabulary words ({len(vclips)} clips, {nex} with example sentences) · {size} KB -> output/2_Practice_Web/')
+    if pics:
+        pk = sorted({m[0] for m in pics.values()})
+        print(f'pictures  : {len(pics)} in {len(pk)} pack(s) · ' + ' · '.join(f'{x} {os.path.getsize(os.path.join(OUT, x)) // 1024} KB' for x in pk))
     if audio: print(f'audio     : {len(audio)} real recordings copied to output/2_Practice_Web/audio/ (publish them as artifact files)')
 
 

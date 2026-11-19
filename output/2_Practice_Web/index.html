@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!-- v69 (2026-11-19): real pictures — items/sections carry "img" (crops listed in content/img/*.tsv, scripts/crop_images.py); build_mockweb packs them as WebP in img_<json file>.js, loaded only when a set needs them (Pics component, tap to enlarge); the Thai 🖼️ caption hides in exam mode once a picture is shown. Written answers auto-grow; essay-length items (model > 100 chars / "long") get a 10-line full-width box + character count; every write item has ⤢ เขียนเต็มจอ (BigWrite popup). New 📌 sets from the teacher's 11/19 hints (final_0_hints.json) -->
 <!-- v64 (2026-11-15): new families mini04 = 복습시험④ 11/18 (30–37과: mini04-* scored sets + mini04x-* spares) and a 기말 tile (exam 'final': the teacher's 복습문제 + 불규칙 정리 + 말하기 기말 연습 handed out 11/13); mini03 moves to the archive row -->
 <!-- v56 (2026-11-05 night): results no longer go missing until a reload — a `storage` listener redraws when another tab of the same browser writes (the cloud merge alone never redrew it: the shared localStorage already held the data), a cover re-reads in place (no scroll), an exam/practice paper whose attempt was submitted, cancelled or restarted elsewhere returns to its cover instead of writing stale answers or auto-submitting an empty paper at time-up, regrade() only rewrites the attempt on screen (C.resAt). Cards carry data-set; __kmu exposes go/setAns/store/C for the headless harness -->
 <!-- v55 (2026-11-05): cloud sync MERGES instead of overwriting — per-key write times (kmuweb:kt:<id> / cloud field t), score + hist = union by attempt time (only 🗑 ล้างผล's t.reset removes attempts), vocab record merged per word (ep = clear count), read → merge → write one doc at a time + a live onSnapshot listener; pre-v55 docs' nulls never erase local data. Late AI grades stay in their own set/attempt (gens). Cause: v54's whole-doc "last change wins" let a stale copy wipe the finished mini03-writing (57/100) and mini02-listening -->
@@ -223,6 +224,26 @@ button { cursor: pointer; }
 .q { font-family: var(--f-ko); white-space: pre-line; }
 .qth { font-size: calc((13px) * var(--ts, 1)); color: var(--muted); }
 .pic { font-size: calc((13px) * var(--ts, 1)); }
+/* real pictures (crops of the book / teacher's paper, content/img/*.tsv): tap to see one full width */
+.pics { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: flex-end; margin: 6px 0 4px; }
+.pimg { display: block; max-width: 100%; height: auto; border-radius: 4px; background: #fff; cursor: zoom-in; }
+.pimg.big { width: 100% !important; cursor: zoom-out; }
+.pimg-wait { display: grid; place-items: center; max-width: 100%; border: 1px dashed var(--rule); border-radius: 4px; color: var(--muted); }
+.paper.exam:not(.show-th) .pic-cap { display: none; }
+/* long written answers (essays): a big ruled box using the full paper width, a character count, and a full-screen writing popup */
+textarea.wa.long { min-height: calc(1.95em * 10 + 4px); margin-left: -44px; width: calc(100% + 44px); border: 1px solid var(--rule); border-bottom: 1.5px solid var(--ink); border-radius: 4px 4px 0 0; padding: 0 10px; resize: vertical; }
+.wa-tools { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 6px 10px; margin: 6px 0 0 -44px; font-size: calc((13px) * var(--ts, 1)); color: var(--muted); }
+.wa-tools .cnt.ok { color: var(--ok); font-weight: 600; }
+.wa-tools.short { margin-top: 2px; justify-content: flex-end; }
+.wa-tools.short .play { padding: 2px 10px; min-height: 28px; font-size: calc((12px) * var(--ts, 1)); }
+.bw { position: fixed; inset: 0; z-index: 60; background: rgba(15, 23, 42, .5); display: flex; justify-content: center; align-items: stretch; padding: max(10px, env(safe-area-inset-top, 0px)) 10px max(10px, env(safe-area-inset-bottom, 0px)); }
+.bw-in { background: var(--paper); color: var(--ink); width: min(1240px, 100%); border-radius: 8px; padding: 14px clamp(12px, 3vw, 32px); display: flex; flex-direction: column; gap: 8px; overflow: auto; }
+.bw-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+.bw-head b { font-family: var(--f-ko); font-size: calc((16px) * var(--ts, 1)); }
+.bw .box { margin: 0; }
+.bw-ta { flex: 1; min-height: 45vh; width: 100%; font-family: var(--f-ko); font-size: calc((19px) * var(--ts, 1)); line-height: 2.1em; color: var(--ink); border: 1px solid var(--rule); border-radius: 6px; padding: 4px 14px;
+  background: var(--paper) repeating-linear-gradient(transparent 0 calc(2.1em - 1px), var(--rule) calc(2.1em - 1px) 2.1em); background-attachment: local; resize: none; }
+.bw-foot { display: flex; justify-content: space-between; gap: 10px; font-size: calc((13px) * var(--ts, 1)); color: var(--muted); }
 .opts { display: flex; flex-wrap: wrap; gap: 6px 8px; margin-top: 6px; }
 .opt { display: inline-flex; align-items: baseline; gap: 6px; border: 1px solid var(--rule); border-radius: 6px; padding: 6px 12px; background: var(--paper); cursor: pointer; min-height: 40px; }
 .opt input { position: absolute; opacity: 0; pointer-events: none; }
@@ -563,6 +584,46 @@ const view = signal('home');                      // home (hub) | cat (category 
 const curSt = signal(null), mode = signal('cover'), leftS = signal(null);   // mode: cover | exam | practice | result
 const selfS = signal({}), aiS = signal({}), playsS = signal({}), G = signal(null);   // G = last grade() result
 const ansTick = signal(0), notice = signal(''), showTh = signal(false), running = signal(false), confirmN = signal(0);
+/* real pictures: window.KMU_IMGS = {id: [pack file, width px, height px]} (data.js); a pack (img_<file>.js) loads when first needed */
+const IMGS = window.KMU_IMGS || {}, imgTick = signal(0), imgPacks = {};
+window.KMU_IMG = window.KMU_IMG || {};
+window.KMU_IMG_ADD = o => { Object.assign(window.KMU_IMG, o); imgTick.value++; };
+function loadPack(f) {
+  if (imgPacks[f]) return;
+  imgPacks[f] = 1;
+  const el = document.createElement('script'); el.src = f; el.onerror = () => { imgPacks[f] = 0; }; document.head.appendChild(el);
+}
+function Pics({ ids }) {
+  const list = (Array.isArray(ids) ? ids : [ids]).filter(id => IMGS[id]);
+  if (!list.length) return null;
+  imgTick.value;
+  return html`<div class="pics">${list.map(id => { const [f, w, h] = IMGS[id], src = window.KMU_IMG[id];
+    if (!src) { loadPack(f); return html`<span class="pimg-wait" style=${{ width: w + 'px', aspectRatio: w + ' / ' + h }}>🖼️</span>`; }
+    return html`<img class="pimg" src=${src} width=${w} height=${h} alt="" style=${{ width: w + 'px' }} onClick=${e => e.currentTarget.classList.toggle('big')} />`; })}</div>`;
+}
+/* written answers: grow with the text; an essay-length item (model > 100 chars or "long": true) gets a big box + a full-screen popup */
+const grow = el => { if (!el || el.classList.contains('bw-ta')) return; el.style.height = 'auto'; el.style.height = (el.scrollHeight + 3) + 'px'; };
+const isLong = it => it.type === 'write' && (it.long || ((it.model || [''])[0] || '').length > 100);
+const chars = t => (t || '').replace(/\n/g, '').length;
+const bigW = signal(null);   // item key whose answer is open in the full-screen writing popup
+function BigWrite() {
+  const k = bigW.value, st = curSt.value;
+  if (k === null || !st) return null;
+  const [si, ii] = k.split('-').map(Number), sec = st.sections[si], it = sec && sec.items[ii];
+  if (!it) return null;
+  const md = mode.value, ro = md === 'result', a = (kv(k).value, C.ans[k] || ''), n = chars(a);
+  const close = () => { bigW.value = null; setTimeout(() => grow(document.getElementById('ta' + k)), 30); };
+  return html`<div class="bw" role="dialog" aria-modal="true" aria-label=${'เขียนคำตอบข้อ ' + it.n} onKeyDown=${e => { if (e.key === 'Escape') close(); }} onClick=${e => { if (e.target === e.currentTarget) close(); }}>
+    <div class="bw-in">
+      <div class="bw-head"><b>${it.n}. ${sec.h}</b><button class="btn sm" type="button" onClick=${close}>✓ เสร็จ · ปิด</button></div>
+      ${sec.box ? html`<div class="box">${dlg(sec.box)}</div>` : null}
+      <div class="q">${dlg(it.q)}</div>
+      ${it.hint && md !== 'exam' ? html`<div class="qth hint">💡 ${it.hint}</div>` : null}
+      <textarea class="bw-ta" lang="ko" value=${a} readOnly=${ro} placeholder="เขียนคำตอบที่นี่ (ขึ้นย่อหน้าใหม่ด้วย Enter)" aria-label=${'คำตอบข้อ ' + it.n}
+        ref=${el => { if (el && !el.dataset.f) { el.dataset.f = 1; setTimeout(() => el.focus(), 30); } }} onInput=${e => setAns(k, e.target.value)}></textarea>
+      <div class="bw-foot"><span>${n} ตัวอักษร (ไม่นับการขึ้นบรรทัด)${isLong(it) ? ' · เป้าประมาณ 300' : ''}</span><span>Esc = ปิด · คำตอบบันทึกอัตโนมัติ</span></div>
+    </div></div>`;
+}
 const liveItem = signal(''), speaking = signal(''), recS = signal({}), spkS = signal({}), audioS = signal({}), aiVer = signal(0), AIS = signal(null);
 const C = { ans: {}, played: [], endAt: null, startedAt: null, lastMode: undefined, used: undefined, reason: undefined, graded: false };
 let kvs = {}, secs = {};
@@ -1440,6 +1501,7 @@ function Section({ sec, si }) {
       <h2 class="sec-h">${sec.h}</h2>
       ${sec.th ? html`<p class="sec-th">${sec.th}</p>` : null}
       ${sec.box ? html`<div class="box">${dlg(sec.box)}</div>` : null}
+      ${sec.img ? html`<${Pics} ids=${sec.img} />` : null}
       ${sec.passage ? html`<div class="passage">${sec.passage.map(l => html`<p><span class="ko">${l.ko}</span><span class="th">${l.th}</span></p>`)}</div>` : null}
       ${sec.script ? html`<div class="lst">
           <button class="play" type="button" data-sec=${si} hidden=${exam} onClick=${async () => { stopRuns(); const id = ++runId; await playSection(si, id); setSec(si, { live: false }); }}>▶ ฟัง <span class="n">${n ? `(${n})` : ''}</span></button>
@@ -1485,8 +1547,9 @@ function Item({ it, k }) {
   const live = liveItem.value === k, rec = recS.value[k];
   const cls = 'item' + (gi ? gi.cls : isAnswered(a) ? ' done' : '') + (live ? ' live' : '');
   return html`<div class=${cls} id=${'it' + k}><span class="qn">${it.n}.</span><div class="mark" aria-hidden="true"></div><div>
+    ${it.img ? html`<${Pics} ids=${it.img} />` : null}
     ${q}
-    ${it.pic ? html`<div class="pic">${it.pic}</div>` : null}
+    ${it.pic ? html`<div class=${it.img ? 'pic pic-cap' : 'pic'}>${it.pic}</div>` : null}
     ${it.th ? html`<div class="qth tr">${it.th}</div>` : null}
     ${ptsOf(it) === 0 ? html`<div class="zero">ข้อสำรอง · ไม่นับคะแนน</div>` : null}
     ${it.type === 'mc' || it.type === 'ox' ? html`<div class="opts" role="radiogroup" aria-label=${'ข้อ ' + it.n}>${(it.type === 'ox' ? [['O', 'ถูก'], ['X', 'ผิด']] : it.opts).map((o, j) => {
@@ -1499,7 +1562,8 @@ function Item({ it, k }) {
           <button class="play" type="button" onClick=${() => checkSpeak(k)}>ตรวจ</button>` : null}
         <span class="rec" hidden=${rec === undefined}>${rec}</span></div>` : null}
       ${it.hint ? html`<div class="qth hint">💡 ${it.hint}</div>` : null}
-      <textarea class="wa" lang="ko" rows="1" id=${'ta' + k} aria-label=${'คำตอบข้อ ' + it.n} placeholder=${it.type === 'speak' ? 'คำตอบ (ไมค์ถอดเสียงให้ หรือพิมพ์เอง)' : 'เขียนคำตอบ'} value=${a || ''} readOnly=${ro} onInput=${e => setAns(k, e.target.value)}></textarea>
+      <textarea class=${'wa' + (isLong(it) ? ' long' : '')} lang="ko" rows=${isLong(it) ? 10 : 1} id=${'ta' + k} aria-label=${'คำตอบข้อ ' + it.n} placeholder=${it.type === 'speak' ? 'คำตอบ (ไมค์ถอดเสียงให้ หรือพิมพ์เอง)' : isLong(it) ? 'เขียนเรียงความที่นี่ (หรือกด ⤢ เขียนเต็มจอ)' : 'เขียนคำตอบ'} value=${a || ''} readOnly=${ro} ref=${el => el && requestAnimationFrame(() => grow(el))} onInput=${e => { setAns(k, e.target.value); grow(e.target); }}></textarea>
+      ${it.type === 'write' ? html`<div class=${'wa-tools' + (isLong(it) ? '' : ' short')} style=${isLong(it) ? undefined : { marginLeft: 0 }}>${isLong(it) ? html`<span class=${'cnt' + (chars(a) >= 270 ? ' ok' : '')}>${chars(a)} ตัวอักษร · เป้าประมาณ 300</span>` : null}<button class="play" type="button" onClick=${() => { bigW.value = k; }}>⤢ เขียนเต็มจอ</button></div>` : null}
       <div class="out">${it.type === 'speak' ? html`<${SpeakOut} it=${it} k=${k} />` : null}</div>` : null}
     ${gi && it.type !== 'speak' && (gi.fix || it.why || gi.typed) ? html`<${Fix} it=${it} k=${k} gi=${gi} />` : null}
   </div></div>`;
@@ -2081,7 +2145,7 @@ function App() {
         <${Help} on=${vw === 'help'} />
       </div>
     </div>
-    <${Transport} /><${Dock} />
+    <${Transport} /><${Dock} /><${BigWrite} />
   </${Fragment}>`;
 }
 

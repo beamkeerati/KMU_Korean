@@ -255,3 +255,16 @@ Site v66 (206 sets · 3,905 items) published. Not committed.
 - **2026-11-18 (late)** The user saw no predicted exams in the 기말 tile (the ③④ mocks had moved with the ④ tile) and pointed out that "ข้อ 6 ออกแน่"
   does not mean the other types won't appear → 기말 mock A/B built like the midterm's (3 Sonnet agents, reviewed: listening B answers tightened to the exact
   heard word, reading B-10 answers 왜 with -아/어서 first, writing stem-only forms added), and the 기말 tile now holds every 23–37 set (27 sets, 10 groups).
+- **2026-11-19 (총복습 day)** The user filed the complete 기말 review handout (16 pp.; the 15-page scan was replaced — p.16 = 한국인의 식사 예절) and
+  their corrected 쓰기 (3)/(4) compositions (source/writing/), and relayed the teacher's hints (3 h 쓰기→듣기→읽기 · ~300-자 composition on 쓰기 3/4 topics ·
+  듣기 all MC · review ④ · memorise 대화 32-1/37-1 · picture description 245/263/271쪽 · 말하기 = handout pp.14–16). Built: real-picture pipeline
+  (content/img/*.tsv → scripts/crop_images.py; make_pdf `img:ID`, picture left of its text; site `img` + lazy WebP packs), final03.md (pictures, two
+  model essays on 원고지 from the user's own drafts + the teacher's corrections, 32/37 dialogues), final01.md p.16 + real route/burger pictures,
+  site v69 (final_0_hints.json: final-pic · final-essay · final-dialog). The user asked for real pictures EVERYWHERE a 🖼️ text stands in for one
+  (~2,500 places): wave 1 = 6 Sonnet agents on 23–37과 + exam papers (brief content/specs/BRIEF_pictures.md), wave 2 = 5–22과.
+- **2026-11-19 (evening)** Real pictures everywhere: 10 Sonnet agents (wave 1 = 23–37과 + exam papers, wave 2 = 5–22과) cropped 1,313 pictures
+  (content/img/*.tsv; drawn `card:` only for invented prediction/mock items or unreadable scans; a few hand-cleaned crops in content/img/gen/) and
+  edited every 🖼️ line; site rows merged from content/img/map_*.tsv (888). Open 🖼️: 2,526 → 18 (all table headers, legends, headings). The agents'
+  pictures exposed transcription errors in the 11과/12과 sheets' picture tables (B/A 2 · 16 · 20 · 22 · 23 · 24 guessed wrong) — fixed in the
+  Markdown, the keys and the site. User feedback on layout: a picture's text must sit in one place (left picture, all 가/나 + blank right) →
+  make_pdf arrange_pictures(); table pictures capped at 24 mm tall. Site v70 (693 pictures in 31 packs) + bigger writing boxes / BigWrite popup.

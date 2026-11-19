@@ -46,7 +46,11 @@ The practice site renders exercise *sets* from JSON files in `content/mockweb/*.
 | `speak` | `q` (the question the teacher asks), `model` (sample answer), `mth` (its Thai), `checks`: `[["regex","Thai label"], …]` 0–3 | mic/typing + regex checks (JS regex syntax, Korean literals, no lookbehind) |
 
 - `n` = the item number as printed ("1", "2-1", "A3"). `th` = Thai translation of the Korean prompt (or 🖼️ picture description in Thai).
-- Pictures do not exist: put the Thai picture description in `pic` (e.g. `"pic": "🖼️ แมวอยู่ใต้โต๊ะ"`).
+- Pictures: keep the Thai description in `pic` (e.g. `"pic": "🖼️ แมวอยู่ใต้โต๊ะ"`) and show the real picture with `"img": "ID"` (or a list)
+  on the item — or on the SECTION when one picture serves all its items. IDs come from content/img/*.tsv (scripts/crop_images.py);
+  agents never edit these JSON files for pictures: they write content/img/map_<name>.tsv rows (scripts/apply_pic_map.py merges them).
+  The site shows the picture above the item, the `pic` text under it (hidden in exam mode). Never put a picture that shows the answer
+  (e.g. a model essay) on the question.
 - Put the student's word-order / tense traps in `why`.
 - A blank whose answer is a choice of two forms (e.g. 일곱 시 반 / 일곱 시 삼십 분) lists both in its accepted list.
 - A dialogue item is one item: `q` = `"가: 지금 뭐 해요?\n나: ___"` (use `\n` between lines).

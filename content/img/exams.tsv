@@ -1,0 +1,153 @@
+# 복습시험 ①–④ · 중간/기말 복습문제 · units 35–37 · speaking papers (agent: exams)
+# id	src	page	box x0 y0 x1 y1 (%)	w	note
+# ---- 35과
+tb35-345-movie	source/textbook/KMU student's book unit 35.pdf	2	42.8 20.4 51 27.4	14	ผู้หญิงนั่งเก้าอี้โรงหนัง กินป๊อปคอร์น (영화 보다)
+tb35-345-music	source/textbook/KMU student's book unit 35.pdf	2	62.5 20.8 70.8 27.5	14	ผู้หญิงเอนเก้าอี้ ใส่หูฟัง (음악 듣다)
+tb35-345-cook	source/textbook/KMU student's book unit 35.pdf	2	21 30.3 28.2 37.8	14	ผู้ชายใส่ผ้ากันเปื้อนถือกระทะ (음식 만들다)
+tb35-345-photo	source/textbook/KMU student's book unit 35.pdf	2	56.8 41.4 64.5 48.2	14	ผู้ชายยกกล้องถ่ายรูปหน้าอาคาร (사진 찍다)
+ev35-t-5	source/everyday/KMU everyday test unit 35.pdf	1	12.2 43.2 28.5 52	16	ผู้หญิงขี่ม้า
+ev35-t-6	source/everyday/KMU everyday test unit 35.pdf	1	11.8 53.6 28.2 62	16	ผู้หญิงใส่หมวกพ่อครัวถือทัพพี ข้างหน้ามีชามอาหาร
+wb35-1-1	source/workbook/KMU workbook unit 35.pdf	1	26.4 28.6 38.8 34.3	22	หม้อหินใบใหญ่ มีไก่ทั้งตัวในน้ำซุป
+wb35-1-2	source/workbook/KMU workbook unit 35.pdf	1	28.6 35.6 37.2 43.4	14	ผู้ชายชุดเทควันโดเตะขาสูง
+wb35-1-3	source/workbook/KMU workbook unit 35.pdf	1	30 44.6 35.8 52.6	14	ผู้หญิงสวมชุดฮันบก เต็มตัว
+wb35-1-4	source/workbook/KMU workbook unit 35.pdf	1	26.8 53.7 38.2 60.7	24	สองคนนั่งขัดสมาธิหน้าห้องทรงโดม (찜질방)
+ev35-s-row	source/everyday/KMU everyday sheet unit 35.pdf	2	17.5 12 84 17.2	70	ไอคอนดำ 6 อัน: ปั่นจักรยาน · กล้องถ่ายหนัง · จิตรกร · กล้องโทรทรรศน์ · หนังสือ · เต้นรำ
+ev35-s-1	source/everyday/KMU everyday sheet unit 35.pdf	2	18.5 12.6 25 17	10	ไอคอนคนปั่นจักรยาน
+ev35-s-2	source/everyday/KMU everyday sheet unit 35.pdf	2	30.5 13 37.3 17	10	ไอคอนกล้องถ่ายหนัง
+ev35-s-3	source/everyday/KMU everyday sheet unit 35.pdf	2	42.9 12.8 49.1 17.3	10	ไอคอนจิตรกรถือจานสี
+ev35-s-4	source/everyday/KMU everyday sheet unit 35.pdf	2	54.6 12.4 60.8 17	10	ไอคอนกล้องโทรทรรศน์
+ev35-s-5	source/everyday/KMU everyday sheet unit 35.pdf	2	65.9 12.4 72 16.7	10	ไอคอนหนังสือกองหนึ่ง
+ev35-s-6	source/everyday/KMU everyday sheet unit 35.pdf	2	77.8 12 83.7 16.8	10	ไอคอนคนเต้นรำมีโน้ตดนตรี
+tb35-349-mongol	source/textbook/KMU student's book unit 35.pdf	6	15.4 18.5 35.2 31.2	24	ธงมองโกเลีย (몽골)
+tb35-349-flags	source/textbook/KMU student's book unit 35.pdf	6	15.4 44.8 78 79.2	75	ธงชาติ 8 ประเทศ: แคนาดา รัสเซีย สวิส ญี่ปุ่น สหรัฐ เวียดนาม อียิปต์ ฝรั่งเศส
+# ---- 36과 (predictions: invented items, no original picture -> drawn cards)
+cd36-p-ex	card:text=내일 시험			19	ปฏิทินวันพรุ่งนี้เขียนว่าสอบ (보기)
+cd36-p-1	card:💻📑			12	ผู้หญิงนั่งหน้าคอมพิวเตอร์ มีกองเอกสาร
+cd36-p-2	card:🥢🍽️			12	ตะเกียบ จานว่างแล้ว
+cd36-p-3	card:🚗			10	คนจับพวงมาลัยรถ
+cd36-p-4	card:👛			10	กระเป๋าตังค์ที่ว่างเปล่า
+# ---- 37과
+ev37-s-row	source/everyday/KMU everyday sheet unit 37.pdf	1	9 58.6 93 76.4	90	แท็กซี่ → ทางออกที่ 4 สถานีมยองดง · แท็กซี่ → ทางออกที่ 3 สถานีคิรึม
+ev37-s-taxi3	source/everyday/KMU everyday sheet unit 37.pdf	1	50.8 58.8 92.6 76.4	48	แท็กซี่ ลูกศรชี้ทางออกที่ 3 (3번 출구) สถานีคิรึม (길음역)
+ev37-s-exit3	source/everyday/KMU everyday sheet unit 37.pdf	1	69 67.2 74 76.2	8	ป้ายทางออกที่ 3 (3번 출구)
+ev37-s-ice	source/everyday/KMU everyday sheet unit 37.pdf	2	76.5 11 91 25.2	20	<얼음> ที่ตักน้ำแข็ง ลูกศรชี้ลงแก้วน้ำแข็ง
+tb37-361-1	source/textbook/KMU student's book unit 37.pdf	2	22 50.5 41 64	24	แท็กซี่: ผู้โดยสารกับคนขับ (남대문으로 가 주세요)
+tb37-361-2	source/textbook/KMU student's book unit 37.pdf	2	50.5 50.5 66 64	24	ร้านผลไม้: ลูกค้ากับแม่ค้า (봉지에 넣다)
+tb37-361-3	source/textbook/KMU student's book unit 37.pdf	2	24.5 72.6 38.5 86	24	ร้านอาหาร/เคาน์เตอร์ (포장하다)
+tb37-361-4	source/textbook/KMU student's book unit 37.pdf	2	50.2 74 66.5 86	24	เคาน์เตอร์แลกเงิน (돈을 바꾸다)
+wb37r-8-map	source/workbook/KMU workbook review unit 22 - 37.pdf	8	16 16.8 34.5 27.2	45	แผนผังรถไฟใต้ดิน 1호선/4호선 (시청역 서울역 종각역 …)
+wb37r-8-wc	source/workbook/KMU workbook review unit 22 - 37.pdf	8	21.4 48 31 53.8	22	ป้ายห้องน้ำชาย/หญิง 50m ลูกศรขวา
+wb37r-8-nosmoke	source/workbook/KMU workbook review unit 22 - 37.pdf	8	17 63.2 26 70.3	16	ป้ายห้ามสูบบุหรี่
+wb37r-9-timetable	source/workbook/KMU workbook review unit 22 - 37.pdf	9	19.6 30.6 58 48.6	55	ตารางเวลา 시간/활동
+wb37r-10-w1	source/workbook/KMU workbook review unit 22 - 37.pdf	10	14.5 24.3 23.5 29.3	10	ไอคอนอากาศ: ดวงอาทิตย์หลังเมฆ (오늘 오후)
+wb37r-10-w2	source/workbook/KMU workbook review unit 22 - 37.pdf	10	29.5 24.3 39 29.3	10	ไอคอนอากาศ: ก้อนเมฆ (내일 오전)
+wb37r-10-w3	source/workbook/KMU workbook review unit 22 - 37.pdf	10	49 23.8 55.6 29.7	10	ไอคอนอากาศ: ดวงอาทิตย์ (내일 오후)
+wb37r-10-w4	source/workbook/KMU workbook review unit 22 - 37.pdf	10	69.4 23.4 75 29.9	10	ไอคอนอากาศ: ตุ๊กตาหิมะ (모레 오전)
+wb37r-10-notice	source/workbook/KMU workbook review unit 22 - 37.pdf	10	11.8 53.6 85.3 72.1	80	ป้ายประกาศ 재미있는 요가 교실 (เวลา สถานที่ ค่าเรียน)
+cd37-p-2	card:🥶			10	ผู้โดยสารกอดตัวสั่น (หนาว)
+cd37-p-3	card:🥵			10	ผู้โดยสารเช็ดเหงื่อ (ร้อน)
+# ---- 복습시험 ①
+mx01-5-1	source/miniexam/KMU mini exam 01 unit 05 - 13.pdf	5	18 60.7 26.5 66.4	14	ผู้หญิงยืนหน้าธงชาติเกาหลี
+mx01-5-2	source/miniexam/KMU mini exam 01 unit 05 - 13.pdf	5	20 68 24.6 74.4	12	พยาบาล
+mx01-5-3	source/miniexam/KMU mini exam 01 unit 05 - 13.pdf	5	16 75.2 25.8 82.6	16	ครูสอนที่โต๊ะ มีนักเรียน 이리나 นั่งอยู่ (ลูกศรชี้ที่นักเรียน)
+mx01-5-4	source/miniexam/KMU mini exam 01 unit 05 - 13.pdf	5	17.2 83.4 27.3 91	16	ปฏิทิน 10월 21일
+# ---- 복습시험 ②
+mx02-3-opts	source/miniexam/KMU mini exam 02 unit 14 - 20.pdf	3	16.5 42.3 85 48.8	70	① กล้องถ่ายรูป ② ขวดน้ำหอม ③ กระเป๋าสตางค์ ④ แก้วมัค
+mx02-3-perfume	source/miniexam/KMU mini exam 02 unit 14 - 20.pdf	3	40.5 42.4 49.4 48.5	10	ขวดน้ำหอมมีโบว์
+mx02-2-ex	source/miniexam/KMU mini exam 02 unit 14 - 20.pdf	2	67.5 17.8 78 28.8	18	7:30 ผู้หญิงเพิ่งตื่นนอน ยืดแขนบนเตียงหน้าหน้าต่าง (보기)
+mx02-2-1	source/miniexam/KMU mini exam 02 unit 14 - 20.pdf	2	68.3 29.6 76 44	14	9:00~12:50 ผู้หญิงใส่สูทนั่งเรียนที่โต๊ะ
+mx02-2-2	source/miniexam/KMU mini exam 02 unit 14 - 20.pdf	2	67.8 45 77.8 57.8	16	1:00 ผู้หญิงสองคนเดินคุยกัน
+mx02-2-3	source/miniexam/KMU mini exam 02 unit 14 - 20.pdf	2	70.5 58.7 75 72	12	4:00~5:15 ผู้หญิงใส่ชุดกีฬา ดื่มน้ำ เหงื่อออก
+# ---- 복습시험 ③
+mx03-1-1	source/miniexam/KMU mini exam 03 unit 22 - 29.pdf	1	9.6 33.8 14 41.3	10	อมยิ้มห่อพลาสติก
+mx03-1-2	source/miniexam/KMU mini exam 03 unit 22 - 29.pdf	1	19.6 34 23.6 41	10	ขวดเกลือ 소금
+mx03-1-3	source/miniexam/KMU mini exam 03 unit 22 - 29.pdf	1	28.4 33.8 33.2 41.3	10	พริกแดง
+mx03-1-4	source/miniexam/KMU mini exam 03 unit 22 - 29.pdf	1	37.8 34.6 43 40.2	10	มะนาวผ่าครึ่ง
+mx03-1-w1	source/miniexam/KMU mini exam 03 unit 22 - 29.pdf	1	8 58.2 13.1 66.5	10	เมฆฝนมีสายฝน
+mx03-1-w2	source/miniexam/KMU mini exam 03 unit 22 - 29.pdf	1	13.7 58.6 19.2 65.6	10	ผู้หญิงโบกพัด เหงื่อออก
+mx03-1-w3	source/miniexam/KMU mini exam 03 unit 22 - 29.pdf	1	21 57.8 25.5 65.8	10	เด็กผู้หญิงใส่โค้ตตัวสั่น
+mx03-1-w4	source/miniexam/KMU mini exam 03 unit 22 - 29.pdf	1	27.3 57.9 31.7 65.2	10	เกล็ดหิมะ
+mx03-1-w5	source/miniexam/KMU mini exam 03 unit 22 - 29.pdf	1	33.4 59 38 64.6	10	ก้อนเมฆสีเทา
+mx03-1-w6	source/miniexam/KMU mini exam 03 unit 22 - 29.pdf	1	40 58.7 44.3 64	10	ดวงอาทิตย์
+# ---- 복습시험 ④
+mx04-1-1	source/miniexam/KMU mini exam 04 unit 30 - 37.pdf	1	5 72 11.8 81.2	12	เครื่องบิน
+mx04-1-2	source/miniexam/KMU mini exam 04 unit 30 - 37.pdf	1	12.4 73.5 19 80.8	12	รถบัส
+mx04-1-3	source/miniexam/KMU mini exam 04 unit 30 - 37.pdf	1	20 73 26.4 81.4	12	รถไฟหัวกระสุน
+mx04-1-4	source/miniexam/KMU mini exam 04 unit 30 - 37.pdf	1	26.7 72.9 33.2 79.6	12	แท็กซี่
+mx04-1-5	source/miniexam/KMU mini exam 04 unit 30 - 37.pdf	1	34.4 72.5 40.4 79	12	เรือ
+mx04-1-cal	source/miniexam/KMU mini exam 04 unit 30 - 37.pdf	1	53.8 16 90.6 35.2	60	ปฏิทินของมาเรีย (일–토) 운동 · 요리 · ไม่มี 등산
+mx04-3-right	source/miniexam/KMU mini exam 04 unit 30 - 37.pdf	3	22 29 30 31.8	8	ลูกศรขวา
+mx04-3-left	source/miniexam/KMU mini exam 04 unit 30 - 37.pdf	3	38.8 29.55 46.2 31.8	8	ลูกศรซ้าย
+mx04-3-up	source/miniexam/KMU mini exam 04 unit 30 - 37.pdf	3	57 27.7 63 33	6	ลูกศรขึ้น
+mx04-3-down	source/miniexam/KMU mini exam 04 unit 30 - 37.pdf	3	73.5 27.8 79 33	6	ลูกศรลง
+# ---- 중간 복습문제 (rv01)
+rv01-3-room	source/review/KMU midterm review 01 unit 05 - 22.pdf	3	14.6 13.9 77.4 39	80	ภาพวาดเส้นห้องนั่งเล่น (ตู้เสื้อผ้า โซฟา โต๊ะเตี้ย ทีวี ถังขยะ รองเท้าแตะ …)
+rv01-7-card	source/review/KMU midterm review 01 unit 05 - 22.pdf	7	48.8 20.5 78 31.6	45	นามบัตร KM호텔 요리사 장 핑
+rv01-7-wallet	source/review/KMU midterm review 01 unit 05 - 22.pdf	7	63.5 65.8 80.2 75.2	24	มือชี้ที่กระเป๋าสตางค์ที่เปิดอยู่
+rv01-12-map	source/review/KMU midterm review 01 unit 05 - 22.pdf	12	15.8 69 84.5 93.8	80	ผังมหาวิทยาลัย 학생회관 체육관 기숙사 (ฟัง 4)
+rv01-13-rooms	source/review/KMU midterm review 01 unit 05 - 22.pdf	13	14.7 27 84 42.2	90	ห้อง 3 ภาพ ①②③ (ฟัง 6-1)
+rv01-13-hall	source/review/KMU midterm review 01 unit 05 - 22.pdf	13	14.9 48.4 84 66.2	90	ทางเดินหน้าห้อง 3 ภาพ ①②③ (ฟัง 6-2)
+rv01-13-bldg	source/review/KMU midterm review 01 unit 05 - 22.pdf	13	14.2 72.3 84.6 86.8	90	อาคาร 3 ภาพ ①②③ (ฟัง 6-3)
+rv01-14-clocks	source/review/KMU midterm review 01 unit 05 - 22.pdf	14	15.9 11 86.5 25.4	90	3 ภาพที่มีนาฬิกาติดผนัง (ฟัง 6-4)
+rv01-14-sleep	source/review/KMU midterm review 01 unit 05 - 22.pdf	14	15.9 31.6 86.5 44.4	90	3 ภาพที่มีนาฬิกาด้านบนซ้าย (ฟัง 6-5)
+# ---- crops from other units' book pages that only my sets need (own ids, no clash)
+tb35-345-travel	source/textbook/KMU student's book unit 35.pdf	2	19.5 41 26.6 48.2	14	ผู้หญิง/ผู้ชายลากกระเป๋าเดินทาง (여행하다)
+tb28-281-guitar	source/textbook/KMU student's book unit 28.pdf	4	42 48.5 50.6 56.2	14	คนนั่งดีดกีตาร์
+tb28-281-pingpong	source/textbook/KMU student's book unit 28.pdf	4	43.3 35.8 49.4 43.9	12	คนตีปิงปอง
+tb28-279-yoga	source/textbook/KMU student's book unit 28.pdf	2	73.6 52.8 77.4 58.8	8	คนยืนท่าโยคะ
+# ---- redrawn scenes (content/img/gen/ex_scenes.py) — invented mock items without an original
+gx-pos-1	content/img/gen/ex_pos_1.png				หนังสืออยู่ข้างในกระเป๋า
+gx-pos-2	content/img/gen/ex_pos_2.png				หมวกวางอยู่บนโต๊ะ
+gx-pos-3	content/img/gen/ex_pos_3.png				นาฬิกาแขวนอยู่เหนือกระดานดำ
+gx-pos-4	content/img/gen/ex_pos_4.png				ร้านสะดวกซื้ออยู่ติดกับไปรษณีย์ (ซ้าย)
+gx-pos-5	content/img/gen/ex_pos_5.png				ร้านหนังสืออยู่ติดถนน ธนาคารอยู่ลึกเข้าไปด้านหลัง
+gx-pos-6	content/img/gen/ex_pos_6.png				นักเรียนยืนอยู่นอกห้องเรียน
+gx-pos-all	content/img/gen/ex_pos_all.png			80	ภาพตำแหน่ง 1)–7) (3 กับ 8 ภาพเดียวกัน · 5 กับ 6 ภาพเดียวกัน)
+gx-q10-all	content/img/gen/ex_q10_all.png			80	1) นาฬิกา 4:45 · 2) ปฏิทินมิถุนายนวงกลมวันที่ 16 + เค้ก · 3) ผู้หญิงหน้าตู้เอทีเอ็มธนาคาร
+gx-cal-june	content/img/gen/ex_cal_june.png			50	ปฏิทินเดือนมิถุนายน วงกลมที่วันที่ 16 พร้อมรูปเค้ก
+gx-atm	content/img/gen/ex_atm.png			30	ผู้หญิงยืนอยู่หน้าตู้เอทีเอ็มของธนาคาร
+gx-cats	content/img/gen/ex_cats.png			80	① แมวนั่งบนเก้าอี้ · ② แมวอยู่ใต้เก้าอี้ · ③ แมวอยู่ข้างเก้าอี้
+gx-map	content/img/gen/ex_map.png			45	แผนที่มองจากด้านบน (ล่าง = ด้านหน้า): 학생회관 · ① · ② · ③
+gx-cal-alexei	content/img/gen/ex_cal_alexei.png			70	ปฏิทิน 4 สัปดาห์ของอเล็กเซย์: 청소 ทุกวันอาทิตย์ · 영화 วันที่ 17
+# ---- drawn cards (emoji; captions = only what a paper would print)
+cd-m-clock445	card:clock=4:45			10	นาฬิกาแขวนผนังบอกเวลา 4:45
+cd-m-c1	card:🍚🍲			12	มากินข้าวเช้า (ข้าวกับซุป) ที่โต๊ะ
+cd-m-c2	card:🧑🧑 | 🎬 | 🍿			29	มากิกับเพื่อนนั่งดูหนังในโรงภาพยนตร์
+cd-m-dclk	card:text=오전 8:45@① | text=오후 8:45@② | text=오전 8:15@③			58	นาฬิกาดิจิทัล 3 เรือน
+cd-m-shoe	card:👟@① | 🧢@② | 👜@③ | ⌚@④			32	① รองเท้าผ้าใบ ② หมวก ③ กระเป๋าถือ ④ นาฬิกาข้อมือ
+cd-m3-temp	card:🌡️@제주도 30도 | 🌡️@서울 25도			15	제주도 30도 (เทอร์โมมิเตอร์สูงกว่า) · 서울 25도
+cd-m3-wind	card:💨			10	ชายหนุ่มยิ้มกว้าง มีเส้นลมพัดวนรอบตัว (바람)
+cd-m3-green	card:🟩			10	แผ่นสีเขียวใบไม้ (초록색)
+cd-m3-berry	card:🍓			10	สตรอว์เบอร์รี
+cd-m3-rabbit	card:🐰🥕			12	กระต่ายกินแครอต
+cd-m3-base	card:⚾			10	เบสบอล
+cd-m4-write	card:👩 | ✍️			15	ผู้หญิงนั่งโต๊ะเขียนหนังสือด้วยปากกา
+cd-f-a3	card:🍜@① | 🍧@② | ☔@③			24	① กินเนงมยอน ② ไปร้านพัดบิงซู ③ กางร่มเดินในฝน
+cd-f-a9	card:🏊@① | 💃@② | 🎾@③			24	① ว่ายน้ำ ② เต้นสปอร์ตแดนซ์ ③ ตีเทนนิส
+cd-f-b2	card:🚄@① | 🚌@② | ✈️@③			24	① รถไฟความเร็วสูง ② รถบัสทางไกล ③ เครื่องบิน
+cd-e2-1	card:👴📰			12	คุณปู่นั่งอ่านหนังสือพิมพ์
+cd-e2-clock	card:clock=7:30			10	นาฬิกา 7:30
+cd-e2-3	card:🎫@어제			10	ตั๋วหนังกับป้าย 어제
+cd-e2-4	card:👩 → 📚			15	ผู้หญิงเดินไปร้านหนังสือ
+cd-e2-5	card:⛰️@이번 주말			10	ภูเขากับป้าย 이번 주말
+cd-e2-6	card:🎁 → 👩			15	ของขวัญให้แฟน
+cd-e2b-1	card:clock=12:45 | 🍱			19	นาฬิกา 12:45 · กินข้าวเที่ยงในโรงอาหาร
+cd-e2b-2	card:🏦@은행 | 💳			15	ผู้ชายเดินเข้าธนาคาร ถือบัตร ATM
+cd-e2b-3	card:👩 → 🎁 → 👜			24	มากิยื่นของขวัญให้เพื่อน ในกล่องเป็นกระเป๋า
+cd-e2b-4	card:📅 | 🏠			15	ปฏิทินช่วงปิดเทอม และบ้านที่ครอบครัวรอ
+cd-e2b-5	card:👜 | text=500,000원			27	กระเป๋าสีแดง ป้ายราคาห้าแสนวอน
+cd-e2b-6	card:👵 | 📺			15	คุณย่านั่งดูโทรทัศน์
+cd-e2c-1	card:👵 | 🛏️			15	คุณยายนอนหลับอยู่บนเตียง
+cd-e2c-2	card:clock=8:15 | 🎒			19	นาฬิกา 8:15 และนักเรียนสะพายกระเป๋า
+cd-e2c-3	card:💐@어제			10	ช่อดอกไม้ให้ครู ป้าย 어제
+cd-e2c-4	card:text=도서관 9:00~18:00			19	ป้ายหน้าห้องสมุด เปิด 9:00 – 18:00
+cd-e2c-5	card:👩 | ⌚ | 👦			24	ผู้หญิงถือนาฬิกาข้อมือ ข้าง ๆ มีพี่ชาย
+cd-e2c-6	card:🌨️			10	นอกหน้าต่างมีหิมะตกหนัก
+cd-sp-1	card:🍳🍚			12	ผู้หญิงนั่งกินอาหารเช้า
+cd-sp-2	card:☕			10	ผู้หญิงถือแก้วใกล้ปาก มีไอขึ้น
+cd-sp-3	card:👩 | 📖			15	ผู้หญิงนั่งอ่านหนังสือที่โต๊ะ
+cd-sp-4	card:🧑👋🧑			18	เพื่อนสองคนเจอกัน ยกมือทักทาย
+cd-sp-5	card:📺			10	โทรทัศน์กำลังฉายรายการ
+cd-sl-food	card:🍜 | 🥩 | 🥪			24	ภาพในสไลด์ครู: ก๋วยเตี๋ยวน้ำสีเข้ม · จานเนื้อ · แซนด์วิชบั๋นหมี่
+cd-sl-place	card:☕ | 🎡 | 💄			24	ภาพในสไลด์ครู: ร้านกาแฟ · ชิงช้าสวรรค์ · เคาน์เตอร์เครื่องสำอาง
+cd-sl-vacation	card:🏊 | ☕			15	ภาพในสไลด์ครู: ครูสอนว่ายน้ำ · พนักงานร้านกาแฟ

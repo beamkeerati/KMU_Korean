@@ -134,5 +134,22 @@ def main(name):
     print(f'{name}: {len(rows)} rows = {len(pages)} side(s) (front 14 rows + back 16 rows = 600 cells per sheet) · ~{used} cells')
 
 
+def main_plain(src, prefix, rows_per_side=10):
+    """A plain-text essay (paragraphs separated by blank lines) on the 쓰기 sheet: 20 cells × 10 rows = 200 cells per side.
+    Writes <prefix>_1.png, <prefix>_2.png … (the numbers 100/200/300 … in the margin as on the paper)."""
+    paras = [' '.join(p.split()) for p in open(src, encoding='utf-8').read().split('\n\n') if p.strip() and not p.lstrip().startswith('#')]
+    rows = layout(paras)
+    out = []
+    for i, start in enumerate(range(0, len(rows), rows_per_side), 1):
+        path = f'{prefix}_{i}.png'
+        draw(rows[start:start + rows_per_side], path, start, rows_per_side)
+        out.append(path)
+    used = (len(rows) - 1) * COLS + sum(1 for i, c in enumerate(rows[-1]) if any(rows[-1][i:]))
+    print(f'{os.path.basename(src)}: {len(rows)} rows · ~{used} cells → ' + ' '.join(os.path.relpath(x, ROOT) for x in out))
+
+
 if __name__ == '__main__':
-    main(sys.argv[1])
+    if sys.argv[1:2] == ['--plain']:          # python3 scripts/wongoji.py --plain content/img/gen/essay_season.txt content/img/gen/essay-season
+        main_plain(sys.argv[2], sys.argv[3])
+    else:
+        main(sys.argv[1])

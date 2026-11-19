@@ -101,3 +101,19 @@ the images to a third party and bills per page — the user considered that and 
   - Bullets: inside a box the first bullet keeps the second and the last keeps the one before it; a list right after an h3–h5 or a bold label keeps its first two bullets with the heading. NO general "last bullet" rule for every list — WeasyPrint satisfies it by backtracking over the whole table that precedes the list (one page 70 % blank, By_Topic 61과).
 - Results 11/16 (final): By_Unit 674 pages (was 652), By_Topic 761 (was 722, incl. the merged slide content). Pages with > 1/3 blank at the bottom, chapter ends excluded: Unit 8, Topic 12; > 2/5: 2 + 2 (a heading moving with its small table). Second Haiku audit after the fixes: one-row table slivers 16 → 0 (one doubtful), orphan headings 2 → 0, overflow 0; the box/label slivers it still found (10) were fixed afterwards and checked by eye on those pages only. First attempt (line-height 1.8, 9 px padding) was rejected by the user as "too empty".
 - Measuring tool: last text yMax per page from `pdftotext -bbox` (header = yMax < 66, footer > 782); a chapter end = the next page's header differs. Visual audit = 4-page contact sheets at 52 dpi read by Haiku agents (9 agents, ≈ 2 min, 1,419 pages).
+
+## Pictures (2026-11-19)
+- `![🖼️ caption](img:ID)` → `convert_images()` runs BEFORE kotag and emits `<img class="pic" src="file://…/extracted/img/ID.jpg" style="width:Nmm" alt="">`
+  (alt stays empty so kotag never tags text inside an attribute; width in mm, not %: a % inside a table cell shrank to nothing).
+  Width = the manifest's `w` (% of the 168 mm text width) or the crop's printed size at 300 dpi.
+- `arrange_pictures()` (after render_md): a `<p>`/`<li>` that STARTS with pictures becomes `.picrow` — pictures left, all the item's text right
+  (table layout); > 100 mm of pictures → `.stack` (pictures above, text below). The user rejected 가: beside the picture with 나: under it.
+- In table cells pictures are blocks capped at 24 mm tall (a 24-row picture table went 27 → 24 pages, 7 rows a page).
+- Crops are regenerated from source/ by scripts/crop_images.py (cache extracted/img/_pages, stamps extracted/img/_stamps.json written atomically);
+  `map_*.tsv` files in content/img/ are site mappings, never manifests.
+- **Remaster (11/19, user: "ชัด สดใส คมเหมือน svg"):** crop_images.py writes the plain crop to extracted/img/_raw/ and then redraws it with
+  Real-ESRGAN (realesrgan-ncnn-vulkan, GPU; official release unzipped in extracted/tools/esrgan, git-ignored — the user approved running it)
+  at 4×, kept at 2× the scan size, paper → pure white, colour ×1.3 saturation. Anime model for book/teacher art, x4plus for lecture photos;
+  drawn cards (cd-/gx-/essay-) are skipped. Photocopy halftone (dottiness ≥ 28) is blurred σ1 and halved first — without that the model
+  erased faces (14과 test woman). Printed size still comes from the _raw crop (natural_px), so remastered files don't print 2× larger.
+  Without the tool the plain crop is used. vtracer (pip) was tried for true SVG: fine for colour art, but grey shading turned solid black.

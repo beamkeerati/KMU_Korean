@@ -147,6 +147,14 @@ blockquote p { margin: 0 0 0.4em; }
 blockquote p:last-child { margin-bottom: 0; }
 hr { border: none; border-top: 1px solid #d0d7de; margin: 1.4em 0; }
 img { max-width: 100%; }
+/* real pictures from the scans (content/img/*.tsv): printed at their paper size, side by side when a line holds several */
+img.pic { vertical-align: middle; margin: 3px 10px 3px 0; max-height: 120mm; }
+.picrow { display: table; width: 100%; page-break-inside: avoid; margin: 2px 0; }
+.picrow > .pc { display: table-cell; vertical-align: middle; white-space: nowrap; width: 1%; padding-right: 6px; }
+.picrow > .pt { display: table-cell; vertical-align: middle; }
+.picrow.stack, .picrow.stack > .pc, .picrow.stack > .pt { display: block; width: auto; }
+.picrow.stack > .pc { white-space: normal; margin-bottom: 4px; }
+td img.pic { display: block; margin: 2px 0 3px; width: auto !important; max-width: 100%; max-height: 24mm; }   /* a row per item: keep rows short */
 
 /* ================= write-in space ================= */
 .wl { display: block; height: 2.2em; margin: 2px 0 6px; border-bottom: 1.2px solid #6e7781; }
@@ -273,6 +281,61 @@ ALERT_LABELS = {
 
 md_converter = markdown.Markdown(extensions=['tables', 'fenced_code', 'sane_lists', 'toc'],
                                  extension_configs={'toc': {'toc_depth': '1-2'}})
+
+
+IMG_MD = re.compile(r'!\[[^\]\n]*\]\(img:([a-z0-9-]+)\)')
+_img_rows = None
+
+
+def convert_images(text):
+    """![🖼️ caption](img:ID) → the real picture (crop listed in content/img/*.tsv, built by scripts/crop_images.py).
+    Runs before kotag: the <img> carries no Korean/Thai text (alt=""), so a line that also holds text is safe to colour."""
+    global _img_rows
+    if '](img:' not in text:
+        return text
+    import crop_images
+    if _img_rows is None:
+        _img_rows = crop_images.load_manifest()
+
+    def repl(m):
+        iid = m.group(1)
+        row, path = _img_rows.get(iid), os.path.join(crop_images.OUT, iid + '.jpg')
+        if row is None or not os.path.exists(path):
+            print(f'WARNING: picture {iid} is not built (python3 scripts/crop_images.py)', file=sys.stderr)
+            return f'🖼️ [{iid}?]'
+        return f'<img class="pic" src="file://{path}" style="width:{round(crop_images.display_width(row) * 1.68)}mm" alt="" />'   # % of the 168 mm text width (mm, not %: a % inside a table cell shrank to nothing)
+    return IMG_MD.sub(repl, text)
+
+
+PIC_LEAD = re.compile(r'(<li>\s*(?:<p>)?|<p>)(\s*(?:<img class="pic"[^>]*/>\s*)+)')
+PIC_SIDE_MM = 100          # pictures up to this total width sit LEFT of their text (as in the textbook); wider ones sit above it
+
+
+def arrange_pictures(body):
+    """An item/paragraph that starts with pictures keeps ALL its text in one place: beside the pictures (picture left,
+    가:/나:/blank lines right, like the textbook) or, for a wide panel, under it — never one line beside and the next below."""
+    out, pos = [], 0
+    for m in PIC_LEAD.finditer(body):
+        if m.start() < pos:
+            continue
+        opener, imgs = m.group(1), m.group(2)
+        if opener.endswith('<p>'):
+            end = body.find('</p>', m.end())
+        else:                                          # tight list item: up to the item's end or its nested list
+            ends = [e for e in (body.find('</li>', m.end()), body.find('<ul', m.end()), body.find('<ol', m.end())) if e != -1]
+            end = min(ends) if ends else -1
+        if end == -1:
+            continue
+        rest = body[m.end():end]
+        if not re.sub(r'<[^>]+>|\s', '', rest) and 'class="wl' not in rest:
+            continue                                   # pictures only: nothing to arrange
+        wide = sum(int(x) for x in re.findall(r'width:(\d+)mm', imgs)) > PIC_SIDE_MM
+        rest = re.sub(r'^\s*(<br\s*/?>\s*)+', '', rest)
+        out.append(body[pos:m.start()] + opener +
+                   f'<span class="picrow{" stack" if wide else ""}"><span class="pc">{imgs.strip()}</span><span class="pt">{rest}</span></span>')
+        pos = end
+    out.append(body[pos:])
+    return ''.join(out)
 
 
 def render_md(text):
@@ -452,12 +515,13 @@ def md_file_to_pdf(md_filename, pdf_dir=None):
         text = f.read()
     body_class = 'book' if text.lstrip().startswith(BOOK_MARK) else ('cover' if '[TOC]' in text else '')
 
+    text = convert_images(text)                                    # ![…](img:ID) → <img> (before kotag: it skips '<' lines)
     text = kotag.braces_to_html(kotag.colorize_markdown(text))   # {c:…} → <span class="kc">
     text = wrap_korean_words(text)
     text = convert_alerts(text)
     text = convert_details(text)
     text = github_compat(text)
-    body = render_md(text)
+    body = arrange_pictures(render_md(text))      # picture + its text side by side (or stacked when wide)
     # a section heading that already carries its own number (06_quickref: "### 08. 안 …") gets no automatic counter
     body = re.sub(r'<h3 id="([^"]*)">(\s*(?:<[^>]+>\s*)*\d{1,2}\.)', r'<h3 id="\1" class="nonum">\2', body)
     body = thai_break_opportunities(body)         # Thai would otherwise never wrap (tables ran off the page)

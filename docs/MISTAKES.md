@@ -183,3 +183,11 @@ starred ones cost real marks.
 
 What the user does well: ㅂ니다/습니다 choice by 받침, -지 않- forms, 겠 forms, the ㅡ-drop past
 (바빴어요·컸어요), special honorific words (드세요·주무세요·계세요), 에서 for activity places.
+
+## 2026-11-19 · 쓰기 (3) 계절 + 쓰기 (4) 취미 (teacher's red pen, source/writing/)
+- ★ ㅖ/ㅕ: 겨절 ×4 → 계절 · ㅏ: 떠뜻합니다 → 따뜻합니다
+- ★ ㅂ irregular in free writing: 춥는 계절 · 춥어서 → 추운 · (날씨가) 추워서
+- 동안 used to open a sentence (동안 여름은 / 동안 장마철은 ×4) → drop it (N 동안 needs its noun) · 기온 중에서 45도 → 최고 기온이 45도 (최저 = lowest)
+- "during the season" written 장마철은 → 장마철에는 · 농업에 종사하다 → 농사를 하다 · comparing weather: 계절은 … 보다 → 날씨가 … 보다
+- incomplete sentence 제일 할 수 있습니다 (teacher: 무엇을?) · 취미 essay lacked frequency (teacher: 얼마나 자주?)
+- tense of habits: 안도감을 느꼈습니다 → 느낍니다 / 마음이 편해집니다 · future 느낄 겁니다 · 영화를 봐 보세요 → 보세요

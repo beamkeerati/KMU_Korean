@@ -1,0 +1,150 @@
+# units 29-31 (agent u29_31) — ids: tb29-/wb29-/ev29-t-/ev29-s-… (and 30, 31)
+# id	src	page	box x0 y0 x1 y1 (%)	w	note
+# ---------- 29과 textbook ----------
+tb29-287-panel	source/textbook/KMU student's book unit 29.pdf	2	15 21.5 82 52.5	70	연습 2 (287쪽): คน 6 คน 마키 압둘라 알렉세이 투이 장핑 지훈
+tb29-287-1	source/textbook/KMU student's book unit 29.pdf	2	15.5 22 29 36	20	마키 อ่านหนังสือ
+tb29-287-2	source/textbook/KMU student's book unit 29.pdf	2	36.5 22 58.5 36	26	압둘라 นั่งโต๊ะกับเพื่อน มีถ้วยกาแฟ
+tb29-287-3	source/textbook/KMU student's book unit 29.pdf	2	64 22 81 36.5	22	알렉세이 ตกแต่งเค้ก
+tb29-287-4	source/textbook/KMU student's book unit 29.pdf	2	15 37 32.5 51.5	22	투이 ยืนที่เคาน์เตอร์ร้านกาแฟ
+tb29-287-5	source/textbook/KMU student's book unit 29.pdf	2	39 37 57.5 52	22	장핑 นั่งเขียนที่โต๊ะ
+tb29-287-6	source/textbook/KMU student's book unit 29.pdf	2	64.5 37 79 52	20	지훈 กับแฟนยืนคู่กัน
+tb29-291-men	source/textbook/KMU student's book unit 29.pdf	6	31 18.5 68 44	50	활동 (291쪽): ผู้ชาย 4 คน 제임스 웨이 샤오밍 장량
+tb29-295-steps	source/textbook/KMU student's book unit 29.pdf	9	24.5 71.8 65 88.5	55	해 봅시다: ขั้นตอนพับผ้าขนหนูสีเหลือง 6 ภาพ
+tb29-295-final	source/textbook/KMU student's book unit 29.pdf	9	69 68 89 88.5	28	ผ้าพับเสร็จคลุมหัวตุ๊กตา พร้อมชามไข่ต้ม
+# ---------- 29과 workbook ----------
+wb29-1-ex	source/workbook/KMU workbook unit 29.pdf	1	68 29.3 85 41.6	20	ตารางตัวอย่าง 사 자 / 과
+wb29-1-g1	source/workbook/KMU workbook unit 29.pdf	1	75.5 44.3 93.5 62.2	20	ตารางไขว้ชุด 1 (ข้อ 1-2)
+wb29-1-g2	source/workbook/KMU workbook unit 29.pdf	1	68 64.3 93.5 76.5	25	ตารางไขว้ชุด 2 (ข้อ 3-4)
+wb29-1-g3	source/workbook/KMU workbook unit 29.pdf	1	75.5 80.8 93.5 93	20	ตารางไขว้ชุด 3 (ข้อ 5-6)
+# ---------- 29과 everyday test ----------
+ev29-t-ex	source/everyday/KMU everyday test unit 29.pdf	1	17 14.8 28 21.2	14	보기: คนนั่งดูหนัง
+ev29-t-1	source/everyday/KMU everyday test unit 29.pdf	1	15 22 25.4 28	14	ข้อ 1: ผู้ชายนั่งกินอาหาร
+ev29-t-2	source/everyday/KMU everyday test unit 29.pdf	1	14.6 28.4 31 34.7	18	ข้อ 2: ครูสอนนักเรียน นักเรียนอ่านหนังสือ
+ev29-t-3	source/everyday/KMU everyday test unit 29.pdf	1	14.5 35 27.5 40.8	14	ข้อ 3: เพื่อนยืนถ่ายรูปหมู่
+ev29-t-4	source/everyday/KMU everyday test unit 29.pdf	1	15 41.5 29 47.3	15	ข้อ 4: มือแต่งหน้าเค้ก
+# ---------- 29과 everyday sheet (page 1 = A table, page 3 = E table) ----------
+ev29-s-ex	source/everyday/KMU everyday sheet unit 29.pdf	1	10.1 14.8 19.8 21.8	13	보기: เดินไปโรงเรียน (가다)
+ev29-s-1	source/everyday/KMU everyday sheet unit 29.pdf	1	20.6 14.8 30.0 21.8	13	คนเดินมาหาเพื่อนที่นั่งอยู่
+ev29-s-2	source/everyday/KMU everyday sheet unit 29.pdf	1	30.8 14.8 40.2 21.8	13	ลูกค้าซื้อของ (ลูกศรชี้ลูกค้า)
+ev29-s-3	source/everyday/KMU everyday sheet unit 29.pdf	1	40.9 14.8 50.2 21.8	13	ร้านเดียวกัน ลูกศรชี้คนขาย
+ev29-s-4	source/everyday/KMU everyday sheet unit 29.pdf	1	50.9 14.8 60.0 21.8	13	ผู้ใหญ่ยื่นของให้เด็ก (ลูกศรชี้ผู้ใหญ่)
+ev29-s-5	source/everyday/KMU everyday sheet unit 29.pdf	1	60.8 14.8 70.0 21.8	13	ภาพเดียวกัน ลูกศรชี้เด็ก
+ev29-s-6	source/everyday/KMU everyday sheet unit 29.pdf	1	70.8 14.8 80.1 21.8	13	ครูสอนนักเรียน (ลูกศรชี้ครู)
+ev29-s-7	source/everyday/KMU everyday sheet unit 29.pdf	1	80.9 14.8 90.3 21.8	13	ภาพเดียวกัน ลูกศรชี้นักเรียน
+ev29-s-8	source/everyday/KMU everyday sheet unit 29.pdf	1	10.1 25.5 19.8 31.9	13	ผู้หญิงนั่งดูทีวี
+ev29-s-9	source/everyday/KMU everyday sheet unit 29.pdf	1	20.6 25.5 30.0 31.9	13	ผู้ชายกินขนมปัง
+ev29-s-10	source/everyday/KMU everyday sheet unit 29.pdf	1	30.8 25.5 40.2 31.9	13	ผู้หญิงนั่งอ่านหนังสือ
+ev29-s-11	source/everyday/KMU everyday sheet unit 29.pdf	1	40.9 25.5 50.2 31.9	13	ผู้หญิงนั่งเหยียดขาพักผ่อน
+ev29-s-12	source/everyday/KMU everyday sheet unit 29.pdf	1	50.9 25.5 60.0 31.9	13	ผู้หญิงลองทาบเสื้อกับตัว
+ev29-s-13	source/everyday/KMU everyday sheet unit 29.pdf	1	60.8 25.5 70.0 31.9	13	ผู้หญิงยืนคิดถึงคนอื่น รออยู่
+ev29-s-14	source/everyday/KMU everyday sheet unit 29.pdf	1	70.8 25.5 80.1 31.9	13	คนเต้นท่าเบรกแดนซ์
+ev29-s-15	source/everyday/KMU everyday sheet unit 29.pdf	1	80.9 25.5 90.3 31.9	13	นักเรียนนั่งเขียนที่โต๊ะ ข้างดินสอ
+ev29-s-16	source/everyday/KMU everyday sheet unit 29.pdf	1	10.1 35.9 19.8 41.8	13	เด็กผู้ชายปั่นจักรยาน
+ev29-s-17	source/everyday/KMU everyday sheet unit 29.pdf	1	20.6 35.9 30.0 41.8	13	เด็กผู้หญิงเหวี่ยงไม้ (กอล์ฟ)
+ev29-s-18	source/everyday/KMU everyday sheet unit 29.pdf	1	30.8 35.9 40.2 41.8	13	เด็กสองคนนั่งเล่นบนพื้น
+ev29-s-19	source/everyday/KMU everyday sheet unit 29.pdf	1	40.9 35.9 50.2 41.8	13	บ้านที่มีเด็กสี่คนอยู่ข้างใน
+ev29-s-20	source/everyday/KMU everyday sheet unit 29.pdf	1	50.9 35.9 60.0 41.8	13	เด็กช่วยคุณยายถือของ
+ev29-s-21	source/everyday/KMU everyday sheet unit 29.pdf	1	60.8 35.9 70.0 41.8	13	ผู้หญิงยืนถือขวดน้ำหลังออกกำลังกาย
+ev29-s-22	source/everyday/KMU everyday sheet unit 29.pdf	1	70.8 35.9 80.1 41.8	13	ผู้ชายซักผ้าในกะละมัง
+ev29-s-23	source/everyday/KMU everyday sheet unit 29.pdf	1	80.9 35.9 90.3 41.8	13	ผู้ชายดูดฝุ่น
+ev29-s-e-ex	source/everyday/KMU everyday sheet unit 29.pdf	3	11 14.8 20.4 22.4	13	보기 (E): คนขายของที่ร้าน
+ev29-s-e14	source/everyday/KMU everyday sheet unit 29.pdf	3	71.3 25.5 80.5 32.2	13	หน้าต่างสองบานที่มีคนแน่น (많아서)
+ev29-s-e15	source/everyday/KMU everyday sheet unit 29.pdf	3	81.3 25.5 90.5 32.2	13	ผู้ชายยิ้มหน้าโต๊ะอาหารเต็มโต๊ะ มีรูปหัวใจ (맛있어서)
+ev29-s-e16	source/everyday/KMU everyday sheet unit 29.pdf	3	11 35.4 20.4 42	13	ห้องสองห้อง วงกลมห้องที่เล็กกว่า (좁아서)
+ev29-s-e17	source/everyday/KMU everyday sheet unit 29.pdf	3	21.3 35.4 30.4 42	13	ผู้หญิงผมยาว (วงกลม) กับผู้ชาย (길어서)
+ev29-s-e18	source/everyday/KMU everyday sheet unit 29.pdf	3	31.3 35.4 40.5 42	13	รองเท้าผ้าใบสองคู่ วงกลมคู่ที่สะอาด (깨끗해서)
+ev29-s-e19	source/everyday/KMU everyday sheet unit 29.pdf	3	41.3 35.4 50.5 42	13	ดวงอาทิตย์ ท้องฟ้าแจ่มใส (맑아서)
+ev29-s-e20	source/everyday/KMU everyday sheet unit 29.pdf	3	51.3 35.4 60.5 42	13	เมฆหนา ครึ้ม (흐려서)
+ev29-s-e21	source/everyday/KMU everyday sheet unit 29.pdf	3	61.3 35.4 70.5 42	13	ตึกกับห้องสมุดที่อยู่ใกล้กัน (가까워서)
+ev29-s-e22	source/everyday/KMU everyday sheet unit 29.pdf	3	71.3 35.4 80.5 42	13	คำว่า 생일
+ev29-s-e23	source/everyday/KMU everyday sheet unit 29.pdf	3	81.3 35.4 90.5 42	13	คำว่า 9시
+# =============== 30과 ===============
+# ---------- 30과 textbook (298 = page 1, 299 = page 2, 303 = page 6, 304 = page 7) ----------
+tb30-298-1	source/textbook/KMU student's book unit 30.pdf	1	26.3 47.3 34 53.1	12	연습 1: ไอคอนคนเดินไปทางซ้าย (ลูกศรซ้าย)
+tb30-298-2	source/textbook/KMU student's book unit 30.pdf	1	63.3 47.4 71 53.1	12	ไอคอนคนเดินออกจากกรอบประตู (밖 / 나오다)
+tb30-298-3	source/textbook/KMU student's book unit 30.pdf	1	26.3 54.3 34 60.1	12	ไอคอนคนเดินเข้ากรอบประตู (안 / 들어가다)
+tb30-298-4	source/textbook/KMU student's book unit 30.pdf	1	63.3 54.3 71 60.1	12	ไอคอนคนเดินขึ้นบันได 9F (9층 / 올라가다)
+tb30-298-5	source/textbook/KMU student's book unit 30.pdf	1	26.3 61.3 34 67	12	ไอคอนคนเดินลงบันได 1F (1층 / 내려가다)
+tb30-299-1	source/textbook/KMU student's book unit 30.pdf	2	16.3 23.8 31.3 30.8	22	연습 2 ข้อ 1: ป้าย POST OFFICE ลูกศรขวา 300m
+tb30-299-2	source/textbook/KMU student's book unit 30.pdf	2	41.2 23.8 56.8 31.1	22	연습 2 ข้อ 2: ป้าย PC방 2F
+tb30-299-3	source/textbook/KMU student's book unit 30.pdf	2	60.2 25.5 80.2 29	28	연습 2 ข้อ 3: ป้าย 나가는 곳 WAY OUT ③ OO병원
+tb30-299-4	source/textbook/KMU student's book unit 30.pdf	2	16.8 35.2 32.2 43.6	22	연습 2 ข้อ 4: ตึกกับลูกศรโค้งเข้าประตู
+tb30-299-5	source/textbook/KMU student's book unit 30.pdf	2	41.2 35.2 56.8 42.6	22	연습 2 ข้อ 5: ป้ายจอดรถ P ลงชั้น B1
+tb30-299-map	source/textbook/KMU student's book unit 30.pdf	2	50.2 46.5 78 63.5	45	연습 3: แผนที่สี่แยก 제프리 อยู่ล่าง 마키 อยู่ซ้าย
+tb30-303-map	source/textbook/KMU student's book unit 30.pdf	6	16 20.3 75.3 55	75	활동 (303쪽): แผนที่สี่แยก 시청쪽 ธนาคาร ร้านขนม โรงพยาบาล ห้าง ฯลฯ
+tb30-304-screen	source/textbook/KMU student's book unit 30.pdf	7	65.8 29.2 90.6 45.8	40	읽기: หน้าจอกระดานข่าว 국민대학교 게시판
+# ---------- 30과 workbook ----------
+wb30-1-1	source/workbook/KMU workbook unit 30.pdf	1	25 26.6 41.5 32.2	16	ลูกศรสีดำชี้ซ้าย (บนพื้นเทา)
+wb30-1-2	source/workbook/KMU workbook unit 30.pdf	1	25 33.1 41.5 38.9	16	ลูกศรสีดำชี้ขวา (บนพื้นเทา)
+wb30-1-3	source/workbook/KMU workbook unit 30.pdf	1	27.8 39.8 39 45.5	12	ทางม้าลาย (มองจากด้านบน)
+wb30-1-4	source/workbook/KMU workbook unit 30.pdf	1	25.8 46.8 41.2 51.5	16	สะพานลอยข้ามถนน
+wb30-1-5	source/workbook/KMU workbook unit 30.pdf	1	29.8 52.3 35.5 59.3	12	ไฟสัญญาณคนข้ามถนน
+wb30-1-6	source/workbook/KMU workbook unit 30.pdf	1	28.8 59.8 38 65	12	สี่แยก (ถนนตัดกัน)
+wb30-2-ex	source/workbook/KMU workbook unit 30.pdf	2	13.3 31.4 31.6 40.2	28	보기: ป้ายห้องพักผ่อน 휴게실 (ถ้วยกาแฟ) กับบันไดลง B1
+wb30-2-1	source/workbook/KMU workbook unit 30.pdf	2	11.6 43.2 31 54.9	28	ข้อ 1: แผนที่สี่แยก ร้านหนังสือ (Book) มุมซ้ายบน
+wb30-2-2	source/workbook/KMU workbook unit 30.pdf	2	11.6 55.5 31.6 67.7	28	ข้อ 2: แผนที่สี่แยก POST OFFICE มุมขวาบน
+wb30-2-3	source/workbook/KMU workbook unit 30.pdf	2	12.3 70.3 30.8 77.7	28	ข้อ 3: ป้าย 한국어교육센터 กับบันไดขึ้น 9F
+wb30-2-4	source/workbook/KMU workbook unit 30.pdf	2	12.3 84.9 30.8 88.3	28	ข้อ 4: ป้าย 나가는 곳 WAY OUT ⑤ 남대문 시장
+wb30-4-ex	source/workbook/KMU workbook unit 30.pdf	4	18.8 15.6 46.5 22.7	40	보기: หน้าหญิงผมยาวตรง "과일을 사고 싶어요."
+wb30-4-1	source/workbook/KMU workbook unit 30.pdf	4	14 24.4 42.5 31	40	ข้อ 1: หน้าคนผมมวย "옷을 사고 싶어요."
+wb30-4-2	source/workbook/KMU workbook unit 30.pdf	4	14 31.7 42.5 38.6	40	ข้อ 2: หน้าคนผิวเข้มผมหยิก "휴대폰을 사고 싶어요."
+wb30-4-3	source/workbook/KMU workbook unit 30.pdf	4	14 39.1 45.5 45.7	40	ข้อ 3: หน้าหญิงผมลอนคลื่น "한국 음식을 먹고 싶어요."
+wb30-4-4	source/workbook/KMU workbook unit 30.pdf	4	14 46.5 43.5 53.2	40	ข้อ 4: หน้าหญิงผมยาวตรง "데이트를 하고 싶어요."
+wb30-4-map	source/workbook/KMU workbook unit 30.pdf	4	52.8 60.4 84.2 79.2	45	ข้อ 4: แผนที่สี่แยก (ธนาคาร ร้านหนังสือ ร้านขายยา ฯลฯ)
+# ---------- 30과 everyday sheet (page 1 = 이동(1), page 2 = 이동(2)) ----------
+ev30-s-5	source/everyday/KMU everyday sheet unit 30.pdf	1	47.8 30.3 69.8 43.1	24	คนเดินข้ามทางม้าลายหน้าตึก (건너다)
+ev30-s-b1	source/everyday/KMU everyday sheet unit 30.pdf	1	15.3 59.6 37.2 73.2	14	ลูกศรชี้ซ้าย (왼쪽)
+ev30-s-b2	source/everyday/KMU everyday sheet unit 30.pdf	1	38.4 59.6 60.3 73.2	14	ลูกศรชี้ขวา (오른쪽)
+ev30-s-b3	source/everyday/KMU everyday sheet unit 30.pdf	1	61.5 59.6 83.6 73.2	14	ลูกศรชี้ขึ้น (똑바로)
+# =============== 31과 ===============
+# ---------- 31과 textbook (306 = page 1, 307 = page 2, 309 = page 4, 313 = page 8) ----------
+tb31-306-circle	source/textbook/KMU student's book unit 31.pdf	1	24.5 42 62.8 72.6	50	연습 1: วงกลม 6 จุดรอบ 지훈 (병원 학교 부산 제주도 기숙사 명동) พร้อมพาหนะ
+tb31-307-1	source/textbook/KMU student's book unit 31.pdf	2	19 15.1 41.4 21.7	25	연습 2 ข้อ 1: ไอคอนรถบัส → 국민대학교
+tb31-307-2	source/textbook/KMU student's book unit 31.pdf	2	19.3 24.1 41.4 30.3	25	연습 2 ข้อ 2: ไอคอนรถบัส 171 → 북한산
+tb31-307-3	source/textbook/KMU student's book unit 31.pdf	2	19.3 32.8 41.4 39.1	25	연습 2 ข้อ 3: ไอคอนรถไฟใต้ดิน 3호선 → 경복궁
+tb31-307-4	source/textbook/KMU student's book unit 31.pdf	2	19.1 41.6 40.1 51.4	25	연습 2 ข้อ 4: ตึก 63빌딩 กับสะพานลอย
+tb31-307-5	source/textbook/KMU student's book unit 31.pdf	2	20.1 54.3 38.3 65.2	22	연습 2 ข้อ 5: คนข้ามทางม้าลายไปโรงหนัง
+tb31-309-ex	source/textbook/KMU student's book unit 31.pdf	4	23 34.6 35 42.9	16	보기: รถบัสสีเขียว 학교 ➡ 집
+tb31-313-mail	source/textbook/KMU student's book unit 31.pdf	8	12.5 22.4 82.8 62.4	80	읽기: หน้าจออีเมลจาก 장핑 ถึง 알렉세이 (2012-10-01)
+tb31-313-card	source/textbook/KMU student's book unit 31.pdf	8	22.5 64.4 69 91.9	45	읽기: บัตรเชิญรูปแพนด้า "중국 문화 축제에 초대합니다"
+# ---------- 31과 workbook (144 = page 1, 146 = page 3, 147 = page 4) ----------
+wb31-1-1	source/workbook/KMU workbook unit 31.pdf	1	29.4 27.7 40.6 34	14	ข้อ 1: รถบัส
+wb31-1-2	source/workbook/KMU workbook unit 31.pdf	1	27.7 35.5 42.3 41.4	16	ข้อ 2: เรือโดยสารลำใหญ่
+wb31-1-3	source/workbook/KMU workbook unit 31.pdf	1	28.3 42.9 41.1 49.4	14	ข้อ 3: เครื่องบิน
+wb31-1-4	source/workbook/KMU workbook unit 31.pdf	1	27.5 50.3 42.4 57.3	16	ข้อ 4: รถไฟความเร็วสูง (หัวขบวนทรงกระสุน)
+wb31-1-5	source/workbook/KMU workbook unit 31.pdf	1	28.7 57.9 41.2 64.9	14	ข้อ 5: ขบวนรถไฟใต้ดิน/รถไฟฟ้า
+wb31-3-ex	source/workbook/KMU workbook unit 31.pdf	3	27.2 21.7 45.7 31.8	20	보기: รถบัส
+wb31-3-1	source/workbook/KMU workbook unit 31.pdf	3	26.9 35.2 46.6 45.3	22	ข้อ 1: เครื่องบิน
+wb31-3-2	source/workbook/KMU workbook unit 31.pdf	3	28.2 48.7 44.8 56.1	18	ข้อ 2: กระเป๋าดินสอเปิดซิป มีปากกาโผล่
+wb31-3-3	source/workbook/KMU workbook unit 31.pdf	3	29.8 57.4 43.1 69.7	16	ข้อ 3: ครูผู้หญิงสวมแว่นชี้หนังสือของนักเรียนบนโต๊ะ
+wb31-3-4	source/workbook/KMU workbook unit 31.pdf	3	26.4 70.9 45.9 80.3	22	ข้อ 4: เก้าอี้ไม้กับต้นไม้
+wb31-3-5	source/workbook/KMU workbook unit 31.pdf	3	25.4 82.4 47.3 92.6	24	ข้อ 5: ขวดน้ำผลไม้ 3 ขวดกับสตรอว์เบอร์รี 2 ผล
+wb31-4-ex	source/workbook/KMU workbook unit 31.pdf	4	12.2 20.5 40.6 30.3	30	보기: รถไฟใต้ดิน 길음역 ↓ 동대문 시장 (20분)
+wb31-4-1	source/workbook/KMU workbook unit 31.pdf	4	11.4 32.3 40.6 43.7	30	ข้อ 1: เครื่องบิน 서울 ↓ 제주도 (1시간)
+wb31-4-2	source/workbook/KMU workbook unit 31.pdf	4	12.9 44.9 40.5 55.8	30	ข้อ 2: รถบัส 국민대학교 ↓ 서울역 (30분)
+wb31-4-3	source/workbook/KMU workbook unit 31.pdf	4	13.9 57.4 40.2 69.6	30	ข้อ 3: รถไฟความเร็วสูง 서울역 ↓ 부산역 (2시간 30분)
+wb31-4-4	source/workbook/KMU workbook unit 31.pdf	4	11.9 71.7 40.2 81.9	30	ข้อ 4: เท้าสองข้างสวมรองเท้าผ้าใบ 학교 ↓ 공원 (15분)
+wb31-4-5	source/workbook/KMU workbook unit 31.pdf	4	10.2 83.1 40.5 93.6	30	ข้อ 5: แท็กซี่ 국민대학교 ↓ 경복궁 (20분)
+wb31-4-4v	source/workbook/KMU workbook unit 31.pdf	4	12.2 71.7 31 79	16	เท้าสองข้างสวมรองเท้าผ้าใบกำลังเดิน (ไม่มีป้ายชื่อ)
+wb31-4-5v	source/workbook/KMU workbook unit 31.pdf	4	10.2 83.1 31.8 91.4	18	แท็กซี่ (ไม่มีป้ายชื่อ)
+# ---------- 31과 everyday test (paper of 10 Nov) ----------
+ev31-t-ex	source/everyday/KMU everyday test unit 31.pdf	1	11.2 15.1 22.8 20.1	14	보기: คนใส่หูฟังฟังเพลง (듣다)
+ev31-t-2	source/everyday/KMU everyday test unit 31.pdf	1	9 20.4 22.8 24.5	14	เท้าสองข้างกำลังเดิน (걷다)
+ev31-t-3	source/everyday/KMU everyday test unit 31.pdf	1	9 24.9 23.2 29.9	14	ผู้ชายถามคำถาม มีกรอบคำพูด (묻다)
+ev31-t-4	source/everyday/KMU everyday test unit 31.pdf	1	8.5 30 23.4 35	14	ผู้หญิงปิดประตู (닫다)
+ev31-t-5	source/everyday/KMU everyday test unit 31.pdf	1	9.3 35.3 23.3 39.9	14	เด็กรับของจากผู้ใหญ่ ลูกศรชี้ที่เด็ก (받다)
+ev31-t-9	source/everyday/KMU everyday test unit 31.pdf	1	12.5 45.2 45.5 48.3	34	ข้อ 9: 서울 · เครื่องบิน · 제주도
+ev31-t-10	source/everyday/KMU everyday test unit 31.pdf	1	11.5 56.6 44.5 59.5	34	ข้อ 10: 국민대 · รถบัส · 서울역
+ev31-t-11	source/everyday/KMU everyday test unit 31.pdf	1	12.5 67.8 44.5 70.6	34	ข้อ 11: 기숙사 · รอยเท้า · 교실
+# ---------- 31과 drawn card (no original picture exists) ----------
+cd31-computer	card:🎬 | 💻				ภาพคนดูหนังบนจอคอมพิวเตอร์ (ทำนายข้อสอบ: 컴퓨터로 영화를 봐요)
+# ---------- 31과 textbook extras for grammar file 52 (309 = page 4, 310 = page 5) ----------
+tb31-309-1	source/textbook/KMU student's book unit 31.pdf	4	19 44.8 38.6 60	20	연습 1 ข้อ 1: รถไฟความเร็วสูง 서울 ➡ 부산
+tb31-309-2	source/textbook/KMU student's book unit 31.pdf	4	48 44.8 68.2 60	20	연습 1 ข้อ 2: เครื่องบิน 도쿄 ➡ 베이징
+tb31-309-3	source/textbook/KMU student's book unit 31.pdf	4	19 62.5 38.6 75.9	20	연습 1 ข้อ 3: เรือ 인천 ➡ 제주도
+tb31-309-4	source/textbook/KMU student's book unit 31.pdf	4	48 62.5 68.2 75.9	20	연습 1 ข้อ 4: รอยเท้า (เดิน) 교실 ➡ 기숙사
+tb31-310-bus	source/textbook/KMU student's book unit 31.pdf	5	53.3 62.7 63.6 68.1	12	연습 3: รถบัส (เวลา 09:00 → 09:30)
+tb31-310-ktx	source/textbook/KMU student's book unit 31.pdf	5	53.8 68.4 62.2 73.9	12	연습 3: รถไฟความเร็วสูง (04:30 → 07:00)
+tb31-310-plane	source/textbook/KMU student's book unit 31.pdf	5	52.8 73.7 64 79.2	12	연습 3: เครื่องบิน (08:00 → 23:00)
+tb31-310-subway	source/textbook/KMU student's book unit 31.pdf	5	53.8 79.7 63.2 85	12	연습 3: รถไฟใต้ดิน (11:00 → 12:00)
+tb31-310-feet	source/textbook/KMU student's book unit 31.pdf	5	51.8 85.1 65 90.1	12	연습 3: รอยเท้า เดิน (08:55 → 09:00)

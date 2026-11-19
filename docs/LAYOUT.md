@@ -28,6 +28,9 @@ source/        ต้นฉบับ — never modify the contents; file names f
                word lists 23–37 (the user's pencil glosses on 23–27) · 16–30 본문 듣기 23–37 (pencil on 23–26) · 31–34 irregular-verb pages ㅂ 23 · ㄹ 25 ·
                ㄷ 31 · 르 32 · 35 ◆동사 2 · 36 ◆형용사 2)
   speaking/    KMU speaking final presentation unit 23 - 37.pdf   (기말 발표 handout 「쓰고 발표하기」, 2 pp, dropped 2026-11-10 as "Final Presentation.pdf")
+  writing/     KMU writing 03 unit 26 - 27.pdf · KMU writing 04 unit 34 - 35.pdf (2026-11-19: the user's own graded 쓰기 (3) 계절 / (4) 취미
+               compositions on 원고지, teacher's red pen → extracted/writing/w03-N.png · w04-N.png; corrections in docs/MISTAKES.md).
+               Same day: source/review/KMU final review 02 unit 23 - 37.pdf replaced by the complete 16-page scan (p.16 = 한국인의 식사 예절).
   lecture/     KMU lecture note unit 05 - 12.pdf   (18 pp of the user's PHOTOS of the teacher's slides + notebook; 366 MB; slides actually run 9–22과)
   syllabus/    KMU syllabus 2026 fall unit 05 - 37.pdf · KMU orientation guide 2026 fall GKS.pdf (2026-10-21, 33 pp English, was
                「KOOKMIN_KLC_Fall 2026 GKS Freshman Orientation Guide(노현서수정)」; pages → extracted/syllabus/orientation_2026fall/)
@@ -48,6 +51,9 @@ extracted/     intermediate extraction output (regenerable, ~300 MB) — same na
   everyday/    unit05-13/test-1..9.png + sheet-01..10.png · unit14/test-1.png · unit15/sheet-1..3.png + test-1.png · unit16/sheet-1..4.png + test-1.png · unit17/sheet-1..2.png + test-1.png · unit18/sheet-1..2.png + test-1.png · unit19/sheet-1..2.png + test-1.png · unit20/sheet-1.png · unit22/test-1.png · unit23/sheet-1..2.png + test-1.png · unit24/sheet-1..2.png + test-1.png · unit25/sheet-1..2.png + test-1.png · unit26/sheet-1..2.png + test-1.png · unit27/sheet-1..3.png + test-1.png · unit28/sheet-1.png + test-1.png · unit29/sheet-1..4.png
   miniexam/    exam01/page-1..5.png (110 dpi; page 1 = score sheet, 2 듣기, 3 읽기, 4–5 쓰기)
   review/      midterm01/page-01..17.png (80 dpi) · vocabulary/page-01..48.png (80 dpi) + vocabulary/unit23-37/page-01..36.png (100 dpi) · lecture/page-01..18.png (150 dpi — photos need it)
+  img/         real pictures (scripts/crop_images.py, 2026-11-19): <id>.jpg = remastered crop used by PDFs and the site · _raw/<id>.jpg = plain
+               crop (printed size) · _pages/ page cache · _web/ site WebP · _stamps.json · _grid/ _sheet_* _preview/ (checking aids) · _review/ _pilot/
+  tools/       esrgan/ = Real-ESRGAN ncnn-vulkan release v0.2.5.0 (GPU; the user approved running it 11/19) used by crop_images.py
 content/       ✍️ SOURCE OF TRUTH — edit here, never in output/
   guide/       00_exam_info.md = ส่วนที่ 0 (shared cover of both books; `{{today}}` / `{{days:YYYY-MM-DD}}` are filled at build time,
                so the countdown column never goes stale) · 01_units/unit05…37.md (ส่วนที่ 1 of the By_Unit book, unified template:
@@ -81,6 +87,10 @@ content/       ✍️ SOURCE OF TRUTH — edit here, never in output/
                (남자는 영어와 일본어를 배워요 = O) is suspect — in the audio it is the sister; listening/unit19 B6 was fixed 10일 → 20일)
                each file = questions, then its own answer key (`# [PART 2]` / `# 정답`)
                00_header.md in each dir = ONE title line only (a longer header is printed before every unit)
+  img/         picture manifests *.tsv — one per writer (final · u05_09 · u10_11 · u12_14 · u15_22 · u23_26 · u27_28 · u29_31 · u32_34 · u33 ·
+               exams; 1,313 rows: id · src (PDF page / image / card:) · box % · print width · Thai note) + map_*.tsv (practice-site rows, merged
+               by scripts/apply_pic_map.py) + gen/ (drawn scenes ex_*.png ← scripts/draw_exam_scenes.py · hand-cleaned scans · 원고지 essays
+               essay-*.png ← scripts/wongoji.py --plain essay_*.txt). Brief for agents: content/specs/BRIEF_pictures.md.
   specs/       SPEC_extraction.md (original scan→md rules) · SPEC_14_22.md (unit 14–22 contract; reuse for 23+)
                SPEC_confusions.md (27 Thai-learner confusion pairs A1–C10 → `### ⚠️ จุดสับสน` in 02_grammar/)
                SPEC_colors.md (colour-by-function classes, the Korean↔Thai mirroring rule, ambiguous Thai words, batch format)
@@ -95,6 +105,8 @@ content/       ✍️ SOURCE OF TRUTH — edit here, never in output/
                02_writing · 03_reading · 04_listening · 05_speaking (+ _key.md, Sonnet agents) by the scratch script
                assemble_midterm.py (questions, then `# 정답` + keys) — edit the parts, re-assemble, `build.py predict`
                🔮 analysis + mock tests, then `# 정답`; the kinds never share a folder
+               final/final01.md (말하기 기말, handout pp.14–16 incl. p.16 식사 예절) · final02.md (기말 analysis 11/17–18) ·
+               final03.md (2026-11-19 총복습 hints: pictures 245/263/271쪽 · model essays on 원고지 · 대화 32-1/37-1 · ≤ 13 pp)
   mindmaps/    unit05…37.md + all.md — mind-map OUTLINES (see scripts/build_mindmaps.py for the grammar). Per unit: 문법 (forms,
                conditions, ⚠️) · 어휘 · 표현·대화 · 연결 (← 이전 / → 이후 / 시험). all.md = 11 cross-unit threads (문장 끝맺기 · 조사 ·
                시제 · 숫자·시간 · 높임 · 부정·질문 · 묘사·장소 + since 10/26 연결어미 · 관형형 · 희망·능력·의무 · 불규칙; 240 nodes, a tall poster page) — the per-unit 연결 branches must agree with it.
@@ -253,6 +265,13 @@ scripts/
   Speech-to-text: faster-whisper 1.2.1 (pip --user; model "small", int8 CPU, decode the mp3 with ffmpeg to f32le 16 kHz and pass a numpy
                  array — the bundled `av` 19 breaks faster-whisper's own decoder). ~95 % right on the clean course audio; numbers and rare
                  words need checking. Scratch script: scratchpad/whisper_run.py (not in the repo).
+  crop_images.py ⭐ real pictures: content/img/*.tsv → extracted/img/<id>.jpg (crop from source/ at 300 dpi, trim, Real-ESRGAN remaster;
+                 card: specs drawn with emoji/clock/text). --grid SRC PAGE (page with a % grid) · --sheet ID…|X.tsv (contact sheet) ·
+                 --only ID… · --check (every img:ID used in content exists). make_pdf.py turns ![…](img:ID) into the picture.
+  pic_inventory.py   every 🖼️ still described in words only (--unit NN · --file PATH · --all); 18 left 11/19, all non-pictures
+  apply_pic_map.py   merges content/img/map_*.tsv into content/mockweb/*.json ("img" on an item or section; --dry = check only)
+  draw_exam_scenes.py  redraws content/img/gen/ex_*.png (position scenes, cats, map, calendars for the mock exams)
+  wongoji.py     also --plain <essay.txt> <prefix>: an essay on the 쓰기 sheet grid (20 × 10 per side) as PNG
   _archive/      superseded: mindmap_midterm.py (rejected poster), mock_clips.py + exam02_mock.html (first single-set mock page)
   kotag.py       ⭐ colour-by-function tagger used by make_pdf.py and build_mindmaps.py at render time. Tag syntax in
                  Markdown: `{n:학생}{p:이} {x:아니에요}` (one letter, UPPERCASE = honorific). Korean runs are tagged

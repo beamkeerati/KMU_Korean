@@ -1,0 +1,28 @@
+# 기말 (11/20 + 11/23): picture exercises the teacher named on 11/19 — textbook 245쪽 연습 2 · 263쪽 연습 2 · 271쪽 연습 2/3 — and the 말하기 review handout p.15
+# id	src	page	box x0 y0 x1 y1 (%)	w	note
+tb24-245-panel	source/textbook/KMU student's book unit 24.pdf	4	13 19.5 72 40.5	75	연습 2 (245쪽): ป้ายห้าม 6 ป้าย
+tb24-245-1	source/textbook/KMU student's book unit 24.pdf	4	13.5 21.6 25.5 29.6	12	ป้ายห้าม: จานอาหาร (ห้ามกิน)
+tb24-245-2	source/textbook/KMU student's book unit 24.pdf	4	36.5 21.6 48.5 29.6	12	ป้ายห้าม: นาฬิกา (ห้ามมาสาย)
+tb24-245-3	source/textbook/KMU student's book unit 24.pdf	4	59.5 21.6 71 29.6	12	ป้ายห้าม: คนสองคนคุยกัน (ห้ามคุย)
+tb24-245-4	source/textbook/KMU student's book unit 24.pdf	4	13.5 32.1 25.5 40	12	ป้ายห้าม: มือ (ห้ามจับ)
+tb24-245-5	source/textbook/KMU student's book unit 24.pdf	4	36.5 32.1 48.5 40	12	ป้ายห้าม: บุหรี่ (ห้ามสูบบุหรี่)
+tb24-245-6	source/textbook/KMU student's book unit 24.pdf	4	59.5 32.1 71 40	12	ป้ายห้าม: กล้อง (ห้ามถ่ายรูป)
+tb26-263-1	source/textbook/KMU student's book unit 26.pdf	2	21.5 14.3 39 22.9	24	압둘라 สูงกว่า 마키
+tb26-263-2	source/textbook/KMU student's book unit 26.pdf	2	21.5 23.3 43 33	24	กาแฟ 5 แก้ว vs น้ำผลไม้ 3 ขวด
+tb26-263-3	source/textbook/KMU student's book unit 26.pdf	2	22.3 33.8 43 42.5	24	บ้าน 지훈 หลังใหญ่ vs บ้าน 윤아 หลังเล็ก
+tb26-263-4	source/textbook/KMU student's book unit 26.pdf	2	23 43.3 42 52	24	นม 700원 vs ขนมปัง 1,000원
+tb26-263-5	source/textbook/KMU student's book unit 26.pdf	2	25 53 39.5 62	24	유리 ผมยาว vs 미나 ผมสั้น
+tb27-271-ex	source/textbook/KMU student's book unit 27.pdf	2	25.5 14.8 38.5 22.3	15	เทอร์โมมิเตอร์ต่ำ → สูง (ตัวอย่าง)
+tb27-271-1	source/textbook/KMU student's book unit 27.pdf	2	22.5 23.8 40.2 32	24	ฟ้าแจ่มใส → ฟ้ามืดครึ้ม ฝนตก
+tb27-271-2	source/textbook/KMU student's book unit 27.pdf	2	22.3 32.3 40.5 40	24	กระดาษสอบ คะแนนต่ำ → คะแนนสูงขึ้น
+tb27-271-3	source/textbook/KMU student's book unit 27.pdf	2	22.3 40.3 40.5 48.1	24	마키 ไม่แต่งหน้า → แต่งหน้าแล้วสวยขึ้น
+tb27-271-4	source/textbook/KMU student's book unit 27.pdf	2	21.8 48.3 40.8 55.4	24	지훈 70kg → 80kg (อ้วนขึ้น)
+tb27-271-3scene	source/textbook/KMU student's book unit 27.pdf	2	15.8 70.4 81.5 92.2	100	연습 3 (271쪽): ภาพสนามโรงเรียน 〈오후〉 vs 〈밤〉
+rv02-15-route1	source/review/KMU final review 02 unit 23 - 37.pdf	15	15.5 6.4 49.6 25.2	62	เส้นทาง 1: 길음역 (4호선) → 충무로역 → 경복궁역 3번 출구 → 국민호텔
+rv02-15-route2	source/review/KMU final review 02 unit 23 - 37.pdf	15	15.5 25.8 49.6 44.6	62	เส้นทาง 2: 길음역 (4호선) → 서울역 → 시청역 4번 출구 → 국민백화점
+rv02-15-burger	source/review/KMU final review 02 unit 23 - 37.pdf	15	53.4 6.8 97.2 29.4	80	ร้านแฮมเบอร์เกอร์: สั่ง → ทานที่ร้าน/ห่อกลับ → ใบเสร็จ → น้ำแข็ง
+# model compositions on the 쓰기 sheet grid (scripts/wongoji.py --plain content/img/gen/essay_*.txt …)
+essay-season-1	content/img/gen/essay-season_1.png			92	เรียงความตัวอย่าง 계절 บน 원고지 หน้า 1 (1–200)
+essay-season-2	content/img/gen/essay-season_2.png			92	เรียงความตัวอย่าง 계절 บน 원고지 หน้า 2 (201–300)
+essay-hobby-1	content/img/gen/essay-hobby_1.png			92	เรียงความตัวอย่าง 취미 บน 원고지 หน้า 1 (1–200)
+essay-hobby-2	content/img/gen/essay-hobby_2.png			92	เรียงความตัวอย่าง 취미 บน 원고지 หน้า 2 (201–300)

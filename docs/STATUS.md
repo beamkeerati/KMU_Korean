@@ -255,3 +255,17 @@ Exam sections of units 23–37 and grammar topics 33–64 now carry the real tes
   final01.md §5 stays the teacher's 6-question 해요체 version.
 - Clocks re-sized 11/18 (user asked): final-combine 30→40 · final-review-writing 40→60 · final-review-irregular 30→35 · final-speaking-qa/-tasks 10→13
   (yardstick = real ④ paper: one-word item ≈ 30 s, sentence item ≈ 110 s in 30 min; speaking flow = q audio + 25 s + 0.6 s per item ≈ 9–9.5 min).
+
+## Real pictures (2026-11-19)
+- Every 🖼️ that stood in for a picture now shows the real one (2,526 open → 18, all of them table headers / legends / headings —
+  `python3 scripts/pic_inventory.py`). 1,313 pictures: 1,190 crops of the scans (textbook, workbook, teacher's tests/sheets, 복습시험 papers,
+  복습문제 handouts, lecture photos) remastered by Real-ESRGAN · 106 drawn `card:` pictures · 13 drawn scenes · 4 원고지 essays.
+  Cards were allowed only for items with no original (predictions / mock exams invented by agents) or an unreadable scan; their captions
+  never show the answer. Hand-cleaned crops (handwriting or red pen whitened out): 14과 test page, 15과 family trees, 6과/8과 workbook
+  classrooms, 13과 weekday strip (redrawn), 17과 textbook photo, 21과 party.
+- Practice site: 693 pictures in 31 packs (img_<json>.js), item/section `img` (888 rows from content/img/map_*.tsv).
+- **Transcription errors found through the pictures, fixed 11/19:** 연습지 11과 B 2 · 16 · 20 · 22 · 23 · 24 (자요 · 기다려요 · 춤춰요 ·
+  공부해요 · 운동해요 · 이야기해요 — matches the user's own key in the lecture notebook) and 연습지 12과 A 2 · 16 · 20 · 22 (same drawings) —
+  Markdown, keys and site items.
+- Known leftovers: some prediction captions describe the person differently from the real picture (e.g. "ผู้หญิง" where the textbook shows
+  a man; predictions/everyday/unit32.md 부르다 · unit34.md #49 · #11) — the picture is right, the Thai caption is the agent's original guess.

@@ -21,6 +21,25 @@ def check_text(where, s, errs):
     if '**' in s or '<' in s and '>' in s: errs.append(f'{where}: markdown/HTML left in text: {s[:60]}')
 
 
+_pics = None
+def check_img(where, v, errs):
+    """"img": "ID" or ["ID", …] — a real picture listed in content/img/*.tsv (scripts/crop_images.py)."""
+    global _pics
+    if _pics is None:
+        import os
+        sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+        import crop_images
+        try:
+            _pics = crop_images.load_manifest(strict=False)   # another writer's half-finished row must not fail every set
+        except SystemExit as e:
+            errs.append(f'content/img/*.tsv: {e}'); _pics = {}
+    ids = [v] if isinstance(v, str) else v
+    if not isinstance(ids, list) or not ids or not all(isinstance(x, str) for x in ids):
+        errs.append(f'{where}.img: must be an id or a list of ids'); return
+    for x in ids:
+        if x not in _pics: errs.append(f'{where}.img: {x} is not in content/img/*.tsv')
+
+
 def validate(path):
     errs, ids = [], set()
     try:
@@ -45,6 +64,7 @@ def validate(path):
                 errs.append(f'{sw}: needs h and a non-empty items list')
             for k in ('h', 'th', 'box'):
                 if k in sec: check_text(f'{sw}.{k}', sec[k], errs)
+            if 'img' in sec: check_img(sw, sec['img'], errs)
             for li, ln in enumerate(sec.get('passage', [])):
                 if not ln.get('ko') or 'th' not in ln: errs.append(f'{sw} passage[{li}]: needs ko and th')
                 check_text(f'{sw} passage[{li}]', ln.get('ko', ''), errs)
@@ -64,6 +84,7 @@ def validate(path):
                 if not it.get('q'): errs.append(f'{iw}: missing q')
                 for k in ('q', 'th', 'why', 'hint', 'pic', 'mth'):
                     if k in it: check_text(f'{iw}.{k}', it[k], errs)
+                if 'img' in it: check_img(iw, it['img'], errs)
                 if 'pts' in it and not isinstance(it['pts'], (int, float)): errs.append(f'{iw}: pts must be a number')
                 if t == 'mc':
                     o = it.get('opts')

@@ -114,3 +114,10 @@ Guide §13–15 add material the course materials never covered explicitly:
   spelling, cutting a repeated 국민대학교, 오늘 날씨 → 한국 날씨, and she added 한국 생활이 재미있어요 as a closer.
   쓰기② (일기, diary) is due in class 2026-10-13 — workbook 17과 ex.5 is the same task; a model diary was
   given in chat.
+
+## 기말 format as announced 11/19 (총복습)
+- 11/20: 3 hours in the order 쓰기 → 듣기 → 읽기. 쓰기 = 50 minutes and includes a composition of about 300 characters whose topic comes from the
+  class 쓰기 (3) (좋아하는 계절 / 고향의 날씨) or 쓰기 (4) (취미 소개) — the question frames are the boxes on review handout p.15. 듣기 = all multiple choice.
+  읽기 format not announced. Review 복습시험④ (vocabulary and task types). Memorise 대화 32-1 and 37-1. Picture description from textbook 245쪽 연습 2
+  (-지 마세요 signs), 263쪽 연습 2 (보다), 271쪽 연습 3 (오후 vs 밤, -아/어졌어요).
+- 11/23 말하기: everything on review handout pp.14–16 (19 questions · subway routes · hamburger shop · 계절/취미 소개 · p.16 식사 예절), pictures and questions.

@@ -1,0 +1,97 @@
+# practice-site picture map (units 12-14) — json file · "<set> §N #n" · image ids
+daily_a.json	daily-12-writing §1	ev12-s-a1
+daily_a.json	daily-12-writing §1 #1	ev12-s-a19
+daily_a.json	daily-12-writing §1 #2	ev12-t-2
+daily_a.json	daily-12-writing §1 #3	ev12-s-a3
+daily_a.json	daily-12-writing §1 #4	ev12-s-a9
+daily_a.json	daily-12-writing §1 #5	ev12-s-a15
+daily_a.json	daily-12-writing §1 #6	ev12-s-a17
+daily_a.json	daily-12-writing §1 #7	ev12-s-a12
+daily_a.json	daily-12-writing §1 #8	ev12-s-a8
+daily_a.json	daily-12-writing §1 #9	ev12-s-a20
+daily_a.json	daily-12-writing §1 #10	ev12-s-a16
+daily_a.json	daily-12-writing §1 #11	ev12-s-a13
+daily_a.json	daily-12-writing §1 #12	ev12-s-a29
+daily_a.json	daily-12-writing §1 #13	ev12-s-a14
+daily_a.json	daily-12-writing §1 #14	ev12-s-a21
+daily_a.json	daily-12-writing §1 #15	ev12-s-a2
+daily_a.json	daily-12-writing §2	ev12-t-b0
+daily_a.json	daily-12-writing §2 #16	ev12-t-16
+daily_a.json	daily-12-writing §2 #17	ev12-t-17
+daily_a.json	daily-12-writing §2 #18	ev12-t-18
+daily_a.json	sheet-12-writing §1 #A1	ev12-s-a1
+daily_a.json	sheet-12-writing §1 #A2	ev12-s-a2
+daily_a.json	sheet-12-writing §1 #A3	ev12-s-a3
+daily_a.json	sheet-12-writing §1 #A4	ev12-s-a4
+daily_a.json	sheet-12-writing §1 #A5	ev12-s-a5
+daily_a.json	sheet-12-writing §1 #A6	ev12-s-a6
+daily_a.json	sheet-12-writing §1 #A7	ev12-s-a7
+daily_a.json	sheet-12-writing §1 #A8	ev12-s-a8
+daily_a.json	sheet-12-writing §1 #A9	ev12-s-a9
+daily_a.json	sheet-12-writing §1 #A10	ev12-s-a10
+daily_a.json	sheet-12-writing §1 #A11	ev12-s-a11
+daily_a.json	sheet-12-writing §1 #A12	ev12-s-a12
+daily_a.json	sheet-12-writing §1 #A13	ev12-s-a13
+daily_a.json	sheet-12-writing §1 #A14	ev12-s-a14
+daily_a.json	sheet-12-writing §1 #A15	ev12-s-a15
+daily_a.json	sheet-12-writing §1 #A16	ev12-s-a16
+daily_a.json	sheet-12-writing §1 #A17	ev12-s-a17
+daily_a.json	sheet-12-writing §1 #A18	ev12-s-a18
+daily_a.json	sheet-12-writing §1 #A19	ev12-s-a19
+daily_a.json	sheet-12-writing §1 #A20	ev12-s-a20
+daily_a.json	sheet-12-writing §1 #A21	ev12-s-a21
+daily_a.json	sheet-12-writing §2 #A22	ev12-s-a22
+daily_a.json	sheet-12-writing §2 #A23	ev12-s-a23
+daily_a.json	sheet-12-writing §2 #A24	ev12-s-a24
+daily_a.json	sheet-12-writing §2 #A25	ev12-s-a25
+daily_a.json	sheet-12-writing §2 #A26	ev12-s-a26
+daily_a.json	sheet-12-writing §2 #A27	ev12-s-a27
+daily_a.json	sheet-12-writing §2 #A28	ev12-s-a28
+daily_a.json	sheet-12-writing §2 #A29	ev12-s-a29
+daily_a.json	sheet-12-writing §2 #A30	ev12-s-a30
+daily_a.json	sheet-12-writing §2 #A31	ev12-s-a31
+daily_a.json	sheet-12-writing §2 #A32	ev12-s-a32
+daily_a.json	sheet-12-writing §2 #A33	ev12-s-a33
+daily_a.json	sheet-12-writing §4	ev12-s-c1
+daily_a.json	sheet-12-writing §4 #C1	ev12-s-c1
+daily_a.json	sheet-12-writing §4 #C2	ev12-s-c2
+daily_a.json	sheet-12-writing §4 #C3	ev12-s-c3
+daily_a.json	sheet-12-writing §4 #C4	ev12-s-c4
+daily_a.json	sheet-12-writing §4 #C5	ev12-s-c5
+daily_a.json	sheet-12-writing §4 #C6	ev12-s-c6
+daily_a.json	sheet-12-writing §4 #C7	ev12-s-c7
+daily_a.json	sheet-12-writing §4 #C8	ev12-s-c8
+daily_a.json	sheet-12-writing §4 #C9	ev12-s-c9
+daily_a.json	sheet-12-writing §4 #C10	ev12-s-c10
+daily_a.json	sheet-12-writing §4 #C11	ev12-s-c11
+daily_a.json	sheet-12-writing §4 #C12	ev12-s-c12
+daily_a.json	daily-13-writing §1	ev13-t-week,ev13-t-months,ev13-t-years
+daily_a.json	daily-13-writing §2 #13	ev13-t-date
+daily_a.json	daily-13-writing §2 #14	ev13-t-date
+daily_a.json	daily-13-writing §2 #15	ev13-t-15
+daily_a.json	sheet-13-writing §2	ev13-s-b0
+daily_a.json	sheet-13-writing §2 #B1	ev13-s-b1
+daily_a.json	sheet-13-writing §2 #B2	ev13-s-b2
+daily_a.json	sheet-13-writing §2 #B3	ev13-s-b3
+daily_a.json	sheet-13-writing §2 #B4	ev13-s-b4
+daily_a.json	sheet-13-writing §2 #B5	ev13-s-b5
+daily_a.json	sheet-13-writing §2 #B6	ev13-s-b6
+daily_a.json	sheet-13-writing §2 #B7	ev13-s-b7
+daily_a.json	sheet-13-writing §2 #B8	ev13-s-b8
+daily_a.json	sheet-13-writing §2 #B9	ev13-s-b9
+daily_a.json	sheet-13-writing §2 #B10	ev13-s-b10
+daily_b.json	daily-14-writing §1	wb14-1-5
+daily_b.json	daily-14-writing §1 #1	ev14-t-1
+daily_b.json	daily-14-writing §1 #2	ev14-t-2
+daily_b.json	daily-14-writing §1 #3	ev14-t-3
+daily_b.json	daily-14-writing §1 #4	ev14-t-4
+daily_b.json	daily-14-writing §1 #5	ev14-t-5
+daily_b.json	daily-14-writing §1 #6	ev14-t-6
+daily_b.json	daily-14-writing §1 #7	ev14-t-7
+daily_b.json	daily-14-writing §1 #8	ev14-t-8
+daily_b.json	daily-14-writing §1 #9	ev14-t-9
+daily_b.json	daily-14-writing §1 #10	ev14-t-10
+daily_b.json	daily-14-writing §2	wb14-4-ex
+daily_b.json	daily-14-writing §2 #11	ev14-t-11
+daily_b.json	daily-14-writing §2 #12	ev14-t-12
+daily_b.json	daily-14-writing §2 #13	ev14-t-13

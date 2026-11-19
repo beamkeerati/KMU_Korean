@@ -1,0 +1,221 @@
+# units 15-22 pictures (agent u15_22) — ids tb15-…/wb15-…/ev15-t-…/ev15-s-…/lc15-… (and 16-22)
+# id	src	page	box x0 y0 x1 y1 (%)	w	note
+# ---------- 15과 ----------
+ev15-t-tree	content/img/gen/ev15-t-tree.png			60	매일시험 15: ผังครอบครัว (ลบลายมือคำตอบ)
+ev15-s-tree	content/img/gen/ev15-s-tree.png			75	연습지 15: ผังครอบครัว 3 รุ่น ช่องว่าง (ลบลายมือคำตอบ)
+wb15-7-tree	source/workbook/KMU workbook unit 14 - 22.pdf	7	15 27.5 88 61.5	75	워크북 15: ผังครอบครัวช่องว่าง
+wb15-8-jihun	source/workbook/KMU workbook unit 14 - 22.pdf	8	29 12 40 23	16	지훈 ผู้ชายผมตั้ง
+wb15-8-wang	source/workbook/KMU workbook unit 14 - 22.pdf	8	29.5 41.5 39.5 52	16	왕쯔이 ผู้หญิงมัดผมจุก
+tb15-134-tree	source/textbook/KMU student's book unit 15.pdf	1	28 61.5 92 93	75	교과서 134쪽: ผังครอบครัว 가족
+tb15-142-photo	source/textbook/KMU student's book unit 15.pdf	9	26 53.5 44 72	22	교과서 142쪽: รูปถ่ายครอบครัว 5 คน
+lc15-p13-a	source/lecture/KMU lecture note unit 05 - 12.pdf	13	3.5 2.8 63.5 28.8	70	สไลด์ 문법 3 윗사람 이/가 + -(으)시-
+lc15-p13-b	source/lecture/KMU lecture note unit 05 - 12.pdf	13	3.5 29.6 63.5 55	70	สไลด์ -(으)시- คำพิเศษ
+# ---------- 16과 ----------
+ev16-s-c-ex1	source/everyday/KMU everyday sheet unit 16.pdf	2	7.6 15.4 18.1 23.3	12	ตัวอย่าง: คนเดินไปโรงเรียน (가겠습니다)
+ev16-s-c1	source/everyday/KMU everyday sheet unit 16.pdf	2	18.6 15.4 28.4 23.3	12	C1: นอนหลับบนเตียง
+ev16-s-c2	source/everyday/KMU everyday sheet unit 16.pdf	2	28.8 15.4 39.0 23.3	12	C2: ลูกค้าซื้อของที่ร้าน ลูกศรชี้ลูกค้า
+ev16-s-c3	source/everyday/KMU everyday sheet unit 16.pdf	2	39.5 15.4 49.8 23.3	12	C3: หญิงสองคนเดินมาเจอกัน
+ev16-s-c4	source/everyday/KMU everyday sheet unit 16.pdf	2	50.2 15.4 60.2 23.3	12	C4: ร้านเดิม ไม่มีลูกศร พนักงานขาย
+ev16-s-c5	source/everyday/KMU everyday sheet unit 16.pdf	2	60.7 15.4 70.9 23.3	12	C5: เด็กหญิงนั่งยอง ๆ
+ev16-s-c6	source/everyday/KMU everyday sheet unit 16.pdf	2	71.3 15.4 81.6 23.3	12	C6: ผู้ใหญ่ยื่นของให้เด็ก ลูกศรชี้เด็ก
+ev16-s-c7	source/everyday/KMU everyday sheet unit 16.pdf	2	82.1 15.4 92.4 23.3	12	C7: คนโบกมือเดินมา อีกคนนั่งบนกระเป๋า
+ev16-s-c-ex2	source/everyday/KMU everyday sheet unit 16.pdf	2	7.6 28.4 18.1 35.5	12	ตัวอย่าง: ผู้หญิงนั่งหน้าทีวี (보지 않겠습니다)
+ev16-s-c8	source/everyday/KMU everyday sheet unit 16.pdf	2	18.6 28.4 28.4 35.5	12	C8: ผู้ชายกัดขนมปัง
+ev16-s-c9	source/everyday/KMU everyday sheet unit 16.pdf	2	28.8 28.4 39.0 35.5	12	C9: ผู้หญิงนั่งอ่านหนังสือ
+ev16-s-c10	source/everyday/KMU everyday sheet unit 16.pdf	2	50.2 28.4 60.2 35.5	12	C10: ผู้หญิงสวมเสื้อโค้ต
+ev16-s-c11	source/everyday/KMU everyday sheet unit 16.pdf	2	60.7 28.4 70.9 35.5	12	C11: ผู้หญิงล้างมือที่อ่าง
+ev16-s-c12	source/everyday/KMU everyday sheet unit 16.pdf	2	71.3 28.4 81.6 35.5	12	C12: ผู้ชายยกแก้วดื่ม
+ev16-s-c13	source/everyday/KMU everyday sheet unit 16.pdf	2	82.1 28.4 92.4 35.5	12	C13: ผู้หญิงคิดถึงผู้ชาย ลูกโป่งความคิด
+ev16-s-d2	source/everyday/KMU everyday sheet unit 16.pdf	2	10.3 69.9 18.9 76.5	12	D2: คนนั่งเขียนหนังสือ
+ev16-s-d3	source/everyday/KMU everyday sheet unit 16.pdf	2	10.3 76.8 18.9 83.4	12	D3: แอปเปิล
+ev16-s-d5	source/everyday/KMU everyday sheet unit 16.pdf	2	10.3 91.7 18.9 98.3	12	D5: คนลากกระเป๋าเดินทาง
+ev16-s-d6	source/everyday/KMU everyday sheet unit 16.pdf	2	54.3 63.3 62.9 69.7	12	D6: ถ้วยกาแฟ
+ev16-s-d7	source/everyday/KMU everyday sheet unit 16.pdf	2	54.3 69.9 62.9 76.5	12	D7: ป้ายห้ามสูบบุหรี่
+ev16-s-d8	source/everyday/KMU everyday sheet unit 16.pdf	2	54.3 76.8 62.9 83.4	12	D8: คนนั่งในโรงหนัง
+ev16-s-d9	source/everyday/KMU everyday sheet unit 16.pdf	2	54.3 83.6 62.9 91.3	12	D9: โรงพยาบาล
+ev16-s-d10	source/everyday/KMU everyday sheet unit 16.pdf	2	54.3 91.7 62.9 98.3	12	D10: ผู้หญิงถือถุงช้อปปิ้ง
+wb16-13-1	source/workbook/KMU workbook unit 14 - 22.pdf	13	14.9 50.1 28.2 58.7		워크북 16: 3-1 ผู้ชายโบกมือลาผู้หญิงหน้าประตูบ้าน
+wb16-13-2	source/workbook/KMU workbook unit 14 - 22.pdf	13	71 57.7 87.3 65.4		워크북 16: 3-2 ผู้ชายนั่งหน้าโต๊ะอาหาร หัวใจลอย
+wb16-13-3	source/workbook/KMU workbook unit 14 - 22.pdf	13	14.8 64.7 28.4 73		워크북 16: 3-3 ชายหญิงที่ร้านกาแฟ ฟองความคิดเป็นถ้วยกาแฟ
+wb16-13-4	source/workbook/KMU workbook unit 14 - 22.pdf	13	72.2 72.4 81.2 80.9		워크북 16: 3-4 ผู้หญิงถือโทรศัพท์ ในจอมีคนถาม ?
+wb16-13-5	source/workbook/KMU workbook unit 14 - 22.pdf	13	15.3 78.9 28.2 88		워크북 16: 3-5 ห้องเรียน นาฬิกาเลยเวลา นักเรียนวิ่งเข้ามาสาย
+wb16-13-6	source/workbook/KMU workbook unit 14 - 22.pdf	13	71 86.6 86.7 94.3		워크북 16: 3-6 ชายหนุ่มสามคนที่โรงหนัง ยื่นป๊อปคอร์น
+tb16-149-cards	source/textbook/KMU student's book unit 16.pdf	6	22 53 82 84	55	교과서 149쪽: การ์ดเครื่องดื่ม 6 ใบ 커피 우유 주스 홍차 콜라 녹차
+lc16-p14-1	source/lecture/KMU lecture note unit 05 - 12.pdf	14	1.2 1.0 61 25.8		สไลด์ 문법 1 -(스)ㅂ니다
+lc16-p14-2	source/lecture/KMU lecture note unit 05 - 12.pdf	14	1.2 28 61 53		สไลด์ ตารางผู้พูด -(으)십니다
+lc16-p14-3	source/lecture/KMU lecture note unit 05 - 12.pdf	14	1.2 54 61 76.8		สไลด์ 3 ช่อง 높임말
+lc16-p15-1	source/lecture/KMU lecture note unit 05 - 12.pdf	15	1.8 0.8 61.5 25.3		สไลด์ -았/었/였- คำนาม
+lc16-p15-2	source/lecture/KMU lecture note unit 05 - 12.pdf	15	1.8 27.3 61.5 46		สไลด์ 에서 왔어요
+lc16-p15-3	source/lecture/KMU lecture note unit 05 - 12.pdf	15	1.8 56.5 61.5 81.5		สไลด์ 18과 오전 오후 반 전 (นาฬิกาปลุก)
+lc16-p18-3	source/lecture/KMU lecture note unit 05 - 12.pdf	18	1.5 40.3 45 59.6		สไลด์ 활동 ถามวันเกิด
+lc18-p16-1	source/lecture/KMU lecture note unit 05 - 12.pdf	16	2.2 1.2 56.8 24.5		สไลด์ 부터~까지
+lc19-p16-2	source/lecture/KMU lecture note unit 05 - 12.pdf	16	2.2 25.7 56.8 49.7		สไลด์ -(으)ㄹ 거예요 บทสนทนา
+lc19-p16-3	source/lecture/KMU lecture note unit 05 - 12.pdf	16	2.2 50.7 56.8 74.5		สไลด์ -(으)ㄹ 거예요 ตาราง
+lc19-p17-1	source/lecture/KMU lecture note unit 05 - 12.pdf	17	1.2 0.5 46 19.8		สไลด์ 언제 วงกลม
+lc19-p17-2	source/lecture/KMU lecture note unit 05 - 12.pdf	17	1.2 21.8 47 40.5		ตารางเรียนบนกระดาน
+lc20-p17-3	source/lecture/KMU lecture note unit 05 - 12.pdf	17	1.2 43.2 47 62		สไลด์ 에게/한테 ประโยคตัวอย่าง
+lc20-p17-4	source/lecture/KMU lecture note unit 05 - 12.pdf	17	1.2 65 47 83.2		สไลด์ 께 การ์ตูนผู้ใหญ่
+lc20-p18-1	source/lecture/KMU lecture note unit 05 - 12.pdf	18	1 0.5 45 18.6		สไลด์ 에게서/한테서
+lc20-p18-2	source/lecture/KMU lecture note unit 05 - 12.pdf	18	1.5 19.3 45 38.8		กระดานสรุป 에게 께 에 / 에게서 께 에서
+lc20-p18-4	source/lecture/KMU lecture note unit 05 - 12.pdf	18	1.5 60.5 45 78.3		สไลด์ 문법 3 -네요
+lc20-p18-5	source/lecture/KMU lecture note unit 05 - 12.pdf	18	1.5 78.8 46 96.8		สไลด์ 듣기 이리나 지훈
+lc22-p10-1	source/lecture/KMU lecture note unit 05 - 12.pdf	10	3.3 1.0 99 31.5		สมุดคู่มือศัพท์ภาพ 22과 26과
+# ---------- 17과 ----------
+wb17-14-year	source/workbook/KMU workbook unit 14 - 22.pdf	14	25.5 33.8 94.8 42.4	70	워크북 17: ตารางปี 2011/2012/2013
+wb17-14-cal	source/workbook/KMU workbook unit 14 - 22.pdf	14	25.5 44.4 94.8 59	70	워크북 17: ปฏิทินสัปดาห์ 3 แถว
+wb17-14-day	source/workbook/KMU workbook unit 14 - 22.pdf	14	25.5 60.9 94.8 69.5	70	워크북 17: ตารางวัน 9월 1일/2일/3일
+wb17-14-timeline	source/workbook/KMU workbook unit 14 - 22.pdf	14	25.5 71 95.3 83	70	워크북 17: เส้นเวลา 압둘라 8:00 โรงเรียน 9:00 마키 10:00
+ev17-t-3	source/everyday/KMU everyday test unit 17.pdf	1	15.5 24.5 43.8 32.3	30	매일시험 17-3: เส้นเวลา 압둘라 8:00 โรงเรียน 9:00
+ev17-t-4	source/everyday/KMU everyday test unit 17.pdf	1	15.5 33 43.8 41.2	30	매일시험 17-4: เส้นเวลา โรงเรียน 9:00 마키 10:00
+wb17-16-ex	source/workbook/KMU workbook unit 14 - 22.pdf	16	27.5 13.2 42 20.8	20	보기: ชามบิบิมบับ
+wb17-16-1	source/workbook/KMU workbook unit 14 - 22.pdf	16	27.5 24.6 41.8 35	20	ผู้หญิงสองคนทักทายกันเดินมาพบกัน
+wb17-16-2	source/workbook/KMU workbook unit 14 - 22.pdf	16	28.3 35.8 41 46.4	20	เครื่องบินจากเกาหลีไปญี่ปุ่น
+wb17-16-3	source/workbook/KMU workbook unit 14 - 22.pdf	16	27.5 47.4 41 57.5	20	ผู้หญิงถือแอปเปิลคุยกับแม่ค้า 과일
+wb17-16-4	source/workbook/KMU workbook unit 14 - 22.pdf	16	27.9 58.5 41.4 68.9	20	ครูหญิงชี้กระดาน 你好
+wb17-16-5	source/workbook/KMU workbook unit 14 - 22.pdf	16	27.5 70.5 42 80.3	20	ผู้หญิงถือแท็บเล็ตในห้องเรียน
+wb17-16-6	source/workbook/KMU workbook unit 14 - 22.pdf	16	27.1 82.1 42.4 91.9	20	ชายหญิงใส่แว่น 3D ดูหนัง
+ev17-t-5	source/everyday/KMU everyday test unit 17.pdf	1	15.5 54.6 28.2 61.9	14	매일시험 17-5: ผู้หญิงนั่งดูหนังในโรงหนัง
+ev17-t-6	source/everyday/KMU everyday test unit 17.pdf	1	16.5 62.3 28 69.8	14	매일시험 17-6: ผู้หญิงนั่งอ่านหนังสือ
+ev17-t-7	source/everyday/KMU everyday test unit 17.pdf	1	16.5 70.2 28 77.6	14	매일시험 17-7: ผู้ชายดูดฝุ่น
+tb17-157-photo	content/img/gen/gtb17-157-photo.png			50	교과서 17과 culture: ภาพถ่ายในโถงทางเดิน 오빠, 뭐 해요? (ลบข้อความอังกฤษข้างภาพ)
+# ---------- 18과 ----------
+ev18-t-ex	source/everyday/KMU everyday test unit 18.pdf	1	12 23.6 27.7 30	15	보기: นาฬิกาดิจิทัล PM 02:30
+ev18-t-1	source/everyday/KMU everyday test unit 18.pdf	1	36 16.5 51.8 22.3	15	นาฬิกาดิจิทัล AM 08:15
+ev18-t-2	source/everyday/KMU everyday test unit 18.pdf	1	65.5 15.8 81.5 22.3	15	นาฬิกาดิจิทัล AM 11:20
+ev18-t-3	source/everyday/KMU everyday test unit 18.pdf	1	36.5 28.2 52.8 34.8	15	นาฬิกาดิจิทัล AM 03:25
+ev18-t-4	source/everyday/KMU everyday test unit 18.pdf	1	65.5 27.8 82 34.8	15	นาฬิกาดิจิทัล PM 05:55
+wb18-18-ex	source/workbook/KMU workbook unit 14 - 22.pdf	18	41.5 27.6 53.8 32.5	15	보기: นาฬิกาดิจิทัล 08:15
+wb18-18-1	source/workbook/KMU workbook unit 14 - 22.pdf	18	30.8 34.7 42.5 39.4	15	นาฬิกาดิจิทัล ข้อ 1
+wb18-18-2	source/workbook/KMU workbook unit 14 - 22.pdf	18	30.8 40 42.5 44.5	15	นาฬิกาดิจิทัล ข้อ 2
+wb18-18-3	source/workbook/KMU workbook unit 14 - 22.pdf	18	30.8 45.2 42.5 49.8	15	นาฬิกาดิจิทัล ข้อ 3
+wb18-18-4	source/workbook/KMU workbook unit 14 - 22.pdf	18	30.8 50.4 42.5 55	15	นาฬิกาดิจิทัล ข้อ 4
+wb18-18-5	source/workbook/KMU workbook unit 14 - 22.pdf	18	30.8 55.8 42.5 60.3	15	นาฬิกาดิจิทัล ข้อ 5
+wb18-19-ex	source/workbook/KMU workbook unit 14 - 22.pdf	19	24.8 20.8 37.1 29.7	17	보기: นาฬิกาเข็ม 7:30
+wb18-19-1	source/workbook/KMU workbook unit 14 - 22.pdf	19	16.3 34 28.6 42.9	17	นาฬิกาเข็ม ข้อ 1
+wb18-19-2	source/workbook/KMU workbook unit 14 - 22.pdf	19	16.3 45.7 28.6 54.6	17	นาฬิกาเข็ม ข้อ 2
+wb18-19-3	source/workbook/KMU workbook unit 14 - 22.pdf	19	16.3 57.2 28.6 66.2	17	นาฬิกาเข็ม ข้อ 3
+wb18-19-4	source/workbook/KMU workbook unit 14 - 22.pdf	19	16.3 68.7 28.6 77.7	17	นาฬิกาเข็ม ข้อ 4
+wb18-19-5	source/workbook/KMU workbook unit 14 - 22.pdf	19	16.3 80.4 28.6 89.4	17	นาฬิกาเข็ม ข้อ 5
+wb18-20-ex	source/workbook/KMU workbook unit 14 - 22.pdf	20	34.5 47.7 44.1 56	13	보기: ผู้ชายแว่น 3D กินป๊อปคอร์น
+wb18-20-1	source/workbook/KMU workbook unit 14 - 22.pdf	20	26.4 57.6 40.1 67.4	13	ผู้หญิงสองคนทักทายกัน
+wb18-20-2	source/workbook/KMU workbook unit 14 - 22.pdf	20	28 69.9 38.1 80	13	ผู้หญิงยกดัมเบล
+wb18-20-3	source/workbook/KMU workbook unit 14 - 22.pdf	20	27.2 83 40.5 93.4	13	ผู้หญิงล้างมือที่อ่าง
+wb18-21-4	source/workbook/KMU workbook unit 14 - 22.pdf	21	18.3 9 27.7 21.1	13	ผู้หญิงถือกระเป๋า นึกถึงอาหาร (ฟองความคิด)
+wb18-21-5	source/workbook/KMU workbook unit 14 - 22.pdf	21	18.3 22.1 28.2 32	13	รูปถ่ายครอบครัวในกรอบรูป
+tb18-162-clocks	source/textbook/KMU student's book unit 18.pdf	1	22 49 83 83	55	교과서 162쪽: นาฬิกาเข็ม 6 เรือน (ข้อ 1 มีตัวอย่าง 여덟 시 십 분)
+ev18-s-b1	source/everyday/KMU everyday sheet unit 18.pdf	1	16.3 65.5 29.0 72.2	13	B1: ผู้หญิงนั่งดูโทรทัศน์
+ev18-s-b2	source/everyday/KMU everyday sheet unit 18.pdf	1	30.3 65.5 43.3 72.2	13	B2: ผู้ชายกำลังกินอาหาร
+ev18-s-b3	source/everyday/KMU everyday sheet unit 18.pdf	1	44.6 65.5 57.4 72.2	13	B3: ลูกค้าที่เคาน์เตอร์ร้านค้า
+ev18-s-b4	source/everyday/KMU everyday sheet unit 18.pdf	1	58.6 65.5 71.0 72.2	13	B4: นั่งอ่านตำราที่โต๊ะ มีโคมไฟ
+ev18-s-b5	source/everyday/KMU everyday sheet unit 18.pdf	1	72.0 65.5 84.9 72.2	13	B5: ล้างมือที่อ่างล้างมือ
+ev18-s-b6	source/everyday/KMU everyday sheet unit 18.pdf	1	16.3 75.6 29.0 81.8	13	B6: กำลังสวมเสื้อ
+ev18-s-b7	source/everyday/KMU everyday sheet unit 18.pdf	1	30.3 75.6 43.3 81.8	13	B7: ออกกำลังกายยืดเส้น
+ev18-s-b8	source/everyday/KMU everyday sheet unit 18.pdf	1	44.6 75.6 57.4 81.8	13	B8: เต้นเบรกแดนซ์
+ev18-s-b9	source/everyday/KMU everyday sheet unit 18.pdf	1	58.6 75.6 71.0 81.8	13	B9: ถือถุงช้อปปิ้งหลายใบ
+ev18-s-b10	source/everyday/KMU everyday sheet unit 18.pdf	1	72.0 75.6 84.9 81.8	13	B10: ครูสอนนักเรียนที่โต๊ะ
+ev18-s-b11	source/everyday/KMU everyday sheet unit 18.pdf	1	16.3 85.3 29.0 91.5	13	B11: นั่งทำงานที่โต๊ะ ป้าย 숙제
+ev18-s-b12	source/everyday/KMU everyday sheet unit 18.pdf	1	30.3 85.3 43.3 91.5	13	B12: ทำงานหน้าคอมพิวเตอร์
+ev18-s-b13	source/everyday/KMU everyday sheet unit 18.pdf	1	44.6 85.3 57.4 91.5	13	B13: นั่งอ่านหนังสือ
+ev18-s-b14	source/everyday/KMU everyday sheet unit 18.pdf	1	58.6 85.3 71.0 91.5	13	B14: ร้องเพลงถือไมโครโฟน
+ev18-s-b15	source/everyday/KMU everyday sheet unit 18.pdf	1	72.0 85.3 84.9 91.5	13	B15: เพื่อนสองคนเดินมาเจอกัน
+ev18-s-c1	source/everyday/KMU everyday sheet unit 18.pdf	2	14.8 21.4 27.5 26.8	13	C1: อาคารเรียนมีธงบนหลังคา
+ev18-s-c2	source/everyday/KMU everyday sheet unit 18.pdf	2	28.8 21.4 41.2 26.8	13	C2: ห้องมีโต๊ะเรียนและกระดาน
+ev18-s-c3	source/everyday/KMU everyday sheet unit 18.pdf	2	42.6 21.4 54.9 26.8	13	C3: ห้องมีโต๊ะทำงานและคอมพิวเตอร์
+ev18-s-c4	source/everyday/KMU everyday sheet unit 18.pdf	2	56.3 21.4 68.7 26.8	13	C4: ร้านมีป้าย Book
+ev18-s-c5	source/everyday/KMU everyday sheet unit 18.pdf	2	70.3 21.4 83.5 26.8	13	C5: อาคารธนาคาร
+ev18-s-c6	source/everyday/KMU everyday sheet unit 18.pdf	2	14.8 29.9 27.5 35.0	13	C6: ต้นไม้ ม้านั่ง สนามหญ้า
+ev18-s-c7	source/everyday/KMU everyday sheet unit 18.pdf	2	28.8 29.9 41.2 35.0	13	C7: ร้านอาหาร
+ev18-s-c8	source/everyday/KMU everyday sheet unit 18.pdf	2	42.6 29.9 54.9 35.0	13	C8: ชั้นหนังสือสูง LIBRARY
+ev18-s-c9	source/everyday/KMU everyday sheet unit 18.pdf	2	56.3 29.9 68.7 35.0	13	C9: ร้านกาแฟ ป้ายถ้วย
+ev18-s-c10	source/everyday/KMU everyday sheet unit 18.pdf	2	70.3 29.9 83.5 35.0	13	C10: ร้านสะดวกซื้อ ป้าย 24
+ev18-s-c11	source/everyday/KMU everyday sheet unit 18.pdf	2	14.8 38.2 27.5 42.9	13	C11: อาคารมีกากบาท โรงพยาบาล
+ev18-s-c12	source/everyday/KMU everyday sheet unit 18.pdf	2	28.8 38.2 41.2 42.9	13	C12: ร้านมีเครื่องหมาย + ขายยา
+ev18-s-c13	source/everyday/KMU everyday sheet unit 18.pdf	2	42.6 38.2 54.9 42.9	13	C13: คนนั่งดูหนังใส่แว่น 3D
+ev18-s-c14	source/everyday/KMU everyday sheet unit 18.pdf	2	56.3 38.2 68.7 42.9	13	C14: ร้านขายเครื่องเขียน
+ev18-s-c15	source/everyday/KMU everyday sheet unit 18.pdf	2	70.3 38.2 83.5 42.9	13	C15: ลู่วิ่งในสนามกีฬา
+
+cd18-clock-1120	card:clock=11:20			14	นาฬิกาเข็ม 11:20 (วาดใหม่ ไม่มีภาพต้นฉบับ)
+# ---------- 19과 ----------
+ev19-s-b1	source/everyday/KMU everyday sheet unit 19.pdf	1	40.6 63.9 52.9 69.2	12	B1: ผู้หญิงนั่งกินอาหารเช้า
+ev19-s-b2	source/everyday/KMU everyday sheet unit 19.pdf	1	40.6 70.5 52.9 75.9	12	B2: ผู้หญิงถือแก้วใกล้ปาก ดื่มกาแฟ/ชา
+ev19-s-b3	source/everyday/KMU everyday sheet unit 19.pdf	1	40.6 76.7 51.5 82.6	12	B3: ผู้หญิงนั่งอ่านหนังสือที่โต๊ะ
+ev19-s-b4	source/everyday/KMU everyday sheet unit 19.pdf	1	40.6 83.5 52 89	12	B4: เพื่อนสองคนเจอกัน ยกมือทักทาย
+ev19-s-b5	source/everyday/KMU everyday sheet unit 19.pdf	1	40.8 90.2 52.5 95.8	12	B5: โทรทัศน์กำลังฉายรายการ
+wb19-23-ex	source/workbook/KMU workbook unit 14 - 22.pdf	23	27.5 21.2 42.5 29.3	15	보기: ป้ายเวลา 3:00~4:00 청소
+wb19-23-1	source/workbook/KMU workbook unit 14 - 22.pdf	23	18.3 32.3 41.3 39.2	20	ตารางสัปดาห์ ลูกศร 학교 จันทร์-ศุกร์
+wb19-23-2	source/workbook/KMU workbook unit 14 - 22.pdf	23	20.5 41.7 39.3 49.8	18	ป้ายประกาศ 방학 5월 20일 ~ 6월 12일
+wb19-23-3	source/workbook/KMU workbook unit 14 - 22.pdf	23	19.2 51.5 40.5 62.9	20	ปฏิทิน 8월 แถบ 인도 여행
+wb19-23-4	source/workbook/KMU workbook unit 14 - 22.pdf	23	19.3 64.9 40.3 77.7	20	ตารางฤดู 봄 여름 가을 겨울
+wb19-23-5	source/workbook/KMU workbook unit 14 - 22.pdf	23	20.4 79.8 39.3 89.9	18	ป้ายประกาศ 오늘 ~ 모레 시험
+tb19-170-circle	source/textbook/KMU student's book unit 19.pdf	1	22 51 58 75.5	35	교과서 170쪽: แผนภาพวงกลม 24 ชั่วโมงของ 압둘라
+tb19-174-t2	source/textbook/KMU student's book unit 19.pdf	5	57.5 72.8 84.5 81.8	28	교과서 174쪽: บัตรภาพยนตร์ 그 남자 그 여자 · 국민극장
+tb19-174-t3	source/textbook/KMU student's book unit 19.pdf	5	23 82.8 50.3 91.8	28	교과서 174쪽: บัตร 사진 전시회 · 서울미술관
+cd19-sunrise	card:☀️ | text=AM 8:00			18	AM 8:00 พระอาทิตย์ขึ้น (วาดใหม่)
+cd19-moon	card:🌙 | text=PM 7:00			18	PM 7:00 พระจันทร์ (วาดใหม่)
+cd19-sign-lib	card:text=도서관 오전 9:00 ~ 오후 6:00			25	ป้ายเวลา 도서관 (วาดใหม่)
+cd19-sign-bank	card:text=은행 오전 9:00 ~ 오후 4:00			25	ป้ายเวลา 은행 (วาดใหม่)
+cd19-sign-movie	card:text=영화 오후 2:10 ~ 4:15			25	ป้ายเวลา 영화 (วาดใหม่)
+cd19-concert	card:🎤 | text=SAT			18	คอนเสิร์ต + วันเสาร์ (วาดใหม่)
+cd19-a1	card:🖼️			10	ห้องแสดงภาพวาด (วาดใหม่)
+cd19-a2	card:🎤			10	นักร้องบนเวที (วาดใหม่)
+cd19-a3	card:🗼			10	วิวหอคอยจากที่สูง (วาดใหม่)
+cd19-a4	card:🍲			10	อาหารเกาหลี (วาดใหม่)
+# ---------- 20과 ----------
+wb20-27-1	source/workbook/KMU workbook unit 14 - 22.pdf	27	18.2 33.5 24.6 38.7	10	ลูกสุนัขการ์ตูน
+wb20-27-2	source/workbook/KMU workbook unit 14 - 22.pdf	27	56.3 34.3 65.3 38	13	แว่นกันแดดสีดำ
+wb20-27-3	source/workbook/KMU workbook unit 14 - 22.pdf	27	17.7 43.3 26.5 48.6	12	ถุงมือไหมพรมรูปหัวใจ
+wb20-27-4	source/workbook/KMU workbook unit 14 - 22.pdf	27	57.3 43.2 64.8 48.6	10	ขวดน้ำหอมทรงหัวใจ
+wb20-31-ex	source/workbook/KMU workbook unit 14 - 22.pdf	31	22.5 15 29.8 21.8	12	보기: 윤아 (หญิงผมยาว)
+wb20-31-1	source/workbook/KMU workbook unit 14 - 22.pdf	31	22 23.2 29.6 30.8	12	어머니 (แม่)
+wb20-31-2	source/workbook/KMU workbook unit 14 - 22.pdf	31	21.8 31.2 30 39.5	12	이리나 (ผมหยักศก)
+wb20-31-3	source/workbook/KMU workbook unit 14 - 22.pdf	31	21.8 40.3 29.8 49.8	12	선생님 (ครูหญิงสวมแว่น)
+wb20-31-4	source/workbook/KMU workbook unit 14 - 22.pdf	31	19.2 49.6 32.6 59.7	20	라디오 (วิทยุเทป)
+wb20-31-5	source/workbook/KMU workbook unit 14 - 22.pdf	31	18 61.4 34.2 69	20	사무실 (ห้องทำงาน)
+tb20-178-panel	source/textbook/KMU student's book unit 20.pdf	1	23.5 44 95 74	75	교과서 178쪽 연습 1: ภาพวงกลม 6 ภาพพร้อมคำใบ้
+tb20-178-1	source/textbook/KMU student's book unit 20.pdf	1	26.8 44.8 37 53.6	14	교과서 178쪽 연습 1 ข้อ 1
+tb20-178-5	source/textbook/KMU student's book unit 20.pdf	1	26.8 64.8 37 73.6	14	교과서 178쪽 연습 1 ข้อ 5
+tb20-179-gifts	source/textbook/KMU student's book unit 20.pdf	2	17.5 67.5 82.5 82.8	70	교과서 179쪽: ของขวัญ 4 ชิ้น 향수 장미 액세서리 옷
+tb20-179-acc	source/textbook/KMU student's book unit 20.pdf	2	46.8 70.8 62.8 78	18	สร้อยและต่างหูเครื่องประดับ
+tb20-183-panel	source/textbook/KMU student's book unit 20.pdf	5	24 40.5 91 70	75	교과서 183쪽 연습 1: ภาพ 6 ภาพพร้อมคำใบ้
+tb20-183-1	source/textbook/KMU student's book unit 20.pdf	5	26.3 44 38.9 53.8	20	교과서 183쪽 연습 1 ข้อ 1
+tb20-183-2	source/textbook/KMU student's book unit 20.pdf	5	47.6 44.3 65.2 52.9	20	교과서 183쪽 연습 1 ข้อ 2
+tb20-185-gifts	source/textbook/KMU student's book unit 20.pdf	8	15 26.5 89.5 54.5	60	교과서 185쪽: ภาพถ่ายของขวัญ 6 ชิ้น
+cd20-bf	card:💐 | text=남자 친구			22	ผู้หญิงถือช่อดอกไม้ ป้าย 남자 친구 (วาดใหม่)
+cd20-sock	card:🧦 → 👴@할아버지			22	ยื่นถุงเท้าให้คุณปู่ (วาดใหม่)
+cd20-grad	card:🎓			10	ชุดครุยโยนหมวก (วาดใหม่)
+cd20-cosm	card:💄			10	เครื่องสำอาง (วาดใหม่)
+# ---------- 21과 ----------
+wb21-33-ex	source/workbook/KMU workbook unit 14 - 22.pdf	33	22.3 66.5 35.8 76.3	13	보기: ผักกาด แตงกวา ผักใบเขียว (야채)
+wb21-33-1	source/workbook/KMU workbook unit 14 - 22.pdf	33	22 80.4 35.3 89.8	13	นมกำลังรินจากกล่องลงแก้ว (우유)
+wb21-34-2	source/workbook/KMU workbook unit 14 - 22.pdf	34	28.7 8.8 42.9 20.9	13	ซองยา 하루에 1번
+wb21-34-3	source/workbook/KMU workbook unit 14 - 22.pdf	34	30.2 22.7 41.2 32.8	12	ผู้หญิงยิ้มคุยโทรศัพท์ (전화)
+wb21-34-4	source/workbook/KMU workbook unit 14 - 22.pdf	34	29.6 34 41.3 44.8	13	ผู้หญิงนั่งโซฟา ฟองความคิดเป็นภาพครอบครัว (저)
+wb21-34-5	source/workbook/KMU workbook unit 14 - 22.pdf	34	29.6 46 41.8 55.2	13	ครูหญิงชี้กระดาน 가나다 (한국어)
+wb21-35-party	content/img/gen/gwb21-35-party.png			40	งานวันเกิดของทุย Happy Birthday 투이 พร้อมป้ายชื่อ (ตัดข้อความบทสนทนาข้างภาพออก)
+wb21r-36-6	source/workbook/KMU workbook unit 14 - 22.pdf	36	74.3 79.8 90.3 88.6	14	5~21과 종합문제 ข้อ 6: จอคอมบนโต๊ะ
+wb21r-43-36	source/workbook/KMU workbook unit 14 - 22.pdf	43	36 15.8 65.2 34	35	5~21과 종합문제 ข้อ 36: ใบเสร็จ 영수증
+tb21-191-party	source/textbook/KMU student's book unit 21.pdf	4	11 45.5 88 78.5	60	교과서 191쪽: งานปาร์ตี้ 8 คนพร้อมชื่อ
+tb21-192-ab	source/textbook/KMU student's book unit 21.pdf	5	23 20.5 94 44.5	65	교과서 192쪽: ภาพ A และ B สวนสาธารณะ
+tb21-194-map	source/textbook/KMU student's book unit 21.pdf	7	72 14 96 37	25	교과서 194쪽: แผนที่ 북한강 남이섬
+tb21-196-class	source/textbook/KMU student's book unit 21.pdf	9	22 38 96 66.5	60	교과서 196쪽: ห้องเรียนครูยกการ์ด 김밥을 먹고 있어요
+tb21-197-night	source/textbook/KMU student's book unit 21.pdf	10	15 18 92 40.5	60	교과서 197쪽: ภาพกลางคืน 2 ภาพ ตลาดและอาคารประดับไฟ
+# ---------- 22과 ----------
+ev22-t-ex	source/everyday/KMU everyday test unit 22.pdf	1	12.3 15.2 23.5 21.4	12	보기: ผู้หญิงนั่งดูหนังในโรงหนัง
+ev22-t-1	source/everyday/KMU everyday test unit 22.pdf	1	12.3 21.8 23.5 27.8	12	เด็กสองคนเดินมาเจอกัน
+ev22-t-2	source/everyday/KMU everyday test unit 22.pdf	1	12.3 28.3 23.5 34.4	12	คนลากกระเป๋าเดินทาง
+ev22-t-3	source/everyday/KMU everyday test unit 22.pdf	1	12.3 34.9 23.5 40.6	12	เด็กถือไอศกรีม
+ev22-t-4	source/everyday/KMU everyday test unit 22.pdf	1	12.3 41.2 23.5 47.6	12	งานเลี้ยงวันเกิด
+wb22-46-1	source/workbook/KMU workbook unit 14 - 22.pdf	46	26.3 35.3 39.7 43.6	13	불고기 (จานเนื้อผัด)
+wb22-46-2	source/workbook/KMU workbook unit 14 - 22.pdf	46	51 35.3 63.8 43.6	13	비빔밥 (ชามสีเข้ม ไข่แดงกลาง)
+wb22-46-3	source/workbook/KMU workbook unit 14 - 22.pdf	46	76.5 34.8 91.5 43.6	14	삼계탕 (ชามซุปไก่ทั้งตัว)
+wb22-46-4	source/workbook/KMU workbook unit 14 - 22.pdf	46	26.3 45.5 39.7 54.8	13	삼겹살 (เตาย่างกลม)
+wb22-46-5	source/workbook/KMU workbook unit 14 - 22.pdf	46	51 45.5 63.8 54.8	13	냉면 (ชามเส้นไข่ต้มผ่าครึ่ง)
+wb22-46-6	source/workbook/KMU workbook unit 14 - 22.pdf	46	73.5 45.2 93.5 55.8	16	생선회 (ปลาดิบหั่นบาง)
+wb22-50-table	source/workbook/KMU workbook unit 14 - 22.pdf	50	23.5 11 92.5 41	65	ตารางสัมภาษณ์ 마키 씨 / 장핑 씨 (ภาพคน 2 คน)
+tb22-226-panel	source/textbook/KMU student's book unit 22.pdf	3	22 38.5 95 70.3	75	교과서 226쪽 연습 1: 5 ชุดภาพ (음식 · 영화 · 운동 · 음악 · 색깔)
+tb22-227-1	source/textbook/KMU student's book unit 22.pdf	4	62 11.5 76 22.5	13	교과서 227쪽 연습 2 ข้อ 1: ผู้หญิงถือเดรสที่เคาน์เตอร์
+tb22-227-2	source/textbook/KMU student's book unit 22.pdf	4	62 23.5 76.5 34.5	13	ข้อ 2: วงสตริงควอร์เต็ต
+tb22-227-3	source/textbook/KMU student's book unit 22.pdf	4	60.5 36 77 49.5	13	ข้อ 3: ผู้หญิงอ่านหนังสือที่คาเฟ่
+tb22-227-4	source/textbook/KMU student's book unit 22.pdf	4	56 50.5 80.5 58.5	18	ข้อ 4: คิมบับบนจาน
+tb22-227-5	source/textbook/KMU student's book unit 22.pdf	4	63.5 62 76 74	13	ข้อ 5: แมวสีเทา
+tb22-231-map	source/textbook/KMU student's book unit 22.pdf	8	15 20 85 50	65	교과서 231쪽: แผนที่เกาหลีใต้ 6 แห่ง + ปฏิทินเดือน 8

@@ -1,0 +1,88 @@
+# practice-site picture map for 27과 + 28과 (daily_b.json · daily_predict27/28.json) — json file · set §section #item · ids
+daily_b.json	daily-27-writing §1	ev27-t-ex
+daily_b.json	daily-27-writing §1 #1	ev27-t-1
+daily_b.json	daily-27-writing §1 #2	ev27-t-2
+daily_b.json	daily-27-writing §1 #3	ev27-t-3
+daily_b.json	daily-27-writing §1 #4	ev27-t-4
+daily_b.json	daily-27-writing §2	tb27-271-3scene
+daily_b.json	sheet-27-writing §1 #1	ev27-s-a01
+daily_b.json	sheet-27-writing §1 #2	ev27-s-a02
+daily_b.json	sheet-27-writing §1 #3	ev27-s-a03
+daily_b.json	sheet-27-writing §1 #4	ev27-s-a04
+daily_b.json	sheet-27-writing §1 #5	ev27-s-a05
+daily_b.json	sheet-27-writing §1 #6	ev27-s-a06
+daily_b.json	sheet-27-writing §1 #7	ev27-s-a07
+daily_b.json	sheet-27-writing §1 #8	ev27-s-a08
+daily_b.json	sheet-27-writing §1 #9	ev27-s-a09
+daily_b.json	sheet-27-writing §1 #10	ev27-s-a10
+daily_b.json	sheet-27-writing §1 #11	ev27-s-a11
+daily_b.json	sheet-27-writing §1 #12	ev27-s-a12
+daily_b.json	sheet-27-writing §1 #13	ev27-s-a13
+daily_b.json	sheet-27-writing §1 #14	ev27-s-a14
+daily_b.json	sheet-27-writing §1 #15	ev27-s-a15
+daily_b.json	sheet-27-writing §1 #16	ev27-s-a16
+daily_b.json	sheet-27-writing §1 #17	ev27-s-a17
+daily_b.json	sheet-27-writing §1 #18	ev27-s-a18
+daily_b.json	sheet-27-writing §1 #19	ev27-s-a19
+daily_b.json	sheet-27-writing §1 #20	ev27-s-a20
+daily_b.json	sheet-27-writing §1 #21	ev27-s-a21
+daily_b.json	sheet-27-writing §2	tb27-271-3scene
+daily_b.json	sheet-27-writing §3 #1	ev27-s-c01
+daily_b.json	sheet-27-writing §3 #2	ev27-s-c02
+daily_b.json	sheet-27-writing §3 #3	ev27-s-c03
+daily_b.json	sheet-27-writing §3 #4	ev27-s-c04
+daily_b.json	sheet-27-writing §3 #5	ev27-s-c05
+daily_b.json	sheet-27-writing §3 #6	ev27-s-c06
+daily_b.json	sheet-27-writing §3 #7	ev27-s-c07
+daily_b.json	sheet-27-writing §3 #8	ev27-s-c08
+daily_b.json	sheet-27-writing §3 #9	ev27-s-c09
+daily_b.json	sheet-27-writing §3 #10	ev27-s-c10
+daily_b.json	sheet-27-writing §3 #11	ev27-s-c11
+daily_b.json	sheet-27-writing §3 #12	ev27-s-c12
+daily_b.json	sheet-27-writing §3 #13	ev27-s-c13
+daily_b.json	sheet-27-writing §3 #14	ev27-s-c14
+daily_b.json	sheet-27-writing §3 #15	ev27-s-c15
+daily_b.json	sheet-27-writing §3 #16	ev27-s-c16
+daily_b.json	sheet-27-writing §3 #17	ev27-s-c17
+daily_b.json	sheet-27-writing §3 #18	ev27-s-c18
+daily_b.json	sheet-27-writing §3 #19	ev27-s-c19
+daily_b.json	sheet-27-writing §3 #20	ev27-s-c20
+daily_b.json	sheet-27-writing §3 #21	ev27-s-c21
+daily_b.json	sheet-27-writing §3 #22	ev27-s-c22
+daily_b.json	sheet-27-writing §3 #23	ev27-s-c23
+daily_b.json	sheet-27-writing §3 #24	ev27-s-c24
+daily_b.json	daily-28-writing §1	tb28-279-season
+daily_b.json	daily-28-writing §1 #1	tb28-279-animal
+daily_b.json	daily-28-writing §1 #2	ev28-t-food
+daily_b.json	daily-28-writing §1 #3	tb28-279-fruit
+daily_b.json	daily-28-writing §1 #4	tb28-279-sport
+daily_b.json	daily-28-writing §2	ev28-t-table
+daily_predict27.json	predict-27-1-writing §2 #7	wb27-3-kaoru
+daily_predict27.json	predict-27-1-writing §2 #8	wb27-3-abdula
+daily_predict27.json	predict-27-2-writing §1	tb27-271-3scene
+daily_predict27.json	predict-27-2-writing §2 #5	ev27-s-park
+daily_predict27.json	predict-27-2-writing §2 #6	ev27-s-park
+daily_predict27.json	predict-27-2-writing §2 #7	ev27-s-c17
+daily_predict27.json	predict-27-2-writing §2 #8	ev27-s-c24
+daily_predict27.json	predict-27-3-writing §1 #1	tb27-271-1
+daily_predict27.json	predict-27-3-writing §1 #2	tb27-271-2
+daily_predict27.json	predict-27-3-writing §1 #3	tb27-271-3
+daily_predict27.json	predict-27-3-writing §1 #4	tb27-271-4
+daily_predict28.json	predict-28-1-writing §2 #5	wb28-3-1
+daily_predict28.json	predict-28-1-writing §2 #6	wb28-3-2
+daily_predict28.json	predict-28-1-writing §2 #7	wb28-3-3
+daily_predict28.json	predict-28-1-writing §2 #8	wb28-3-4
+daily_predict28.json	predict-28-2-writing §1 #1	cd28-fruit4
+daily_predict28.json	predict-28-2-writing §1 #2	cd28-color4
+daily_predict28.json	predict-28-2-writing §1 #3	cd28-animal4
+daily_predict28.json	predict-28-2-writing §1 #4	cd28-friends
+daily_predict28.json	predict-28-2-writing §2	tb28-281-7
+daily_predict28.json	predict-28-2-writing §2 #5	tb28-281-2
+daily_predict28.json	predict-28-2-writing §2 #6	cd28-ski
+daily_predict28.json	predict-28-2-writing §2 #7	tb28-281-3
+daily_predict28.json	predict-28-2-writing §2 #8	tb28-280-4
+daily_predict28.json	predict-28-3-writing §2	tb28-281-1
+daily_predict28.json	predict-28-3-writing §2 #5	tb28-281-3
+daily_predict28.json	predict-28-3-writing §2 #6	tb28-281-7
+daily_predict28.json	predict-28-3-writing §2 #7	tb28-281-2
+daily_predict28.json	predict-28-3-writing §2 #8	tb28-281-9
