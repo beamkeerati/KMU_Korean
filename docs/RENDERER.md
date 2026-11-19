@@ -117,3 +117,7 @@ the images to a third party and bills per page — the user considered that and 
   drawn cards (cd-/gx-/essay-) are skipped. Photocopy halftone (dottiness ≥ 28) is blurred σ1 and halved first — without that the model
   erased faces (14과 test woman). Printed size still comes from the _raw crop (natural_px), so remastered files don't print 2× larger.
   Without the tool the plain crop is used. vtracer (pip) was tried for true SVG: fine for colour art, but grey shading turned solid black.
+- **Remaster r2 (same evening):** a random 24-picture check showed the anime model inventing white blotches/scratches on small
+  photocopied PHOTOS of objects on the teacher's papers (credit card ev11-s-c06, camera ev34-s-a2a, building ev18-s-c5, train mx04-1-3);
+  a blurred-SSIM fidelity score did not catch them (0.92–0.99), so the fix is by source: teacher papers (ev/mx/rv) = realesrgan-x4plus
+  (general) after a σ1.4 blur (σ0.8 if not dotty), no halving; textbook/workbook keep the anime model. Only the 525 paper crops re-ran.

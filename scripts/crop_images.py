@@ -197,7 +197,9 @@ def trim(im, pad=10, thr=238):
 
 def stamp_of(r):
     mt = 0 if r['src'].startswith('card:') else os.path.getmtime(os.path.join(ROOT, r['src']))
-    return hashlib.sha1(json.dumps([r['src'], r['page'], r['box'], mt, remaster_policy(r) and REMASTER_VER]).encode()).hexdigest()
+    pol = remaster_policy(r)
+    ver = None if not pol else ('r2-paper' if pol == PAPER else REMASTER_VER)
+    return hashlib.sha1(json.dumps([r['src'], r['page'], r['box'], mt, ver]).encode()).hexdigest()
 
 
 # ---------------------------------------------------------------- remaster (user 11/19: "ชัด สดใส คมเหมือน svg")
@@ -211,11 +213,20 @@ REMASTER_VER = 'r1'
 DOTTY = 28.0                 # mean high-frequency energy on ink pixels: teacher photocopies ≈ 30–33, book print ≈ 20
 
 
+PAPER = 'paper'             # teacher's photocopied papers: general model after a stronger blur (r2, 11/19 evening)
+
+
 def remaster_policy(r):
-    """ESRGAN model for this crop, or None (drawn cards, generated scenes and essays are already clean)."""
+    """How to remaster this crop: an ESRGAN model name, PAPER, or None (drawn cards, generated scenes and essays are already clean).
+    r1 used the anime model + halving for the teacher's papers too; on small photocopied PHOTOS of objects (credit card, camera,
+    building, train) it invented white blotches and scratches → PAPER = realesrgan-x4plus after a σ1.4 blur, no halving."""
     if r['src'].startswith('card:') or re.match(r'(gx|cd|essay)-', r['id']):
         return None
-    return 'realesrgan-x4plus' if r['id'].startswith('lc') else 'realesrgan-x4plus-anime'
+    if r['id'].startswith('lc'):
+        return 'realesrgan-x4plus'
+    if re.match(r'(ev|mx|rv)\d', r['id']):
+        return PAPER
+    return 'realesrgan-x4plus-anime'
 
 
 def _dotty(g):
@@ -249,7 +260,9 @@ def remaster(rows, ids):
                 img = raw
                 hsv = cv2.cvtColor(raw, cv2.COLOR_BGR2HSV)
                 colour = float(np.mean(hsv[..., 1] > 60)) > 0.04
-                if not colour and _dotty(cv2.cvtColor(raw, cv2.COLOR_BGR2GRAY)) >= DOTTY:
+                if model == PAPER:
+                    img = cv2.GaussianBlur(img, (0, 0), 1.4 if _dotty(cv2.cvtColor(raw, cv2.COLOR_BGR2GRAY)) >= DOTTY else 0.8)
+                elif not colour and _dotty(cv2.cvtColor(raw, cv2.COLOR_BGR2GRAY)) >= DOTTY:
                     img = cv2.GaussianBlur(img, (0, 0), 1.0)
                     if w >= 260:
                         img = cv2.resize(img, (w // 2, h // 2), interpolation=cv2.INTER_AREA)
@@ -257,7 +270,7 @@ def remaster(rows, ids):
                     img = cv2.resize(img, (1000, round(img.shape[0] * 1000 / img.shape[1])), interpolation=cv2.INTER_AREA)
                 cv2.imwrite(f'{tmp}/in/{iid}.png', img)
                 meta[iid] = (w, h, colour)
-            res = subprocess.run([TOOL, '-i', f'{tmp}/in', '-o', f'{tmp}/out', '-n', model, '-s', '4', '-f', 'png',
+            res = subprocess.run([TOOL, '-i', f'{tmp}/in', '-o', f'{tmp}/out', '-n', 'realesrgan-x4plus' if model == PAPER else model, '-s', '4', '-f', 'png',
                                   '-m', os.path.join(TOOL_DIR, 'models')], capture_output=True, text=True)
             for iid in group:
                 w, h, colour = meta[iid]
