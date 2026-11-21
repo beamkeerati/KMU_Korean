@@ -288,3 +288,10 @@ Site v66 (206 sets · 3,905 items) published. Not committed.
   sign 2 = a SCHOOL building 🏫 — the user said the book's grey block is a school; the first draft drew a grey board with a clock). Routes w = 100 (canvas 1650 × 450). final05 uses
   gx-sign-N, final01 + final_speaking.json use gx-sign-panel; every other book keeps tb24-245-*. build_mockweb: gx-* pictures → WebP ≤ 1600 px q90
   (others 900 px q74). Site published as version 82 (81 had the board-and-clock sign) (files data.js + img_final_speaking.js; still labelled v71); the watch the publish armed was stopped.
+- 2026-11-21 (same day, after the commit) — **subway-route script realigned to the teacher's sheet.** The user asked whether the route script followed
+  the 32과 everyday sheet: it did not (it paraphrased 대화 32-1). Sheet page 8 (source/everyday/KMU everyday sheet unit 32.pdf, content/exercises/everyday/unit32.md §H)
+  is the teacher's [보기] for exactly this task, and its pages 9–10 are the two handout p.15 pictures. Script now = that model in final05.md §3, final01.md §2 and
+  final_speaking.json items 1-1/1-2: 길음역에서 지하철 4호선을 타세요. / N역에서 내려서 N호선으로 갈아타세요. / 그리고 N역에서 내려서 N번 출구로 나가세요. /
+  N번 출구 앞에 N이/가 있어요. / N분쯤 걸려요 (no 모두; the question stays 얼마나 걸려요? as the handout prints it). final05 kept at 10 pp by putting the time
+  question + answer on one line. Site published as version 83 (data.js only). **Rule for next time: for a speaking picture task, look for the teacher's own
+  sheet [보기] before the textbook dialogue.**
