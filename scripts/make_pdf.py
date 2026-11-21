@@ -303,6 +303,9 @@ def convert_images(text):
         if row is None or not os.path.exists(path):
             print(f'WARNING: picture {iid} is not built (python3 scripts/crop_images.py)', file=sys.stderr)
             return f'🖼️ [{iid}?]'
+        svg = os.path.join(crop_images.MANIFESTS, 'gen', iid + '.svg')      # redrawn pictures (scripts/draw_speaking_pics.py) stay vector in the PDF
+        if os.path.exists(svg):
+            path = svg
         return f'<img class="pic" src="file://{path}" style="width:{round(crop_images.display_width(row) * 1.68)}mm" alt="" />'   # % of the 168 mm text width (mm, not %: a % inside a table cell shrank to nothing)
     return IMG_MD.sub(repl, text)
 

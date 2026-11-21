@@ -242,9 +242,10 @@ def write_pictures(sets):
         im = Image.open(src)
         w, h = im.size
         if not os.path.exists(web) or os.path.getmtime(web) < os.path.getmtime(src):
-            if w > 900:
-                im = im.resize((900, round(h * 900 / w)), Image.LANCZOS)
-            im.convert('RGB').save(web, 'WEBP', quality=74, method=6)
+            cap, q = (1600, 90) if iid.startswith('gx-') else (900, 74)     # redrawn pictures (flat colour + text) stay crisp on 2× screens
+            if w > cap:
+                im = im.resize((cap, round(h * cap / w)), Image.LANCZOS)
+            im.convert('RGB').save(web, 'WEBP', quality=q, method=6)
         uri = 'data:image/webp;base64,' + base64.b64encode(open(web, 'rb').read()).decode()
         names = packs.setdefault(stem, [{}])
         if sum(len(x) for x in names[-1].values()) + len(uri) > PIC_MAX:

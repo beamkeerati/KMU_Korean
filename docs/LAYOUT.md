@@ -106,7 +106,11 @@ content/       ✍️ SOURCE OF TRUTH — edit here, never in output/
                assemble_midterm.py (questions, then `# 정답` + keys) — edit the parts, re-assemble, `build.py predict`
                🔮 analysis + mock tests, then `# 정답`; the kinds never share a folder
                final/final01.md (말하기 기말, handout pp.14–16 incl. p.16 식사 예절) · final02.md (기말 analysis 11/17–18) ·
-               final03.md (2026-11-19 총복습 hints: pictures 245/263/271쪽 · model essays on 원고지 · 대화 32-1/37-1 · ≤ 13 pp)
+               final03.md (2026-11-19 총복습 hints: pictures 245/263/271쪽 · model essays on 원고지 · 대화 32-1/37-1 · ≤ 13 pp) ·
+               final04.md (11/19 grammar summary, 10 pp) · final05.md (2026-11-21 말하기 summary for 11/23: handout pp.14–16 as Q→A tables with the real
+               pictures; 계절/취미 answers = the user's own 쓰기 (3)(4) essays; routes follow 대화 32-1; 10 pp); colour redraws of the p.15 route/burger
+               pictures = ids gx-route1 · gx-route2 · gx-burger · gx-sign-1…6 · gx-sign-panel, drawn by scripts/draw_speaking_pics.py
+               (→ content/img/gen/<id>.svg, embedded as vector by make_pdf, + .png for the site)
   mindmaps/    unit05…37.md + all.md — mind-map OUTLINES (see scripts/build_mindmaps.py for the grammar). Per unit: 문법 (forms,
                conditions, ⚠️) · 어휘 · 표현·대화 · 연결 (← 이전 / → 이후 / 시험). all.md = 11 cross-unit threads (문장 끝맺기 · 조사 ·
                시제 · 숫자·시간 · 높임 · 부정·질문 · 묘사·장소 + since 10/26 연결어미 · 관형형 · 희망·능력·의무 · 불규칙; 240 nodes, a tall poster page) — the per-unit 연결 branches must agree with it.

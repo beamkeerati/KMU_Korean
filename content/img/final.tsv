@@ -26,3 +26,15 @@ essay-season-1	content/img/gen/essay-season_1.png			92	เรียงควา�
 essay-season-2	content/img/gen/essay-season_2.png			92	เรียงความตัวอย่าง 계절 บน 원고지 หน้า 2 (201–300)
 essay-hobby-1	content/img/gen/essay-hobby_1.png			92	เรียงความตัวอย่าง 취미 บน 원고지 หน้า 1 (1–200)
 essay-hobby-2	content/img/gen/essay-hobby_2.png			92	เรียงความตัวอย่าง 취미 บน 원고지 หน้า 2 (201–300)
+# colour redraws of the handout p.15 pictures (scripts/draw_speaking_pics.py, user 11/21) — same layout and words as rv02-15-*
+gx-route1	content/img/gen/gx-route1.png			100	เส้นทาง 1 (วาดใหม่มีสี): 길음역 4호선 → 충무로역 3호선 → 경복궁역 3번 출구 → 국민호텔 · 15분 + 10분
+gx-route2	content/img/gen/gx-route2.png			100	เส้นทาง 2 (วาดใหม่มีสี): 길음역 4호선 → 서울역 1호선 → 시청역 4번 출구 → 국민백화점 · 10분 + 10분
+gx-burger	content/img/gen/gx-burger.png			100	ร้านแฮมเบอร์เกอร์ (วาดใหม่มีสี): 주문 → 매장 식사 / 포장 → 영수증 ลงถัง → 얼음 ใส่แก้ว
+# 245쪽 연습 2 signs redrawn as vector (the book scan shows glare): single signs + the panel with the printed verbs
+gx-sign-1	content/img/gen/gx-sign-1.png			14	ป้ายห้าม (วาดใหม่): 먹다 (ห้ามกิน)
+gx-sign-2	content/img/gen/gx-sign-2.png			14	ป้ายห้าม (วาดใหม่): 지각하다 (ห้ามมาสาย · รูปโรงเรียน)
+gx-sign-3	content/img/gen/gx-sign-3.png			14	ป้ายห้าม (วาดใหม่): 이야기하다 (ห้ามคุย)
+gx-sign-4	content/img/gen/gx-sign-4.png			14	ป้ายห้าม (วาดใหม่): 만지다 (ห้ามจับ)
+gx-sign-5	content/img/gen/gx-sign-5.png			14	ป้ายห้าม (วาดใหม่): 담배를 피우다 (ห้ามสูบบุหรี่)
+gx-sign-6	content/img/gen/gx-sign-6.png			14	ป้ายห้าม (วาดใหม่): 사진을 찍다 (ห้ามถ่ายรูป)
+gx-sign-panel	content/img/gen/gx-sign-panel.png			75	연습 2 (245쪽) วาดใหม่: ป้ายห้าม 6 ป้ายพร้อมคำกริยาที่ตำราพิมพ์

@@ -268,3 +268,23 @@ Site v66 (206 sets · 3,905 items) published. Not committed.
   pictures exposed transcription errors in the 11과/12과 sheets' picture tables (B/A 2 · 16 · 20 · 22 · 23 · 24 guessed wrong) — fixed in the
   Markdown, the keys and the site. User feedback on layout: a picture's text must sit in one place (left picture, all 가/나 + blank right) →
   make_pdf arrange_pictures(); table pictures capped at 24 mm tall. Site v70 (693 pictures in 31 packs) + bigger writing boxes / BigWrite popup.
+- **2026-11-21 (Sat, after the 11/20 written 기말)** The user asked for a ≤ 10-page 말하기 summary for Mon 11/23 (typed "listening" but meant speaking;
+  hint re-read from the 11/19 message: handout pp.14–16 in full, pictures and questions). Built content/predictions/final/final05.md →
+  output/3_Exam_Prep/KMU_Predict_final05.pdf (10 pp): 19 questions as a ครูถาม | คุณตอบ table (bold = the grammar the teacher listens for), picture
+  tables 245 · 263 · 271쪽 with 가/나 lines, both subway routes shortened to the 대화 32-1 pattern (…내리세요. N번 출구에 …이 있어요.), burger shop table,
+  계절 (태국의 겨울, 합니다체) / 취미 (영화 보는 것, 해요체) answers taken from the user's corrected 쓰기 (3)(4) essays — final01 and the site set still
+  use 가을 / 운동 placeholders — 식사 예절, emergency phrases, slips, two-day plan. Only this one PDF was rendered (build_predictions() + to_pdf on the
+  single job); a raw `<div style="page-break-before: always"></div>` before a `###` works as a manual page break in make_pdf.
+  Same day: the user asked for the two handout p.15 pictures (subway routes, burger shop) to be REDRAWN IN COLOUR (or a Gemini prompt if that was not
+  possible). Drawn locally: scripts/draw_speaking_pics.py → content/img/gen/gx-route1/-route2/-burger.png (SVG shapes + Korean text through rsvg-convert,
+  colour emoji pasted with PIL because librsvg prints Noto Color Emoji as black silhouettes; Seoul line colours 1 = #0052A4 · 3 = #EF7C1C · 4 = #00A5DE;
+  same layout and printed words as the sheet). New ids gx-route1 · gx-route2 · gx-burger (content/img/final.tsv, `gx-` = never remastered) replace
+  rv02-15-* in final01.md, final05.md and content/mockweb/final_speaking.json; the 37과 sheet transcription keeps the photocopy crop. PDFs final01 (13 pp)
+  and final05 (10 pp) rebuilt. (Superseded by the next lines.)
+  Later the same day (user: site too · routes full width · sharper · 245쪽 signs "as vector, the scan shows glare"): draw_speaking_pics.py now writes
+  content/img/gen/<id>.svg + .png. make_pdf.convert_images embeds the SVG when one exists (true vector in the PDF; WeasyPrint and librsvg both print
+  emoji TEXT as black silhouettes, so each emoji is the font's 109-px bitmap enlarged 4× by Real-ESRGAN anime — colour-on-white and alpha upscaled
+  separately, then un-premultiplied — and embedded as a PNG data URI; cache extracted/img/_emoji/). New ids gx-sign-1…6 + gx-sign-panel (245쪽 연습 2;
+  sign 2 = a SCHOOL building 🏫 — the user said the book's grey block is a school; the first draft drew a grey board with a clock). Routes w = 100 (canvas 1650 × 450). final05 uses
+  gx-sign-N, final01 + final_speaking.json use gx-sign-panel; every other book keeps tb24-245-*. build_mockweb: gx-* pictures → WebP ≤ 1600 px q90
+  (others 900 px q74). Site published as version 82 (81 had the board-and-clock sign) (files data.js + img_final_speaking.js; still labelled v71); the watch the publish armed was stopped.
