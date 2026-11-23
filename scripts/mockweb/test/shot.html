@@ -1,0 +1,30 @@
+<!doctype html><meta charset="utf-8">
+<!-- Screenshot frame for scripts/mockweb/test/shot.sh: loads index.html in an iframe of the requested size (like the claude.ai frame),
+     then runs the ';;'-separated steps: a CSS selector = click it · text:<selector>:<text> = click the first match containing <text> ·
+     scroll:<px> = scroll #scroller · wait:<ms>. A missing target sets the page title to "MISS <step>". -->
+<style>html,body{margin:0;overflow:hidden;background:#888}iframe{border:0;display:block}</style>
+<iframe id="f"></iframe>
+<script>
+const q = new URLSearchParams(location.search), f = document.getElementById('f');
+f.width = q.get('w'); f.height = q.get('h');
+const steps = (q.get('do') || '').split(';;').filter(s => s && s !== '-');
+let ran = false;   // a pre: step reloads the iframe → onload fires again; run the step list only once
+f.onload = async () => {
+  if (ran) return; ran = true;
+  const d = f.contentDocument, sleep = ms => new Promise(r => setTimeout(r, ms));
+  await sleep(1200);
+  for (const s of steps) {
+    if (s.startsWith('pre:')) {   // pre:key=value → seed kmuweb:<key> (JSON string) and reload, e.g. pre:theme=dark
+      const kv = s.slice(4), i = kv.indexOf('=');
+      localStorage.setItem('kmuweb:' + kv.slice(0, i), JSON.stringify(kv.slice(i + 1)));
+      f.contentWindow.location.reload(); await sleep(1500); continue; }
+    if (s.startsWith('scroll:')) f.contentDocument.getElementById('scroller').scrollTop = +s.slice(7);
+    else if (s.startsWith('wait:')) { await sleep(+s.slice(5)); continue; }
+    else if (s.startsWith('text:')) { const [, sel, ...t] = s.split(':'), txt = t.join(':'); const b = [...f.contentDocument.querySelectorAll(sel)].find(e => e.textContent.includes(txt)); if (b) b.click(); else document.title = 'MISS ' + s; }
+    else { const e = f.contentDocument.querySelector(s); if (e) e.click(); else document.title = 'MISS ' + s; }
+    await sleep(900);
+  }
+};
+const h = q.get('hash');
+f.src = 'index.html' + (h && h !== '-' ? '#' + h : '');
+</script>

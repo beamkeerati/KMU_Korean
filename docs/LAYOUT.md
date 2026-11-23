@@ -193,6 +193,21 @@ content/       ✍️ SOURCE OF TRUTH — edit here, never in output/
                  늦게/느리다, 좋다/좋아하다 by particle, 열다/켜다, 미안하다/죄송하다 …), 통역 ≠ ล่าม, 이때 = ตอนนั้น, adjectives "to be …";
                  HOMONYMS in build_mockweb.load_vocab (개 · 반 · 배 · 쓰다 · 일 had lost their 2nd meaning) + a 2nd example each;
                  unit23.md stray rows moved back into their table; old glosses fixed in workbook 17/30/35/36, grammar 51, vocab_b.json.
+               (2026-11-23) v72 (index.html only — UX/UI redesign, BRIEF_web_ux.md all 3 phases + full restyle + transitions; answers: desktop first ·
+                 full redesign · publish once at the end): new tokens (--r-s/m/l radii, --sh-1/2/3 shadows, --ease/--tr) + a "v72 redesign layer" at the
+                 end of the stylesheet that overrides the old paper look (old rules stay as safety net); page-enter/hover/popup animations everywhere
+                 (`.wrap > section:not([hidden])` restarts its animation when `hidden` toggles; prefers-reduced-motion kills all); home = "📌 วันนี้" card
+                 (next exam from CATS `dates` [[date,label],…] via nextEv() — fixes the 기말 tile saying ผ่านแล้ว while 말하기 11/23 + 발표 11/24 were
+                 ahead — absorbs ResumeBar + VTeaser) + icon-chip tile rows + 🗂️ past exams in a collapsed <details>; home-tip removed; category pages:
+                 skill/status filter chips (catFilt, cleared on category change), note folded to 1 line + อ่านต่อ, cards get a coloured last-score bar
+                 (.cbar); cover: back button on top, start buttons first, rules in <details>; paper: sticky Prog panel removed (clock + progress live in
+                 the Dock, now a bottom-centre blurred pill; #dock-p opens an item-number grid (ItemGrid, .ig) coloured by answer/grade state to jump;
+                 the confirm dialog's กลับไปทำต่อ calls dockNext() directly), a hint repeated under every item of a section shows once under the heading,
+                 results get 🔍 ดูเฉพาะข้อที่เสียคะแนน (.paper.only-wrong hides .item.g-ok); vocab: start button above <details> settings; profile tables
+                 get a rounded shell + sticky first column; phones < 640 px get a bottom tab bar (หน้าแรก·ศัพท์·คะแนน·ตั้งค่า; strip 🔤 👤 hide) and a
+                 one-line paper header. Harness hooks kept: .badge, [data-set], .last, .self button.v-o, .mode-btn, #dock-p, #scroller; run.sh all PASS
+                 (the "card updates (no card)" lines were already vacuous since v68 hid the mini03 tile). shot.html gained a `pre:key=value` step
+                 (seeds kmuweb:<key> then reloads) used for dark/palette shots. Screens: extracted/web_shots/ (b_* = before, a_/r_/t_/v_* = after).
                (2026-11-18) v68 (index.html + data + clips + clips2 + clips5 = artifact version 75): 기말 mock A + B for 쓰기/읽기/듣기 (3 Sonnet
                  agents, BRIEF_final_mock.md; final_1_writing 78 items · final_1_reading 35 · final_1_listening 22 on the unused tracks 24-1 25-1 27-1
                  33-1 34-1 35-1 36-2 24-2; clocks 60/30 · 60/20 · 13/14 min); the 기말 CAT now matches exam final|mini03|mini04 (user thought the ③④

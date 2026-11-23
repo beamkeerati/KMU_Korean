@@ -1,3 +1,4 @@
+<!-- v72 (2026-11-23): UX/UI redesign (BRIEF_web_ux.md, all 3 phases + full restyle + transitions): new design tokens (radius/shadow/easing) + "v72 redesign" CSS layer at the end of the stylesheet overriding the old paper look; page/hover/popup animations everywhere (hidden-toggle restarts section animations; prefers-reduced-motion kills them); home = "📌 วันนี้" card (next exam via CATS dates list — fixes ผ่านแล้ว while 말하기/발표 were still ahead — absorbs ResumeBar + VTeaser) + compact tile rows + past exams in a collapsed <details>; category pages get skill/status filter chips + 1-line note with อ่านต่อ; cover = back on top, start buttons first, rules collapsed; paper drops the sticky Prog panel (progress lives in the Dock, now bottom-centre; tapping it opens an item-number grid coloured by state to jump); results get ดูเฉพาะข้อที่เสียคะแนน; vocab start button above collapsed settings; phone bottom tab bar (หน้าแรก·ศัพท์·คะแนน·ตั้งค่า) -->
 <!-- v69 (2026-11-19): real pictures — items/sections carry "img" (crops listed in content/img/*.tsv, scripts/crop_images.py); build_mockweb packs them as WebP in img_<json file>.js, loaded only when a set needs them (Pics component, tap to enlarge); the Thai 🖼️ caption hides in exam mode once a picture is shown. Written answers auto-grow; essay-length items (model > 100 chars / "long") get a 10-line full-width box + character count; every write item has ⤢ เขียนเต็มจอ (BigWrite popup). New 📌 sets from the teacher's 11/19 hints (final_0_hints.json) -->
 <!-- v64 (2026-11-15): new families mini04 = 복습시험④ 11/18 (30–37과: mini04-* scored sets + mini04x-* spares) and a 기말 tile (exam 'final': the teacher's 복습문제 + 불규칙 정리 + 말하기 기말 연습 handed out 11/13); mini03 moves to the archive row -->
 <!-- v56 (2026-11-05 night): results no longer go missing until a reload — a `storage` listener redraws when another tab of the same browser writes (the cloud merge alone never redrew it: the shared localStorage already held the data), a cover re-reads in place (no scroll), an exam/practice paper whose attempt was submitted, cancelled or restarted elsewhere returns to its cover instead of writing stale answers or auto-submitting an empty paper at time-up, regrade() only rewrites the attempt on screen (C.resAt). Cards carry data-set; __kmu exposes go/setAns/store/C for the headless harness -->
@@ -17,18 +18,31 @@
 /* Layout: exam papers on a desk — a home board of the three exams, then per set: cover page → paper (exam or practice) → results.
    The teacher's red pen grades. */
 :root {
-  --desk: #e9edf2; --paper: #ffffff; --ink: #1b2533; --muted: #5d6b7c; --rule: #d5dce5;
+  --desk: #eef1f6; --paper: #ffffff; --ink: #1b2533; --muted: #566478; --rule: #dde3ec;
   --navy: #0f4c81; --navy-soft: #e6eef7; --red: #d22f2f; --red-soft: #fdecec; --ok: #1f7a4d; --ok-soft: #e5f4ec; --hi: #fff4c2; --half: #b45309; --half-soft: #fdefd9; --tip: #2f6b8f;
   --f-ko: "Noto Sans KR", "Noto Sans Thai", system-ui, sans-serif;
   --f-th: "Noto Sans Thai", "Noto Sans KR", system-ui, sans-serif;
   --f-disp: "Noto Serif KR", "Noto Sans KR", serif;
+  /* v72 design tokens: radius scale, layered shadows, one easing for every move */
+  --r-s: 9px; --r-m: 14px; --r-l: 20px;
+  --sh-1: 0 1px 2px rgba(15, 23, 42, .05), 0 2px 8px -2px rgba(15, 23, 42, .07);
+  --sh-2: 0 4px 14px -4px rgba(15, 23, 42, .13), 0 14px 34px -16px rgba(15, 23, 42, .2);
+  --sh-3: 0 10px 44px -8px rgba(15, 23, 42, .32);
+  --ease: cubic-bezier(.22, .9, .3, 1);
+  --tr: .18s var(--ease);
 }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
-  --desk: #10151c; --paper: #18202b; --ink: #e4e9f0; --muted: #9aa8b8; --rule: #2c3846; --navy: #7fb2e5; --navy-soft: #1d2b3b;
-  --red: #ff6b6b; --red-soft: #3a1f22; --ok: #5fd39a; --ok-soft: #173126; --hi: #3d3720; --half: #f2a541; --half-soft: #3a2c17; --tip: #8fc1e3; color-scheme: dark } }
+  --desk: #0e131a; --paper: #18202b; --ink: #e4e9f0; --muted: #9aa8b8; --rule: #2c3846; --navy: #7fb2e5; --navy-soft: #1d2b3b;
+  --red: #ff6b6b; --red-soft: #3a1f22; --ok: #5fd39a; --ok-soft: #173126; --hi: #3d3720; --half: #f2a541; --half-soft: #3a2c17; --tip: #8fc1e3; color-scheme: dark;
+  --sh-1: 0 1px 2px rgba(0, 0, 0, .35), 0 2px 8px -2px rgba(0, 0, 0, .3);
+  --sh-2: 0 4px 14px -4px rgba(0, 0, 0, .5), 0 14px 34px -16px rgba(0, 0, 0, .6);
+  --sh-3: 0 10px 44px -8px rgba(0, 0, 0, .65); } }
 :root[data-theme="dark"] {
-  --desk: #10151c; --paper: #18202b; --ink: #e4e9f0; --muted: #9aa8b8; --rule: #2c3846; --navy: #7fb2e5; --navy-soft: #1d2b3b;
-  --red: #ff6b6b; --red-soft: #3a1f22; --ok: #5fd39a; --ok-soft: #173126; --hi: #3d3720; --half: #f2a541; --half-soft: #3a2c17; --tip: #8fc1e3; color-scheme: dark }
+  --desk: #0e131a; --paper: #18202b; --ink: #e4e9f0; --muted: #9aa8b8; --rule: #2c3846; --navy: #7fb2e5; --navy-soft: #1d2b3b;
+  --red: #ff6b6b; --red-soft: #3a1f22; --ok: #5fd39a; --ok-soft: #173126; --hi: #3d3720; --half: #f2a541; --half-soft: #3a2c17; --tip: #8fc1e3; color-scheme: dark;
+  --sh-1: 0 1px 2px rgba(0, 0, 0, .35), 0 2px 8px -2px rgba(0, 0, 0, .3);
+  --sh-2: 0 4px 14px -4px rgba(0, 0, 0, .5), 0 14px 34px -16px rgba(0, 0, 0, .6);
+  --sh-3: 0 10px 44px -8px rgba(0, 0, 0, .65); }
 /* colour tones (the red pen stays red in every tone) */
 :root[data-palette="sakura"] { --desk: #f7eaee; --paper: #fffafb; --rule: #ecd3dc; --navy: #a8326e; --navy-soft: #fbe4ee; --hi: #fff1c9; }
 @media (prefers-color-scheme: dark) { :root[data-palette="sakura"]:not([data-theme="light"]) { --desk: #1a1216; --paper: #24191f; --rule: #3d2a33; --navy: #f08cb8; --navy-soft: #3a2230; --hi: #3d3720; } }
@@ -488,6 +502,225 @@ mark.vbk { background: var(--paper); color: var(--navy); border: 1.5px solid var
   .strip .btn.sm, .menu summary { white-space: nowrap; flex: none; padding-left: 9px; padding-right: 9px; } .strip .lbl { display: none; }
   .vopt .k { display: none; } .vtab { padding: 8px 12px; } }
 .vprog.all .prog-bar i { background: var(--ok); }
+
+/* ================================================================== v72 redesign layer
+   Overrides the old flat "exam paper" look with a soft, layered app look and adds motion everywhere.
+   Later rules win at equal specificity, so the base styles above stay as the safety net. */
+
+/* ---- backdrop: a quiet tinted glow that follows the palette's --navy */
+#scroller { background:
+  radial-gradient(1100px 480px at 85% -140px, color-mix(in srgb, var(--navy) 9%, transparent), transparent 70%),
+  radial-gradient(900px 480px at -120px 38%, color-mix(in srgb, var(--navy) 5%, transparent), transparent 70%); }
+
+/* ---- motion primitives */
+@keyframes pagein { from { opacity: 0; transform: translateY(10px); } }
+@keyframes popin  { from { opacity: 0; transform: translateY(14px) scale(.985); } }
+@keyframes fadein { from { opacity: 0; } }
+@keyframes menuin { from { opacity: 0; transform: translateY(-6px) scale(.98); } }
+@keyframes dockin { from { opacity: 0; transform: translate(-50%, 16px); } to { opacity: 1; transform: translate(-50%, 0); } }
+@keyframes stampin { from { opacity: 0; transform: scale(1.5) rotate(-5deg); } }
+.wrap > section:not([hidden]) { animation: pagein .3s var(--ease) both; }   /* hidden-toggle re-matches the selector → the animation restarts */
+#set .paper, #cat .exam { animation: pagein .32s var(--ease) both; }
+.menu[open] .pop { animation: menuin .16s var(--ease) both; }
+.bw { animation: fadein .18s both; } .bw-in { animation: popin .24s var(--ease) both; }
+.results { animation: popin .3s var(--ease) both; }
+.results .stamp { display: inline-block; animation: stampin .4s var(--ease) both .08s; }
+.vfb, .confirm, .resume, .notice, .fix { animation: popin .22s var(--ease) both; }
+.vcard { animation: pagein .25s var(--ease) both; }
+details[open] > :not(summary) { animation: pagein .22s var(--ease) both; }
+button, .btn, .mode-btn, .play, .vchip, .fchip, .vopt, .opt, .card, .tile, .utile, .vunit, .vnum, .menu summary, .sw, .crumb, .vtab, .tabbar .tab, .ig-n, .aibtn, .self button, .lp {
+  transition: background-color var(--tr), border-color var(--tr), color var(--tr), box-shadow var(--tr), transform var(--tr), opacity var(--tr); }
+.item { transition: background-color .3s var(--ease), box-shadow .3s var(--ease); }
+.btn:active, .mode-btn:active, .tile:active, .card:active, .utile:active, .vunit:active, .vopt:active, .opt:active, .vchip:active, .fchip:active, .play:active, .ig-n:active, .tabbar .tab:active { transform: scale(.975); }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-delay: 0ms !important; transition-duration: .01ms !important; } }
+
+/* ---- top strip: translucent blur bar */
+.strip { background: var(--paper); background: color-mix(in srgb, var(--paper) 78%, transparent);
+  -webkit-backdrop-filter: blur(14px) saturate(1.5); backdrop-filter: blur(14px) saturate(1.5);
+  border-bottom: 1px solid color-mix(in srgb, var(--rule) 72%, transparent); padding-top: 10px; padding-bottom: 10px; }
+.brand { letter-spacing: .01em; }
+.strip .btn.sm, .menu summary { border-radius: 999px; min-height: 36px; }
+.menu .pop { border-radius: var(--r-m); box-shadow: var(--sh-3); border-color: color-mix(in srgb, var(--rule) 80%, var(--navy)); }
+
+/* ---- shared surfaces */
+.exam, .paper { border-radius: var(--r-l); border-color: color-mix(in srgb, var(--rule) 82%, transparent); box-shadow: var(--sh-1); }
+.exam-h { border-bottom: 1px solid var(--rule); }
+.paper-head { border-bottom: 1px solid var(--rule); }
+.exam-h h2 { font-size: calc(clamp(20px, 2.8vw, 24px) * var(--ts, 1)); }
+.btn { border-radius: 10px; font-weight: 600; }
+.btn.primary { background: linear-gradient(180deg, color-mix(in srgb, var(--navy) 88%, var(--paper)), var(--navy)); border-color: transparent;
+  box-shadow: 0 2px 10px -2px color-mix(in srgb, var(--navy) 55%, transparent); }
+.btn:hover:not(:disabled) { background: var(--navy-soft); }
+.btn.primary:hover:not(:disabled) { background: var(--navy); filter: brightness(1.08); }
+.btn.red:hover:not(:disabled) { background: var(--red-soft); }
+.play { font-weight: 600; } .play:hover { background: var(--navy-soft); }
+.dday { box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--red) 25%, transparent); }
+
+/* ---- secondary text ≥ 14 px */
+.card .sk, .card .meta, .tile .m, .tile .s, .utile .uth, .utile .um, .qth, .sec-th, .grp-note, .exam-h p, .exam-sum, .hist,
+.vnote, .opt .th, .mode-btn .s, .hub-h small, .catnote, .home-tip, .crumbs, .legend, .g-status, .results .sub { font-size: calc(14px * var(--ts, 1)); }
+
+/* ---- "📌 วันนี้" card */
+.today { background: linear-gradient(135deg, color-mix(in srgb, var(--navy) 13%, var(--paper)), var(--paper) 58%);
+  border: 1px solid color-mix(in srgb, var(--navy) 24%, var(--rule)); border-radius: var(--r-l); box-shadow: var(--sh-2);
+  padding: 16px clamp(16px, 3vw, 24px) 14px; margin: 16px 0 22px; display: grid; gap: 2px; }
+.today-h { display: flex; align-items: baseline; gap: 10px; padding-bottom: 8px; }
+.today-h b { font-family: var(--f-disp); font-size: calc(21px * var(--ts, 1)); }
+.trow { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; padding: 10px 0;
+  border-top: 1px dashed color-mix(in srgb, var(--navy) 18%, var(--rule)); }
+.trow .tic { font-size: 21px; line-height: 1; }
+.trow .sp, .ig-h .sp { flex: 1; }
+.trow .dday { font-family: var(--f-ko); font-weight: 700; font-size: calc(13px * var(--ts, 1)); padding: 2px 11px; border-radius: 999px; background: var(--red-soft); }
+
+/* ---- home: hub rows */
+.hub-h { font-size: calc(19px * var(--ts, 1)); margin: 26px 0 12px; }
+.tiles { grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); gap: 10px; }
+.tile { grid-template-columns: auto 1fr; column-gap: 12px; align-items: start; align-content: start; min-height: 0;
+  padding: 14px 44px 14px 14px; border-radius: var(--r-m); box-shadow: var(--sh-1); }
+.tile .ic { grid-row: 1 / span 2; width: 46px; height: 46px; display: grid; place-items: center; font-size: 23px;
+  background: var(--navy-soft); border-radius: var(--r-s); }
+.tile .t, .tile .s, .tile .m, .tile > .grp-bar, .tile .badge { grid-column: 2; }
+.tile .t { font-size: calc(16.5px * var(--ts, 1)); }
+.tile .s { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.tile:hover, .card:hover, .utile:hover, .vunit:hover { transform: translateY(-2px); box-shadow: var(--sh-2);
+  border-color: color-mix(in srgb, var(--navy) 45%, var(--rule)); }
+.tile.hero { border: 1px solid color-mix(in srgb, var(--navy) 36%, var(--rule));
+  background: linear-gradient(120deg, color-mix(in srgb, var(--navy) 16%, var(--paper)), var(--paper) 62%); box-shadow: var(--sh-2); }
+.tile.hero .ic { width: 56px; height: 56px; font-size: 29px; }
+.tile.hero .t { font-size: calc(clamp(20px, 2.6vw, 24px) * var(--ts, 1)); }
+.pastbox { margin-top: 26px; }
+.pastbox summary { list-style: none; cursor: pointer; display: flex; align-items: center; gap: 8px; border-radius: var(--r-s); }
+.pastbox summary::-webkit-details-marker { display: none; }
+.pastbox summary .hub-h { margin: 0; flex: 1; }
+.pastbox summary::after { content: "▾"; color: var(--muted); font-size: 15px; transition: transform var(--tr); }
+.pastbox:not([open]) summary::after { transform: rotate(-90deg); }
+.pastbox summary:hover .hub-h { color: var(--navy); }
+.pastbox > .tiles { margin-top: 12px; }
+
+/* ---- category page: filter chips + folded note + score bar on cards */
+.filters { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 14px 0 2px; }
+.fchip { border: 1px solid var(--rule); background: var(--paper); border-radius: 999px; padding: 5px 14px; min-height: 36px;
+  font-size: calc(14px * var(--ts, 1)); color: var(--muted); }
+.fchip:hover { border-color: var(--navy); color: var(--navy); }
+.fchip[aria-pressed="true"] { background: var(--navy); border-color: var(--navy); color: var(--paper); font-weight: 600; }
+.fsep { width: 1px; height: 20px; background: var(--rule); margin: 0 4px; }
+.catnote { display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden; }
+.catnote.open { display: block; }
+.morebtn { background: none; border: 0; padding: 2px 0; color: var(--navy); font-size: calc(13.5px * var(--ts, 1)); text-decoration: underline; text-underline-offset: 3px; }
+.card { border-radius: var(--r-m); box-shadow: var(--sh-1); padding: 12px 14px 13px; }
+.cbar { display: flex; height: 5px; border-radius: 3px; background: var(--rule); overflow: hidden; margin-top: 5px; }
+.cbar i { display: block; height: 100%; border-radius: 3px; transition: width .4s var(--ease); }
+.cbar.ok i { background: var(--ok); } .cbar.half i { background: var(--half); } .cbar.low i { background: var(--red); }
+.utile { border-radius: var(--r-m); box-shadow: var(--sh-1); }
+.grp { border-top-color: color-mix(in srgb, var(--rule) 85%, transparent); }
+@media (max-width: 640px) { .skills.four { grid-template-columns: 1fr; } }
+
+/* ---- cover */
+.cover-top { margin: -4px 0 12px; }
+.cover-title { border: 0; border-radius: var(--r-m); padding: 26px 18px 20px;
+  background: linear-gradient(160deg, color-mix(in srgb, var(--navy) 10%, var(--paper)), var(--paper) 70%);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--navy) 22%, var(--rule)); }
+.cover-meta { border-top-color: color-mix(in srgb, var(--navy) 20%, var(--rule)); }
+.modes { margin-top: 18px; }
+.mode-btn { border-radius: var(--r-m); box-shadow: var(--sh-1); border-width: 1.5px; }
+.mode-btn:hover { transform: translateY(-2px); box-shadow: var(--sh-2); }
+.mode-btn.primary { background: linear-gradient(180deg, color-mix(in srgb, var(--navy) 86%, var(--paper)), var(--navy)); border-color: transparent;
+  box-shadow: 0 4px 16px -4px color-mix(in srgb, var(--navy) 60%, transparent); }
+.rules-d { margin: 18px 0 0; border: 1px solid var(--rule); border-radius: var(--r-m); background: color-mix(in srgb, var(--navy-soft) 55%, var(--paper)); }
+.rules-d summary { list-style: none; cursor: pointer; padding: 11px 16px; font-weight: 600; font-size: calc(14.5px * var(--ts, 1)); display: flex; align-items: center; gap: 8px; min-height: 44px; }
+.rules-d summary::-webkit-details-marker { display: none; }
+.rules-d summary::after { content: "▾"; margin-left: auto; color: var(--muted); transition: transform var(--tr); }
+.rules-d:not([open]) summary::after { transform: rotate(-90deg); }
+.rules-d .rules { border: 0; background: none; margin: 0; padding: 0 16px 12px; }
+.resume { border-radius: var(--r-m); }
+
+/* ---- paper: progress lives only in the dock; keep the last items clear of it */
+.paper.exam, .paper.practice, .paper.result { padding-bottom: 110px; }
+.item { scroll-margin-top: 64px; }
+.sec-hint { margin: 2px 0 6px; }
+:root[data-layout="split"] #paper .sec-l { top: calc(var(--strip-h, 52px) + 14px); max-height: calc(100vh - var(--strip-h, 52px) - 30px); }
+.exambar { border-radius: var(--r-s); }
+.paper.only-wrong .item.g-ok { display: none; }   /* ดูเฉพาะข้อที่เสียคะแนน */
+.results { border-radius: var(--r-m); box-shadow: var(--sh-2); border-width: 1.5px; }
+.results .legend .btn.sm { margin-left: auto; }
+
+/* ---- dock (bottom-centre pill) + item-number grid popup */
+.dock { left: 50%; right: auto; transform: translateX(-50%); border-radius: 999px; box-shadow: var(--sh-3);
+  border-color: color-mix(in srgb, var(--navy) 30%, var(--rule)); animation: dockin .32s var(--ease) both;
+  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); background: color-mix(in srgb, var(--paper) 92%, transparent); }
+.dock[hidden] { display: none; }
+.dock.up { left: auto; right: max(16px, env(safe-area-inset-right, 0px)); transform: none; animation: none; }
+.dock .bar { width: 76px; }
+.dock .dp, .dock .dt { white-space: nowrap; }
+.dock .ig-tip { color: var(--navy); font-size: 15px; }
+.ig { position: fixed; inset: 0; z-index: 59; background: color-mix(in srgb, #0b1220 44%, transparent);
+  display: flex; align-items: flex-end; justify-content: center; animation: fadein .16s both; }
+.ig-in { background: var(--paper); border-radius: var(--r-l) var(--r-l) 0 0; width: min(680px, 100%); max-height: 70vh; overflow: auto;
+  padding: 14px 18px calc(84px + env(safe-area-inset-bottom, 0px)); box-shadow: var(--sh-3); display: grid; gap: 12px; align-content: start;
+  animation: popin .24s var(--ease) both; }
+.ig-h { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; }
+.ig-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(52px, 1fr)); gap: 8px; }
+.ig-n { border: 1.5px solid var(--rule); background: var(--paper); color: var(--ink); border-radius: var(--r-s); min-height: 44px;
+  font-variant-numeric: tabular-nums; font-weight: 600; font-size: calc(15px * var(--ts, 1)); }
+.ig-n:hover { border-color: var(--navy); }
+.ig-n.done { border-color: var(--navy); background: var(--navy-soft); color: var(--navy); }
+.ig-n.ok { border-color: var(--ok); background: var(--ok-soft); color: var(--ok); }
+.ig-n.half { border-color: var(--half); background: var(--half-soft); color: var(--half); }
+.ig-n.ng { border-color: var(--red); background: var(--red-soft); color: var(--red); }
+.ig-n.pend { border-color: var(--muted); background: var(--desk); color: var(--muted); }
+
+/* ---- vocab page: start first, settings folded */
+.vgo { margin-top: 14px; }
+.vset { margin: 14px 0 0; border: 1px solid var(--rule); border-radius: var(--r-m); background: var(--paper); }
+.vset summary { list-style: none; cursor: pointer; padding: 10px 16px; min-height: 44px; display: flex; align-items: center; gap: 8px;
+  color: var(--muted); font-size: calc(14px * var(--ts, 1)); font-weight: 600; }
+.vset summary::-webkit-details-marker { display: none; }
+.vset summary::after { content: "▾"; margin-left: auto; transition: transform var(--tr); }
+.vset:not([open]) summary::after { transform: rotate(-90deg); }
+.vset .vopts { margin: 0; padding: 0 16px 14px; }
+.vset .vunits { margin: 0; padding: 0 16px 14px; }
+.vcard { border-radius: var(--r-m); box-shadow: var(--sh-1); }
+.vnum { border-radius: var(--r-m); }
+.vopt { border-radius: var(--r-m); }
+.vopt:not(:disabled):hover { transform: translateY(-1px); box-shadow: var(--sh-1); }
+.vchip[aria-pressed="true"] { box-shadow: 0 2px 8px -2px color-mix(in srgb, var(--navy) 50%, transparent); }
+
+/* ---- profile tables: rounded shell + sticky first column on narrow screens */
+.ptw { border: 1px solid var(--rule); border-radius: var(--r-m); }
+.ptab { min-width: 560px; }
+.ptab tbody th, .ptab thead th:first-child { position: sticky; left: 0; background: var(--paper); z-index: 1; }
+.ptab thead th:first-child { background: var(--navy-soft); }
+
+/* ---- options / inputs */
+.opt { border-radius: 10px; }
+.opt:hover { border-color: var(--navy); }
+.opt:has(input:checked) { box-shadow: inset 0 0 0 1px var(--navy); }
+textarea.wa, input.bl { transition: border-color var(--tr), background-color var(--tr); }
+.notice { border-radius: var(--r-s); }
+.box { border-radius: var(--r-s); border-color: color-mix(in srgb, var(--ink) 55%, var(--rule)); }
+
+/* ---- phone bottom tab bar (< 640 px); the strip's duplicate buttons hide there */
+.tabbar { display: none; }
+@media (max-width: 640px) {
+  .tabbar { position: fixed; display: flex; left: 0; right: 0; bottom: 0; z-index: 6;
+    background: color-mix(in srgb, var(--paper) 88%, transparent); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
+    border-top: 1px solid var(--rule);
+    padding: 5px max(8px, env(safe-area-inset-right, 0px)) max(5px, env(safe-area-inset-bottom, 0px)) max(8px, env(safe-area-inset-left, 0px)); }
+  .tabbar[hidden] { display: none; }
+  .tabbar .tab { flex: 1; display: grid; justify-items: center; gap: 1px; background: none; border: 0; border-radius: 10px;
+    color: var(--muted); font-size: calc(11.5px * var(--ts, 1)); font-weight: 600; padding: 4px 0 3px; min-height: 48px; }
+  .tabbar .tab.on { color: var(--navy); background: var(--navy-soft); }
+  .tabbar .tic { font-size: 20px; line-height: 1.2; }
+  #scroller { padding-bottom: 128px; }
+  #vocab-btn, #prof-btn { display: none; }
+  .dock { max-width: calc(100vw - 20px); }
+  /* paper header = one line of title + one line of meta */
+  .paper-head { grid-template-columns: 1fr; gap: 4px; }
+  .paper-head h1 { font-size: calc(19px * var(--ts, 1)); }
+  .namebox { display: flex; flex-wrap: wrap; gap: 2px 14px; }
+  .namebox span:nth-child(odd) { margin-right: -8px; }
+}
 </style>
 
 <div id="app"></div>
@@ -758,6 +991,12 @@ function resetSet(id) { gens[id] = genOf(id) + 1; ['ans', 'self', 'ai', 'score',
 function dday(date) { if (!date) return ''; const [y, m, dd] = date.split('-').map(Number), now = new Date();
   const d = Math.round((Date.UTC(y, m - 1, dd) - Date.UTC(now.getFullYear(), now.getMonth(), now.getDate())) / 86400000);
   return d > 0 ? `D-${d}` : d === 0 ? 'วันนี้' : 'ผ่านแล้ว'; }
+/* a category can carry several exam days (dates: [[date, label], …]): the chip shows the first one not yet past, so the 기말 tile
+   stops saying ผ่านแล้ว while 말하기 (11/23) and the 발표 (11/24) are still ahead */
+const nextEv = c => { const ds = c.dates || (c.date ? [[c.date, '']] : []); if (!ds.length) return null;
+  const now = new Date(), t0 = Date.UTC(now.getFullYear(), now.getMonth(), now.getDate());
+  return ds.find(([d]) => { const [y, m, dd] = d.split('-').map(Number); return Date.UTC(y, m - 1, dd) >= t0; }) || ds[ds.length - 1]; };
+const evChip = c => { const e = nextEv(c); return e ? html` <span class="dday">${dday(e[0])}${e[1] ? ' · ' + e[1] : ''}</span>` : null; };
 let homeDay = new Date().toDateString();   // a tab left open overnight re-draws the countdown when the date changes
 const dayS = signal(0);
 function refreshDay() { const t = new Date().toDateString(); if (t !== homeDay) { homeDay = t; dayS.value++; } }
@@ -789,13 +1028,13 @@ function show(which) { batch(() => { view.value = which; }); const sc = $('#scro
 function go(id) { if (location.hash.slice(1) !== id) location.hash = id; else openSet(id); }
 function route() { const id = location.hash.slice(1), mx = /^x\/([\w-]+)(?:\/(\d+))?$/.exec(id);
   if (id === 'profile') { leaveSet(); show('profile'); } else if (id === 'vocab') { leaveSet(); show('vocab'); }
-  else if (mx && CATS.some(c => c.id === mx[1])) { leaveSet(); catS.value = { id: mx[1], unit: mx[2] ? +mx[2] : null }; show('cat'); }
+  else if (mx && CATS.some(c => c.id === mx[1])) { leaveSet(); if (catS.peek().id !== mx[1]) catFilt.value = { sk: '', st: '' }; catS.value = { id: mx[1], unit: mx[2] ? +mx[2] : null }; show('cat'); }
   else if (id && SETS.some(s => s.id === id)) openSet(id); else { leaveSet(); show('home'); } }
 function leaveSet() { stopRuns(); stopExamClock(); curSt.value = null; }   // stopExamClock saves the remaining time
 window.addEventListener('hashchange', route);
 
 /* ------------------------------------------------------------------ open a set (cover) / start or resume an attempt */
-function resetRun() { kvs = {}; secs = {}; notice.value = ''; showTh.value = false; running.value = false; confirmN.value = 0; liveItem.value = ''; speaking.value = ''; recS.value = {}; spkS.value = {}; audioS.value = {}; }
+function resetRun() { kvs = {}; secs = {}; notice.value = ''; showTh.value = false; running.value = false; confirmN.value = 0; liveItem.value = ''; speaking.value = ''; recS.value = {}; spkS.value = {}; audioS.value = {}; gridS.value = false; onlyWrong.value = false; }
 /* another tab (storage event) or device (cloud merge) changed the stored data: redraw what reads the store; a cover re-reads its set;
    an open paper whose attempt was submitted / cancelled / restarted elsewhere returns to its cover instead of writing over the newer data */
 const staleAttempt = () => { const st = curSt.peek(), m = mode.peek(); if (!st || (m !== 'exam' && m !== 'practice')) return false;
@@ -1242,6 +1481,17 @@ function Strip() {
     <button class="btn sm" type="button" id="help-btn" onClick=${() => { stopRuns(); show('help'); }}>วิธีใช้</button>
   </div></div>`;
 }
+/* (v72) phone bottom tab bar (< 640 px, CSS-hidden elsewhere): หน้าแรก · ศัพท์ · คะแนน · ตั้งค่า; hidden inside an open paper (the Dock rules there) */
+function TabBar() {
+  const vw = view.value, md = mode.value, inPaper = vw === 'set' && md !== 'cover';
+  const tab = (h, ic, lab, on) => html`<button type="button" class=${'tab' + (on ? ' on' : '')} aria-current=${on ? 'page' : undefined} onClick=${() => { if (location.hash.slice(1) !== h) location.hash = h; else route(); }}><span class="tic" aria-hidden="true">${ic}</span>${lab}</button>`;
+  return html`<nav class="tabbar" id="tabbar" hidden=${inPaper} aria-label="เมนูหลัก">
+    ${tab('', '🏠', 'หน้าแรก', vw === 'home')}
+    ${VOCAB.length ? tab('vocab', '🔤', 'ศัพท์', vw === 'vocab') : null}
+    ${tab('profile', '📊', 'คะแนน', vw === 'profile')}
+    <button type="button" class="tab" onClick=${() => { const d = $('#settings'); if (d) { d.open = !d.open; $('#scroller').scrollTo({ top: 0, behavior: 'smooth' }); } }}><span class="tic" aria-hidden="true">⚙️</span>ตั้งค่า</button>
+  </nav>`;
+}
 function Transport() {
   const t = tpS.value;
   return html`<div class="tp" id="tp" hidden=${!t.show} role="group" aria-label="ควบคุมเสียง">
@@ -1262,6 +1512,7 @@ function dockNext() {
   next.scrollIntoView({ behavior: 'smooth', block: 'center' });
   const f = next.querySelector('input:not([type=radio]), textarea'); if (f && !f.readOnly) setTimeout(() => f.focus({ preventScroll: true }), 350);
 }
+const gridS = signal(false), onlyWrong = signal(false);   // (v72) item-number grid popup · results "ดูเฉพาะข้อที่เสียคะแนน"
 function Dock() {
   const st = curSt.value, md = mode.value, inSet = view.value === 'set' && st && md !== 'cover', up = dockUp.value;
   const n = answeredN.value, N = st ? itemCount(st) : 0, left = leftS.value; aiVer.value;
@@ -1270,9 +1521,28 @@ function Dock() {
   const aiTxt = AIS.value && aiBusy && aiProg && md === 'result' ? `🤖 ${aiProg.done}/${aiProg.total}` : '';
   return html`<div class=${'dock' + (up ? ' up' : '')} id="dock" hidden=${!inSet} style=${up ? 'top:' + up : undefined}>
     <button type="button" class=${'dt' + (warn ? ' warn' : '')} id="dock-t" title="เวลา" onClick=${() => { if (st && md === 'result') $('#results-slot').scrollIntoView({ behavior: 'smooth', block: 'start' }); }}>${t}</button>
-    <button type="button" class=${'dp' + (inSet && N && n === N ? ' all' : '')} id="dock-p" title="ไปข้อที่ยังไม่ตอบ" onClick=${dockNext}><span id="dock-n">${inSet ? `ตอบแล้ว ${n}/${N}` : '0/0'}</span><span class="bar"><i id="dock-bar" style=${{ width: inSet && N ? (100 * n / N) + '%' : '0' }}></i></span></button>
+    <button type="button" class=${'dp' + (inSet && N && n === N ? ' all' : '')} id="dock-p" title="ดูทุกข้อ · แตะเลขข้อเพื่อกระโดดไป" aria-expanded=${String(gridS.value)} onClick=${() => { gridS.value = !gridS.peek(); }}><span id="dock-n">${inSet ? `ตอบแล้ว ${n}/${N}` : '0/0'}</span><span class="bar"><i id="dock-bar" style=${{ width: inSet && N ? (100 * n / N) + '%' : '0' }}></i></span><span class="ig-tip" aria-hidden="true">▦</span></button>
     <span class="da" id="dock-ai" hidden=${!aiTxt} aria-live="polite">${aiTxt}</span>
   </div>`;
+}
+/* tapping the dock's progress button opens a grid of item numbers coloured by state → jump to the item */
+function ItemGrid() {
+  if (!gridS.value) return null;
+  const st = curSt.value, md = mode.value;
+  if (!st || view.value !== 'set' || md === 'cover') return null;
+  ansTick.value; answeredN.value; aiVer.value;
+  const g = md === 'result' && G.value ? G.value.items : null, rows = [];
+  st.sections.forEach((sec, si) => sec.items.forEach((it, ii) => { const k = si + '-' + ii;
+    const gi = g && g[k], cls = gi ? (gi.cls || '').trim().replace('g-', '') : isAnswered(C.ans[k]) ? 'done' : '';
+    rows.push({ k, n: it.n, cls }); }));
+  const jump = k => { gridS.value = false; requestAnimationFrame(() => { const d = $('#it' + k); if (d) d.scrollIntoView({ behavior: 'smooth', block: 'center' }); }); };
+  return html`<div class="ig" onClick=${e => { if (e.target === e.currentTarget) gridS.value = false; }}>
+    <div class="ig-in" role="dialog" aria-label="ไปที่ข้อ">
+      <div class="ig-h"><b>ไปที่ข้อ</b><span class="muted">${md === 'result' ? 'เขียว ถูก · ส้ม ครึ่ง · แดง ผิด · เทา รอตรวจ' : 'น้ำเงิน = ตอบแล้ว'}</span><span class="sp"></span>
+        ${md !== 'result' ? html`<button class="btn sm" type="button" onClick=${() => { gridS.value = false; dockNext(); }}>▶ ข้อที่ยังไม่ตอบ</button>` : null}
+        <button class="btn sm" type="button" aria-label="ปิด" onClick=${() => { gridS.value = false; }}>✕</button></div>
+      <div class="ig-grid">${rows.map(r => html`<button type="button" class=${'ig-n' + (r.cls ? ' ' + r.cls : '')} onClick=${() => jump(r.k)}>${r.n}</button>`)}</div>
+    </div></div>`;
 }
 
 /* ------------------------------------------------------------------ components: home board */
@@ -1284,9 +1554,10 @@ function Card({ st, short }) {
   if (att) badge = html`<span class="badge live">⏸ กำลังทำ ${answeredIn(st, store.get('ans:' + st.id, {}))}/${itemCount(st)}${att.mode === 'exam' && attLeft(att) !== null ? ' · เหลือ ' + fmt(attLeft(att)) : ''}</span>`;
   else if (sc) badge = html`<span class=${'badge' + (pct >= .8 ? ' good' : '')}>${oldSpk(sc) ? `ตอบ ${sc.s}/${sc.t}` : sc.spoken ? `${sc.s}/${sc.t} · ตอบ ${sc.n}/${sc.t} ข้อ` : `${sc.s}/${sc.t || tot}`}${sc.mode ? ' · ' + MODE_TH[sc.mode] : ''}</span>`;
   else badge = html`<span class="badge none">ยังไม่ได้ทำ</span>`;
+  const bar = sc && !oldSpk(sc) && !att ? html`<span class=${'cbar ' + (pct >= .8 ? 'ok' : pct >= .6 ? 'half' : 'low')}><i style=${'width:' + Math.round(pct * 100) + '%'}></i></span>` : null;   // last score as a coloured bar
   return html`<button class=${'card' + (att ? ' c-live' : sc ? (pct >= .8 ? ' c-good' : ' c-done') : '')} type="button" data-set=${st.id} onClick=${() => go(st.id)}>${short
-    ? html`<span class="tt ko">${SKILL[st.skill][0]} <small>${SKILL[st.skill][1]}</small></span><span class="meta">${meta}</span>${badge}`
-    : html`<span class="sk">${SKILL[st.skill][0]} · ${SKILL[st.skill][1]}</span><span class="tt">${st.title}</span><span class="meta">${meta}</span>${badge}`}</button>`;
+    ? html`<span class="tt ko">${SKILL[st.skill][0]} <small>${SKILL[st.skill][1]}</small></span><span class="meta">${meta}</span>${badge}${bar}`
+    : html`<span class="sk">${SKILL[st.skill][0]} · ${SKILL[st.skill][1]}</span><span class="tt">${st.title}</span><span class="meta">${meta}</span>${badge}${bar}`}</button>`;
 }
 /* ------------------------------------------------------------------ components: home hub → category page → (unit page) → set cover
    The hub (#) shows one tile per category; a tile opens #x/<cat> (the groups of that category, or — for the daily tests — a grid of unit tiles that
@@ -1296,6 +1567,7 @@ const UNITS = window.KMU_UNITS || {};   // {unit: {ko, th}} from the first line 
 /* first matching category wins, so the vocabulary and textbook-listening sets leave the midterm page. sec: 0 next exam · 1 daily practice · 2 past papers */
 const CATS = [
   { id: 'final', sec: 0, icon: '🎓', title: '기말시험', sub: 'ข้อสอบจำลอง 기말 ชุด A · B · ⭐ ข้อ 6 · 복습문제 ของครู · ชุดเก็งและข้อสอบจริง ③ ④', hero: true, date: '2026-11-20',
+    dates: [['2026-11-20', '쓰기·듣기·읽기'], ['2026-11-23', '말하기'], ['2026-11-24', '발표']],
     when: 'ศ. 20 พ.ย. 쓰기·듣기·읽기 · จ. 23 พ.ย. 말하기 · บท 23~37', note: 'ทุกอย่างของบท 23~37 อยู่ที่นี่: ข้อสอบจำลอง 기말 ชุด A (แบบ 복습문제 เปลี่ยนคำ) · ชุด B (แบบ 복습시험) · ชุดฝึกข้อ 6 ที่ครูย้ำ · 복습문제 + 불규칙 정리 ที่ครูแจก 13 พ.ย. · ชุดเก็งและข้อสอบจริงของ 복습시험 ③ (22~29) และ ④ (30~37) · 말하기 기말 연습', match: s => s.exam === 'final' || s.exam === 'mini04' || s.exam === 'mini03' },   // first match wins: the ③ ④ tiles empty out and hide
   { id: 'mini04', sec: 2, icon: '📄', title: '복습시험 ④', sub: 'บท 30~37 · สอบแล้ว 18 พ.ย. · ข้อสอบจริง + ชุดเก็ง', date: '2026-11-18',
     when: 'พ. 18 พ.ย. · บท 30~37 · 쓰기 100 · 읽기 10 · 듣기 10 · ข้อสอบจริง (mini04r) ถอดจากกระดาษ ⚠️ = ข้อที่พลาด',
@@ -1351,31 +1623,50 @@ function Tile({ c }) {
   const sets = CAT_SETS[c.id], n = sets.length, done = sets.filter(s => lastScore(s.id)).length, live = sets.filter(s => store.get('attempt:' + s.id, null)).length;
   return html`<button type="button" class=${'tile' + (c.hero ? ' hero' : '')} id=${'tile-' + c.id} onClick=${() => { location.hash = 'x/' + c.id; }}>
     <span class="ic" aria-hidden="true">${c.icon}</span>
-    <span class="t ko">${c.title}${c.date ? html` <span class="dday">${dday(c.date)}</span>` : null}</span>
+    <span class="t ko">${c.title}${evChip(c)}</span>
     <span class="s">${c.sub}</span>
     <span class="m"><span>${n} ชุด</span><span>ทำแล้ว ${done}/${n}</span>${live ? html`<span class="badge live">⏸ ค้างอยู่ ${live}</span>` : null}</span>
     <span class="grp-bar"><i style=${'width:' + (100 * done / n) + '%'}></i></span>
     <span class="go" aria-hidden="true">›</span></button>`;
 }
-/* sets left half-done (an attempt is stored), straight from the home hub */
-function ResumeBar() {
-  storeVer.value;
+/* "📌 วันนี้" card on top of the home board: the next exam still ahead, sets left half-done (the old ResumeBar) and today's
+   vocabulary queue (the old VTeaser) in one glance */
+const pastOpen = signal(false);   // the 🗂️ past-exams shelf stays collapsed by default
+function TodayCard() {
+  storeVer.value; dayS.value;
+  const now = new Date(), t0 = Date.UTC(now.getFullYear(), now.getMonth(), now.getDate());
+  const evs = [];
+  CATS.forEach(c => (c.dates || (c.date ? [[c.date, '']] : [])).forEach(([d, lab]) => {
+    const [y, m, dd] = d.split('-').map(Number); if (Date.UTC(y, m - 1, dd) >= t0) evs.push({ c, d, lab, u: Date.UTC(y, m - 1, dd) }); }));
+  evs.sort((a, b) => a.u - b.u);
+  const up = evs[0];
   const live = SETS.filter(s => store.get('attempt:' + s.id, null));
-  if (!live.length) return null;
-  return html`<div class="resume-bar" id="resume-bar"><span>⏸ <b>ทำค้างอยู่</b></span>${live.slice(0, 4).map(s => html`<button class="btn sm" type="button" onClick=${() => go(s.id)}>${s.title} · ${answeredIn(s, store.get('ans:' + s.id, {}))}/${itemCount(s)}</button>`)}${live.length > 4 ? html`<span class="muted">+${live.length - 4}</span>` : null}</div>`;
+  const q = VOCAB.length ? vInfo() : null;
+  return html`<section class="today" id="today">
+    <div class="today-h"><b>📌 วันนี้</b><span class="muted">${now.toLocaleDateString('th-TH', { weekday: 'long', day: 'numeric', month: 'long' })}</span></div>
+    <div class="trow">${up ? html`<span class="tic" aria-hidden="true">${up.c.icon}</span><b class="ko">${up.c.title}</b>${up.lab ? html`<span class="ko muted">${up.lab}</span>` : null}<span class="dday">${dday(up.d)}</span><span class="sp"></span><button class="btn sm primary" type="button" onClick=${() => { location.hash = 'x/' + up.c.id; }}>ไปที่ชุดฝึก ›</button>`
+      : html`<span class="tic" aria-hidden="true">🎉</span><b>สอบครบทุกสนามของเทอมนี้แล้ว</b><span class="muted">ทบทวนชุดไหนก็ได้ตามสบาย</span>`}</div>
+    ${live.length ? html`<div class="trow" id="resume-bar"><span class="tic" aria-hidden="true">⏸</span><b>ทำค้างอยู่</b>${live.slice(0, 3).map(s => html`<button class="btn sm" type="button" onClick=${() => go(s.id)}>${s.title} · ${answeredIn(s, store.get('ans:' + s.id, {}))}/${itemCount(s)}</button>`)}${live.length > 3 ? html`<span class="muted">+${live.length - 3}</span>` : null}</div>` : null}
+    ${q ? html`<div class="trow"><span class="tic" aria-hidden="true">🔤</span><b>ศัพท์วันนี้</b><span class="muted">${q.sess ? `ทบทวน ${q.review} + คำใหม่ ${q.add} = ${q.sess} คำ` : 'ครบรอบของวันนี้แล้ว 🎉'}${q.streak ? ` · ฝึกติดต่อกัน ${q.streak} วัน` : ''}</span><span class="sp"></span><button class="btn sm primary" type="button" id="vteaser-go" onClick=${goVocab}>▶ ฝึกศัพท์</button></div>` : null}
+  </section>`;
 }
 function Home() {
   storeVer.value; dayS.value;
-  const sec = (i, h, sub, lead) => { const cs = CATS.filter(c => c.sec === i && CAT_SETS[c.id].length);
-    return cs.length ? html`<h3 class="hub-h">${h} <small>${sub}</small></h3>${lead || null}<div class="tiles">${cs.map(c => html`<${Tile} c=${c} />`)}</div>` : null; };
-  return html`<p class="home-tip">เลือกหมวดข้อสอบ → เลือกชุด → หน้าปกจะบอกเวลาและกติกา → <b>เริ่มสอบจริง</b> (จับเวลา เสียงเล่นเอง) หรือ <b>ฝึกทำ</b> (ไม่จับเวลา ดูคำแปลได้)</p>
-    <${ResumeBar} />
+  const sec = (i, h, sub) => { const cs = CATS.filter(c => c.sec === i && CAT_SETS[c.id].length);
+    return cs.length ? html`<h3 class="hub-h">${h} <small>${sub}</small></h3><div class="tiles">${cs.map(c => html`<${Tile} c=${c} />`)}</div>` : null; };
+  const past = CATS.filter(c => c.sec === 2 && CAT_SETS[c.id].length);
+  return html`<${TodayCard} />
     ${sec(0, '⏳ ใกล้ถึงวันสอบ', 'ทำชุดจำลองก่อนสอบจริง')}
-    ${sec(1, '📚 ฝึกประจำวัน', 'ศัพท์ · ข้อสอบรายบท · ฟังเสียงจริง', html`<${VTeaser} />`)}
-    ${sec(2, '🗂️ ข้อสอบที่ผ่านมาแล้ว', '복습시험 ② · 중간시험 · ชุดทบทวนของครู')}`;
+    ${sec(1, '📚 ฝึกประจำวัน', 'ศัพท์ · ข้อสอบรายบท · ฟังเสียงจริง')}
+    ${past.length ? html`<details class="pastbox" open=${pastOpen.value} onToggle=${e => { pastOpen.value = e.target.open; }}>
+      <summary><h3 class="hub-h">🗂️ ข้อสอบที่ผ่านมาแล้ว <small>복습시험 ② ③ ④ · 중간시험 · ชุดทบทวนของครู · ${past.length} หมวด</small></h3></summary>
+      <div class="tiles">${past.map(c => html`<${Tile} c=${c} />`)}</div>
+    </details>` : null}`;
 }
 function CatHead({ c, sub, done, n }) {
-  return html`<div class="exam-h"><h2 class="ko">${c.icon} ${c.title}${sub ? ' · ' + sub : ''}</h2>${c.date ? html`<span class="dday">${dday(c.date)}</span>` : null}<span class="muted">${c.when}</span>${c.note ? html`<p>${c.note}</p>` : null}</div>
+  const [more, setMore] = useState(false), long = (c.note || '').length > 90;   // long notes fold to one line + อ่านต่อ
+  return html`<div class="exam-h"><h2 class="ko">${c.icon} ${c.title}${sub ? ' · ' + sub : ''}</h2>${evChip(c)}<span class="muted">${c.when}</span>
+      ${c.note ? html`<p class=${'catnote' + (more || !long ? ' open' : '')}>${c.note}</p>${long ? html`<button type="button" class="morebtn" onClick=${() => setMore(!more)}>${more ? 'ย่อ ▴' : 'อ่านต่อ ▾'}</button>` : null}` : null}</div>
     <p class="exam-sum">ทำแล้ว ${done}/${n} ชุด</p>`;
 }
 /* #x/daily — one tile per unit, newest first */
@@ -1401,15 +1692,33 @@ function UnitPage({ c, u }) {
       ${sets.length ? groups.map(g => html`<${Group} g=${g} byPaper=${byPaper} />`) : html`<p class="notice">ยังไม่มีชุดข้อสอบของบทนี้</p>`}
     </article></section>`;
 }
+/* (v72) tap filters on a category page: skill + status; cleared when the category changes (route()) */
+const catFilt = signal({ sk: '', st: '' });
+const filtPass = (s, f) => { if (f.sk && s.skill !== f.sk) return false; const sc = lastScore(s.id);
+  if (f.st === 'new') return !sc; if (f.st === 'done') return !!sc;
+  if (f.st === 'low') return !!sc && !oldSpk(sc) && sc.s / (sc.t || setTotal(s)) < .8; return true; };
+function Filters({ sets }) {
+  const f = catFilt.value;
+  const chip = (on, lab, patch) => html`<button type="button" class="fchip" aria-pressed=${String(on)} onClick=${() => { catFilt.value = { ...f, ...patch }; }}>${lab}</button>`;
+  const sks = ORDER.filter(s => sets.some(x => x.skill === s));
+  return html`<div class="filters" role="group" aria-label="กรองชุดข้อสอบ">
+    ${chip(!f.sk && !f.st, 'ทั้งหมด', { sk: '', st: '' })}
+    ${sks.length > 1 ? sks.map(s => chip(f.sk === s, SKILL[s][0] + ' ' + SKILL[s][1], { sk: f.sk === s ? '' : s })) : null}
+    <span class="fsep" aria-hidden="true"></span>
+    ${[['new', 'ยังไม่ทำ'], ['done', 'ทำแล้ว'], ['low', 'ต่ำกว่า 80%']].map(([k, lab]) => chip(f.st === k, lab, { st: f.st === k ? '' : k }))}
+  </div>`;
+}
 function Category() {
   storeVer.value; dayS.value;
   const { id, unit } = catS.value, c = CATS.find(x => x.id === id);
   if (!c) return null;
   if (c.kind === 'units') return unit ? html`<${UnitPage} c=${c} u=${unit} />` : html`<${UnitGrid} c=${c} />`;
-  const sets = CAT_SETS[c.id], { groups, byPaper } = groupsOf(sets);
+  const sets = CAT_SETS[c.id], f = catFilt.value, fsets = sets.filter(s => filtPass(s, f)), { groups, byPaper } = groupsOf(fsets);
   return html`<section id="cat"><${Crumbs} items=${[{ label: 'หน้าแรก', hash: '' }, { label: c.title }]} />
     <article class="exam"><${CatHead} c=${c} done=${sets.filter(s => lastScore(s.id)).length} n=${sets.length} />
-      ${groups.map(g => html`<${Group} g=${g} byPaper=${byPaper} />`)}
+      ${sets.length > 6 ? html`<${Filters} sets=${sets} />` : null}
+      ${fsets.length ? groups.map(g => html`<${Group} g=${g} byPaper=${byPaper} />`)
+        : html`<p class="notice">ไม่มีชุดที่ตรงตัวกรอง — <button class="crumb" type="button" onClick=${() => { catFilt.value = { sk: '', st: '' }; }}>ล้างตัวกรอง</button></p>`}
     </article></section>`;
 }
 
@@ -1420,17 +1729,17 @@ const RULES = {
   listening: ['โหมดสอบจริง: ครูอ่านเลขข้อ เสียงเล่นเองตอนละ 2 รอบ แล้วมีเวลาตอบก่อนไปตอนถัดไป กดฟังซ้ำและดูสคริปต์ไม่ได้จนกว่าจะส่ง', 'โหมดฝึก: กดฟังได้ไม่จำกัด เปิดสคริปต์ได้'],
   speaking: ['โหมดสอบจริง: ครูถามทีละข้อ มีเวลาตอบข้อละ ' + SPEAK_SECS + ' วินาที แล้วไปข้อถัดไปเอง', 'โหมดฝึก: กด ▶ ถาม ทีละข้อ แล้วกด ตรวจ ได้ทันที', 'คะแนนข้อพูด: AI ตรวจหลังส่ง (ถูก 1 · ครึ่ง 0.5 · ผิด 0) ไม่เห็นด้วยกด ถูก / ครึ่ง / ผิด แก้เองได้ทุกข้อ', '○ ✕ ใต้ข้อคือเช็กคำสำคัญ ไม่ใช่คะแนน · เว้นวรรคที่ต่างเพราะถอดเสียงไม่หักคะแนน']
 };
+const rulesOpen = signal(false);   // (v72) the cover's rules fold away so the start buttons sit above the fold
 function Cover() {
   storeVer.value;
   const st = curSt.peek(), ex = EXAMS.find(e => e.id === st.exam), tot = setTotal(st), n = itemCount(st), min = setMinutes(st);
   const att = store.get('attempt:' + st.id, null), last = lastScore(st.id), hist = store.get('hist:' + st.id, []), answered = answeredIn(st, C.ans);
   const expired = att && att.mode === 'exam' && attLeft(att) !== null && attLeft(att) <= 0;
-  return html`<article class="paper">
+  return html`<article class="paper cover">
+    <div class="cover-top"><button class="btn sm" type="button" id="cover-back" onClick=${() => { location.hash = parentOf(st).hash; }}>← ${parentOf(st).label}</button></div>
     <div class="cover-title"><div class="cover-org">국민대학교 한국어교육센터 · 한국어 1급</div><h1 class="ko">${st.title}</h1>
       <div class="cover-exam">${ex ? ex.title : ''} · ${SKILL[st.skill][0]} (${SKILL[st.skill][1]})</div>
       <div class="cover-meta"><div><span>이름</span><b>빔</b></div><div><span>문항</span><b>${n}문항</b></div><div><span>점수</span><b>${tot}점</b></div><div><span>시간</span><b>${min}분</b></div></div></div>
-    <div class="rules"><h3>수험 유의사항 · กติกา</h3><ul>${st.intro ? html`<li>${st.intro}</li>` : null}${RULES[st.skill].map(r => html`<li>${r}</li>`)}</ul></div>
-    ${st.skill === 'speaking' && FRAMED ? html`<p class="notice">ลิงก์ claude.ai ใช้ไมค์ของเว็บไม่ได้ — ตอบด้วยไมค์ของแป้นพิมพ์: แตะช่องคำตอบ สลับแป้นเป็นภาษาเกาหลี กด 🎤 บนแป้น (iPad/iPhone/Android) หรือ Win+H บน Windows · บน PC เปิดผ่าน start.sh จะใช้ไมค์ของเว็บและอัดเสียงได้</p>` : null}
     ${att ? html`<div class="resume">
       ${expired ? html`<div><b>หมดเวลาแล้ว</b> — การสอบจริงที่ค้างไว้ (ตอบแล้ว ${answered}/${n} ข้อ) </div>`
         : html`<div><b>มีการทำค้างอยู่</b> — โหมด${MODE_TH[att.mode]} ตอบแล้ว ${answered}/${n} ข้อ${att.mode === 'exam' ? ` · เหลือเวลา ${fmt(attLeft(att))} (หยุดเวลาไว้)` : ''}</div>`}
@@ -1441,9 +1750,11 @@ function Cover() {
       <button class="mode-btn" type="button" onClick=${() => startSet('practice')}><span class="t">✎ ฝึกทำ</span><span class="s">ไม่จับเวลา · ดูคำแปล ฟังซ้ำ และตรวจได้ตามสบาย</span></button></div>
     ${last && !att ? html`<div class="last"><span>ผลล่าสุด <b>${oldSpk(last) ? `ตอบ ${last.s}/${last.t} ข้อ (ยังไม่มีคะแนน)` : last.spoken ? `คะแนน ${last.s}/${last.t} · ตอบ ${last.n}/${last.t} ข้อ` : `${last.s}/${last.t || tot}`}</b> (${MODE_TH[last.mode] || 'ทำแล้ว'} · ${dateTh(last.at)})</span>
       <button class="btn sm" type="button" onClick=${() => { C.lastMode = last.mode; mode.value = 'result'; finishGrading('view'); }}>📊 ดูผลและเฉลย</button></div>` : null}
-    ${last || att || hist.length ? html`<p class="reset">${resetAsk.value === st.id ? html`<span>ล้างคำตอบ คะแนน ประวัติ และสถานะของชุดนี้ทั้งหมด (รวมที่ซิงก์ไว้) กลับเป็น "ยังไม่ได้ทำ"?</span> <button class="btn sm danger" type="button" onClick=${() => resetSet(st.id)}>🗑 ยืนยันล้าง</button> <button class="btn sm" type="button" onClick=${() => { resetAsk.value = ''; }}>ยกเลิก</button>` : html`<button class="btn sm" type="button" onClick=${() => { resetAsk.value = st.id; }}>🗑 ล้างผลชุดนี้</button>`}</p>` : null}
+    ${st.skill === 'speaking' && FRAMED ? html`<p class="notice">ลิงก์ claude.ai ใช้ไมค์ของเว็บไม่ได้ — ตอบด้วยไมค์ของแป้นพิมพ์: แตะช่องคำตอบ สลับแป้นเป็นภาษาเกาหลี กด 🎤 บนแป้น (iPad/iPhone/Android) หรือ Win+H บน Windows · บน PC เปิดผ่าน start.sh จะใช้ไมค์ของเว็บและอัดเสียงได้</p>` : null}
+    <details class="rules-d" open=${rulesOpen.value} onToggle=${e => { rulesOpen.value = e.target.open; }}><summary>📋 수험 유의사항 · กติกาและวิธีตรวจ</summary>
+      <div class="rules"><ul>${st.intro ? html`<li>${st.intro}</li>` : null}${RULES[st.skill].map(r => html`<li>${r}</li>`)}</ul></div></details>
     ${hist.length > 1 ? html`<p class="hist">ประวัติ: ${hist.slice().reverse().map(e => html`<span>${e.s}/${e.t} ${MODE_TH[e.mode] ? '(' + MODE_TH[e.mode] + ')' : ''} ${dateTh(e.at)}</span>`)}</p>` : null}
-    <div class="actions"><button class="btn" type="button" id="cover-back" onClick=${() => { location.hash = parentOf(st).hash; }}>← กลับ ${parentOf(st).label}</button></div>
+    ${last || att || hist.length ? html`<p class="reset">${resetAsk.value === st.id ? html`<span>ล้างคำตอบ คะแนน ประวัติ และสถานะของชุดนี้ทั้งหมด (รวมที่ซิงก์ไว้) กลับเป็น "ยังไม่ได้ทำ"?</span> <button class="btn sm danger" type="button" onClick=${() => resetSet(st.id)}>🗑 ยืนยันล้าง</button> <button class="btn sm" type="button" onClick=${() => { resetAsk.value = ''; }}>ยกเลิก</button>` : html`<button class="btn sm" type="button" onClick=${() => { resetAsk.value = st.id; }}>🗑 ล้างผลชุดนี้</button>`}</p>` : null}
   </article>`;
 }
 
@@ -1456,7 +1767,7 @@ function Paper() {
   const st = curSt.peek(), md = mode.peek(), ex = EXAMS.find(e => e.id === st.exam), tot = setTotal(st), th = showTh.value;
   const stopBtn = html`<button class="btn sm red" type="button" data-stop="1" disabled=${!running.value} onClick=${stopRuns}>${st.skill === 'listening' ? '■ หยุดเสียง' : '■ หยุด'}</button>`;
   const pauseBtn = (cls) => html`<button class=${'btn sm' + cls} type="button" onClick=${pauseSet}>⏸ พักไว้ก่อน</button>`;
-  return html`<article class=${'paper ' + md + (th ? ' show-th' : '')} id="paper">
+  return html`<article class=${'paper ' + md + (th ? ' show-th' : '') + (md === 'result' && onlyWrong.value ? ' only-wrong' : '')} id="paper">
     <div class="paper-head"><div><h1 class="ko">${st.title}</h1><p>${ex ? ex.title : ''} · ${SKILL[st.skill][0]} (${SKILL[st.skill][1]})</p></div>
       <div class="namebox"><span>이름</span><span>빔</span><span>점수</span><span>${tot}점</span><span>시간</span><span>${setMinutes(st)}분</span></div></div>
     <div id="results-slot">${md === 'result' ? html`<${Results} />` : null}</div>
@@ -1467,7 +1778,6 @@ function Paper() {
         : html`<button class="btn sm" type="button" onClick=${() => $('#results-slot').scrollIntoView({ behavior: 'smooth', block: 'start' })}>↑ ดูสรุปผล</button>`}
     </div>
     ${notice.value ? html`<p class="notice" id="run-notice" role="status">${notice.value}</p>` : null}
-    ${md !== 'result' ? html`<${Prog} />` : null}
     ${st.sections.map((sec, si) => html`<${Section} sec=${sec} si=${si} />`)}
     <div class="actions" id="end-actions">
       ${md !== 'result' ? html`<button class="btn primary" type="button" onClick=${() => submit('user')}>✔ ส่งคำตอบ · ตรวจด้วยปากกาแดง</button>`
@@ -1475,23 +1785,19 @@ function Paper() {
       <button class="btn" type="button" onClick=${() => { if (md === 'exam' || md === 'practice') pauseSet(); else openSet(st.id); }}>← หน้าปก</button>
     </div>
     <div id="confirm-slot">${confirmN.value > 0 ? html`<div class="confirm" role="alertdialog"><div><b>ยังไม่ได้ตอบ ${confirmN.value} ข้อ</b> — ส่งเลยหรือกลับไปทำต่อ?</div>
-      <div class="actions"><button class="btn red" type="button" onClick=${() => submit('force')}>ส่งเลย</button><button class="btn" type="button" onClick=${() => { confirmN.value = 0; $('#dock-p').click(); }}>กลับไปทำต่อ</button></div></div>` : null}</div>
+      <div class="actions"><button class="btn red" type="button" onClick=${() => submit('force')}>ส่งเลย</button><button class="btn" type="button" onClick=${() => { confirmN.value = 0; dockNext(); }}>กลับไปทำต่อ</button></div></div>` : null}</div>
   </article>`;
 }
-/* big progress panel (sticky under the strip): answered count, % and the exam clock — it alone re-renders on the clock tick */
-function Prog() {
-  const st = curSt.peek(), md = mode.peek(), N = itemCount(st), n = answeredN.value, pc = N ? Math.round(100 * n / N) : 0, left = leftS.value, warn = left !== null && left <= 60;
-  return html`<div class=${'prog' + (pc === 100 ? ' all' : '')} id="prog"><div class="prog-row"><b id="prog-n">ตอบแล้ว ${n}/${N} ข้อ</b><span id="prog-p">${pc}%</span><span class="sp"></span>
-    <b id="prog-t" class=${md === 'exam' && warn ? 'warn' : undefined}>${md === 'exam' ? '⏱ เหลือ ' + fmt(Math.max(0, Math.round(left || 0))) : '✎ ไม่จับเวลา'}</b></div>
-    <div class="prog-bar"><i id="prog-a" style=${{ width: pc + '%' }}></i></div>
-    ${md === 'exam' ? html`<div class="prog-bar time"><i id="prog-time" class=${warn ? 'warn' : undefined} style=${{ width: (100 * (left || 0) / (setMinutes(st) * 60)) + '%' }}></i></div>` : null}</div>`;
-}
+/* (v72) the old sticky Prog panel is gone — progress and the exam clock live only in the Dock (bottom bar) */
 function Section({ sec, si }) {
   const ss = secSig(si).value, md = mode.peek(), exam = md === 'exam', n = playsS.value[si] || 0, [open, setOpen] = useState(md === 'result');
+  /* a hint repeated under every item of the section shows once up here instead */
+  const shared = sec.items.length > 1 && sec.items[0].hint && sec.items.every(it => it.hint === sec.items[0].hint) ? sec.items[0].hint : null;
   return html`<section class=${'sec' + (ss.live ? ' live' : '')} id=${'sec' + si}>
     <div class="sec-l">
       <h2 class="sec-h">${sec.h}</h2>
       ${sec.th ? html`<p class="sec-th">${sec.th}</p>` : null}
+      ${shared ? html`<div class="qth hint sec-hint">💡 ${shared}</div>` : null}
       ${sec.box ? html`<div class="box">${dlg(sec.box)}</div>` : null}
       ${sec.img ? html`<${Pics} ids=${sec.img} />` : null}
       ${sec.passage ? html`<div class="passage">${sec.passage.map(l => html`<p><span class="ko">${l.ko}</span><span class="th">${l.th}</span></p>`)}</div>` : null}
@@ -1503,7 +1809,7 @@ function Section({ sec, si }) {
         <div class="script" hidden=${!open}>${sec.script.map((l, i) => html`<p data-i=${i} class=${speaking.value === `${si}-${i}` ? 'speaking' : undefined}>
           <button class="lp" type="button" aria-label="ฟังบรรทัดนี้" onClick=${async e => { const kl = e.currentTarget.parentNode.querySelector('.kline'); stopRuns(); const id = ++runId; speaking.value = `${si}-${i}`; await say(l.ko, l.s, kl); if (id === runId) speaking.value = ''; }}>▶</button>${l.who ? html`<span class="who ko">${l.who}: </span>` : null}<${Kline} cls="ko kline" text=${l.ko} /><span class="th">${l.th}</span></p>`)}</div>` : null}
     </div>
-    <div class="sec-r">${sec.items.map((it, ii) => html`<${Item} it=${it} k=${si + '-' + ii} />`)}</div>
+    <div class="sec-r">${sec.items.map((it, ii) => html`<${Item} it=${it} k=${si + '-' + ii} noHint=${!!shared} />`)}</div>
   </section>`;
 }
 /* dialogue prompts: every speaker turn on its own line ("가: …? 나: …" → two lines); the label must follow sentence-final
@@ -1511,7 +1817,7 @@ function Section({ sec, si }) {
 const SPK = /[ \t]+(?=(?:가|나|다|라|A|B|남자|여자|[가-힣]{1,4} 씨)[ \t]?:[ \t])|(?<=[.?!。)）]|___)[ \t]+(?=[가-힣A-Za-z]{1,5}[ \t]?:[ \t])/g;
 const dlg = t => typeof t === 'string' ? t.replace(SPK, '\n') : t;
 const setBlank = (k, i, v) => { const a = C.ans[k] || []; a[i] = v; setAns(k, a); };
-function Item({ it, k }) {
+function Item({ it, k, noHint }) {
   const md = mode.peek(), ro = md === 'result', a = (kv(k).value, C.ans[k]);   // reading kv(k) subscribes this item (only) to its own answer
   const gi = ro && G.value ? G.value.items[k] : null;
   let bi = 0;
@@ -1553,7 +1859,7 @@ function Item({ it, k }) {
           ${SR && !FRAMED && !ro ? html`<button class="play" type="button" data-mic=${k} onClick=${() => { if (activeFinish[k]) activeFinish[k](); else { stopRuns(); listen(k, it, ++runId); } }}>🎙 ตอบ</button>` : null}
           <button class="play" type="button" onClick=${() => checkSpeak(k)}>ตรวจ</button>` : null}
         <span class="rec" hidden=${rec === undefined}>${rec}</span></div>` : null}
-      ${it.hint ? html`<div class="qth hint">💡 ${it.hint}</div>` : null}
+      ${it.hint && !noHint ? html`<div class="qth hint">💡 ${it.hint}</div>` : null}
       <textarea class=${'wa' + (isLong(it) ? ' long' : '')} lang="ko" rows=${isLong(it) ? 10 : 1} id=${'ta' + k} aria-label=${'คำตอบข้อ ' + it.n} placeholder=${it.type === 'speak' ? 'คำตอบ (ไมค์ถอดเสียงให้ หรือพิมพ์เอง)' : isLong(it) ? 'เขียนเรียงความที่นี่ (หรือกด ⤢ เขียนเต็มจอ)' : 'เขียนคำตอบ'} value=${a || ''} readOnly=${ro} ref=${el => el && requestAnimationFrame(() => grow(el))} onInput=${e => { setAns(k, e.target.value); grow(e.target); }}></textarea>
       ${it.type === 'write' ? html`<div class=${'wa-tools' + (isLong(it) ? '' : ' short')} style=${isLong(it) ? undefined : { marginLeft: 0 }}>${isLong(it) ? html`<span class=${'cnt' + (chars(a) >= 270 ? ' ok' : '')}>${chars(a)} ตัวอักษร · เป้าประมาณ 300</span>` : null}<button class="play" type="button" onClick=${() => { bigW.value = k; }}>⤢ เขียนเต็มจอ</button></div>` : null}
       <div class="out">${it.type === 'speak' ? html`<${SpeakOut} it=${it} k=${k} />` : null}</div>` : null}
@@ -1615,7 +1921,7 @@ function Results() {
   return html`<section class="results" id="results" aria-live="polite">
     <div class="top"><span class="stamp">${g.sum}/${g.tot}</span><div><div><b>${spoken ? `สัมภาษณ์เสร็จแล้ว · ตอบ ${answeredIn(st, C.ans)}/${itemCount(st)} ข้อ · คะแนน ${g.sum}/${g.tot} · ` : ''}${g.sum === g.tot ? 'ถูกทุกข้อ ✓' : `เสีย ${Math.round((g.tot - g.sum) * 100) / 100} คะแนน`}</b>${g.pending.length ? ` · รอ AI ตรวจ ${g.pending.length} ข้อ` : ''}</div><div class="sub">${sub}</div></div></div>
     ${!spoken && g.perSec.length > 1 ? html`<table><tbody><tr><th>ตอน</th><th>คะแนน</th></tr>${g.perSec.map(s => html`<tr><td class="ko">${s.h}</td><td>${s.sum}/${s.tot}</td></tr>`)}</tbody></table>` : null}
-    ${html`<div class="legend"><span class="l-ok">ถูก</span><span class="l-half">ครึ่งคะแนน</span><span class="l-ng">ผิด</span><span class="l-pend">รอตรวจ</span></div>`}
+    ${html`<div class="legend"><span class="l-ok">ถูก</span><span class="l-half">ครึ่งคะแนน</span><span class="l-ng">ผิด</span><span class="l-pend">รอตรวจ</span>${g.lost.length ? html`<button class="btn sm" type="button" id="only-wrong" aria-pressed=${String(onlyWrong.value)} onClick=${() => { onlyWrong.value = !onlyWrong.peek(); }}>${onlyWrong.value ? '👁 แสดงทุกข้อ' : '🔍 ดูเฉพาะข้อที่เสียคะแนน'}</button>` : null}</div>`}
     <div class="ai-line" id="ai-line"><${AiLine} /></div>
     ${spoken ? html`<ul><li>คะแนน = AI ตรวจ (ถูก 1 · ครึ่ง 0.5 · ผิด 0) · ไม่เห็นด้วยกด ถูก / ครึ่ง / ผิด ใต้ข้อนั้น · ○ ✕ เป็นแค่เช็กคำสำคัญ · เว้นวรรคจากการถอดเสียงไม่หักคะแนน</li>${g.lost.length ? html`<li>ข้อที่เสียคะแนน: ${g.lost.map((l, i) => html`${i ? ' · ' : ''}<a href="#" data-jump=${l.key} onClick=${e => jump(e, l.key)}>${l.n} (${l.got}/${l.pts})</a>`)}</li>` : null}</ul>`
       : g.lost.length ? html`<ul><li>ข้อที่เสียคะแนน: ${g.lost.map((l, i) => html`${i ? ' · ' : ''}<a href="#" data-jump=${l.key} onClick=${e => jump(e, l.key)}>${l.n} (${l.got}/${l.pts})</a>`)}</li>${g.pending.length || Object.keys(aiS.value).length ? null : html`<li>ข้อที่พิมพ์ตอบและไม่ตรงเฉลย: กด ถูก / ครึ่ง / ผิด ตรวจเองได้</li>`}</ul>` : null}
@@ -1805,7 +2111,7 @@ const vdirS = signal(['k2t', 't2k', 'cloze', 'mix'].includes(store.get('vocab:di
 const vfastS = signal(store.get('vocab:fast', 0) === 1);   // card mode: a right answer moves on by itself (otherwise the feedback with the example waits for ถัดไป)
 const vnewS = signal([0, 10, 15, 20].includes(+store.get('vocab:newmin', 15)) ? +store.get('vocab:newmin', 15) : 15);   // slots of each daily session kept for NEW words: 15 by default so all 912 words are met before the 기말 (a 30-word session with 0 reserved met only ~180 words in 24 simulated days)
 const vPref = (sig, key, v) => { sig.value = v; store.put('vocab:' + key, typeof v === 'boolean' ? +v : v); };
-const vtabS = signal('today'), vresetS = signal(false);
+const vtabS = signal('today'), vresetS = signal(false), vOptOpen = signal(false);   // vOptOpen: the drill settings fold under the start button (v72)
 /* the running session (null = none): { src, label, mode, queue: [{ko, retry}], total, done, ok, half, ng, first: {ko: first score}, phase: ask | fb | end, fb, mc, seq, at } —
    done counts words finished (right or half); a wrong word goes to the back of the queue until it is answered right */
 const vsS = signal(null);
@@ -1954,9 +2260,9 @@ function VToday() {
       <div class="vnum"><b id="v-today">${q.today.n}</b><span>ตอบแล้ววันนี้ · ถูก ${q.today.r}</span></div>
       <div class=${'vnum' + (q.streak ? ' good' : '')}><b id="v-streak">${q.streak}</b><span>วันติดต่อกัน</span></div>
     </div>
-    <${VOpts} sizes=${true} />
     <div class="vgo">${q.sess ? html`<button class="mode-btn primary" type="button" id="vstart" onClick=${vStartDaily}><span class="t">▶ เริ่มชุดวันนี้ · ${q.sess} คำ</span><span class="s">ทบทวน ${q.review} คำ + คำใหม่ ${q.add} คำ · ${md === 'type' ? 'เห็นคำไทย แล้วพิมพ์คำเกาหลี' : { k2t: 'เห็นคำเกาหลี เลือกคำแปลไทย 1 ใน 4', t2k: 'เห็นคำไทย เลือกคำเกาหลี 1 ใน 4', cloze: 'เห็นประโยคที่เว้นช่องว่าง + คำแปลไทย เลือกคำที่เติมได้ 1 ใน 4', mix: 'สลับ 3 แบบ: เกาหลี→ไทย · ไทย→เกาหลี · เติมคำในประโยค' }[vdirS.value]}</span></button>`
       : html`<p class="notice" id="vnone">วันนี้ไม่มีคำที่ถึงรอบทบทวน และไม่เหลือคำใหม่แล้ว 🎉 — เลือกฝึกตามบท หรือทวนคำที่ยังอ่อน</p>${q.seen ? html`<div class="actions"><button class="btn primary" type="button" id="vweak" onClick=${vStartWeak}>ทวนคำที่ยังอ่อน (${Math.min(vsizeS.value, q.seen)} คำ)</button></div>` : null}`}</div>
+    <details class="vset" open=${vOptOpen.value} onToggle=${e => { vOptOpen.value = e.target.open; }}><summary>⚙ ตั้งค่าชุดฝึก · ${vsizeS.value} คำ · ${md === 'type' ? '✍ พิมพ์' : '🃏 การ์ด'}</summary><${VOpts} sizes=${true} /></details>
     <p class="sec-th">ลำดับคำ: คำที่ถึงรอบทบทวนมาก่อน (กล่องต่ำสุดก่อน แล้วบทหลังสุดก่อน) ตามด้วยคำใหม่${q.newUnits.length ? ` จากบท ${q.newUnits.join(' · ')} …` : ''} · ตอบผิด = ถามซ้ำท้ายชุดจนตอบถูก · ตอบถูก = นัดทวนอีก 1 · 2 · 4 · 7 · 14 · 30 วัน</p>
   </div>`;
 }
@@ -1970,8 +2276,8 @@ function VUnits() {
   const chip = (u, st, label) => html`<button type="button" class=${'vunit' + (u === 'all' ? ' all' : '')} data-unit=${u} onClick=${() => vStartUnit(u)}><b>${label}</b><span>จำได้ ${st.learned}/${st.total}</span>${st.seen > st.learned ? html`<span class="vseen">ฝึกแล้ว ${st.seen}</span>` : null}<${VBar} st=${st} /></button>`;
   return html`<div class="sec" id="vunits">
     <p class="sec-th">แตะบทเพื่อฝึกทุกคำของบทนั้น (ตามโหมดที่เลือก) · <b>จำได้</b> = ตอบถูก 2 รอบขึ้นไป (รอบแรก + รอบทบทวนวันถัดไป) · แถบฟ้า = ฝึกแล้ว รอรอบทบทวน · เขียวอ่อน = จำได้ · เขียวเข้ม = แม่นแล้ว</p>
-    <${VOpts} shuffle=${true} />
     <div class="vunits">${VUNITS.map(u => chip(u, us[u], `${u}과`))}${chip('all', all, 'ทั้งหมด')}</div>
+    <details class="vset" open=${vOptOpen.value} onToggle=${e => { vOptOpen.value = e.target.open; }}><summary>⚙ ตั้งค่าชุดฝึก · ${vmodeS.value === 'type' ? '✍ พิมพ์' : '🃏 การ์ด'}</summary><${VOpts} shuffle=${true} /></details>
   </div>`;
 }
 function VStats() {
@@ -2073,17 +2379,7 @@ function Vocab() {
     <div class="actions"><button class="btn" type="button" id="vocab-back" onClick=${() => { location.hash = ''; }}>← กลับหน้าแรก</button></div>
   </section>`;
 }
-/* card at the top of the home board: today's due count, the new words suggested, a button to the drill */
-function VTeaser() {
-  storeVer.value; dayS.value; vsizeS.value;
-  if (!VOCAB.length) return null;
-  const q = vInfo(), s = vsS.value, live = s && s.phase !== 'end';
-  return html`<article class="exam vteaser" id="vteaser">
-    <div class="exam-h"><h2 class="ko">🔤 ศัพท์ประจำวัน</h2><span class="muted">ทุกคำจากชีตศัพท์ ตำรา และเวิร์กบุ๊ก 5~37과 · ${VOCAB.length} คำ</span>
-      <p>ถึงรอบทบทวนวันนี้ <b>${q.due}</b> คำ · คำใหม่ที่ยังไม่เคยฝึก <b>${q.fresh}</b> คำ · จำได้แล้ว <b>${q.learned}</b>/${VOCAB.length}${q.streak ? html` · ฝึกติดต่อกัน <b>${q.streak}</b> วัน` : ''}<br />${q.sess ? html`ชุดวันนี้ ${q.sess} คำ = ทบทวน ${q.review} + แนะนำคำใหม่ ${q.add}` : 'วันนี้ไม่มีคำที่ถึงรอบทบทวนและไม่เหลือคำใหม่ 🎉'}</p></div>
-    <div class="actions"><button class="btn primary" type="button" id="vteaser-go" onClick=${goVocab}>${live ? '▶ ทำชุดศัพท์ที่ค้างอยู่ต่อ' : '▶ ฝึกศัพท์วันนี้'}</button></div>
-  </article>`;
-}
+/* (v72) the old VTeaser home card is folded into TodayCard */
 
 /* ------------------------------------------------------------------ components: help page, routing shell */
 function Help({ on }) {
@@ -2137,7 +2433,7 @@ function App() {
         <${Help} on=${vw === 'help'} />
       </div>
     </div>
-    <${Transport} /><${Dock} /><${BigWrite} />
+    <${Transport} /><${Dock} /><${ItemGrid} /><${TabBar} /><${BigWrite} />
   </${Fragment}>`;
 }
 

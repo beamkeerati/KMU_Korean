@@ -88,7 +88,10 @@ output/       🤖 GENERATED, never hand-edit. Entry = output/START_HERE.html (h
   omit `capabilities` (keeps db, sample, user). If refused as "unread", run `Artifact list scope:files` on the url first. Compare file sizes with that
   listing to see what changed. Each clips file must stay < 16 MB (build_mockweb splits spoken-line clips over SCLIP_FILES and word clips over VCLIP_FILES; add a file + `<script>` tag in
   app.html when the build says so). Do not re-enable the artifact watch on your own.
-- Current: **v71** (11/19: 693 real pictures — Real-ESRGAN remastered — via `img` in 31 lazy packs img_<json>.js — publish the packs that changed; written answers auto-grow, essays get a big box + ⤢ full-screen popup; 📌 hint sets final_0_hints.json) · v68 — 기말 tile (hero) gathers everything for 23–37 (match exam final|mini03|mini04, so the ③ ④ tiles hide): 기말 mock A (복습문제 shape) + B
+- Current: **v72** (11/23: UX/UI redesign per content/specs/BRIEF_web_ux.md — all 3 phases + full restyle + transitions, desktop first; "📌 วันนี้" card
+  (CATS `dates` list fixes ผ่านแล้ว), category filter chips, cover rules collapsed, Prog panel → Dock bottom-centre + item-number jump grid, results
+  🔍 ดูเฉพาะข้อที่เสียคะแนน, phone tab bar; details docs/LAYOUT.md — **not yet published, app.html-only change: publish with no `files`**) ·
+  v71 (11/19: 693 real pictures — Real-ESRGAN remastered — via `img` in 31 lazy packs img_<json>.js — publish the packs that changed; written answers auto-grow, essays get a big box + ⤢ full-screen popup; 📌 hint sets final_0_hints.json) · v68 — 기말 tile (hero) gathers everything for 23–37 (match exam final|mini03|mini04, so the ③ ④ tiles hide): 기말 mock A (복습문제 shape) + B
   (복습시험 shape) in final_1_{writing,reading,listening}.json (brief BRIEF_final_mock.md) · ⭐ final_drill.json · 📋 final_review.json (renamed so it sorts
   before 말하기; group order = file order) — 217 sets · 4,128 items · 1,139 clips · 1,366 vocab words (vocab.js, Leitner drill, VOCAB_PRIO in build_mockweb.py line ~74).
   **v61:** every word has an example sentence + Thai translation + usage note in content/guide/04_vocabulary/examples/unitNN.json (brief

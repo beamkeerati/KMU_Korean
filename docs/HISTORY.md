@@ -295,3 +295,14 @@ Site v66 (206 sets · 3,905 items) published. Not committed.
   N번 출구 앞에 N이/가 있어요. / N분쯤 걸려요 (no 모두; the question stays 얼마나 걸려요? as the handout prints it). final05 kept at 10 pp by putting the time
   question + answer on one line. Site published as version 83 (data.js only). **Rule for next time: for a speaking picture task, look for the teacher's own
   sheet [보기] before the textbook dialogue.**
+
+**2026-11-23 (Fable 5, UX/UI session):** Practice-site v72 — the BRIEF_web_ux.md pass, run as one session after the user answered the three open
+questions: main device = **computer**, scope = **full redesign** (not just restructure), timing = **all phases then publish once**; mid-session the
+user added "improve ALL transitions". All three phases of the brief plus the restyle were done directly (no subagents — single visual language in one
+file beat the token saving): design tokens + a v72 CSS override layer, page/hover/popup animations with a prefers-reduced-motion kill switch, the
+"📌 วันนี้" home card (CATS dates list, fixing the 기말 tile's wrong ผ่านแล้ว on 11/23), compact tile rows + collapsed past-exams shelf, category
+filter chips + folded notes + score bars on cards, cover reordered (start first, rules in details), paper without the sticky Prog panel (Dock =
+bottom-centre pill, tap → item-number jump grid), shared section hints shown once, results "ดูเฉพาะข้อที่เสียคะแนน", vocab start-first with folded
+settings, phone bottom tab bar. scripts/mockweb/test/run.sh all PASS; shot.sh/shot.html (new, from 11/22 prep) gained a pre: step to shoot dark mode
+and palettes; before/after screens in extracted/web_shots/. Not yet published to the artifact (no Artifact tool in that session) — next session with
+the tool publishes app.html with no `files`.
