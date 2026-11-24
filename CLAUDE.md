@@ -90,7 +90,7 @@ output/       🤖 GENERATED, never hand-edit. Entry = output/START_HERE.html (h
   app.html when the build says so). Do not re-enable the artifact watch on your own.
 - Current: **v72** (11/23: UX/UI redesign per content/specs/BRIEF_web_ux.md — all 3 phases + full restyle + transitions, desktop first; "📌 วันนี้" card
   (CATS `dates` list fixes ผ่านแล้ว), category filter chips, cover rules collapsed, Prog panel → Dock bottom-centre + item-number jump grid, results
-  🔍 ดูเฉพาะข้อที่เสียคะแนน, phone tab bar; details docs/LAYOUT.md — **not yet published, app.html-only change: publish with no `files`**) ·
+  🔍 ดูเฉพาะข้อที่เสียคะแนน, phone tab bar; details docs/LAYOUT.md — **published 11/24** (app.html only; every data file matched the live sha256; a first publish in a session is refused until the saved live source is Read in full, ≈ 90k tokens)) ·
   v71 (11/19: 693 real pictures — Real-ESRGAN remastered — via `img` in 31 lazy packs img_<json>.js — publish the packs that changed; written answers auto-grow, essays get a big box + ⤢ full-screen popup; 📌 hint sets final_0_hints.json) · v68 — 기말 tile (hero) gathers everything for 23–37 (match exam final|mini03|mini04, so the ③ ④ tiles hide): 기말 mock A (복습문제 shape) + B
   (복습시험 shape) in final_1_{writing,reading,listening}.json (brief BRIEF_final_mock.md) · ⭐ final_drill.json · 📋 final_review.json (renamed so it sorts
   before 말하기; group order = file order) — 217 sets · 4,128 items · 1,139 clips · 1,366 vocab words (vocab.js, Leitner drill, VOCAB_PRIO in build_mockweb.py line ~74).

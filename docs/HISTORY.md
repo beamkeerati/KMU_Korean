@@ -306,3 +306,8 @@ bottom-centre pill, tap → item-number jump grid), shared section hints shown o
 settings, phone bottom tab bar. scripts/mockweb/test/run.sh all PASS; shot.sh/shot.html (new, from 11/22 prep) gained a pre: step to shoot dark mode
 and palettes; before/after screens in extracted/web_shots/. Not yet published to the artifact (no Artifact tool in that session) — next session with
 the tool publishes app.html with no `files`.
+
+**2026-11-24 (Fable 5.2, publish session):** v72 published to the practice-site artifact as version 84 (id 1795489475-941c), app.html only — all 39
+data/clip/picture files and the 80 mp3s matched the live sha256, so no `files` were sent; capabilities db · sample · user carried forward. The first
+publish was refused until the saved live source (2,161 lines) had been Read in full: it was byte-identical to the v71 commit 5a6556a plus the publish
+wrapper line and `</body></html>`, and the `cloud` sync block is unchanged between v71 and v72. The auto-armed artifact watch was stopped again.
