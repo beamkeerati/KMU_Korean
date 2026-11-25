@@ -311,3 +311,10 @@ the tool publishes app.html with no `files`.
 data/clip/picture files and the 80 mp3s matched the live sha256, so no `files` were sent; capabilities db · sample · user carried forward. The first
 publish was refused until the saved live source (2,161 lines) had been Read in full: it was byte-identical to the v71 commit 5a6556a plus the publish
 wrapper line and `</body></html>`, and the `cloud` sync block is unchanged between v71 and v72. The auto-armed artifact watch was stopped again.
+
+**2026-11-25 (Opus 5.5):** the user dropped 3 files in source/: the 복습시험④ scan again with the official slip as p.1 (10 · 8.7 · 8.0 · 8.5; pages 2–7
+md5-identical to the 11/18 scan, which it replaced), the 1급 성적표 and the certificate + 개근상 (new folder source/results/). exam04.md now carries the
+official score; a re-read of 듣기 found 코미드 (item 8) for the extra lost point. scores.json gained `final` + per-term `official`; site v73 (profile 🎓
+block, วันนี้ card จบ 1급 / เปิดเทอม 2급 D-N, 기말 tile moved to the past shelf, shelf header lists real titles) published as version 85 (id
+1795574094-7820) with app.html + data.js only — the first publish was refused with a line diff (it counts as "viewed"; it held only my own edits), a resend
+went through after `list scope:files` covered data.js. run.sh all PASS.

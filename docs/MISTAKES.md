@@ -191,3 +191,7 @@ What the user does well: ㅂ니다/습니다 choice by 받침, -지 않- forms, 
 - "during the season" written 장마철은 → 장마철에는 · 농업에 종사하다 → 농사를 하다 · comparing weather: 계절은 … 보다 → 날씨가 … 보다
 - incomplete sentence 제일 할 수 있습니다 (teacher: 무엇을?) · 취미 essay lacked frequency (teacher: 얼마나 자주?)
 - tense of habits: 안도감을 느꼈습니다 → 느낍니다 / 마음이 편해집니다 · future 느낄 겁니다 · 영화를 봐 보세요 → 보세요
+
+## 2026-11-25 · 복습시험④ official slip (듣기 8.0, not the 9 recalled)
+- ★ vowel written as ㅡ again: 듣기 8 **코미드 영화** → 코미디 (same family as 글음 · 아르바으트 · 음료스 on tests 32–33) — the likely extra −1.
+- 쓰기 87/100 (recall said 77): the teacher gave partial credit back on some of 1-2 · 1-3 · 5-4 · 7-1 · 7-3 · 7-5; which ones is not marked.

@@ -121,3 +121,14 @@ Guide §13–15 add material the course materials never covered explicitly:
   읽기 format not announced. Review 복습시험④ (vocabulary and task types). Memorise 대화 32-1 and 37-1. Picture description from textbook 245쪽 연습 2
   (-지 마세요 signs), 263쪽 연습 2 (보다), 271쪽 연습 3 (오후 vs 밤, -아/어졌어요).
 - 11/23 말하기: everything on review handout pp.14–16 (19 questions · subway routes · hamburger shop · 계절/취미 소개 · p.16 식사 예절), pictures and questions.
+
+## Level 1 result (2026-11-24)
+- 1급 성적표: 과목 평균 말하기 90.3 · 듣기 89.0 · 쓰기 91.3 · 읽기 94.4 · 평균 91.2 → **진급 2급**; 출석 100 % (개근상). Every skill passed the ≥ 70 rule with
+  20+ points to spare. Next term (2급) starts **Mon 2026-12-14**. Full table → docs/STATUS.md "Level 1 result".
+
+## 기말 lead-up notes (moved out of CLAUDE.md §1 on 2026-11-25, verbatim)
+- **Dates still ahead:** 11/19 총복습 (no new unit; a 37과 매일시험 is unconfirmed) · 기말 **11/20** (쓰기·듣기·읽기; analysis = content/predictions/final/final02.md) / **11/23** (말하기) · 기말 발표 11/24 (topic announced 11/10). (The handout's 10/20 for 기말 was corrected to 11/20 by the teacher.) 복습시험③ was sat 11/6, ④ (30–37과) 11/18. **Teacher after ④: its ข้อ 6 type
+  (두 문장 → 한 문장 with a 보기 of 4 grammar points, connectors + -(으)ㄹ/-는/-(으)ㄴ + N mixed) WILL be on the 기말** — drill sets final-combine + 복습문제 §3/§5.
+  **총복습 11/19 hints:** 3 h, 쓰기 (50 min, includes a ~300-자 composition on the 쓰기 (3) 계절 or 쓰기 (4) 취미 topic — source/writing/) → 듣기 (all
+  multiple choice) → 읽기; review ④ (words + task types); memorise 대화 32-1 + 37-1; picture description from textbook 245쪽 연습 2 · 263쪽 연습 2 ·
+  271쪽 연습 3; 말하기 11/23 = review handout pp.14–16 (p.16 식사 예절 new). Pack = content/predictions/final/final03.md + site sets final_0_hints.json.

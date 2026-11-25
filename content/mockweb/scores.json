@@ -181,7 +181,14 @@
       "note": "ครูประกาศตอนจบเทอม"
      }
     ]
-   }
+   },
+   "official": {
+    "speaking": 90.2,
+    "listening": 88.0,
+    "writing": 89.8,
+    "reading": 96.2
+   },
+   "officialNote": "ใบ 1급 성적표 (source/results/KMU level 1 score unit 05 - 37.pdf) · ตัวเลขรวมของเทอม (시험 + 복습시험 + คะแนนเก็บ) · ใบเกรดไม่แยก 시험 กับ คะแนนเก็บ"
   },
   {
    "id": "fin",
@@ -208,9 +215,9 @@
       "name": "복습시험 ④",
       "group": "review",
       "max": 10,
-      "got": null,
+      "got": 10.0,
       "date": "2026-11-18",
-      "note": ""
+      "note": "ใบคะแนน 24 พ.ย. · พูดแนะนำ 한강 공원"
      },
      {
       "name": "발표",
@@ -250,9 +257,9 @@
       "name": "복습시험 ④",
       "group": "review",
       "max": 10,
-      "got": null,
+      "got": 8.0,
       "date": "2026-11-18",
-      "note": ""
+      "note": "ใบคะแนน 24 พ.ย. · 8/10 (ข้อ 9 약속이 เขียนไม่จบ · ข้อ 8 코미드 → 코미디)"
      },
      {
       "name": "워크북 숙제",
@@ -292,9 +299,9 @@
       "name": "복습시험 ④",
       "group": "review",
       "max": 10,
-      "got": null,
+      "got": 8.7,
       "date": "2026-11-18",
-      "note": ""
+      "note": "ใบคะแนน 24 พ.ย. · 87/100 (ประมาณไว้ 77 → ครูให้คะแนนบางส่วนคืน 10)"
      },
      {
       "name": "글쓰기",
@@ -342,9 +349,9 @@
       "name": "복습시험 ④",
       "group": "review",
       "max": 10,
-      "got": null,
+      "got": 8.5,
       "date": "2026-11-18",
-      "note": ""
+      "note": "ใบคะแนน 24 พ.ย. · ข้อ 3 ครึ่ง · ข้อ 10 แต่งคำถาม"
      },
      {
       "name": "낭독시험",
@@ -363,7 +370,14 @@
       "note": "ครูประกาศตอนจบเทอม"
      }
     ]
-   }
+   },
+   "official": {
+    "speaking": 90.4,
+    "listening": 90.0,
+    "writing": 92.9,
+    "reading": 92.5
+   },
+   "officialNote": "ใบ 1급 성적표 (source/results/KMU level 1 score unit 05 - 37.pdf) · ตัวเลขรวมของเทอม (시험 + 복습시험 + คะแนนเก็บ) · ใบเกรดไม่แยก 시험 กับ คะแนนเก็บ"
   }
  ],
  "daily": [
@@ -573,6 +587,15 @@
    "listening": 9.0,
    "reading": 10.0,
    "note": "ใบคะแนน 10 พ.ย. (37.9/40)"
+  },
+  {
+   "name": "복습시험 ④",
+   "date": "2026-11-18",
+   "speaking": 10.0,
+   "writing": 8.7,
+   "listening": 8.0,
+   "reading": 8.5,
+   "note": "ใบคะแนน 24 พ.ย. (35.2/40)"
   }
  ],
  "presentations": [
@@ -618,5 +641,43 @@
   "writing": 45.5,
   "reading": 49.0,
   "note": "ใบคะแนน 중간시험 (source/midterm/KMU midterm score unit 05 - 21.pdf) · ครูไม่ให้ถ่ายข้อสอบ · ผู้เรียนจำได้ว่าข้อสอบเหมือนในหนังสือมาก"
+ },
+ "final": {
+  "level": "1급",
+  "result": "2급",
+  "date": "2026-11-24",
+  "avg": 91.2,
+  "rows": [
+   {
+    "name": "중간 시험",
+    "speaking": 90.2,
+    "listening": 88.0,
+    "writing": 89.8,
+    "reading": 96.2,
+    "att": "196"
+   },
+   {
+    "name": "기말 시험",
+    "speaking": 90.4,
+    "listening": 90.0,
+    "writing": 92.9,
+    "reading": 92.5,
+    "att": "–"
+   },
+   {
+    "name": "과목 평균",
+    "speaking": 90.3,
+    "listening": 89.0,
+    "writing": 91.3,
+    "reading": 94.4,
+    "att": "100%"
+   }
+  ],
+  "award": "개근상 · Perfect Attendance Award (24 พ.ย.)",
+  "certificate": "이수증명서 · หลักสูตร 정규 (Regular) 1급 · 14 ก.ย. – 25 พ.ย. 2026",
+  "nextTerm": "2026-12-14",
+  "nextLabel": "เปิดเทอม 2급 (다음 학기)",
+  "source": "ใบ 1급 성적표 (source/results/KMU level 1 score unit 05 - 37.pdf) + source/results/KMU certificate level 1.pdf",
+  "note": "แถว 중간/기말 = คะแนนรวมของเทอม /100 ต่อทักษะ · 과목 평균 = เฉลี่ยสองเทอม · 출석 196 ตามใบ (ไม่ระบุหน่วย) · 평균 91.2 = เฉลี่ยสี่ทักษะ"
  }
 }

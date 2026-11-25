@@ -15,14 +15,11 @@ Claude Code loads this file into every message, so it is kept short (target ≤ 
 ## 1. User, goal, exams
 - Thai GKS scholar at Kookmin University Korean Language Center, level 1 (국민한국어 1). **Reply in Thai, short.** Study material = Korean with Thai explanations.
 - Course = 자모 + Units 5–37. Midterm covered 1–21과 (book 1-1); final = 23–37과 (book 1-2).
-- **Dates still ahead:** 11/19 총복습 (no new unit; a 37과 매일시험 is unconfirmed) · 기말 **11/20** (쓰기·듣기·읽기; analysis = content/predictions/final/final02.md) / **11/23** (말하기) · 기말 발표 11/24 (topic announced 11/10). (The handout's 10/20 for 기말 was corrected to 11/20 by the teacher.) 복습시험③ was sat 11/6, ④ (30–37과) 11/18. **Teacher after ④: its ข้อ 6 type
-  (두 문장 → 한 문장 with a 보기 of 4 grammar points, connectors + -(으)ㄹ/-는/-(으)ㄴ + N mixed) WILL be on the 기말** — drill sets final-combine + 복습문제 §3/§5.
-  **총복습 11/19 hints:** 3 h, 쓰기 (50 min, includes a ~300-자 composition on the 쓰기 (3) 계절 or 쓰기 (4) 취미 topic — source/writing/) → 듣기 (all
-  multiple choice) → 읽기; review ④ (words + task types); memorise 대화 32-1 + 37-1; picture description from textbook 245쪽 연습 2 · 263쪽 연습 2 ·
-  271쪽 연습 3; 말하기 11/23 = review handout pp.14–16 (p.16 식사 예절 new). Pack = content/predictions/final/final03.md + site sets final_0_hints.json.
+- **Level 1 is over (11/25):** 1급 성적표 (source/results/) 과목 평균 말하기 90.3 · 듣기 89.0 · 쓰기 91.3 · 읽기 94.4 · 평균 91.2 → **진급 2급**,
+  출석 100 % (개근상). **2급 starts Mon 2026-12-14** (book/teacher unknown yet). The 기말 lead-up notes (총복습 hints, ข้อ 6 type) → docs/COURSE.md.
 - **Pass rule:** every skill's average of 중간 + 기말 ≥ 70; < 60 = fail; 60–69 may re-test. Each skill /100 = 시험 50 + 복습시험 20 + coursework 30 (per term). Details → docs/COURSE.md.
-- **Results so far:** 중간 말하기 41.2 · 듣기 42.0 · 쓰기 45.5 · 읽기 49.0 (/50). 복습시험①+② 말하기 20 · 쓰기 16.3 · 듣기 16.0 · 읽기 19.0 (/20). 복습시험③ (slip 11/10)
-  말하기 10 · 쓰기 8.9 · 듣기 9.0 · 읽기 10 (/10 each, 37.9/40 — best of the three). ④ by the user's recall (official score not out): 말하기 ≈ 10 · 쓰기 ≈ 7.7 · 듣기 9 · 읽기 8.5. Weakest: 말하기, 듣기. 매일시험 average ≈ 7.5/10; the losses are **word recall**, not grammar.
+- **Results:** term totals /100 (말·듣·쓰·읽) 중간 90.2 · 88.0 · 89.8 · 96.2 · 기말 90.4 · 90.0 · 92.9 · 92.5. 중간시험 말하기 41.2 · 듣기 42.0 · 쓰기 45.5 · 읽기 49.0 (/50). 복습시험①+② 말하기 20 · 쓰기 16.3 · 듣기 16.0 · 읽기 19.0 (/20). 복습시험③ (slip 11/10)
+  말하기 10 · 쓰기 8.9 · 듣기 9.0 · 읽기 10 (/10 each, 37.9/40 — best of the three). ④ (slip 11/24) 말하기 10 · 쓰기 8.7 · 듣기 8.0 · 읽기 8.5 (35.2/40). Weakest: 말하기, 듣기. 매일시험 average ≈ 7.5/10; the losses are **word recall**, not grammar.
 - 복습시험 (user says "mini exam") = 말하기 interview + 쓰기 (several short sections) + 듣기 + 읽기 (textbook 읽기 passages lifted almost verbatim). Exams "look like the book": predictions should lift textbook 대화/읽기/연습 nearly verbatim.
 
 ### 1.1 Stated preferences (all deliverables)
@@ -39,7 +36,7 @@ Claude Code loads this file into every message, so it is kept short (target ≤ 
 ## 2. Layout (one folder per material type at every level; full tree → docs/LAYOUT.md)
 ```
 source/       originals — never modify contents; only move/rename (naming §2.1). The user drops new scans in source/ root → file them.
-  textbook/ workbook/ everyday/ miniexam/ review/ vocabulary/ lecture/ syllabus/ midterm/ speaking/ audio/ (git-ignored mp3s)
+  textbook/ workbook/ everyday/ miniexam/ review/ vocabulary/ lecture/ syllabus/ midterm/ speaking/ writing/ results/ audio/ (git-ignored mp3s)
 extracted/    regenerable page images/OCR (git-ignored)
 content/      ✍️ SOURCE OF TRUTH — edit here, never in output/
   guide/        00_exam_info.md (ส่วนที่ 0) · 01_units/unitNN.md (book 1, 5–37) · 02_grammar/NN_slug.md (book 2, topics 01–64;
@@ -88,7 +85,8 @@ output/       🤖 GENERATED, never hand-edit. Entry = output/START_HERE.html (h
   omit `capabilities` (keeps db, sample, user). If refused as "unread", run `Artifact list scope:files` on the url first. Compare file sizes with that
   listing to see what changed. Each clips file must stay < 16 MB (build_mockweb splits spoken-line clips over SCLIP_FILES and word clips over VCLIP_FILES; add a file + `<script>` tag in
   app.html when the build says so). Do not re-enable the artifact watch on your own.
-- Current: **v72** (11/23: UX/UI redesign per content/specs/BRIEF_web_ux.md — all 3 phases + full restyle + transitions, desktop first; "📌 วันนี้" card
+- Current: **v73** (11/25: level 1 over — scores.json `final` (1급 성적표) + per-term `official` totals → profile 🎓 block, วันนี้ card จบ 1급 /
+  เปิดเทอม 2급 D-N, 기말 tile moved to the past shelf; **published 11/25** as version 85, app.html + data.js) · v72 (11/23: UX/UI redesign per content/specs/BRIEF_web_ux.md — all 3 phases + full restyle + transitions, desktop first; "📌 วันนี้" card
   (CATS `dates` list fixes ผ่านแล้ว), category filter chips, cover rules collapsed, Prog panel → Dock bottom-centre + item-number jump grid, results
   🔍 ดูเฉพาะข้อที่เสียคะแนน, phone tab bar; details docs/LAYOUT.md — **published 11/24** (app.html only; every data file matched the live sha256; a first publish in a session is refused until the saved live source is Read in full, ≈ 90k tokens)) ·
   v71 (11/19: 693 real pictures — Real-ESRGAN remastered — via `img` in 31 lazy packs img_<json>.js — publish the packs that changed; written answers auto-grow, essays get a big box + ⤢ full-screen popup; 📌 hint sets final_0_hints.json) · v68 — 기말 tile (hero) gathers everything for 23–37 (match exam final|mini03|mini04, so the ③ ④ tiles hide): 기말 mock A (복습문제 shape) + B
@@ -172,7 +170,7 @@ sections (with a 보기) in the MAIN set, keep 보기 word-choice + 질문에 �
 
 ## 6. The user's recurring mistakes — top list (every sighting → docs/MISTAKES.md)
 Use these when checking work or writing predictions. ★ = has cost marks repeatedly.
-- ★ **ㅈ/ㅊ shapes** (9+ tests: 젝/책, 몆/몇, 장마절, 자가/차가, 남차) · ★ **ㅐ/ㅔ** (네 게, 테국, 메워요) · ★ **other vowels written as ㅡ** (글음 · 아르바으트 · 음료스, tests 32–33) · **ㅖ/ㅕ** (여쁘지만, 여뻐서) · 가 written like 기 · **ㅃ/ㅂ** (runner picture = 빠르다 written 바르다 ×3 on test 32) · 길을 → 글음 ·
+- ★ **ㅈ/ㅊ shapes** (9+ tests: 젝/책, 몆/몇, 장마절, 자가/차가, 남차) · ★ **ㅐ/ㅔ** (네 게, 테국, 메워요) · ★ **other vowels written as ㅡ** (글음 · 아르바으트 · 음료스, tests 32–33; 코미드 on 복습시험④ 듣기) · **ㅖ/ㅕ** (여쁘지만, 여뻐서) · 가 written like 기 · **ㅃ/ㅂ** (runner picture = 빠르다 written 바르다 ×3 on test 32) · 길을 → 글음 ·
   ★ **걸려요 written 거려요** ×4 on test 31 (−2) · 선물 written 성물.
 - ★ **Object marked with 이/가 instead of 을/를**, esp. inside -는/-(으)ㄴ/-(으)ㄹ 수 phrases (책이 읽는 ×4 on test 27; 시계가 받았어요; 음식를).
 - ★ **Vocabulary recall under test conditions** (23과 4.5; 만나고 for 앉고; 요리하세요 for 만드세요 — use the unit's target verb; 동물).

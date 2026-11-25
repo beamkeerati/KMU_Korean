@@ -12,6 +12,8 @@ source/        ต้นฉบับ — never modify the contents; file names f
                for EVERY unit, incl. the 22~37과 종합문제; before it the 15–22 keys were AI-solved) · KMU workbook review unit 22 - 37.pdf
                (22~37과 종합문제, 45 items, pp.174–183)
   midterm/     KMU midterm score unit 05 - 21.pdf (the 중간시험 score slip, 2026-10-27 — the papers themselves may not be photographed)
+  results/     (2026-11-25) KMU level 1 score unit 05 - 37.pdf (1급 성적표: term totals per skill, 과목 평균, 진급 2급, next term 12/14) ·
+               KMU certificate level 1.pdf (p.1 이수증명서 · p.2 개근상 — holds the date of birth and student number: never copy those into content/ or the site)
   everyday/    KMU everyday test unit 05 - 13.pdf · KMU everyday sheet unit 05 - 13.pdf
                KMU everyday test unit 14.pdf · test unit 15, 16, 17, 18, 19, 22, 23, 24, 25, 26, 27, 28 · sheet unit 15, 16, 17, 18, 19, 20, 23, 24, 25, 26, 27, 28, 29   ← daily hand-outs land HERE
                (the user dropped test 24 / sheet 25 in source/ itself on 10/28, test 25 / sheet 26 on 11/1, test 26 / sheet 27 on 11/2, test 27 / sheet 28 on 11/3, test 28 / sheet 29 on 11/4, test 30 / sheet 31 on 11/9, test 31 / sheet 32 on 11/10 — moved here; check source/ root after each drop)
@@ -20,6 +22,8 @@ source/        ต้นฉบับ — never modify the contents; file names f
                KMU mini exam 02 unit 14 - 20.pdf   (복습시험 ②, sat 2026-10-20: 쓰기 4 pp + 듣기 + 읽기, the student's pencil, no marks yet)
                KMU mini exam 03 unit 22 - 29.pdf   (복습시험 ③, sat 2026-11-06: the papers with the class-key red pen)
                KMU mini exam 03 score unit 22 - 29.pdf   (복습시험 ③ official score slip, photo 2026-11-10)
+               KMU mini exam 04 unit 30 - 37.pdf   (복습시험 ④, 7 pp since 2026-11-25: p.1 = official score slip 10 · 8.7 · 8.0 · 8.5, pp.2–7 = the
+               six paper pages, byte-identical images to the 11/18 scan it replaced — extracted/miniexam/exam04/p-N.png keep the old 1–6 numbering, score-1.png = slip)
                ← 복습시험 scans land HERE, never in everyday/ (the user wants the two kept apart at every level)
   review/      KMU midterm review 01 unit 05 - 22.pdf   (teacher's 「1급 중간시험 복습문제」, 16 pp: 쓰기 1–14 · 읽기 1–25 · 듣기 1–12 · 말하기 1–20;
                p.17 of the scan is the 19과 sheet again — ignored)

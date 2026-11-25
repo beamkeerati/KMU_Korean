@@ -246,8 +246,9 @@ Exam sections of units 23–37 and grammar topics 33–64 now carry the real tes
 
 ## 복습시험④ (2026-11-18) — real paper vs the mock
 - Scan: source/miniexam/KMU mini exam 04 unit 30 - 37.pdf (6 pages: 쓰기 2 · 듣기 1 · 읽기 2 · 취미 handout 1) → content/exercises/miniexam/exam04.md
-  (+ real-paper sets mini04r-writing / mini04r-reading in content/mockweb/final_drill.json). Official score not out; losses from the user's recall:
-  쓰기 1-2 1-3 5-4 7-1 7-3 7-5 (≈ 77/100) · 듣기 9 (9/10) · 읽기 3 half + 10 (8.5/10) · 말하기 (한강 공원 장소 소개) "probably full".
+  (+ real-paper sets mini04r-writing / mini04r-reading in content/mockweb/final_drill.json). **Official slip (received 11/24, scan p.1): 말하기 10.0 ·
+  쓰기 8.7 · 듣기 8.0 · 읽기 8.5 = 35.2/40.** The user's recall had 쓰기 ≈ 77/100 (1-2 1-3 5-4 7-1 7-3 7-5 — the teacher gave 10 points of partial credit back,
+  item unknown, no marks on the paper) and 듣기 9/10 (item 9) — the extra 듣기 loss is most likely item 8 **코미드** for 코미디 (re-read 11/25) · 읽기 3 half + 10 as recalled.
 - Mock fit: 읽기 3/3 passages (30 · 34 · 37과, same order as the mock's main set) · 듣기 10/10 items from mock tracks (main 31-1 · 32-2 · 37-1; 예비 30-1 ·
   32-1 · 36-1) · 쓰기 5/7 sections in the main set (A 교통 · C particles · E/F irregular · G combine · H dialogue), 1 in 예비 (달력 → 빈도), 1 new (반대말).
 - ④ is a cut-down 기말 복습문제: §4 = 복습문제 §1 · §6 = §3 + §5 (6-1 = 3-7 verbatim) · §7 = §6 · §5 = 불규칙 정리. Teacher: "ข้อ 6 type is on the 기말 for sure".
@@ -269,3 +270,15 @@ Exam sections of units 23–37 and grammar topics 33–64 now carry the real tes
   Markdown, keys and site items.
 - Known leftovers: some prediction captions describe the person differently from the real picture (e.g. "ผู้หญิง" where the textbook shows
   a man; predictions/everyday/unit32.md 부르다 · unit34.md #49 · #11) — the picture is right, the Thai caption is the agent's original guess.
+
+## Level 1 result (1급 성적표, 2026-11-24 · scan source/results/)
+| | 말하기 | 듣기 | 쓰기 | 읽기 | 출석 |
+|:---|:---|:---|:---|:---|:---|
+| 중간 시험 (term total /100) | 90.2 | 88.0 | 89.8 | 96.2 | 196 |
+| 기말 시험 (term total /100) | 90.4 | 90.0 | 92.9 | 92.5 | – |
+| 과목 평균 | 90.3 | 89.0 | 91.3 | 94.4 | 100% |
+
+- 평균 91.2 · 진급 **2급** · next term (다음 학기) starts **Mon 2026-12-14** · 이수증명서 (정규 1급, 2026.09.14 ~ 2026.11.25) + 개근상 (perfect attendance).
+- Term total = 시험 50 + 복습시험 20 + coursework 30. 중간 coursework is exact by subtraction: 말하기 29.0 · 듣기 30.0 · 쓰기 28.0 · 읽기 28.2.
+  기말 gives only 시험 + coursework (after ③ + ④ = 20 · 17.0 · 17.6 · 18.5): 말하기 70.4 · 듣기 73.0 · 쓰기 75.3 · 읽기 74.0 /80 — the split is unknown.
+- Site: scores.json `final` + per-term `official` (v73) — profile 🎓 block, วันนี้ card shows จบ 1급 / เปิดเทอม 2급 D-N.

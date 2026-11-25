@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!-- v73 (2026-11-25): level 1 over — scores.json "final" (1급 성적표: term totals, 과목 평균, 진급 2급, 개근상, next term 12/14) → profile 🎓 block on top + "📌 วันนี้" shows จบ 1급 / เปิดเทอม 2급 D-N once every exam day is past; terms carry "official" totals → skillStat/GroupCell fill blank rows from the sheet (one blank group = exact, two = their sum); profile summary uses the latest term; 기말 tile moved to the past-exams shelf (sec 2, no hero); 복습시험 ④ official 10 · 8.7 · 8.0 · 8.5 -->
 <!-- v72 (2026-11-23): UX/UI redesign (BRIEF_web_ux.md, all 3 phases + full restyle + transitions): new design tokens (radius/shadow/easing) + "v72 redesign" CSS layer at the end of the stylesheet overriding the old paper look; page/hover/popup animations everywhere (hidden-toggle restarts section animations; prefers-reduced-motion kills them); home = "📌 วันนี้" card (next exam via CATS dates list — fixes ผ่านแล้ว while 말하기/발표 were still ahead — absorbs ResumeBar + VTeaser) + compact tile rows + past exams in a collapsed <details>; category pages get skill/status filter chips + 1-line note with อ่านต่อ; cover = back on top, start buttons first, rules collapsed; paper drops the sticky Prog panel (progress lives in the Dock, now bottom-centre; tapping it opens an item-number grid coloured by state to jump); results get ดูเฉพาะข้อที่เสียคะแนน; vocab start button above collapsed settings; phone bottom tab bar (หน้าแรก·ศัพท์·คะแนน·ตั้งค่า) -->
 <!-- v69 (2026-11-19): real pictures — items/sections carry "img" (crops listed in content/img/*.tsv, scripts/crop_images.py); build_mockweb packs them as WebP in img_<json file>.js, loaded only when a set needs them (Pics component, tap to enlarge); the Thai 🖼️ caption hides in exam mode once a picture is shown. Written answers auto-grow; essay-length items (model > 100 chars / "long") get a 10-line full-width box + character count; every write item has ⤢ เขียนเต็มจอ (BigWrite popup). New 📌 sets from the teacher's 11/19 hints (final_0_hints.json) -->
 <!-- v64 (2026-11-15): new families mini04 = 복습시험④ 11/18 (30–37과: mini04-* scored sets + mini04x-* spares) and a 기말 tile (exam 'final': the teacher's 복습문제 + 불규칙 정리 + 말하기 기말 연습 handed out 11/13); mini03 moves to the archive row -->
@@ -1574,7 +1575,7 @@ const unitOf = st => { const m = /^(?:daily|sheet|predict)-(\d+)/.exec(st.id); r
 const UNITS = window.KMU_UNITS || {};   // {unit: {ko, th}} from the first line of content/guide/01_units/unitNN.md
 /* first matching category wins, so the vocabulary and textbook-listening sets leave the midterm page. sec: 0 next exam · 1 daily practice · 2 past papers */
 const CATS = [
-  { id: 'final', sec: 0, icon: '🎓', title: '기말시험', sub: 'ข้อสอบจำลอง 기말 ชุด A · B · ⭐ ข้อ 6 · 복습문제 ของครู · ชุดเก็งและข้อสอบจริง ③ ④', hero: true, date: '2026-11-20',
+  { id: 'final', sec: 2, icon: '🎓', title: '기말시험', sub: 'บท 23~37 · สอบแล้ว 20 · 23 พ.ย. · ชุดจำลอง A · B · ⭐ ข้อ 6 · 복습문제 · ③ ④', date: '2026-11-20',
     dates: [['2026-11-20', '쓰기·듣기·읽기'], ['2026-11-23', '말하기'], ['2026-11-24', '발표']],
     when: 'ศ. 20 พ.ย. 쓰기·듣기·읽기 · จ. 23 พ.ย. 말하기 · บท 23~37', note: 'ทุกอย่างของบท 23~37 อยู่ที่นี่: ข้อสอบจำลอง 기말 ชุด A (แบบ 복습문제 เปลี่ยนคำ) · ชุด B (แบบ 복습시험) · ชุดฝึกข้อ 6 ที่ครูย้ำ · 복습문제 + 불규칙 정리 ที่ครูแจก 13 พ.ย. · ชุดเก็งและข้อสอบจริงของ 복습시험 ③ (22~29) และ ④ (30~37) · 말하기 기말 연습', match: s => s.exam === 'final' || s.exam === 'mini04' || s.exam === 'mini03' },   // first match wins: the ③ ④ tiles empty out and hide
   { id: 'mini04', sec: 2, icon: '📄', title: '복습시험 ④', sub: 'บท 30~37 · สอบแล้ว 18 พ.ย. · ข้อสอบจริง + ชุดเก็ง', date: '2026-11-18',
@@ -1653,7 +1654,9 @@ function TodayCard() {
   return html`<section class="today" id="today">
     <div class="today-h"><b>📌 วันนี้</b><span class="muted">${now.toLocaleDateString('th-TH', { weekday: 'long', day: 'numeric', month: 'long' })}</span></div>
     <div class="trow">${up ? html`<span class="tic" aria-hidden="true">${up.c.icon}</span><b class="ko">${up.c.title}</b>${up.lab ? html`<span class="ko muted">${up.lab}</span>` : null}<span class="dday">${dday(up.d)}</span><span class="sp"></span><button class="btn sm primary" type="button" onClick=${() => { location.hash = 'x/' + up.c.id; }}>ไปที่ชุดฝึก ›</button>`
+      : FINAL ? html`<span class="tic" aria-hidden="true">🎓</span><b>จบ ${FINAL.level} · เลื่อนเป็น ${FINAL.result}</b><span class="muted">เฉลี่ย ${n1(FINAL.avg)}${FINAL.award ? ' · 🏅 개근상' : ''}</span><span class="sp"></span><button class="btn sm primary" type="button" id="today-final" onClick=${() => { location.hash = 'profile'; }}>ดูใบเกรด ›</button>`
       : html`<span class="tic" aria-hidden="true">🎉</span><b>สอบครบทุกสนามของเทอมนี้แล้ว</b><span class="muted">ทบทวนชุดไหนก็ได้ตามสบาย</span>`}</div>
+    ${!up && FINAL && FINAL.nextTerm ? html`<div class="trow"><span class="tic" aria-hidden="true">📅</span><b>${FINAL.nextLabel}</b><span class="muted">${ymdTh(FINAL.nextTerm)}</span><span class="dday">${dday(FINAL.nextTerm)}</span></div>` : null}
     ${live.length ? html`<div class="trow" id="resume-bar"><span class="tic" aria-hidden="true">⏸</span><b>ทำค้างอยู่</b>${live.slice(0, 3).map(s => html`<button class="btn sm" type="button" onClick=${() => go(s.id)}>${s.title} · ${answeredIn(s, store.get('ans:' + s.id, {}))}/${itemCount(s)}</button>`)}${live.length > 3 ? html`<span class="muted">+${live.length - 3}</span>` : null}</div>` : null}
     ${q ? html`<div class="trow"><span class="tic" aria-hidden="true">🔤</span><b>ศัพท์วันนี้</b><span class="muted">${q.sess ? `ทบทวน ${q.review} + คำใหม่ ${q.add} = ${q.sess} คำ` : 'ครบรอบของวันนี้แล้ว 🎉'}${q.streak ? ` · ฝึกติดต่อกัน ${q.streak} วัน` : ''}</span><span class="sp"></span><button class="btn sm primary" type="button" id="vteaser-go" onClick=${goVocab}>▶ ฝึกศัพท์</button></div>` : null}
   </section>`;
@@ -1667,7 +1670,7 @@ function Home() {
     ${sec(0, '⏳ ใกล้ถึงวันสอบ', 'ทำชุดจำลองก่อนสอบจริง')}
     ${sec(1, '📚 ฝึกประจำวัน', 'ศัพท์ · ข้อสอบรายบท · ฟังเสียงจริง')}
     ${past.length ? html`<details class="pastbox" open=${pastOpen.value} onToggle=${e => { pastOpen.value = e.target.open; }}>
-      <summary><h3 class="hub-h">🗂️ ข้อสอบที่ผ่านมาแล้ว <small>복습시험 ② ③ ④ · 중간시험 · ชุดทบทวนของครู · ${past.length} หมวด</small></h3></summary>
+      <summary><h3 class="hub-h">🗂️ ข้อสอบที่ผ่านมาแล้ว <small>${past.map(c => c.title).join(' · ')} · ${past.length} หมวด</small></h3></summary>
       <div class="tiles">${past.map(c => html`<${Tile} c=${c} />`)}</div>
     </details>` : null}`;
 }
@@ -1949,14 +1952,23 @@ function passStat(st) { const max = st.earned + st.pend, need = Math.max(0, PASS
   const k = st.earned >= PASS.pass ? 'sure' : max >= PASS.pass ? 'open' : max >= PASS.retest ? 'retest' : 'fail';
   const txt = k === 'sure' ? `✅ ถึง ${PASS.pass} แล้ว ผ่านแน่` : k === 'open' ? `🟡 ต้องได้อีก ${n1(need)} จาก ${n1(st.pend)} ที่ยังว่าง (${Math.round(need / st.pend * 100)}%)` : k === 'retest' ? `🟠 ถึง ${PASS.pass} ไม่ทันแล้ว · ยังสอบซ่อมได้ถ้าได้อีก ${n1(need60)} (≥ ${PASS.retest})` : `🔴 ถึง ${PASS.retest} ไม่ได้แล้ว`;
   return { max, need, need60, k, txt }; }
-function skillStat(comps) {
+function skillStat(comps, off) {
   const ann = comps.filter(c => c.got !== null && c.got !== undefined), pen = comps.filter(c => c.got === null || c.got === undefined);
   const earned = sum(ann, c => c.got), annMax = sum(ann, c => c.max), pend = sum(pen, c => c.max);
   const pg = {}; pen.forEach(c => { pg[c.group] = (pg[c.group] || 0) + c.max; });
+  /* (v73) the 1급 성적표 gives only each term's total per skill: the rows still blank are covered by lump = total − announced rows */
+  if (off !== undefined && off !== null) return { earned: off, annMax: 100, lost: 100 - off, pend: 0, pg: {}, ann: comps, pen: [], off: true, lump: off - earned, lumpGroups: [...new Set(pen.map(c => c.group))] };
   return { earned, annMax, lost: annMax - earned, pend, pg, ann, pen };
 }
-function GroupCell({ comps, group }) {
+const stOf = (tm, s) => skillStat(tm.skills[s], (tm.official || {})[s]);
+function GroupCell({ comps, group, st }) {
   const cs = comps.filter(c => c.group === group), mx = sum(cs, c => c.max), ann = cs.filter(c => c.got !== null && c.got !== undefined), got = sum(ann, c => c.got);
+  const lg = st && st.off ? st.lumpGroups : [];
+  if (!ann.length && lg.includes(group)) {   // blank rows covered by the grade sheet's total: one blank group = exact, two = their sum only
+    if (lg.length === 1) return html`<td class=${'pc ' + tone(st.lump, mx)}><b>${n1(st.lump)}</b><span class="muted">/${mx}</span><div class="pn">คิดจากใบเกรด (ไม่แยกรายการ)</div></td>`;
+    const lmx = sum(comps.filter(c => lg.includes(c.group)), c => c.max);
+    return html`<td class=${'pc ' + tone(st.lump, lmx)}><span class="muted">ใบเกรดไม่แยก</span><div class="pn">${lg.map(g => GRP[g]).join(' + ')} = <b>${n1(st.lump)}</b>/${lmx}</div></td>`;
+  }
   const t = ann.length ? tone(got, sum(ann, c => c.max)) : 'p-none';
   let main;
   if (group === 'review') main = html`<b>${cs.map((c, i) => html`${i ? '+' : ''}${c.got === null || c.got === undefined ? '–' : n1(c.got)}`)}</b> <span class="muted">= ${ann.length ? n1(got) : '–'}/${mx}</span>`;
@@ -1966,10 +1978,10 @@ function GroupCell({ comps, group }) {
 }
 function termTable(tm) {
   return html`<div class="ptw"><table class="ptab"><thead><tr><th>ทักษะ</th><th>시험 50</th><th>복습시험 20</th><th>คะแนนเก็บ 30</th><th>รวมที่รู้แล้ว</th><th>ยังไม่ประกาศ</th></tr></thead><tbody>
-    ${SKORD.map(s => { const c = tm.skills[s], st = skillStat(c);
+    ${SKORD.map(s => { const c = tm.skills[s], st = stOf(tm, s);
       return html`<tr><th class="ko">${SKILL[s][0]} <small>${SKILL[s][1]}</small></th>
-        <${GroupCell} comps=${c} group="exam" /><${GroupCell} comps=${c} group="review" /><${GroupCell} comps=${c} group="course" />
-        <td class=${'pc ' + (st.ann.length ? tone(st.earned, st.annMax) : 'p-none')}>${st.ann.length ? html`<b>${n1(st.earned)}</b><span class="muted">/${n1(st.annMax)}</span>` : '–'}</td>
+        <${GroupCell} comps=${c} group="exam" st=${st} /><${GroupCell} comps=${c} group="review" st=${st} /><${GroupCell} comps=${c} group="course" st=${st} />
+        <td class=${'pc ' + (st.ann.length ? tone(st.earned, st.annMax) : 'p-none')}>${st.ann.length ? html`<b>${n1(st.earned)}</b><span class="muted">/${n1(st.annMax)}</span>${st.off ? html`<div class="pn">ใบเกรด</div>` : null}` : '–'}</td>
         <td class="pc p-none">${n1(st.pend)}</td></tr>`; })}
   </tbody></table></div>`;
 }
@@ -2001,20 +2013,33 @@ function practiceStats() {
   return { by, real };
 }
 const pc = p => p === null ? '–' : Math.round(p * 100) + '%';
+/* (v73) the level is over: scores.json "final" = the 1급 성적표 (term totals, 과목 평균, 진급) + the certificate / award + the next term's start */
+const FINAL = SCORES.final || null;
+const ymdTh = d => { const [y, m, dd] = d.split('-').map(Number); return new Date(y, m - 1, dd).toLocaleDateString('th-TH', { weekday: 'short', day: 'numeric', month: 'short' }); };
+function FinalRes() {
+  const f = FINAL; if (!f) return null;
+  return html`<div class="sec fin-res" id="final-res"><h2 class="sec-h">🎓 จบ ${f.level} · เลื่อนเป็น ${f.result}</h2>
+    <p class="sec-th">ใบ <span class="ko">1급 성적표</span> ${ymdTh(f.date)} · เฉลี่ยรวม <b>${n1(f.avg)}</b> · ทุกทักษะ ≥ ${PASS.pass} ทั้งสองเทอม</p>
+    <div class="ptw"><table class="ptab"><thead><tr><th></th>${SKORD.map(s => html`<th class="ko">${SKILL[s][0]} <small>${SKILL[s][1]}</small></th>`)}<th class="ko">출석</th></tr></thead><tbody>
+      ${f.rows.map(r => html`<tr><th class="ko">${r.name}</th>${SKORD.map(s => html`<td class=${'pc ' + tone(r[s], 100)}><b>${n1(r[s])}</b></td>`)}<td class="pc">${r.att}</td></tr>`)}
+    </tbody></table></div>
+    <ul class="sumul">${f.award ? html`<li>🏅 ${f.award}</li>` : null}${f.certificate ? html`<li>📜 ${f.certificate}</li>` : null}${f.nextTerm ? html`<li>📅 ${f.nextLabel} ${ymdTh(f.nextTerm)} · <span class="dday">${dday(f.nextTerm)}</span></li>` : null}</ul>
+    ${f.note ? html`<p class="sec-th">${f.note}</p>` : null}</div>`;
+}
 function Profile() {
   storeVer.value;
   const terms = SCORES.terms || [], pr = practiceStats();
-  const cur = terms.find(t => SKORD.some(s => t.skills[s].some(c => c.got !== null && c.got !== undefined))) || terms[0];
+  const cur = [...terms].reverse().find(t => t.official || SKORD.some(s => t.skills[s].some(c => c.got !== null && c.got !== undefined))) || terms[0];
   const anyPractice = SKORD.some(s => pr.by[s].sets > 0);
   const tsum = [];
   if (cur) {
-    const stats = SKORD.map(s => [s, skillStat(cur.skills[s])]).filter(([, st]) => st.ann.length);
+    const stats = SKORD.map(s => [s, stOf(cur, s)]).filter(([, st]) => st.ann.length);
     if (stats.length) {
       const r = stats.map(([s, st]) => [s, st.earned / st.annMax]).sort((a, b) => a[1] - b[1]);
       const lo = r[0], hi = r[r.length - 1];
-      tsum.push(lo[1] === hi[1] ? `คะแนนที่ประกาศแล้วทุกทักษะได้ ${Math.round(lo[1] * 100)}% เท่ากัน` : `ทักษะที่คะแนนประกาศแล้วต่ำสุด: ${SKILL[lo[0]][0]} (${Math.round(lo[1] * 100)}% — ${n1(skillStat(cur.skills[lo[0]]).earned)}/${n1(skillStat(cur.skills[lo[0]]).annMax)}) · สูงสุด: ${SKILL[hi[0]][0]} (${Math.round(hi[1] * 100)}%)`);
+      tsum.push(lo[1] === hi[1] ? `คะแนนที่ประกาศแล้วทุกทักษะได้ ${Math.round(lo[1] * 100)}% เท่ากัน` : `ทักษะที่คะแนนประกาศแล้วต่ำสุด: ${SKILL[lo[0]][0]} (${Math.round(lo[1] * 100)}% — ${n1(stOf(cur, lo[0]).earned)}/${n1(stOf(cur, lo[0]).annMax)}) · สูงสุด: ${SKILL[hi[0]][0]} (${Math.round(hi[1] * 100)}%)`);
     }
-    SKORD.forEach(s => { const st = skillStat(cur.skills[s]);
+    SKORD.forEach(s => { const st = stOf(cur, s);
       const base = st.earned + sum(st.pen.filter(c => c.group !== 'exam'), c => c.max), pe = sum(st.pen.filter(c => c.group === 'exam'), c => c.max);
       if (pe > 0) { const need = PASS.pass - base, needLo = PASS.pass - (st.earned + .7 * (base - st.earned));
         tsum.push(need <= 0 ? `${SKILL[s][0]}: ถ้าคะแนนเก็บเต็มก็ถึง ${PASS.pass} แล้วตั้งแต่ยังไม่สอบ 시험` : `${SKILL[s][0]}: ถ้าคะแนนเก็บได้เต็ม ต้องได้ 시험 ${n1(need)}/${pe} (${Math.round(need / pe * 100)}%) ถึงจะผ่าน ${PASS.pass} · ถ้าคะแนนเก็บได้แค่ 70% ต้องได้ 시험 ${n1(Math.min(pe, needLo))}/${pe} (${Math.round(Math.min(pe, needLo) / pe * 100)}%)`); }
@@ -2025,12 +2050,13 @@ function Profile() {
   else tsum.push('ยังไม่มีผลฝึกในเว็บ — ทำชุดข้อสอบสักชุดแล้วกลับมาดู');
   return html`<section id="profile" class="paper prof">
     <div class="paper-head"><div><h1>👤 โปรไฟล์คะแนน</h1><p>คะแนนที่ครูประกาศ (สมุดคะแนนในเว็บ) + ผลฝึกที่เก็บไว้ในเครื่องนี้ · แต่ละทักษะเต็ม 100 ต่อเทอม = 시험 50 + 복습시험 20 + คะแนนเก็บ 30 · <b>เกณฑ์ผ่านระดับ (คู่มือ GKS): เฉลี่ยแต่ละวิชา ≥ ${PASS.pass} · ${PASS.retest}–${PASS.pass - 1} สอบซ่อม · ต่ำกว่า ${PASS.retest} ตก</b></p></div></div>
+    <${FinalRes} />
     <div class="sec"><h2 class="sec-h">1 · ตารางคะแนน</h2><p class="sec-th">สีตามเกณฑ์ผ่าน: เขียว ≥ ${PASS.pass}% (ผ่าน) · เหลือง ${PASS.retest}–${PASS.pass - 1}% (ช่วงสอบซ่อม) · แดง ต่ำกว่า ${PASS.retest}% (ตก) · เทา = ยังไม่ประกาศ (ครูประกาศคะแนนเก็บตอนจบเทอม)</p>
       ${terms.map(tm => html`<h3 class="ko ph3">${tm.title}</h3>${termTable(tm)}`)}
       ${(SCORES.daily || []).length ? html`<p class="hist">หลักฐาน 쓰기 คะแนนเก็บ · 매일시험: ${SCORES.daily.map(d => html`<span>${d.unit}과 ${n1(d.got)}</span>`)} <span>เฉลี่ย ${n1(sum(SCORES.daily, d => d.got) / SCORES.daily.length)}/10</span></p>` : null}
     </div>
-    <div class="sec"><h2 class="sec-h">2 · เกณฑ์ผ่านระดับ</h2><p class="sec-th">จาก ${PASS.source || 'คู่มือ GKS'} · คิดต่อวิชา ไม่ใช่รวมสี่วิชา · ค่าเฉลี่ยของเทอมกลางภาคกับปลายภาค (ตอนนี้มีแต่กลางภาค จึงคิดจากเทอมนี้ก่อน)</p>
-      ${terms.map(tm => { const rows = SKORD.map(s => [s, skillStat(tm.skills[s])]); if (!rows.some(([, st]) => st.ann.length)) return null;
+    <div class="sec"><h2 class="sec-h">2 · เกณฑ์ผ่านระดับ</h2><p class="sec-th">จาก ${PASS.source || 'คู่มือ GKS'} · คิดต่อวิชา ไม่ใช่รวมสี่วิชา · ค่าเฉลี่ยของเทอมกลางภาคกับปลายภาค${FINAL ? ' · ทั้งสองเทอมประกาศครบแล้ว (ใบเกรด)' : ' (ตอนนี้มีแต่กลางภาค จึงคิดจากเทอมนี้ก่อน)'}</p>
+      ${terms.map(tm => { const rows = SKORD.map(s => [s, stOf(tm, s)]); if (!rows.some(([, st]) => st.ann.length)) return null;
         return html`<h3 class="ko ph3">${tm.title}</h3><div class="ptw"><table class="ptab"><thead><tr><th>ทักษะ</th><th>ได้แล้ว</th><th>ยังว่าง</th><th>สูงสุดที่ยังเป็นไปได้</th><th>ขาดอีกถึง ${PASS.pass}</th><th>สถานะ</th></tr></thead><tbody>
           ${rows.map(([s, st]) => { const ps = passStat(st); return html`<tr><th class="ko">${SKILL[s][0]} <small>${SKILL[s][1]}</small></th><td class="pc"><b>${n1(st.earned)}</b><span class="muted">/${n1(st.annMax)}</span></td><td class="pc p-none">${n1(st.pend)}</td><td class=${'pc ' + tone(ps.max, 100)}>${n1(ps.max)}</td><td class="pc">${ps.need ? n1(ps.need) : '–'}</td><td class=${'pc ' + (ps.k === 'sure' ? 'p-ok' : ps.k === 'open' ? 'p-mid' : 'p-low')}>${ps.txt}</td></tr>`; })}
         </tbody></table></div>`; })}
@@ -2038,7 +2064,7 @@ function Profile() {
     </div>
     <div class="sec"><h2 class="sec-h">3 · ช่องที่ขาด</h2>
       <p class="legend"><span class="l-ok">ได้แล้ว</span><span class="l-lost">เสียไปแล้ว</span><span class="l-pend">ยังไม่ประกาศ</span></p>
-      ${terms.map(tm => { const rows = SKORD.map(s => [s, skillStat(tm.skills[s])]); if (!rows.some(([, st]) => st.ann.length)) return html`<p class="muted">${tm.title}: ยังไม่มีคะแนนประกาศ — ว่างทั้งหมด</p>`;
+      ${terms.map(tm => { const rows = SKORD.map(s => [s, stOf(tm, s)]); if (!rows.some(([, st]) => st.ann.length)) return html`<p class="muted">${tm.title}: ยังไม่มีคะแนนประกาศ — ว่างทั้งหมด</p>`;
         return html`<h3 class="ko ph3">${tm.title}</h3>${rows.map(([s, st]) => { const sent = st.ann.length ? `${SKILL[s][0]}: ได้ ${n1(st.earned)}/${n1(st.annMax)} จาก ${annTxt(st)} เสีย ${n1(st.lost)} คะแนน` : `${SKILL[s][0]}: ยังไม่มีคะแนนประกาศ`;
           const full = sent + ` · ยังว่าง ${n1(st.pend)}${st.pend ? ` (${pendTxt(st.pg)})` : ''}`;
           return html`<div class="srow"><div class="sk-l ko">${SKILL[s][0]}</div>${stackBar(st, full)}<div class="sk-n">${n1(st.earned)}</div></div><p class="sent">${full}</p>`; })}`; })}
