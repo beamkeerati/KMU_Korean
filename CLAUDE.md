@@ -93,7 +93,9 @@ output/       🤖 GENERATED, never hand-edit. Entry = output/START_HERE.html (h
   omit `capabilities` (keeps db, sample, user). If refused as "unread", run `Artifact list scope:files` on the url first. Compare file sizes with that
   listing to see what changed. Each clips file must stay < 16 MB (build_mockweb splits spoken-line clips over SCLIP_FILES and word clips over VCLIP_FILES; add a file + `<script>` tag in
   app.html when the build says so). Do not re-enable the artifact watch on your own.
-- Current: **v73** (11/25: level 1 over — scores.json `final` (1급 성적표) + per-term `official` totals → profile 🎓 block, วันนี้ card จบ 1급 /
+- Current: **v74** (11/25: screen tiers — column 900 → 1080 / 1360 / 1760 / 2400 px and type ×1 / 1.1 / 1.25 / 1.6 at 1100 / 1500 / 2200 / 3200 px
+  viewports (`--wmax` `--rmax` `--vs` at the end of the stylesheet; the text-size setting writes `--ts-user`, CSS sets `--ts = --ts-user × --vs`);
+  reading pages (#set #vocab #profile #help) cap at `--rmax`; tiles auto-fit; published 11/25 as version 87, app.html only) · v73 (11/25: level 1 over — scores.json `final` (1급 성적표) + per-term `official` totals → profile 🎓 block, วันนี้ card จบ 1급 /
   เปิดเทอม 2급 D-N, 기말 tile moved to the past shelf; **published 11/25** as version 85, app.html + data.js) · v72 (11/23: UX/UI redesign per specs/BRIEF_web_ux.md — all 3 phases + full restyle + transitions, desktop first; "📌 วันนี้" card
   (CATS `dates` list fixes ผ่านแล้ว), category filter chips, cover rules collapsed, Prog panel → Dock bottom-centre + item-number jump grid, results
   🔍 ดูเฉพาะข้อที่เสียคะแนน, phone tab bar; details levels/1/docs/LAYOUT.md — **published 11/24** (app.html only; every data file matched the live sha256; a first publish in a session is refused until the saved live source is Read in full, ≈ 90k tokens)) ·
@@ -118,7 +120,7 @@ output/       🤖 GENERATED, never hand-edit. Entry = output/START_HERE.html (h
   (a whole-doc push lost the 복습시험③ 쓰기 score on 11-05). Recovery source if it ever happens again: Chrome `Local Storage/leveldb` (*.log keeps old values).
   After touching sync / store / attempt code run `bash scripts/mockweb/test/run.sh` (merge tests + 5-window headless test on a fake cloud; must print no FAIL).
 - scores.json: load, append to `daily` ({unit, got, max, note}), dump with indent=1, ensure_ascii=False. The profile view reads it.
-- **Artifact limits (tested 11/25, test page claude.ai/artifact/8VmHpNHCerKh86PR5e4anG):** the CSP blocks every outside host for audio AND fetch
+- **Artifact limits (tested 11/25 with a throwaway test page, deleted after):** the CSP blocks every outside host for audio AND fetch
   (media-src + connect-src: GitHub raw/Pages, jsDelivr gh/npm, unpkg, cdnjs, Hugging Face, archive.org) — all media must live in the artifact.
   Room: version files ≤ 256 MB / 511 files + **asset store 1024 MB / 5000 files per artifact** (needs the `assets` capability; restate db · sample · user with it).
 - The claude.ai frame refuses the microphone; local `start.sh` serves it for mic use. Feature history → levels/1/docs/LAYOUT.md.

@@ -327,3 +327,11 @@ level from level 1's folder tree. Verified: git sees 1,131 pure renames and 0 de
 build.py all (5 min) → 69 PDFs with identical text, _build/md differs only by absolute picture paths (6 speaking files, identical once normalised)
 and the {{today}} countdown (2 guides); artifact scan 82/82 clean. Website decision deferred to 2급 (artifact CSP blocks every outside host —
 tested with claude.ai/artifact/8VmHpNHCerKh86PR5e4anG; asset store = 1,024 MB / 5,000 files per artifact). output/ stays tracked (user).
+
+**2026-11-25 (Opus 5.5, v74):** user asked for the site to fit 2K · 1080p · iPad · phone. Before: one 900 px column with 15 px text at every
+width (2/3 of a 2560 screen empty). v74 adds screen tiers at the end of the stylesheet (column + type scale per viewport, reading pages capped,
+tiles auto-fit so 3 tiles fill a row), fixes #profile/#help/#set opening with the title under the sticky strip (scroll-margin-top, as #vocab had)
+and lets the 🎓 grade table fit a phone. Screenshots before/after at 2560×1300 · 1920×950 · 1180×820 · 820×1180 · 390×844 (shot.sh, a_*/b_* in
+levels/1/extracted/web_shots/); phone and iPad portrait unchanged by design; run.sh 14 PASS; only index.html changed; published as version 87.
+
+**2026-11-25:** the audio host test page (claude.ai/artifact/8VmHpNHCerKh86PR5e4anG) was deleted at the user's request; its results are in CLAUDE.md §2.3.

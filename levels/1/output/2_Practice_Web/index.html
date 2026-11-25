@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!-- v74 (2026-11-25): screen tiers — the column widens (900 → 1080 / 1360 / 1760 / 2400 px) and the type scales (×1 / 1.1 / 1.25 / 1.6) at 1100 / 1500 / 2200 / 3200 px viewports; reading pages (#set #vocab #profile #help) cap at --rmax; the text-size setting now writes --ts-user and CSS multiplies it by the screen factor --vs; phone + iPad portrait unchanged -->
 <!-- v73 (2026-11-25): level 1 over — scores.json "final" (1급 성적표: term totals, 과목 평균, 진급 2급, 개근상, next term 12/14) → profile 🎓 block on top + "📌 วันนี้" shows จบ 1급 / เปิดเทอม 2급 D-N once every exam day is past; terms carry "official" totals → skillStat/GroupCell fill blank rows from the sheet (one blank group = exact, two = their sum); profile summary uses the latest term; 기말 tile moved to the past-exams shelf (sec 2, no hero); 복습시험 ④ official 10 · 8.7 · 8.0 · 8.5 -->
 <!-- v72 (2026-11-23): UX/UI redesign (BRIEF_web_ux.md, all 3 phases + full restyle + transitions): new design tokens (radius/shadow/easing) + "v72 redesign" CSS layer at the end of the stylesheet overriding the old paper look; page/hover/popup animations everywhere (hidden-toggle restarts section animations; prefers-reduced-motion kills them); home = "📌 วันนี้" card (next exam via CATS dates list — fixes ผ่านแล้ว while 말하기/발표 were still ahead — absorbs ResumeBar + VTeaser) + compact tile rows + past exams in a collapsed <details>; category pages get skill/status filter chips + 1-line note with อ่านต่อ; cover = back on top, start buttons first, rules collapsed; paper drops the sticky Prog panel (progress lives in the Dock, now bottom-centre; tapping it opens an item-number grid coloured by state to jump); results get ดูเฉพาะข้อที่เสียคะแนน; vocab start button above collapsed settings; phone bottom tab bar (หน้าแรก·ศัพท์·คะแนน·ตั้งค่า) -->
 <!-- v69 (2026-11-19): real pictures — items/sections carry "img" (crops listed in content/img/*.tsv, scripts/crop_images.py); build_mockweb packs them as WebP in img_<json file>.js, loaded only when a set needs them (Pics component, tap to enlarge); the Thai 🖼️ caption hides in exam mode once a picture is shown. Written answers auto-grow; essay-length items (model > 100 chars / "long") get a 10-line full-width box + character count; every write item has ⤢ เขียนเต็มจอ (BigWrite popup). New 📌 sets from the teacher's 11/19 hints (final_0_hints.json) -->
@@ -727,6 +728,30 @@ textarea.wa, input.bl { transition: border-color var(--tr), background-color var
   .namebox { display: flex; flex-wrap: wrap; gap: 2px 14px; }
   .namebox span:nth-child(odd) { margin-right: -8px; }
 }
+
+/* ================================================================== v74 screen tiers (2026-11-25): the old fixed 900 px column left
+   2/3 of a 2K screen empty with 15 px text. Each tier widens the column (--wmax) and scales the type (--vs, multiplied with the
+   viewer's own text-size choice --ts-user). Reading pages (set cover / paper / results, vocab, profile, help) stop at --rmax so
+   lines stay readable; the hub pages (home, category, unit) use the full width. Phone + iPad portrait (< 1100 px) are unchanged. */
+:root { --vs: 1; --wmax: 900px; --rmax: 900px; --ts: calc(var(--ts-user, 1) * var(--vs)); }
+@media (min-width: 1100px) { :root { --wmax: 1080px; --rmax: 980px; } }                 /* iPad landscape · small laptops */
+@media (min-width: 1500px) { :root { --vs: 1.1; --wmax: 1360px; --rmax: 1100px; } }    /* 1080p monitors (1920) */
+@media (min-width: 2200px) { :root { --vs: 1.25; --wmax: 1760px; --rmax: 1300px; } }   /* 2K monitors (2560) */
+@media (min-width: 3200px) { :root { --vs: 1.6; --wmax: 2400px; --rmax: 1700px; } }    /* 4K at 100 % */
+.strip-in, .wrap { max-width: var(--wmax); }
+#set, #vocab, #profile, #help { max-width: var(--rmax); margin-left: auto; margin-right: auto; }
+:root[data-layout="split"] .wrap { max-width: max(var(--wmax), min(calc(1400px * var(--vs)), 96vw)); }
+:root[data-layout="split"] #set { max-width: none; }
+.tiles { grid-template-columns: repeat(auto-fit, minmax(min(100%, calc(300px * var(--vs))), 1fr)); }   /* auto-fit: 3 tiles stretch over a 4-column row instead of leaving a hole */
+.unit-grid { grid-template-columns: repeat(auto-fill, minmax(calc(165px * var(--vs)), 1fr)); }
+.skills:not(.four) { grid-template-columns: repeat(auto-fill, minmax(calc(200px * var(--vs)), 1fr)); }
+.tile .ic { font-size: calc(26px * var(--vs)); }
+@media (max-width: 560px) { .tiles { grid-template-columns: 1fr; } .unit-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+/* opening #profile / #help / a set by its hash scrolled the page title under the sticky strip (only #vocab had this fix) */
+#home, #cat, #set, #profile, #help { scroll-margin-top: calc(var(--strip-h, 52px) + 16px); }
+/* the 🎓 grade sheet has 6 short columns: fit it on a phone instead of the profile tables' 560 px minimum + sideways scroll */
+.fin-res .ptab { min-width: 0; }
+@media (max-width: 560px) { .fin-res .ptab th small { display: none; } .fin-res .ptab th, .fin-res .ptab td { padding: 6px 5px; } }
 </style>
 </head>
 <body>
@@ -892,7 +917,7 @@ effect(() => { const n = paletteS.value; if (n && n !== 'navy') root.setAttribut
 /* layout: stack (one column) or split (instructions / passage / audio stay on the left, questions + answers scroll on the right) */
 effect(() => { const v = layoutS.value; root.setAttribute('data-layout', v === 'split' ? 'split' : 'stack'); store.set('layout', v); });
 /* text size: the --ts factor scales every font-size (no CSS zoom: it double-scaled inputs in Chrome) */
-effect(() => { const v = tsizeS.value; root.style.setProperty('--ts', v); store.set('tsize', v); stripH(); later(stripH); });
+effect(() => { const v = tsizeS.value; root.style.setProperty('--ts-user', v); store.set('tsize', v); stripH(); later(stripH); });   // v74: --ts = this × the screen factor --vs (CSS)
 window.addEventListener('resize', stripH);
 document.addEventListener('click', e => { const m = $('#settings'); if (m && m.open && !m.contains(e.target)) m.open = false; });
 
