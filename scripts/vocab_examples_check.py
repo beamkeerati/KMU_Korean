@@ -16,14 +16,14 @@ import os
 import re
 import sys
 
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+from kmu_paths import REPO, ROOT   # ROOT = levels/<N>/ (source/ content/ output/ extracted/) · REPO = repo root (scripts/ specs/ tools/)
 EXDIR = os.path.join(ROOT, 'content', 'guide', '04_vocabulary', 'examples')
 HANGUL = re.compile(r'[가-힣]')
 THAI = re.compile(r'[฀-๿]')
 
 
 def vocab_by_unit():
-    spec = importlib.util.spec_from_file_location('bm', os.path.join(ROOT, 'scripts', 'build_mockweb.py'))
+    spec = importlib.util.spec_from_file_location('bm', os.path.join(REPO, 'scripts', 'build_mockweb.py'))
     bm = importlib.util.module_from_spec(spec); spec.loader.exec_module(bm)
     out = {}
     for w in bm.load_vocab():

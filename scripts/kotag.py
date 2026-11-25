@@ -24,7 +24,7 @@ import sys
 
 sys.path.insert(0, os.path.expanduser('~/.local/lib/python3.12/site-packages'))
 
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+from kmu_paths import REPO, ROOT   # ROOT = levels/<N>/ (source/ content/ output/ extracted/) · REPO = repo root (scripts/ specs/ tools/)
 VOCAB_GLOB = os.path.join(ROOT, 'content', 'guide', '04_vocabulary', 'unit*.md')
 
 # ------------------------------------------------------------------ palette & legend

@@ -13,7 +13,7 @@ import re
 import subprocess
 import sys
 
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+from kmu_paths import REPO, ROOT   # ROOT = levels/<N>/ (source/ content/ output/ extracted/) · REPO = repo root (scripts/ specs/ tools/)
 PATTERNS = [
     ('raw tag', re.compile(r'</?span|class="|&lt;|&gt;|&amp;|<details>|<summary>|<br>')),
     ('markdown', re.compile(r'\*\*|~~|\*\(|(?<![A-Za-z0-9])`|> \[!|\[!(INTRO|SUMMARY|TIP|WARNING|NOTE)\]|^#{1,6} |\|:?-{2,}', re.M)),

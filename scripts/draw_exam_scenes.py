@@ -7,8 +7,8 @@ import sys
 
 from PIL import Image, ImageDraw
 
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-sys.path.insert(0, os.path.join(ROOT, 'scripts'))
+from kmu_paths import REPO, ROOT   # ROOT = levels/<N>/ (source/ content/ output/ extracted/) · REPO = repo root (scripts/ specs/ tools/)
+sys.path.insert(0, os.path.join(REPO, 'scripts'))
 import crop_images as ci  # noqa: E402  (only its font + clock helpers)
 
 OUT = os.path.join(ROOT, 'content', 'img', 'gen')

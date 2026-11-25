@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Check a guide Markdown file against content/specs/SPEC_book_style.md (2026-10-27).
+"""Check a guide Markdown file against specs/SPEC_book_style.md (2026-10-27).
 
 usage: python3 scripts/book_style_check.py content/guide/01_units/unit23.md [more files…]
 
@@ -12,7 +12,7 @@ import re
 import subprocess
 import sys
 
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+from kmu_paths import REPO, ROOT   # ROOT = levels/<N>/ (source/ content/ output/ extracted/) · REPO = repo root (scripts/ specs/ tools/)
 HANGUL = re.compile(r'[가-힣]+')
 
 

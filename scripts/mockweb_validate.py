@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate a practice-site data file (content/mockweb/*.json) against content/specs/SPEC_mockweb.md.
+"""Validate a practice-site data file (content/mockweb/*.json) against specs/SPEC_mockweb.md.
 
 usage: python3 scripts/mockweb_validate.py content/mockweb/<file>.json [more.json ...]
 Prints OK per file, or the list of problems (exit 1).

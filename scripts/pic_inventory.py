@@ -14,7 +14,7 @@ import os
 import re
 import sys
 
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+from kmu_paths import REPO, ROOT   # ROOT = levels/<N>/ (source/ content/ output/ extracted/) · REPO = repo root (scripts/ specs/ tools/)
 PIC = '🖼'
 
 
@@ -27,7 +27,7 @@ def md_open():
     out = []
     for path in sorted(glob.glob(os.path.join(ROOT, 'content', '**', '*.md'), recursive=True)):
         rel = os.path.relpath(path, ROOT)
-        if rel.startswith('content/specs/'):
+        if rel.startswith('specs/'):
             continue
         lines = open(path, encoding='utf-8').read().split('\n')
         for i, line in enumerate(lines):

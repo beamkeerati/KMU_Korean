@@ -2,7 +2,8 @@
 """Assemble content/predictions/midterm/midterm01.md from parts/ (01_analysis + 02..05 questions, then # 정답 + keys). Run before build.py predict."""
 """Assemble content/predictions/midterm/parts/*.md into midterm01.md (questions, then # 정답 + keys)."""
 import pathlib, re
-root = pathlib.Path(__file__).resolve().parent.parent / 'content' / 'predictions' / 'midterm'
+from kmu_paths import ROOT   # levels/<N>/
+root = pathlib.Path(ROOT) / 'content' / 'predictions' / 'midterm'
 parts = root / 'parts'
 q = [parts / '01_analysis.md', parts / '02_writing.md', parts / '03_reading.md', parts / '04_listening.md', parts / '05_speaking.md']
 k = [parts / '02_writing_key.md', parts / '03_reading_key.md', parts / '04_listening_key.md', parts / '05_speaking_key.md']

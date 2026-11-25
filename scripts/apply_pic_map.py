@@ -12,7 +12,7 @@ Writers (agents) never edit the shared JSON files; they list rows in content/img
 """
 import glob, json, os, re, sys
 
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+from kmu_paths import REPO, ROOT   # ROOT = levels/<N>/ (source/ content/ output/ extracted/) · REPO = repo root (scripts/ specs/ tools/)
 DATA = os.path.join(ROOT, 'content', 'mockweb')
 WHERE = re.compile(r'^(\S+)\s+§(\d+)(?:\s+#(.+))?$')
 

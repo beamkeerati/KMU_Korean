@@ -12,7 +12,8 @@
 #   bash scripts/mockweb/test/shot.sh --sheet A m_home m_paper ...   → extracted/web_shots/A.png (side by side, to view in ONE image read)
 # A 390×844 shot costs ≈ 440 tokens to view, a 4-phone sheet ≈ 1.8k.
 set -euo pipefail
-ROOT="$(cd "$(dirname "$0")/../../.." && pwd)"; OUT="$ROOT/extracted/web_shots"; mkdir -p "$OUT"
+ROOT="$(cd "$(dirname "$0")/../../.." && pwd)"; LV="$ROOT/levels/${KMU_LEVEL:-$(cat "$ROOT/levels/current")}"   # the level whose site is shot
+OUT="$LV/extracted/web_shots"; mkdir -p "$OUT"
 if [ "${1:-}" = "--sheet" ]; then
   shift; name="$1"; shift
   python3 - "$OUT" "$name" "$@" <<'PY'
@@ -27,7 +28,7 @@ PY
   exit 0
 fi
 W="$(mktemp -d)"; trap 'kill $SRV 2>/dev/null || true; rm -rf "$W"' EXIT
-for f in "$ROOT"/output/2_Practice_Web/*.js "$ROOT"/output/2_Practice_Web/index.html; do b=$(basename "$f"); case $b in clips*.js) : > "$W/$b";; *) ln -s "$f" "$W/$b";; esac; done
+for f in "$LV"/output/2_Practice_Web/*.js "$LV"/output/2_Practice_Web/index.html; do b=$(basename "$f"); case $b in clips*.js) : > "$W/$b";; *) ln -s "$f" "$W/$b";; esac; done
 echo 'window.KMU_CLIPS = {};' > "$W/clips.js"; cp "$ROOT/scripts/mockweb/test/shot.html" "$W/"
 PORT=$((20000 + RANDOM % 20000)); (cd "$W" && exec python3 -m http.server $PORT --bind 127.0.0.1 >/dev/null 2>&1) & SRV=$!; sleep 1
 while read -r name w h hash steps; do

@@ -52,7 +52,7 @@ register conversion); ส่วนที่ 3 gained §3.3 "รูปแบบ�
 questions · every 의문사 answer template · checklist). Then the user asked for **colour by word function in every PDF** (Korean
 segment and its Thai translation in the same colour, instead of bold only): built scripts/kotag.py (Kiwi + PyThaiNLP, the user
 pointed at PyThaiNLP), wired it into make_pdf.py (running legend) and build_mindmaps.py (coloured tspans/spans + colour legend
-row), wrote the legend page in ส่วนที่ 0 and content/specs/SPEC_colors.md, and had 6 Sonnet agents review the 2,312 auto-tagged
+row), wrote the legend page in ส่วนที่ 0 and specs/SPEC_colors.md, and had 6 Sonnet agents review the 2,312 auto-tagged
 Thai glosses (output = only corrected lines; merged with `kotag.py merge`). All eight PDFs the user listed were rebuilt.
 2026-10-18 (after midnight): the user asked for a **중간시험 prediction**. Fable wrote the blueprint (SPEC_predict_midterm.md), the analysis
 part (evidence = the teacher's 복습문제 + 복습시험 ①; grammar ranked by how often she has tested it; the user's own loss list; a 6-day plan)
@@ -80,17 +80,17 @@ freeze the clock (attempt.left, synced), progress sync across devices (cloud mod
 every 20 s), big sticky progress bar (page scrolls inside #scroller because iPad Safari grows the claude.ai iframe), split left/right layout
 option, text-size option, conjugation rows as a grid, tip vs correction colours, karaoke word highlight + transport bar. AI grades every typed
 answer on submit. A started Workflow audit (5 lenses + refuters) was cancelled on the user's request mid-run — do not relaunch. 복습시험②
-papers 2 and 3 (mini02_b/c.json, 2 Sonnet agents from content/specs/BRIEF_mini02_extra.md; Fable swapped a 학생일 거예요 item for 바쁘다 and
+papers 2 and 3 (mini02_b/c.json, 2 Sonnet agents from specs/BRIEF_mini02_extra.md; Fable swapped a 학생일 거예요 item for 바쁘다 and
 de-duplicated the conjugation/word-order items between the papers) → the home board groups 복습시험② by paper (ชุดที่ 1–3, 4 skills each).
 The user scored 100/100 쓰기, 10/10 읽기, 9/10 듣기 on paper 1 before the exam. Framework question: the user wants a "better frontend"
 later — Fable recommended Preact + Signals (no build step, works as a single-file artifact) or React+Vite+shadcn with own hosting; the user
 chose **A = wait until after the midterm (after 2026-10-23)**, then decide. Pending ideas offered but not built: export/import of progress,
 HTTPS hosting for the iPad microphone, loading clips per set instead of one 6 MB file.
 2026-10-20 (afternoon/evening, Fable 5.1 + Sonnet agents): folder renamed KMU_Korean and put under git (§2.2). The practice site was ported to
-**Preact + Signals** (v25, one Sonnet agent from content/specs/BRIEF_preact_port.md, 245k tokens; harness drivers all matched v24). A speech
+**Preact + Signals** (v25, one Sonnet agent from specs/BRIEF_preact_port.md, 245k tokens; harness drivers all matched v24). A speech
 audio player for the 자기 소개 발표 was built (scripts/build_speech_audio.py → output/6_Speaking/KMU_Speaking_Myself_Audio.html, artifact
 https://claude.ai/artifact/UB8eXhn7DoTV6pVQDVMPSC; theme / reading / text-size controls added on request). The 복습시험② scan arrived (§1, §6b):
-Fable read it, scored the prediction (format ~50 % for 쓰기, content ~85 %; 듣기/읽기 matched), and wrote content/specs/BRIEF_midterm_v2.md; four
+Fable read it, scored the prediction (format ~50 % for 쓰기, content ~85 %; 듣기/읽기 matched), and wrote specs/BRIEF_midterm_v2.md; four
 Sonnet agents (125–160k tokens, 3–7 min each) transcribed the real paper (exercises/miniexam/exam02.md + mockweb/mini02_real.json → past/KMU_MiniExam_02.pdf)
 and rewrote the midterm mock as **v2** (parts 02–05 + mockweb mid_*.json: every section mirrors 복습시험①/② or the review set with changed words;
 쓰기 2 papers, 읽기 25+15, 듣기 29+10 with scripts, 말하기 25 questions with 해요/합니다 answers). scripts/assemble_midterm.py now lives in the repo.
@@ -104,7 +104,7 @@ prompts split per speaker (v35), three-row answer key under each item (v36), sel
 2026-10-27 (Fable 5.1 + 15 Sonnet agents, ~6.2M agent tokens, 22–36 min each): the user rejected the two guides as crammed notes
 ("อัด ๆ ยัด ๆ", examples chained with `·` in one paragraph, bold lines as headings, no introductions, Korean words split across lines) and
 asked for a real book — and chose the fonts from a five-sample sheet (TH Sarabun for Thai/Latin, serif Korean). Fable rewrote
-scripts/make_pdf.py as a book stylesheet (§2 scripts, §5 gotchas), wrote content/specs/SPEC_book_style.md + scripts/book_style_check.py,
+scripts/make_pdf.py as a book stylesheet (§2 scripts, §5 gotchas), wrote specs/SPEC_book_style.md + scripts/book_style_check.py,
 rewrote 01_units/unit23.md and 02_grammar/37_b-irregular.md by hand as the exemplars, the two part headers and the "วิธีอ่าน" section of
 ส่วนที่ 0; 15 agents then reflowed every other file (units 5–22/24–37 · grammar 01–36/38–64 · ส่วนที่ 2, 3, 5, 6) to the spec — no
 sources re-read, Korean-token count per file 107–147 % of the committed version (table headers and added glosses; nothing dropped per
@@ -240,9 +240,9 @@ Site v66 (206 sets · 3,905 items) published. Not committed.
 2026-11-17 (later, Opus 5.5 + 5 Sonnet agents): **guide-book audit** after the user found the By-Topic vocabulary stopped at 22과.
 - 📂 คำศัพท์แยกหมวด: the hand-written 91_categories.md (5–22 only, ~70 of 280 words for 14–22) replaced by `scripts/vocab_categories.py`
   rendering every word of examples/unitNN.json (1,366) into 32 meaning categories from `04_vocabulary/91_categories.tsv` (+ -아/어요 form for
-  verbs/adjectives, rule-checked; `--check` flags uncategorised words; brief content/specs/BRIEF_vocab_categories.md). By-Topic 765 → 792 pp.
+  verbs/adjectives, rule-checked; `--check` flags uncategorised words; brief specs/BRIEF_vocab_categories.md). By-Topic 765 → 792 pp.
 - Exam sections of units 23–37 (🧪 ออกสอบอย่างไร) and grammar topics 33–64 (🧪 ออกสอบแล้ว) all still said "ยังไม่มีข้อสอบจริง" (written ~10/27):
-  rewritten from the real 매일시험 23–36, sheets, workbooks, 복습시험③ and the 기말 handout (brief content/specs/BRIEF_exam_sections_23_37.md).
+  rewritten from the real 매일시험 23–36, sheets, workbooks, 복습시험③ and the 기말 handout (brief specs/BRIEF_exam_sections_23_37.md).
 - ส่วนที่ 0: midterm scores, 총복습 11/19, 낭독 table, coursework status to 36과, final-week plan from final02, slip list refreshed; past midterm-week plan removed.
 - 03b §3.6: the 복습시험② guess replaced by the real ② and ③ question sections + likely 기말 questions (handout §6).
 - Style checker now 0 warnings on all guide sources; both PDFs 0 leftovers, 0 overflow. One colour fix: 시다 → {v:셔}{e:요} (was tagged honorific).
@@ -251,7 +251,7 @@ Site v66 (206 sets · 3,905 items) published. Not committed.
   the user's answers + key + mock comparison + lessons). final02.md re-analysed after ④ (§0 mapping ④ ↔ 복습문제, teacher's hint on ข้อ 6, used/unused
   passages and tracks, plan, new slips); p6 = 취미 writing homework already handed in (recorded only; final01 §5 left as is).
   Set clocks re-sized from the real ④ pace (final-combine 40 · final-review-writing 60 · -irregular 35 · final speaking 13 min).
-  Site: final_drill.json (mini04r-writing/-reading real papers · final-combine · final-antonym · final-question; brief content/specs/BRIEF_final_drill.md).
+  Site: final_drill.json (mini04r-writing/-reading real papers · final-combine · final-antonym · final-question; brief specs/BRIEF_final_drill.md).
 - **2026-11-18 (late)** The user saw no predicted exams in the 기말 tile (the ③④ mocks had moved with the ④ tile) and pointed out that "ข้อ 6 ออกแน่"
   does not mean the other types won't appear → 기말 mock A/B built like the midterm's (3 Sonnet agents, reviewed: listening B answers tightened to the exact
   heard word, reading B-10 answers 왜 with -아/어서 first, writing stem-only forms added), and the 기말 tile now holds every 23–37 set (27 sets, 10 groups).
@@ -261,7 +261,7 @@ Site v66 (206 sets · 3,905 items) published. Not committed.
   (content/img/*.tsv → scripts/crop_images.py; make_pdf `img:ID`, picture left of its text; site `img` + lazy WebP packs), final03.md (pictures, two
   model essays on 원고지 from the user's own drafts + the teacher's corrections, 32/37 dialogues), final01.md p.16 + real route/burger pictures,
   site v69 (final_0_hints.json: final-pic · final-essay · final-dialog). The user asked for real pictures EVERYWHERE a 🖼️ text stands in for one
-  (~2,500 places): wave 1 = 6 Sonnet agents on 23–37과 + exam papers (brief content/specs/BRIEF_pictures.md), wave 2 = 5–22과.
+  (~2,500 places): wave 1 = 6 Sonnet agents on 23–37과 + exam papers (brief specs/BRIEF_pictures.md), wave 2 = 5–22과.
 - **2026-11-19 (evening)** Real pictures everywhere: 10 Sonnet agents (wave 1 = 23–37과 + exam papers, wave 2 = 5–22과) cropped 1,313 pictures
   (content/img/*.tsv; drawn `card:` only for invented prediction/mock items or unreadable scans; a few hand-cleaned crops in content/img/gen/) and
   edited every 🖼️ line; site rows merged from content/img/map_*.tsv (888). Open 🖼️: 2,526 → 18 (all table headers, legends, headings). The agents'
@@ -318,3 +318,12 @@ official score; a re-read of 듣기 found 코미드 (item 8) for the extra lost 
 block, วันนี้ card จบ 1급 / เปิดเทอม 2급 D-N, 기말 tile moved to the past shelf, shelf header lists real titles) published as version 85 (id
 1795574094-7820) with app.html + data.js only — the first publish was refused with a line diff (it counts as "viewed"; it held only my own edits), a resend
 went through after `list scope:files` covered data.js. run.sh all PASS.
+
+**2026-11-25 (Opus 5.5, later):** workspace prepared for 2급–4급 (user chose one folder per level). source/ content/ output/ extracted/ →
+levels/1/; content/specs → specs/ (shared); extracted/tools → tools/ (git-ignored); docs/COURSE · STATUS · LAYOUT → levels/1/docs/ (RENDERER ·
+MISTAKES · HISTORY stay shared); new inbox/ for drops; levels/current = 1. scripts/kmu_paths.py gives every script ROOT (level folder) + REPO;
+19 scripts switched, scripts/ joins and tools/esrgan → REPO, run.sh/shot.sh read levels/current; scripts/new_level.py N [--switch] scaffolds a
+level from level 1's folder tree. Verified: git sees 1,131 pure renames and 0 deletions; site rebuild = all 40 files byte-identical; run.sh 14 PASS;
+build.py all (5 min) → 69 PDFs with identical text, _build/md differs only by absolute picture paths (6 speaking files, identical once normalised)
+and the {{today}} countdown (2 guides); artifact scan 82/82 clean. Website decision deferred to 2급 (artifact CSP blocks every outside host —
+tested with claude.ai/artifact/8VmHpNHCerKh86PR5e4anG; asset store = 1,024 MB / 5,000 files per artifact). output/ stays tracked (user).

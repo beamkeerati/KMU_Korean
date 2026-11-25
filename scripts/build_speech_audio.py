@@ -10,7 +10,7 @@ writes a single-file HTML player (clips embedded as base64). Publish the HTML as
 import asyncio, base64, hashlib, json, os, re, ssl, sys
 sys.path.insert(0, os.path.expanduser('~/.local/lib/python3.12/site-packages'))
 
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+from kmu_paths import REPO, ROOT   # ROOT = levels/<N>/ (source/ content/ output/ extracted/) · REPO = repo root (scripts/ specs/ tools/)
 CACHE = os.path.join(ROOT, 'extracted', 'speech_clips')
 VOICES = {'F': 'ko-KR-SunHiNeural', 'M': 'ko-KR-InJoonNeural', 'S': 'ko-KR-HyunsuMultilingualNeural'}
 

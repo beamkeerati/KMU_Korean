@@ -14,7 +14,7 @@ sys.path.insert(0, os.path.expanduser('~/.local/lib/python3.12/site-packages'))
 from PIL import Image, ImageOps
 from weasyprint import HTML
 
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+from kmu_paths import REPO, ROOT   # ROOT = levels/<N>/ (source/ content/ output/ extracted/) · REPO = repo root (scripts/ specs/ tools/)
 SRC = os.path.join(ROOT, 'content', 'speaking', 'travel_chengdu_img')
 TMP = os.path.join(ROOT, 'extracted', 'slides', 'chengdu')
 OUT = os.path.join(ROOT, 'output', '6_Speaking', 'KMU_Speaking_TravelChengdu_Deck.pdf')

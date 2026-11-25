@@ -1,11 +1,17 @@
-# รูปถ่ายสไลด์ 349 MB — ถอดความไว้แล้วใน content/guide/07_lecture/ และรูปใน extracted/lecture/
-source/lecture/KMU lecture note unit 05 - 12.pdf
+# Layout (2026-11-25): levels/<N>/ = one level's source/ content/ output/ extracted/ · scripts/ specs/ docs/ tools/ inbox/ are shared
 
-# สร้างใหม่ได้จาก source/ ด้วย pdftoppm/tesseract/edge-tts (335 MB) — ใส่ !extracted/lecture/ ถ้าต้องการรูปสไลด์บนเครื่องอื่น
-extracted/
+# รูปถ่ายสไลด์ 349 MB — ถอดความไว้แล้วใน levels/1/content/guide/07_lecture/ และรูปใน levels/1/extracted/lecture/
+levels/1/source/lecture/KMU lecture note unit 05 - 12.pdf
+
+# สร้างใหม่ได้จาก source/ ด้วย pdftoppm/tesseract/edge-tts — ใส่ !levels/1/extracted/lecture/ ถ้าต้องการรูปสไลด์บนเครื่องอื่น
+levels/*/extracted/
+
+# publisher mp3s (147 MB for 1급) — re-copy from the TalkFile folders if needed
+levels/*/source/audio/
+
+# binaries (Real-ESRGAN 101 MB …) — re-download per docs/RENDERER.md
+tools/
 
 .vscode/
 __pycache__/
-# publisher mp3s (147 MB) — re-copy from the TalkFile folders if needed
-source/audio/
 *.pyc

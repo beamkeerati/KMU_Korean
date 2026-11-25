@@ -33,7 +33,7 @@ import sys
 
 from PIL import Image, ImageDraw, ImageFont
 
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+from kmu_paths import REPO, ROOT   # ROOT = levels/<N>/ (source/ content/ output/ extracted/) · REPO = repo root (scripts/ specs/ tools/)
 MANIFESTS = os.path.join(ROOT, 'content', 'img')
 OUT = os.path.join(ROOT, 'extracted', 'img')
 PAGES = os.path.join(OUT, '_pages')
@@ -206,7 +206,7 @@ def stamp_of(r):
 # Real-ESRGAN (ncnn-vulkan, GPU) redraws each scanned crop 4× sharper; the result is kept at 2× the scan size, the paper is made
 # pure white and colours a little livelier. Halftone/photocopy dots are smoothed first, or the model erases faces (pilot 11/19).
 # Without the tool (extracted/tools/esrgan, git-ignored) the plain crop is used.
-TOOL_DIR = os.path.join(ROOT, 'extracted', 'tools', 'esrgan')
+TOOL_DIR = os.path.join(REPO, 'tools', 'esrgan')
 TOOL = os.path.join(TOOL_DIR, 'realesrgan-ncnn-vulkan')
 RAW = os.path.join(OUT, '_raw')
 REMASTER_VER = 'r1'

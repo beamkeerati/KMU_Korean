@@ -3,7 +3,7 @@ import subprocess
 import os
 import sys
 
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+from kmu_paths import REPO, ROOT   # ROOT = levels/<N>/ (source/ content/ output/ extracted/) · REPO = repo root (scripts/ specs/ tools/)
 # extracted/textbook/unitNN/page-N.png (300 dpi) and extracted/textbook/unitNN.txt (tesseract kor+eng)
 output_dir = os.path.join(ROOT, 'extracted', 'textbook')
 img_dir = output_dir

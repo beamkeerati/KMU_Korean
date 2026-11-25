@@ -7,7 +7,7 @@ content/guide/04_vocabulary/91_categories.tsv: `ko <TAB> cat <TAB> 해요-form`,
 build.py calls render(). Run `python3 scripts/vocab_categories.py --check` after adding a word to 04_vocabulary/unitNN.md
 (+ its examples entry): it lists words without a category, stale rows, unknown ids, verbs/adjectives without a -아/어요 form
 and -아/어요 forms that the conjugation rules below cannot produce (warnings — check them by hand).
-Brief for categorising a batch of words: content/specs/BRIEF_vocab_categories.md.
+Brief for categorising a batch of words: specs/BRIEF_vocab_categories.md.
 """
 import glob
 import json
@@ -15,7 +15,7 @@ import os
 import re
 import sys
 
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+from kmu_paths import REPO, ROOT   # ROOT = levels/<N>/ (source/ content/ output/ extracted/) · REPO = repo root (scripts/ specs/ tools/)
 VOCAB = os.path.join(ROOT, 'content', 'guide', '04_vocabulary')
 MAP = os.path.join(VOCAB, '91_categories.tsv')
 

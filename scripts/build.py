@@ -21,7 +21,7 @@ import re
 import subprocess
 import sys
 
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+from kmu_paths import REPO, ROOT   # ROOT = levels/<N>/ (source/ content/ output/ extracted/) · REPO = repo root (scripts/ specs/ tools/)
 CONTENT = os.path.join(ROOT, 'content')
 OUTPUT = os.path.join(ROOT, 'output')
 # output/ is organised by what the student does with each file (reorganised 2026-10-18, see output/START_HERE.html):
@@ -384,7 +384,7 @@ def build_predictions():
 
 def to_pdf(jobs):
     """jobs = [(md_path, pdf_dir), ...] — rendered in groups by destination directory."""
-    make_pdf = os.path.join(ROOT, 'scripts', 'make_pdf.py')
+    make_pdf = os.path.join(REPO, 'scripts', 'make_pdf.py')
     for pdf_dir in dict.fromkeys(d for _, d in jobs):
         mds = [m for m, d in jobs if d == pdf_dir]
         subprocess.run([sys.executable, make_pdf] + mds + ['--pdf-dir', pdf_dir], check=True)

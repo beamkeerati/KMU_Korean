@@ -11,7 +11,7 @@ a cell · no empty cell after . or , · one empty cell after ? and ! · a line n
 import os, re, sys
 from PIL import Image, ImageDraw, ImageFont
 
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+from kmu_paths import REPO, ROOT   # ROOT = levels/<N>/ (source/ content/ output/ extracted/) · REPO = repo root (scripts/ specs/ tools/)
 COLS, ROWS = 20, 14
 SHEET = [14, 16]          # 발표 (2): front = 14 rows (to 280), back = 16 rows (300 … 600) -> 600 cells per sheet
 FONT = '/usr/share/fonts/opentype/noto/NotoSerifCJK-Regular.ttc'

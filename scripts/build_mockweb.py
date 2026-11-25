@@ -13,12 +13,12 @@ Clips are cached in extracted/mockweb_clips/<sha1>.mp3, so only new or changed l
 import re
 import asyncio, base64, glob, hashlib, json, os, re, shutil, ssl, sys
 
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-sys.path.insert(0, os.path.join(ROOT, 'scripts'))
+from kmu_paths import REPO, ROOT   # ROOT = levels/<N>/ (source/ content/ output/ extracted/) · REPO = repo root (scripts/ specs/ tools/)
+sys.path.insert(0, os.path.join(REPO, 'scripts'))
 from mockweb_validate import validate  # noqa: E402
 
 DATA = os.path.join(ROOT, 'content', 'mockweb')
-APP = os.path.join(ROOT, 'scripts', 'mockweb', 'app.html')
+APP = os.path.join(REPO, 'scripts', 'mockweb', 'app.html')
 OUT = os.path.join(ROOT, 'output', '2_Practice_Web')
 CACHE = os.path.join(ROOT, 'extracted', 'mockweb_clips')
 VOICES = {'T': ('ko-KR-SunHiNeural', '-5%'), 'F': ('ko-KR-SunHiNeural', '+0%'),
@@ -123,7 +123,7 @@ EX_DIR = os.path.join(VOCAB_DIR, 'examples')
 
 
 def attach_examples(vocab):
-    """content/guide/04_vocabulary/examples/unitNN.json (brief: content/specs/BRIEF_vocab_examples.md, checker: scripts/vocab_examples_check.py)
+    """content/guide/04_vocabulary/examples/unitNN.json (brief: specs/BRIEF_vocab_examples.md, checker: scripts/vocab_examples_check.py)
     -> w['ex'] = [[sentence, Thai translation, blank], …] and w['nt'] = Thai usage note. The drill turns ex into fill-in-the-blank cards
     and shows sentence + note after every answer. Only examples whose blank occurs in the sentence are kept."""
     by = {w['ko']: w for w in vocab}
@@ -213,7 +213,7 @@ def write_pictures(sets):
     scripts/crop_images.py) → WebP data URIs in img_<json file>.js packs, loaded by app.html only when a set that needs them opens.
     Returns {id: [pack file, display width px, height px]} for data.js (window.KMU_IMGS)."""
     from PIL import Image
-    sys.path.insert(0, os.path.join(ROOT, 'scripts'))
+    sys.path.insert(0, os.path.join(REPO, 'scripts'))
     import crop_images
     webdir = os.path.join(crop_images.OUT, '_web')
     os.makedirs(webdir, exist_ok=True)

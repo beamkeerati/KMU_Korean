@@ -34,7 +34,7 @@ sys.path.insert(0, os.path.expanduser('~/.local/lib/python3.12/site-packages'))
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import kotag                                   # colour-by-function for the Korean half of every label
 
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+from kmu_paths import REPO, ROOT   # ROOT = levels/<N>/ (source/ content/ output/ extracted/) · REPO = repo root (scripts/ specs/ tools/)
 CONTENT = os.path.join(ROOT, 'content', 'mindmaps')
 OUT = os.path.join(ROOT, 'output', '1_Guides', 'mindmaps')
 OUT_MD = os.path.join(ROOT, 'output', '_build', 'md', 'mindmaps')
